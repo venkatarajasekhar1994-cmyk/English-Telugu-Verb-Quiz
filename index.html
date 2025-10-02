@@ -1,0 +1,2017 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- CRITICAL for device compatibility, responsiveness, and preventing horizontal scrolling -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telugu Verb Quiz</title>
+    
+    <!-- PWA MANIFEST LINK (Required for Install Banner) -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+        // Check for service worker support and register it
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered: ', registration);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Tone.js for sound effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    
+    <!-- Configure Tailwind to use Inter font for body and Lora for title -->
+    <style>
+        /* Import all available fonts for customization */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght=700&family=Roboto:wght@400;700&family=Merriweather:wght==400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&display=swap');
+        
+        /* --- CSS Variables for Theme Management --- */
+        
+        /* Font Variables */
+        :root {
+            --font-body: 'Inter', sans-serif;
+            --font-title: 'Lora', serif;
+            /* Input Variables (Defaults to 'rounded') */
+            --input-border-radius: 1.5rem; /* Ultra rounded default */
+            --input-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Soft shadow default */
+            /* Text Contrast Variables (Defaults to High Contrast for seamlessness) */
+            --text-color-light: #111827; /* Near black */
+            --text-color-dark: #f3f4f6; /* Near white */
+        }
+        
+        /* Default: Indigo */
+        :root,
+        body[data-color="indigo"] {
+            --color-primary: 79, 70, 229; /* Indigo 600 RGB */
+            --color-primary-hex: #4f46e5;
+            --color-primary-light: 165, 180, 252; /* Indigo 300 RGB */
+            --color-bg-light-start: #a78bfa;
+            --color-bg-light-mid: #818cf8;
+            --color-bg-light-end: #3b82f6;
+            --color-bg-dark-start: #1f2937;
+            --color-bg-dark-mid: #111827;
+            --color-bg-dark-end: #0f172a;
+        }
+
+        /* Teal Theme */
+        body[data-color="teal"] {
+            --color-primary: 20, 184, 166; /* Teal 600 RGB */
+            --color-primary-hex: #14b8a6;
+            --color-primary-light: 94, 234, 212; /* Teal 300 RGB */
+            --color-bg-light-start: #2dd4bf;
+            --color-bg-light-mid: #5eead4;
+            --color-bg-light-end: #0d9488;
+        }
+
+        /* Rose Theme */
+        body[data-color="rose"] {
+            --color-primary: 225, 29, 72; /* Rose 600 RGB */
+            --color-primary-hex: #e11d48;
+            --color-primary-light: 251, 207, 232; /* Rose 300 RGB */
+            --color-bg-light-start: #fda4af;
+            --color-bg-light-mid: #f43f5e;
+            --color-bg-light-end: #e11d48;
+        }
+
+        /* Amber Theme (New) */
+        body[data-color="amber"] {
+            --color-primary: 245, 158, 11; /* Amber 600 RGB */
+            --color-primary-hex: #f59e0b;
+            --color-primary-light: 253, 230, 138; /* Amber 300 RGB */
+            --color-bg-light-start: #fcd34d;
+            --color-bg-light-mid: #f59e0b;
+            --color-bg-light-end: #fbbf24;
+        }
+        
+        /* Emerald Theme (New) */
+        body[data-color="emerald"] {
+            --color-primary: 5, 150, 105; /* Emerald 600 RGB */
+            --color-primary-hex: #059669;
+            --color-primary-light: 110, 231, 183; /* Emerald 300 RGB */
+            --color-bg-light-start: #34d399;
+            --color-bg-light-mid: #10b981;
+            --color-bg-light-end: #059669;
+        }
+        
+        /* --- Base Styles --- */
+        body {
+            font-family: var(--font-body);
+            min-height: 100vh;
+            padding: 1rem;
+            color: var(--text-color-light); 
+            background: linear-gradient(135deg, var(--color-bg-light-start), var(--color-bg-light-mid), var(--color-bg-light-end));
+        }
+        
+        .elegant-title {
+            font-family: var(--font-title); 
+            font-weight: 700;
+            letter-spacing: 0.05em; 
+            color: #1e293b;
+        }
+
+        /* Main Glass Card */
+        .liquid-glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(var(--color-primary-light), 0.35));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            transition: all 0.3s ease;
+        }
+        
+        /* Frosted Glass Effect for Settings Options (New Class) */
+        .frosted-option {
+            background: rgba(255, 255, 255, 0.5); /* Lighter background for better contrast */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s ease, transform 0.1s ease;
+        }
+        .frosted-option:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+        .frosted-option:active { /* Subtle press animation */
+            transform: scale(0.98); 
+        }
+        
+        /* Custom selector list items (NEW) */
+        /* Used for floating selection modals */
+        .selector-item {
+            cursor: pointer;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(156, 163, 175, 0.3);
+            transition: all 0.2s ease, transform 0.1s ease;
+        }
+        .selector-item:last-child {
+            border-bottom: none;
+        }
+        .selector-item.selected {
+            background-color: rgba(var(--color-primary-light), 0.2);
+            font-weight: 600;
+        }
+        .selector-item:active { /* Subtle press animation */
+            transform: scale(0.98); 
+        }
+        
+        /* Custom radio circle (NEW) */
+        .radio-circle {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            border: 2px solid #9ca3af;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+        .radio-circle.selected {
+            border-color: var(--color-primary-hex);
+        }
+        .radio-dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background-color: transparent;
+            transition: background-color 0.2s ease;
+        }
+        .radio-dot.selected {
+            background-color: var(--color-primary-hex);
+        }
+
+
+        /* Prompt box styles */
+        .prompt-box {
+            background: linear-gradient(135deg, rgba(var(--color-primary-light), 0.6), rgba(var(--color-primary), 0.4)); 
+            backdrop-filter: blur(8px);
+            border-color: rgba(var(--color-primary), 0.5);
+        }
+        
+        input[type="text"], textarea {
+            font-family: var(--font-body);
+            background-color: rgba(255, 255, 255, 0.5) !important;
+            border: 1px solid rgba(156, 163, 175, 0.3);
+            color: var(--text-color-light) !important;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.3s ease;
+            
+            border-radius: var(--input-border-radius); 
+            box-shadow: var(--input-shadow);
+        }
+
+        .text-primary { color: var(--color-primary-hex); }
+        .border-primary { border-color: var(--color-primary-hex); }
+        .bg-primary { background-color: var(--color-primary-hex); }
+        .shadow-primary { box-shadow: 0 10px 15px -3px rgba(var(--color-primary), 0.2), 0 4px 6px -4px rgba(var(--color-primary), 0.1); }
+
+
+        /* --- Feedback styling --- */
+        .correct {
+            border: 2px solid rgba(16, 185, 129, 0.5) !important;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.1)) !important;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5) !important;
+        }
+        .incorrect {
+            border: 2px solid rgba(239, 68, 68, 0.5) !important;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(239, 68, 68, 0.1)) !important;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5) !important;
+        }
+        
+        #progress-bar {
+            transition: width 0.5s ease-in-out;
+            background-color: var(--color-primary-hex);
+        }
+        
+        /* --- Liquid Glass Ripple Effect --- */
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+            z-index: 1;
+        }
+
+        .ripple-btn::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            /* Use radial gradient for a soft, liquid ripple look */
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform 0.6s, opacity 0.8s;
+            border-radius: inherit; /* Inherit the button's rounded corners */
+            z-index: -1;
+        }
+
+        .ripple-btn:active::after {
+            transform: scale(0, 0);
+            opacity: 1;
+            transition: 0s;
+        }
+
+
+        /* --- Dark Mode Styles --- */
+        .dark-mode {
+            background: linear-gradient(135deg, var(--color-bg-dark-start), var(--color-bg-dark-mid), var(--color-bg-dark-end)); 
+            color: var(--text-color-dark);
+        }
+        
+        .dark-mode .liquid-glass-card {
+            background: linear-gradient(135deg, rgba(55, 65, 81, 0.4), rgba(31, 41, 55, 0.5));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); 
+        }
+
+        .dark-mode .frosted-option {
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(107, 114, 128, 0.4);
+        }
+        .dark-mode .frosted-option:hover {
+            background: rgba(31, 41, 55, 0.8);
+        }
+        
+        /* Dark mode custom selector styles */
+        .dark-mode .selector-item {
+             border-bottom: 1px solid rgba(107, 114, 128, 0.4);
+        }
+        .dark-mode .selector-item.selected {
+            background-color: rgba(var(--color-primary-light), 0.1);
+        }
+        .dark-mode .radio-circle {
+            border: 2px solid #6b7280;
+        }
+        .dark-mode .radio-dot.selected {
+            background-color: var(--color-primary-hex);
+        }
+
+
+        .dark-mode h1,
+        .dark-mode .elegant-title { color: #ffffff; }
+
+        .dark-mode input[type="text"], .dark-mode textarea {
+            background-color: rgba(31, 41, 55, 0.6) !important;
+            color: var(--text-color-dark) !important; 
+            border-color: rgba(107, 114, 128, 0.4);
+            
+            border-radius: var(--input-border-radius); 
+            box-shadow: var(--input-shadow);
+        }
+        
+        .dark-mode .prompt-box {
+            background: linear-gradient(135deg, rgba(var(--color-primary-light), 0.3), rgba(var(--color-primary), 0.1)) !important;
+            border-color: rgba(var(--color-primary), 0.5);
+            color: #eef2ff;
+        }
+        
+        .dark-mode .correct {
+            border-color: rgba(52, 211, 153, 0.7) !important;
+            background: linear-gradient(135deg, rgba(52, 211, 153, 0.25), rgba(52, 211, 153, 0.1)) !important;
+            box-shadow: 0 0 10px rgba(52, 211, 153, 0.6) !important;
+        }
+
+        .dark-mode .incorrect {
+            border-color: rgba(248, 113, 113, 0.7) !important;
+            background: linear-gradient(135deg, rgba(248, 113, 113, 0.25), rgba(248, 113, 113, 0.1)) !important;
+            box-shadow: 0 0 10px rgba(248, 113, 113, 0.6) !important;
+        }
+
+        /* Set color variables for all text based on theme */
+        body .text-gray-700,
+        body .text-gray-800,
+        body .text-gray-600 { color: var(--text-color-light) !important; }
+        
+        .dark-mode .text-gray-700,
+        .dark-mode .text-gray-800,
+        .dark-mode .text-gray-600 { color: var(--text-color-dark) !important; }
+
+
+        /* Modal styles */
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        
+        /* New selection modal transition: Adjusted to look centered/higher */
+        .selection-modal-content {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.3s forwards; 
+            border-radius: 1.5rem; 
+            
+            width: 90%; 
+            max-width: 400px;
+            margin-bottom: 5vh; /* Adjusted vertical position */
+        }
+        
+        /* Default modal styles remain for settings/data management */
+        .modal-content {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 flex flex-col items-center">
+
+    <div id="game-container" class="w-full max-w-xl liquid-glass-card p-6 md:p-8 my-8">
+        
+        <!-- Header, Title, and Controls -->
+        <div class="flex justify-between items-center mb-6 border-b-2 pb-2 border-primary">
+            
+            <div class="flex items-center space-x-3"> 
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark-mode:text-gray-50 mb-0 elegant-title">
+                    ENGLISH VERBS QUIZ (TELUGU)
+                </h1>
+            </div>
+
+            <div class="flex space-x-2">
+                <button id="hamburger-button" onclick="window.toggleHamburgerMenu()" 
+                        class="ripple-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex">
+                    <svg id="hamburger-icon" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- SCORE, PROGRESS, & FEEDBACK BAR -->
+        <!-- Hidden by default until quiz starts -->
+        <div id="quiz-status-bar" class="hidden">
+            <div class="grid grid-cols-2 gap-4 items-center mb-3">
+                <!-- Score and Counter Group -->
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-600 dark-mode:text-gray-400 text-base">Score: <span id="score-display" class="text-primary text-2xl font-bold">0</span></span>
+                    <span class="text-gray-600 dark-mode:text-gray-400 text-base">Q: <span id="question-counter" class="text-primary text-2xl font-bold">0/15</span></span>
+                </div>
+                <!-- Feedback Message -->
+                <span id="feedback-message" class="text-base font-medium text-right"></span>
+            </div>
+            
+            <!-- PROGRESS BAR -->
+            <div id="progress-bar-container" class="w-full h-2 bg-gray-200 dark-mode:bg-gray-700 rounded-full overflow-hidden mb-6 shadow-inner">
+                <div id="progress-bar" class="h-full rounded-full" style="width: 0%;"></div>
+            </div>
+        </div>
+
+
+        <!-- START SCREEN CONTENT (Visible at start) -->
+        <div id="start-screen" class="mt-8 text-center">
+            <h2 class="text-3xl font-bold text-primary mb-4 elegant-title">Welcome to the Verb Quiz!</h2>
+            <p id="start-message" class="text-lg text-gray-700 dark-mode:text-gray-300 mb-8">
+                Load up your memory and challenge yourself to master irregular English verbs. You are currently set to practice **15 questions**.
+            </p>
+
+            <!-- Quiz Length Setting (NOW A BUTTON THAT OPENS MODAL) -->
+            <div class="mb-8 p-4 bg-primary/5 rounded-xl frosted-option">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Length</h3>
+                <button id="quiz-length-button" onclick="handleUiTapFeedback(); openSelectionModal('count')"
+                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                    <span id="current-quiz-length" class="font-semibold">15 Questions (Default)</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                    </svg>
+                </button>
+            </div>
+            
+            <button id="start-quiz-button" onclick="handleUiTapFeedback(); startQuiz()"
+                    class="ripple-btn w-full px-4 py-4 bg-green-600 text-white font-extrabold rounded-2xl shadow-xl shadow-green-500/50 hover:bg-green-700 transition duration-300 transform hover:scale-[1.01] text-xl disabled:bg-gray-400 disabled:shadow-none"
+                    disabled>
+                Start Quiz
+            </button>
+            <p id="loading-indicator" class="mt-4 text-sm text-gray-500">Loading initial data...</p>
+
+        </div>
+        <!-- END START SCREEN CONTENT -->
+
+
+        <!-- QUESTION AREA (Hidden at start) -->
+        <div id="question-area" class="space-y-4 hidden">
+            <!-- Questions will appear here -->
+        </div>
+
+        <!-- QUIZ ACTION BUTTONS (Hidden at start) -->
+        <div id="quiz-action-buttons" class="mt-8 grid grid-cols-12 gap-4 hidden">
+            <!-- SKIP BUTTON (Col 1-4) -->
+            <button id="skip-button" onclick="handleUiTapFeedback(); processAnswer(true)"
+                    class="ripple-btn col-span-4 px-2 py-3 bg-yellow-600 text-white font-bold rounded-xl shadow-lg shadow-yellow-500/50 hover:opacity-90 transition duration-150 disabled:bg-gray-400 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-opacity-50 text-sm md:text-base"
+                    disabled>
+                Skip
+            </button>
+            <!-- MAIN ACTION BUTTON (Col 5-12) - Combines Check Answer / Next Verb / Finish Quiz -->
+            <button id="main-action-button" onclick="handleUiTapFeedback(); processAnswer(false)"
+                    class="ripple-btn col-span-8 px-2 py-3 bg-primary text-white font-bold rounded-xl shadow-lg shadow-indigo-500/50 hover:opacity-90 transition duration-150 disabled:bg-gray-400 focus:outline-none focus:ring-4 focus:ring-primary-hex focus:ring-opacity-50 text-base md:text-lg"
+                    disabled>
+                Check Answer
+            </button>
+        </div>
+        
+        <!-- Updated Final Results section will be populated dynamically -->
+        <div id="final-results" class="hidden mt-8 text-center p-4 bg-yellow-300/40 liquid-glass-card border-yellow-300 border-2">
+            <!-- Content generated by endGame() -->
+        </div>
+
+    </div>
+
+    <!-- NEW: Hamburger Menu Off-Canvas -->
+    <div id="hamburger-menu" class="fixed top-0 right-0 h-full w-64 z-50 transform translate-x-full transition-transform duration-300 bg-white dark-mode:bg-gray-800 shadow-2xl p-6">
+        <div class="flex justify-end">
+            <!-- Close Button -->
+            <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700">
+                <!-- X Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <h3 class="text-xl font-bold mb-6 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">Menu</h3>
+
+        <!-- Dark Mode Toggle -->
+        <button id="menu-theme-toggle" onclick="handleUiTapFeedback(); toggleTheme()" 
+                class="ripple-btn w-full flex items-center justify-between p-3 mb-4 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150">
+            <span id="menu-theme-text" class="font-semibold"></span>
+            <svg id="menu-theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <!-- Icon will be set by JS -->
+            </svg>
+        </button>
+        
+        <!-- User ID Display (LOCAL STATUS) -->
+        <div class="mb-4 p-3 bg-gray-100 dark-mode:bg-gray-700 rounded-xl text-xs text-gray-600 dark-mode:text-gray-400 overflow-x-auto break-all">
+            <span class="font-bold">Status:</span> <span id="user-id-display">Local Data Storage</span>
+        </div>
+
+        <!-- Manage Verb Data Button (NEW POSITION) -->
+        <button onclick="handleUiTapFeedback(); openDataManagementFromMenu()"
+                class="ripple-btn w-full flex items-center p-3 mb-4 rounded-xl text-white font-bold bg-primary hover:opacity-90 transition duration-150 shadow-md shadow-indigo-500/50">
+            <!-- Database Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.69 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.69-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0c0 2.278-3.69 4.125-8.25 4.125S3.75 12.331 3.75 10.056m16.5 0v3.75m-16.5-3.75v3.75m16.5 0c0 2.278-3.69 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+            </svg>
+            Manage Verb Data
+        </button>
+
+        <!-- Link to full settings (NEW POSITION) -->
+        <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu(); openSettings();"
+                class="ripple-btn w-full flex items-center p-3 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150 shadow-md shadow-gray-500/10">
+            <!-- Cog Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 12h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3zm9-6h3.75m-3.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 18h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0" />
+            </svg>
+            Quiz Settings
+        </button>
+    </div>
+    
+    <!-- NEW: Overlay for Hamburger Menu -->
+    <div id="hamburger-overlay" class="hidden fixed inset-0 z-40 bg-black opacity-50" onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()"></div>
+
+
+    <!-- Settings Modal (Used for general settings) -->
+    <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+        <!-- ADDED overflow-y-auto and max-h-[90vh] for scrollability -->
+        <div class="modal-content liquid-glass-card w-full max-w-sm p-6 overflow-y-auto max-h-[90vh]">
+            <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">App Settings</h2>
+
+            <!-- Settings Persistence Note -->
+            <div class="bg-blue-100 dark-mode:bg-blue-900/40 border border-blue-400 text-blue-800 dark-mode:text-blue-200 text-sm p-3 rounded-xl mb-4">
+                <p class="font-semibold">All settings are saved automatically to this device only.</p>
+            </div>
+
+            <!-- Color Palette Selection -->
+            <div class="mb-6">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3">Color Accent</h3>
+                <!-- INCREASED OPTIONS -->
+                <div class="grid grid-cols-5 gap-2">
+                    <button onclick="setThemeColor('indigo')" data-color-id="indigo"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-indigo-600 hover:opacity-90 text-sm">
+                        Indigo
+                    </button>
+                    <button onclick="setThemeColor('teal')" data-color-id="teal"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-teal-600 hover:opacity-90 text-sm">
+                        Teal
+                    </button>
+                    <button onclick="setThemeColor('rose')" data-color-id="rose"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-rose-600 hover:opacity-90 text-sm">
+                        Rose
+                    </button>
+                    <button onclick="setThemeColor('amber')" data-color-id="amber"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-amber-600 hover:opacity-90 text-sm">
+                        Amber
+                    </button>
+                    <button onclick="setThemeColor('emerald')" data-color-id="emerald"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-emerald-600 hover:opacity-90 text-sm">
+                        Emerald
+                    </button>
+                </div>
+            </div>
+
+            <!-- Text Contrast Setting -->
+            <div class="mb-6">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Text Contrast</h3>
+                <div class="flex space-x-4">
+                    <button onclick="setTextContrast('default')" data-contrast-id="default" id="contrast-default"
+                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
+                        Default
+                    </button>
+                    <button onclick="setTextContrast('high')" data-contrast-id="high" id="contrast-high"
+                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
+                        High Contrast
+                    </button>
+                </div>
+            </div>
+
+            <!-- Input Style -->
+            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Input Style</h3>
+                <div class="flex space-x-4">
+                    <button onclick="setInputStyle('rounded')" data-style-id="rounded" id="style-rounded"
+                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
+                        Rounded
+                    </button>
+                    <button onclick="setInputStyle('square')" data-style-id="square" id="style-square"
+                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
+                        Square
+                    </button>
+                </div>
+            </div>
+
+            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Feedback</h3>
+                <!-- Audio and Haptic Feedback Toggles - Added ripple-btn to label for touch feedback -->
+                <div class="flex flex-col space-y-2">
+                    <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
+                        <input type="checkbox" id="toggle-audio" onclick="toggleAudio()" 
+                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
+                        <span class="text-gray-700 dark-mode:text-gray-300">Disable Sound Effects</span>
+                    </label>
+                    <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
+                        <input type="checkbox" id="toggle-haptics" onclick="toggleHaptics()" 
+                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
+                        <span class="text-gray-700 dark-mode:text-gray-300">Disable Vibration (Haptics)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Display</h3>
+                <!-- Hide Telugu Toggle - Added ripple-btn to label for touch feedback -->
+                <div class="flex flex-col space-y-2">
+                    <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
+                        <input type="checkbox" id="toggle-telugu" onclick="toggleTelugu()" 
+                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
+                        <span class="text-gray-700 dark-mode:text-gray-300">Hide Telugu Meaning (in Question)</span>
+                    </label>
+                    
+                    <!-- New Themed Text Hue Toggle - Added ripple-btn to label for touch feedback -->
+                    <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
+                        <input type="checkbox" id="toggle-text-hue" onclick="toggleTextHue()" 
+                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
+                        <span class="text-gray-700 dark-mode:text-gray-300">Themed Text Hue (Subtle Color Tint)</span>
+                    </label>
+                </div>
+            </div>
+
+
+            <!-- Body Font Family (NOW A BUTTON THAT OPENS MODAL) -->
+            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Body Font</h3>
+                <button id="body-font-button" onclick="handleUiTapFeedback(); openSelectionModal('body')"
+                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                    <span id="current-body-font" class="font-semibold">Inter (Sans-serif, Default)</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Title Font Family (NOW A BUTTON THAT OPENS MODAL) -->
+            <div class="mb-6">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Title Font</h3>
+                <button id="title-font-button" onclick="handleUiTapFeedback(); openSelectionModal('title')"
+                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                    <span id="current-title-font" class="font-semibold">Lora (Serif, Default)</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                    </svg>
+                </button>
+            </div>
+
+            <button onclick="handleUiTapFeedback(); closeSettings()"
+                    class="ripple-btn mt-8 w-full py-3 bg-gray-500 text-white font-bold rounded-xl hover:bg-gray-600 transition duration-150">
+                Close Settings
+            </button>
+        </div>
+    </div>
+    
+    <!-- NEW: Generic Selection Modal (Slide up from bottom) -->
+    <div id="selection-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-overlay">
+        <!-- Adjusted styling classes for positioning -->
+        <div class="selection-modal-content liquid-glass-card w-full max-w-sm p-0">
+            <div class="p-4 flex justify-between items-center border-b dark-mode:border-gray-700">
+                <h3 id="selection-modal-title" class="text-xl font-bold text-gray-900 dark-mode:text-gray-100">Select Option</h3>
+                <button onclick="handleUiTapFeedback(); closeSelectionModal()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div id="selection-modal-list" class="max-h-80 overflow-y-auto rounded-b-xl">
+                <!-- Content populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- NEW: Data Management Modal (Wider: max-w-3xl) -->
+    <div id="data-management-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+        <div class="modal-content liquid-glass-card w-full max-w-3xl p-6 overflow-y-auto max-h-[90vh]">
+            <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">
+                Manage Verb Data (<span id="current-verb-count">0</span> Total)
+            </h2>
+            
+            <p class="text-sm text-gray-600 dark-mode:text-gray-400 mb-4">
+                Enter all 10 fields for a new verb row. Use a forward slash (/) to separate multiple correct answers (e.g., 'got/gotten').
+            </p>
+            
+            <!-- Input Grid Layout -->
+            <div id="add-data-form" class="space-y-4 p-4 bg-primary/5 rounded-xl border border-primary/20 frosted-option">
+                <!-- Header Row for Labels (Desktop only) -->
+                <div class="hidden md:grid md:grid-cols-2 gap-4 text-sm font-bold text-gray-700 dark-mode:text-gray-300">
+                    <div class="text-center border-b pb-2">English Forms</div>
+                    <div class="text-center border-b pb-2">Telugu Meanings</div>
+                </div>
+
+                <!-- Input Rows -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Base Form (Col 1) / Telugu Base (Col 2) -->
+                    <div class="space-y-2">
+                        <label for="add-base" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Base Form</label>
+                        <input type="text" id="add-base" placeholder="e.g., 'go'" class="w-full p-3">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="add-telugu-base" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Telugu (Base)</label>
+                        <input type="text" id="add-telugu-base" placeholder="తెలుగు అర్థం" class="w-full p-3">
+                    </div>
+                    
+                    <!-- 3rd Person (Col 1) / Telugu 3rd Person (Col 2) -->
+                    <div class="space-y-2">
+                        <label for="add-third" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">3rd Person Singular</label>
+                        <input type="text" id="add-third" placeholder="e.g., 'goes'" class="w-full p-3">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="add-telugu-third" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Telugu (3rd Person)</label>
+                        <input type="text" id="add-telugu-third" placeholder="తెలుగు అర్థం" class="w-full p-3">
+                    </div>
+
+                    <!-- -ing Form (Col 1) / Telugu -ing (Col 2) -->
+                    <div class="space-y-2">
+                        <label for="add-ing" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">-ing Form</label>
+                        <input type="text" id="add-ing" placeholder="e.g., 'going'" class="w-full p-3">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="add-telugu-ing" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Telugu (-ing)</label>
+                        <input type="text" id="add-telugu-ing" placeholder="తెలుగు అర్థం" class="w-full p-3">
+                    </div>
+
+                    <!-- Past Simple (Col 1) / Telugu Past Simple (Col 2) -->
+                    <div class="space-y-2">
+                        <label for="add-simple" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Past Simple</label>
+                        <input type="text" id="add-simple" placeholder="e.g., 'went'" class="w-full p-3">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="add-telugu-simple" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Telugu (Past Simple)</label>
+                        <input type="text" id="add-telugu-simple" placeholder="తెలుగు అర్థం" class="w-full p-3">
+                    </div>
+
+                    <!-- Past Participle (Col 1) / Telugu Past Participle (Col 2) -->
+                    <div class="space-y-2">
+                        <label for="add-participle" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Past Participle</label>
+                        <input type="text" id="add-participle" placeholder="e.g., 'gone'" class="w-full p-3">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="add-telugu-participle" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Telugu (Past Participle)</label>
+                        <input type="text" id="add-telugu-participle" placeholder="తెలుగు అర్థం" class="w-full p-3">
+                    </div>
+                </div>
+
+                <button id="save-verb-button" onclick="handleUiTapFeedback(); saveNewVerbData()"
+                        class="ripple-btn w-full py-3 mt-4 bg-primary text-white font-bold rounded-xl shadow-lg hover:opacity-90 transition duration-150 disabled:bg-gray-400">
+                    Add Verb Row
+                </button>
+                <p id="data-management-feedback" class="text-center text-sm font-semibold mt-2 hidden"></p>
+            </div>
+            
+            <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2 mt-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+                Custom Verbs Added (Local):
+            </h3>
+            
+            <!-- Display area for the currently added verb data -->
+            <div id="user-data-list" class="space-y-2 max-h-48 overflow-y-auto p-2 border rounded-lg frosted-option">
+                <p class="text-center text-gray-500" id="no-user-data">No custom verbs added yet.</p>
+            </div>
+
+
+            <button onclick="handleUiTapFeedback(); closeDataManagement()"
+                    class="ripple-btn mt-8 w-full py-3 bg-gray-500 text-white font-bold rounded-xl hover:bg-gray-600 transition duration-150">
+                Close Data Management
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        // Data provided by the user (extracted from CSV).
+        const initialCsvData = `Base Form,Telugu,3rd Person Singular,Telugu ( he she it),-ing Form,Telugu4,Past Simple,Telugu2,Past Participle,Telugu3
+be,అవ్వడం/ఉండడం,is/are,ఉన్నాడు/ఉంది,being,అవుతూ/ఉండుతూ,was/were,అయ్యాడు/ఉండాడు,been,అయ్యిన/ఉన్న
+have,కలిగి ఉండడం,has,కలిగి ఉన్నాడు,having,కలిగి ఉండటం,had,కలిగిన,had,కలిగిన
+do,చేయడం,does,చేస్తాడు,doing,చేస్తూ,did,చేశాడు,done,చేసినది
+go,వెళ్లడం,goes,వెళ్తాడు,going,వెళుతూ,went,వెళ్లాడు,gone,వెళ్లిన
+get,పొందడం,gets,పొందుతాడు,getting,పొందుతూ,got,పొందాడు,got/gotten,పొందిన
+make,తయారు చేయడం,makes,తయారుచేస్తాడు,making,తయారు చేస్తూ,made,తయారు చేశాడు,made,తయారు చేసిన
+take,తీసుకోవడం,takes,తీసుకుంటాడు,taking,తీసుకుంటూ,took,తీసుకున్నాడు,taken,తీసుకున్న
+see,చూడడం,sees,చూస్తాడు,seeing,చూస్తూ,saw,చూసాడు,seen,చూసిన
+come,రావడం,comes,వస్తాడు,coming,వస్తూ,came,వచ్చాడు,come,వచ్చిన
+know,తెలుసుకోవడం,knows,తెలుసుకుంటాడు,knowing,తెలుసుకుంటూ,knew,తెలుసుకున్నాడు,known,తెలుసుకున్న
+think,ఆలోచించడం,thinks,ఆలోచిస్తాడు,thinking,ఆలోచిస్తూ,thought,ఆలోచించాడు,thought,ఆలోచించిన
+look,చూడడం,looks,చూస్తాడు,looking,చూస్తూ,looked,చూసాడు,looked,చూసిన
+want,కావాలనుకోవడం,wants,కావాలనుకుంటాడు,wanting,కావాలనుకుంటూ,wanted,కావాలనుకున్నాడు,wanted,కావాలనుకున్న
+give,ఇవ్వడం,gives,ఇస్తాడు,giving,ఇస్తూ,gave,ఇచ్చాడు,given,ఇచ్చిన
+use,వాడడం,uses,వాడుతాడు,using,వాడుతూ,used,వాడాడు,used,వాడిన
+find,కనుగొనడం,finds,కనుగొంటాడు,finding,కనుగొంటూ,found,కనుగొన్నాడు,found,కనుగొన్న
+tell,చెప్పడం,tells,చెప్తాడు,telling,చెప్తూ,told,చెప్పాడు,told,చెప్పిన
+ask,అడగడం,asks,అడుగుతాడు,asking,అడుగుతూ,asked,అడిగాడు,asked,అడిగిన
+work,పని చేయడం,works,పని చేస్తాడు,working,పని చేస్తూ,worked,పని చేశాడు,worked,పని చేసిన
+seem,కనిపించడం,seems,కనిపిస్తాడు,seeming,కనిపిస్తూ,seemed,కనిపించాడు,seemed,కనిపించిన
+feel,అనుభూతి చెందడం,feels,అనుభూతి చెందుతాడు,feeling,అనుభూతి చెందుతూ,felt,అనుభూతి చెందాడు,felt,అనుభూతి చెందిన
+try,ప్రయత్నించడం,tries,ప్రయత్నిస్తాడు,trying,ప్రయత్నిస్తూ,tried,ప్రయత్నించాడు,tried,ప్రయత్నించిన
+leave,వదిలివేయడం,leaves,వదిలివేస్తాడు,leaving,వదిలివేస్తూ,left,వదిలివేశాడు,left,వదిలివేసిన
+call,పిలవడం,calls,పిలుస్తాడు,calling,పిలుస్తూ,called,పిలిచాడు,called,పిలిచిన
+run,పరుగెత్తడం,runs,పరుగెత్తుతాడు,running,పరుగెత్తుతూ,ran,పరుగెత్తాడు,run,పరుగెత్తిన
+move,కదలడం,moves,కదులుతాడు,moving,కదులుతూ,moved,కదిలాడు,moved,కదిలిన
+play,ఆడడం,plays,ఆడతాడు,playing,ఆడుతూ,played,ఆడిన
+put,ఉంచడం,puts,ఉంచుతాడు,putting,ఉంచుతూ,put,ఉంచాడు,put,ఉంచిన
+hold,పట్టుకోవడం,holds,పట్టుకుంటాడు,holding,పట్టుకుంటూ,held,పట్టుకున్నాడు,held,పట్టుకున్న
+bring,తీసుకురావడం,brings,తీసుకువస్తాడు,bringing,తీసుకువస్తూ,brought,తీసుకువచ్చాడు,brought,తీసుకువచ్చిన
+happen,జరగడం,happens,జరుగుతుంది,happening,జరుగుతూ,happened,జరిగింది,happened,జరిగిన
+write,రాయడం,writes,రాస్తాడు,writing,రాస్తూ,wrote,రాశాడు,written,రాసిన
+provide,అందించడం,provides,అందిస్తాడు,providing,అందిస్తూ,provided,అందించాడు,provided,అందించిన
+sit,కూర్చోవడం,sits,కూర్చుంటాడు,sitting,కూర్చుంటూ,sat,కూర్చున్నాడు,sat,కూర్చున్న
+stand,నిలబడడం,stands,నిలబడతాడు,standing,నిలబడుతూ,stood,నిలబడ్డాడు,stood,నిలబడిన
+lose,కోల్పోవడం,loses,కోల్పోతాడు,losing,కోల్పోతూ,lost,కోల్పోయాడు,lost,కోల్పోయిన
+pay,చెల్లించడం,pays,చెల్లిస్తాడు,paying,చెల్లిస్తూ,paid,చెల్లించాడు,paid,చెల్లించిన
+meet,కలవడం,meets,కలుస్తాడు,meeting,కలుస్తూ,met,కలిసాడు,met,కలిసిన
+include,చేర్చడం,includes,చేర్చుతాడు,including,చేర్చుతూ,included,చేర్చాడు,included,చేర్చిన
+set,నిర్ణయించడం,sets,నిర్ణయిస్తాడు,setting,నిర్ణయిస్తూ,set,నిర్ణయించాడు,set,నిర్ణయించిన
+learn,నేర్చుకోవడం,learns,నేర్చుకుంటాడు,learning,నేర్చుకుంటూ,learned/learnt,నేర్చుకున్నాడు,learned/learnt,నేర్చుకున్న
+change,మార్చడం,changes,మార్చేస్తాడు,changing,మార్చేస్తూ,changed,మార్చాడు,changed,మార్చిన
+check,తనిఖీ చేయడం,checks,తనిఖీ చేస్తాడు,checking,తనిఖీ చేస్తూ,checked,తనిఖీ చేశాడు,checked,తనిఖీ చేసిన
+clap,చప్పట్లు కొట్టడం,claps,చప్పట్లు కొడతాడు,clapping,చప్పట్లు కొడుతూ,clapped,చప్పట్లు కొట్టాడు,clapped,చప్పట్లు కొట్టిన
+count,లెక్కించడం,counts,లెక్కేస్తాడు,counting,లెక్కిస్తూ,counted,లెక్కించాడు,counted,లెక్కించిన
+cover,కప్పివేయడం,covers,కప్పివేస్తాడు,covering,కప్పివేస్తూ,covered,కప్పివేశాడు,covered,కప్పివేసిన
+cross,దాటడం,crosses,దాటుతాడు,crossing,దాటుతూ,crossed,దాటాడు,crossed,దాటిన
+dance,నృత్యం చేయడం,dances,నృత్యం చేస్తాడు,dancing,నృత్యం చేస్తూ,danced,నృత్యం చేశాడు,danced,నృత్యం చేసిన
+drop,వదలడం,drops,వదులుతాడు,dropping,వదులుతూ,dropped,వదిలాడు,dropped,వదిలిన
+enter,ప్రవేశించడం,enters,ప్రవేశిస్తాడు,entering,ప్రవేశిస్తూ,entered,ప్రవేశించాడు,entered,ప్రవేశించిన
+finish,ముగించడం,finishes,ముగిస్తాడు,finishing,ముగిస్తూ,finished,ముగించాడు,finished,ముగిించిన
+fix,సరిదిద్దడం,fixes,సరి చేస్తాడు,fixing,సరి చేస్తూ,fixed,సరిచేశాడు,fixed,సరిచేసిన
+read,చదవడం,reads,చదువుతాడు,reading,చదువుతూ,read,చదివాడు,read,చదివిన
+sleep,నిద్రపోవడం,sleeps,నిద్రపోతాడు,sleeping,నిద్రపోతూ,slept,నిద్రపోయాడు,slept,నిద్రపోయిన
+speak,మాట్లాడడం,speaks,మాట్లాడతాడు,speaking,మాట్లాడుతూ,spoke,మాట్లాడాడు,spoken,మాట్లాడిన
+eat,తినడం,eats,తింటాడు,eating,తింటూ,ate,తిన్నాడు,eaten,తిన్న
+drink,తాగడం,drinks,తాగుతాడు,drinking,తాగుతూ,drank,తాగాడు,drunk,తాగిన
+buy,కొనడం,buys,కొంటాడు,buying,కొంటూ,bought,కొన్నాడు,bought,కొన్న
+sell,అమ్మడం,sells,అమ్ముతాడు,selling,అమ్ముతూ,sold,అమ్మాడు,sold,అమ్మిన
+teach,బోధించడం,teaches,బోధిస్తాడు,teaching,బోధిస్తూ,taught,బోధించాడు,taught,బోధించిన
+win,గెలవడం,wins,గెలుస్తాడు,winning,గెలుస్తూ,won,గెలిచాడు,won,గెలిచిన
+cut,కోయడం,cuts,కోస్తాడు,cutting,కోస్తూ,cut,కోశాడు,cut,కోసిన
+become,అవ్వడం,becomes,అవుతాడు,becoming,అవుతూ,became,అయ్యాడు,become,అయ్యిన
+begin,ప్రారంభించడం,begins,ప్రారంభిస్తాడు,beginning,ప్రారంభిస్తూ,began,ప్రారంభించాడు,begun,ప్రారంభించిన
+show,చూపించడం,shows,చూపిస్తాడు,showing,చూపిస్తూ,showed,చూపించాడు,shown/showed,చూపించిన
+hear,వినడం,hears,వింటాడు,hearing,వింటూ,heard,విన్నాడు,heard,విన్న
+understand,అర్థం చేసుకోవడం,understands,అర్థం చేసుకుంటాడు,understanding,అర్థం చేసుకుంటూ,understood,అర్థం చేసుకున్నాడు,understood,అర్థం చేసుకున్న
+build,నిర్మించడం,builds,నిర్మిస్తాడు,building,నిర్మిస్తూ,built,నిర్మించాడు,built,నిర్మించిన
+fall,పడిపోవడం,falls,పadiపోతాడు,falling,పడిపోతూ,fell,పడిపోయాడు,fallen,పడిపోయిన
+send,పంపడం,sends,పంపుతాడు,sending,పంపుతూ,sent,పంపాడు,sent,పంపిన
+decide,నిర్ణయించడం,decides,నిర్ణయిస్తాడు,deciding,నిర్ణయిస్తూ,decided,నిర్ణయించాడు,decided,నిర్ణయించిన
+return,తిరిగి రావడం,returns,తిరిగి వస్తాడు,returning,తిరిగి వస్తూ,returned,తిరిగి వచ్చాడు,returned,తిరిగి వచ్చిన
+create,సృష్టించడం,creates,సృష్టిస్తాడు,creating,సృష్టిస్తూ,created,సృష్టించాడు,created,సృష్టించిన
+believe,నమ్మడం,believes,నమ్ముతాడు,believing,నమ్ముతూ,believed,నమ్మాడు,believed,నమ్మిన
+receive,స్వీకరించడం,receives,స్వీకరిస్తాడు,receiving,స్వీకరిస్తూ,received,స్వీకరించాడు,received,స్వీకరించిన
+wait,వేచి ఉండడం,waits,వేచి ఉంటాడు,waiting,వేచి ఉంటూ,waited,వేచి ఉన్నాడు,waited,వేచి ఉన్న
+die,చనిపోవడం,dies,చనిపోతాడు,dying,చనిపోతూ,died,చనిపోయాడు,died,చనిపోయిన
+kill,చంపడం,kills,చంపుతాడు,killing,చంపుతూ,killed,చంపాడు,killed,చంపిన
+stay,ఉండడం,stays,ఉంటాడు,staying,ఉంటూ,stayed,ఉన్నాడు,stayed,ఉన్న
+remember,గుర్తుంచుకోవడం,remembers,గుర్తుంచుకుంటాడు,remembering,గుర్తుంచుకుంటూ,remembered,గుర్తుంచుకున్నాడు,remembered,గుర్తుంచుకున్న
+stop,ఆపడం,stops,ఆపుతాడు,stopping,ఆపుతూ,stopped,ఆపాడు,stopped,ఆపిన
+raise,పెంచడం,raises,పెంచుతాడు,raising,పెంచుతూ,raised,పెంచాడు,raised,పెంచిన
+pass,దాటడం,passes,దాటుతాడు,passing,దాటుతూ,passed,దాటాడు,passed,దాటిన
+require,అవసరం,requires,అవసరమవుతుంది,requiring,అవసరమవుతూ,required,అవసరమయింది,required,అవసరమైన
+report,నివేదించడం,reports,నివేదిస్తాడు,reporting,నివేదిస్తూ,reported,నివేదించాడు,reported,నివేదించిన
+push,నెట్టడం,pushes,నెట్టుతాడు,pushing,నెట్టుతూ,pushed,నెట్టాడు,pushed,నెట్టిన
+pull,లాగడం,pulls,లాగుతాడు,pulling,లాగుతూ,pulled,లాగాడు,pulled,లాగిన
+offer,అందించడం,offers,అందిస్తాడు,offering,అందిస్తూ,offered,అందించాడు,offered,అందించిన
+open,తెరవడం,opens,తెరుస్తాడు,opening,తెరుస్తూ,opened,తెరిచాడు,opened,తెరిచిన
+close,మూయడం,closes,మూస్తాడు,closing,మూస్తూ,closed,మూశాడు,closed,మూసిన
+grow,పెరగడం,grows,పెరుగుతాడు,growing,పెరుగుతూ,grew,పెరిగాడు,grown,పెరిగిన
+expect,ఆశించడం,expects,ఆశిస్తాడు,expecting,ఆశిస్తూ,expected,ఆశించాడు,expected,ఆశించిన
+introduce,పరిచయం చేయడం,introduces,పరిచయం చేస్తాడు,introducing,పరిచయం చేస్తూ,introduced,పరిచయం చేశాడు,introduced,పరిచయం చేసిన
+spend,ఖర్చు చేయడం,spends,ఖర్చు చేస్తాడు,spending,ఖర్చు చేస్తూ,spent,ఖర్చు చేశాడు,spent,ఖర్చు చేసిన
+agree,అంగీకరించడం,agrees,అంగీకరిస్తాడు,agreeing,అంగీకరిస్తూ,agreed,అంగీకరించాడు,agreed,అంగీకరించిన
+imagine,ఊహించడం,imagines,ఊహిస్తాడు,imagining,ఊహిస్తూ,imagined,ఊహించాడు,imagined,ఊహించిన
+enjoy,ఆనందించడం,enjoys,ఆనందిస్తాడు,enjoying,ఆనందిస్తూ,enjoyed,ఆనందించాడు,enjoyed,ఆనందించిన
+worry,ఆందోళన చెందడం,worries,ఆందోళన చెందుతాడు,worrying,ఆందోళన చెందుతూ,worried,ఆందోళన చెందాడు,worried,ఆందోళన చెందిన
+draw,గీయడం,draws,గీస్తాడు,drawing,గీస్తూ,drew,గీశాడు,drawn,గీసిన
+drive,నడపడం,drives,నడుపుతాడు,driving,నడుపుతూ,drove,నడిపాడు,driven,నడిపిన
+fly,ఎగరడం,flies,ఎగురుతాడు,flying,ఎగురుతూ,flew,ఎగిరాడు,flown,ఎగిరిన
+sing,పాడడం,sings,పాడుతాడు,singing,పాడుతూ,sang,పాడాడు,sung,పాడిన
+swim,ఈదడం,swims,ఈదుతాడు,swimming,ఈదుతూ,swam,ఈదాను,swum,ఈదిన
+tear,చింపడం,tears,చింపుతాడు,tearing,చింపుతూ,tore,చింపాడు,torn,చింపిన
+wear,ధరించడం,wears,ధరిస్తాడు,wearing,ధరిస్తూ,wore,ధరించాడు,worn,ధరించిన
+hide,దాచడం,hides,దాస్తాడు,hiding,దాస్తూ,hid,దాచాడు,hidden,దాచిన
+ride,స్వారీ చేయడం,rides,స్వారీ చేస్తాడు,riding,స్వారీ చేస్తూ,rode,స్వారీ చేశాడు,ridden,స్వారీ చేసిన
+bite,కొరకడం,bites,కొరుకుతాడు,biting,కొరుకుతూ,bit,కొరికాడు,bitten,కొరికిన
+break,విరగడం,breaks,విరుస్తాడు,breaking,విరుస్తూ,broke,విరిచాడు,broken,విరిగిన
+choose,ఎంచుకోవడం,chooses,ఎంచుకుంటాడు,choosing,ఎంచుకుంటూ,chose,ఎంచుకున్నాడు,chosen,ఎంచుకున్న
+forget,మర్చిపోవడం,forgets,మర్చిపోతాడు,forgetting,మర్చిపోతూ,forgot,మర్చిపోయాడు,forgotten,మర్చిపోయిన
+freeze,గడ్డకట్టడం,freezes,గడ్డకడతాడు,freezing,గడ్డకడుతూ,froze,గడ్డకట్టాడు,frozen,గడ్డకట్టిన
+steal,దొంగిలించడం,steals,దొంగిలిస్తాడు,stealing,దొంగిలిస్తూ,stole,దొంగిలించాడు,stolen,దొంగిలించిన
+wake,మేల్కొనడం,wakes,మేల్కొంటాడు,waking,మేల్కొంటూ,woke,మేల్కొన్నాడు,woken,మేల్కొన్న
+shut,మూసివేయడం,shuts,మూసివేస్తాడు,shutting,మూసివేస్తూ,shut,మూసివేశాడు,shut,మూసివేసిన
+hit,కొట్టడం,hits,కొడతాడు,hitting,కొడుతూ,hit,కొట్టాడు,hit,కొట్టిన
+let,అనుమతించడం,lets,అనుమతిస్తాడు,letting,అనుమతిస్తూ,let,అనుమతించాడు,let,అనుమతించిన
+cost,ఖర్చు అవ్వడం,costs,ఖర్చు అవుతుంది,costing,ఖర్చు అవుతూ,cost,ఖర్చు అయింది,cost,ఖర్చు అయిన
+spread,వ్యాపించడం,spreads,వ్యాపిస్తుంది,spreading,వ్యాపిస్తూ,spread,వ్యాపించింది,spread,వ్యాపించిన
+fight,పోరాడడం,fights,పోరాడతాడు,fighting,పోరాడుతూ,fought,పోరాడాడు,fought,పోరాడిన
+shoot,షూట్ చేయడం,shoots,షూట్ చేస్తాడు,shooting,షూట్ చేస్తూ,shot,షూట్ చేశాడు,shot,షూట్ చేసిన
+keep,ఉంచుకోవడం,keeps,ఉంచుకుంటాడు,keeping,ఉంచుకుంటూ,kept,ఉంచుకున్నాడు,kept,ఉంచుకున్న
+sleep,నిద్రపోవడం,sleeps,నిద్రపోతాడు,sleeping,నిద్రపోతూ,slept,నిద్రపోయాడు,slept,నిద్రపోయిన
+deal,వ్యవహరించడం,deals,వ్యవహరిస్తాడు,dealing,వ్యవహరిస్తూ,dealt,వ్యవహరించాడు,dealt,వ్యవహరించిన
+mean,అర్థం,means,అర్థం అవుతుంది,meaning,అర్థం అవుతూ,meant,అర్థం అయింది,meant,అర్థం అయిన
+catch,పట్టుకోవడం,catches,పట్టుకుంటాడు,catching,పట్టుకుంటూ,caught,పట్టుకున్నాడు,caught,పట్టుకున్న
+lend,అప్పు ఇవ్వడం,lends,అప్పు ఇస్తాడు,lending,అప్పు ఇస్తూ,lent,అప్పు ఇచ్చాడు,lent,అప్పు ఇచ్చిన
+smell,వాసన చూడడం,smells,వాసన చూస్తాడు,smelling,వాసన చూస్తూ,smelled/smelt,వాసన చూశాడు,smelled/smelt,వాసన చూసిన
+blow,ఊదడం,blows,ఊదుతాడు,blowing,ఊదుతూ,blew,ఊదాడు,blown,ఊదిన
+throw,విసిరేయడం,throws,విసిరేస్తాడు,throwing,విసిరేస్తూ,threw,విసిరేశాడు,thrown,విసిరేసిన
+bend,వంగడం,bends,వంగుతాడు,bending,వంగుతూ,bent,వంగాడు,bent,వంగిన
+hang,వేలాడదీయడం,hangs,వేలాడదీస్తాడు,hanging,వేలాడదీస్తూ,hung,వేలాడదీశాడు,hung,వేలాడదీసిన
+rise,లేవడం,rises,లేస్తాడు,rising,లేస్తూ,rose,లేచాడు,risen,లేచిన
+forgive,క్షమించడం,forgives,క్షమిస్తాడు,forgiving,క్షమిస్తూ,forgave,క్షమించాడు,forgiven,క్షమించిన
+shake,కదిలించడం,shakes,కదిలిస్తాడు,shaking,కదిలిస్తూ,shook,కదిలించాడు,shaken,కదిలించిన
+say,చెప్పడం,says,చెప్తాడు,saying,చెప్తూ,said,చెప్పాడు,said,చెప్పిన
+lead,నడిపించడం,leads,నడిపిస్తాడు,leading,నడిపిస్తూ,led,నడిపించాడు,led,నడిపించిన
+hurt,బాధపెట్టడం,hurts,బాధపెడతాడు,hurting,బాధపెడుతూ,hurt,బాధపెట్టాడు,hurt,బాధపెట్టిన
+quit,మానేయడం,quits,మానేస్తాడు,quitting,మానేస్తూ,quit,మానేశాడు,quit,మానేసిన
+light,వెలిగించడం,lights,వెలిగిస్తాడు,lighting,వెలిగిస్తూ,lit/lighted,వెలిగించాడు,lit/lighted,వెలిగించిన
+spell,అక్షరాలు పలకడం,spells,అక్షరాలు పలుకుతాడు,spelling,అక్షరాలు పలుకుతూ,spelled/spelt,అక్షరాలు పలికాడు,spelled/spelt,అక్షరాలు పలికిన
+burn,కాల్చడం,burns,కాలుస్తాడు,burning,కాలుస్తూ,burned/burnt,కాల్చాడు,burned/burnt,కాల్చిన
+dream,కల కనడం,dreams,కల కంటాడు,dreaming,కల కంటూ,dreamed/dreamt,కల కన్నాడు,dreamed/dreamt,కల కన్న
+dig,త్రవ్వడం,digs,త్రవ్వుతాడు,digging,త్రవ్వుతూ,dug,త్రవ్వాడు,dug,త్రవ్విన
+cast,విసిరేయడం,casts,విసిరేస్తాడు,casting,విసిరేస్తూ,cast,విసిరేశాడు,cast,విసిరేసిన
+fit,సరిపోవడం,fits,సరిపోతుంది,fitting,సరిపోతూ,fit/fitted,సరిపోయింది,fit/fitted,సరిపోయిన
+kneel,మోకరిల్లడం,kneels,మోకరిల్లుతాడు,kneeling,మోకరిల్లుతూ,knelt/kneeled,మోకరిల్లాడు,knelt/kneeled,మోకరిల్లిన
+bet,పందెం కాయడం,bets,పందెం కాస్తాడు,betting,పందెం కాస్తూ,bet,పందెం కాశాడు,bet,పందెం కాసిన
+slap,చరుచుకోవడం,slaps,చరుచుకుంటాడు,slapping,చరుచుకుంటూ,slapped,చరుచుకున్నాడు,slapped,చరుచుకున్న
+stab,పొడవడం,stabs,పొడుస్తాడు,stabbing,పొడుస్తూ,stabbed,పొడిచాడు,stabbed,పొడిచిన
+allow,అనుమతించడం,allows,అనుమతిస్తాడు,allowing,అనుమతిస్తూ,allowed,అనుమతించాడు,allowed,అనుమతించిన
+add,జోడించడం,adds,జోడిస్తాడు,adding,జోడిస్తూ,added,జోడించాడు,added,జోడించిన
+agree,అంగీకరించడం,agrees,అంగీకరిస్తాడు,agreeing,అంగీకరిస్తూ,agreed,అంగీకరించాడు,agreed,అంగీకరించిన
+explain,వివరించడం,explains,వివరిస్తాడు,explaining,వివరిస్తూ,explained,వివరించాడు,explained,వివరించిన
+follow,అనుసరించడం,follows,అనుసరిస్తాడు,following,అనుసరిస్తూ,followed,అనుసరించాడు,followed,అనుసరించిన
+mention,పేర్కొనడం,mentions,పేర్కొంటాడు,mentioning,పేర్కొంటూ,mentioned,పేర్కొన్నాడు,mentioned,పేర్కొన్న
+notice,గమనించడం,notices,గమనిస్తాడు,noticing,గమనిస్తూ,noticed,గమనించాడు,noticed,గమనించిన
+prevent,నిరోధించడం,prevents,నిరోధిస్తాడు,preventing,నిరోధిస్తూ,prevented,నిరోధించాడు,prevented,నిరోధించిన
+refuse,తిరస్కరించడం,refuses,తిరస్కరిస్తాడు,refusing,తిరస్కరిస్తూ,refused,తిరస్కరించాడు,refused,తిరస్కరించిన
+solve,పరిష్కరించడం,solves,పరిష్కరిస్తాడు,solving,పరిష్కరిస్తూ,solved,పరిష్కరించాడు,solved,పరిష్కరించిన
+suggest,సూచించడం,suggests,సూచిస్తాడు,suggesting,సూచిస్తూ,suggested,సూచించాడు,suggested,సూచించిన
+support,మద్దతు ఇవ్వడం,supports,మద్దతు ఇస్తాడు,supporting,మద్దతు ఇస్తూ,supported,మద్దతు ఇచ్చాడు,supported,మద్దతు ఇచ్చిన
+touch,తాకడం,touches,తాకుతాడు,touching,తాకుతూ,touched,తాకాడు,touched,తాకిన
+visit,సందర్శించడం,visits,సందర్శిస్తాడు,visiting,సందర్శిస్తూ,visited,సందర్శించాడు,visited,సందర్శించిన
+walk,నడవడం,walks,నడుస్తాడు,walking,నడుస్తూ,walked,నడిచాడు,walked,నడిచిన
+wash,కడగడం,washes,కడుగుతాడు,washing,కడుగుతూ,washed,కడిగాడు,washed,కడిగిన
+suffer,బాధపడడం,suffers,బాధపడతాడు,suffering,బాధపడుతూ,suffered,బాధపడ్డాడు,suffered,బాధపడిన
+surprise,ఆశ్చర్యపరచడం,surprises,ఆశ్చర్యపరుస్తాడు,surprising,ఆశ్చర్యపరుస్తూ,surprised,ఆశ్చర్యపరిచాడు,surprised,ఆశ్చర్యపరిచిన
+thank,ధన్యవాదాలు చెప్పడం,thanks,ధన్యవాదాలు చెప్తాడు,thanking,ధన్యవాదాలు చెప్తూ,thanked,ధన్యవాదాలు చెప్పాడు,thanked,ధన్యవాదాలు చెప్పిన
+threaten,బెదిరించడం,threatens,బెదిరిస్తాడు,threatening,బెదిరిస్తూ,threatened,బెదిరించాడు,threatened,బెదిరించిన
+treat,వ్యవహరించడం,treats,వ్యవహరిస్తాడు,treating,వ్యవహరిస్తూ,treated,వ్యవహరించాడు,treated,వ్యవహరించిన
+value,విలువ ఇవ్వడం,values,విలువ ఇస్తాడు,valuing,విలువ ఇస్తూ,valued,విలువ ఇచ్చాడు,valued,విలువ ఇచ్చిన
+warn,హెచ్చరించడం,warns,హెచ్చరిస్తాడు,warning,హెచ్చరిస్తూ,warned,హెచ్చరించాడు,warned,హెచ్చరించిన
+waste,వృధా చేయడం,wastes,వృధా చేస్తాడు,wasting,వృధా చేస్తూ,wasted,వృధా చేశాడు,wasted,వృధా చేసిన
+welcome,స్వాగతం పలకడం,welcomes,స్వాగతం పలుకుతాడు,welcoming,స్వాగతం పలుకుతూ,welcomed,స్వాగతం పలికాడు,welcomed,స్వాగతం పలికిన
+wish,కోరుకోవడం,wishes,కోరుకుంటాడు,wishing,కోరుకుంటూ,wished,కోరుకున్నాడు,wished,కోరుకున్న
+wonder,ఆశ్చర్యపోవడం,wonders,ఆశ్చర్యపోతాడు,wondering,ఆశ్చర్యపోతూ,wondered,ఆశ్చర్యపోయాడు,wondered,ఆశ్చర్యపోయిన
+save,సేవ్ చేయడం,saves,సేవ్ చేస్తాడు,saving,సేవ్ చేస్తూ,saved,సేవ్ చేశాడు,saved,సేవ్ చేసిన
+smoke,పొగ తాగడం,smokes,పొగ తాగుతాడు,smoking,పొగ తాగుతూ,smoked,పొగ తాగాడు,smoked,పొగ తాగిన
+start,ప్రారంభించడం,starts,ప్రారంభిస్తాడు,starting,ప్రారంభిస్తూ,started,ప్రారంభించాడు,started,ప్రారంభించిన
+study,చదువుకోవడం,studies,చదువుకుంటాడు,studying,చదువుకుంటూ,studied,చదువుకున్నాడు,studied,చదువుకున్న
+talk,మాట్లాడడం,talks,మాట్లాడతాడు,talking,మాట్లాడుతూ,talked,మాట్లాడాడు,talked,మాట్లాడిన
+taste,రుచి చూడడం,tastes,రుచి చూస్తాడు,tasting,రుచి చూస్తూ,tasted,రుచి చూశాడు,tasted,రుచి చూసిన
+tease,ఏడిపించడం,teases,ఏడిపిస్తాడు,teasing,ఏడిపిస్తూ,teased,ఏడిపించాడు,teased,ఏడిపించిన
+scream,అరవడం,screams,అరుస్తాడు,screaming,అరుస్తూ,screamed,అరిచాడు,screamed,అరిచిన
+search,వెతకడం,searches,వెతుకుతాడు,searching,వెతుకుతూ,searched,వెతికాడు,searched,వెతికిన
+separate,విడదీయడం,separates,విడదీస్తాడు,separating,విడదీస్తూ,separated,విడదీశాడు,separated,విడదీసిన
+share,పంచుకోవడం,shares,పంచుకుంటాడు,sharing,పంచుకుంటూ,shared,పంచుకున్నాడు,shared,పంచుకున్న
+shout,అరవడం,shouts,అరుస్తాడు,shouting,అరుస్తూ,shouted,అరిచాడు,shouted,అరిచిన
+sign,సంతకం చేయడం,signs,సంతకం చేస్తాడు,signing,సంతకం చేస్తూ,signed,సంతకం చేశాడు,signed,సంతకం చేసిన
+skip,దాటవేయడం,skips,దాటవేస్తాడు,skipping,దాటవేస్తూ,skipped,దాటవేశాడు,skipped,దాటవేసిన
+slip,జారిపోవడం,slips,జారిపోతాడు,slipping,జారిపోతూ,slipped,జారిపోయాడు,slipping,జారిపోయిన
+slow,నెమ్మదిగా చేయడం,slows,నెమ్మదిగా చేస్తాడు,slowing,నెమ్మదిగా చేస్తూ,slowed,నెమ్మదిగా చేశాడు,slowed,నెమ్మదిగా చేసిన
+smile,నవ్వడం,smiles,నవ్వుతాడు,smiling,నవ్వుతూ,smiled,నవ్వాడు,smiled,నవ్విన
+sound,వినిపించడం,sounds,వినిపిస్తుంది,sounding,వినిపిస్తూ,sounded,వినిపించింది,sounded,వినిపించిన
+starve,ఆకలితో ఉండడం,starves,ఆకలితో ఉంటాడు,starving,ఆకలితో ఉంటూ,starved,ఆకలితో ఉన్నాడు,starved,ఆకలితో ఉన్న
+store,నిల్వ చేయడం,stores,నిల్వ చేస్తాడు,storing,నిల్వ చేస్తూ,stored,నిల్వ చేశాడు,stored,నిల్వ చేసిన
+stretch,సాగుట,stretches,సాగుతాడు,stretching,సాగుతూ,stretched,సాగాడు,stretched,సాగుట
+strip,తొలగించడం,strips,తొలగిస్తాడు,stripping,తొలగిస్తూ,stripped,తొలగించాడు,stripped,తొలగించిన
+`
+        
+        // --- Configuration ---
+        const QUESTION_OPTIONS = [5, 10, 15, 20, 30];
+        const FONT_OPTIONS = {
+            body: [
+                { value: 'Inter', label: 'Inter (Sans-serif, Default)' },
+                { value: 'Roboto', label: 'Roboto (Sans-serif)' },
+                { value: 'Source Sans 3', label: 'Source Sans 3 (Sans-serif)' },
+                { value: 'Merriweather', label: 'Merriweather (Serif)' }
+            ],
+            title: [
+                { value: 'Lora', label: 'Lora (Serif, Default)' },
+                { value: 'Playfair Display', label: 'Playfair Display (Serif)' },
+                { value: 'Montserrat', label: 'Montserrat (Sans-serif)' },
+                { value: 'Merriweather', label: 'Merriweather (Serif)' }
+            ]
+        };
+        const DEFAULT_MAX_QUESTIONS = 15;
+
+        // --- Game State ---
+        let maxQuestions = DEFAULT_MAX_QUESTIONS;
+        let verbs = [];
+        let currentVerb = null;
+        let hiddenFormKey = null;
+        let score = 0;
+        let questionsAsked = 0; 
+        let verbIndicesPool = []; 
+        let quizResults = [];
+        let isDataLoaded = false;
+        let currentSelectionType = null;
+        
+        // NEW: Key for Local Storage of Custom Data & Settings
+        const CUSTOM_VERB_KEY = 'customVerbData';
+        const SETTINGS_KEY = 'quizSettings';
+
+        // --- Column Indices ---
+        const COL_BASE = 0;
+        const COL_TELUGU_BASE = 1;
+        const COL_THIRD = 2;
+        const COL_TELUGU_THIRD = 3;
+        const COL_ING = 4;
+        const COL_TELUGU_ING = 5;
+        const COL_SIMPLE = 6;
+        const COL_TELUGU_SIMPLE = 7;
+        const COL_PARTICIPLE = 8;
+        const COL_TELUGU_PARTICIPLE = 9;
+        
+        const FORM_KEYS = {
+            base: "Base Form",
+            third: "3rd Person Singular (he/she/it)",
+            ing: "-ing Form",
+            simple: "Past Simple",
+            participle: "Past Participle",
+        };
+        const TELUGU_KEYS = {
+            base: 'telugu_base',
+            third: 'telugu_third',
+            ing: 'telugu_ing',
+            simple: 'telugu_simple',
+            participle: 'telugu_participle',
+        };
+
+        // --- Tone.js Audio Setup ---
+        let correctSynth;
+        let incorrectSynth;
+        let clickSynth;
+
+        const setupAudio = () => {
+            correctSynth = new Tone.MembraneSynth().toDestination();
+            correctSynth.set({ oscillator: { type: "sine" }, envelope: { attack: 0.001, decay: 0.2, sustain: 0, release: 0.1 }, pitchDecay: 0.05 });
+            incorrectSynth = new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.005, decay: 0.1, sustain: 0 } }).toDestination();
+            clickSynth = new Tone.Synth({ 
+                oscillator: { type: "sine" },
+                envelope: { attack: 0.001, decay: 0.05, sustain: 0 }
+            }).toDestination();
+        }
+
+        const playCorrect = () => { 
+            const disableSound = getLocalStorageSetting('disableSound', false);
+            if (!disableSound) { Tone.context.resume().then(() => { correctSynth.triggerAttackRelease("G5", "8n"); }); } 
+        }
+        const playIncorrect = () => { 
+            const disableSound = getLocalStorageSetting('disableSound', false);
+            if (!disableSound) { Tone.context.resume().then(() => { incorrectSynth.triggerAttackRelease("16n"); }); } 
+        }
+        const playClick = () => {
+            const disableSound = getLocalStorageSetting('disableSound', false);
+            if (!disableSound) { Tone.context.resume().then(() => { clickSynth.triggerAttackRelease("C5", "32n"); }); } 
+        }
+        
+        const vibrateCorrect = () => { 
+            const disableVibration = getLocalStorageSetting('disableVibration', false);
+            if (!disableVibration && navigator.vibrate) { navigator.vibrate(100); } 
+        };
+        const vibrateIncorrect = () => { 
+            const disableVibration = getLocalStorageSetting('disableVibration', false);
+            if (!disableVibration && navigator.vibrate) { navigator.vibrate([100, 50, 100, 50, 100]); } 
+        };
+        const vibrateClick = () => { 
+            const disableVibration = getLocalStorageSetting('disableVibration', false);
+            if (!disableVibration && navigator.vibrate) { navigator.vibrate(30); } 
+        };
+
+        window.handleUiTapFeedback = function() {
+            playClick();
+            vibrateClick();
+        }
+        // --- End Haptic Feedback Setup ---
+
+        // --- Theme and Settings Management (LOCAL STORAGE) ---
+        const DARK_CLASS = 'dark-mode';
+        
+        // Error-free loading of state from localStorage
+        const getLocalStorageSetting = (key, defaultValue) => {
+            try {
+                const settingsString = localStorage.getItem(SETTINGS_KEY);
+                if (!settingsString) return defaultValue;
+                
+                const settings = JSON.parse(settingsString);
+                
+                // Handle complex types/defaults
+                if (key === 'maxQuestions') {
+                    const parsed = parseInt(settings[key]);
+                    return isNaN(parsed) ? defaultValue : parsed;
+                }
+                if (typeof settings[key] === 'undefined' || settings[key] === null) {
+                    return defaultValue;
+                }
+                return settings[key];
+
+            } catch (e) {
+                console.error(`Error loading local setting key ${key}:`, e);
+                return defaultValue;
+            }
+        };
+
+        const saveLocalStorageSetting = (key, value) => {
+            try {
+                const settingsString = localStorage.getItem(SETTINGS_KEY);
+                let settings = settingsString ? JSON.parse(settingsString) : {};
+                
+                settings[key] = value;
+                localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+                
+            } catch (e) {
+                console.error(`Error saving local setting key ${key}:`, e);
+            }
+        }
+
+
+        function setThemeColor(color) {
+            saveLocalStorageSetting('color', color);
+            applyTheme(getLocalStorageSetting('theme', 'light') === 'dark');
+            updateSettingsUI();
+        }
+
+        function setThemeMode(mode) {
+            saveLocalStorageSetting('theme', mode);
+            applyTheme(mode === 'dark');
+            updateSettingsUI();
+        }
+
+        function toggleTheme() {
+            const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+            setThemeMode(currentMode === 'dark' ? 'light' : 'dark');
+            updateHamburgerMenuUI();
+        }
+        
+        function setTextContrast(contrast) {
+            saveLocalStorageSetting('contrast', contrast);
+            document.body.setAttribute('data-contrast', contrast);
+            applyTheme(getLocalStorageSetting('theme', 'light') === 'dark'); 
+            updateSettingsUI();
+        }
+        
+        window.setBodyFont = function(font) {
+            saveLocalStorageSetting('bodyFont', font);
+            const fallback = font.includes('serif') ? 'serif' : 'sans-serif';
+            document.documentElement.style.setProperty('--font-body', `"${font}", ${fallback}`);
+            updateSettingsUI(); 
+        }
+
+        window.setTitleFont = function(font) {
+            saveLocalStorageSetting('titleFont', font);
+            const fallback = font.includes('serif') ? 'serif' : 'sans-serif'; 
+            document.documentElement.style.setProperty('--font-title', `"${font}", ${fallback}`);
+            updateSettingsUI(); 
+        }
+        
+        function setInputStyle(style) {
+            saveLocalStorageSetting('inputStyle', style);
+            applyInputStyles();
+            updateSettingsUI();
+        }
+
+        function applyInputStyles() {
+            const style = getLocalStorageSetting('inputStyle', 'rounded');
+            const root = document.documentElement.style;
+            if (style === 'square') {
+                root.setProperty('--input-border-radius', '0.5rem'); 
+                root.setProperty('--input-shadow', '0 2px 4px rgba(0,0,0,0.1)');
+            } else { 
+                root.setProperty('--input-border-radius', '1.5rem'); 
+                root.setProperty('--input-shadow', '0 4px 6px rgba(0,0,0,0.05)');
+            }
+            // Also apply to dynamically created/existing inputs
+            const inputs = document.querySelectorAll('input[type="text"], textarea');
+            inputs.forEach(input => {
+                input.style.borderRadius = `var(--input-border-radius)`;
+                input.style.boxShadow = `var(--input-shadow)`;
+            });
+        }
+        
+        function toggleAudio() {
+            const currentState = getLocalStorageSetting('disableSound', false);
+            saveLocalStorageSetting('disableSound', !currentState);
+            updateSettingsUI();
+        }
+
+        function toggleHaptics() {
+            const currentState = getLocalStorageSetting('disableVibration', false);
+            saveLocalStorageSetting('disableVibration', !currentState);
+            updateSettingsUI();
+        }
+
+        function toggleTelugu() {
+            const currentState = getLocalStorageSetting('hideTelugu', false);
+            saveLocalStorageSetting('hideTelugu', !currentState);
+            if (currentVerb) renderQuestion();
+            updateSettingsUI();
+        }
+        
+        function toggleTextHue() {
+            const currentState = getLocalStorageSetting('textHue', false);
+            saveLocalStorageSetting('textHue', !currentState);
+            applyTheme(getLocalStorageSetting('theme', 'light') === 'dark');
+            updateSettingsUI();
+        }
+
+        window.handleQuestionCountChange = function(value) {
+            const count = parseInt(value);
+            maxQuestions = count;
+            saveLocalStorageSetting('maxQuestions', count);
+
+            const limit = Math.min(verbs.length, maxQuestions);
+            document.getElementById('question-counter').textContent = `${questionsAsked}/${limit}`;
+            if (questionsAsked > 0) {
+                 updateProgressBar();
+            }
+            updateStartScreenMessage();
+        }
+        
+        function applyTheme(isDark) {
+            const color = getLocalStorageSetting('color', 'indigo');
+            const contrast = getLocalStorageSetting('contrast', 'default');
+            const textHue = getLocalStorageSetting('textHue', false);
+            const bodyFont = getLocalStorageSetting('bodyFont', 'Inter');
+            const titleFont = getLocalStorageSetting('titleFont', 'Lora');
+            
+            const body = document.body;
+            body.setAttribute('data-color', color);
+            body.setAttribute('data-contrast', contrast);
+            body.setAttribute('data-text-hue', textHue ? 'themed' : 'default');
+
+            if (isDark) {
+                body.classList.add(DARK_CLASS);
+            } else {
+                body.classList.remove(DARK_CLASS);
+            }
+            
+            window.setBodyFont(bodyFont);
+            window.setTitleFont(titleFont);
+            applyInputStyles();
+            updateHamburgerMenuUI(); 
+        }
+
+        function updateSettingsUI() {
+            const color = getLocalStorageSetting('color', 'indigo');
+            const contrast = getLocalStorageSetting('contrast', 'default');
+            const inputStyle = getLocalStorageSetting('inputStyle', 'rounded');
+            const disableSound = getLocalStorageSetting('disableSound', false);
+            const disableVibration = getLocalStorageSetting('disableVibration', false);
+            const hideTelugu = getLocalStorageSetting('hideTelugu', false);
+            const textHue = getLocalStorageSetting('textHue', false);
+            
+            // Highlight active color
+            document.querySelectorAll('.color-option').forEach(btn => {
+                btn.classList.toggle('border-white', btn.dataset.colorId === color);
+                btn.classList.toggle('border-4', btn.dataset.colorId === color);
+            });
+            
+            // Highlight active contrast/input style
+            document.querySelectorAll('[data-contrast-id], [data-style-id]').forEach(btn => {
+                const isActive = (btn.dataset.contrastId === contrast) || (btn.dataset.styleId === inputStyle);
+                btn.classList.toggle('ring-4', isActive);
+                btn.classList.toggle('ring-primary-hex', isActive);
+            });
+            
+            // Update toggles
+            document.getElementById('toggle-audio').checked = disableSound;
+            document.getElementById('toggle-haptics').checked = disableVibration;
+            document.getElementById('toggle-telugu').checked = hideTelugu;
+            document.getElementById('toggle-text-hue').checked = textHue;
+            
+            // Update buttons reflecting selected values
+            updateQuizLengthButton();
+            updateFontButton('body');
+            updateFontButton('title');
+
+
+            document.getElementById('score-display').style.color = `var(--color-primary-hex)`;
+            document.getElementById('question-counter').style.color = `var(--color-primary-hex)`;
+        }
+
+        function updateHamburgerMenuUI() {
+            const isDark = document.body.classList.contains(DARK_CLASS);
+            const iconContainer = document.getElementById('menu-theme-icon');
+            const textContainer = document.getElementById('menu-theme-text');
+
+            if (isDark) {
+                iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.593.748-3.752A9.753 9.753 0 009 12.75a9.75 9.75 0 0011.002 9.75z" />`;
+                textContainer.textContent = "Switch to Light Mode";
+            } else {
+                iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`;
+                textContainer.textContent = "Switch to Dark Mode";
+            }
+        }
+        
+        function loadInitialTheme() {
+            // Load max questions early
+            maxQuestions = getLocalStorageSetting('maxQuestions', DEFAULT_MAX_QUESTIONS);
+            
+            const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+            applyTheme(currentMode === 'dark');
+            updateSettingsUI();
+            
+            document.getElementById('loading-indicator').textContent = 'Data loaded and ready.';
+        }
+        // --- End Theme and Settings Management ---
+        
+        // --- Modals and Helpers (Globalized for button access) ---
+
+        window.openSelectionModal = function(type) {
+            currentSelectionType = type;
+            const modal = document.getElementById('selection-modal');
+            const titleEl = document.getElementById('selection-modal-title');
+            const listEl = document.getElementById('selection-modal-list');
+            
+            listEl.innerHTML = '';
+            let optionsHTML = '';
+
+            switch(type) {
+                case 'count':
+                    titleEl.textContent = 'Select Quiz Length';
+                    optionsHTML = QUESTION_OPTIONS.map(count => 
+                        renderOption('count', count, `${count} Questions${count === DEFAULT_MAX_QUESTIONS ? ' (Default)' : ''}`, maxQuestions, 'handleSelectionChange')
+                    ).join('');
+                    break;
+                case 'body':
+                    titleEl.textContent = 'Select Body Font';
+                    optionsHTML = FONT_OPTIONS.body.map(font => 
+                        renderOption('body-font', font.value, font.label, getLocalStorageSetting('bodyFont', 'Inter'), 'handleSelectionChange')
+                    ).join('');
+                    break;
+                case 'title':
+                    titleEl.textContent = 'Select Title Font';
+                    optionsHTML = FONT_OPTIONS.title.map(font => 
+                        renderOption('title-font', font.value, font.label, getLocalStorageSetting('titleFont', 'Lora'), 'handleSelectionChange')
+                    ).join('');
+                    break;
+            }
+            
+            listEl.innerHTML = optionsHTML;
+            modal.classList.remove('hidden');
+        }
+        
+        window.closeSelectionModal = function() {
+            document.getElementById('selection-modal').classList.add('hidden');
+            currentSelectionType = null;
+        }
+
+        window.handleSelectionChange = function(value) {
+            switch(currentSelectionType) {
+                case 'count':
+                    handleQuestionCountChange(value);
+                    updateQuizLengthButton();
+                    break;
+                case 'body':
+                    setBodyFont(value);
+                    updateFontButton('body');
+                    break;
+                case 'title':
+                    setTitleFont(value);
+                    updateFontButton('title');
+                    break;
+            }
+            closeSelectionModal();
+        }
+
+        window.openSettings = function() { 
+            document.getElementById('settings-modal').classList.remove('hidden'); 
+            updateSettingsUI();
+        }
+        window.closeSettings = function() { document.getElementById('settings-modal').classList.add('hidden'); }
+        
+        window.toggleHamburgerMenu = function() {
+            handleUiTapFeedback();
+            const menu = document.getElementById('hamburger-menu');
+            const overlay = document.getElementById('hamburger-overlay');
+            const isOpen = menu.classList.contains('translate-x-full');
+            
+            if (isOpen) {
+                menu.classList.remove('translate-x-full');
+                menu.classList.add('translate-x-0');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.remove('translate-x-0');
+                menu.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+            updateHamburgerMenuUI();
+        }
+        
+        window.openDataManagement = function() {
+            document.getElementById('data-management-modal').classList.remove('hidden');
+            renderUserDataList();
+            document.getElementById('current-verb-count').textContent = verbs.length;
+        }
+
+        window.openDataManagementFromMenu = function() {
+            window.toggleHamburgerMenu();
+            window.openDataManagement();
+        }
+
+        window.closeDataManagement = function() {
+            document.getElementById('data-management-modal').classList.add('hidden');
+            resetQuizAndReloadData(); 
+            showDataFeedback('', 'green', true);
+        }
+
+        function showDataFeedback(message, type = 'gray', hide = false) {
+            const feedbackEl = document.getElementById('data-management-feedback');
+            feedbackEl.textContent = message;
+            feedbackEl.className = `text-center text-sm font-semibold mt-2 text-${type}-600`;
+            if (hide) {
+                 feedbackEl.classList.add('hidden');
+            } else {
+                 feedbackEl.classList.remove('hidden');
+            }
+        }
+        
+        function renderOption(type, value, label, currentValue, handler) {
+            const isSelected = value.toString() === currentValue.toString();
+            const selectedClass = isSelected ? 'selected' : '';
+            
+            let styleAttr = '';
+            if (type.includes('font')) {
+                const fallback = value.includes('serif') ? 'serif' : 'sans-serif'; 
+                styleAttr = `style="font-family: '${value}', ${fallback};"`;
+            }
+
+            return `
+                <div class="ripple-btn selector-item ${selectedClass}" 
+                     onclick="handleUiTapFeedback(); ${handler}('${value}')"
+                     ${styleAttr}>
+                    <span>${label}</span>
+                    <div class="radio-circle ${selectedClass}">
+                        <div class="radio-dot ${selectedClass}"></div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function getLabel(type, value) {
+            if (type === 'count') {
+                return `${value} Questions${value === DEFAULT_MAX_QUESTIONS ? ' (Default)' : ''}`;
+            }
+            const options = FONT_OPTIONS[type];
+            const option = options.find(opt => opt.value === value);
+            return option ? option.label : value;
+        }
+
+        function updateQuizLengthButton() {
+            const button = document.getElementById('current-quiz-length');
+            if (button) {
+                button.textContent = getLabel('count', maxQuestions);
+            }
+        }
+
+        function updateFontButton(type) {
+            const id = type === 'body' ? 'current-body-font' : 'current-title-font';
+            const value = getLocalStorageSetting(type === 'body' ? 'bodyFont' : 'titleFont', type === 'body' ? 'Inter' : 'Lora');
+            const button = document.getElementById(id);
+            if (button) {
+                button.textContent = getLabel(type, value);
+            }
+        }
+        
+        const normalize = (value) => {
+            if (typeof value !== 'string') return '';
+            return value.toLowerCase().trim().replace(/[\s,]+/g, '/');
+        };
+
+        // --- Data Handling (LOCAL STORAGE) ---
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+        
+        function loadCustomVerbs() {
+            try {
+                const customData = localStorage.getItem(CUSTOM_VERB_KEY);
+                return customData ? JSON.parse(customData) : [];
+            } catch (e) {
+                console.error("Error loading custom verbs from storage:", e);
+                localStorage.removeItem(CUSTOM_VERB_KEY);
+                return [];
+            }
+        }
+        
+        function saveCustomVerbs(data) {
+            try {
+                localStorage.setItem(CUSTOM_VERB_KEY, JSON.stringify(data));
+            } catch (e) {
+                console.error("Error saving custom verbs to storage:", e);
+            }
+        }
+        
+        function createVerbObject(dataArray) {
+            if (dataArray.length < 10) return null;
+
+            const getField = (index) => dataArray[index] ? dataArray[index].trim() : '';
+
+            return {
+                base: getField(COL_BASE),
+                telugu_base: getField(COL_TELUGU_BASE),
+                third: getField(COL_THIRD),
+                telugu_third: getField(COL_TELUGU_THIRD),
+                ing: getField(COL_ING),
+                telugu_ing: getField(COL_TELUGU_ING),
+                simple: getField(COL_SIMPLE),
+                telugu_simple: getField(COL_TELUGU_SIMPLE),
+                participle: getField(COL_PARTICIPLE),
+                telugu_participle: getField(COL_TELUGU_PARTICIPLE),
+                source: 'custom'
+            };
+        }
+
+        function parseAndLoadVerbs() {
+            verbs = [];
+            
+            const lines = initialCsvData.trim().split('\n');
+            const dataLines = lines.slice(1);
+
+            for (const line of dataLines) {
+                const columns = line.split(',');
+                const verb = createVerbObject(columns);
+                if (verb && verb.base) {
+                    verb.source = 'initial';
+                    verbs.push(verb);
+                }
+            }
+            
+            const customVerbs = loadCustomVerbs();
+            verbs.push(...customVerbs);
+            
+            let allIndices = Array.from({ length: verbs.length }, (_, i) => i);
+            shuffleArray(allIndices);
+
+            const limit = Math.min(verbs.length, maxQuestions);
+            verbIndicesPool = allIndices.slice(0, limit);
+            
+            document.getElementById('current-verb-count').textContent = verbs.length;
+            
+            isDataLoaded = true;
+            updateStartScreenMessage();
+        }
+        
+        function renderUserDataList() {
+            const listEl = document.getElementById('user-data-list');
+            const customVerbs = loadCustomVerbs();
+            listEl.innerHTML = '';
+            
+            if (customVerbs.length === 0) {
+                listEl.innerHTML = '<p class="text-center text-gray-500" id="no-user-data">No custom verbs added yet.</p>';
+                return;
+            }
+            
+            customVerbs.forEach((verb, index) => {
+                const item = document.createElement('div');
+                item.className = 'flex justify-between items-center p-2 border-b dark-mode:border-gray-700 hover:bg-opacity-80 rounded-md transition duration-150';
+                item.innerHTML = `
+                    <span class="font-semibold text-primary dark-mode:text-primary-light">${verb.base}</span>
+                    <span class="text-xs text-gray-600 dark-mode:text-gray-400">(${verb.telugu_base})</span>
+                    <button onclick="handleUiTapFeedback(); deleteCustomVerb(${index})" class="ripple-btn p-2 rounded-lg text-red-500 hover:text-red-700 text-sm">
+                        Remove
+                    </button>
+                `;
+                listEl.appendChild(item);
+            });
+        }
+        
+        window.deleteCustomVerb = function(index) {
+            const customVerbs = loadCustomVerbs();
+            if (index >= 0 && index < customVerbs.length) {
+                customVerbs.splice(index, 1);
+                saveCustomVerbs(customVerbs);
+                renderUserDataList();
+                document.getElementById('current-verb-count').textContent = verbs.length;
+                showDataFeedback('Verb removed successfully!', 'green');
+            }
+        }
+        
+        window.saveNewVerbData = function() {
+            const inputIds = ['add-base', 'add-telugu-base', 'add-third', 'add-telugu-third', 'add-ing', 'add-telugu-ing', 'add-simple', 'add-telugu-simple', 'add-participle', 'add-telugu-participle'];
+            const inputs = inputIds.map(id => document.getElementById(id));
+            const values = inputs.map(input => input.value.trim());
+
+            
+            if (values.some(val => val === '')) {
+                showDataFeedback('Please fill in ALL 10 fields.', 'red');
+                return;
+            }
+            
+            const newVerb = createVerbObject(values);
+            if (!newVerb || !newVerb.base) {
+                 showDataFeedback('Failed to create verb object. Base form is missing.', 'red');
+                return;
+            }
+
+            const customVerbs = loadCustomVerbs();
+            if (customVerbs.some(verb => normalize(verb.base) === normalize(newVerb.base))) {
+                showDataFeedback(`Error: Verb "${newVerb.base}" already exists in your custom list.`, 'red');
+                return;
+            }
+            
+            customVerbs.push(newVerb);
+            saveCustomVerbs(customVerbs);
+
+            inputs.forEach(input => input.value = '');
+            showDataFeedback(`Verb "${newVerb.base}" added successfully!`, 'green');
+            renderUserDataList();
+        }
+        
+        // --- Game Logic ---
+        
+        window.startQuiz = function() {
+            if (!isDataLoaded || verbs.length === 0) {
+                updateStartScreenMessage();
+                return;
+            }
+
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-status-bar').classList.remove('hidden');
+            document.getElementById('question-area').classList.remove('hidden');
+            document.getElementById('quiz-action-buttons').classList.remove('hidden');
+            
+            const limit = Math.min(verbs.length, maxQuestions);
+            document.getElementById('question-counter').textContent = `0/${limit}`;
+            
+            score = 0;
+            questionsAsked = 0;
+            quizResults = [];
+            document.getElementById('score-display').textContent = score;
+            
+            parseAndLoadVerbs(); 
+            startNextQuestion();
+        }
+
+        window.startNextQuestion = function() {
+            if (questionsAsked >= maxQuestions || verbIndicesPool.length === 0) {
+                endGame();
+                return;
+            }
+
+            document.getElementById('feedback-message').textContent = '';
+            document.getElementById('final-results').classList.add('hidden');
+
+            const mainButton = document.getElementById('main-action-button');
+            mainButton.textContent = 'Check Answer';
+            mainButton.onclick = () => { handleUiTapFeedback(); processAnswer(false); };
+            mainButton.disabled = true;
+            
+            document.getElementById('skip-button').disabled = false;
+
+            const poolIndex = Math.floor(Math.random() * verbIndicesPool.length);
+            const verbIndex = verbIndicesPool[poolIndex];
+            
+            verbIndicesPool.splice(poolIndex, 1);
+            
+            currentVerb = verbs[verbIndex];
+            questionsAsked++;
+
+            const formKeys = Object.keys(FORM_KEYS);
+            const hiddenFormIndex = Math.floor(Math.random() * formKeys.length);
+            hiddenFormKey = formKeys[hiddenFormIndex];
+
+            renderQuestion();
+            updateProgressBar();
+        }
+
+        function renderQuestion() {
+            if (!currentVerb) {
+                document.getElementById('question-area').innerHTML = '<p class="text-center text-red-500">Error: No verb data available for the question.</p>';
+                return;
+            }
+
+            const questionArea = document.getElementById('question-area');
+            const teluguKey = TELUGU_KEYS[hiddenFormKey];
+            const teluguMeaning = currentVerb[teluguKey] || 'Telugu meaning not available';
+
+            let html = '';
+
+            const limit = Math.min(verbs.length, maxQuestions);
+            document.getElementById('question-counter').textContent = `${questionsAsked}/${limit}`;
+
+            const hideTelugu = getLocalStorageSetting('hideTelugu', false);
+            const teluguDisplayClass = hideTelugu ? 'opacity-0 h-0 p-0 m-0' : 'opacity-100 h-auto';
+
+            html += `<div class="prompt-box p-4 rounded-xl border-2 border-primary text-center">
+                        <p class="text-xl text-indigo-900 font-semibold mb-1 dark-mode:text-gray-100">Given Form: <span class="text-2xl font-bold">${currentVerb[hiddenFormKey]}</span></p>
+                        <p class="text-sm text-indigo-700 dark-mode:text-gray-300">(${FORM_KEYS[hiddenFormKey]})</p>
+                        <p class="text-base text-gray-800 mt-2 dark-mode:text-gray-200 transition-opacity duration-300 ${teluguDisplayClass}">Telugu Meaning: <span class="font-bold text-primary">${teluguMeaning}</span></p>
+                    </div>`;
+
+            html += '<div class="space-y-4">';
+            let firstInputId = null; 
+
+            for (const key of Object.keys(FORM_KEYS)) {
+                if (key !== hiddenFormKey) {
+                    const label = FORM_KEYS[key];
+                    const inputId = `input-${key}`;
+                    
+                    if (firstInputId === null) {
+                        firstInputId = inputId;
+                    }
+
+                    const autofocusAttr = (firstInputId === inputId) ? 'autofocus' : ''; 
+
+                    html += `
+                        <div class="flex flex-col">
+                            <label for="${inputId}" class="text-sm font-medium text-gray-700 mb-1">${label}</label>
+                            <input type="text" id="${inputId}" placeholder="Enter the ${label}" 
+                                class="w-full p-3 border-2 border-gray-300 focus:ring-primary-hex focus:border-primary-hex transition duration-150"
+                                data-form-key="${key}" oninput="document.getElementById('main-action-button').disabled = false; document.getElementById('skip-button').disabled = false;"
+                                ${autofocusAttr}>
+                            <span id="result-${key}" class="text-xs mt-1 font-medium italic"></span>
+                        </div>
+                    `;
+                }
+            }
+
+            html += '</div>';
+            questionArea.innerHTML = html;
+            applyInputStyles();
+
+            if (firstInputId) {
+                document.getElementById(firstInputId).focus();
+            }
+        }
+        
+        window.processAnswer = function(isSkipped = false) {
+            if (!currentVerb) return;
+
+            const mainButton = document.getElementById('main-action-button');
+            mainButton.disabled = true; 
+            document.getElementById('skip-button').disabled = true; 
+            
+            let allCorrect = true;
+            let correctCount = 0;
+            
+            const FORM_TO_TELUGU_KEY = {
+                'base': 'telugu_base', 'third': 'telugu_third', 'ing': 'telugu_ing', 
+                'simple': 'telugu_simple', 'participle': 'telugu_participle'
+            };
+
+
+            let questionResults = {
+                questionNumber: questionsAsked,
+                verb: currentVerb.base,
+                hiddenForm: FORM_KEYS[hiddenFormKey],
+                hiddenFormTelugu: currentVerb[TELUGU_KEYS[hiddenFormKey]],
+                allCorrect: true, 
+                forms: [], 
+                correctCount: 0,
+                skipped: isSkipped,
+            };
+
+            const inputElements = document.querySelectorAll('#question-area input');
+
+            inputElements.forEach(input => {
+                const key = input.dataset.formKey;
+                const userInput = normalize(input.value);
+                const correctEnglish = currentVerb[key] || '';
+                const correctAnswers = correctEnglish.split('/').map(normalize).filter(a => a.length > 0);
+                
+                const teluguMeaningKey = FORM_TO_TELUGU_KEY[key];
+                const teluguMeaning = currentVerb[teluguMeaningKey] || 'Telugu meaning not available';
+
+                const isCorrect = correctAnswers.some(correct => correct === userInput) && userInput.length > 0;
+                
+                questionResults.forms.push({
+                    key: FORM_KEYS[key],
+                    userInput: input.value,
+                    correctAnswer: correctEnglish,
+                    isCorrect: isSkipped ? false : isCorrect,
+                    teluguMeaning: teluguMeaning 
+                });
+
+                const resultSpan = document.getElementById(`result-${key}`);
+
+                input.readOnly = true;
+                input.classList.remove('focus:ring-primary-hex', 'focus:border-primary-hex', 'border-gray-300');
+                
+                if (isSkipped) {
+                    input.value = correctEnglish;
+                    input.classList.add('incorrect');
+                    resultSpan.textContent = `Skipped. Correct Answer: ${correctEnglish} (Telugu: ${teluguMeaning})`;
+                    resultSpan.classList.add('text-yellow-600');
+                    allCorrect = false;
+                } else if (isCorrect) {
+                    input.classList.add('correct');
+                    resultSpan.textContent = `Correct! (Telugu: ${teluguMeaning})`;
+                    resultSpan.classList.remove('text-red-500', 'text-gray-500');
+                    resultSpan.classList.add('text-green-600');
+                    correctCount++;
+                } else {
+                    input.classList.add('incorrect');
+                    resultSpan.textContent = `Incorrect. Correct: ${correctEnglish} (Telugu: ${teluguMeaning})`;
+                    resultSpan.classList.remove('text-green-600', 'text-gray-500');
+                    resultSpan.classList.add('text-red-500');
+                    allCorrect = false;
+                }
+            });
+
+            questionResults.allCorrect = allCorrect;
+            questionResults.correctCount = correctCount;
+            quizResults.push(questionResults);
+            
+            if (!isSkipped) {
+                if (allCorrect) {
+                    score++;
+                    document.getElementById('feedback-message').textContent = 'Perfect! All forms correct.';
+                    document.getElementById('feedback-message').className = 'text-base font-medium text-green-600';
+                    playCorrect();
+                    vibrateCorrect();
+                } else {
+                    document.getElementById('feedback-message').textContent = `You got ${correctCount} out of ${Object.keys(FORM_KEYS).length - 1} correct.`;
+                    document.getElementById('feedback-message').className = 'text-base font-medium text-red-500';
+                    playIncorrect();
+                    vibrateIncorrect();
+                }
+            } else {
+                document.getElementById('feedback-message').textContent = 'Question Skipped. See the answers above.';
+                document.getElementById('feedback-message').className = 'text-base font-medium text-yellow-600';
+            }
+
+
+            document.getElementById('score-display').textContent = score;
+
+            if (questionsAsked >= maxQuestions || verbIndicesPool.length === 0) {
+                mainButton.textContent = 'Finish Quiz';
+                mainButton.onclick = () => { handleUiTapFeedback(); endGame(); };
+            } else {
+                mainButton.textContent = 'Next Verb';
+                mainButton.onclick = startNextQuestion; 
+            }
+            mainButton.disabled = false;
+        }
+        
+        window.endGame = function() {
+            document.getElementById('question-area').innerHTML = '';
+            
+            document.getElementById('quiz-action-buttons').classList.add('hidden');
+            document.getElementById('quiz-status-bar').classList.add('hidden');
+            
+            document.getElementById('feedback-message').textContent = '';
+            
+            updateProgressBar();
+
+            const percentage = maxQuestions > 0 ? ((score / maxQuestions) * 100).toFixed(1) : 0.0;
+
+            let resultsHTML = `
+                <h3 class="text-2xl font-bold text-yellow-800 mb-2">Quiz Complete!</h3>
+                <p class="text-lg text-gray-700 dark-mode:text-gray-300 mb-4">
+                    Your Final Score: <span class="font-bold text-2xl text-primary">${score}</span> 
+                    out of <span class="font-bold text-2xl text-primary">${maxQuestions}</span> questions!
+                </p>
+                <p class="text-xl font-bold text-gray-900 dark-mode:text-gray-100 mb-4">
+                    Percentage: <span class="text-3xl text-primary">${percentage}%</span>
+                </p>
+                
+                <div class="border-t pt-4 mt-4 border-gray-300 dark-mode:border-gray-700 text-left">
+                    <h4 class="text-lg font-bold text-gray-900 dark-mode:text-gray-100 mb-3">Detailed Results:</h4>
+                    
+                    <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
+            `;
+
+            quizResults.forEach(result => {
+                let statusClass = '';
+                let statusText = '';
+                
+                if (result.skipped) {
+                    statusClass = 'bg-yellow-100 dark-mode:bg-yellow-900/40 border-yellow-400';
+                    statusText = 'SKIPPED';
+                } else if (result.allCorrect) {
+                    statusClass = 'bg-green-100 dark-mode:bg-green-900/40 border-green-400';
+                    statusText = 'CORRECT';
+                } else {
+                    statusClass = 'bg-red-100 dark-mode:bg-red-900/40 border-red-400';
+                    statusText = 'INCORRECT';
+                }
+
+
+                resultsHTML += `
+                    <div class="p-3 rounded-xl border-2 ${statusClass}">
+                        <p class="font-bold text-lg flex justify-between items-center mb-1">
+                            <span>Q${result.questionNumber}: ${result.verb}</span>
+                            <span class="text-sm font-extrabold ${result.allCorrect ? 'text-green-700 dark-mode:text-green-400' : (result.skipped ? 'text-yellow-700 dark-mode:text-yellow-400' : 'text-red-700 dark-mode:text-red-400')}">${statusText}</span>
+                        </p>
+                        <p class="text-sm italic text-primary dark-mode:text-primary-light mb-2">
+                            Telugu Meaning: ${result.hiddenFormTelugu}
+                        </p>
+
+                        <p class="text-sm italic text-gray-600 dark-mode:text-gray-300 mb-2">
+                            *Given Form: ${result.hiddenForm}*
+                        </p>
+                        <ul class="text-sm space-y-1 pl-2">
+                `;
+
+                result.forms.forEach(form => {
+                    const formStatusClass = form.isCorrect ? 'text-green-700 dark-mode:text-green-300' : (result.skipped ? 'text-yellow-700 dark-mode:text-yellow-300' : 'text-red-700 dark-mode:text-red-300');
+                    const userDisplay = form.userInput.trim() || '<span class="text-gray-500 dark-mode:text-gray-500">[No Answer]</span>';
+                    
+                    const correctDetails = (!form.isCorrect || result.skipped) 
+                        ? `<span class="text-xs text-gray-600 dark-mode:text-gray-400">(Right: ${form.correctAnswer} - ${form.teluguMeaning})</span>`
+                        : `<span class="text-xs text-gray-600 dark-mode:text-gray-400">(Telugu: ${form.teluguMeaning})</span>`;
+
+                    resultsHTML += `
+                        <li class="border-t border-gray-200 dark-mode:border-gray-700 pt-1">
+                            <span class="font-semibold text-gray-800 dark-mode:text-gray-200">${form.key}:</span> 
+                            <span class="${formStatusClass}">${userDisplay}</span> 
+                            ${correctDetails}
+                        </li>
+                    `;
+                });
+
+                resultsHTML += `</ul></div>`;
+            });
+
+            resultsHTML += `
+                    </div>
+                </div>
+                <button onclick="handleUiTapFeedback(); resetQuizAndReloadData()" class="mt-4 inline-block text-primary font-semibold hover:underline">Start a new quiz?</button>
+            `;
+            
+            document.getElementById('final-results').innerHTML = resultsHTML;
+            document.getElementById('final-results').classList.remove('hidden');
+        }
+        
+        window.resetQuizAndReloadData = function() {
+            score = 0;
+            questionsAsked = 0;
+            quizResults = [];
+            currentVerb = null;
+            
+            document.getElementById('quiz-status-bar').classList.add('hidden');
+            document.getElementById('question-area').classList.add('hidden');
+            document.getElementById('quiz-action-buttons').classList.add('hidden');
+            document.getElementById('final-results').classList.add('hidden');
+
+            document.getElementById('start-screen').classList.remove('hidden');
+            
+            document.getElementById('score-display').textContent = score;
+            document.getElementById('feedback-message').textContent = '';
+            
+            parseAndLoadVerbs(); 
+        }
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            const totalQuestions = Math.min(verbs.length, maxQuestions); 
+            
+            let percentage = 0;
+            if (totalQuestions > 0) {
+                percentage = (questionsAsked / totalQuestions) * 100;
+            }
+            
+            percentage = Math.max(0, Math.min(100, percentage));
+            progressBar.style.width = `${percentage}%`;
+        }
+        
+        function updateStartScreenMessage() {
+            const messageEl = document.getElementById('start-message');
+            const startButton = document.getElementById('start-quiz-button');
+            const indicator = document.getElementById('loading-indicator');
+
+            if (!isDataLoaded) {
+                 messageEl.textContent = 'Loading verb data...';
+                 startButton.disabled = true;
+                 indicator.classList.remove('hidden');
+                 return;
+            }
+
+            indicator.classList.add('hidden');
+
+            if (verbs.length === 0) {
+                messageEl.textContent = 'Error: No verb data available. Please add custom verbs to start a quiz.';
+                startButton.disabled = true;
+            } else {
+                const limit = Math.min(verbs.length, maxQuestions);
+                messageEl.innerHTML = `Load up your memory and challenge yourself to master irregular English verbs. You are currently set to practice **${limit} questions**.`;
+                startButton.disabled = false;
+            }
+        }
+
+        // Initialize the game when the window loads
+        window.onload = () => {
+            setupAudio();
+            loadInitialTheme();
+            parseAndLoadVerbs(); 
+        };
+
+    </script>
+
+</body>
+</html>
+
