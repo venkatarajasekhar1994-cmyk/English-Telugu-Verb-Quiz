@@ -1,25 +1,24 @@
 // service-worker.js
 
-// **CRITICAL:** CHANGE THE CACHE VERSION (e.g., to v7 or v8)
-const CACHE_NAME = 'my-pwa-cache-v7'; 
+const CACHE_NAME = 'my-pwa-cache-v8'; // <-- BUMP THE VERSION!
 
 const urlsToCache = [
   '/',                     
   'index.html',            
-  'gamehub.html',          // The main UI
+  'gamehub.html',          // CORRECT
   
-  // Final, Correct File Names:
+  // Game File Names (Ensure these match your committed files EXACTLY)
   'Verbs game.html',       
-  'English vocabulary game.html', // <--- THE CORRECTED FILE NAME
+  'English vocabulary game.html', 
   
-  // Shared assets (ensure all shared images, CSS, and JS files are listed)
+  // SUPPORTING FILES (CRITICAL)
   'manifest.json',
-  'https://cdn.tailwindcss.com', // If you rely on the CDN, it might not cache reliably. 
-                                // Best practice is to download Tailwind CSS locally and cache it here.
-  // 'styles/game-main.css',  
-  // 'scripts/game-logic.js',
+  
+  // EXTERNAL LIBRARIES (Must be listed if used offline)
+  'https://cdn.tailwindcss.com',
+  'https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js', // <-- ADD THIS
+  
+  // Note: If you use any local CSS/JS files (e.g., styles/game-main.css), add them here too.
 ];
 
 // ... rest of your service worker install/fetch logic
-
-
