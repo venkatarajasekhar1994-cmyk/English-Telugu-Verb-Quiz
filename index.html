@@ -1,1 +1,32 @@
-<meta http-equiv="refresh" content="0; url=gamehub.html">
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Game Hub</title>
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Load Tailwind for basic styling in case of slow redirect -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CRITICAL: Redirects to the main hub immediately -->
+    <meta http-equiv="refresh" content="0; url=game hub.html">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker registered:', reg.scope))
+                    .catch(err => console.error('Service Worker registration failed:', err));
+            });
+        }
+    </script>
+</head>
+<!-- Added Tailwind classes for centered, mobile-friendly loading display -->
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <p class="text-lg text-gray-700 font-semibold p-4 rounded-xl shadow-md bg-white">
+        Loading Game Hub... If you are not redirected, click <a href="game hub.html" class="text-indigo-600 underline font-bold">here</a>.
+    </p>
+</body>
+</html>
+

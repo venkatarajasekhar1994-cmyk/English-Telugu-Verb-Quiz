@@ -1,49 +1,352 @@
-<script>
-    // --- Theme and Settings Management (CRITICAL for consistency) ---
-    // This logic is copied from Verbs game.html to apply the saved theme/color
-    const DARK_CLASS = 'dark-mode';
-    const SETTINGS_KEY = 'quizSettings'; // Assuming you use this key for all settings
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Hub - Start Playing</title>
+    
+    <link rel="manifest" href="manifest.json">
+    
+    <script>
+        // Check for service worker support and register it
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered: ', registration);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Import all available fonts for customization */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght=700&family=Roboto:wght@400;700&family=Merriweather:wght==400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;400&family=Source+Sans+3:wght@400;700&display=swap');
+        
+        /* --- CSS Variables for Theme Management --- */
+        
+        /* Font Variables */
+        :root {
+            --font-body: 'Inter', sans-serif;
+            --font-title: 'Lora', serif;
+            /* Input Variables (Defaults to 'rounded') */
+            --input-border-radius: 1.5rem; /* Ultra rounded default */
+            --input-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Soft shadow default */
+            /* Text Contrast Variables (Defaults to High Contrast for seamlessness) */
+            --text-color-light: #111827; /* Near black */
+            --text-color-dark: #f3f4f6; /* Near white */
+        }
+        
+        /* Default: Indigo */
+        :root,
+        body[data-color="indigo"] {
+            --color-primary: 79, 70, 229; /* Indigo 600 RGB */
+            --color-primary-hex: #4f46e5;
+            --color-primary-light: 165, 180, 252; /* Indigo 300 RGB */
+            --color-bg-light-start: #a78bfa;
+            --color-bg-light-mid: #818cf8;
+            --color-bg-light-end: #3b82f6;
+            --color-bg-dark-start: #1f2937;
+            --color-bg-dark-mid: #111827;
+            --color-bg-dark-end: #0f172a;
+        }
 
-    const getLocalStorageSetting = (key, defaultValue) => {
-        try {
-            const settingsString = localStorage.getItem(SETTINGS_KEY);
-            if (!settingsString) return defaultValue;
-            const settings = JSON.parse(settingsString);
-            if (typeof settings[key] === 'undefined' || settings[key] === null) {
+        /* Teal Theme */
+        body[data-color="teal"] {
+            --color-primary: 20, 184, 166; /* Teal 600 RGB */
+            --color-primary-hex: #14b8a6;
+            --color-primary-light: 94, 234, 212; /* Teal 300 RGB */
+            --color-bg-light-start: #2dd4bf;
+            --color-bg-light-mid: #5eead4;
+            --color-bg-light-end: #0d9488;
+        }
+
+        /* Rose Theme */
+        body[data-color="rose"] {
+            --color-primary: 225, 29, 72; /* Rose 600 RGB */
+            --color-primary-hex: #e11d48;
+            --color-primary-light: 251, 207, 232; /* Rose 300 RGB */
+            --color-bg-light-start: #fda4af;
+            --color-bg-light-mid: #f43f5e;
+            --color-bg-light-end: #e11d48;
+        }
+
+        /* Amber Theme (New) */
+        body[data-color="amber"] {
+            --color-primary: 245, 158, 11; /* Amber 600 RGB */
+            --color-primary-hex: #f59e0b;
+            --color-primary-light: 253, 230, 138; /* Amber 300 RGB */
+            --color-bg-light-start: #fcd34d;
+            --color-bg-light-mid: #f59e0b;
+            --color-bg-light-end: #fbbf24;
+        }
+        
+        /* Emerald Theme (New) */
+        body[data-color="emerald"] {
+            --color-primary: 5, 150, 105; /* Emerald 600 RGB */
+            --color-primary-hex: #059669;
+            --color-primary-light: 110, 231, 183; /* Emerald 300 RGB */
+            --color-bg-light-start: #34d399;
+            --color-bg-light-mid: #10b981;
+            --color-bg-light-end: #059669;
+        }
+        
+        /* --- Base Styles --- */
+        body {
+            font-family: var(--font-body);
+            min-height: 100vh;
+            padding: 1rem;
+            color: var(--text-color-light); 
+            background: linear-gradient(135deg, var(--color-bg-light-start), var(--color-bg-light-mid), var(--color-bg-light-end));
+        }
+        
+        .elegant-title {
+            font-family: var(--font-title); 
+            font-weight: 700;
+            letter-spacing: 0.05em; 
+            color: #1e293b;
+        }
+
+        /* Main Glass Card */
+        .liquid-glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(var(--color-primary-light), 0.35));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            transition: all 0.3s ease;
+        }
+        
+        /* Frosted Glass Effect for Game Options */
+        .frosted-option {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s ease, transform 0.1s ease;
+        }
+        .frosted-option:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+        .frosted-option:active {
+            transform: scale(0.98); 
+        }
+        
+        /* Custom styles for Game Cards in the Hub */
+        .game-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(var(--color-primary), 0.3);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .game-card:hover {
+            box-shadow: 0 10px 20px rgba(var(--color-primary), 0.3);
+            transform: translateY(-2px) scale(1.02);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .game-card h2 {
+            font-family: var(--font-title);
+            color: var(--color-primary-hex);
+        }
+        
+        /* --- Liquid Glass Ripple Effect --- */
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0); 
+            z-index: 1;
+        }
+
+        .ripple-btn::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform 0.6s, opacity 0.8s;
+            border-radius: inherit; 
+            z-index: -1;
+        }
+
+        .ripple-btn:active::after {
+            transform: scale(0, 0);
+            opacity: 1;
+            transition: 0s;
+        }
+        
+        /* --- Dark Mode Styles --- */
+        .dark-mode {
+            background: linear-gradient(135deg, var(--color-bg-dark-start), var(--color-bg-dark-mid), var(--color-bg-dark-end)); 
+            color: var(--text-color-dark);
+        }
+        
+        .dark-mode .liquid-glass-card {
+            background: linear-gradient(135deg, rgba(55, 65, 81, 0.4), rgba(31, 41, 55, 0.5));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); 
+        }
+
+        .dark-mode .frosted-option {
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(107, 114, 128, 0.4);
+        }
+        .dark-mode .frosted-option:hover {
+            background: rgba(31, 41, 55, 0.8);
+        }
+        
+        .dark-mode .game-card {
+            background: rgba(31, 41, 55, 0.7);
+            border: 1px solid rgba(var(--color-primary), 0.2);
+        }
+        .dark-mode .game-card:hover {
+            box-shadow: 0 10px 20px rgba(var(--color-primary), 0.5);
+            background: rgba(31, 41, 55, 0.9);
+        }
+
+
+        .dark-mode h1,
+        .dark-mode .elegant-title { color: #ffffff; }
+        
+        /* Set color variables for all text based on theme */
+        body .text-gray-700,
+        body .text-gray-800,
+        body .text-gray-600 { color: var(--text-color-light) !important; }
+        
+        .dark-mode .text-gray-700,
+        .dark-mode .text-gray-800,
+        .dark-mode .text-gray-600 { color: var(--text-color-dark) !important; }
+
+        /* Ensure the back button is visible */
+        .back-to-hub {
+            color: var(--color-primary-hex);
+        }
+        
+    </style>
+</head>
+<body class="min-h-screen p-4 flex flex-col items-center">
+
+    <div id="hub-container" class="w-full max-w-xl liquid-glass-card p-6 md:p-8 my-8">
+        
+        <div class="flex justify-between items-center mb-6 border-b-2 pb-2 border-primary">
+            
+            <div class="flex items-center space-x-3"> 
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark-mode:text-gray-50 mb-0 elegant-title">
+                    GAME HUB
+                </h1>
+            </div>
+
+            <a href="home.html" 
+                class="ripple-btn text-sm font-semibold back-to-hub p-2 rounded-full hover:bg-gray-200 dark-mode:hover:bg-gray-700 transition duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 inline-block align-middle">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.156-.439 1.596 0L21.75 12m-13.5-7.5v9m6-9v9" />
+                </svg>
+                Home
+            </a>
+            
+        </div>
+        
+        <div class="mt-8 space-y-4">
+            
+            <a href="Verbs game.html" class="block">
+                <div class="game-card shadow-md shadow-indigo-300/50">
+                    <h2 class="text-xl font-bold mb-1">English Verbs Quiz</h2>
+                    <p class="text-gray-600 dark-mode:text-gray-400">Master 4 verb forms with Telugu meanings.</p>
+                    <span class="text-xs mt-2 inline-block px-2 py-1 bg-primary/20 text-primary-hex rounded-full font-semibold">Play Now</span>
+                </div>
+            </a>
+
+            <!-- CORRECTED FILENAME HERE to match 'English vocabulary game.html' exactly -->
+            <a href="English vocabulary game.html" class="block">
+                <div class="game-card shadow-md shadow-teal-300/50">
+                    <h2 class="text-xl font-bold mb-1">Vocabulary Game</h2>
+                    <p class="text-gray-600 dark-mode:text-gray-400">Challenge your intermediate vocabulary.</p>
+                    <span class="text-xs mt-2 inline-block px-2 py-1 bg-teal-600/20 text-teal-600 rounded-full font-semibold">Play Now</span>
+                </div>
+            </a>
+            
+            <div class="game-card opacity-60 pointer-events-none border-dashed border-gray-400">
+                 <h2 class="text-xl font-bold mb-1 text-gray-500">New Game Coming Soon!</h2>
+                 <p class="text-gray-500">Check back later for a new challenge.</p>
+            </div>
+            
+            <div class="p-4 mt-6 text-center text-sm text-gray-500 dark-mode:text-gray-400 border-t pt-4">
+                <p>All games listed here are available offline thanks to PWA caching!</p>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <script>
+        // --- Theme and Settings Management (CRITICAL for consistency) ---
+        // This is the simplified logic needed to apply the user's saved color/theme.
+        const DARK_CLASS = 'dark-mode';
+        const SETTINGS_KEY = 'quizSettings';
+
+        const getLocalStorageSetting = (key, defaultValue) => {
+            try {
+                const settingsString = localStorage.getItem(SETTINGS_KEY);
+                if (!settingsString) return defaultValue;
+                const settings = JSON.parse(settingsString);
+                
+                // Handle font fallbacks
+                if (key === 'bodyFont' || key === 'titleFont') {
+                    return settings[key] || defaultValue;
+                }
+
+                if (typeof settings[key] === 'undefined' || settings[key] === null) {
+                    return defaultValue;
+                }
+                return settings[key];
+            } catch (e) {
                 return defaultValue;
             }
-            return settings[key];
-        } catch (e) {
-            return defaultValue;
+        };
+
+        function applyTheme(isDark) {
+            const color = getLocalStorageSetting('color', 'indigo');
+            const bodyFont = getLocalStorageSetting('bodyFont', 'Inter');
+            const titleFont = getLocalStorageSetting('titleFont', 'Lora');
+            
+            const body = document.body;
+            body.setAttribute('data-color', color);
+
+            if (isDark) {
+                body.classList.add(DARK_CLASS);
+            } else {
+                body.classList.remove(DARK_CLASS);
+            }
+            
+            // Apply Font Styles
+            document.documentElement.style.setProperty('--font-body', `'${bodyFont}', sans-serif`);
+            document.documentElement.style.setProperty('--font-title', `'${titleFont}', serif`);
         }
-    };
 
-    function applyTheme(isDark) {
-        const color = getLocalStorageSetting('color', 'indigo');
-        const bodyFont = getLocalStorageSetting('bodyFont', 'Inter');
-        const titleFont = getLocalStorageSetting('titleFont', 'Lora');
-        
-        const body = document.body;
-        body.setAttribute('data-color', color);
-
-        if (isDark) {
-            body.classList.add(DARK_CLASS);
-        } else {
-            body.classList.remove(DARK_CLASS);
+        function loadInitialTheme() {
+            // Check for user preference or system preference
+            const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+            applyTheme(currentMode === 'dark');
         }
         
-        // Apply Font Styles
-        document.documentElement.style.setProperty('--font-body', `'${bodyFont}', sans-serif`);
-        document.documentElement.style.setProperty('--font-title', `'${titleFont}', serif`);
-    }
+        // Initialize the theme on load
+        window.onload = loadInitialTheme;
 
-    function loadInitialTheme() {
-        const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-        applyTheme(currentMode === 'dark');
-        // NOTE: The hub doesn't need all the updateSettingsUI/HamburgerMenu logic, 
-        // but loading the theme here is essential.
-    }
-    
-    // Initialize the theme on load
-    window.onload = loadInitialTheme;
-</script>
+    </script>
+</body>
+</html>
+
