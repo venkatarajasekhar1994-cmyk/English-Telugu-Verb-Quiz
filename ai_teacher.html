@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="te">
 <head>
     <meta charset="UTF-8">
@@ -235,6 +235,11 @@
              margin-top: 0.2rem;
              font-weight: 500;
         }
+        
+        /* Progress Bar Animation */
+        #progress-bar-home {
+            transition: width 0.5s ease-in-out; /* Added animation */
+        }
 
         /* --- Liquid Glass Ripple Effect (COPIED) --- */
         .ripple-btn {
@@ -312,6 +317,21 @@
         .telugu-text {
             font-family: 'Noto Sans Telugu', sans-serif;
         }
+        /* Home page card enhancements */
+        .home-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.7), rgba(var(--color-primary-light), 0.2));
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .dark-mode .home-card {
+            background: linear-gradient(145deg, rgba(31, 41, 55, 0.8), rgba(55, 65, 81, 0.5));
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body class="min-h-screen p-4 flex flex-col items-center">
@@ -324,64 +344,76 @@
                 AI English Teacher
             </h1>
             <div class="text-right">
-                <span class="text-sm font-semibold text-gray-600 dark-mode:text-gray-400">Score: </span>
+                <span class="text-sm font-semibold text-gray-600 dark-mode:text-gray-400">స్కోర్: </span>
                 <span id="userScore" class="text-xl font-bold text-primary">0</span>
             </div>
         </div>
         
-        <!-- Target Language Switch (English/Hindi) -->
-        <div class="mb-4 p-3 bg-gray-100 dark-mode:bg-gray-700 rounded-xl flex justify-around space-x-2" id="targetLangSwitch">
-            <p id="targetLangPrompt" class="text-sm font-medium text-gray-800 dark-mode:text-gray-200 telugu-text self-center">మీరు ఏ భాష ప్రాక్టీస్ చేయాలనుకుంటున్నారు?</p>
-            <button data-target="english" class="flex-1 py-1 px-3 rounded-full bg-primary text-white font-bold text-sm ripple-btn">
-                English
-            </button>
-            <button data-target="hindi" class="flex-1 py-1 px-3 rounded-full bg-gray-300 dark-mode:bg-gray-600 text-gray-800 dark-mode:text-gray-200 font-bold text-sm ripple-btn">
-                हिंदी
-            </button>
-        </div>
-
         <!-- Navigation Tabs -->
         <div class="flex justify-around border-b border-gray-300 dark-mode:border-gray-700 mb-4">
-            <button data-view="home" class="nav-button active p-3 flex-1 text-sm font-bold ripple-btn">Home</button>
-            <button data-view="lessons" class="nav-button p-3 flex-1 text-sm font-bold ripple-btn">Lessons</button>
-            <button data-view="quiz" class="nav-button p-3 flex-1 text-sm font-bold ripple-btn">Quiz</button>
-            <button data-view="practice" class="nav-button p-3 flex-1 text-sm font-bold ripple-btn">Practice (AI)</button>
+            <button data-view="home" class="nav-button active p-3 flex-1 text-sm font-bold ripple-btn telugu-text">హోమ్</button>
+            <button data-view="lessons" class="nav-button p-3 flex-1 text-sm font-bold ripple-btn telugu-text">పాఠాలు</button>
+            <button data-view="quiz" class="nav-button p-3 flex-1 text-sm font-bold ripple-btn telugu-text">క్విజ్</button>
+            <button data-view="practice" class="nav-button p-3 flex-1 text-sm font-bold ripple-btn telugu-text">ప్రాక్టీస్ (AI)</button>
         </div>
 
         <!-- --- VIEW: HOME (Word of the Day / Progress) --- -->
         <div id="view-home" class="view active space-y-4">
-            <h2 class="text-xl font-bold text-primary elegant-title">Daily Focus</h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark-mode:text-gray-200 elegant-title mb-4 telugu-text">స్మార్ట్ హోమ్</h2>
 
-            <!-- Word of the Day -->
-            <div class="frosted-option p-4 rounded-xl shadow-md border-primary/20">
-                <div class="flex justify-between items-center mb-2 border-b pb-2 border-gray-300 dark-mode:border-gray-700">
-                    <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200">Word of the Day</h3>
-                    <button onclick="window.speakDailyWord()" class="ripple-btn p-2 rounded-full text-primary hover:bg-primary/20" aria-label="Speak word">
-                         <!-- Speaker icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11v2m-5-2v2m-2-2v2m-2-2v2m-4-2h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </button>
+            <!-- Word of the Day CARD -->
+            <div class="home-card bg-indigo-100 dark-mode:bg-indigo-900/40">
+                <div class="flex-grow">
+                    <h3 class="text-lg font-bold text-primary mb-1 telugu-text">రోజు మాట (Word of the Day)</h3>
+                    <p id="daily-word-en" class="text-3xl font-extrabold text-gray-900 dark-mode:text-white mb-1">Enthusiastic</p>
+                    <p id="daily-word-te" class="text-sm telugu-text text-gray-700 dark-mode:text-gray-300">ఉత్సాహంగా</p>
                 </div>
-                <p id="daily-word-en" class="text-2xl font-extrabold text-primary mb-1">Enthusiastic</p>
-                <p id="daily-word-te" class="text-base telugu-text text-gray-700 dark-mode:text-gray-300">ఉత్సాహంగా</p>
-                <p class="text-sm mt-3 text-gray-600 dark-mode:text-gray-400">Example: <span id="daily-word-example">"She was **enthusiastic** about starting her new language app."</span></p>
+                <button onclick="window.speakDailyWord()" class="ripple-btn p-3 bg-primary text-white rounded-full shadow-lg shadow-primary/50 hover:opacity-90 transition duration-150" aria-label="Speak word">
+                     <!-- Speaker icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-7 h-7">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 11v2m-5-2v2m-2-2v2m-2-2v2m-4-2h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </button>
             </div>
             
-            <!-- Progress Tracker -->
-            <div class="frosted-option p-4 rounded-xl shadow-md border-primary/20">
-                <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 mb-2">My Progress</h3>
-                <p id="progress-level" class="text-sm font-semibold text-gray-700 dark-mode:text-gray-300">Level: <span class="text-primary font-extrabold">Beginner</span></p>
-                <div class="w-full h-3 bg-gray-300 dark-mode:bg-gray-600 rounded-full mt-2">
-                    <div id="progress-bar-home" class="h-full rounded-full bg-primary" style="width: 25%;"></div>
-                </div>
-                <p id="progress-score" class="text-xs text-right mt-1 text-gray-600 dark-mode:text-gray-400">0 Points (25% to next level)</p>
+            <!-- Progress Tracker CARD -->
+            <div class="home-card bg-green-100 dark-mode:bg-green-900/40">
+                 <div class="flex-grow">
+                    <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 telugu-text mb-2">నా పురోగతి</h3>
+                    <p id="progress-level" class="text-xl font-extrabold text-primary telugu-text">స్థాయి: <span class="text-green-600 dark-mode:text-green-400">Beginner</span></p>
+                    <div class="w-full h-3 bg-gray-300 dark-mode:bg-gray-600 rounded-full mt-2 overflow-hidden">
+                        <div id="progress-bar-home" class="h-full rounded-full bg-primary" style="width: 25%;"></div>
+                    </div>
+                    <p id="progress-score" class="text-xs text-left mt-1 text-gray-600 dark-mode:text-gray-400">0 పాయింట్లు (25% to next level)</p>
+                 </div>
+                 <div class="text-4xl text-green-600 dark-mode:text-green-400 font-bold">
+                    🥇
+                 </div>
             </div>
+
+            <!-- Quick Access Cards -->
+            <div class="grid grid-cols-2 gap-4">
+                 <div class="frosted-option p-4 rounded-xl shadow-md border-primary/20 flex flex-col items-center justify-center text-center">
+                    <span class="text-4xl mb-2">🧠</span>
+                    <h4 class="font-bold text-gray-800 dark-mode:text-gray-200 telugu-text">క్విజ్</h4>
+                    <p class="text-xs text-gray-600 dark-mode:text-gray-400 telugu-text">పదజాలం టెస్ట్</p>
+                    <!-- FIXED: Added onclick to the button for proper behavior -->
+                    <button onclick="window.changeView('quiz')" class="ripple-btn mt-2 text-sm text-primary font-bold">Start</button>
+                 </div>
+                 <div class="frosted-option p-4 rounded-xl shadow-md border-primary/20 flex flex-col items-center justify-center text-center">
+                    <span class="text-4xl mb-2">🎭</span>
+                    <h4 class="font-bold text-gray-800 dark-mode:text-gray-200 telugu-text">రోల్-ప్లే</h4>
+                    <p class="text-xs text-gray-600 dark-mode:text-gray-400 telugu-text">సంభాషణ ప్రాక్టీస్</p>
+                    <!-- FIXED: Added onclick to the button for proper behavior -->
+                    <button onclick="window.startRolePlay('restaurant')" class="ripple-btn mt-2 text-sm text-primary font-bold">Start</button>
+                 </div>
+            </div>
+
         </div>
 
         <!-- --- VIEW: LESSONS (Daily Lessons) --- -->
         <div id="view-lessons" class="view space-y-4">
-            <h2 class="text-xl font-bold text-primary elegant-title">Daily Lessons</h2>
+            <h2 class="text-xl font-bold text-primary elegant-title telugu-text">దినసరి పాఠాలు</h2>
             <div class="text-sm text-gray-600 dark-mode:text-gray-400 p-2 telugu-text">
                 <p>ప్రతి రోజు కొత్త పాఠాలు ఇక్కడ అప్‌డేట్ అవుతాయి.</p>
             </div>
@@ -389,46 +421,73 @@
             <div class="frosted-option p-4 rounded-xl space-y-3">
                 <div class="flex items-center space-x-3">
                     <span class="text-2xl text-green-500">📝</span>
-                    <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200">Lesson 1: Basic Greetings</h3>
+                    <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200">పాఠం 1: ప్రాథమిక శుభాకాంక్షలు</h3>
                 </div>
-                <p class="text-sm text-gray-700 dark-mode:text-gray-300">Learn "Hello," "How are you," and "Thank you" in English and Hindi.</p>
-                <button class="play-button ripple-btn bg-green-600 hover:bg-green-700 shadow-green-500/50 w-full py-2">
-                    Start Lesson
+                <p class="text-sm text-gray-700 dark-mode:text-gray-300">"Hello," "How are you," మరియు "Thank you" లను ఇంగ్లీష్‌లో నేర్చుకోండి.</p>
+                <button onclick="window.startLesson()" class="play-button ripple-btn bg-green-600 hover:bg-green-700 shadow-green-500/50 w-full py-2 text-white font-bold telugu-text">
+                    పాఠం ప్రారంభించండి
                 </button>
             </div>
              <div class="frosted-option p-4 rounded-xl space-y-3">
                 <div class="flex items-center space-x-3">
                     <span class="text-2xl text-yellow-500">🗓️</span>
-                    <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200">Lesson 2: Days of the Week</h3>
+                    <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200">పాఠం 2: వారపు రోజులు</h3>
                 </div>
-                <p class="text-sm text-gray-700 dark-mode:text-gray-300">Practice days and simple time phrases. (Week days practice)</p>
-                <button class="play-button ripple-btn bg-yellow-600 hover:bg-yellow-700 shadow-yellow-500/50 w-full py-2">
-                    Start Lesson
+                <p class="text-sm text-gray-700 dark-mode:text-gray-300">వారపు రోజులు మరియు సాధారణ సమయ పదబంధాలను ప్రాక్టీస్ చేయండి.</p>
+                <button onclick="window.startLesson()" class="play-button ripple-btn bg-yellow-600 hover:bg-yellow-700 shadow-yellow-500/50 w-full py-2 text-white font-bold telugu-text">
+                    పాఠం ప్రారంభించండి
                 </button>
             </div>
         </div>
 
         <!-- --- VIEW: QUIZ (Interactive Quiz / Translation Practice) --- -->
         <div id="view-quiz" class="view space-y-4">
-            <h2 class="text-xl font-bold text-primary elegant-title">Interactive Challenge</h2>
+            <h2 class="text-xl font-bold text-primary elegant-title telugu-text">ఇంటరాక్టివ్ క్విజ్ ఛాలెంజ్</h2>
 
-            <!-- Quick Quiz -->
-            <div class="frosted-option p-4 rounded-xl shadow-md border-primary/20">
-                <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 mb-2">Quick Quiz (English to Telugu)</h3>
-                <p id="quiz-question" class="text-base text-gray-700 dark-mode:text-gray-300 mb-3">Telugu translation for: **'I want water.'**</p>
-                <input type="text" id="quizInput" class="w-full p-3 border-2 border-gray-300 focus:ring-primary-hex focus:border-primary-hex" placeholder="మీ జవాబును టైప్ చేయండి...">
-                <button onclick="window.checkQuizAnswer()" class="play-button ripple-btn w-full py-2 bg-primary mt-3">
-                    Check Answer
-                </button>
-                <p id="quiz-feedback" class="text-sm mt-2 font-semibold hidden"></p>
+            <!-- 1000 Question Interactive Quiz (MCQ) -->
+            <div id="interactive-quiz-card" class="frosted-option p-4 rounded-xl shadow-md border-primary/20">
+                <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 mb-3 telugu-text">దినసరి క్విజ్</h3>
+                
+                <p id="quiz-counter" class="text-xs text-gray-500 dark-mode:text-gray-400 mb-2 text-right telugu-text">ప్రశ్న 1 / 1000</p>
+                
+                <!-- Question Display -->
+                <p id="mcq-question" class="text-lg font-semibold text-gray-900 dark-mode:text-gray-100 mb-4">
+                    <!-- Question injected here by JS -->
+                </p>
+
+                <!-- Options Container -->
+                <div id="mcq-options-container" class="space-y-3 mb-4">
+                    <!-- Options injected here by JS -->
+                </div>
+
+                <!-- Feedback and Actions -->
+                <div id="quiz-feedback-area" class="space-y-2">
+                    <button id="check-answer-btn" onclick="window.checkQuizAnswerMCQ()" class="play-button ripple-btn w-full py-2 bg-primary mt-2 disabled:opacity-50 text-white font-bold telugu-text">
+                        జవాబును తనిఖీ చేయండి (Check Answer)
+                    </button>
+                    <div id="quiz-result-message" class="text-sm font-bold p-2 rounded-lg hidden telugu-text"></div>
+                    
+                    <div class="flex space-x-2 mt-2">
+                        <button id="hint-btn" onclick="window.showHint()" class="ripple-btn flex-1 py-2 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded-xl shadow-md disabled:opacity-50 font-bold telugu-text">
+                            హింట్ (Hint)
+                        </button>
+                         <button id="explanation-btn" onclick="window.showExplanation()" class="ripple-btn flex-1 py-2 text-sm bg-orange-500 hover:bg-orange-600 text-white rounded-xl shadow-md disabled:opacity-50 font-bold telugu-text">
+                            వివరణ (Explanation)
+                        </button>
+                        <button id="next-question-btn" onclick="window.loadNextQuestion()" class="ripple-btn flex-1 py-2 text-sm bg-green-500 hover:bg-green-600 text-white rounded-xl shadow-md hidden disabled:opacity-50 font-bold telugu-text">
+                            తరువాత ప్రశ్న
+                        </button>
+                    </div>
+                     <p id="quiz-explanation-text" class="text-sm mt-3 p-3 bg-gray-200 dark-mode:bg-gray-700 rounded-xl hidden telugu-text"></p>
+                </div>
             </div>
 
-            <!-- Translation Practice -->
+            <!-- Translation Practice (Retained) -->
             <div class="frosted-option p-4 rounded-xl shadow-md border-primary/20">
-                <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 mb-2">Telugu-English Translation</h3>
+                <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 mb-2 telugu-text">తెలుగు-ఇంగ్లీష్ అనువాదం</h3>
                 <p class="text-base text-gray-700 dark-mode:text-gray-300 mb-3 telugu-text">నాకు కాఫీ తాగాలని ఉంది.</p>
-                <button class="play-button ripple-btn w-full py-2 bg-teal-600 hover:bg-teal-700 shadow-teal-500/50">
-                    Practice Translation (Start)
+                <button class="play-button ripple-btn w-full py-2 bg-teal-600 hover:bg-teal-700 shadow-teal-500/50 text-white font-bold telugu-text">
+                    అనువాదం ప్రాక్టీస్ చేయండి
                 </button>
             </div>
         </div>
@@ -465,10 +524,11 @@
 
             <!-- Role-Play Section -->
             <div class="mt-4 pt-4 border-t border-gray-300 dark-mode:border-gray-700">
-                <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 mb-2">Role-Play Conversation</h3>
+                <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 telugu-text mb-2">రోల్-ప్లే సంభాషణ</h3>
                 <p class="text-sm text-gray-600 dark-mode:text-gray-400 mb-3 telugu-text">ఒక రెస్టారెంట్‌లో ఆహారం ఆర్డర్ చేయడానికి ప్రాక్టీస్ చేయండి.</p>
-                <button class="play-button ripple-btn w-full py-2 bg-amber-600 hover:bg-amber-700 shadow-amber-500/50">
-                    Start Role-Play
+                <!-- FIXED: Added onclick handler to startRolePlay -->
+                <button onclick="window.startRolePlay('restaurant')" class="play-button ripple-btn w-full py-2 bg-amber-600 hover:bg-amber-700 shadow-amber-500/50 text-white font-bold telugu-text">
+                    రోల్-ప్లే ప్రారంభించండి
                 </button>
             </div>
         </div>
@@ -478,14 +538,14 @@
     <!-- SETTINGS MODAL (COPIED from your game files for consistency) -->
     <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
         <div class="liquid-glass-card w-full max-w-sm p-6 overflow-y-auto max-h-[90vh]">
-            <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">App Settings</h2>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary telugu-text">యాప్ సెట్టింగ్స్</h2>
 
-            <div class="bg-blue-100 dark-mode:bg-blue-900/40 border border-blue-400 text-blue-800 dark-mode:text-blue-200 text-sm p-3 rounded-xl mb-4">
-                <p class="font-semibold">All settings are saved automatically to this device only.</p>
+            <div class="bg-blue-100 dark-mode:bg-blue-900/40 border border-blue-400 text-blue-800 dark-mode:text-blue-200 text-sm p-3 rounded-xl mb-4 telugu-text">
+                <p class="font-semibold">అన్ని సెట్టింగ్‌లు ఈ పరికరంలో ఆటోమేటిక్‌గా సేవ్ చేయబడతాయి.</p>
             </div>
 
             <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3">Color Accent</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3 telugu-text">రంగు యాక్సెంట్</h3>
                 <div class="grid grid-cols-5 gap-2">
                     <button onclick="setThemeColor('indigo')" data-color-id="indigo" class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-indigo-600 hover:opacity-90 text-sm">Indigo</button>
                     <button onclick="setThemeColor('teal')" data-color-id="teal" class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-teal-600 hover:opacity-90 text-sm">Teal</button>
@@ -496,7 +556,7 @@
             </div>
 
             <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Theme Mode</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2 telugu-text">థీమ్ మోడ్</h3>
                 <div class="flex space-x-4">
                     <button onclick="setThemeMode('light')" data-mode-id="light" id="mode-light" class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 hover:bg-opacity-80 transition duration-150">Light</button>
                     <button onclick="setThemeMode('dark')" data-mode-id="dark" id="mode-dark" class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 hover:bg-opacity-80 transition duration-150">Dark</button>
@@ -505,35 +565,35 @@
 
              <!-- TTS/AI Chat Toggles (Specific to this app) -->
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">AI Chat Settings</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2 telugu-text">AI చాట్ సెట్టింగ్స్</h3>
                 <div class="flex flex-col space-y-2">
                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-ai-voice" onclick="toggleAiVoice()" 
                                 class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-600 transition duration-150 focus:ring-primary-hex">
-                        <span class="text-gray-700 dark-mode:text-gray-300">Disable AI Voice Feedback (TTS)</span>
+                        <span class="text-gray-700 dark-mode:text-gray-300 telugu-text">AI వాయిస్ ఫీడ్‌బ్యాక్ నిలిపివేయండి (TTS)</span>
                     </label>
                 </div>
             </div>
             
              <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Display & Feedback</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2 telugu-text">డిస్‌ప్లే & ఫీడ్‌బ్యాక్</h3>
                 <div class="flex flex-col space-y-2">
                      <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-audio" onclick="toggleAudio()" 
                                 class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-600 transition duration-150 focus:ring-primary-hex">
-                        <span class="text-gray-700 dark-mode:text-gray-300">Disable Sound Effects</span>
+                        <span class="text-gray-700 dark-mode:text-gray-300 telugu-text">శబ్ద ప్రభావాలను నిలిపివేయండి</span>
                     </label>
                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-haptics" onclick="toggleHaptics()" 
                                 class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-600 transition duration-150 focus:ring-primary-hex">
-                        <span class="text-gray-700 dark-mode:text-gray-300">Disable Vibration (Haptics)</span>
+                        <span class="text-gray-700 dark-mode:text-gray-300 telugu-text">వైబ్రేషన్ నిలిపివేయండి</span>
                     </label>
                 </div>
             </div>
 
             <button onclick="handleUiTapFeedback(); closeSettings()"
-                    class="ripple-btn mt-8 w-full py-3 bg-gray-500 text-white font-bold rounded-xl hover:bg-gray-600 transition duration-150">
-                Close Settings
+                    class="ripple-btn mt-8 w-full py-3 bg-gray-500 text-white font-bold rounded-xl hover:bg-gray-600 transition duration-150 telugu-text">
+                సెట్టింగ్స్ మూసివేయండి
             </button>
         </div>
     </div>
@@ -551,74 +611,66 @@
         let currentView = 'home';
         let userProgress = { score: 0, level: 1 };
         let chatHistory = [];
+        let currentQuizIndex = 0; // Tracks the current question index
+        let isAnswered = false; 
         
-        // --- Dummy Data for Gamified Features ---
-        const dummyQuizAnswer = "నాకు నీరు కావాలి"; 
-
-        const updateLevelText = (score) => {
-            if (score < 100) return { name: "Beginner", percentage: score, max: 100 };
-            if (score < 300) return { name: "Intermediate", percentage: score - 100, max: 200 };
-            return { name: "Advanced", percentage: score - 300, max: 500 };
-        };
+        // --- NEW STATE: Tracks the current context/system instruction key ---
+        let currentSystemInstructionKey = 'tutor'; // 'tutor' or 'roleplay_restaurant'
         
-        // --- UI Text Translations ---
-        const Translations = {
-            te: {
-                appTitle: "AI ఇంగ్లీష్ టీచర్", scoreLabel: "స్కోర్:", 
-                aiInitialMessage: "హలో! నేను మీ AI టీచర్ ని. మనం **English** లో ప్రాక్టీస్ చేద్దాం! ఈ రోజు మీరు ఏ విషయం గురించి మాట్లాడాలనుకుంటున్నారు?",
-                aiInputPlaceholder: "ఇంగ్లీష్‌లో మాట్లాడండి లేదా టైప్ చేయండి...",
-                aiWaiting: "టీచర్ సమాధానం కోసం వేచి ఉంది...", targetLangPrompt: "మీరు ఏ భాష ప్రాక్టీస్ చేయాలనుకుంటున్నారు?",
-                aiError: "క్షమించండి, AI కి కనెక్ట్ కాలేకపోయాను. దయచేసి మళ్లీ ప్రయత్నించండి.",
-                aiConnectionError: "ఇంటర్నెట్ కనెక్షన్ సమస్య. దయచేసి మీ నెట్‌వర్క్‌ను తనిఖీ చేయండి.",
-                quizCorrect: "సరైన సమాధానం! 20 పాయింట్లు లభించాయి.",
-                quizIncorrect: "తప్పు సమాధానం. సరైనది: ",
-            },
-            en: {
-                appTitle: "AI English Teacher", scoreLabel: "Score:",
-                aiInitialMessage: "Hello! I'm your AI Teacher. Let's practice **English**! What topic would you like to discuss today?",
-                aiInputPlaceholder: "Speak or Type your response...",
-                aiWaiting: "Waiting for the teacher's response...",
-                targetLangPrompt: "Which language do you want to practice?",
-                quizCorrect: "Correct Answer! You earned 20 points.",
-                quizIncorrect: "Incorrect Answer. The correct answer is: ",
-            },
-            hi: {
-                appTitle: "एआई अंग्रेजी शिक्षक", scoreLabel: "स्कोर:",
-                aiInitialMessage: "नमस्ते! मैं आपकी एआई टीचर हूँ। आइए **English** में अभ्यास करें! आज आप किस विषय पर बात करना चाहेंगे?",
-                aiInputPlaceholder: "हिंदी या अंग्रेजी में बोलें...",
-                aiWaiting: "टीचर के जवाब का इंतज़ार है...",
-                targetLangPrompt: "आप किस भाषा का अभ्यास करना चाहते हैं?",
-                quizCorrect: "सही जवाब! आपने 20 अंक अर्जित किए।",
-                quizIncorrect: "गलत जवाब। सही उत्तर है: ",
-            }
-        };
+        // --- Mock 1000 Question Data for Quiz ---
+        const quizData = [];
+        // Generate 1000 mock questions for demonstration
+        const EnglishWords = ['Cat', 'Dog', 'House', 'Water', 'Tree', 'Book', 'Car', 'Sun', 'Moon', 'Star', 'Run', 'Eat', 'Sleep', 'Happy', 'Sad'];
+        const TeluguWords = ['పిల్లి', 'కుక్క', 'ఇల్లు', 'నీరు', 'చెట్టు', 'పుస్తకం', 'కారు', 'సూర్యుడు', 'చంద్రుడు', 'నక్షత్రం', 'పరిగెత్తడం', 'తినడం', 'నిద్రపోవడం', 'సంతోషం', 'దుఃఖం'];
+        const DistractorsTe = ['పక్షి', 'పని', 'ఆనందం', 'సంతోషం', 'మనుషులు', 'రైలు', 'బస్సు', 'భూమి', 'విద్య', 'ఆట', 'గాలి', 'సమయం', 'పాలు'];
 
-        // --- Gemini AI System Instructions ---
-        const AI_SYSTEM_INSTRUCTION = (target) => {
-            const teluguGuide = target === 'english' ? 'మీరు చేసే ప్రతి ఇంగ్లీష్ వాక్యం తర్వాత, దానిని మెరుగుపరిచి, సరైన గ్రామర్, పదం మరియు వాక్య నిర్మాణాన్ని తెలియజేయండి. ఫీడ్‌బ్యాక్ తర్వాత మాత్రమే తదుపరి సంభాషణను English లో కొనసాగించండి.' : 'మీరు చేసే ప్రతి హిందీ వాక్యం తర్వాత, దానిని మెరుగుపరిచి, సరైన గ్రామర్, పదం మరియు వాక్య నిర్మాణాన్ని తెలియజేయండి. ఫీడ్‌బ్యాక్ తర్వాత మాత్రమే తదుపరి సంభాషణను Hindi లో కొనసాగించండి.';
-            const langName = target === 'english' ? 'English' : 'Hindi (हिंदी)';
-
-            return `You are an expert, friendly AI language coach named **AI English Teacher**. Your user is a native Telugu speaker and is currently focused on learning **${langName}**.
+        for (let i = 0; i < 1000; i++) {
+            const index = i % EnglishWords.length;
+            const word = EnglishWords[index];
+            const correctTe = TeluguWords[index];
             
-            Your primary role is to act as a **personal conversational tutor** for ${langName}, providing real-time feedback and coaching.
+            let options_te = [correctTe];
+            let options_en = [word];
+            
+            // Collect distractors
+            let usedDistractors = [correctTe];
+            while (options_te.length < 4) {
+                 const randomIndex = Math.floor(Math.random() * DistractorsTe.length);
+                 const distractorTe = DistractorsTe[randomIndex];
+                 
+                 // Get the English equivalent of the distractor word (approximation)
+                 let distractorEn = EnglishWords[TeluguWords.indexOf(distractorTe)];
+                 if (!distractorEn) {
+                    // Fallback English word for Telugu distractors
+                    distractorEn = "option"; 
+                 }
+                 
+                 if (!usedDistractors.includes(distractorTe)) {
+                     options_te.push(distractorTe);
+                     options_en.push(distractorEn);
+                     usedDistractors.push(distractorTe);
+                 }
+            }
+            
+            // Combine and shuffle options to maintain correspondence
+            let combined = options_te.map((te, idx) => ({ te: te, en: options_en[idx] }));
+            combined.sort(() => 0.5 - Math.random());
 
-            Your goals are:
-            1. Maintain an engaging conversation, primarily in **${langName}**.
-            2. Respond in **${langName}**, but use Telugu for encouragement and clarity.
-            3. **CRITICAL: After every user response, provide explicit and constructive feedback.** This feedback must include:
-               - A clear correction of any grammar, spelling, or vocabulary errors.
-               - An improved, natural-sounding version of the user's sentence (The target output).
-               - A quick, positive coaching tip related to their usage.
-            4. Do NOT use markdown formatting (like **bold** or bullet points) in your response, keep the output conversational and easy to read.
-            5. Telugu Instruction: ${teluguGuide}
-            6. Encourage the user to continue the dialogue or start a new topic. **Your responses should be engaging and short to simulate a real conversation.**`;
-        };
+            quizData.push({
+                id: i + 1,
+                question_en: `What is the Telugu translation for the English word: '${word}'? (Q${i+1})`,
+                answer_te: correctTe,
+                options: combined.map(c => c.te), // Telugu options for display
+                options_en: combined.map(c => c.en), // English options for talk-back
+                hint_te: `ఇది సాధారణంగా ${word === 'Cat' ? 'ఇంట్లో పెంచుకునే పెంపుడు జంతువు.' : word === 'Water' ? 'మనం దాహం తీర్చుకోవడానికి ఉపయోగించేది.' : 'ఒక ప్రాథమిక నామవాచకం.'}`,
+                explanation_te: `'${word}' కు తెలుగులో సరైన అనువాదం '${correctTe}'. ఇది ప్రాథమిక పదజాలంలో భాగం.`,
+            });
+        }
         
         // --- Utility Functions (Theme, Audio, Haptics) ---
         
         // Local Storage Functions (Adapted to check both keys)
         const getLocalStorageSetting = (key, defaultValue) => {
-             // ... (Local Storage logic copied from the previous file is still here)
              try {
                 let settings = {};
                 let foundValue = undefined;
@@ -648,7 +700,6 @@
         };
 
         const saveLocalStorageSetting = (key, value) => {
-            // ... (Local Storage save logic copied from the previous file is still here)
              try {
                 const keysToUpdate = [SETTINGS_KEY_VERB, SETTINGS_KEY_VOCAB];
 
@@ -692,16 +743,17 @@
             vibrateClick();
         }
 
-        // TTS Speaker
+        // TTS Speaker (Talk Back Function)
         const speakText = (text, lang) => {
             const disableVoice = getLocalStorageSetting('disableAiVoice', false);
             if (disableVoice || !('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang === 'english' ? 'en-US' : 'hi-IN';
+            utterance.lang = lang === 'english' ? 'en-US' : 'en-IN'; 
             
             const voices = window.speechSynthesis.getVoices();
-            const selectedVoice = voices.find(v => v.lang.startsWith(lang === 'english' ? 'en' : 'hi')) || voices[0];
+            // Prioritize English voices, fallback to any available
+            const selectedVoice = voices.find(v => v.lang.startsWith('en')) || voices[0]; 
             if (selectedVoice) {
                 utterance.voice = selectedVoice;
             }
@@ -711,7 +763,6 @@
         
         // Theme Application Functions (Must be defined globally for the app)
         function applyInputStyles() {
-             // (Input styles copied here)
              const style = getLocalStorageSetting('inputStyle', 'rounded');
             const root = document.documentElement.style;
             if (style === 'square') {
@@ -736,7 +787,6 @@
             document.documentElement.style.setProperty('--font-title', `"${font}", ${fallback}`);
         }
         function applyTheme(isDark) {
-             // (Theme application logic copied here)
              const color = getLocalStorageSetting('color', 'indigo');
             const contrast = getLocalStorageSetting('contrast', 'default');
             const textHue = getLocalStorageSetting('textHue', false);
@@ -760,19 +810,39 @@
         }
         
         // --- UI Update & Navigation ---
+
+        // --- UI Text Translations ---
+        const Translations = {
+            te: {
+                appTitle: "AI ఇంగ్లీష్ టీచర్", scoreLabel: "స్కోర్:", 
+                aiInitialMessage: "హలో! నేను మీ AI టీచర్ ని. మనం **English** లో ప్రాక్టీస్ చేద్దాం! ఈ రోజు మీరు ఏ విషయం గురించి మాట్లాడాలనుకుంటున్నారు?",
+                aiInputPlaceholder: "ఇంగ్లీష్‌లో మాట్లాడండి లేదా టైప్ చేయండి...",
+                aiWaiting: "టీచర్ సమాధానం కోసం వేచి ఉంది...", targetLangPrompt: "మీరు ఈ భాషను ప్రాక్టీస్ చేస్తున్నారు:",
+                aiError: "క్షమించండి, AI కి కనెక్ట్ కాలేకపోయాను. దయచేసి మళ్లీ ప్రయత్నించండి.",
+                aiConnectionError: "ఇంటర్నెట్ కనెక్షన్ సమస్య. దయచేసి మీ నెట్‌వర్క్‌ను తనిఖీ చేయండి.",
+                aiCoachTitle: "AI ఇంగ్లీష్ టీచర్",
+                lessonStartMessage: "మీరు ప్రాథమిక శుభాకాంక్షలు (Basic Greetings) పాఠాన్ని ప్రారంభించారు. నాతో English లో మాట్లాడటం ప్రారంభించండి.",
+            },
+            en: {
+                appTitle: "AI English Teacher", scoreLabel: "Score:",
+                aiInitialMessage: "Hello! I'm your AI Teacher. Let's practice **English**! What topic would you like to discuss today?",
+                aiInputPlaceholder: "Speak or Type your response...",
+                aiWaiting: "Waiting for the teacher's response...",
+                targetLangPrompt: "You are practicing this language:",
+                aiCoachTitle: "AI English Teacher",
+                lessonStartMessage: "You have started the Basic Greetings lesson. Start speaking to me in English.",
+            }
+        };
         
         const updateUI = () => {
             const langData = Translations[currentLang];
             document.querySelector('#app-container h1').textContent = langData.appTitle;
-            document.querySelector('#aiCoachTitle').textContent = langData.aiCoachTitle;
-            document.getElementById('targetLangPrompt').textContent = langData.targetLangPrompt;
+            document.getElementById('aiCoachTitle').textContent = langData.aiCoachTitle;
+            // REMOVED: document.getElementById('targetLangPrompt').textContent = langData.targetLangPrompt;
             document.getElementById('aiLoading').textContent = langData.aiWaiting;
             
             // Update input placeholder based on currentLang
             let placeholderText = Translations[currentLang].aiInputPlaceholder;
-            if (currentLang === 'te') {
-                 placeholderText = targetLang === 'english' ? "ఇంగ్లీష్‌లో మాట్లాడండి లేదా టైప్ చేయండి..." : "హిందీలో మాట్లాడండి లేదా టైప్ చేయండి...";
-            }
             document.getElementById('chatInput').placeholder = placeholderText;
 
             // Update visible view
@@ -793,26 +863,29 @@
             if (currentView === 'practice') {
                  document.getElementById('chatInput').focus();
             }
+             if (currentView === 'quiz') {
+                 // Ensure the quiz loads if we switch to it
+                 if (quizData.length > 0) window.loadQuizQuestion(currentQuizIndex);
+            }
         };
 
-        const changeView = (viewName) => {
+        window.changeView = (viewName) => {
             if (currentView === viewName) return;
             currentView = viewName;
+            // Reset to default tutor instruction when leaving the practice tab
+            if (currentView !== 'practice') {
+                currentSystemInstructionKey = 'tutor';
+            }
             updateUI();
         };
 
         const switchTargetLanguage = (newTarget) => {
+            // Since we only support English now, this function is simplified
             if (targetLang === newTarget) return;
-            targetLang = newTarget;
+            // Removed targetLang update and switch logic for Hindi
             
-            document.querySelectorAll('#targetLangSwitch button').forEach(btn => {
-                btn.classList.remove('bg-primary', 'text-white');
-                btn.classList.add('bg-gray-300', 'dark-mode:bg-gray-600', 'text-gray-800', 'dark-mode:text-gray-200');
-            });
-            document.querySelector(`button[data-target="${newTarget}"]`).classList.add('bg-primary', 'text-white');
-            document.querySelector(`button[data-target="${newTarget}"]`).classList.remove('bg-gray-300', 'dark-mode:bg-gray-600', 'text-gray-800', 'dark-mode:text-gray-200');
-
-            // Reset chat history when target language changes
+            // Reset chat history and instruction
+            currentSystemInstructionKey = 'tutor';
             chatHistory = [];
             renderInitialAiMessage();
             updateUI();
@@ -820,6 +893,12 @@
 
         // --- Progress and Firestore ---
         
+        const updateLevelText = (score) => {
+            if (score < 100) return { name: "Beginner", percentage: score, max: 100 };
+            if (score < 300) return { name: "Intermediate", percentage: score - 100, max: 200 };
+            return { name: "Advanced", percentage: score - 300, max: 500 };
+        };
+
         const updateProgressBarUI = () => {
             const progress = updateLevelText(userProgress.score);
             const levelEl = document.getElementById('progress-level');
@@ -828,7 +907,7 @@
             const totalScoreEl = document.getElementById('userScore');
             
             totalScoreEl.textContent = userProgress.score;
-            levelEl.innerHTML = `Level: <span class="text-primary font-extrabold">${progress.name}</span>`;
+            levelEl.innerHTML = `స్థాయి: <span class="text-primary font-extrabold text-green-600 dark-mode:text-green-400">${progress.name}</span>`;
 
             let percent = 0;
             if (progress.max > 0) {
@@ -836,7 +915,7 @@
             }
             
             barEl.style.width = `${percent}%`;
-            scoreEl.textContent = `${userProgress.score} Points (${percent.toFixed(0)}% to ${progress.name === 'Beginner' ? 'Intermediate' : 'Advanced'})`;
+            scoreEl.textContent = `${userProgress.score} పాయింట్లు (${percent.toFixed(0)}% to ${progress.name === 'Beginner' ? 'Intermediate' : 'Advanced'})`;
         };
 
         const updateScoreDisplay = async (oldScore) => {
@@ -903,19 +982,33 @@
             if (role === 'ai') {
                 // Simple parsing logic: assume corrected sentence is first, then Telugu tip
                 const parts = text.split('.');
-                const correctionIndex = parts.findIndex(p => p.toLowerCase().includes('corrected') || p.toLowerCase().includes('improved'));
+                // Check for feedback in the entire response
+                const correctionMatch = text.match(/(Correction|Improved):\s*(.*?)\.\s*(.*)/i);
 
-                if (correctionIndex !== -1) {
-                    feedback = `<span class="ai-feedback">Correction: ${parts[correctionIndex].trim()}.</span>`;
+                if (correctionMatch) {
+                    const correction = correctionMatch[2].trim();
+                    const remainingText = correctionMatch[3].trim();
                     
-                    // Remove the correction part from the display text
-                    displayText = parts.slice(0, correctionIndex).join('.') + (parts.slice(correctionIndex + 1).join('.'));
+                    // The main conversational text is typically the first sentence before the correction/feedback
+                    const firstSentenceEnd = text.indexOf(correctionMatch[0]);
+                    if (firstSentenceEnd !== -1) {
+                         displayText = text.substring(0, firstSentenceEnd).trim();
+                    } else {
+                         displayText = text; // Fallback
+                    }
+
+                    feedback = `<span class="ai-feedback">Correction: ${correction}.</span>`;
                     
-                    // Attempt to extract Telugu tip (if present, usually near the end)
-                    const teluguMatch = displayText.match(/(మీరు చెప్పే|మీరు మాట్లాడే)/i);
+                    // Attempt to extract Telugu tip from remaining text
+                    const teluguMatch = remainingText.match(/(మీరు చెప్పే|మీరు మాట్లాడే|సరైన వాక్యం|ఇక్కడ గమనించండి)/i);
                     if (teluguMatch) {
                         teluguTip = `<span class="telugu-tip">${teluguMatch.input.substring(teluguMatch.index)}</span>`;
-                        displayText = displayText.substring(0, teluguMatch.index).trim();
+                        // Remove the Telugu part from the main display text
+                        if (displayText === text) {
+                            displayText = displayText.substring(0, teluguMatch.index).trim();
+                        }
+                    } else {
+                         displayText = text;
                     }
                 }
             }
@@ -932,32 +1025,122 @@
         };
         
         const extractTargetLanguageForSpeaking = (fullText, target) => {
-            // Updated heuristic to look for the corrected sentence first
+            // Heuristic to look for the corrected/main sentence
             const langCode = target === 'english' ? 'English' : 'Hindi';
-            const match = fullText.match(new RegExp(`Corrected ${langCode}:\\s*(.*?)(?=\\.|\\n|$)`, 'i'));
-            if (match && match[1]) {
-                return match[1].trim();
+            // 1. Look for explicit correction/improvement
+            const correctionMatch = fullText.match(new RegExp(`(Correction|Improved):\\s*(.*?)\\.\s*`, 'i'));
+            if (correctionMatch && correctionMatch[2]) {
+                return correctionMatch[2].trim();
             }
-            // Fallback: If no explicit correction, try to find the main conversation text
-            const conversationMatch = fullText.match(/(\w[\w\s,']{15,}[\.!?])/); 
-            if (conversationMatch) {
-                 return conversationMatch[1].trim();
+            
+            // 2. Try to find the first conversational sentence (before any feedback)
+            const feedbackStart = fullText.toLowerCase().indexOf('correction:');
+            let conversationText = fullText;
+            if (feedbackStart !== -1) {
+                 conversationText = fullText.substring(0, feedbackStart).trim();
             }
-            return fullText;
+            
+            // 3. Extract the first sentence or a long block of text
+            const sentenceMatch = conversationText.match(/(\w[\w\s,']{10,}[\.!?])/); 
+            if (sentenceMatch) {
+                 return sentenceMatch[1].trim();
+            }
+            return fullText; // Fallback
         };
 
         const renderInitialAiMessage = () => {
              const chatBox = document.getElementById('chatBox');
              chatBox.innerHTML = '';
              chatHistory = [];
+             currentSystemInstructionKey = 'tutor'; // Default to tutor mode
              
              let initialMsg = Translations[currentLang].aiInitialMessage;
              renderMessage('ai', initialMsg);
              chatHistory.push({ role: 'ai', text: initialMsg });
         };
         
+        // --- Gemini AI System Instructions (Refactored to handle role-play) ---
+        const getSystemInstruction = (key, target) => {
+            const teluguGuide = 'మీరు చేసే ప్రతి ఇంగ్లీష్ వాక్యం తర్వాత, దానిని మెరుగుపరిచి, సరైన గ్రామర్, పదం మరియు వాక్య నిర్మాణాన్ని తెలియజేయండి. ఫీడ్‌బ్యాక్ తర్వాత మాత్రమే తదుపరి సంభాషణను English లో కొనసాగించండి.';
+            const langName = 'English';
+
+            // --- ROLE PLAY: RESTAURANT ---
+            if (key === 'roleplay_restaurant') {
+                return `You are now acting as a friendly and helpful waiter/waitress at a restaurant called 'The Global Cafe'. The user is your customer who is learning ${langName} (their native language is Telugu).
+                
+                Your responses MUST strictly adhere to the role of a server.
+                
+                CRITICAL: After every user response (order or question), you must immediately provide two things:
+                1. Your next natural line in the conversation as a server, in ${langName}.
+                2. Then, provide CONSTRUCTIVE FEEDBACK on the user's previous sentence (like the tutor). The feedback must start with "Correction: [Corrected sentence in ${langName}]." and be followed by a quick Telugu tip explaining the error or giving positive encouragement.
+
+                Example AI Response: "Certainly, one latte coming right up! Did you want anything to eat with that? Correction: You said 'I want coffee' but 'I would like coffee' or 'Can I please get a coffee' is more polite. ఇక్కడ 'would like' వాడటం మర్యాదగా ఉంటుంది."
+                
+                Your response should be short, engaging, and in character. Do NOT use markdown formatting. The user's goal is to successfully order a meal.`;
+            } 
+            
+            // --- DEFAULT: TUTOR ---
+            else { 
+                return `You are an expert, friendly AI language coach named **AI English Teacher**. Your user is a native Telugu speaker and is currently focused on learning **${langName}**.
+                
+                Your primary role is to act as a **personal conversational tutor** for ${langName}, providing real-time feedback and coaching.
+
+                Your goals are:
+                1. Maintain an engaging conversation, primarily in **${langName}**.
+                2. Respond in **${langName}**, but use Telugu for encouragement and clarity.
+                3. **CRITICAL: After every user response, provide explicit and constructive feedback.** This feedback must include:
+                   - A clear correction of any grammar, spelling, or vocabulary errors.
+                   - An improved, natural-sounding version of the user's sentence (The target output).
+                   - A quick, positive coaching tip related to their usage.
+                4. Do NOT use markdown formatting (like **bold** or bullet points) in your response, keep the output conversational and easy to read.
+                5. Telugu Instruction: ${teluguGuide}
+                6. Encourage the user to continue the dialogue or start a new topic. **Your responses should be engaging and short to simulate a real conversation.**`;
+            }
+        };
+
+        // --- NEW FUNCTION: To start the role-play scenario ---
+        window.startRolePlay = (scenario) => {
+            handleUiTapFeedback();
+            currentSystemInstructionKey = `roleplay_${scenario}`;
+            chatHistory = []; // Clear previous chat
+            let initialMsg = '';
+
+            if (scenario === 'restaurant') {
+                 initialMsg = "Hello! Welcome to 'The Global Cafe'. I will be your server today. What can I get started for you? (Please respond in English.)";
+            } else {
+                 // Fallback to default tutor mode
+                 currentSystemInstructionKey = 'tutor';
+                 initialMsg = Translations[currentLang].aiInitialMessage;
+            }
+
+            // Immediately set the view to practice and render the new message
+            changeView('practice');
+            document.getElementById('chatBox').innerHTML = ''; // Clear chat area
+            renderMessage('ai', initialMsg);
+            chatHistory.push({ role: 'ai', text: initialMsg });
+            document.getElementById('chatInput').focus();
+        };
+
+        // --- NEW FUNCTION: To start a lesson (navigates to chat) ---
+        window.startLesson = () => {
+             handleUiTapFeedback();
+             // Reset to general tutor mode (could be expanded later for specific lesson modes)
+             currentSystemInstructionKey = 'tutor'; 
+             chatHistory = []; 
+             
+             // Immediately set the view to practice
+             changeView('practice');
+             document.getElementById('chatBox').innerHTML = ''; // Clear chat area
+             
+             // Render a welcoming message for the lesson
+             let lessonMsg = Translations[currentLang].lessonStartMessage;
+             renderMessage('ai', lessonMsg);
+             chatHistory.push({ role: 'ai', text: lessonMsg });
+             document.getElementById('chatInput').focus();
+        };
+        
         // --- Gemini API Handler ---
-        const geminiApiCall = async (history, systemInstruction, maxRetries = 3) => {
+        const geminiApiCall = async (history, systemInstructionKey, maxRetries = 3) => { // Use key here
             const apiKey = ""; 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
@@ -969,7 +1152,8 @@
             const payload = {
                 contents: contents,
                 systemInstruction: {
-                    parts: [{ text: systemInstruction(targetLang) }]
+                    // Use the getter function with the current key
+                    parts: [{ text: getSystemInstruction(systemInstructionKey, targetLang) }] 
                 },
             };
 
@@ -1025,7 +1209,8 @@
             micBtn.disabled = true;
             chatInput.disabled = true;
 
-            const aiResponse = await geminiApiCall(chatHistory, AI_SYSTEM_INSTRUCTION);
+            // Pass the current system instruction key
+            const aiResponse = await geminiApiCall(chatHistory, currentSystemInstructionKey); 
 
             aiLoading.classList.add('hidden');
             sendChatBtn.disabled = false;
@@ -1045,6 +1230,9 @@
 
         // --- STT Logic (Mic Button) ---
         let recognition = null;
+        const micBtn = document.getElementById('micBtn');
+        const chatInput = document.getElementById('chatInput');
+
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             recognition = new SpeechRecognition();
@@ -1079,19 +1267,19 @@
             micBtn.addEventListener('click', () => {
                 handleUiTapFeedback();
                 try {
-                    recognition.lang = targetLang === 'english' ? 'en-US' : 'hi-IN';
+                    recognition.lang = 'en-US'; // Hardcoded to English since Hindi is removed
                     recognition.start();
                 } catch (e) {
                     console.error("Recognition already started or error:", e);
                 }
             });
         } else {
-            document.getElementById('micBtn').disabled = true;
-            document.getElementById('micBtn').style.backgroundColor = '#ccc';
-            document.getElementById('micBtn').title = "Speech recognition not supported by your browser.";
+            micBtn.disabled = true;
+            micBtn.style.backgroundColor = '#ccc';
+            micBtn.title = "Speech recognition not supported by your browser.";
         }
         
-        // --- Gamified Feature Handlers ---
+        // --- Gamified Feature Handlers (Word of the Day) ---
         
         window.speakDailyWord = () => {
             handleUiTapFeedback();
@@ -1099,47 +1287,162 @@
             speakText(word, 'english');
         }
         
-        window.checkQuizAnswer = async () => {
-            const input = document.getElementById('quizInput');
-            const feedback = document.getElementById('quiz-feedback');
-            const userAns = input.value.trim().toLowerCase();
-            const correctAns = dummyQuizAnswer.toLowerCase();
-            const langData = Translations[currentLang];
+        // --- NEW QUIZ LOGIC (MCQ) ---
+
+        // Helper function to render an option button
+        const renderOptionButton = (optionText, index) => {
+            // Check if quizData is initialized before trying to access it
+            const currentQuestion = quizData[currentQuizIndex];
+            const englishWord = currentQuestion && currentQuestion.options_en ? currentQuestion.options_en[index] : 'word';
             
-            input.disabled = true;
+            return `
+                <button data-option="${index}" 
+                        onclick="window.selectQuizOption(this)"
+                        data-english-word="${englishWord}"
+                        class="mcq-option ripple-btn w-full p-3 rounded-xl border-2 border-gray-300 dark-mode:border-gray-700 bg-white dark-mode:bg-gray-800 text-gray-800 dark-mode:text-gray-200 text-left telugu-text transition duration-150 hover:bg-gray-100 dark-mode:hover:bg-gray-700 disabled:opacity-100">
+                    ${optionText}
+                </button>
+            `;
+        };
+
+        // NEW: Handles option selection and pronunciation
+        window.selectQuizOption = (button) => {
+            if (isAnswered) return;
+            handleUiTapFeedback();
+            const optionsContainer = document.getElementById('mcq-options-container');
             
-            if (userAns === correctAns) {
-                 feedback.textContent = langData.quizCorrect;
-                 feedback.className = 'text-sm mt-2 font-semibold text-green-600';
-                 feedback.classList.remove('hidden');
-                 
-                 const oldScore = userProgress.score;
-                 userProgress.score += 20;
-                 await updateScoreDisplay(oldScore);
-                 playCorrect();
-            } else {
-                feedback.textContent = langData.quizIncorrect + `'${dummyQuizAnswer}'`;
-                feedback.className = 'text-sm mt-2 font-semibold text-red-600';
-                feedback.classList.remove('hidden');
-                playIncorrect();
+            // Visually select the option
+            optionsContainer.querySelectorAll('.mcq-option').forEach(b => {
+                 b.classList.remove('border-primary', 'bg-primary/20', 'shadow-md');
+                 b.removeAttribute('data-selected');
+            });
+            button.classList.add('border-primary', 'bg-primary/20', 'shadow-md');
+            // Store selection
+            button.setAttribute('data-selected', 'true');
+            
+            // Talk Back: Speak the English word for pronunciation practice
+            const englishWord = button.getAttribute('data-english-word');
+            speakText(englishWord, 'english');
+        };
+
+        window.loadQuizQuestion = (index = 0) => {
+            if (quizData.length === 0) return; // Prevent crash if quizData is empty
+            currentQuizIndex = index % quizData.length; // Loop through questions
+            isAnswered = false;
+
+            const question = quizData[currentQuizIndex];
+            const optionsContainer = document.getElementById('mcq-options-container');
+            const questionEl = document.getElementById('mcq-question');
+            const counterEl = document.getElementById('quiz-counter');
+            const resultMsgEl = document.getElementById('quiz-result-message');
+            const explanationTextEl = document.getElementById('quiz-explanation-text');
+            
+            // Reset state
+            resultMsgEl.classList.add('hidden');
+            explanationTextEl.classList.add('hidden');
+            explanationTextEl.classList.remove('bg-blue-100', 'dark-mode:bg-blue-900/40', 'text-blue-800', 'dark-mode:text-blue-200', 'bg-gray-200', 'dark-mode:bg-gray-700');
+            document.getElementById('check-answer-btn').disabled = false;
+            document.getElementById('next-question-btn').classList.add('hidden');
+            document.getElementById('hint-btn').disabled = false;
+            document.getElementById('explanation-btn').disabled = true; // Can only explain after answering
+
+            questionEl.textContent = question.question_en;
+            counterEl.textContent = `ప్రశ్న ${currentQuizIndex + 1} / ${quizData.length}`;
+
+            // Render Options
+            // Pass both option text and its index to the map function
+            optionsContainer.innerHTML = question.options.map((option, index) => renderOptionButton(option, index)).join('');
+        };
+
+        window.checkQuizAnswerMCQ = async () => {
+            if (isAnswered) return;
+            
+            const optionsContainer = document.getElementById('mcq-options-container');
+            const selectedButton = optionsContainer.querySelector('[data-selected="true"]');
+            const resultMsgEl = document.getElementById('quiz-result-message');
+            const checkBtn = document.getElementById('check-answer-btn');
+
+            if (!selectedButton) {
+                resultMsgEl.textContent = "దయచేసి ఒక ఎంపికను ఎంచుకోండి.";
+                resultMsgEl.className = 'text-sm font-bold p-2 rounded-lg bg-yellow-100 text-yellow-800 dark-mode:bg-yellow-900/40 dark-mode:text-yellow-200 telugu-text';
+                resultMsgEl.classList.remove('hidden');
+                return;
             }
             
-            // Simple delay before resetting the quiz question
-            setTimeout(() => {
-                input.value = '';
-                input.disabled = false;
-                feedback.classList.add('hidden');
-            }, 3000);
-        }
+            handleUiTapFeedback();
+            isAnswered = true;
+            checkBtn.disabled = true;
+            document.getElementById('explanation-btn').disabled = false;
+            document.getElementById('next-question-btn').classList.remove('hidden');
+            
+            const question = quizData[currentQuizIndex];
+            const userAnswer = selectedButton.textContent.trim();
+            const isCorrect = (userAnswer === question.answer_te);
+            
+            // Highlight correct/incorrect
+            optionsContainer.querySelectorAll('.mcq-option').forEach(btn => {
+                const optionText = btn.textContent.trim();
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-gray-100', 'dark-mode:hover:bg-gray-700', 'border-primary', 'bg-primary/20', 'shadow-md');
+
+                if (optionText === question.answer_te) {
+                    // Correct answer highlight (Green)
+                    btn.classList.add('bg-green-200', 'dark-mode:bg-green-700', 'border-green-500');
+                } else if (btn === selectedButton) {
+                    // Incorrect selection highlight (Red)
+                    btn.classList.add('bg-red-200', 'dark-mode:bg-red-700', 'border-red-500');
+                }
+            });
+
+            if (isCorrect) {
+                resultMsgEl.textContent = `సరైన సమాధానం! 🎉 10 పాయింట్లు లభించాయి.`;
+                resultMsgEl.className = 'text-sm font-bold p-2 rounded-lg bg-green-100 text-green-800 dark-mode:bg-green-900/40 dark-mode:text-green-200 telugu-text';
+                
+                const oldScore = userProgress.score;
+                userProgress.score += 10;
+                await updateScoreDisplay(oldScore);
+                playCorrect();
+            } else {
+                resultMsgEl.textContent = `తప్పు సమాధానం. 😔 సరైన సమాధానం: "${question.answer_te}"`;
+                resultMsgEl.className = 'text-sm font-bold p-2 rounded-lg bg-red-100 text-red-800 dark-mode:bg-red-900/40 dark-mode:text-red-200 telugu-text';
+                playIncorrect();
+            }
+            resultMsgEl.classList.remove('hidden');
+        };
+
+        window.showHint = () => {
+            handleUiTapFeedback();
+            const explanationTextEl = document.getElementById('quiz-explanation-text');
+            const question = quizData[currentQuizIndex];
+            
+            explanationTextEl.textContent = `హింట్: ${question.hint_te}`;
+            explanationTextEl.classList.remove('hidden');
+            explanationTextEl.classList.add('bg-blue-100', 'dark-mode:bg-blue-900/40', 'text-blue-800', 'dark-mode:text-blue-200');
+            explanationTextEl.classList.remove('bg-gray-200', 'dark-mode:bg-gray-700');
+            
+            document.getElementById('hint-btn').disabled = true;
+        };
+
+        window.showExplanation = () => {
+            if (!isAnswered) return;
+            handleUiTapFeedback();
+            const explanationTextEl = document.getElementById('quiz-explanation-text');
+            const question = quizData[currentQuizIndex];
+
+            explanationTextEl.textContent = `వివరణ: ${question.explanation_te}`;
+            explanationTextEl.classList.remove('hidden', 'bg-blue-100', 'dark-mode:bg-blue-900/40', 'text-blue-800', 'dark-mode:text-blue-200');
+            explanationTextEl.classList.add('bg-gray-200', 'dark-mode:bg-gray-700');
+            document.getElementById('explanation-btn').disabled = true;
+        };
+
+        window.loadNextQuestion = () => {
+            handleUiTapFeedback();
+            window.loadQuizQuestion(currentQuizIndex + 1);
+        };
 
         // --- Event Listeners and Initializers ---
 
-        document.getElementById('targetLangSwitch').addEventListener('click', (e) => {
-            if (e.target.dataset.target) {
-                handleUiTapFeedback();
-                switchTargetLanguage(e.target.dataset.target);
-            }
-        });
+        // REMOVED: document.getElementById('targetLangSwitch').addEventListener('click', ...
 
         document.querySelectorAll('.nav-button').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -1156,10 +1459,64 @@
         });
         
         document.getElementById('app-container').addEventListener('click', (e) => {
-            if (e.target.closest('#app-container button:not(#micBtn)')) {
+            // Only vibrate/tap feedback for buttons that don't already have specific handlers
+            if (e.target.closest('#app-container button:not(#micBtn):not(.mcq-option):not([onclick])')) {
                 handleUiTapFeedback();
             }
         });
+
+        // --- Settings Modal Functions (Needed for Dark Mode) ---
+        window.openSettings = function() {
+            document.getElementById('settings-modal').classList.remove('hidden');
+            // Ensure current theme color and mode are selected visually
+            const currentMode = getLocalStorageSetting('theme', 'light');
+            const currentColor = getLocalStorageSetting('color', 'indigo');
+            
+            document.querySelectorAll('#mode-light, #mode-dark').forEach(btn => btn.classList.remove('border-primary'));
+            document.getElementById(`mode-${currentMode}`).classList.add('border-primary');
+            
+            document.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('border-4', 'border-white', 'dark-mode:border-gray-900'));
+            document.querySelector(`[data-color-id="${currentColor}"]`).classList.add('border-4', 'border-white', 'dark-mode:border-gray-900');
+
+            // Update toggles
+            document.getElementById('toggle-ai-voice').checked = getLocalStorageSetting('disableAiVoice', false);
+            document.getElementById('toggle-audio').checked = getLocalStorageSetting('disableSound', false);
+            document.getElementById('toggle-haptics').checked = getLocalStorageSetting('disableVibration', false);
+        };
+
+        window.closeSettings = function() {
+            document.getElementById('settings-modal').classList.add('hidden');
+        };
+
+        window.setThemeMode = function(mode) {
+            saveLocalStorageSetting('theme', mode);
+            applyTheme(mode === 'dark');
+            document.querySelectorAll('#mode-light, #mode-dark').forEach(btn => btn.classList.remove('border-primary'));
+            document.getElementById(`mode-${mode}`).classList.add('border-primary');
+            handleUiTapFeedback();
+        };
+
+        window.setThemeColor = function(color) {
+            saveLocalStorageSetting('color', color);
+            applyTheme(getLocalStorageSetting('theme', 'light') === 'dark'); 
+            document.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('border-4', 'border-white', 'dark-mode:border-gray-900'));
+            document.querySelector(`[data-color-id="${color}"]`).classList.add('border-4', 'border-white', 'dark-mode:border-gray-900');
+            handleUiTapFeedback();
+        };
+
+        // Toggle functions for settings
+        window.toggleAiVoice = function() {
+            const isChecked = document.getElementById('toggle-ai-voice').checked;
+            saveLocalStorageSetting('disableAiVoice', isChecked);
+        };
+        window.toggleAudio = function() {
+            const isChecked = document.getElementById('toggle-audio').checked;
+            saveLocalStorageSetting('disableSound', isChecked);
+        };
+        window.toggleHaptics = function() {
+            const isChecked = document.getElementById('toggle-haptics').checked;
+            saveLocalStorageSetting('disableVibration', isChecked);
+        };
 
         // --- Application Initialization ---
 
@@ -1168,12 +1525,12 @@
             const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
             applyTheme(currentMode === 'dark');
 
-            // Set initial target language active state (English by default)
-            document.querySelector(`button[data-target="english"]`).classList.add('bg-primary', 'text-white');
-
             updateUI();
             setupProgressListener(); 
             setupAudio();
+            
+            // Load the first quiz question when the app starts
+            if (quizData.length > 0) window.loadQuizQuestion(0);
         };
     </script>
     
