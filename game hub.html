@@ -387,6 +387,7 @@
                     Practice English/Hindi conversations with real-time AI feedback, lessons, and quizzes. **(Requires Internet)**
                 </p>
                 <!-- UPDATED Play Now Button -->
+                <!-- CRITICAL FIX: Ensure link is 'ai_teacher.html' (all lowercase) -->
                 <a href="ai_teacher.html" class="play-button ripple-btn bg-rose-600 hover:bg-rose-700 shadow-rose-500/50" style="background-color: #e11d48;">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -422,6 +423,7 @@
             </div>
             
             <!-- Settings Card -->
+            <!-- Note: The anchor tag links to # (or uses a JS function) but visually matches the play button style -->
             <div class="game-card shadow-md shadow-gray-400/50">
                 <h2 class="text-xl font-bold mb-1 text-gray-800 dark-mode:text-gray-200" style="color: var(--color-primary-hex);">
                     App Settings
@@ -927,6 +929,7 @@
         }
 
         function loadInitialTheme() {
+            // Check for user preference or system preference
             const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
             applyTheme(currentMode === 'dark');
         }

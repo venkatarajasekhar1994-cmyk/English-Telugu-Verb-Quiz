@@ -1,8 +1,8 @@
 // service-worker.js
 
-// **CRITICAL:** CHANGE THE CACHE VERSION (e.g., to v7 or v10)
+// **CRITICAL:** CHANGE THE CACHE VERSION (to v11)
 // INCREMENTED VERSION TO FORCE BROWSER TO RELOAD ALL ASSETS
-const CACHE_NAME = 'my-pwa-cache-v10'; 
+const CACHE_NAME = 'my-pwa-cache-v11'; 
 
 const urlsToCache = [
   '/',                     
@@ -12,7 +12,7 @@ const urlsToCache = [
   // Final, Correct File Names:
   'Verbs game.html',       
   'English vocabulary game.html', 
-  'ai_teacher.html', // <--- NEW AI TEACHER FILE
+  'ai_teacher.html', // <--- NEW AI TEACHER FILE (small case name)
   
   // Shared assets
   'manifest.json',
