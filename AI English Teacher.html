@@ -1,0 +1,1191 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI English Teacher - Practice Zone</title>
+    
+    <!-- PWA Manifest & Service Worker (for cache) -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script type="module">
+        // --- Firebase/Canvas Setup ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        
+        let app, db, auth;
+        let userId = null;
+
+        const initFirebase = async () => {
+            try {
+                if (Object.keys(firebaseConfig).length > 0) {
+                    app = initializeApp(firebaseConfig);
+                    db = getFirestore(app);
+                    auth = getAuth(app);
+                    setLogLevel('debug'); 
+
+                    // Authentication
+                    if (initialAuthToken) {
+                        await signInWithCustomToken(auth, initialAuthToken);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+
+                    onAuthStateChanged(auth, (user) => {
+                        if (user) {
+                            userId = user.uid;
+                        } else {
+                            userId = crypto.randomUUID();
+                        }
+                        window.app.db = db;
+                        window.app.userId = userId;
+                        window.app.initApp(); 
+                    });
+
+                } else {
+                    console.error("Firebase config is missing. App will run in mock mode.");
+                    window.app.initApp();
+                }
+            } catch (error) {
+                console.error("Firebase Initialization or Auth Failed:", error);
+                window.app.initApp();
+            }
+        };
+
+        window.app = {
+            db: null,
+            userId: null,
+            appId: appId,
+            initFirebase: initFirebase,
+            initApp: () => { console.log("App initialization started (Mock/Real)."); } 
+        };
+
+        initFirebase();
+    </script>
+
+    <!-- CUSTOM STYLES & THEMING (COPIED/ADAPTED FROM YOUR PWA FILES) -->
+    <style>
+        /* Import all available fonts for customization */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght==400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&display=swap');
+        
+        /* --- CSS Variables for Theme Management --- */
+        
+        :root {
+            --font-body: 'Inter', sans-serif;
+            --font-title: 'Lora', serif;
+            --input-border-radius: 1.5rem; 
+            --input-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+            --text-color-light: #111827; 
+            --text-color-dark: #f3f4f6; 
+        }
+        
+        /* Default: Indigo */
+        :root, body[data-color="indigo"] {
+            --color-primary: 79, 70, 229; --color-primary-hex: #4f46e5;
+            --color-primary-light: 165, 180, 252; 
+            --color-bg-light-start: #a78bfa; --color-bg-light-mid: #818cf8; --color-bg-light-end: #3b82f6;
+            --color-bg-dark-start: #1f2937; --color-bg-dark-mid: #111827; --color-bg-dark-end: #0f172a;
+        }
+        /* Teal Theme */
+        body[data-color="teal"] {
+            --color-primary: 20, 184, 166; --color-primary-hex: #14b8a6;
+            --color-primary-light: 94, 234, 212; 
+            --color-bg-light-start: #2dd4bf; --color-bg-light-mid: #5eead4; --color-bg-light-end: #0d9488;
+        }
+        /* Rose Theme */
+        body[data-color="rose"] {
+            --color-primary: 225, 29, 72; --color-primary-hex: #e11d48;
+            --color-primary-light: 251, 207, 232; 
+            --color-bg-light-start: #fda4af; --color-bg-light-mid: #f43f5e; --color-bg-light-end: #e11d48;
+        }
+        /* Amber Theme */
+        body[data-color="amber"] {
+            --color-primary: 245, 158, 11; --color-primary-hex: #f59e0b;
+            --color-primary-light: 253, 230, 138; 
+            --color-bg-light-start: #fcd34d; --color-bg-light-mid: #f59e0b; --color-bg-light-end: #fbbf24;
+        }
+        /* Emerald Theme */
+        body[data-color="emerald"] {
+            --color-primary: 5, 150, 105; --color-primary-hex: #059669;
+            --color-primary-light: 110, 231, 183; 
+            --color-bg-light-start: #34d399; --color-bg-light-mid: #10b981; --color-bg-light-end: #059669;
+        }
+        
+        /* --- Base Styles --- */
+        body {
+            font-family: var(--font-body);
+            min-height: 100vh;
+            color: var(--text-color-light); 
+            background: linear-gradient(135deg, var(--color-bg-light-start), var(--color-bg-light-mid), var(--color-bg-light-end));
+            padding-bottom: 4rem; 
+        }
+        
+        .elegant-title {
+            font-family: var(--font-title); 
+            font-weight: 700;
+            letter-spacing: 0.05em; 
+            color: #1e293b;
+        }
+
+        /* Main Glass Card (COPIED) */
+        .liquid-glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(var(--color-primary-light), 0.35));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            transition: all 0.3s ease;
+        }
+
+        /* Frosted Option Card */
+        .frosted-option {
+            background: rgba(255, 255, 255, 0.5); /* Lighter background for better contrast */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s ease, transform 0.1s ease;
+        }
+        
+        .text-primary { color: var(--color-primary-hex); }
+        .border-primary { border-color: var(--color-primary-hex); }
+        .bg-primary { background-color: var(--color-primary-hex); }
+        .shadow-primary { box-shadow: 0 10px 15px -3px rgba(var(--color-primary), 0.2), 0 4px 6px -4px rgba(var(--color-primary), 0.1); }
+        
+        input[type="text"], textarea {
+            font-family: var(--font-body);
+            background-color: rgba(255, 255, 255, 0.5) !important;
+            border: 1px solid rgba(156, 163, 175, 0.3);
+            color: var(--text-color-light) !important;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.3s ease;
+            
+            border-radius: var(--input-border-radius); 
+            box-shadow: var(--input-shadow);
+        }
+
+        /* Nav Bar Styles */
+        .nav-button {
+            transition: all 0.3s ease;
+            color: #4b5563; /* Gray 600 */
+        }
+        .nav-button.active {
+            color: var(--color-primary-hex); 
+            background-color: rgba(var(--color-primary-light), 0.2);
+            /* bottom border highlight */
+            box-shadow: 0 -3px 0 0 var(--color-primary-hex) inset;
+        }
+
+        /* Active View Style */
+        .view {
+            display: none;
+        }
+        .view.active {
+            display: block;
+        }
+        
+        /* Chat Specific Styles */
+        .chat-container {
+            border: 2px solid var(--color-primary-hex);
+            border-radius: 1rem;
+            height: 60vh; /* Reduced height for better mobile layout */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-box {
+            flex-grow: 1;
+            overflow-y: auto;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        .chat-user-message {
+            background-color: rgba(var(--color-primary-light), 0.5); 
+            align-self: flex-end;
+            border-radius: 12px 12px 0 12px;
+            max-width: 85%;
+        }
+        .chat-ai-message {
+            background-color: #f3f4f6; /* Near white/light gray */
+            align-self: flex-start;
+            border-radius: 12px 12px 12px 0;
+            max-width: 90%;
+            border-left: 3px solid var(--color-primary-hex);
+        }
+        .ai-feedback {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #10b981; /* Green 600 */
+            border-top: 1px solid #d1d5db;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+            display: block;
+        }
+        .telugu-tip {
+             font-size: 0.75rem;
+             color: #4f46e5; /* Indigo 600 */
+             display: block;
+             margin-top: 0.2rem;
+             font-weight: 500;
+        }
+
+        /* --- Liquid Glass Ripple Effect (COPIED) --- */
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0); 
+            z-index: 1;
+        }
+
+        .ripple-btn::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform 0.6s, opacity 0.8s;
+            border-radius: inherit; 
+            z-index: -1;
+        }
+
+        .ripple-btn:active::after {
+            transform: scale(0, 0);
+            opacity: 1;
+            transition: 0s;
+        }
+
+        /* --- Dark Mode Styles (COPIED) --- */
+        .dark-mode {
+            background: linear-gradient(135deg, var(--color-bg-dark-start), var(--color-bg-dark-mid), var(--color-bg-dark-end)); 
+            color: var(--text-color-dark);
+        }
+        .dark-mode .liquid-glass-card {
+            background: linear-gradient(135deg, rgba(55, 65, 81, 0.4), rgba(31, 41, 55, 0.5));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); 
+        }
+        .dark-mode .elegant-title { color: #ffffff; }
+        .dark-mode .frosted-option {
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(107, 114, 128, 0.4);
+        }
+        
+        .dark-mode input[type="text"], .dark-mode textarea {
+            background-color: rgba(31, 41, 55, 0.6) !important;
+            color: var(--text-color-dark) !important; 
+            border-color: rgba(107, 114, 128, 0.4);
+        }
+        .dark-mode .chat-box {
+             background-color: rgba(31, 41, 55, 0.9);
+        }
+        .dark-mode .chat-ai-message {
+            background-color: #1f2937; 
+            border-left: 3px solid var(--color-primary-hex);
+        }
+        .dark-mode .chat-user-message {
+            background-color: rgba(var(--color-primary-light), 0.1); 
+        }
+        
+        .dark-mode .nav-button { color: #d1d5db; }
+        .dark-mode .nav-button.active {
+            color: var(--color-primary-hex); 
+            background-color: rgba(var(--color-primary-light), 0.1);
+        }
+        .dark-mode .ai-feedback { color: #34d399; }
+        .dark-mode .telugu-tip { color: #a78bfa; }
+
+        /* --- Custom Language Font --- */
+        .telugu-text {
+            font-family: 'Noto Sans Telugu', sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 flex flex-col items-center">
+
+    <div id="app-container" class="w-full max-w-xl liquid-glass-card p-4 md:p-6 my-4">
+        
+        <!-- Header, Title, and Score -->
+        <div class="flex justify-between items-center mb-4 border-b-2 pb-2 border-primary">
+            <h1 class="text-2xl font-bold text-gray-900 dark-mode:text-gray-50 mb-0 elegant-title">
+                AI English Teacher
+            </h1>
+            <div class="text-right">
+                <span class="text-sm font-semibold text-gray-600 dark-mode:text-gray-400">Score: </span>
+                <span id="userScore" class="text-xl font-bold text-primary">0</span>
+            </div>
+        </div>
+        
+        <!-- Target Language Switch (English/Hindi) -->
+        <div class="mb-4 p-3 bg-gray-100 dark-mode:bg-gray-700 rounded-xl flex justify-around space-x-2" id="targetLangSwitch">
+            <p id="targetLangPrompt" class="text-sm font-medium text-gray-800 dark-mode:text-gray-200 telugu-text self-center">మీరు ఏ భాష ప్రాక్టీస్ చేయాలనుకుంటున్నారు?</p>
+            <button data-target="english" class="flex-1 py-1 px-3 rounded-full bg-primary text-white font-bold text-sm ripple-btn">
+                English
+            </button>
+            <button data-target="hindi" class="flex-1 py-1 px-3 rounded-full bg-gray-300 dark-mode:bg-gray-600 text-gray-800 dark-mode:text-gray-200 font-bold text-sm ripple-btn">
+                हिंदी
+            </button>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="flex justify-around border-b border-gray-300 dark-mode:border-gray-700 mb-4">
+            <button data-view="home" class="nav-button active p-3 flex-1 text-sm font-bold ripple-btn">Home</button>
+            <button data-view="lessons" class="nav-button p-3 flex-1 text-sm font-bold ripple-btn">Lessons</button>
+            <button data-view="quiz" class="nav-button p-3 flex-1 text-sm font-bold ripple-btn">Quiz</button>
+            <button data-view="practice" class="nav-button p-3 flex-1 text-sm font-bold ripple-btn">Practice (AI)</button>
+        </div>
+
+        <!-- --- VIEW: HOME (Word of the Day / Progress) --- -->
+        <div id="view-home" class="view active space-y-4">
+            <h2 class="text-xl font-bold text-primary elegant-title">Daily Focus</h2>
+
+            <!-- Word of the Day -->
+            <div class="frosted-option p-4 rounded-xl shadow-md border-primary/20">
+                <div class="flex justify-between items-center mb-2 border-b pb-2 border-gray-300 dark-mode:border-gray-700">
+                    <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200">Word of the Day</h3>
+                    <button onclick="window.speakDailyWord()" class="ripple-btn p-2 rounded-full text-primary hover:bg-primary/20" aria-label="Speak word">
+                         <!-- Speaker icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11v2m-5-2v2m-2-2v2m-2-2v2m-4-2h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </button>
+                </div>
+                <p id="daily-word-en" class="text-2xl font-extrabold text-primary mb-1">Enthusiastic</p>
+                <p id="daily-word-te" class="text-base telugu-text text-gray-700 dark-mode:text-gray-300">ఉత్సాహంగా</p>
+                <p class="text-sm mt-3 text-gray-600 dark-mode:text-gray-400">Example: <span id="daily-word-example">"She was **enthusiastic** about starting her new language app."</span></p>
+            </div>
+            
+            <!-- Progress Tracker -->
+            <div class="frosted-option p-4 rounded-xl shadow-md border-primary/20">
+                <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 mb-2">My Progress</h3>
+                <p id="progress-level" class="text-sm font-semibold text-gray-700 dark-mode:text-gray-300">Level: <span class="text-primary font-extrabold">Beginner</span></p>
+                <div class="w-full h-3 bg-gray-300 dark-mode:bg-gray-600 rounded-full mt-2">
+                    <div id="progress-bar-home" class="h-full rounded-full bg-primary" style="width: 25%;"></div>
+                </div>
+                <p id="progress-score" class="text-xs text-right mt-1 text-gray-600 dark-mode:text-gray-400">0 Points (25% to next level)</p>
+            </div>
+        </div>
+
+        <!-- --- VIEW: LESSONS (Daily Lessons) --- -->
+        <div id="view-lessons" class="view space-y-4">
+            <h2 class="text-xl font-bold text-primary elegant-title">Daily Lessons</h2>
+            <div class="text-sm text-gray-600 dark-mode:text-gray-400 p-2 telugu-text">
+                <p>ప్రతి రోజు కొత్త పాఠాలు ఇక్కడ అప్‌డేట్ అవుతాయి.</p>
+            </div>
+
+            <div class="frosted-option p-4 rounded-xl space-y-3">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl text-green-500">📝</span>
+                    <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200">Lesson 1: Basic Greetings</h3>
+                </div>
+                <p class="text-sm text-gray-700 dark-mode:text-gray-300">Learn "Hello," "How are you," and "Thank you" in English and Hindi.</p>
+                <button class="play-button ripple-btn bg-green-600 hover:bg-green-700 shadow-green-500/50 w-full py-2">
+                    Start Lesson
+                </button>
+            </div>
+             <div class="frosted-option p-4 rounded-xl space-y-3">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl text-yellow-500">🗓️</span>
+                    <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200">Lesson 2: Days of the Week</h3>
+                </div>
+                <p class="text-sm text-gray-700 dark-mode:text-gray-300">Practice days and simple time phrases. (Week days practice)</p>
+                <button class="play-button ripple-btn bg-yellow-600 hover:bg-yellow-700 shadow-yellow-500/50 w-full py-2">
+                    Start Lesson
+                </button>
+            </div>
+        </div>
+
+        <!-- --- VIEW: QUIZ (Interactive Quiz / Translation Practice) --- -->
+        <div id="view-quiz" class="view space-y-4">
+            <h2 class="text-xl font-bold text-primary elegant-title">Interactive Challenge</h2>
+
+            <!-- Quick Quiz -->
+            <div class="frosted-option p-4 rounded-xl shadow-md border-primary/20">
+                <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 mb-2">Quick Quiz (English to Telugu)</h3>
+                <p id="quiz-question" class="text-base text-gray-700 dark-mode:text-gray-300 mb-3">Telugu translation for: **'I want water.'**</p>
+                <input type="text" id="quizInput" class="w-full p-3 border-2 border-gray-300 focus:ring-primary-hex focus:border-primary-hex" placeholder="మీ జవాబును టైప్ చేయండి...">
+                <button onclick="window.checkQuizAnswer()" class="play-button ripple-btn w-full py-2 bg-primary mt-3">
+                    Check Answer
+                </button>
+                <p id="quiz-feedback" class="text-sm mt-2 font-semibold hidden"></p>
+            </div>
+
+            <!-- Translation Practice -->
+            <div class="frosted-option p-4 rounded-xl shadow-md border-primary/20">
+                <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 mb-2">Telugu-English Translation</h3>
+                <p class="text-base text-gray-700 dark-mode:text-gray-300 mb-3 telugu-text">నాకు కాఫీ తాగాలని ఉంది.</p>
+                <button class="play-button ripple-btn w-full py-2 bg-teal-600 hover:bg-teal-700 shadow-teal-500/50">
+                    Practice Translation (Start)
+                </button>
+            </div>
+        </div>
+
+        <!-- --- VIEW: PRACTICE (AI Chat / Role-Play) --- -->
+        <div id="view-practice" class="view space-y-4">
+            
+            <h2 class="text-xl font-bold text-primary elegant-title telugu-text" id="aiCoachTitle">
+                AI ఇంగ్లీష్ టీచర్
+            </h2>
+            
+            <!-- Chat Display Box -->
+            <div class="chat-container mb-4">
+                <div id="chatBox" class="chat-box p-3 flex flex-col space-y-3">
+                    <!-- Initial message will be injected here -->
+                </div>
+            </div>
+            
+            <!-- Chat Input and Send Button with Mic -->
+            <div class="flex">
+                <button id="micBtn" class="p-3 bg-rose-600 text-white font-bold hover:bg-rose-700 transition duration-150 shadow-md flex items-center justify-center rounded-l-xl disabled:opacity-50 ripple-btn" aria-label="Speak">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.45-3c0 3.12-2.53 5.75-5.5 5.95V20h-1v-2.05c-2.97-.2-5.5-2.83-5.5-5.95H5v-2h2c0 3.09 2.41 5.66 5.5 5.95V20h1v-2.05c3.09-.29 5.5-2.86 5.5-5.95h2v-2h-2z"/>
+                    </svg>
+                </button>
+                <input type="text" id="chatInput" class="flex-grow p-3 border-y-2 border-r-0 border-l-0 border-gray-300 focus:ring-primary-hex focus:border-primary-hex" placeholder="Speak or Type your response...">
+                <button id="sendChatBtn" class="p-3 bg-primary text-white font-bold rounded-r-xl hover:opacity-90 transition duration-150 shadow-md flex items-center justify-center disabled:opacity-50 ripple-btn" aria-label="Send">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </button>
+            </div>
+            <div id="aiLoading" class="mt-2 text-sm text-primary-hex hidden telugu-text">కోచ్ సమాధానం కోసం వేచి ఉంది...</div>
+
+            <!-- Role-Play Section -->
+            <div class="mt-4 pt-4 border-t border-gray-300 dark-mode:border-gray-700">
+                <h3 class="text-lg font-bold text-gray-800 dark-mode:text-gray-200 mb-2">Role-Play Conversation</h3>
+                <p class="text-sm text-gray-600 dark-mode:text-gray-400 mb-3 telugu-text">ఒక రెస్టారెంట్‌లో ఆహారం ఆర్డర్ చేయడానికి ప్రాక్టీస్ చేయండి.</p>
+                <button class="play-button ripple-btn w-full py-2 bg-amber-600 hover:bg-amber-700 shadow-amber-500/50">
+                    Start Role-Play
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SETTINGS MODAL (COPIED from your game files for consistency) -->
+    <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+        <div class="liquid-glass-card w-full max-w-sm p-6 overflow-y-auto max-h-[90vh]">
+            <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">App Settings</h2>
+
+            <div class="bg-blue-100 dark-mode:bg-blue-900/40 border border-blue-400 text-blue-800 dark-mode:text-blue-200 text-sm p-3 rounded-xl mb-4">
+                <p class="font-semibold">All settings are saved automatically to this device only.</p>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3">Color Accent</h3>
+                <div class="grid grid-cols-5 gap-2">
+                    <button onclick="setThemeColor('indigo')" data-color-id="indigo" class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-indigo-600 hover:opacity-90 text-sm">Indigo</button>
+                    <button onclick="setThemeColor('teal')" data-color-id="teal" class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-teal-600 hover:opacity-90 text-sm">Teal</button>
+                    <button onclick="setThemeColor('rose')" data-color-id="rose" class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-rose-600 hover:opacity-90 text-sm">Rose</button>
+                    <button onclick="setThemeColor('amber')" data-color-id="amber" class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-amber-600 hover:opacity-90 text-sm">Amber</button>
+                    <button onclick="setThemeColor('emerald')" data-color-id="emerald" class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-emerald-600 hover:opacity-90 text-sm">Emerald</button>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Theme Mode</h3>
+                <div class="flex space-x-4">
+                    <button onclick="setThemeMode('light')" data-mode-id="light" id="mode-light" class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 hover:bg-opacity-80 transition duration-150">Light</button>
+                    <button onclick="setThemeMode('dark')" data-mode-id="dark" id="mode-dark" class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 hover:bg-opacity-80 transition duration-150">Dark</button>
+                </div>
+            </div>
+
+             <!-- TTS/AI Chat Toggles (Specific to this app) -->
+            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">AI Chat Settings</h3>
+                <div class="flex flex-col space-y-2">
+                    <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
+                        <input type="checkbox" id="toggle-ai-voice" onclick="toggleAiVoice()" 
+                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-600 transition duration-150 focus:ring-primary-hex">
+                        <span class="text-gray-700 dark-mode:text-gray-300">Disable AI Voice Feedback (TTS)</span>
+                    </label>
+                </div>
+            </div>
+            
+             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Display & Feedback</h3>
+                <div class="flex flex-col space-y-2">
+                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
+                        <input type="checkbox" id="toggle-audio" onclick="toggleAudio()" 
+                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-600 transition duration-150 focus:ring-primary-hex">
+                        <span class="text-gray-700 dark-mode:text-gray-300">Disable Sound Effects</span>
+                    </label>
+                    <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
+                        <input type="checkbox" id="toggle-haptics" onclick="toggleHaptics()" 
+                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-600 transition duration-150 focus:ring-primary-hex">
+                        <span class="text-gray-700 dark-mode:text-gray-300">Disable Vibration (Haptics)</span>
+                    </label>
+                </div>
+            </div>
+
+            <button onclick="handleUiTapFeedback(); closeSettings()"
+                    class="ripple-btn mt-8 w-full py-3 bg-gray-500 text-white font-bold rounded-xl hover:bg-gray-600 transition duration-150">
+                Close Settings
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        // --- Configuration Keys (Match your existing game files) ---
+        const SETTINGS_KEY_VERB = 'quizSettings'; 
+        const SETTINGS_KEY_VOCAB = 'vocabQuizSettings'; 
+        const DARK_CLASS = 'dark-mode';
+
+        // --- State and Variables ---
+        let currentLang = 'te'; 
+        let targetLang = 'english'; 
+        let currentView = 'home';
+        let userProgress = { score: 0, level: 1 };
+        let chatHistory = [];
+        
+        // --- Dummy Data for Gamified Features ---
+        const dummyQuizAnswer = "నాకు నీరు కావాలి"; 
+
+        const updateLevelText = (score) => {
+            if (score < 100) return { name: "Beginner", percentage: score, max: 100 };
+            if (score < 300) return { name: "Intermediate", percentage: score - 100, max: 200 };
+            return { name: "Advanced", percentage: score - 300, max: 500 };
+        };
+        
+        // --- UI Text Translations ---
+        const Translations = {
+            te: {
+                appTitle: "AI ఇంగ్లీష్ టీచర్", scoreLabel: "స్కోర్:", 
+                aiInitialMessage: "హలో! నేను మీ AI టీచర్ ని. మనం **English** లో ప్రాక్టీస్ చేద్దాం! ఈ రోజు మీరు ఏ విషయం గురించి మాట్లాడాలనుకుంటున్నారు?",
+                aiInputPlaceholder: "ఇంగ్లీష్‌లో మాట్లాడండి లేదా టైప్ చేయండి...",
+                aiWaiting: "టీచర్ సమాధానం కోసం వేచి ఉంది...", targetLangPrompt: "మీరు ఏ భాష ప్రాక్టీస్ చేయాలనుకుంటున్నారు?",
+                aiError: "క్షమించండి, AI కి కనెక్ట్ కాలేకపోయాను. దయచేసి మళ్లీ ప్రయత్నించండి.",
+                aiConnectionError: "ఇంటర్నెట్ కనెక్షన్ సమస్య. దయచేసి మీ నెట్‌వర్క్‌ను తనిఖీ చేయండి.",
+                quizCorrect: "సరైన సమాధానం! 20 పాయింట్లు లభించాయి.",
+                quizIncorrect: "తప్పు సమాధానం. సరైనది: ",
+            },
+            en: {
+                appTitle: "AI English Teacher", scoreLabel: "Score:",
+                aiInitialMessage: "Hello! I'm your AI Teacher. Let's practice **English**! What topic would you like to discuss today?",
+                aiInputPlaceholder: "Speak or Type your response...",
+                aiWaiting: "Waiting for the teacher's response...",
+                targetLangPrompt: "Which language do you want to practice?",
+                quizCorrect: "Correct Answer! You earned 20 points.",
+                quizIncorrect: "Incorrect Answer. The correct answer is: ",
+            },
+            hi: {
+                appTitle: "एआई अंग्रेजी शिक्षक", scoreLabel: "स्कोर:",
+                aiInitialMessage: "नमस्ते! मैं आपकी एआई टीचर हूँ। आइए **English** में अभ्यास करें! आज आप किस विषय पर बात करना चाहेंगे?",
+                aiInputPlaceholder: "हिंदी या अंग्रेजी में बोलें...",
+                aiWaiting: "टीचर के जवाब का इंतज़ार है...",
+                targetLangPrompt: "आप किस भाषा का अभ्यास करना चाहते हैं?",
+                quizCorrect: "सही जवाब! आपने 20 अंक अर्जित किए।",
+                quizIncorrect: "गलत जवाब। सही उत्तर है: ",
+            }
+        };
+
+        // --- Gemini AI System Instructions ---
+        const AI_SYSTEM_INSTRUCTION = (target) => {
+            const teluguGuide = target === 'english' ? 'మీరు చేసే ప్రతి ఇంగ్లీష్ వాక్యం తర్వాత, దానిని మెరుగుపరిచి, సరైన గ్రామర్, పదం మరియు వాక్య నిర్మాణాన్ని తెలియజేయండి. ఫీడ్‌బ్యాక్ తర్వాత మాత్రమే తదుపరి సంభాషణను English లో కొనసాగించండి.' : 'మీరు చేసే ప్రతి హిందీ వాక్యం తర్వాత, దానిని మెరుగుపరిచి, సరైన గ్రామర్, పదం మరియు వాక్య నిర్మాణాన్ని తెలియజేయండి. ఫీడ్‌బ్యాక్ తర్వాత మాత్రమే తదుపరి సంభాషణను Hindi లో కొనసాగించండి.';
+            const langName = target === 'english' ? 'English' : 'Hindi (हिंदी)';
+
+            return `You are an expert, friendly AI language coach named **AI English Teacher**. Your user is a native Telugu speaker and is currently focused on learning **${langName}**.
+            
+            Your primary role is to act as a **personal conversational tutor** for ${langName}, providing real-time feedback and coaching.
+
+            Your goals are:
+            1. Maintain an engaging conversation, primarily in **${langName}**.
+            2. Respond in **${langName}**, but use Telugu for encouragement and clarity.
+            3. **CRITICAL: After every user response, provide explicit and constructive feedback.** This feedback must include:
+               - A clear correction of any grammar, spelling, or vocabulary errors.
+               - An improved, natural-sounding version of the user's sentence (The target output).
+               - A quick, positive coaching tip related to their usage.
+            4. Do NOT use markdown formatting (like **bold** or bullet points) in your response, keep the output conversational and easy to read.
+            5. Telugu Instruction: ${teluguGuide}
+            6. Encourage the user to continue the dialogue or start a new topic. **Your responses should be engaging and short to simulate a real conversation.**`;
+        };
+        
+        // --- Utility Functions (Theme, Audio, Haptics) ---
+        
+        // Local Storage Functions (Adapted to check both keys)
+        const getLocalStorageSetting = (key, defaultValue) => {
+             // ... (Local Storage logic copied from the previous file is still here)
+             try {
+                let settings = {};
+                let foundValue = undefined;
+
+                const settingsStringVocab = localStorage.getItem(SETTINGS_KEY_VOCAB);
+                const settingsStringVerb = localStorage.getItem(SETTINGS_KEY_VERB);
+
+                if (settingsStringVocab) {
+                    settings = JSON.parse(settingsStringVocab);
+                    if (typeof settings[key] !== 'undefined') foundValue = settings[key];
+                }
+
+                if (typeof foundValue === 'undefined' && settingsStringVerb) {
+                    settings = JSON.parse(settingsStringVerb);
+                    if (typeof settings[key] !== 'undefined') foundValue = settings[key];
+                }
+
+                if (typeof foundValue === 'undefined' || foundValue === null) {
+                    return defaultValue;
+                }
+                return foundValue;
+
+            } catch (e) {
+                console.error(`Error loading local setting key ${key}:`, e);
+                return defaultValue;
+            }
+        };
+
+        const saveLocalStorageSetting = (key, value) => {
+            // ... (Local Storage save logic copied from the previous file is still here)
+             try {
+                const keysToUpdate = [SETTINGS_KEY_VERB, SETTINGS_KEY_VOCAB];
+
+                keysToUpdate.forEach(storageKey => {
+                    const settingsString = localStorage.getItem(storageKey);
+                    let settings = settingsString ? JSON.parse(settingsString) : {};
+                    settings[key] = value;
+                    localStorage.setItem(storageKey, JSON.stringify(settings));
+                });
+                
+            } catch (e) {
+                console.error(`Error saving local setting key ${key}:`, e);
+            }
+        }
+        
+        // Audio/Haptics Setup
+        let correctSynth, incorrectSynth;
+        const setupAudio = () => {
+            // Use Tone.js only if it's available (better sound quality)
+            if (typeof Tone !== 'undefined') {
+                correctSynth = new Tone.MembraneSynth().toDestination();
+                incorrectSynth = new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.005, decay: 0.1, sustain: 0 } }).toDestination();
+            }
+        }
+        
+        const playCorrect = () => { 
+            const disableSound = getLocalStorageSetting('disableSound', false);
+            if (disableSound) return;
+            if (correctSynth) { Tone.context.resume().then(() => { correctSynth.triggerAttackRelease("G5", "8n"); }); } 
+        };
+        const playIncorrect = () => { 
+            const disableSound = getLocalStorageSetting('disableSound', false);
+            if (disableSound) return;
+            if (incorrectSynth) { Tone.context.resume().then(() => { incorrectSynth.triggerAttackRelease("16n"); }); }
+        };
+        const vibrateClick = () => { 
+            const disableVibration = getLocalStorageSetting('disableVibration', false);
+            if (!disableVibration && navigator.vibrate) { navigator.vibrate(30); } 
+        };
+        window.handleUiTapFeedback = function() {
+            vibrateClick();
+        }
+
+        // TTS Speaker
+        const speakText = (text, lang) => {
+            const disableVoice = getLocalStorageSetting('disableAiVoice', false);
+            if (disableVoice || !('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang === 'english' ? 'en-US' : 'hi-IN';
+            
+            const voices = window.speechSynthesis.getVoices();
+            const selectedVoice = voices.find(v => v.lang.startsWith(lang === 'english' ? 'en' : 'hi')) || voices[0];
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+            }
+            
+            window.speechSynthesis.speak(utterance);
+        };
+        
+        // Theme Application Functions (Must be defined globally for the app)
+        function applyInputStyles() {
+             // (Input styles copied here)
+             const style = getLocalStorageSetting('inputStyle', 'rounded');
+            const root = document.documentElement.style;
+            if (style === 'square') {
+                root.setProperty('--input-border-radius', '0.5rem'); 
+                root.setProperty('--input-shadow', '0 2px 4px rgba(0,0,0,0.1)');
+            } else { 
+                root.setProperty('--input-border-radius', '1.5rem'); 
+                root.setProperty('--input-shadow', '0 4px 6px rgba(0,0,0,0.05)');
+            }
+            const inputs = document.querySelectorAll('input[type="text"], textarea');
+            inputs.forEach(input => {
+                input.style.borderRadius = `var(--input-border-radius)`;
+                input.style.boxShadow = `var(--input-shadow)`;
+            });
+        }
+        window.setBodyFont = function(font) {
+            const fallback = font.includes('serif') ? 'serif' : 'sans-serif';
+            document.documentElement.style.setProperty('--font-body', `"${font}", ${fallback}`);
+        }
+        window.setTitleFont = function(font) {
+            const fallback = font.includes('serif') ? 'serif' : 'sans-serif'; 
+            document.documentElement.style.setProperty('--font-title', `"${font}", ${fallback}`);
+        }
+        function applyTheme(isDark) {
+             // (Theme application logic copied here)
+             const color = getLocalStorageSetting('color', 'indigo');
+            const contrast = getLocalStorageSetting('contrast', 'default');
+            const textHue = getLocalStorageSetting('textHue', false);
+            const bodyFont = getLocalStorageSetting('bodyFont', 'Inter');
+            const titleFont = getLocalStorageSetting('titleFont', 'Lora');
+            
+            const body = document.body;
+            body.setAttribute('data-color', color);
+            body.setAttribute('data-contrast', contrast);
+            body.setAttribute('data-text-hue', textHue ? 'themed' : 'default');
+
+            if (isDark) {
+                body.classList.add(DARK_CLASS);
+            } else {
+                body.classList.remove(DARK_CLASS);
+            }
+            
+            window.setBodyFont(bodyFont);
+            window.setTitleFont(titleFont);
+            applyInputStyles();
+        }
+        
+        // --- UI Update & Navigation ---
+        
+        const updateUI = () => {
+            const langData = Translations[currentLang];
+            document.querySelector('#app-container h1').textContent = langData.appTitle;
+            document.querySelector('#aiCoachTitle').textContent = langData.aiCoachTitle;
+            document.getElementById('targetLangPrompt').textContent = langData.targetLangPrompt;
+            document.getElementById('aiLoading').textContent = langData.aiWaiting;
+            
+            // Update input placeholder based on currentLang
+            let placeholderText = Translations[currentLang].aiInputPlaceholder;
+            if (currentLang === 'te') {
+                 placeholderText = targetLang === 'english' ? "ఇంగ్లీష్‌లో మాట్లాడండి లేదా టైప్ చేయండి..." : "హిందీలో మాట్లాడండి లేదా టైప్ చేయండి...";
+            }
+            document.getElementById('chatInput').placeholder = placeholderText;
+
+            // Update visible view
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById(`view-${currentView}`).classList.add('active');
+            
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                 btn.classList.remove('active');
+            });
+            document.querySelector(`.nav-button[data-view="${currentView}"]`).classList.add('active');
+
+            // Rerender initial message/focus if needed
+            if (currentView === 'practice' && chatHistory.length === 0) {
+                 renderInitialAiMessage();
+            }
+            if (currentView === 'practice') {
+                 document.getElementById('chatInput').focus();
+            }
+        };
+
+        const changeView = (viewName) => {
+            if (currentView === viewName) return;
+            currentView = viewName;
+            updateUI();
+        };
+
+        const switchTargetLanguage = (newTarget) => {
+            if (targetLang === newTarget) return;
+            targetLang = newTarget;
+            
+            document.querySelectorAll('#targetLangSwitch button').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('bg-gray-300', 'dark-mode:bg-gray-600', 'text-gray-800', 'dark-mode:text-gray-200');
+            });
+            document.querySelector(`button[data-target="${newTarget}"]`).classList.add('bg-primary', 'text-white');
+            document.querySelector(`button[data-target="${newTarget}"]`).classList.remove('bg-gray-300', 'dark-mode:bg-gray-600', 'text-gray-800', 'dark-mode:text-gray-200');
+
+            // Reset chat history when target language changes
+            chatHistory = [];
+            renderInitialAiMessage();
+            updateUI();
+        };
+
+        // --- Progress and Firestore ---
+        
+        const updateProgressBarUI = () => {
+            const progress = updateLevelText(userProgress.score);
+            const levelEl = document.getElementById('progress-level');
+            const scoreEl = document.getElementById('progress-score');
+            const barEl = document.getElementById('progress-bar-home');
+            const totalScoreEl = document.getElementById('userScore');
+            
+            totalScoreEl.textContent = userProgress.score;
+            levelEl.innerHTML = `Level: <span class="text-primary font-extrabold">${progress.name}</span>`;
+
+            let percent = 0;
+            if (progress.max > 0) {
+                 percent = (progress.percentage / progress.max) * 100;
+            }
+            
+            barEl.style.width = `${percent}%`;
+            scoreEl.textContent = `${userProgress.score} Points (${percent.toFixed(0)}% to ${progress.name === 'Beginner' ? 'Intermediate' : 'Advanced'})`;
+        };
+
+        const updateScoreDisplay = async (oldScore) => {
+            if (!window.app.db || !window.app.userId) {
+                userProgress.score = Math.max(0, userProgress.score); // Ensure score >= 0
+                updateProgressBarUI();
+                return;
+            }
+
+            const progressRef = doc(window.app.db, 
+                'artifacts', window.app.appId, 
+                'users', window.app.userId, 
+                'language_app_data', 'progress'
+            );
+
+            try {
+                await setDoc(progressRef, userProgress, { merge: true });
+                updateProgressBarUI();
+                if (userProgress.score > oldScore) {
+                     playCorrect(); 
+                }
+            } catch (error) {
+                console.error("Error saving progress:", error);
+            }
+        };
+        
+        const setupProgressListener = () => {
+             if (!window.app.db || !window.app.userId) {
+                updateProgressBarUI();
+                return;
+            }
+
+            const progressRef = doc(window.app.db, 
+                'artifacts', window.app.appId, 
+                'users', window.app.userId, 
+                'language_app_data', 'progress'
+            );
+
+            onSnapshot(progressRef, (docSnap) => {
+                const oldScore = userProgress.score;
+                if (docSnap.exists()) {
+                    userProgress = docSnap.data();
+                } else {
+                    userProgress = { score: 0, level: 1 };
+                    updateScoreDisplay(0); // Initialize Firestore record
+                }
+                updateProgressBarUI();
+            }, (error) => {
+                console.error("Error listening to progress:", error);
+            });
+        };
+        
+        // --- Chat Functions ---
+
+        const renderMessage = (role, text) => {
+            const chatBox = document.getElementById('chatBox');
+            const msgDiv = document.createElement('div');
+            
+            // AI Response processing
+            let displayText = text;
+            let feedback = '';
+            let teluguTip = '';
+
+            if (role === 'ai') {
+                // Simple parsing logic: assume corrected sentence is first, then Telugu tip
+                const parts = text.split('.');
+                const correctionIndex = parts.findIndex(p => p.toLowerCase().includes('corrected') || p.toLowerCase().includes('improved'));
+
+                if (correctionIndex !== -1) {
+                    feedback = `<span class="ai-feedback">Correction: ${parts[correctionIndex].trim()}.</span>`;
+                    
+                    // Remove the correction part from the display text
+                    displayText = parts.slice(0, correctionIndex).join('.') + (parts.slice(correctionIndex + 1).join('.'));
+                    
+                    // Attempt to extract Telugu tip (if present, usually near the end)
+                    const teluguMatch = displayText.match(/(మీరు చెప్పే|మీరు మాట్లాడే)/i);
+                    if (teluguMatch) {
+                        teluguTip = `<span class="telugu-tip">${teluguMatch.input.substring(teluguMatch.index)}</span>`;
+                        displayText = displayText.substring(0, teluguMatch.index).trim();
+                    }
+                }
+            }
+            
+            msgDiv.className = `p-3 shadow-md text-sm mb-2 transition-all duration-300 ${role === 'user' ? 'chat-user-message ml-auto' : 'chat-ai-message mr-auto'}`;
+            msgDiv.innerHTML = displayText.replace(/\n/g, '<br>') + feedback + teluguTip;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            if (role === 'ai') {
+                const englishText = extractTargetLanguageForSpeaking(text, targetLang);
+                speakText(englishText, targetLang);
+            }
+        };
+        
+        const extractTargetLanguageForSpeaking = (fullText, target) => {
+            // Updated heuristic to look for the corrected sentence first
+            const langCode = target === 'english' ? 'English' : 'Hindi';
+            const match = fullText.match(new RegExp(`Corrected ${langCode}:\\s*(.*?)(?=\\.|\\n|$)`, 'i'));
+            if (match && match[1]) {
+                return match[1].trim();
+            }
+            // Fallback: If no explicit correction, try to find the main conversation text
+            const conversationMatch = fullText.match(/(\w[\w\s,']{15,}[\.!?])/); 
+            if (conversationMatch) {
+                 return conversationMatch[1].trim();
+            }
+            return fullText;
+        };
+
+        const renderInitialAiMessage = () => {
+             const chatBox = document.getElementById('chatBox');
+             chatBox.innerHTML = '';
+             chatHistory = [];
+             
+             let initialMsg = Translations[currentLang].aiInitialMessage;
+             renderMessage('ai', initialMsg);
+             chatHistory.push({ role: 'ai', text: initialMsg });
+        };
+        
+        // --- Gemini API Handler ---
+        const geminiApiCall = async (history, systemInstruction, maxRetries = 3) => {
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            const contents = history.map(msg => ({
+                role: msg.role === 'ai' ? 'model' : 'user',
+                parts: [{ text: msg.text }]
+            }));
+
+            const payload = {
+                contents: contents,
+                systemInstruction: {
+                    parts: [{ text: systemInstruction(targetLang) }]
+                },
+            };
+
+            for (let attempt = 0; attempt < maxRetries; attempt++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 429 && attempt < maxRetries - 1) {
+                            const delay = Math.pow(2, attempt) * 1000;
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            continue;
+                        }
+                        throw new Error(`API request failed with status ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || Translations[currentLang].aiError;
+                    return text;
+
+                } catch (error) {
+                    console.error("Gemini API Error:", error);
+                    if (attempt === maxRetries - 1) {
+                        return Translations[currentLang].aiConnectionError;
+                    }
+                }
+            }
+            return Translations[currentLang].aiError;
+        };
+
+        const sendConversationMessage = async () => {
+            const chatInput = document.getElementById('chatInput');
+            const sendChatBtn = document.getElementById('sendChatBtn');
+            const micBtn = document.getElementById('micBtn');
+            const aiLoading = document.getElementById('aiLoading');
+
+            const userText = chatInput.value.trim();
+            if (userText === '') return;
+            
+            handleUiTapFeedback(); 
+
+            renderMessage('user', userText);
+            chatInput.value = '';
+            
+            chatHistory.push({ role: 'user', text: userText });
+
+            aiLoading.classList.remove('hidden');
+            sendChatBtn.disabled = true;
+            micBtn.disabled = true;
+            chatInput.disabled = true;
+
+            const aiResponse = await geminiApiCall(chatHistory, AI_SYSTEM_INSTRUCTION);
+
+            aiLoading.classList.add('hidden');
+            sendChatBtn.disabled = false;
+            micBtn.disabled = false;
+            chatInput.disabled = false;
+            chatInput.focus();
+
+            renderMessage('ai', aiResponse);
+            chatHistory.push({ role: 'ai', text: aiResponse });
+
+            if (userText.length > 5) {
+                const oldScore = userProgress.score;
+                userProgress.score += 5;
+                updateScoreDisplay(oldScore);
+            }
+        };
+
+        // --- STT Logic (Mic Button) ---
+        let recognition = null;
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            
+            recognition.onstart = () => {
+                micBtn.classList.add('bg-yellow-500', 'animate-pulse');
+                chatInput.placeholder = "Listening... Speak now!";
+                micBtn.disabled = true; 
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                chatInput.value = transcript;
+                sendConversationMessage(); 
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                micBtn.classList.remove('bg-yellow-500', 'animate-pulse');
+                chatInput.placeholder = Translations[currentLang].aiInputPlaceholder;
+                micBtn.disabled = false;
+            };
+
+            recognition.onend = () => {
+                micBtn.classList.remove('bg-yellow-500', 'animate-pulse');
+                chatInput.placeholder = Translations[currentLang].aiInputPlaceholder;
+                micBtn.disabled = false;
+            };
+            
+            micBtn.addEventListener('click', () => {
+                handleUiTapFeedback();
+                try {
+                    recognition.lang = targetLang === 'english' ? 'en-US' : 'hi-IN';
+                    recognition.start();
+                } catch (e) {
+                    console.error("Recognition already started or error:", e);
+                }
+            });
+        } else {
+            document.getElementById('micBtn').disabled = true;
+            document.getElementById('micBtn').style.backgroundColor = '#ccc';
+            document.getElementById('micBtn').title = "Speech recognition not supported by your browser.";
+        }
+        
+        // --- Gamified Feature Handlers ---
+        
+        window.speakDailyWord = () => {
+            handleUiTapFeedback();
+            const word = document.getElementById('daily-word-en').textContent;
+            speakText(word, 'english');
+        }
+        
+        window.checkQuizAnswer = async () => {
+            const input = document.getElementById('quizInput');
+            const feedback = document.getElementById('quiz-feedback');
+            const userAns = input.value.trim().toLowerCase();
+            const correctAns = dummyQuizAnswer.toLowerCase();
+            const langData = Translations[currentLang];
+            
+            input.disabled = true;
+            
+            if (userAns === correctAns) {
+                 feedback.textContent = langData.quizCorrect;
+                 feedback.className = 'text-sm mt-2 font-semibold text-green-600';
+                 feedback.classList.remove('hidden');
+                 
+                 const oldScore = userProgress.score;
+                 userProgress.score += 20;
+                 await updateScoreDisplay(oldScore);
+                 playCorrect();
+            } else {
+                feedback.textContent = langData.quizIncorrect + `'${dummyQuizAnswer}'`;
+                feedback.className = 'text-sm mt-2 font-semibold text-red-600';
+                feedback.classList.remove('hidden');
+                playIncorrect();
+            }
+            
+            // Simple delay before resetting the quiz question
+            setTimeout(() => {
+                input.value = '';
+                input.disabled = false;
+                feedback.classList.add('hidden');
+            }, 3000);
+        }
+
+        // --- Event Listeners and Initializers ---
+
+        document.getElementById('targetLangSwitch').addEventListener('click', (e) => {
+            if (e.target.dataset.target) {
+                handleUiTapFeedback();
+                switchTargetLanguage(e.target.dataset.target);
+            }
+        });
+
+        document.querySelectorAll('.nav-button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                handleUiTapFeedback();
+                changeView(e.target.dataset.view);
+            });
+        });
+
+        document.getElementById('sendChatBtn').addEventListener('click', sendConversationMessage);
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendConversationMessage();
+            }
+        });
+        
+        document.getElementById('app-container').addEventListener('click', (e) => {
+            if (e.target.closest('#app-container button:not(#micBtn)')) {
+                handleUiTapFeedback();
+            }
+        });
+
+        // --- Application Initialization ---
+
+        window.app.initApp = () => {
+            // Apply theme/font settings from PWA local storage
+            const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+            applyTheme(currentMode === 'dark');
+
+            // Set initial target language active state (English by default)
+            document.querySelector(`button[data-target="english"]`).classList.add('bg-primary', 'text-white');
+
+            updateUI();
+            setupProgressListener(); 
+            setupAudio();
+        };
+    </script>
+    
+    <!-- Floating Settings Button (Adapted to match your PWA styling) -->
+    <button onclick="handleUiTapFeedback(); openSettings()"
+        class="fixed bottom-4 right-4 p-4 bg-primary text-white rounded-full shadow-xl shadow-primary/50 hover:bg-opacity-90 transition duration-150 ripple-btn z-20"
+        title="Settings">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.599.345 1.35.424 1.576.471.226.047.608-.184.608-.431V6.26z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+    </button>
+</body>
+</html>
+
