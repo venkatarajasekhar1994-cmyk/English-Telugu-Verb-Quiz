@@ -1,11 +1,10 @@
 // service-worker.js
 
-// App Version: 1.0.1 (Fixed CSV parsing bug in Spoken English quiz)
-// CRITICAL: Cache version incremented to v18.
-// Every time you change a file that's cached (like your HTML pages or data),
-// you MUST increment this version number. This tells the browser to delete the old cache
-// and download the new files.
-const CACHE_NAME = 'my-pwa-cache-v18';
+// App Version: 1.0.3 (Robust CSV parsing)
+// CRITICAL: Cache version incremented to v19.
+// This new version number is ESSENTIAL to make sure browsers
+// download the fixed 'spoken english.html' file.
+const CACHE_NAME = 'my-pwa-cache-v19';
 
 // This is the list of all the files that will be saved for offline use.
 // This list matches all the files in your project.

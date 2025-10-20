@@ -10,7 +10,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
+                navigator.service-worker.register('/service-worker.js')
                     .then(registration => console.log('Service Worker registered: ', registration))
                     .catch(error => console.error('Service Worker registration failed: ', error));
             });
@@ -173,6 +173,7 @@
         <div id="final-results" class="hidden mt-8 text-center p-4"></div>
     </div>
 
+    <!-- HAMBURGER MENU AND MODALS (UNCHANGED) -->
     <div id="hamburger-menu" class="fixed top-0 right-0 h-full w-64 z-50 transform translate-x-full transition-transform duration-300 bg-white dark-mode:bg-gray-800 shadow-2xl p-6">
         <div class="flex justify-end"><button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button></div>
         <h3 class="text-xl font-bold mb-6 border-b pb-2 border-primary">Menu</h3>
@@ -288,20 +289,35 @@
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const csvText = await response.text();
                 const rows = csvText.trim().split('\n').slice(1);
+                
                 allQuestions = rows.map(row => {
-                    // --- THIS IS THE FIX YOU REQUESTED ---
-                    // This line skips any blank rows in the CSV
-                    if (row.trim() === '') return null;
-                    // --- END OF FIX ---
+                    // Skips any blank or empty-looking rows
+                    if (!row || row.trim() === '') {
+                        return null;
+                    }
+
+                    // --- THIS IS THE FIX ---
+                    // The 'match' can fail on malformed rows and return null.
+                    // This new code checks for that failure and skips the row if it happens.
+                    const columnsMatch = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+                    if (!columnsMatch) {
+                        console.warn('Skipping malformed CSV row:', row);
+                        return null; 
+                    }
                     
-                    const columns = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g).map(field => field.trim().replace(/^"|"$/g, '').trim());
-                    if (columns.length < 11) return null;
+                    const columns = columnsMatch.map(field => field.trim().replace(/^"|"$/g, '').trim());
+                    
+                    if (columns.length < 11) {
+                        console.warn('Skipping row with not enough columns:', row);
+                        return null;
+                    }
+
                     return {
                         lesson: columns[0], type: columns[1], promptEN: columns[2], promptTE: columns[3],
                         options: { A: columns[4], B: columns[5], C: columns[6], D: columns[7] },
                         correct: columns[8], feedbackEN: columns[9], feedbackTE: columns[10]
                     };
-                }).filter(q => q !== null);
+                }).filter(q => q !== null && q.lesson); // Also filter out any remaining nulls or questions without a lesson number
                 
                 isDataLoaded = true;
                 document.getElementById('start-quiz-button').disabled = false;
@@ -565,7 +581,7 @@
             document.querySelectorAll('.color-option').forEach(btn => { btn.classList.toggle('border-white', btn.dataset.colorId === color); btn.classList.toggle('border-4', btn.dataset.colorId === color); });
             document.querySelectorAll('[data-contrast-id], [data-style-id]').forEach(btn => { const isActive = (btn.dataset.contrastId === contrast) || (btn.dataset.styleId === inputStyle); btn.classList.toggle('ring-4', isActive); btn.classList.toggle('ring-primary-hex', isActive); });
             document.getElementById('toggle-audio').checked = disableSound;
-            document.getElementById('toggle-haptics').checked = disableVVibration;
+            document.getElementById('toggle-haptics').checked = disableVibration;
             document.getElementById('toggle-text-hue').checked = textHue;
             updateFontButton('body'); updateFontButton('title'); updateClassSelectionButton();
             updateQuizLengthButton();
@@ -634,3 +650,4 @@
     </script>
 </body>
 </html>
+
