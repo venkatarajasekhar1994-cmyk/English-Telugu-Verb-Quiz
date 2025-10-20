@@ -1,943 +1,390 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
-<html lang="en">
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en"> <!-- Removed 'dark' class, theme is now handled by JS -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Hub - Start Playing</title>
+    <title>English Learning Game Hub</title>
     
     <link rel="manifest" href="manifest.json">
     
     <script>
-        // Check for service worker support and register it
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/service-worker.js')
-                    .then(registration => {
-                        console.log('Service Worker registered: ', registration);
-                    })
-                    .catch(error => {
-                        console.error('Service Worker registration failed: ', error);
-                    });
+                    .then(registration => console.log('Service Worker registered: ', registration))
+                    .catch(error => console.error('Service Worker registration failed: ', error));
             });
         }
     </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
-        /* Import all available fonts for customization */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght==400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;400&family=Source+Sans+3:wght@400;700&display=swap');
+        /* FONT IMPORTS - Same as other game pages for consistency */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700;900&family=Source+Sans+3:wght@400;700&display=swap');
         
-        /* --- CSS Variables for Theme Management --- */
-        
-        /* Font Variables */
+        /* THEME VARIABLES - Added Light & Dark modes */
         :root {
-            --font-body: 'Inter', sans-serif;
-            --font-title: 'Lora', serif;
-            /* Input Variables (Defaults to 'rounded') */
-            --input-border-radius: 1.5rem; /* Ultra rounded default */
-            --input-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Soft shadow default */
-            /* Text Contrast Variables (Defaults to High Contrast for seamlessness) */
-            --text-color-light: #111827; /* Near black */
-            --text-color-dark: #f3f4f6; /* Near white */
-        }
-        
-        /* Default: Indigo */
-        :root,
-        body[data-color="indigo"] {
-            --color-primary: 79, 70, 229; /* Indigo 600 RGB */
-            --color-primary-hex: #4f46e5;
-            --color-primary-light: 165, 180, 252; /* Indigo 300 RGB */
-            --color-bg-light-start: #a78bfa;
-            --color-bg-light-mid: #818cf8;
-            --color-bg-light-end: #3b82f6;
-            --color-bg-dark-start: #1f2937;
-            --color-bg-dark-mid: #111827;
-            --color-bg-dark-end: #0f172a;
+            --background-start-light: #f3f4f6;
+            --background-end-light: #e5e7eb;
+            --card-background-light: rgba(255, 255, 255, 0.7);
+            --text-primary-light: #111827;
+            --text-secondary-light: #4b5563;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+
+            --background-start-dark: #111827;
+            --background-end-dark: #1f2937;
+            --card-background-dark: rgba(31, 41, 55, 0.7);
+            --text-primary-dark: #f9fafb;
+            --text-secondary-dark: #d1d5db;
+            --shadow-dark: rgba(0, 0, 0, 0.3);
+            
+            /* Default Accent Colors */
+            --primary-color: #6366f1;
+            --secondary-color: #818cf8;
+            --accent-color: #c4b5fd;
+            
+            /* Default to light mode variables */
+            --bg-start: var(--background-start-light);
+            --bg-end: var(--background-end-light);
+            --card-bg: var(--card-background-light);
+            --text-main: var(--text-primary-light);
+            --text-sub: var(--text-secondary-light);
+            --shadow-color: var(--shadow-light);
+
+            /* Default fonts */
+            --font-title: 'Montserrat', sans-serif;
+            --font-body: 'Poppins', sans-serif;
         }
 
-        /* Teal Theme */
-        body[data-color="teal"] {
-            --color-primary: 20, 184, 166; /* Teal 600 RGB */
-            --color-primary-hex: #14b8a6;
-            --color-primary-light: 94, 234, 212; /* Teal 300 RGB */
-            --color-bg-light-start: #2dd4bf;
-            --color-bg-light-mid: #5eead4;
-            --color-bg-light-end: #0d9488;
+        .dark-mode {
+            --bg-start: var(--background-start-dark);
+            --bg-end: var(--background-end-dark);
+            --card-bg: var(--card-background-dark);
+            --text-main: var(--text-primary-dark);
+            --text-sub: var(--text-secondary-dark);
+            --shadow-color: var(--shadow-dark);
         }
 
-        /* Rose Theme */
-        body[data-color="rose"] {
-            --color-primary: 225, 29, 72; /* Rose 600 RGB */
-            --color-primary-hex: #e11d48;
-            --color-primary-light: 251, 207, 232; /* Rose 300 RGB */
-            --color-bg-light-start: #fda4af;
-            --color-bg-light-mid: #f43f5e;
-            --color-bg-light-end: #e11d48;
-        }
+        .font-title { font-family: var(--font-title); }
+        .font-body { font-family: var(--font-body); }
 
-        /* Amber Theme (New) */
-        body[data-color="amber"] {
-            --color-primary: 245, 158, 11; /* Amber 600 RGB */
-            --color-primary-hex: #f59e0b;
-            --color-primary-light: 253, 230, 138; /* Amber 300 RGB */
-            --color-bg-light-start: #fcd34d;
-            --color-bg-light-mid: #f59e0b;
-            --color-bg-light-end: #fbbf24;
-        }
-        
-        /* Emerald Theme (New) */
-        body[data-color="emerald"] {
-            --color-primary: 5, 150, 105; /* Emerald 600 RGB */
-            --color-primary-hex: #059669;
-            --color-primary-light: 110, 231, 183; /* Emerald 300 RGB */
-            --color-bg-light-start: #34d399;
-            --color-bg-light-mid: #10b981;
-            --color-bg-light-end: #059669;
-        }
-        
-        /* --- Base Styles --- */
         body {
-            font-family: var(--font-body);
-            min-height: 100vh;
-            padding: 1rem;
-            color: var(--text-color-light); 
-            background: linear-gradient(135deg, var(--color-bg-light-start), var(--color-bg-light-mid), var(--color-bg-light-end));
-        }
-        
-        .elegant-title {
-            font-family: var(--font-title); 
-            font-weight: 700;
-            letter-spacing: 0.05em; 
-            color: #1e293b;
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            color: var(--text-main);
+            transition: background 0.5s ease, color 0.5s ease;
         }
 
-        /* Main Glass Card */
-        .liquid-glass-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(var(--color-primary-light), 0.35));
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 1.5rem;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            transition: all 0.3s ease;
-        }
-        
-        /* Frosted Glass Effect for Game Options */
-        .frosted-option {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: all 0.2s ease, transform 0.1s ease;
-        }
-        .frosted-option:hover {
-            background: rgba(255, 255, 255, 0.7);
-        }
-        .frosted-option:active {
-            transform: scale(0.98); 
-        }
-        
-        /* Custom styles for Game Cards in the Hub */
         .game-card {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(var(--color-primary), 0.3);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .game-card:hover {
-            box-shadow: 0 10px 20px rgba(var(--color-primary), 0.3);
-            transform: translateY(-2px) scale(1.02);
-            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px var(--shadow-color), 0 0 20px var(--accent-color);
         }
-        .game-card h2 {
-            font-family: var(--font-title);
-            color: var(--color-primary-hex);
-        }
-
-        /* Play Now Button Styling */
-        .play-button {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            margin-top: 0.75rem;
-            background-color: var(--color-primary-hex);
-            color: #ffffff;
-            font-weight: 700;
-            border-radius: 0.75rem; /* Large rounded corners */
-            box-shadow: 0 4px 10px rgba(var(--color-primary), 0.4);
-            transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-        .play-button:hover {
-            background-color: rgba(var(--color-primary), 0.9);
-            transform: translateY(-1px);
-        }
-        .play-button:active {
-            transform: scale(0.98);
-        }
-
-        /* Custom selector list items */
-        .selector-item {
-            cursor: pointer;
-            padding: 0.75rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(156, 163, 175, 0.3);
-            transition: all 0.2s ease, transform 0.1s ease;
-        }
-        .selector-item:last-child {
-            border-bottom: none;
-        }
-        .selector-item.selected {
-            background-color: rgba(var(--color-primary-light), 0.2);
-            font-weight: 600;
-        }
-        .selector-item:active { /* Subtle press animation */
-            transform: scale(0.98); 
+        .icon-circle {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         }
         
-        /* Custom radio circle */
-        .radio-circle {
-            width: 1.25rem;
-            height: 1.25rem;
-            border-radius: 50%;
-            border: 2px solid #9ca3af;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
-        }
-        .radio-circle.selected {
-            border-color: var(--color-primary-hex);
-        }
-        .radio-dot {
-            width: 0.75rem;
-            height: 0.75rem;
-            border-radius: 50%;
-            background-color: transparent;
-            transition: background-color 0.2s ease;
-        }
-        .radio-dot.selected {
-            background-color: var(--color-primary-hex);
-        }
-
-
-        
-        /* --- Liquid Glass Ripple Effect --- */
-        .ripple-btn {
-            position: relative;
-            overflow: hidden;
-            transform: translate3d(0, 0, 0); 
-            z-index: 1;
-        }
-
-        .ripple-btn::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 10.01%);
-            background-repeat: no-repeat;
-            background-position: 50%;
-            transform: scale(10, 10);
-            opacity: 0;
-            transition: transform 0.6s, opacity 0.8s;
-            border-radius: inherit; 
-            z-index: -1;
-        }
-
-        .ripple-btn:active::after {
-            transform: scale(0, 0);
-            opacity: 1;
-            transition: 0s;
-        }
-        
-        /* --- Dark Mode Styles --- */
-        .dark-mode {
-            background: linear-gradient(135deg, var(--color-bg-dark-start), var(--color-bg-dark-mid), var(--color-bg-dark-end)); 
-            color: var(--text-color-dark);
-        }
-
-        /* NEW: Themed Text Hue support in Dark Mode */
-        .dark-mode[data-text-hue="themed"] .text-gray-700,
-        .dark-mode[data-text-hue="themed"] .text-gray-800,
-        .dark-mode[data-text-hue="themed"] .text-gray-600 { 
-            color: var(--color-primary-light) !important; 
-        }
-
-        /* NEW: Dark mode contrast/input handling */
-        .dark-mode input[type="text"], .dark-mode textarea {
-            background-color: rgba(31, 41, 55, 0.6) !important;
-            color: var(--text-color-dark) !important; 
-            border-color: rgba(107, 114, 128, 0.4);
-            
-            border-radius: var(--input-border-radius); 
-            box-shadow: var(--input-shadow);
-        }
-        
-        .dark-mode .liquid-glass-card {
-            background: linear-gradient(135deg, rgba(55, 65, 81, 0.4), rgba(31, 41, 55, 0.5));
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); 
-        }
-
-        .dark-mode .frosted-option {
-            background: rgba(31, 41, 55, 0.6);
-            border: 1px solid rgba(107, 114, 128, 0.4);
-        }
-        .dark-mode .frosted-option:hover {
-            background: rgba(31, 41, 55, 0.8);
-        }
-        
-        .dark-mode .game-card {
-            background: rgba(31, 41, 55, 0.7);
-            border: 1px solid rgba(var(--color-primary), 0.2);
-        }
-        .dark-mode .game-card:hover {
-            box-shadow: 0 10px 20px rgba(var(--color-primary), 0.5);
-            transform: translateY(-2px) scale(1.02);
-            background: rgba(31, 41, 55, 0.9);
-        }
-
-        .dark-mode .play-button {
-            box-shadow: 0 4px 10px rgba(var(--color-primary), 0.8);
-        }
-        
-        .dark-mode .selector-item {
-             border-bottom: 1px solid rgba(107, 114, 128, 0.4);
-        }
-        .dark-mode .selector-item.selected {
-            background-color: rgba(var(--color-primary-light), 0.1);
-        }
-        .dark-mode .radio-circle {
-            border: 2px solid #6b7280;
-        }
-        .dark-mode .radio-dot.selected {
-            background-color: var(--color-primary-hex);
-        }
-
-
-        .dark-mode h1,
-        .dark-mode .elegant-title { color: #ffffff; }
-        
-        /* Set color variables for all text based on theme */
-        body:not(.dark-mode) .text-gray-700,
-        body:not(.dark-mode) .text-gray-800,
-        body:not(.dark-mode) .text-gray-600 { color: var(--text-color-light) !important; }
-        
-        .dark-mode[data-text-hue="default"] .text-gray-700,
-        .dark-mode[data-text-hue="default"] .text-gray-800,
-        .dark-mode[data-text-hue="default"] .text-gray-600 { color: var(--text-color-dark) !important; }
-
-        /* Modal styles */
-        .modal-overlay {
-            background-color: rgba(0, 0, 0, 0.7);
+        /* Modal Styles */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(5px);
         }
-        
-        .selection-modal-content {
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            animation: fadeIn 0.3s forwards; 
-            border-radius: 1.5rem; 
-            width: 90%; 
-            max-width: 400px;
-            margin-bottom: 5vh; 
-        }
-        
         .modal-content {
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            animation: fadeIn 0.3s;
+            background: linear-gradient(145deg, var(--bg-end), var(--bg-start));
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        .setting-btn {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.2s;
+        }
+        .setting-btn:hover {
+             background-color: rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
-<body class="min-h-screen p-4 flex flex-col items-center">
+<body class="font-body antialiased">
 
-    <div id="hub-container" class="w-full max-w-xl liquid-glass-card p-6 md:p-8 my-8">
-        
-        <!-- HEADER: Removed Home Link -->
-        <div class="flex justify-between items-center mb-6 border-b-2 pb-2 border-primary">
-            
-            <div class="flex items-center space-x-3"> 
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark-mode:text-gray-50 mb-0 elegant-title">
-                    GAME HUB
-                </h1>
-            </div>
-            
+    <div class="min-h-screen w-full p-4 sm:p-6 lg:p-8 flex flex-col relative">
+        <!-- Settings Button -->
+        <div class="absolute top-4 right-4 z-20">
+            <button onclick="openSettings()" class="w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform duration-300 hover:rotate-45" style="background: var(--card-bg); color: var(--text-sub);">
+                <i class="fas fa-cog"></i>
+            </button>
         </div>
+
+        <!-- Header Section -->
+        <header class="text-center mb-10 md:mb-16 pt-8">
+            <h1 class="font-title font-black text-4xl sm:text-5xl md:text-6xl tracking-tighter">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400" style="background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));">
+                    English Learning Hub
+                </span>
+            </h1>
+            <p id="header-subtitle" class="mt-4 text-lg max-w-2xl mx-auto" style="color: var(--text-sub);">
+                Master grammar, expand your vocabulary, and conquer verbs with these interactive games.
+            </p>
+        </header>
+
+        <!-- Games Grid -->
+        <main class="flex-grow">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <a href="spoken_english.html" class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
+                    <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-graduation-cap text-5xl text-white"></i>
+                    </div>
+                    <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-main);">Spoken English Quiz</h2>
+                    <p class="flex-grow" style="color: var(--text-sub);">
+                        Test your knowledge with 45 lessons covering grammar from basic to advanced concepts.
+                    </p>
+                    <button class="mt-6 font-semibold bg-white/10 py-2 px-6 rounded-full border border-white/20 group-hover:text-white transition-colors duration-300" style="background-color: var(--primary-color);">
+                        Start Learning
+                    </button>
+                </a>
+
+                <a href="English vocabulary game.html" class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
+                    <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-book-open text-5xl text-white"></i>
+                    </div>
+                    <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-main);">Vocabulary Builder</h2>
+                    <p class="flex-grow" style="color: var(--text-sub);">
+                        Expand your word power with a challenging multiple-choice quiz.
+                    </p>
+                    <button class="mt-6 font-semibold bg-white/10 py-2 px-6 rounded-full border border-white/20 group-hover:text-white transition-colors duration-300" style="background-color: var(--primary-color);">
+                        Build Vocabulary
+                    </button>
+                </a>
+
+                <a href="Verbs game.html" class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
+                    <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                        <i class="fas fa-running text-5xl text-white"></i>
+                    </div>
+                    <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-main);">Irregular Verbs</h2>
+                    <p class="flex-grow" style="color: var(--text-sub);">
+                        Master the tricky past tense and participle forms of common English verbs.
+                    </p>
+                    <button class="mt-6 font-semibold bg-white/10 py-2 px-6 rounded-full border border-white/20 group-hover:text-white transition-colors duration-300" style="background-color: var(--primary-color);">
+                        Master Verbs
+                    </button>
+                </a>
+            </div>
+        </main>
         
-        <div class="mt-8 space-y-4">
-            
-            <!-- NEW: AI English Teacher Card -->
-            <div class="game-card shadow-md shadow-red-300/50">
-                <h2 class="text-xl font-bold mb-1 text-red-600" style="color: #e11d48;">
-                    AI English Teacher (Practice)
-                </h2>
-                <p class="text-gray-600 dark-mode:text-gray-400">
-                    Practice English/Hindi conversations with real-time AI feedback, lessons, and quizzes. **(Requires Internet)**
-                </p>
-                <!-- UPDATED Play Now Button -->
-                <!-- CRITICAL FIX: Ensure link is 'ai_teacher.html' (all lowercase) -->
-                <a href="ai_teacher.html" class="play-button ripple-btn bg-rose-600 hover:bg-rose-700 shadow-rose-500/50" style="background-color: #e11d48;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                    </svg>
-                    Start Practice
-                </a>
+        <footer class="text-center py-6 mt-12" style="color: var(--text-sub);">
+            <p>&copy; 2025 English Learning Hub. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+        <div class="modal-content w-full max-w-md rounded-2xl shadow-2xl p-6 relative">
+            <button onclick="closeSettings()" class="absolute top-4 right-4 w-8 h-8 text-xl rounded-full transition-colors" style="color: var(--text-sub); background-color: rgba(255,255,255,0.1);">&times;</button>
+            <h2 class="font-title text-2xl font-bold mb-6" style="color: var(--text-main);">Settings</h2>
+            <div class="space-y-4">
+                <!-- Theme Toggle -->
+                <div class="flex items-center justify-between">
+                    <span class="font-semibold" style="color: var(--text-sub);">Theme</span>
+                    <button id="theme-toggle-btn" onclick="toggleTheme()" class="setting-btn px-4 py-2 rounded-lg text-sm font-semibold"></button>
+                </div>
+                <!-- Accent Color Selection -->
+                <div class="flex items-center justify-between">
+                    <span class="font-semibold" style="color: var(--text-sub);">Accent Color</span>
+                    <button id="current-color-theme" onclick="openSelectionModal('color')" class="setting-btn px-4 py-2 rounded-lg text-sm font-semibold w-40 flex items-center justify-between truncate"></button>
+                </div>
+                <!-- Font Selection -->
+                <div class="flex items-center justify-between">
+                    <span class="font-semibold" style="color: var(--text-sub);">Title Font</span>
+                    <button id="current-title-font" onclick="openSelectionModal('title')" class="setting-btn px-4 py-2 rounded-lg text-sm font-semibold w-40 text-left truncate"></button>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="font-semibold" style="color: var(--text-sub);">Body Font</span>
+                    <button id="current-body-font" onclick="openSelectionModal('body')" class="setting-btn px-4 py-2 rounded-lg text-sm font-semibold w-40 text-left truncate"></button>
+                </div>
             </div>
-
-            <!-- English Verbs Quiz Card -->
-            <div class="game-card shadow-md shadow-indigo-300/50">
-                <h2 class="text-xl font-bold mb-1">English Verbs Quiz</h2>
-                <p class="text-gray-600 dark-mode:text-gray-400">Master 4 verb forms with Telugu meanings. (Offline)</p>
-                <!-- UPDATED Play Now Button -->
-                <a href="Verbs game.html" class="play-button ripple-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.972l-11.54 6.347a1.125 1.125 0 01-1.667-.986V5.653z" />
-                    </svg>
-                    Play Now
-                </a>
-            </div>
-
-            <!-- Vocabulary Game Card -->
-            <div class="game-card shadow-md shadow-teal-300/50">
-                <h2 class="text-xl font-bold mb-1">Vocabulary Game</h2>
-                <p class="text-gray-600 dark-mode:text-gray-400">Challenge your intermediate vocabulary. (Offline)</p>
-                <!-- UPDATED Play Now Button -->
-                <a href="English vocabulary game.html" class="play-button ripple-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.972l-11.54 6.347a1.125 1.125 0 01-1.667-.986V5.653z" />
-                    </svg>
-                    Play Now
-                </a>
-            </div>
-            
-            <!-- Settings Card -->
-            <!-- Note: The anchor tag links to # (or uses a JS function) but visually matches the play button style -->
-            <div class="game-card shadow-md shadow-gray-400/50">
-                <h2 class="text-xl font-bold mb-1 text-gray-800 dark-mode:text-gray-200" style="color: var(--color-primary-hex);">
-                    App Settings
-                </h2>
-                <p class="text-gray-600 dark-mode:text-gray-400">Customize the look and feel of your game hub and quizzes.</p>
-                <a href="#" class="play-button ripple-btn bg-gray-600 hover:bg-gray-700 shadow-gray-400/50" onclick="window.handleUiTapFeedback(); window.openSettings();">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.75 2.924-1.75 3.35 0a1.725 1.725 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.725 1.725 0 001.065 2.572c1.75.426 1.75 2.924 0 3.35a1.725 1.725 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.725 1.725 0 00-2.572 1.065c-.426 1.75-2.924 1.75-3.35 0a1.725 1.725 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.725 1.725 0 00-1.065-2.572c-1.75-.426-1.75-2.924 0-3.35a1.725 1.725 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.228.016 2.573-1.065z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-                    </svg>
-                    Settings
-                </a>
-            </div>
-
-            <!-- "Coming Soon" card remains -->
-            <div class="game-card opacity-60 pointer-events-none border-dashed border-gray-400">
-                 <h2 class="text-xl font-bold mb-1 text-gray-500">New Game Coming Soon!</h2>
-                 <p class="text-gray-500">Check back later for a new challenge.</p>
-            </div>
-            
-            <div class="p-4 mt-6 text-center text-sm text-gray-500 dark-mode:text-gray-400 border-t pt-4">
-                <p>All games listed here are available offline thanks to PWA caching!</p>
-                <p class="text-xs text-red-500 font-semibold mt-1">The AI English Teacher requires an active internet connection to function.</p>
-            </div>
-            
         </div>
-        
     </div>
 
-    <!-- Settings Modal (Copied from game pages) -->
-    <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
-        <div class="modal-content liquid-glass-card w-full max-w-sm p-6 overflow-y-auto max-h-[90vh]">
-            <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">App Settings</h2>
-
-            <!-- Settings Persistence Note -->
-            <div class="bg-blue-100 dark-mode:bg-blue-900/40 border border-blue-400 text-blue-800 dark-mode:text-blue-200 text-sm p-3 rounded-xl mb-4">
-                <p class="font-semibold">All settings are saved automatically to this device only.</p>
-            </div>
-
-            <!-- Color Palette Selection -->
-            <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3">Color Accent</h3>
-                <!-- INCREASED OPTIONS -->
-                <div class="grid grid-cols-5 gap-2">
-                    <button onclick="setThemeColor('indigo')" data-color-id="indigo"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-indigo-600 hover:opacity-90 text-sm">
-                        Indigo
-                    </button>
-                    <button onclick="setThemeColor('teal')" data-color-id="teal"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-teal-600 hover:opacity-90 text-sm">
-                        Teal
-                    </button>
-                    <button onclick="setThemeColor('rose')" data-color-id="rose"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-rose-600 hover:opacity-90 text-sm">
-                        Rose
-                    </button>
-                    <button onclick="setThemeColor('amber')" data-color-id="amber"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-amber-600 hover:opacity-90 text-sm">
-                        Amber
-                    </button>
-                    <button onclick="setThemeColor('emerald')" data-color-id="emerald"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-emerald-600 hover:opacity-90 text-sm">
-                        Emerald
-                    </button>
-                </div>
-            </div>
-
-            <!-- Dark Mode Toggle -->
-            <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Theme Mode</h3>
-                <div class="flex space-x-4">
-                    <button onclick="setThemeMode('light')" data-mode-id="light" id="mode-light"
-                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
-                        Light
-                    </button>
-                    <button onclick="setThemeMode('dark')" data-mode-id="dark" id="mode-dark"
-                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
-                        Dark
-                    </button>
-                </div>
-            </div>
-
-            <!-- Text Contrast Setting -->
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Text Contrast</h3>
-                <div class="flex space-x-4">
-                    <button onclick="setTextContrast('default')" data-contrast-id="default" id="contrast-default"
-                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
-                        Default
-                    </button>
-                    <button onclick="setTextContrast('high')" data-contrast-id="high" id="contrast-high"
-                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
-                        High Contrast
-                    </button>
-                </div>
-            </div>
-
-            <!-- Input Style -->
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Input Style</h3>
-                <div class="flex space-x-4">
-                    <button onclick="setInputStyle('rounded')" data-style-id="rounded" id="style-rounded"
-                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
-                        Rounded
-                    </button>
-                    <button onclick="setInputStyle('square')" data-style-id="square" id="style-square"
-                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
-                        Square
-                    </button>
-                </div>
-            </div>
-
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Feedback Toggles</h3>
-                <!-- Audio and Haptic Feedback Toggles - Added ripple-btn to label for touch feedback -->
-                <div class="flex flex-col space-y-2">
-                    <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
-                        <input type="checkbox" id="toggle-audio" onclick="toggleAudio()" 
-                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
-                        <span class="text-gray-700 dark-mode:text-gray-300">Disable Sound Effects (Click/Correct)</span>
-                    </label>
-                    <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
-                        <input type="checkbox" id="toggle-haptics" onclick="toggleHaptics()" 
-                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
-                        <span class="text-gray-700 dark-mode:text-gray-300">Disable Vibration (Haptics)</span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Display</h3>
-                <!-- Themed Text Hue Toggle -->
-                <div class="flex flex-col space-y-2">
-                    <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
-                        <input type="checkbox" id="toggle-text-hue" onclick="toggleTextHue()" 
-                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
-                        <span class="text-gray-700 dark-mode:text-gray-300">Themed Text Hue (Subtle Color Tint)</span>
-                    </label>
-                </div>
-            </div>
-
-
-            <!-- Body Font Family (NOW A BUTTON THAT OPENS MODAL) -->
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Body Font</h3>
-                <button id="body-font-button" onclick="window.handleUiTapFeedback(); openSelectionModal('body')"
-                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
-                    <span id="current-body-font" class="font-semibold">Inter (Sans-serif, Default)</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Title Font Family (NOW A BUTTON THAT OPENS MODAL) -->
-            <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Title Font</h3>
-                <button id="title-font-button" onclick="window.handleUiTapFeedback(); openSelectionModal('title')"
-                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
-                    <span id="current-title-font" class="font-semibold">Lora (Serif, Default)</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                    </svg>
-                </button>
-            </div>
-
-            <button onclick="window.handleUiTapFeedback(); window.closeSettings()"
-                    class="ripple-btn mt-8 w-full py-3 bg-gray-500 text-white font-bold rounded-xl hover:bg-gray-600 transition duration-150">
-                Close Settings
-            </button>
+    <!-- Font & Color Selection Modal -->
+    <div id="selection-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+        <div class="modal-content w-full max-w-md rounded-2xl shadow-2xl p-6 relative">
+            <button onclick="closeSelectionModal()" class="absolute top-4 right-4 w-8 h-8 text-xl rounded-full" style="color: var(--text-sub); background-color: rgba(255,255,255,0.1);">&times;</button>
+            <h2 id="selection-modal-title" class="font-title text-2xl font-bold mb-4" style="color: var(--text-main);">Select</h2>
+            <div id="selection-list" class="max-h-60 overflow-y-auto space-y-2 pr-2"></div>
         </div>
     </div>
     
-    <!-- NEW: Generic Selection Modal (Copied from game pages) -->
-    <div id="selection-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-overlay">
-        <div class="selection-modal-content liquid-glass-card w-full max-w-sm p-0">
-            <div class="p-4 flex justify-between items-center border-b dark-mode:border-gray-700">
-                <h3 id="selection-modal-title" class="text-xl font-bold text-gray-900 dark-mode:text-gray-100">Select Option</h3>
-                <button onclick="window.handleUiTapFeedback(); window.closeSelectionModal()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            <div id="selection-modal-list" class="max-h-80 overflow-y-auto rounded-b-xl">
-                <!-- Content populated dynamically -->
-            </div>
-        </div>
-    </div>
-
-
     <script>
-        // --- Configuration (Copied from game files) ---
         const FONT_OPTIONS = {
-            body: [
-                { value: 'Inter', label: 'Inter (Sans-serif, Default)' },
-                { value: 'Roboto', label: 'Roboto (Sans-serif)' },
-                { value: 'Source Sans 3', label: 'Source Sans 3 (Sans-serif)' },
-                { value: 'Merriweather', label: 'Merriweather (Serif)' }
-            ],
             title: [
-                { value: 'Lora', label: 'Lora (Serif, Default)' },
-                { value: 'Playfair Display', label: 'Playfair Display (Serif)' },
-                { value: 'Montserrat', label: 'Montserrat (Sans-serif)' },
-                { value: 'Merriweather', label: 'Merriweather (Serif)' }
+                { value: `'Montserrat', sans-serif`, label: 'Montserrat' },
+                { value: `'Lora', serif`, label: 'Lora' },
+                { value: `'Playfair Display', serif`, label: 'Playfair Display' },
+            ],
+            body: [
+                { value: `'Poppins', sans-serif`, label: 'Poppins' },
+                { value: `'Inter', sans-serif`, label: 'Inter' },
+                { value: `'Roboto', sans-serif`, label: 'Roboto' },
+                { value: `'Source Sans 3', sans-serif`, label: 'Source Sans 3'},
+                { value: `'Merriweather', serif`, label: 'Merriweather' },
             ]
         };
-        
-        // --- Theme and Settings Management (CRITICAL for consistency) ---
-        const DARK_CLASS = 'dark-mode';
-        const SETTINGS_KEY = 'quizSettings'; // Key used by Verbs game
-        const SETTINGS_KEY_VOCAB = 'vocabQuizSettings'; // Key used by Vocab game
+        const COLOR_THEMES = [
+            { name: 'Indigo', primary: '#6366f1', secondary: '#818cf8', accent: '#c4b5fd' },
+            { name: 'Teal', primary: '#14b8a6', secondary: '#2dd4bf', accent: '#5eead4' },
+            { name: 'Rose', primary: '#f43f5e', secondary: '#fb7185', accent: '#fda4af' },
+            { name: 'Amber', primary: '#f59e0b', secondary: '#fbbf24', accent: '#fcd34d' },
+            { name: 'Sky', primary: '#38bdf8', secondary: '#7dd3fc', accent: '#bae6fd' }
+        ];
         let currentSelectionType = null;
-        
-        // Mock Tone.js/Haptics functions for compatibility
-        window.handleUiTapFeedback = function() {
-            // Placeholder for click sound/vibration
-            if (getLocalStorageSetting('disableVibration', false) === false && navigator.vibrate) {
-                navigator.vibrate(30);
-            }
+
+        // --- Local Storage Helpers ---
+        function getLocalStorageSetting(key, defaultValue) {
+            return localStorage.getItem(key) || defaultValue;
         }
-        
-        const getLocalStorageSetting = (key, defaultValue) => {
-            try {
-                // Check both potential settings keys for the value, prioritizing vocab (more recent game)
-                let settings = {};
-                let foundValue = undefined;
-
-                const settingsStringVocab = localStorage.getItem(SETTINGS_KEY_VOCAB);
-                const settingsStringVerb = localStorage.getItem(SETTINGS_KEY);
-
-                // Priority 1: Vocab Settings
-                if (settingsStringVocab) {
-                    settings = JSON.parse(settingsStringVocab);
-                    if (typeof settings[key] !== 'undefined') foundValue = settings[key];
-                }
-
-                // Priority 2: Verb Settings (only if not found in vocab settings)
-                if (typeof foundValue === 'undefined' && settingsStringVerb) {
-                    settings = JSON.parse(settingsStringVerb);
-                    if (typeof settings[key] !== 'undefined') foundValue = settings[key];
-                }
-
-                if (typeof foundValue === 'undefined' || foundValue === null) {
-                    return defaultValue;
-                }
-                return foundValue;
-
-            } catch (e) {
-                console.error(`Error loading local setting key ${key}:`, e);
-                return defaultValue;
-            }
-        };
-
-        const saveLocalStorageSetting = (key, value) => {
-            try {
-                // Save to BOTH keys to ensure next game load is consistent
-                const keysToUpdate = [SETTINGS_KEY, SETTINGS_KEY_VOCAB];
-
-                keysToUpdate.forEach(storageKey => {
-                    const settingsString = localStorage.getItem(storageKey);
-                    let settings = settingsString ? JSON.parse(settingsString) : {};
-                    settings[key] = value;
-                    localStorage.setItem(storageKey, JSON.stringify(settings));
-                });
-                
-            } catch (e) {
-                console.error(`Error saving local setting key ${key}:`, e);
-            }
+        function setLocalStorageSetting(key, value) {
+            localStorage.setItem(key, value);
         }
 
-
-        window.setThemeColor = function(color) {
-            saveLocalStorageSetting('color', color);
-            applyTheme(getLocalStorageSetting('theme', 'light') === 'dark');
-            updateSettingsUI();
-        }
-
-        window.setThemeMode = function(mode) {
-            saveLocalStorageSetting('theme', mode);
-            applyTheme(mode === 'dark');
-            updateSettingsUI();
-        }
-        
-        window.setTextContrast = function(contrast) {
-            saveLocalStorageSetting('contrast', contrast);
-            document.body.setAttribute('data-contrast', contrast);
-            applyTheme(getLocalStorageSetting('theme', 'light') === 'dark'); 
-            updateSettingsUI();
-        }
-        
-        window.setBodyFont = function(font) {
-            saveLocalStorageSetting('bodyFont', font);
-            const fallback = font.includes('serif') ? 'serif' : 'sans-serif';
-            document.documentElement.style.setProperty('--font-body', `"${font}", ${fallback}`);
-            updateSettingsUI(); 
-        }
-
-        window.setTitleFont = function(font) {
-            saveLocalStorageSetting('titleFont', font);
-            const fallback = font.includes('serif') ? 'serif' : 'sans-serif'; 
-            document.documentElement.style.setProperty('--font-title', `"${font}", ${fallback}`);
-            updateSettingsUI(); 
-        }
-        
-        window.setInputStyle = function(style) {
-            saveLocalStorageSetting('inputStyle', style);
-            applyInputStyles();
-            updateSettingsUI();
-        }
-
-        function applyInputStyles() {
-            const style = getLocalStorageSetting('inputStyle', 'rounded');
-            const root = document.documentElement.style;
-            if (style === 'square') {
-                root.setProperty('--input-border-radius', '0.5rem'); 
-                root.setProperty('--input-shadow', '0 2px 4px rgba(0,0,0,0.1)');
-            } else { 
-                root.setProperty('--input-border-radius', '1.5rem'); 
-                root.setProperty('--input-shadow', '0 4px 6px rgba(0,0,0,0.05)');
-            }
-            // Apply styles to any inputs that might appear on the hub later
-            const inputs = document.querySelectorAll('input[type="text"], textarea');
-            inputs.forEach(input => {
-                input.style.borderRadius = `var(--input-border-radius)`;
-                input.style.boxShadow = `var(--input-shadow)`;
-            });
-        }
-        
-        window.toggleAudio = function() {
-            const currentState = getLocalStorageSetting('disableSound', false);
-            saveLocalStorageSetting('disableSound', !currentState);
-            updateSettingsUI();
-        }
-
-        window.toggleHaptics = function() {
-            const currentState = getLocalStorageSetting('disableVibration', false);
-            saveLocalStorageSetting('disableVibration', !currentState);
-            updateSettingsUI();
-        }
-        
-        window.toggleTextHue = function() {
-            const currentState = getLocalStorageSetting('textHue', false);
-            saveLocalStorageSetting('textHue', !currentState);
-            applyTheme(getLocalStorageSetting('theme', 'light') === 'dark');
-            updateSettingsUI();
-        }
-        
+        // --- Theme Management ---
         function applyTheme(isDark) {
-            const color = getLocalStorageSetting('color', 'indigo');
-            const contrast = getLocalStorageSetting('contrast', 'default');
-            const textHue = getLocalStorageSetting('textHue', false);
-            const bodyFont = getLocalStorageSetting('bodyFont', 'Inter');
-            const titleFont = getLocalStorageSetting('titleFont', 'Lora');
-            
-            const body = document.body;
-            body.setAttribute('data-color', color);
-            body.setAttribute('data-contrast', contrast);
-            body.setAttribute('data-text-hue', textHue ? 'themed' : 'default');
-
+            const root = document.documentElement;
+            const toggleBtn = document.getElementById('theme-toggle-btn');
             if (isDark) {
-                body.classList.add(DARK_CLASS);
+                root.classList.add('dark-mode');
+                if (toggleBtn) toggleBtn.innerHTML = '<i class="fas fa-sun mr-2"></i> Light Mode';
             } else {
-                body.classList.remove(DARK_CLASS);
+                root.classList.remove('dark-mode');
+                if (toggleBtn) toggleBtn.innerHTML = '<i class="fas fa-moon mr-2"></i> Dark Mode';
             }
-            
-            window.setBodyFont(bodyFont);
-            window.setTitleFont(titleFont);
-            applyInputStyles();
+        }
+        function toggleTheme() {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            applyTheme(isDark);
+            setLocalStorageSetting('theme', isDark ? 'dark' : 'light');
         }
 
-        function updateSettingsUI() {
-            const color = getLocalStorageSetting('color', 'indigo');
-            const mode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-            const contrast = getLocalStorageSetting('contrast', 'default');
-            const inputStyle = getLocalStorageSetting('inputStyle', 'rounded');
-            const disableSound = getLocalStorageSetting('disableSound', false);
-            const disableVibration = getLocalStorageSetting('disableVibration', false);
-            const textHue = getLocalStorageSetting('textHue', false);
-            
-            // Highlight active color
-            document.querySelectorAll('.color-option').forEach(btn => {
-                btn.classList.toggle('border-white', btn.dataset.colorId === color);
-                btn.classList.toggle('border-4', btn.dataset.colorId === color);
-            });
-            
-            // Highlight active mode
-            document.querySelectorAll('[data-mode-id]').forEach(btn => {
-                const isActive = (btn.dataset.modeId === mode);
-                btn.classList.toggle('ring-4', isActive);
-                btn.classList.toggle('ring-primary-hex', isActive);
-            });
-
-            // Highlight active contrast/input style
-            document.querySelectorAll('[data-contrast-id], [data-style-id]').forEach(btn => {
-                const isActive = (btn.dataset.contrastId === contrast) || (btn.dataset.styleId === inputStyle);
-                btn.classList.toggle('ring-4', isActive);
-                btn.classList.toggle('ring-primary-hex', isActive);
-            });
-            
-            // Update toggles
-            document.getElementById('toggle-audio').checked = disableSound;
-            document.getElementById('toggle-haptics').checked = disableVibration;
-            document.getElementById('toggle-text-hue').checked = textHue;
-            
-            // Update buttons reflecting selected values
-            updateFontButton('body');
-            updateFontButton('title');
+        // --- Accent Color Management ---
+        function applyAccentColor(themeName) {
+            const theme = COLOR_THEMES.find(t => t.name === themeName) || COLOR_THEMES[0];
+            const root = document.documentElement;
+            root.style.setProperty('--primary-color', theme.primary);
+            root.style.setProperty('--secondary-color', theme.secondary);
+            root.style.setProperty('--accent-color', theme.accent);
+            setLocalStorageSetting('colorTheme', themeName);
+        }
+        function updateColorButton() {
+            const themeName = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name);
+            const theme = COLOR_THEMES.find(t => t.name === themeName) || COLOR_THEMES[0];
+            const btn = document.getElementById('current-color-theme');
+            if (btn) {
+                btn.innerHTML = `<span>${theme.name}</span> <span class="w-4 h-4 rounded-full border border-white/20" style="background-color: ${theme.primary};"></span>`;
+            }
         }
 
+        // --- Font Management ---
+        function setBodyFont(fontFamily) {
+            document.documentElement.style.setProperty('--font-body', fontFamily);
+            setLocalStorageSetting('bodyFont', fontFamily);
+        }
+        function setTitleFont(fontFamily) {
+            document.documentElement.style.setProperty('--font-title', fontFamily);
+            setLocalStorageSetting('titleFont', fontFamily);
+        }
         function getLabel(type, value) {
             const options = FONT_OPTIONS[type];
             const option = options.find(opt => opt.value === value);
             return option ? option.label : value;
         }
-
         function updateFontButton(type) {
             const id = type === 'body' ? 'current-body-font' : 'current-title-font';
-            const value = getLocalStorageSetting(type === 'body' ? 'bodyFont' : 'titleFont', type === 'body' ? 'Inter' : 'Lora');
-            const button = document.getElementById(id);
-            if (button) {
-                button.textContent = getLabel(type, value);
-            }
+            const storageKey = type === 'body' ? 'bodyFont' : 'titleFont';
+            const defaultFont = type === 'body' ? FONT_OPTIONS.body[0].value : FONT_OPTIONS.title[0].value;
+            const value = getLocalStorageSetting(storageKey, defaultFont);
+            document.getElementById(id).textContent = getLabel(type, value);
         }
 
-        function renderOption(type, value, label, currentValue, handler) {
-            const isSelected = value.toString() === currentValue.toString();
-            const selectedClass = isSelected ? 'selected' : '';
-            
-            let styleAttr = '';
-            if (type.includes('font')) {
-                const fallback = value.includes('serif') ? 'serif' : 'sans-serif'; 
-                styleAttr = `style="font-family: '${value}', ${fallback};"`;
-            }
-
-            return `
-                <div class="ripple-btn selector-item ${selectedClass}" 
-                     onclick="window.handleUiTapFeedback(); ${handler}('${value}')"
-                     ${styleAttr}>
-                    <span>${label}</span>
-                    <div class="radio-circle ${selectedClass}">
-                        <div class="radio-dot ${selectedClass}"></div>
-                    </div>
-                </div>
-            `;
+        // --- Modal Management ---
+        window.openSettings = function() {
+            document.getElementById('settings-modal').classList.remove('hidden');
+            updateSettingsUI();
         }
-        
-        // --- Modal Functions (Copied from game files) ---
-        
+        window.closeSettings = function() {
+            document.getElementById('settings-modal').classList.add('hidden');
+        }
+        function updateSettingsUI() {
+            const isDark = document.documentElement.classList.contains('dark-mode');
+            applyTheme(isDark); // Updates the button text
+            updateFontButton('title');
+            updateFontButton('body');
+            updateColorButton();
+        }
+
         window.openSelectionModal = function(type) {
             currentSelectionType = type;
             const modal = document.getElementById('selection-modal');
-            const titleEl = document.getElementById('selection-modal-title');
-            const listEl = document.getElementById('selection-modal-list');
-            
-            listEl.innerHTML = '';
+            const listEl = document.getElementById('selection-list');
             let optionsHTML = '';
 
-            switch(type) {
-                case 'body':
-                    titleEl.textContent = 'Select Body Font';
-                    optionsHTML = FONT_OPTIONS.body.map(font => 
-                        renderOption('body-font', font.value, font.label, getLocalStorageSetting('bodyFont', 'Inter'), 'handleSelectionChange')
-                    ).join('');
-                    break;
-                case 'title':
-                    titleEl.textContent = 'Select Title Font';
-                    optionsHTML = FONT_OPTIONS.title.map(font => 
-                        renderOption('title-font', font.value, font.label, getLocalStorageSetting('titleFont', 'Lora'), 'handleSelectionChange')
-                    ).join('');
-                    break;
+            if (type === 'color') {
+                document.getElementById('selection-modal-title').textContent = 'Select Accent Color';
+                optionsHTML = COLOR_THEMES.map(opt => `
+                    <button onclick="handleSelectionChange('${type}', '${opt.name}')" class="w-full text-left p-2 rounded-md setting-btn flex items-center justify-between">
+                        <span style="color: var(--text-sub);">${opt.name}</span>
+                        <span class="w-5 h-5 rounded-full border border-white/20" style="background-color: ${opt.primary};"></span>
+                    </button>
+                `).join('');
+            } else { // 'title' or 'body'
+                document.getElementById('selection-modal-title').textContent = `Select ${type === 'title' ? 'Title' : 'Body'} Font`;
+                const options = FONT_OPTIONS[type];
+                optionsHTML = options.map(opt => 
+                    `<button onclick="handleSelectionChange('${type}', '${opt.value}')" class="w-full text-left p-2 rounded-md setting-btn" style="font-family: ${opt.value}; color: var(--text-sub);">${opt.label}</button>`
+                ).join('');
             }
             
             listEl.innerHTML = optionsHTML;
             modal.classList.remove('hidden');
         }
-        
         window.closeSelectionModal = function() {
             document.getElementById('selection-modal').classList.add('hidden');
             currentSelectionType = null;
         }
-
-        window.handleSelectionChange = function(value) {
-            switch(currentSelectionType) {
-                case 'body':
-                    setBodyFont(value);
-                    updateFontButton('body');
-                    break;
-                case 'title':
-                    setTitleFont(value);
-                    updateFontButton('title');
-                    break;
+        window.handleSelectionChange = function(type, value) {
+            if (type === 'body') {
+                setBodyFont(value);
+                updateFontButton(type);
+            } else if (type === 'title') {
+                setTitleFont(value);
+                updateFontButton(type);
+            } else if (type === 'color') {
+                applyAccentColor(value);
+                updateColorButton();
             }
             closeSelectionModal();
         }
-
-        window.openSettings = function() { 
-            document.getElementById('settings-modal').classList.remove('hidden'); 
-            updateSettingsUI();
-        }
-        window.closeSettings = function() { 
-            document.getElementById('settings-modal').classList.add('hidden'); 
-        }
-
-        function loadInitialTheme() {
-            // Check for user preference or system preference
+        
+        // --- Initialization ---
+        function loadInitialSettings() {
             const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
             applyTheme(currentMode === 'dark');
+
+            const titleFont = getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value);
+            const bodyFont = getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value);
+            setTitleFont(titleFont);
+            setBodyFont(bodyFont);
+            
+            const colorTheme = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name);
+            applyAccentColor(colorTheme);
         }
         
-        // Initialize the theme on load
-        window.onload = loadInitialTheme;
-
+        window.onload = loadInitialSettings;
     </script>
 </body>
 </html>
+
 
