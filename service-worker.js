@@ -1,14 +1,15 @@
 // service-worker.js
 
-// CRITICAL: Cache version incremented to v13 to reflect the latest updates to the game hub.
+// CRITICAL: Cache version has been updated to v14.
+// This will force the browser to delete the old files and download your new changes.
 // Every time you change a file that's cached, you MUST increment this version number.
-const CACHE_NAME = 'my-pwa-cache-v13'; 
+const CACHE_NAME = 'my-pwa-cache-v14'; 
 
 // This is the list of all the files that will be saved for offline use.
 const urlsToCache = [
   '/',                     
   'index.html',            
-  'game hub.html',          // The main UI, recently updated with new settings.
+  'game hub.html',
   
   // Game files
   'spoken_english.html',
@@ -96,7 +97,6 @@ self.addEventListener('fetch', event => {
       })
     );
 });
-
 
 
 
