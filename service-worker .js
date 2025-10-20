@@ -1,19 +1,19 @@
 // service-worker.js
 
-// CRITICAL: Cache version incremented to v17.
+// App Version: 1.0.1 (Fixed CSV parsing bug in Spoken English quiz)
+// CRITICAL: Cache version incremented to v18.
 // Every time you change a file that's cached (like your HTML pages or data),
 // you MUST increment this version number. This tells the browser to delete the old cache
 // and download the new files.
-const CACHE_NAME = 'my-pwa-cache-v17';
+const CACHE_NAME = 'my-pwa-cache-v18';
 
 // This is the list of all the files that will be saved for offline use.
-// I have corrected the filenames to use spaces instead of underscores
-// to match your actual files.
+// This list matches all the files in your project.
 const urlsToCache = [
   '/',
   'index.html',
-  'game hub.html', // Corrected from game_hub.html
-  'spoken english.html', // Corrected from spoken_english.html
+  'game hub.html',
+  'spoken english.html',
   'Verbs game.html',
   'English vocabulary game.html',
   'data.csv',
@@ -41,28 +41,28 @@ self.addEventListener('install', event => {
 });
 
 // Activation Step: The service worker is activated.
-// This is where we clean up old, unused caches from previous versions.
 self.addEventListener('activate', event => {
   console.log('[Service Worker] Activate Event for version', CACHE_NAME);
+  // This is the ideal place to delete old, unused caches.
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
-        cacheNames.map(cacheName => {
-          // If the cacheName is not our current one, delete it.
-          if (cacheName !== CACHE_NAME) {
-            console.log('[Service Worker] Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
+        cacheNames.map(cache => {
+          if (cache !== CACHE_NAME) {
+            console.log('[Service Worker] Clearing old cache:', cache);
+            return caches.delete(cache);
           }
         })
       );
-    }).then(() => {
-        // Take control of the page immediately.
+    })
+    .then(() => {
+        // Tell the active service worker to take control of the page immediately.
         return self.clients.claim();
     })
   );
 });
 
-// Fetch Step: Intercept network requests.
+// Fetch Step: The service worker intercepts network requests.
 self.addEventListener('fetch', event => {
   // For the CSV data file, we use a "Network First, then Cache" strategy.
   // This ensures users always get the latest questions if they are online,

@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -173,7 +173,6 @@
         <div id="final-results" class="hidden mt-8 text-center p-4"></div>
     </div>
 
-    <!-- HAMBURGER MENU AND MODALS (UNCHANGED) -->
     <div id="hamburger-menu" class="fixed top-0 right-0 h-full w-64 z-50 transform translate-x-full transition-transform duration-300 bg-white dark-mode:bg-gray-800 shadow-2xl p-6">
         <div class="flex justify-end"><button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button></div>
         <h3 class="text-xl font-bold mb-6 border-b pb-2 border-primary">Menu</h3>
@@ -290,6 +289,11 @@
                 const csvText = await response.text();
                 const rows = csvText.trim().split('\n').slice(1);
                 allQuestions = rows.map(row => {
+                    // --- THIS IS THE FIX YOU REQUESTED ---
+                    // This line skips any blank rows in the CSV
+                    if (row.trim() === '') return null;
+                    // --- END OF FIX ---
+                    
                     const columns = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g).map(field => field.trim().replace(/^"|"$/g, '').trim());
                     if (columns.length < 11) return null;
                     return {
@@ -561,7 +565,7 @@
             document.querySelectorAll('.color-option').forEach(btn => { btn.classList.toggle('border-white', btn.dataset.colorId === color); btn.classList.toggle('border-4', btn.dataset.colorId === color); });
             document.querySelectorAll('[data-contrast-id], [data-style-id]').forEach(btn => { const isActive = (btn.dataset.contrastId === contrast) || (btn.dataset.styleId === inputStyle); btn.classList.toggle('ring-4', isActive); btn.classList.toggle('ring-primary-hex', isActive); });
             document.getElementById('toggle-audio').checked = disableSound;
-            document.getElementById('toggle-haptics').checked = disableVibration;
+            document.getElementById('toggle-haptics').checked = disableVVibration;
             document.getElementById('toggle-text-hue').checked = textHue;
             updateFontButton('body'); updateFontButton('title'); updateClassSelectionButton();
             updateQuizLengthButton();
@@ -630,5 +634,3 @@
     </script>
 </body>
 </html>
-
-
