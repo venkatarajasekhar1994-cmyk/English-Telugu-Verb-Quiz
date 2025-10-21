@@ -1,33 +1,38 @@
 // service-worker.js
 
-// CRITICAL: Cache version incremented to v16.
-// Every time you change a file that's cached (like your HTML pages or data),
-// you MUST increment this version number. This tells the browser to delete the old cache
-// and download the new files.
-const CACHE_NAME = 'my-pwa-cache-v16';
+// CRITICAL: Cache version.
+// Every time you change ANY file that's cached (HTML, CSV, etc.),
+// you MUST increment this version number. This tells the browser to
+// delete the old cache and download the new files.
+const CACHE_NAME = 'my-pwa-cache-v21'; // I've incremented this from v18 for you
 
 // This is the list of all the files that will be saved for offline use.
-// Make sure all your important files are listed here.
+// It's important these paths are correct relative to your website's root.
+// For a GitHub repo like "user.github.io/my-repo/", these paths are correct.
 const urlsToCache = [
-  '/',
+  './', // Caches the root directory, which serves index.html
   'index.html',
-  'game_hub.html',
-  'spoken_english.html',
-  'data.csv',
-  'English vocabulary game.html',
+  'game hub.html',
+  'spoken english.html',
   'Verbs game.html',
-  'manifest.json',
+  'English vocabulary game.html',
+  'data.csv',
+  'manifest.json'
 ];
 
-// Installation Step: The service worker is installed.
+// --- INSTALLATION ---
+// This runs when the service worker is first installed.
 self.addEventListener('install', event => {
-  console.log('[Service Worker] Install Event');
-  // Perform install steps
+  console.log(`[Service Worker] Installing version ${CACHE_NAME}`);
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('[Service Worker] Caching all core assets');
         return cache.addAll(urlsToCache);
+      })
+      .then(() => {
+        // Force the new service worker to become active immediately.
+        self.skipWaiting();
       })
       .catch(err => {
         console.error('[Service Worker] Caching failed:', err);
@@ -35,35 +40,41 @@ self.addEventListener('install', event => {
   );
 });
 
-// Activation Step: The service worker is activated.
-// This is where we clean up old, unused caches.
+// --- ACTIVATION ---
+// This runs after the installation and cleans up old caches.
 self.addEventListener('activate', event => {
-  console.log('[Service Worker] Activate Event');
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          // If the cacheName is not our current cache, we delete it.
-          if (cacheName !== CACHE_NAME) {
-            console.log('[Service Worker] Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
+    console.log(`[Service Worker] Activating version ${CACHE_NAME}`);
+    event.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames.map(cacheName => {
+                    // If the cache name is old (not our current CACHE_NAME), delete it.
+                    if (cacheName !== CACHE_NAME) {
+                        console.log('[Service Worker] Deleting old cache:', cacheName);
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        }).then(() => {
+            // Tell the active service worker to take control of the page immediately.
+            return self.clients.claim();
         })
-      );
-    })
-  );
+    );
 });
 
-// Fetch Step: The service worker intercepts network requests.
+
+// --- FETCH INTERCEPTION ---
+// This runs every time the browser tries to fetch a file.
 self.addEventListener('fetch', event => {
-  // For the CSV data file, we use a "Network First, then Cache" strategy.
-  // This ensures users always get the latest questions if they are online,
-  // but the game still works with the old data if they are offline.
-  if (event.request.url.endsWith('.csv')) {
+  const url = new URL(event.request.url);
+
+  // Strategy: Network First, then Cache for data.csv
+  // This ensures users get the latest questions if online, but the game works offline with old data.
+  if (url.pathname.endsWith('data.csv')) {
     event.respondWith(
       fetch(event.request)
         .then(networkResponse => {
-            // If we get a valid response from the network, cache it and return it.
+            // If the network request is successful, cache the new data and return it.
             return caches.open(CACHE_NAME).then(cache => {
                 // We must clone the response as it can only be consumed once.
                 cache.put(event.request, networkResponse.clone());
@@ -71,7 +82,7 @@ self.addEventListener('fetch', event => {
             });
         })
         .catch(() => {
-            // If the network request fails (e.g., user is offline), serve from the cache.
+            // If the network fails (user is offline), try to serve the file from the cache.
             console.log('[Service Worker] Network failed for CSV, serving from cache.');
             return caches.match(event.request);
         })
@@ -79,19 +90,22 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // For all other files (HTML, etc.), we use a "Cache First, then Network" strategy.
-  // This makes the app load instantly from the cache for a fast, offline-first experience.
+  // Strategy: Cache First, then Network for all other app shell files.
+  // This makes the app load instantly and work offline.
   event.respondWith(
     caches.match(event.request)
-      .then(response => {
-        // If we find a match in the cache, return it.
-        if (response) {
-          return response;
+      .then(cachedResponse => {
+        // If we find a match in the cache, return it immediately.
+        if (cachedResponse) {
+          return cachedResponse;
         }
-
-        // If no match in cache, try to fetch it from the network.
+        // If not in cache, fetch from the network.
+        // (This is a fallback and shouldn't happen for files in urlsToCache)
         return fetch(event.request);
       })
     );
 });
+
+
+
 

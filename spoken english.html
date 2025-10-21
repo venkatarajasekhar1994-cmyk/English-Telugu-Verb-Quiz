@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,8 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.service-worker.register('/service-worker.js')
+                // Correct path to the service worker file
+                navigator.serviceWorker.register('service-worker.js')
                     .then(registration => console.log('Service Worker registered: ', registration))
                     .catch(error => console.error('Service Worker registration failed: ', error));
             });
@@ -21,633 +22,652 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght==400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
         
         :root {
-            --font-body: 'Inter', sans-serif;
-            --font-title: 'Lora', serif;
-            --input-border-radius: 1.5rem;
-            --input-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            --text-color-light: #111827;
-            --text-color-dark: #f3f4f6;
+            --title-font: 'Lora', serif;
+            --body-font: 'Inter', sans-serif;
+            --accent-color: 79, 70, 229; /* Indigo */
+            
+            /* Light Glass Theme Variables */
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --main-text: #f3f4f6;
+            --subtle-text: #d1d5db;
+            --button-bg: rgba(0, 0, 0, 0.2);
+        }
+
+        .dark:root {
+             /* Dark Glass Theme Variables - UPDATED for more contrast */
+            --glass-bg: rgba(0, 0, 0, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --main-text: #f3f4f6;
+            --subtle-text: #9ca3af;
+            --button-bg: rgba(0, 0, 0, 0.6);
         }
         
-        :root, body[data-color="indigo"] {
-            --color-primary: 79, 70, 229; --color-primary-hex: #4f46e5; --color-primary-light: 165, 180, 252;
-            --color-bg-light-start: #a78bfa; --color-bg-light-mid: #818cf8; --color-bg-light-end: #3b82f6;
-            --color-bg-dark-start: #1f2937; --color-bg-dark-mid: #111827; --color-bg-dark-end: #0f172a;
+        body {
+            font-family: var(--body-font);
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--main-text);
         }
-        body[data-color="teal"] { --color-primary: 20, 184, 166; --color-primary-hex: #14b8a6; --color-primary-light: 94, 234, 212; --color-bg-light-start: #2dd4bf; --color-bg-light-mid: #5eead4; --color-bg-light-end: #0d9488; }
-        body[data-color="rose"] { --color-primary: 225, 29, 72; --color-primary-hex: #e11d48; --color-primary-light: 251, 207, 232; --color-bg-light-start: #fda4af; --color-bg-light-mid: #f43f5e; --color-bg-light-end: #e11d48; }
-        body[data-color="amber"] { --color-primary: 245, 158, 11; --color-primary-hex: #f59e0b; --color-primary-light: 253, 230, 138; --color-bg-light-start: #fcd34d; --color-bg-light-mid: #f59e0b; --color-bg-light-end: #fbbf24; }
-        body[data-color="emerald"] { --color-primary: 5, 150, 105; --color-primary-hex: #059669; --color-primary-light: 110, 231, 183; --color-bg-light-start: #34d399; --color-bg-light-mid: #10b981; --color-bg-light-end: #059669; }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1, h2, h3, .font-title { font-family: var(--title-font); }
+        .accent-bg { background-color: rgb(var(--accent-color)); }
+        .accent-text { color: rgb(var(--accent-color)); }
+        .accent-border { border-color: rgb(var(--accent-color)); }
+        .accent-ring:focus { --tw-ring-color: rgb(var(--accent-color)); }
         
-        body { font-family: var(--font-body); min-height: 100vh; padding: 1rem; color: var(--text-color-light); background: linear-gradient(135deg, var(--color-bg-light-start), var(--color-bg-light-mid), var(--color-bg-light-end)); }
-        .elegant-title { font-family: var(--font-title); font-weight: 700; letter-spacing: 0.05em; color: #1e293b; }
-        .liquid-glass-card { background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(var(--color-primary-light), 0.35)); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 1.5rem; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); }
-        .frosted-option { background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: all 0.2s ease, transform 0.1s ease; }
-        .frosted-option:hover { background: rgba(255, 255, 255, 0.7); }
-        .frosted-option:active { transform: scale(0.98); }
-        .selector-item { cursor: pointer; padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(156, 163, 175, 0.3); transition: all 0.2s ease, transform 0.1s ease; }
-        .selector-item:last-child { border-bottom: none; }
-        .selector-item.selected { background-color: rgba(var(--color-primary-light), 0.2); font-weight: 600; }
-        .selector-item:active { transform: scale(0.98); }
-        .radio-circle { width: 1.25rem; height: 1.25rem; border-radius: 50%; border: 2px solid #9ca3af; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; flex-shrink: 0; }
-        .radio-circle.selected { border-color: var(--color-primary-hex); }
-        .radio-dot { width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: transparent; transition: background-color 0.2s ease; }
-        .radio-dot.selected { background-color: var(--color-primary-hex); }
-        .mc-option { transition: all 0.2s ease; border: 2px solid #e5e7eb; font-weight: 600; background-color: rgba(255, 255, 255, 0.6); backdrop-filter: blur(5px); }
-        .mc-option:hover:not(.selected):not(.correct):not(.incorrect) { border-color: rgba(var(--color-primary), 0.5); background-color: rgba(var(--color-primary-light), 0.2); }
-        .mc-option.selected { border-color: var(--color-primary-hex) !important; background-color: rgba(var(--color-primary-light), 0.4); box-shadow: 0 4px 6px rgba(var(--color-primary), 0.2); }
-        .mc-option.locked { pointer-events: none; cursor: default; }
-        .text-primary { color: var(--color-primary-hex); }
-        .border-primary { border-color: var(--color-primary-hex); }
-        .bg-primary { background-color: var(--color-primary-hex); }
-        .correct { border: 2px solid rgba(16, 185, 129, 0.7) !important; background: linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(16, 185, 129, 0.1)) !important; }
-        .incorrect { border: 2px solid rgba(239, 68, 68, 0.7) !important; background: linear-gradient(135deg, rgba(239, 68, 68, 0.35), rgba(239, 68, 68, 0.1)) !important; }
-        .skipped { border-color: rgba(245, 158, 11, 0.7) !important; background: linear-gradient(135deg, rgba(251, 191, 36, 0.35), rgba(251, 191, 36, 0.1)) !important; }
-        #progress-bar { transition: width 0.5s ease-in-out; background-color: var(--color-primary-hex); }
-        .ripple-btn { position: relative; overflow: hidden; transform: translate3d(0, 0, 0); z-index: 1; }
-        .ripple-btn::after { content: ""; position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 10.01%); background-repeat: no-repeat; background-position: 50%; transform: scale(10, 10); opacity: 0; transition: transform 0.6s, opacity 0.8s; border-radius: inherit; z-index: -1; }
-        .ripple-btn:active::after { transform: scale(0, 0); opacity: 1; transition: 0s; }
-        input[type="text"] { font-family: var(--font-body); background-color: rgba(255, 255, 255, 0.5) !important; border: 1px solid rgba(156, 163, 175, 0.3); color: var(--text-color-light) !important; transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.3s ease; border-radius: var(--input-border-radius); box-shadow: var(--input-shadow); }
-        input[type="text"]:focus { border-color: var(--color-primary-hex) !important; box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.3) !important; }
+        .glass-effect {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        
+        .subtle-text-color { color: var(--subtle-text); }
+        .button-bg-color { background-color: var(--button-bg); }
 
-        .dark-mode { background: linear-gradient(135deg, var(--color-bg-dark-start), var(--color-bg-dark-mid), var(--color-bg-dark-end)); color: var(--text-color-dark); }
-        .dark-mode .liquid-glass-card { background: linear-gradient(135deg, rgba(55, 65, 81, 0.4), rgba(31, 41, 55, 0.5)); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .dark-mode .frosted-option { background: rgba(31, 41, 55, 0.6); border: 1px solid rgba(107, 114, 128, 0.4); }
-        .dark-mode .frosted-option:hover { background: rgba(31, 41, 55, 0.8); }
-        .dark-mode .selector-item { border-bottom: 1px solid rgba(107, 114, 128, 0.4); }
-        .dark-mode .selector-item.selected { background-color: rgba(var(--color-primary-light), 0.1); }
-        .dark-mode .radio-circle { border: 2px solid #6b7280; }
-        .dark-mode .radio-dot.selected { background-color: var(--color-primary-hex); }
-        .dark-mode h1, .dark-mode .elegant-title { color: #ffffff; }
-        .dark-mode input[type="text"] { background-color: rgba(31, 41, 55, 0.6) !important; color: var(--text-color-dark) !important; border-color: rgba(107, 114, 128, 0.4); }
-        .dark-mode .mc-option { background-color: rgba(31, 41, 55, 0.7); border: 2px solid #374151; }
-        .dark-mode .mc-option:hover:not(.selected):not(.correct):not(.incorrect) { border-color: rgba(var(--color-primary), 0.7); background-color: rgba(var(--color-primary-light), 0.2); }
-        .dark-mode .mc-option.selected { border-color: var(--color-primary-hex) !important; background-color: rgba(var(--color-primary-light), 0.2); }
-        .dark-mode .correct { border-color: rgba(52, 211, 153, 0.7) !important; background: linear-gradient(135deg, rgba(52, 211, 153, 0.25), rgba(52, 211, 153, 0.1)) !important; }
-        .dark-mode .incorrect { border-color: rgba(248, 113, 113, 0.7) !important; background: linear-gradient(135deg, rgba(248, 113, 113, 0.25), rgba(248, 113, 113, 0.1)) !important; }
-        .dark-mode .skipped { border-color: rgba(251, 191, 36, 0.7) !important; background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(251, 191, 36, 0.1)) !important; }
-        body:not(.dark-mode) .text-gray-700, body:not(.dark-mode) .text-gray-800, body:not(.dark-mode) .text-gray-600 { color: var(--text-color-light) !important; }
-        .dark-mode[data-text-hue="default"] .text-gray-700, .dark-mode[data-text-hue="default"] .text-gray-800, .dark-mode[data-text-hue="default"] .text-gray-600 { color: var(--text-color-dark) !important; }
-        .dark-mode[data-text-hue="themed"] .text-gray-700, .dark-mode[data-text-hue="themed"] .text-gray-800, .dark-mode[data-text-hue="themed"] .text-gray-600 { color: var(--color-primary-light) !important; }
+        .animated-float {
+             animation: liquid-float 15s ease-in-out infinite;
+        }
 
-        .modal-overlay { background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); }
-        .modal-content, .selection-modal-content { box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); animation: fadeIn 0.3s; }
-        .selection-modal-content { border-radius: 1.5rem; width: 90%; max-width: 400px; margin-bottom: 5vh; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        @keyframes liquid-float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="min-h-screen p-4 flex flex-col items-center">
+<body class="transition-colors duration-300">
 
-    <div id="game-container" class="w-full max-w-xl liquid-glass-card p-6 md:p-8 my-8">
+    <div id="app" class="max-w-4xl mx-auto p-4 md:p-6">
         
-        <div class="flex justify-between items-center mb-6 border-b-2 pb-2 border-primary">
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-900 elegant-title">Spoken English Quiz</h1>
-            <button id="hamburger-button" onclick="window.toggleHamburgerMenu()" class="ripple-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600">
-                <svg id="hamburger-icon" class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        <header class="flex items-center justify-between mb-6">
+            <h1 class="text-3xl md:text-4xl font-bold text-white shadow-sm">Spoken English Quiz</h1>
+            <div class="flex items-center space-x-2">
+                <a href="game hub.html" class="text-gray-200 hover:text-white transition-colors p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </a>
+                 <!-- NEW: Curriculum Button -->
+                <button id="curriculum-button" class="p-2 rounded-full text-gray-200 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                </button>
+                <button id="settings-button" class="p-2 rounded-full text-gray-200 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 0 2l-.15.08a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1 0-2l.15.08a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+                <button id="theme-toggle" class="p-2 rounded-full text-gray-200 hover:text-white transition-colors">
+                    <svg id="theme-icon-light" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <div id="start-screen" class="text-center p-6 rounded-2xl glass-effect animated-float">
+            <h2 class="text-2xl font-bold mb-4 text-white">Welcome!</h2>
+            <p id="start-message" class="mb-6 subtle-text-color">Loading data... Please wait.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <button onclick="openSelectionModal('class')" class="w-full text-white p-3 rounded-lg text-left button-bg-color">
+                    <span class="text-xs text-gray-400">Class</span><br>
+                    <span id="current-class-selection" class="font-semibold"></span>
+                </button>
+                <button onclick="openSelectionModal('count')" class="w-full text-white p-3 rounded-lg text-left button-bg-color">
+                    <span class="text-xs text-gray-400">Quiz Length</span><br>
+                    <span id="current-quiz-length" class="font-semibold"></span>
+                </button>
+            </div>
+
+            <button id="start-quiz-button" disabled class="w-full accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+                Start Quiz
             </button>
         </div>
 
-        <div id="quiz-status-bar" class="hidden">
-             <div class="grid grid-cols-2 gap-4 items-center mb-3">
-                <div class="flex items-center space-x-4">
-                    <span class="text-gray-600">Score: <span id="score-display" class="text-primary text-2xl font-bold">0</span></span>
-                    <span class="text-gray-600">Q: <span id="question-counter" class="text-primary text-2xl font-bold">0/0</span></span>
+        <div id="quiz-screen" class="hidden animated-float">
+            <div class="flex justify-between items-center mb-4">
+                <div id="stats" class="text-sm font-semibold">Question 1/10</div>
+                <div id="score" class="text-sm font-semibold">Score: 0</div>
+            </div>
+            <div class="w-full rounded-full h-2.5 mb-4 button-bg-color">
+                <div id="progress-bar" class="accent-bg h-2.5 rounded-full" style="width: 10%"></div>
+            </div>
+
+            <div id="question-container" class="p-6 rounded-2xl glass-effect"></div>
+            <button id="next-question-button" class="hidden mt-6 w-full accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 transition-opacity">Next</button>
+        </div>
+
+        <div id="results-screen" class="hidden text-center p-6 rounded-2xl glass-effect animated-float">
+             <h2 class="text-2xl font-bold mb-2 text-white">Quiz Complete!</h2>
+             <p class="text-lg mb-4 text-gray-200">Your final score is <span id="final-score" class="font-bold accent-text"></span></p>
+             <div id="results-details" class="text-left mb-6 space-y-2 max-h-60 overflow-y-auto no-scrollbar"></div>
+             <button id="restart-quiz-button" class="w-full accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 transition-opacity">Play Again</button>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="selection-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4">
+        <div class="rounded-2xl shadow-xl p-6 w-full max-w-sm max-h-[80vh] flex flex-col glass-effect">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-xl font-bold text-white">Select Option</h3>
+                <button onclick="closeSelectionModal()" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
+            </div>
+            <div id="modal-options" class="space-y-2 overflow-y-auto no-scrollbar"></div>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4">
+        <div class="rounded-2xl shadow-xl p-6 w-full max-w-sm glass-effect">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-white">Settings</h3>
+                <button onclick="closeSettingsModal()" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <button onclick="openSelectionModal('bodyFont')" class="w-full p-3 rounded-lg text-left button-bg-color text-white">
+                    <span class="text-xs text-gray-400">Body Font</span><br>
+                    <span id="current-body-font" class="font-semibold"></span>
+                </button>
+                <button onclick="openSelectionModal('titleFont')" class="w-full p-3 rounded-lg text-left button-bg-color text-white">
+                    <span class="text-xs text-gray-400">Title Font</span><br>
+                    <span id="current-title-font" class="font-semibold"></span>
+                </button>
+                <button onclick="openSelectionModal('color')" class="w-full p-3 rounded-lg text-left button-bg-color text-white">
+                    <span class="text-xs text-gray-400">Accent Color</span><br>
+                    <span id="current-accent-color" class="font-semibold"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+     <!-- NEW: Curriculum Modal -->
+    <div id="curriculum-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4">
+        <div class="rounded-2xl shadow-xl p-6 w-full max-w-3xl max-h-[80vh] flex flex-col glass-effect">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-white">45-Day Spoken English Curriculum</h3>
+                <button onclick="closeCurriculumModal()" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
+            </div>
+            <div class="space-y-6 overflow-y-auto no-scrollbar pr-2 text-sm">
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-2 accent-text">Phase I: Core Action and Simple Tense Mastery (Classes 01–12)</h4>
+                    <table class="w-full text-left">
+                        <thead class="border-b border-white/20">
+                            <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-2">01</td><td class="p-2">Pronoun Roles</td><td class="p-2">Establishes the core sentence structure (S+V+O) and differentiates between subject and object pronouns.</td></tr>
+                            <tr><td class="p-2">02</td><td class="p-2">Self-Introduction</td><td class="p-2">Teaches the full framework for self-presentation.</td></tr>
+                            <tr><td class="p-2">03</td><td class="p-2">Regular Verbs</td><td class="p-2">Drills predictable conjugation patterns (V1, V2, V3, V-ing).</td></tr>
+                            <tr><td class="p-2">04</td><td class="p-2">Irregular Verbs</td><td class="p-2">Focuses on high-frequency irregular verbs (e.g., eat/ate/eaten).</td></tr>
+                            <tr><td class="p-2">05</td><td class="p-2">Simple Present Tense</td><td class="p-2">Expressing habitual actions, daily routines, and general truths.</td></tr>
+                            <tr><td class="p-2">06</td><td class="p-2">Simple Present (Do/Does)</td><td class="p-2">Using Do/Does for questions and negative statements.</td></tr>
+                            <tr><td class="p-2">07</td><td class="p-2">WH-Questions (Do/Does)</td><td class="p-2">Synthesizes Do/Does with question words (What, Why, Where, How).</td></tr>
+                            <tr><td class="p-2">08</td><td class="p-2">Simple Past Tense</td><td class="p-2">Using the Past Tense form (V2) to describe completed actions.</td></tr>
+                            <tr><td class="p-2">09</td><td class="p-2">Simple Past (Did)</td><td class="p-2">Using Did/didn't for questions and negatives in the Past Tense.</td></tr>
+                            <tr><td class="p-2">10</td><td class="p-2">WH-Questions (Did)</td><td class="p-2">Integrates Did with question words to ask about past actions.</td></tr>
+                            <tr><td class="p-2">11</td><td class="p-2">Simple Future Tense</td><td class="p-2">Using Shall/Will to express future intentions and actions.</td></tr>
+                            <tr><td class="p-2">12</td><td class="p-2">WH-Questions (Shall/Will)</td><td class="p-2">Applies Shall/Will with WH-Words to inquire about future plans.</td></tr>
+                        </tbody>
+                    </table>
                 </div>
-                <span id="feedback-message" class="text-base font-medium text-right"></span>
-            </div>
-            <div id="progress-bar-container" class="w-full h-2 bg-gray-200 dark-mode:bg-gray-700 rounded-full overflow-hidden mb-6 shadow-inner">
-                <div id="progress-bar" class="h-full rounded-full" style="width: 0%;"></div>
-            </div>
-        </div>
 
-        <div id="start-screen" class="mt-8 text-center">
-            <h2 class="text-3xl font-bold text-primary mb-4 elegant-title">45-Day Course Quiz</h2>
-            <p id="start-message" class="text-lg text-gray-700 mb-8">Test your knowledge on key concepts from the curriculum. Choose a class to begin.</p>
-            <div class="mb-4 p-4 bg-primary/5 rounded-xl frosted-option">
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">Select a Class</h3>
-                <button id="class-selection-button" onclick="handleUiTapFeedback(); openSelectionModal('class')" class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600">
-                    <span id="current-class-selection" class="font-semibold">Class 1: Pronoun Roles</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" /></svg>
-                </button>
-            </div>
-            <div class="mb-8 p-4 bg-primary/5 rounded-xl frosted-option">
-                <h3 class="font-semibold text-lg text-gray-800 mb-2">Quiz Length</h3>
-                <button id="quiz-length-button" onclick="handleUiTapFeedback(); openSelectionModal('count')" class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600">
-                    <span id="current-quiz-length" class="font-semibold">15 Questions</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" /></svg>
-                </button>
-            </div>
-            <button id="start-quiz-button" onclick="handleUiTapFeedback(); startQuiz()" class="ripple-btn w-full px-4 py-4 bg-green-600 text-white font-extrabold rounded-2xl shadow-xl shadow-green-500/50 disabled:bg-gray-400 disabled:shadow-none" disabled>Start Quiz</button>
-             <p id="loading-indicator" class="mt-4 text-sm text-gray-500">Loading quiz data...</p>
-        </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-2 accent-text">Phase II: Actions in Progress—Mastery of Continuous Forms (Classes 13–15)</h4>
+                    <table class="w-full text-left">
+                        <thead class="border-b border-white/20">
+                            <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-2">13</td><td class="p-2">Present Continuous</td><td class="p-2">Using Am/Is/Are + V-ing for actions happening now.</td></tr>
+                            <tr><td class="p-2">14</td><td class="p-2">Past Continuous</td><td class="p-2">Using Was/Were + V-ing for ongoing past actions.</td></tr>
+                            <tr><td class="p-2">15</td><td class="p-2">Future Continuous</td><td class="p-2">Using Shall be/Will be + V-ing for actions that will be in progress.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-2 accent-text">Phase III: Modality, Ability, and Obligation (Classes 16–20)</h4>
+                    <table class="w-full text-left">
+                        <thead class="border-b border-white/20">
+                            <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-2">16</td><td class="p-2">Can/Could</td><td class="p-2">Expressing present ability (Can) and past ability (Could).</td></tr>
+                            <tr><td class="p-2">17</td><td class="p-2">May/Might</td><td class="p-2">Expressing uncertainty and possibility.</td></tr>
+                            <tr><td class="p-2">18</td><td class="p-2">Should</td><td class="p-2">Expressing general advice, responsibility, and duty.</td></tr>
+                            <tr><td class="p-2">19</td><td class="p-2">Must</td><td class="p-2">Expressing strong obligation, determination, or necessity.</td></tr>
+                            <tr><td class="p-2">20</td><td class="p-2">Would & Synthesis</td><td class="p-2">Using Would for past habits and synthesizing all learned forms.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                 <div>
+                    <h4 class="font-bold text-lg mb-2 accent-text">Phase IV: Perfect Tenses and Complex Modal Structures (Classes 21–35)</h4>
+                    <table class="w-full text-left">
+                        <thead class="border-b border-white/20">
+                            <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-2">21</td><td class="p-2">Have/Has (Possession)</td><td class="p-2">Clarifies role in expressing current possession.</td></tr>
+                            <tr><td class="p-2">22</td><td class="p-2">Present Perfect</td><td class="p-2">Using Have/Has + P.P.F for recent past actions with present relevance.</td></tr>
+                            <tr><td class="p-2">23</td><td class="p-2">Past Perfect</td><td class="p-2">Using Had + P.P.F for an action that occurred before another past action.</td></tr>
+                            <tr><td class="p-2">24</td><td class="p-2">Future Perfect</td><td class="p-2">Using Shall have/Will have + P.P.F for actions completed by a future deadline.</td></tr>
+                            <tr><td class="p-2">25</td><td class="p-2">Should have/Must have</td><td class="p-2">Expressing past unfulfilled actions or strong assumptions.</td></tr>
+                            <tr><td class="p-2">26</td><td class="p-2">May have/Might have</td><td class="p-2">Expressing degrees of uncertainty about past actions.</td></tr>
+                            <tr><td class="p-2">27</td><td class="p-2">Would have/Could have</td><td class="p-2">Discussing hypothetical situations in the past (counterfactuals).</td></tr>
+                            <tr><td class="p-2">28</td><td class="p-2">Past Actions Review</td><td class="p-2">Comprehensive review of all 17 structures for past actions.</td></tr>
+                            <tr><td class="p-2">29</td><td class="p-2">Present Perfect Continuous</td><td class="p-2">Have been/Has been + V-ing for actions from past to present.</td></tr>
+                            <tr><td class="p-2">30</td><td class="p-2">Past Perfect Continuous</td><td class="p-2">Had been + V-ing for continuous actions before a past moment.</td></tr>
+                            <tr><td class="p-2">31</td><td class="p-2">Future Perfect Continuous</td><td class="p-2">Shall have been/Will have been + V-ing for action duration up to a future point.</td></tr>
+                            <tr><td class="p-2">32</td><td class="p-2">Continuous Modal Perfects</td><td class="p-2">Introduces structures like 'Should have been doing'.</td></tr>
+                            <tr><td class="p-2">33</td><td class="p-2">Application of Should/Must Have Been</td><td class="p-2">Drilling continuous modal perfects for past actions.</td></tr>
+                            <tr><td class="p-2">34</td><td class="p-2">Application of Would/Could Have Been</td><td class="p-2">Drilling continuous modals for hypothetical past actions.</td></tr>
+                            <tr><td class="p-2">35</td><td class="p-2">Application of May/Might Have Been & Review</td><td class="p-2">Final review of all modal and perfect forms.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
 
-        <div id="question-area" class="space-y-4 hidden">
-            <div id="question-prompt" class="p-4 rounded-xl border-2 border-primary">
-                <p id="question-telugu" class="text-gray-800 dark-mode:text-gray-300 mb-2"></p>
-                <p id="question-english" class="text-xl text-indigo-900 dark-mode:text-indigo-100 font-semibold"></p>
-            </div>
-            <div id="mcq-options" class="grid grid-cols-1 gap-3"></div>
-            <div id="fill-blank-container" class="hidden">
-                 <input type="text" id="fill-blank-input" placeholder="Type your answer here..." class="w-full p-4 text-lg border-2 rounded-xl" oninput="document.getElementById('main-action-button').disabled = this.value.trim() === ''">
-            </div>
-            <div id="explanation-area" class="hidden p-3 mt-4 rounded-xl border-2 bg-primary/10 dark-mode:bg-primary/5">
-                <p class="font-bold text-sm mb-1 text-primary">Feedback:</p>
-                <p id="explanation-text" class="text-gray-800 dark-mode:text-gray-200 text-base"></p>
+                <div>
+                    <h4 class="font-bold text-lg mb-2 accent-text">Phase V: Necessity, Desire, and Specialized Auxiliaries (Classes 36–41)</h4>
+                    <table class="w-full text-left">
+                        <thead class="border-b border-white/20">
+                            <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-2">36</td><td class="p-2">Have to/Has to</td><td class="p-2">Expressing external compulsion in present and future.</td></tr>
+                            <tr><td class="p-2">37</td><td class="p-2">Need to/Dare to/Ought to</td><td class="p-2">Specialized auxiliaries for necessity, courage, and moral obligation.</td></tr>
+                            <tr><td class="p-2">38</td><td class="p-2">Want to/Wish to/Would like to</td><td class="p-2">Covers various expressions of desire and preference.</td></tr>
+                            <tr><td class="p-2">39</td><td class="p-2">Able to, Willing to, Going to</td><td class="p-2">Phrasal auxiliaries for ability, readiness, and planning.</td></tr>
+                            <tr><td class="p-2">40</td><td class="p-2">Had to (Past Obligation)</td><td class="p-2">Expressing a necessity or obligation in the past.</td></tr>
+                            <tr><td class="p-2">41</td><td class="p-2">Used to (Past Habit)</td><td class="p-2">Expressing a repeated past habit that is no longer performed.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-2 accent-text">Phase VI: Synthesis, Tenses, and Voice (Classes 42–45)</h4>
+                    <table class="w-full text-left">
+                        <thead class="border-b border-white/20">
+                           <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-2">42</td><td class="p-2">The 12 Tenses Matrix</td><td class="p-2">Unified map of the English verbal system by time and aspect.</td></tr>
+                            <tr><td class="p-2">43</td><td class="p-2">12 Tenses Application</td><td class="p-2">Drilling a single verb across all twelve tenses.</td></tr>
+                            <tr><td class="p-2">44</td><td class="p-2">Active & Passive Voice</td><td class="p-2">Introduces voice transformation and auxiliary conversion.</td></tr>
+                            <tr><td class="p-2">45</td><td class="p-2">Be with P.P. Form</td><td class="p-2">Master key for expressing static states in all modal/auxiliary contexts.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        
-        <div id="quiz-action-buttons" class="mt-8 grid grid-cols-12 gap-4 hidden">
-            <button id="skip-button" onclick="handleUiTapFeedback(); processAnswer(true)"
-                    class="ripple-btn col-span-4 px-2 py-3 bg-yellow-600 text-white font-bold rounded-xl shadow-lg shadow-yellow-500/50 hover:opacity-90 disabled:bg-gray-400">
-                Skip
-            </button>
-            <button id="main-action-button" onclick="handleUiTapFeedback(); processAnswer(false)"
-                    class="ripple-btn col-span-8 px-2 py-3 bg-primary text-white font-bold rounded-xl shadow-primary disabled:bg-gray-400 text-lg">
-                Select an Answer
-            </button>
-        </div>
-
-        <div id="final-results" class="hidden mt-8 text-center p-4"></div>
     </div>
 
-    <!-- HAMBURGER MENU AND MODALS (UNCHANGED) -->
-    <div id="hamburger-menu" class="fixed top-0 right-0 h-full w-64 z-50 transform translate-x-full transition-transform duration-300 bg-white dark-mode:bg-gray-800 shadow-2xl p-6">
-        <div class="flex justify-end"><button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button></div>
-        <h3 class="text-xl font-bold mb-6 border-b pb-2 border-primary">Menu</h3>
-        <button id="menu-theme-toggle" onclick="handleUiTapFeedback(); toggleTheme()" class="ripple-btn w-full flex items-center justify-between p-3 mb-4 rounded-xl frosted-option"><span id="menu-theme-text" class="font-semibold"></span><svg id="menu-theme-icon" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"></svg></button>
-        <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu(); openSettings();" class="ripple-btn w-full flex items-center p-3 rounded-xl frosted-option"><svg class="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 12h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3zm9-6h3.75m-3.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 18h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0" /></svg>App Settings</button>
-    </div>
-    
-    <div id="hamburger-overlay" class="hidden fixed inset-0 z-40 bg-black opacity-50" onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()"></div>
-
-    <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
-        <div class="modal-content liquid-glass-card w-full max-w-sm p-6 overflow-y-auto max-h-[90vh]">
-            <h2 class="text-2xl font-bold mb-4 border-b pb-2 border-primary">App Settings</h2>
-            <div class="bg-blue-100 dark-mode:bg-blue-900/40 text-blue-800 dark-mode:text-blue-200 text-sm p-3 rounded-xl mb-4"><p class="font-semibold">All settings saved locally.</p></div>
-            <div class="mb-6"><h3 class="font-semibold text-lg mb-3">Color Accent</h3><div class="grid grid-cols-5 gap-2">
-                <button onclick="setThemeColor('indigo')" data-color-id="indigo" class="ripple-btn color-option p-2 rounded-xl bg-indigo-600 text-white font-bold text-sm">Indigo</button>
-                <button onclick="setThemeColor('teal')" data-color-id="teal" class="ripple-btn color-option p-2 rounded-xl bg-teal-600 text-white font-bold text-sm">Teal</button>
-                <button onclick="setThemeColor('rose')" data-color-id="rose" class="ripple-btn color-option p-2 rounded-xl bg-rose-600 text-white font-bold text-sm">Rose</button>
-                <button onclick="setThemeColor('amber')" data-color-id="amber" class="ripple-btn color-option p-2 rounded-xl bg-amber-600 text-white font-bold text-sm">Amber</button>
-                <button onclick="setThemeColor('emerald')" data-color-id="emerald" class="ripple-btn color-option p-2 rounded-xl bg-emerald-600 text-white font-bold text-sm">Emerald</button>
-            </div></div>
-             <div class="mb-6"><h3 class="font-semibold text-lg mb-2">Text Contrast</h3><div class="flex space-x-4">
-                <button onclick="setTextContrast('default')" data-contrast-id="default" class="ripple-btn flex-1 p-3 rounded-xl frosted-option">Default</button>
-                <button onclick="setTextContrast('high')" data-contrast-id="high" class="ripple-btn flex-1 p-3 rounded-xl frosted-option">High Contrast</button>
-            </div></div>
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700"><h3 class="font-semibold text-lg mb-2">Input Style</h3><div class="flex space-x-4">
-                <button onclick="setInputStyle('rounded')" data-style-id="rounded" class="ripple-btn flex-1 p-3 rounded-xl frosted-option">Rounded</button>
-                <button onclick="setInputStyle('square')" data-style-id="square" class="ripple-btn flex-1 p-3 rounded-xl frosted-option">Square</button>
-            </div></div>
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700"><h3 class="font-semibold text-lg mb-2">Feedback</h3><div class="flex flex-col space-y-2">
-                <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option"><input type="checkbox" id="toggle-audio" onclick="toggleAudio()" class="form-checkbox h-5 w-5 rounded"><span>Disable Sound</span></label>
-                <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option"><input type="checkbox" id="toggle-haptics" onclick="toggleHaptics()" class="form-checkbox h-5 w-5 rounded"><span>Disable Vibration</span></label>
-            </div></div>
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700"><h3 class="font-semibold text-lg mb-2">Quiz Display</h3><div class="flex flex-col space-y-2">
-                <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option"><input type="checkbox" id="toggle-text-hue" onclick="toggleTextHue()" class="form-checkbox h-5 w-5 rounded"><span>Themed Text Hue</span></label>
-            </div></div>
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700"><h3 class="font-semibold text-lg mb-2">Body Font</h3><button id="body-font-button" onclick="handleUiTapFeedback(); openSelectionModal('body')" class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl frosted-option"><span id="current-body-font">Inter</span><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" /></svg></button></div>
-            <div class="mb-6"><h3 class="font-semibold text-lg mb-2">Title Font</h3><button id="title-font-button" onclick="handleUiTapFeedback(); openSelectionModal('title')" class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl frosted-option"><span id="current-title-font">Lora</span><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" /></svg></button></div>
-            <button onclick="handleUiTapFeedback(); closeSettings()" class="ripple-btn mt-8 w-full py-3 bg-gray-500 text-white font-bold rounded-xl">Close Settings</button>
-        </div>
-    </div>
-    
-    <div id="selection-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-overlay">
-        <div class="selection-modal-content liquid-glass-card w-full max-w-sm p-0">
-            <div class="p-4 flex justify-between items-center border-b dark-mode:border-gray-700"><h3 id="selection-modal-title" class="text-xl font-bold">Select Option</h3><button onclick="handleUiTapFeedback(); closeSelectionModal()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button></div>
-            <div id="selection-modal-list" class="max-h-80 overflow-y-auto rounded-b-xl"></div>
-        </div>
-    </div>
 
     <script>
-        const SETTINGS_KEY = 'spokenEnglishQuizSettings';
-        const CLASS_TOPICS = ["Pronoun Roles", "Self-Introduction", "Regular Verbs", "Irregular Verbs", "Simple Present Tense", "Simple Present (Do/Does)", "WH-Questions (Do/Does)", "Simple Past Tense", "Simple Past (Did)", "WH-Questions (Did)", "Simple Future Tense", "WH-Questions (Shall/Will)", "Present Continuous (Am/Is/Are)", "Past Continuous (Was/Were)", "Future Continuous (Shall be/Will be)", "Can/Could", "May/Might", "Should", "Must", "Would & Synthesis", "Have/Has (Possession)", "Present Perfect Tense", "Past Perfect Tense", "Future Perfect Tense", "Should have/Must have", "May have/Might have", "Would have/Could have", "Past Actions Review", "Present Perfect Continuous", "Past Perfect Continuous", "Future Perfect Continuous", "Continuous Modal Perfects", "Application of Should/Must Have Been", "Application of Would/Could Have Been", "Application of May/Might Have Been", "Have to/Has to", "Need to/Dare to/Ought to", "Want to/Wish to/Would like to", "Able to, Willing to, Going to", "Had to (Past Obligation)", "Used to (Past Habit)", "The 12 Tenses Matrix", "12 Tenses Application", "Active & Passive Voice", "Be with P.P. Form"];
-        const QUESTION_OPTIONS = [5, 10, 15, 20, 30];
-        const DEFAULT_MAX_QUESTIONS = 15;
-        const FONT_OPTIONS = {
-            body: [
-                { value: 'Inter', label: 'Inter (Sans-serif, Default)' }, { value: 'Roboto', label: 'Roboto (Sans-serif)' },
-                { value: 'Source Sans 3', label: 'Source Sans 3 (Sans-serif)' }, { value: 'Merriweather', label: 'Merriweather (Serif)' }
-            ],
-            title: [
-                { value: 'Lora', label: 'Lora (Serif, Default)' }, { value: 'Playfair Display', label: 'Playfair Display (Serif)' },
-                { value: 'Montserrat', label: 'Montserrat (Sans-serif)' }, { value: 'Merriweather', label: 'Merriweather (Serif)' }
-            ]
-        };
-        const DARK_CLASS = 'dark-mode';
+        // DOM Elements
+        const startScreen = document.getElementById('start-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const questionContainer = document.getElementById('question-container');
+        const startButton = document.getElementById('start-quiz-button');
+        const nextButton = document.getElementById('next-question-button');
+        const restartButton = document.getElementById('restart-quiz-button');
+        const curriculumButton = document.getElementById('curriculum-button');
 
+        // State
         let allQuestions = [];
-        let questionPool = [];
+        let currentQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
-        let selectedOption = null;
-        let quizPhase = 'select';
-        let maxQuestions = DEFAULT_MAX_QUESTIONS;
-        let selectedClass = 1;
-        let currentSelectionType = null;
         let isDataLoaded = false;
-        let quizResults = [];
+        let selectedClass = 1;
+        let maxQuestions = 10;
+        let synth;
+        let correctSound, wrongSound;
 
-        let correctSynth, incorrectSynth, clickSynth;
+        // Constants
+        const CLASS_TOPICS = [ "Pronoun Roles", "Self-Introduction", "Regular Verbs", "Irregular Verbs", "Simple Present Tense", "Simple Present (Do/Does)", "WH-Questions (Do/Does)", "Simple Past Tense", "Simple Past (Did)", "WH-Questions (Did)", "Simple Future Tense", "WH-Questions (Shall/Will)", "Present Continuous (Am/Is/Are)", "Past Continuous (Was/Were)", "Future Continuous (Shall be/Will be)", "Can/Could", "May/Might", "Should", "Must", "Would (Past Habit) & Synthesis", "Have/Has (Possession)", "Present Perfect Tense", "Past Perfect Tense", "Future Perfect Tense", "Should have/Must have (P.P.F)", "May have/Might have (P.P.F)", "Would have/Could have (P.P.F)", "Past Actions Review", "Present Perfect Continuous", "Past Perfect Continuous", "Future Perfect Continuous", "Continuous Modal Perfects", "Application of Should/Must Have Been", "Application of Would/Could Have Been", "Application of May/Might Have Been & Review", "Have to/Has to (Present/Future)", "Need to/Dare to/Ought to", "Want to/Wish to/Would like to", "Able to, Willing to, Going to, etc.", "Had to (Past Obligation)", "Used to (Past Habit)", "The 12 Tenses Matrix", "12 Tenses Application", "Active Voice & Passive Voice", "Be with P.P. Form and Special Verbs" ];
+        const FONT_OPTIONS = {
+            body: [ { label: 'Inter', value: 'Inter, sans-serif' }, { label: 'Roboto', value: 'Roboto, sans-serif' }, { label: 'Source Sans', value: "'Source Sans 3', sans-serif" }, { label: 'Poppins', value: 'Poppins, sans-serif' } ],
+            title: [ { label: 'Lora', value: 'Lora, serif' }, { label: 'Merriweather', value: 'Merriweather, serif' }, { label: 'Playfair Display', value: "'Playfair Display', serif" }, { label: 'Montserrat', value: 'Montserrat, sans-serif' } ]
+        };
+        const COLOR_THEMES = [ { name: 'Indigo', value: '79, 70, 229' }, { name: 'Sky', value: '2, 132, 199' }, { name: 'Emerald', value: '5, 150, 105' }, { name: 'Rose', value: '225, 29, 72' }, { name: 'Amber', value: '217, 119, 6' } ];
 
+        // --- Audio & Haptic Feedback ---
         function setupAudio() {
-            try {
-                correctSynth = new Tone.MembraneSynth().toDestination();
-                incorrectSynth = new Tone.NoiseSynth({ noise: { type: "white" }, envelope: { attack: 0.005, decay: 0.1, sustain: 0 } }).toDestination();
-                clickSynth = new Tone.Synth({ oscillator: { type: "sine" }, envelope: { attack: 0.001, decay: 0.05, sustain: 0 } }).toDestination();
-            } catch(e) { console.error("Could not initialize Tone.js", e); }
+            if (window.Tone) {
+                correctSound = new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.3, release: 0.1 } }).toDestination();
+                wrongSound = new Tone.Synth({ oscillator: { type: 'sawtooth' }, envelope: { attack: 0.01, decay: 0.2, sustain: 0, release: 0.1 } }).toDestination();
+            }
+            synth = window.speechSynthesis;
         }
 
-        function playSound(type) {
-            const disableSound = getLocalStorageSetting('disableSound', false);
-            if (!disableSound && typeof Tone !== 'undefined') {
-                Tone.context.resume().then(() => {
-                    if (type === 'correct' && correctSynth) correctSynth.triggerAttackRelease("G5", "8n");
-                    else if (type === 'incorrect' && incorrectSynth) incorrectSynth.triggerAttackRelease("16n");
-                    else if (clickSynth) clickSynth.triggerAttackRelease("C5", "32n");
-                });
+        function playFeedback(isCorrect) {
+            if (window.Tone) {
+                if (isCorrect) correctSound.triggerAttackRelease('G5', '8n', Tone.now());
+                else wrongSound.triggerAttackRelease('C3', '4n', Tone.now());
             }
-        }
-        
-        function vibrate(type) {
-            const disableVibration = getLocalStorageSetting('disableVibration', false);
-            if (!disableVibration && navigator.vibrate) {
-                if (type === 'correct') navigator.vibrate(100);
-                else if (type === 'incorrect') navigator.vibrate([100, 50, 100]);
-                else navigator.vibrate(30);
+            if (navigator.vibrate) {
+                if (isCorrect) navigator.vibrate(100);
+                else navigator.vibrate([200, 75, 200]);
             }
         }
 
-        window.handleUiTapFeedback = () => { playSound('click'); vibrate('click'); }
+        function speak(text) {
+            if (synth && text) {
+                synth.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                synth.speak(utterance);
+            }
+        }
+
+        // --- Data Loading & Parsing ---
+        function parseCsvRow(row) {
+            const values = [];
+            const regex = /("([^"]|"")*"|[^,]*)(,|$)/g;
+            let match;
+            let processedRow = row.trim();
+            if (processedRow.charAt(processedRow.length - 1) !== ',') processedRow += ',';
+            while ((match = regex.exec(processedRow)) !== null) {
+                let value = match[1];
+                if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1).replace(/""/g, '"');
+                values.push(value.trim());
+                if (match[3] === '') break;
+            }
+            if (values.length > 0 && values[values.length - 1] === '') values.pop();
+            return values;
+        }
 
         async function loadQuestions() {
             try {
+                // IMPROVED: Use a cache-busting parameter for development if needed,
+                // but the service worker handles caching in production.
+                // The path is kept relative, which works well with GitHub Pages structure.
                 const response = await fetch('data.csv');
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                const csvText = await response.text();
-                const rows = csvText.trim().split('\n').slice(1);
+
+                if (!response.ok) {
+                    // This will catch HTTP errors like 404 Not Found
+                    throw new Error(`Failed to fetch data. Status: ${response.status} ${response.statusText}`);
+                }
+
+                const csvData = await response.text();
                 
-                allQuestions = rows.map(row => {
-                    // Skips any blank or empty-looking rows
-                    if (!row || row.trim() === '') {
+                // Check if the CSV data is empty or just headers
+                if (!csvData || csvData.trim().split(/\r?\n/).length <= 1) {
+                    throw new Error("CSV data is empty or invalid.");
+                }
+
+                const lines = csvData.trim().split(/\r?\n/);
+                const headers = parseCsvRow(lines[0]);
+                
+                allQuestions = lines.slice(1).map(line => {
+                    if (line.trim() === '') return null;
+                    const values = parseCsvRow(line);
+                    if (values.length < headers.length) {
+                        console.warn('Skipping malformed CSV row:', line);
                         return null;
                     }
+                    let question = {};
+                    headers.forEach((header, i) => {
+                        question[header.trim()] = values[i] || '';
+                    });
+                    return question;
+                }).filter(q => q !== null && q.lesson);
 
-                    // --- THIS IS THE FIX ---
-                    // The 'match' can fail on malformed rows and return null.
-                    // This new code checks for that failure and skips the row if it happens.
-                    const columnsMatch = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
-                    if (!columnsMatch) {
-                        console.warn('Skipping malformed CSV row:', row);
-                        return null; 
-                    }
-                    
-                    const columns = columnsMatch.map(field => field.trim().replace(/^"|"$/g, '').trim());
-                    
-                    if (columns.length < 11) {
-                        console.warn('Skipping row with not enough columns:', row);
-                        return null;
-                    }
-
-                    return {
-                        lesson: columns[0], type: columns[1], promptEN: columns[2], promptTE: columns[3],
-                        options: { A: columns[4], B: columns[5], C: columns[6], D: columns[7] },
-                        correct: columns[8], feedbackEN: columns[9], feedbackTE: columns[10]
-                    };
-                }).filter(q => q !== null && q.lesson); // Also filter out any remaining nulls or questions without a lesson number
+                if (allQuestions.length === 0) {
+                    throw new Error("No valid questions were parsed from the data file.");
+                }
                 
                 isDataLoaded = true;
-                document.getElementById('start-quiz-button').disabled = false;
-                document.getElementById('loading-indicator').textContent = 'Data loaded successfully!';
-                updateStartScreenMessage();
+                console.log(`Successfully loaded and parsed ${allQuestions.length} questions.`);
+
             } catch (error) {
-                console.error('Failed to load quiz data:', error);
-                document.getElementById('loading-indicator').textContent = 'Error loading quiz data. Check console.';
-                document.getElementById('start-quiz-button').disabled = true;
+                console.error("Failed to load or parse questions:", error);
+                isDataLoaded = false;
+                // IMPROVED: Show a user-friendly error message on the screen.
+                document.getElementById('start-message').innerHTML = `
+                    <strong class="text-red-400">Error: Could not load quiz data.</strong>
+                    <br>
+                    <small>If you are offline, please connect to the internet to download the latest questions. If the problem continues, the data file may be missing or corrupt.</small>
+                `;
             }
+            
+            // This part runs regardless of success or failure to set up the rest of the UI
+            selectedClass = parseInt(getLocalStorageSetting('spokenEnglishClass', '1'), 10);
+            maxQuestions = parseInt(getLocalStorageSetting('spokenEnglishLength', '10'), 10);
+            updateStartScreenMessage();
+            updateClassSelectionButton();
+            updateQuizLengthButton();
+            startButton.disabled = !isDataLoaded;
         }
 
+
+        // --- Game Logic ---
         function startQuiz() {
-            if (!isDataLoaded || allQuestions.length === 0) return;
-            
-            let classQuestions = allQuestions.filter(q => q.lesson == selectedClass);
-
-            if (classQuestions.length < 5) {
-                alert(`Sorry, Class ${selectedClass} doesn't have enough questions yet (minimum 5 required). Please add more to data.csv.`);
-                return;
+            const filtered = allQuestions.filter(q => parseInt(q.lesson, 10) === selectedClass);
+            currentQuestions = filtered.sort(() => 0.5 - Math.random()).slice(0, maxQuestions);
+            if (currentQuestions.length === 0) {
+                 document.getElementById('start-message').textContent = `No questions available for Class ${selectedClass}. Please select another class.`;
+                 return;
             }
-
-            document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('quiz-status-bar').classList.remove('hidden');
-            document.getElementById('question-area').classList.remove('hidden');
-            document.getElementById('quiz-action-buttons').classList.remove('hidden');
-            
-            shuffleArray(classQuestions);
-            const actualMax = Math.min(maxQuestions, classQuestions.length);
-            questionPool = classQuestions.slice(0, actualMax);
-
-
             currentQuestionIndex = 0;
             score = 0;
-            quizResults = []; // Reset results
-            updateScore();
-            showQuestion();
+            startScreen.classList.add('hidden');
+            resultsScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            displayQuestion();
         }
-        
-        function showQuestion() {
-            quizPhase = 'select';
-            selectedOption = null;
-            document.getElementById('explanation-area').classList.add('hidden');
-            const mainButton = document.getElementById('main-action-button');
-            const skipButton = document.getElementById('skip-button');
-            mainButton.disabled = true;
-            mainButton.textContent = "Select an Answer";
-            skipButton.disabled = false;
-            
-            const questionData = questionPool[currentQuestionIndex];
-            
-            document.getElementById('question-telugu').textContent = questionData.promptTE;
-            document.getElementById('question-english').innerHTML = questionData.promptEN.replace(/____/g, '<span class="font-extrabold text-red-500">____</span>');
 
-            if (questionData.type === 'mcq') {
-                document.getElementById('mcq-options').classList.remove('hidden');
-                document.getElementById('fill-blank-container').classList.add('hidden');
-                const optionsContainer = document.getElementById('mcq-options');
-                optionsContainer.innerHTML = '';
-                ['A', 'B', 'C', 'D'].forEach(letter => {
-                    if (questionData.options[letter]) {
-                        const button = document.createElement('button');
-                        button.innerHTML = `<span class="font-bold text-primary mr-2">${letter}:</span> ${questionData.options[letter]}`;
-                        button.className = 'mc-option ripple-btn w-full text-left px-4 py-3 rounded-xl';
-                        button.onclick = () => handleOptionSelection(button, letter);
-                        optionsContainer.appendChild(button);
-                    }
-                });
-            } else { // fill_blank
-                document.getElementById('mcq-options').classList.add('hidden');
-                document.getElementById('fill-blank-container').classList.remove('hidden');
-                const input = document.getElementById('fill-blank-input');
-                input.value = '';
-                input.classList.remove('correct', 'incorrect');
-                input.readOnly = false;
-                mainButton.textContent = "Type an Answer";
-                input.onkeydown = (event) => {
-                    if (event.key === 'Enter' && input.value.trim() !== '') {
-                        processAnswer(false);
-                    }
-                };
+        function displayQuestion() {
+            nextButton.classList.add('hidden');
+            const question = currentQuestions[currentQuestionIndex];
+            document.getElementById('stats').textContent = `Question ${currentQuestionIndex + 1}/${currentQuestions.length}`;
+            document.getElementById('score').textContent = `Score: ${score}`;
+            document.getElementById('progress-bar').style.width = `${((currentQuestionIndex + 1) / currentQuestions.length) * 100}%`;
+            const prompt = `<div class="flex items-center justify-between mb-4"><p class="text-lg subtle-text-color">${question.promptTE}</p><button onclick="speak('${question.promptEN.replace(/'/g, "\\'")}')" class="p-2 rounded-full hover:bg-white/20 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></button></div><h2 class="text-2xl font-bold mb-6 text-white">${question.promptEN}</h2>`;
+            let content = '';
+            if (question.type === 'mcq') {
+                const options = ['A', 'B', 'C', 'D'].map(opt => `<button onclick="checkAnswer('${opt}', this)" class="w-full text-left p-4 border-2 border-white/30 rounded-lg hover:accent-border hover:bg-white/10 transition-all duration-200">${question[opt]}</button>`).join('');
+                content = `${prompt}<div class="space-y-3">${options}</div>`;
+            } else if (question.type === 'fill_blank') {
+                content = `${prompt}<input id="fill-blank-input" type="text" class="w-full p-4 border-2 border-white/30 rounded-lg bg-transparent focus:outline-none focus:ring-2 accent-ring" placeholder="Type your answer..."><button onclick="checkFillBlank()" class="mt-4 w-full accent-bg text-white font-bold py-3 rounded-lg">Check Answer</button>`;
             }
-            
-            document.getElementById('question-counter').textContent = `${currentQuestionIndex + 1}/${questionPool.length}`;
-            updateProgressBar();
-            applyInputStyles();
+            questionContainer.innerHTML = `<div class="fade-in">${content}</div><div id="feedback" class="mt-4"></div>`;
         }
-        
-        function handleOptionSelection(button, letter) {
-            if (quizPhase !== 'select') return;
-            handleUiTapFeedback();
-            selectedOption = letter;
-            document.querySelectorAll('.mc-option').forEach(btn => btn.classList.remove('selected'));
-            button.classList.add('selected');
-            document.getElementById('main-action-button').disabled = false;
-            document.getElementById('main-action-button').textContent = "Check Answer";
-        }
-        
-        function processAnswer(isSkipped = false) {
-            if (quizPhase === 'next') {
-                showNextQuestion();
-                return;
-            }
 
-            quizPhase = 'next';
-            const questionData = questionPool[currentQuestionIndex];
-            let isCorrect = false;
-            let userAnswer = '';
-            
-            document.getElementById('skip-button').disabled = true;
-
-            if (isSkipped) {
-                userAnswer = '(Skipped)';
-                isCorrect = false;
-            } else if (questionData.type === 'mcq') {
-                userAnswer = selectedOption;
-                isCorrect = selectedOption === questionData.correct;
-            } else { // fill_blank
-                const input = document.getElementById('fill-blank-input');
-                userAnswer = input.value.trim();
-                const correctAnswers = questionData.correct.toLowerCase().split('/').map(a => a.trim());
-                isCorrect = correctAnswers.includes(userAnswer.toLowerCase());
-            }
-
-            // UI feedback
-            if (questionData.type === 'mcq') {
-                document.querySelectorAll('.mc-option').forEach(btn => {
-                    btn.classList.add('locked');
-                    const btnLetter = btn.textContent.trim().substring(0, 1);
-                    if (btnLetter === questionData.correct) btn.classList.add('correct');
-                    if (btn.classList.contains('selected') && !isCorrect) btn.classList.add('incorrect');
-                });
-                 if (isSkipped) {
-                    document.querySelectorAll('.mc-option').forEach(btn => {
-                        const btnLetter = btn.textContent.trim().substring(0, 1);
-                        if (btnLetter === questionData.correct) btn.classList.add('skipped');
-                    });
-                }
+        function checkAnswer(selected, element) {
+            const question = currentQuestions[currentQuestionIndex];
+            const isCorrect = selected === question.correct;
+            const buttons = questionContainer.querySelectorAll('button');
+            buttons.forEach(b => b.disabled = true);
+            playFeedback(isCorrect);
+            if (isCorrect) {
+                score++;
+                element.classList.add('bg-green-500/50', 'border-green-400');
             } else {
-                const input = document.getElementById('fill-blank-input');
-                input.readOnly = true;
-                if (!isSkipped) input.classList.add(isCorrect ? 'correct' : 'incorrect');
-                else input.classList.add('skipped');
-                input.onkeydown = null;
+                element.classList.add('bg-red-500/50', 'border-red-400');
+                const correctButton = Array.from(buttons).find(b => b.textContent === question[question.correct]);
+                if(correctButton) correctButton.classList.add('bg-green-500/50', 'border-green-400');
             }
+            displayFeedback(isCorrect);
+        }
 
-            if(isSkipped) {
-                document.getElementById('feedback-message').textContent = 'Skipped!';
-                document.getElementById('feedback-message').className = 'text-base font-medium text-right text-yellow-600 dark-mode:text-yellow-400';
-            } else if (isCorrect) {
-                score++; playSound('correct'); vibrate('correct');
-                document.getElementById('feedback-message').textContent = 'Correct!';
-                document.getElementById('feedback-message').className = 'text-base font-medium text-right text-green-600 dark-mode:text-green-400';
+        function checkFillBlank() {
+            const input = document.getElementById('fill-blank-input');
+            const question = currentQuestions[currentQuestionIndex];
+            const isCorrect = input.value.trim().toLowerCase() === question.correct.trim().toLowerCase();
+            input.disabled = true;
+            questionContainer.querySelector('button').disabled = true;
+            playFeedback(isCorrect);
+            if (isCorrect) { score++; input.classList.add('bg-green-500/50', 'border-green-400'); } 
+            else { input.classList.add('bg-red-500/50', 'border-red-400'); }
+            displayFeedback(isCorrect);
+        }
+
+        function displayFeedback(isCorrect) {
+            const question = currentQuestions[currentQuestionIndex];
+            const icon = isCorrect ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 text-green-300"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 text-red-300"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`;
+            document.getElementById('feedback').innerHTML = `<div class="fade-in p-4 rounded-lg glass-effect"><p class="font-semibold">${icon} ${isCorrect ? 'Correct!' : 'Not quite.'}</p><p class="text-sm text-gray-300 mt-2">${question.feedbackEN}</p><p class="text-sm text-gray-400 mt-1">${question.feedbackTE}</p></div>`;
+            nextButton.classList.remove('hidden');
+        }
+
+        function handleNextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentQuestions.length) displayQuestion();
+            else showResults();
+        }
+        
+        function showResults() {
+             quizScreen.classList.add('hidden');
+             resultsScreen.classList.remove('hidden');
+             const percentage = Math.round((score / currentQuestions.length) * 100);
+             document.getElementById('final-score').textContent = `${score}/${currentQuestions.length} (${percentage}%)`;
+             document.getElementById('results-details').innerHTML = currentQuestions.map((q, i) => `<div class="p-3 rounded-md button-bg-color"><p class="font-semibold text-gray-200">${i+1}. ${q.promptEN}</p><p class="text-green-400">Correct: ${q[q.correct] || q.correct}</p></div>`).join('');
+        }
+
+        // Event Listeners
+        startButton.addEventListener('click', startQuiz);
+        nextButton.addEventListener('click', handleNextQuestion);
+        restartButton.addEventListener('click', () => { resultsScreen.classList.add('hidden'); startScreen.classList.remove('hidden'); });
+
+        // Theming & Settings
+        function getLocalStorageSetting(key, defaultValue) { return localStorage.getItem(key) || defaultValue; }
+        function setLocalStorageSetting(key, value) { localStorage.setItem(key, value); }
+        
+        function applyTheme(isDark) {
+            const lightIcon = document.getElementById('theme-icon-light');
+            const darkIcon = document.getElementById('theme-icon-dark');
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                lightIcon.classList.add('hidden');
+                darkIcon.classList.remove('hidden');
             } else {
-                playSound('incorrect'); vibrate('incorrect');
-                document.getElementById('feedback-message').textContent = 'Not quite.';
-                document.getElementById('feedback-message').className = 'text-base font-medium text-right text-red-500 dark-mode:text-red-400';
+                document.documentElement.classList.remove('dark');
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
             }
-
-            quizResults.push({
-                question: questionData,
-                userAnswer: userAnswer,
-                isCorrect: isCorrect,
-                isSkipped: isSkipped,
+        }
+        
+        function setBodyFont(font) { document.documentElement.style.setProperty('--body-font', font); setLocalStorageSetting('bodyFont', font); }
+        function setTitleFont(font) { document.documentElement.style.setProperty('--title-font', font); setLocalStorageSetting('titleFont', font); }
+        function applyAccentColor(name) {
+            const theme = COLOR_THEMES.find(t => t.name === name) || COLOR_THEMES[0];
+            document.documentElement.style.setProperty('--accent-color', theme.value);
+            setLocalStorageSetting('colorTheme', name);
+        }
+        
+        function loadInitialSettings() {
+            const savedTheme = getLocalStorageSetting('theme', 'dark'); // Default to dark glass
+            applyTheme(savedTheme === 'dark');
+            document.getElementById('theme-toggle').addEventListener('click', () => {
+                const isDark = document.documentElement.classList.contains('dark');
+                applyTheme(!isDark);
+                setLocalStorageSetting('theme', isDark ? 'light' : 'dark');
             });
             
-            updateScore();
-            document.getElementById('explanation-text').innerHTML = `<strong class="text-primary">English:</strong> ${questionData.feedbackEN}<br/><strong class="text-primary mt-2 block">Telugu:</strong> <em class="text-gray-500 dark-mode:text-gray-400">${questionData.feedbackTE}</em>`;
-            document.getElementById('explanation-area').classList.remove('hidden');
-            
-            const mainButton = document.getElementById('main-action-button');
-            mainButton.disabled = false;
-            mainButton.textContent = currentQuestionIndex === questionPool.length - 1 ? 'Finish Quiz' : 'Next Question';
+            setBodyFont(getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value));
+            setTitleFont(getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value));
+            applyAccentColor(getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name));
+            updateFontButton('body');
+            updateFontButton('title');
+            updateColorButton();
+            document.getElementById('settings-button').addEventListener('click', openSettingsModal);
+            curriculumButton.addEventListener('click', openCurriculumModal); // Add listener for curriculum
         }
-
-        function showNextQuestion() {
-            document.getElementById('feedback-message').textContent = '';
-            if (currentQuestionIndex < questionPool.length - 1) {
-                currentQuestionIndex++;
-                showQuestion();
-            } else {
-                finishQuiz();
+        
+        // Modals Logic
+        function openSettingsModal() { document.getElementById('settings-modal').classList.remove('hidden'); }
+        function closeSettingsModal() { document.getElementById('settings-modal').classList.add('hidden'); }
+        function openCurriculumModal() { document.getElementById('curriculum-modal').classList.remove('hidden'); }
+        function closeCurriculumModal() { document.getElementById('curriculum-modal').classList.add('hidden'); }
+        
+        function openSelectionModal(type) {
+            if (['bodyFont', 'titleFont', 'color'].includes(type)) {
+                closeSettingsModal();
             }
-        }
-        
-        function finishQuiz() {
-            document.getElementById('question-area').classList.add('hidden');
-            document.getElementById('quiz-action-buttons').classList.add('hidden');
-            document.getElementById('quiz-status-bar').classList.add('hidden');
-            const finalResults = document.getElementById('final-results');
-            finalResults.classList.remove('hidden');
-            
-            const attempted = questionPool.length - quizResults.filter(r => r.isSkipped).length;
-            const percentage = attempted > 0 ? ((score / attempted) * 100).toFixed(0) : 0;
-            
-            let resultsHTML = `
-                <h2 class="text-3xl font-bold text-primary mb-4 elegant-title">Class ${selectedClass} Complete!</h2>
-                <p class="text-lg text-gray-700 dark-mode:text-gray-300 mb-2">You scored ${score} out of ${attempted} attempted questions.</p>
-                <p class="text-2xl font-bold text-primary">${percentage}% Correct</p>
-                <div class="border-t pt-4 mt-4 text-left space-y-4 max-h-96 overflow-y-auto pr-2">
-            `;
-            
-            quizResults.forEach((result, index) => {
-                let statusClass = result.isSkipped ? 'bg-yellow-100 dark-mode:bg-yellow-900/40 border-yellow-400' : (result.isCorrect ? 'bg-green-100 dark-mode:bg-green-900/40 border-green-400' : 'bg-red-100 dark-mode:bg-red-900/40 border-red-400');
-                let statusText = result.isSkipped ? 'SKIPPED' : (result.isCorrect ? 'CORRECT' : 'INCORRECT');
-                let statusTextClass = result.isSkipped ? 'text-yellow-700 dark-mode:text-yellow-300' : (result.isCorrect ? 'text-green-700 dark-mode:text-green-300' : 'text-red-700 dark-mode:text-red-300');
 
-                let userAnswerDisplay = result.isSkipped ? '(Skipped)' : result.userAnswer;
-                if (result.question.type === 'mcq' && !result.isSkipped) {
-                    userAnswerDisplay = `${result.userAnswer}: ${result.question.options[result.userAnswer]}`;
-                }
-
-                resultsHTML += `
-                    <div class="p-3 rounded-xl border-2 ${statusClass}">
-                        <p class="font-bold text-lg flex justify-between items-center mb-1">
-                            <span>Q${index + 1}</span>
-                            <span class="text-sm font-extrabold ${statusTextClass}">${statusText}</span>
-                        </p>
-                        <p class="text-sm italic text-gray-600 dark-mode:text-gray-300 mb-2">${result.question.promptEN}</p>
-                        <p class="text-sm">You answered: <strong class="${statusTextClass}">${userAnswerDisplay}</strong></p>
-                        ${!result.isCorrect && !result.isSkipped ? `<p class="text-sm">Correct answer: <strong>${result.question.type === 'mcq' ? result.question.correct + ': ' + result.question.options[result.question.correct] : result.question.correct}</strong></p>` : ''}
-                        <div class="mt-2 pt-2 border-t border-gray-300 dark-mode:border-gray-600 text-xs">
-                           <p><strong>EN:</strong> ${result.question.feedbackEN}</p>
-                           <p><strong>TE:</strong> ${result.question.feedbackTE}</p>
-                        </div>
-                    </div>
-                `;
-            });
-
-            resultsHTML += `</div><button onclick="window.location.reload()" class="ripple-btn mt-6 w-full px-4 py-3 bg-green-600 text-white font-bold rounded-xl shadow-lg">Back to Home</button>`;
-            finalResults.innerHTML = resultsHTML;
-        }
-        
-        function updateScore() { document.getElementById('score-display').textContent = score; }
-        function updateProgressBar() { const total = questionPool.length > 0 ? questionPool.length : 1; document.getElementById('progress-bar').style.width = `${((currentQuestionIndex + 1) / total) * 100}%`; }
-        function shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } }
-        
-        const getLocalStorageSetting = (key, defaultValue) => { try { const s = localStorage.getItem(SETTINGS_KEY); if (!s) return defaultValue; const settings = JSON.parse(s); if (key === 'selectedClass' || key === 'maxQuestions') { const p = parseInt(settings[key]); return isNaN(p) ? defaultValue : p; } return (typeof settings[key] === 'undefined' || settings[key] === null) ? defaultValue : settings[key]; } catch (e) { console.error(`Error loading setting ${key}:`, e); return defaultValue; } };
-        const saveLocalStorageSetting = (key, value) => { try { const s = localStorage.getItem(SETTINGS_KEY); let o = s ? JSON.parse(s) : {}; o[key] = value; localStorage.setItem(SETTINGS_KEY, JSON.stringify(o)); } catch (e) { console.error(`Error saving setting ${key}:`, e); } };
-        function setThemeColor(color) { saveLocalStorageSetting('color', color); applyTheme(getLocalStorageSetting('theme', 'light') === 'dark'); updateSettingsUI(); }
-        function setThemeMode(mode) { saveLocalStorageSetting('theme', mode); applyTheme(mode === 'dark'); updateSettingsUI(); }
-        function toggleTheme() { const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')); setThemeMode(currentMode === 'dark' ? 'light' : 'dark'); }
-        function setTextContrast(contrast) { saveLocalStorageSetting('contrast', contrast); document.body.setAttribute('data-contrast', contrast); applyTheme(getLocalStorageSetting('theme', 'light') === 'dark'); updateSettingsUI(); }
-        window.setBodyFont = function(font) { saveLocalStorageSetting('bodyFont', font); const fallback = font.includes('serif') ? 'serif' : 'sans-serif'; document.documentElement.style.setProperty('--font-body', `"${font}", ${fallback}`); updateSettingsUI(); }
-        window.setTitleFont = function(font) { saveLocalStorageSetting('titleFont', font); const fallback = font.includes('serif') ? 'serif' : 'sans-serif'; document.documentElement.style.setProperty('--font-title', `"${font}", ${fallback}`); updateSettingsUI(); }
-        function setInputStyle(style) { saveLocalStorageSetting('inputStyle', style); applyInputStyles(); updateSettingsUI(); }
-        function applyInputStyles() { const style = getLocalStorageSetting('inputStyle', 'rounded'); const root = document.documentElement.style; root.setProperty('--input-border-radius', style === 'square' ? '0.5rem' : '1.5rem'); root.setProperty('--input-shadow', style === 'square' ? '0 2px 4px rgba(0,0,0,0.1)' : '0 4px 6px rgba(0,0,0,0.05)'); document.querySelectorAll('input[type="text"]').forEach(input => { input.style.borderRadius = `var(--input-border-radius)`; input.style.boxShadow = `var(--input-shadow)`; }); }
-        function toggleAudio() { saveLocalStorageSetting('disableSound', !getLocalStorageSetting('disableSound', false)); updateSettingsUI(); }
-        function toggleHaptics() { saveLocalStorageSetting('disableVibration', !getLocalStorageSetting('disableVibration', false)); updateSettingsUI(); }
-        function toggleTextHue() { saveLocalStorageSetting('textHue', !getLocalStorageSetting('textHue', false)); applyTheme(getLocalStorageSetting('theme', 'light') === 'dark'); updateSettingsUI(); }
-        function applyTheme(isDark) { const color = getLocalStorageSetting('color', 'indigo'); const contrast = getLocalStorageSetting('contrast', 'default'); const textHue = getLocalStorageSetting('textHue', false); const bodyFont = getLocalStorageSetting('bodyFont', 'Inter'); const titleFont = getLocalStorageSetting('titleFont', 'Lora'); const body = document.body; body.setAttribute('data-color', color); body.setAttribute('data-contrast', contrast); body.setAttribute('data-text-hue', textHue ? 'themed' : 'default'); body.classList.toggle(DARK_CLASS, isDark); window.setBodyFont(bodyFont); window.setTitleFont(titleFont); applyInputStyles(); updateHamburgerMenuUI(); }
-        function updateSettingsUI() {
-            const mode = getLocalStorageSetting('theme', 'light');
-            const color = getLocalStorageSetting('color', 'indigo');
-            const contrast = getLocalStorageSetting('contrast', 'default');
-            const inputStyle = getLocalStorageSetting('inputStyle', 'rounded');
-            const disableSound = getLocalStorageSetting('disableSound', false);
-            const disableVibration = getLocalStorageSetting('disableVibration', false);
-            const textHue = getLocalStorageSetting('textHue', false);
-            document.querySelectorAll('[data-mode-id]').forEach(btn => { const isActive = (btn.dataset.modeId === mode); btn.classList.toggle('ring-4', isActive); btn.classList.toggle('ring-primary-hex', isActive); });
-            document.querySelectorAll('.color-option').forEach(btn => { btn.classList.toggle('border-white', btn.dataset.colorId === color); btn.classList.toggle('border-4', btn.dataset.colorId === color); });
-            document.querySelectorAll('[data-contrast-id], [data-style-id]').forEach(btn => { const isActive = (btn.dataset.contrastId === contrast) || (btn.dataset.styleId === inputStyle); btn.classList.toggle('ring-4', isActive); btn.classList.toggle('ring-primary-hex', isActive); });
-            document.getElementById('toggle-audio').checked = disableSound;
-            document.getElementById('toggle-haptics').checked = disableVibration;
-            document.getElementById('toggle-text-hue').checked = textHue;
-            updateFontButton('body'); updateFontButton('title'); updateClassSelectionButton();
-            updateQuizLengthButton();
-        }
-        function updateHamburgerMenuUI() { const isDark = document.body.classList.contains(DARK_CLASS); document.getElementById('menu-theme-text').textContent = isDark ? "Switch to Light Mode" : "Switch to Dark Mode"; document.getElementById('menu-theme-icon').innerHTML = isDark ? `<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.593.748-3.752A9.753 9.753 0 009 12.75a9.75 9.75 0 0011.002 9.75z" />` : `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`; }
-        function loadInitialTheme() { 
-            selectedClass = getLocalStorageSetting('selectedClass', 1); 
-            maxQuestions = getLocalStorageSetting('maxQuestions', DEFAULT_MAX_QUESTIONS);
-            const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')); 
-            applyTheme(currentMode === 'dark'); 
-            updateSettingsUI(); 
-            updateStartScreenMessage(); 
-        }
-        
-        window.openSettings = function() { document.getElementById('settings-modal').classList.remove('hidden'); updateSettingsUI(); }
-        window.closeSettings = function() { document.getElementById('settings-modal').classList.add('hidden'); }
-        window.toggleHamburgerMenu = function() { document.getElementById('hamburger-menu').classList.toggle('translate-x-full'); document.getElementById('hamburger-overlay').classList.toggle('hidden'); updateHamburgerMenuUI(); }
-        window.openSelectionModal = function(type) {
-            currentSelectionType = type;
             const modal = document.getElementById('selection-modal');
-            const titleEl = document.getElementById('selection-modal-title');
-            const listEl = document.getElementById('selection-modal-list');
-            listEl.innerHTML = ''; let optionsHTML = '';
-            if (type === 'class') { titleEl.textContent = 'Select a Class'; optionsHTML = CLASS_TOPICS.map((topic, index) => renderOption('class', index + 1, `Class ${index + 1}: ${topic}`, selectedClass, 'handleSelectionChange')).join(''); }
-            else if (type === 'count') { titleEl.textContent = 'Select Quiz Length'; optionsHTML = QUESTION_OPTIONS.map(c => renderOption('count', c, `${c} Questions`, maxQuestions, 'handleSelectionChange')).join(''); }
-            else if (type === 'body') { titleEl.textContent = 'Select Body Font'; optionsHTML = FONT_OPTIONS.body.map(f => renderOption('font', f.value, f.label, getLocalStorageSetting('bodyFont', 'Inter'), 'handleSelectionChange')).join(''); }
-            else if (type === 'title') { titleEl.textContent = 'Select Title Font'; optionsHTML = FONT_OPTIONS.title.map(f => renderOption('font', f.value, f.label, getLocalStorageSetting('titleFont', 'Lora'), 'handleSelectionChange')).join(''); }
-            listEl.innerHTML = optionsHTML; modal.classList.remove('hidden');
+            const title = document.getElementById('modal-title');
+            const optionsContainer = document.getElementById('modal-options');
+            let optionsHTML = '';
+            const buttonClass = 'w-full text-left p-3 rounded-lg hover:bg-white/10 text-white';
+
+            if (type === 'class') {
+                title.textContent = 'Select a Class';
+                optionsHTML = CLASS_TOPICS.map((topic, i) => `<button onclick="handleSelectionChange('class', ${i+1})" class="${buttonClass}">${i+1}: ${topic}</button>`).join('');
+            } else if (type === 'count') {
+                title.textContent = 'Select Quiz Length';
+                [4, 5, 10, 15, 20, 25].forEach(count => { optionsHTML += `<button onclick="handleSelectionChange('count', ${count})" class="${buttonClass}">${count} Questions</button>`; });
+            } else if (type === 'bodyFont' || type === 'titleFont') {
+                title.textContent = type === 'bodyFont' ? 'Select Body Font' : 'Select Title Font';
+                const options = FONT_OPTIONS[type === 'bodyFont' ? 'body' : 'title'];
+                optionsHTML = options.map(opt => `<button onclick="handleSelectionChange('${type}', '${opt.value}')" class="${buttonClass}" style="font-family: ${opt.value};">${opt.label}</button>`).join('');
+            } else if (type === 'color') {
+                title.textContent = 'Select Accent Color';
+                optionsHTML = COLOR_THEMES.map(theme => `<button onclick="handleSelectionChange('color', '${theme.name}')" class="${buttonClass} flex items-center justify-between"><span>${theme.name}</span><span class="w-6 h-6 rounded-full" style="background-color: rgb(${theme.value})"></span></button>`).join('');
+            }
+            optionsContainer.innerHTML = optionsHTML;
+            modal.classList.remove('hidden');
         }
-        window.closeSelectionModal = function() { document.getElementById('selection-modal').classList.add('hidden'); }
-        window.handleSelectionChange = function(value) {
-            if (currentSelectionType === 'class') { selectedClass = parseInt(value); saveLocalStorageSetting('selectedClass', selectedClass); updateClassSelectionButton(); updateStartScreenMessage(); }
-            else if (currentSelectionType === 'count') { maxQuestions = parseInt(value); saveLocalStorageSetting('maxQuestions', maxQuestions); updateQuizLengthButton(); updateStartScreenMessage(); }
-            else if (currentSelectionType === 'body') { window.setBodyFont(value); }
-            else if (currentSelectionType === 'title') { window.setTitleFont(value); }
+
+        function closeSelectionModal() { document.getElementById('selection-modal').classList.add('hidden'); }
+        
+        function handleSelectionChange(type, value) {
+            if (type === 'class') { selectedClass = value; setLocalStorageSetting('spokenEnglishClass', value); updateClassSelectionButton(); } 
+            else if (type === 'count') { maxQuestions = value; setLocalStorageSetting('spokenEnglishLength', value); updateQuizLengthButton(); } 
+            else if (type === 'bodyFont') { setBodyFont(value); updateFontButton('body'); } 
+            else if (type === 'titleFont') { setTitleFont(value); updateFontButton('title'); } 
+            else if (type === 'color') { applyAccentColor(value); updateColorButton(); }
             closeSelectionModal();
         }
-        function renderOption(type, value, label, currentValue, handler) {
-            const isSelected = value.toString() === currentValue.toString();
-            let styleAttr = type === 'font' ? `style="font-family: '${value}', ${value.includes('serif') ? 'serif' : 'sans-serif'};"` : '';
-            return `<div class="ripple-btn selector-item ${isSelected ? 'selected' : ''}" onclick="handleUiTapFeedback(); ${handler}('${value}')" ${styleAttr}><span>${label}</span><div class="radio-circle ${isSelected ? 'selected' : ''}"><div class="radio-dot ${isSelected ? 'selected' : ''}"></div></div></div>`;
-        }
+
+        // Update UI Text
         function getLabel(type, value) {
             if (type === 'class') return `Class ${value}: ${CLASS_TOPICS[value-1]}`;
             if (type === 'count') return `${value} Questions`;
-            const options = FONT_OPTIONS[type === 'bodyFont' ? 'body' : 'title'];
-            const option = options.find(opt => opt.value === value);
-            return option ? option.label : value;
+            if (type === 'bodyFont' || type === 'titleFont') {
+                const options = FONT_OPTIONS[type === 'bodyFont' ? 'body' : 'title'];
+                return (options.find(opt => opt.value === value) || {}).label || 'Default';
+            }
+            return value;
         }
-        function updateFontButton(type) { const id = type === 'body' ? 'current-body-font' : 'current-title-font'; const value = getLocalStorageSetting(type === 'body' ? 'bodyFont' : 'Inter', type === 'body' ? 'Inter' : 'Lora'); document.getElementById(id).textContent = getLabel(type === 'body' ? 'bodyFont' : 'titleFont', value); }
+        
+        function updateFontButton(type) { const id = type === 'body' ? 'current-body-font' : 'current-title-font'; const key = type === 'body' ? 'bodyFont' : 'titleFont'; const value = getLocalStorageSetting(key, FONT_OPTIONS[type][0].value); document.getElementById(id).textContent = getLabel(key, value); }
+        function updateColorButton() { const value = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name); document.getElementById('current-accent-color').textContent = value; }
         function updateClassSelectionButton() { document.getElementById('current-class-selection').textContent = getLabel('class', selectedClass); }
         function updateQuizLengthButton() { document.getElementById('current-quiz-length').textContent = getLabel('count', maxQuestions); }
+        
         function updateStartScreenMessage() {
+            // Only update the message if the data has loaded. 
+            // If there was an error, the error message will be preserved.
             if (isDataLoaded) {
-                 document.getElementById('start-message').textContent = `Ready to practice Class ${selectedClass}? Select your quiz length and press Start!`;
-            } else {
-                 document.getElementById('start-message').textContent = `Loading data... Please wait.`;
+                 document.getElementById('start-message').textContent = `Ready to practice? Select your class and quiz length, then press Start!`;
             }
         }
+
 
         window.onload = () => {
             setupAudio();
             loadQuestions();
-            loadInitialTheme();
+            loadInitialSettings();
         };
     </script>
 </body>
 </html>
+
+
 
