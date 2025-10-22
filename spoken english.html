@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,6 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                // Correct path to the service worker file
                 navigator.serviceWorker.register('service-worker.js')
                     .then(registration => console.log('Service Worker registered: ', registration))
                     .catch(error => console.error('Service Worker registration failed: ', error));
@@ -29,7 +28,6 @@
             --body-font: 'Inter', sans-serif;
             --accent-color: 79, 70, 229; /* Indigo */
             
-            /* Light Glass Theme Variables */
             --glass-bg: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.2);
             --main-text: #f3f4f6;
@@ -38,7 +36,6 @@
         }
 
         .dark:root {
-             /* Dark Glass Theme Variables - UPDATED for more contrast */
             --glass-bg: rgba(0, 0, 0, 0.5);
             --glass-border: rgba(255, 255, 255, 0.1);
             --main-text: #f3f4f6;
@@ -104,7 +101,6 @@
                 <a href="game hub.html" class="text-gray-200 hover:text-white transition-colors p-2 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                 </a>
-                 <!-- NEW: Curriculum Button -->
                 <button id="curriculum-button" class="p-2 rounded-full text-gray-200 hover:text-white transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                 </button>
@@ -123,17 +119,39 @@
             <p id="start-message" class="mb-6 subtle-text-color">Loading data... Please wait.</p>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                <button onclick="openSelectionModal('class')" class="w-full text-white p-3 rounded-lg text-left button-bg-color">
+                <button id="class-selection-button" class="w-full text-white p-3 rounded-lg text-left button-bg-color">
                     <span class="text-xs text-gray-400">Class</span><br>
                     <span id="current-class-selection" class="font-semibold"></span>
                 </button>
-                <button onclick="openSelectionModal('count')" class="w-full text-white p-3 rounded-lg text-left button-bg-color">
+                <button id="length-selection-button" class="w-full text-white p-3 rounded-lg text-left button-bg-color">
                     <span class="text-xs text-gray-400">Quiz Length</span><br>
                     <span id="current-quiz-length" class="font-semibold"></span>
                 </button>
             </div>
 
-            <button id="start-quiz-button" disabled class="w-full accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+            <!-- --- THIS IS THE NEW TIPS BLOCK --- -->
+            <div id="lesson-tips-container" class="hidden text-left p-4 rounded-lg button-bg-color mt-6 glass-effect">
+                <h3 id="lesson-tip-title" class="font-bold text-lg text-white mb-2">Lesson Focus:</h3>
+                
+                <div class="flex items-center justify-between">
+                    <p id="lesson-tip-en" class="text-sm text-gray-200 flex-1 pr-2"></p>
+                    <button id="speak-en-tip" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    </button>
+                </div>
+                
+                <hr class="border-white/20 my-2">
+                
+                <div class="flex items-center justify-between">
+                    <p id="lesson-tip-te" class="text-sm text-gray-300 flex-1 pr-2"></p>
+                    <button id="speak-te-tip" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- --- END OF NEW TIPS BLOCK --- -->
+
+            <button id="start-quiz-button" disabled class="w-full mt-6 accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
                 Start Quiz
             </button>
         </div>
@@ -164,7 +182,7 @@
         <div class="rounded-2xl shadow-xl p-6 w-full max-w-sm max-h-[80vh] flex flex-col glass-effect">
             <div class="flex justify-between items-center mb-4">
                 <h3 id="modal-title" class="text-xl font-bold text-white">Select Option</h3>
-                <button onclick="closeSelectionModal()" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
+                <button id="close-selection-modal" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
             </div>
             <div id="modal-options" class="space-y-2 overflow-y-auto no-scrollbar"></div>
         </div>
@@ -174,18 +192,18 @@
         <div class="rounded-2xl shadow-xl p-6 w-full max-w-sm glass-effect">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-xl font-bold text-white">Settings</h3>
-                <button onclick="closeSettingsModal()" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
+                <button id="close-settings-modal" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
             </div>
             <div class="space-y-4">
-                <button onclick="openSelectionModal('bodyFont')" class="w-full p-3 rounded-lg text-left button-bg-color text-white">
+                <button id="body-font-button" class="w-full p-3 rounded-lg text-left button-bg-color text-white">
                     <span class="text-xs text-gray-400">Body Font</span><br>
                     <span id="current-body-font" class="font-semibold"></span>
                 </button>
-                <button onclick="openSelectionModal('titleFont')" class="w-full p-3 rounded-lg text-left button-bg-color text-white">
+                <button id="title-font-button" class="w-full p-3 rounded-lg text-left button-bg-color text-white">
                     <span class="text-xs text-gray-400">Title Font</span><br>
                     <span id="current-title-font" class="font-semibold"></span>
                 </button>
-                <button onclick="openSelectionModal('color')" class="w-full p-3 rounded-lg text-left button-bg-color text-white">
+                <button id="color-button" class="w-full p-3 rounded-lg text-left button-bg-color text-white">
                     <span class="text-xs text-gray-400">Accent Color</span><br>
                     <span id="current-accent-color" class="font-semibold"></span>
                 </button>
@@ -193,15 +211,14 @@
         </div>
     </div>
 
-     <!-- NEW: Curriculum Modal -->
     <div id="curriculum-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4">
         <div class="rounded-2xl shadow-xl p-6 w-full max-w-3xl max-h-[80vh] flex flex-col glass-effect">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold text-white">45-Day Spoken English Curriculum</h3>
-                <button onclick="closeCurriculumModal()" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
+                <button id="close-curriculum-modal" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
             </div>
             <div class="space-y-6 overflow-y-auto no-scrollbar pr-2 text-sm">
-                
+                <!-- All the curriculum table HTML is unchanged... -->
                 <div>
                     <h4 class="font-bold text-lg mb-2 accent-text">Phase I: Core Action and Simple Tense Mastery (Classes 01–12)</h4>
                     <table class="w-full text-left">
@@ -224,7 +241,6 @@
                         </tbody>
                     </table>
                 </div>
-
                 <div>
                     <h4 class="font-bold text-lg mb-2 accent-text">Phase II: Actions in Progress—Mastery of Continuous Forms (Classes 13–15)</h4>
                     <table class="w-full text-left">
@@ -238,7 +254,6 @@
                         </tbody>
                     </table>
                 </div>
-                
                 <div>
                     <h4 class="font-bold text-lg mb-2 accent-text">Phase III: Modality, Ability, and Obligation (Classes 16–20)</h4>
                     <table class="w-full text-left">
@@ -279,7 +294,6 @@
                         </tbody>
                     </table>
                 </div>
-
                 <div>
                     <h4 class="font-bold text-lg mb-2 accent-text">Phase V: Necessity, Desire, and Specialized Auxiliaries (Classes 36–41)</h4>
                     <table class="w-full text-left">
@@ -296,7 +310,6 @@
                         </tbody>
                     </table>
                 </div>
-                
                 <div>
                     <h4 class="font-bold text-lg mb-2 accent-text">Phase VI: Synthesis, Tenses, and Voice (Classes 42–45)</h4>
                     <table class="w-full text-left">
@@ -317,17 +330,15 @@
 
 
     <script>
-        // DOM Elements
-        const startScreen = document.getElementById('start-screen');
-        const quizScreen = document.getElementById('quiz-screen');
-        const resultsScreen = document.getElementById('results-screen');
-        const questionContainer = document.getElementById('question-container');
-        const startButton = document.getElementById('start-quiz-button');
-        const nextButton = document.getElementById('next-question-button');
-        const restartButton = document.getElementById('restart-quiz-button');
-        const curriculumButton = document.getElementById('curriculum-button');
+        // --- DOM Elements (Declared with 'let') ---
+        let startScreen, quizScreen, resultsScreen, questionContainer, startButton, nextButton, restartButton, curriculumButton;
+        let lessonTipsContainer, lessonTipTitle, lessonTipEN, lessonTipTE, speakENTipButton, speakTETipButton;
+        let stats, scoreEl, progressBar, finalScoreEl, resultsDetails, selectionModal, modalTitle, modalOptions;
+        let settingsModal, themeToggle, themeIconLight, themeIconDark, startMessage, classSelectionButton, lengthSelectionButton;
+        let currentClassSelection, currentQuizLength, closeSelectionModalBtn, closeSettingsModalBtn, closeCurriculumModalBtn;
+        let bodyFontBtn, titleFontBtn, colorBtn, currentBodyFont, currentTitleFont, currentAccentColor;
 
-        // State
+        // --- State ---
         let allQuestions = [];
         let currentQuestions = [];
         let currentQuestionIndex = 0;
@@ -338,15 +349,65 @@
         let synth;
         let correctSound, wrongSound;
 
-        // Constants
+        // --- Constants ---
         const CLASS_TOPICS = [ "Pronoun Roles", "Self-Introduction", "Regular Verbs", "Irregular Verbs", "Simple Present Tense", "Simple Present (Do/Does)", "WH-Questions (Do/Does)", "Simple Past Tense", "Simple Past (Did)", "WH-Questions (Did)", "Simple Future Tense", "WH-Questions (Shall/Will)", "Present Continuous (Am/Is/Are)", "Past Continuous (Was/Were)", "Future Continuous (Shall be/Will be)", "Can/Could", "May/Might", "Should", "Must", "Would (Past Habit) & Synthesis", "Have/Has (Possession)", "Present Perfect Tense", "Past Perfect Tense", "Future Perfect Tense", "Should have/Must have (P.P.F)", "May have/Might have (P.P.F)", "Would have/Could have (P.P.F)", "Past Actions Review", "Present Perfect Continuous", "Past Perfect Continuous", "Future Perfect Continuous", "Continuous Modal Perfects", "Application of Should/Must Have Been", "Application of Would/Could Have Been", "Application of May/Might Have Been & Review", "Have to/Has to (Present/Future)", "Need to/Dare to/Ought to", "Want to/Wish to/Would like to", "Able to, Willing to, Going to, etc.", "Had to (Past Obligation)", "Used to (Past Habit)", "The 12 Tenses Matrix", "12 Tenses Application", "Active Voice & Passive Voice", "Be with P.P. Form and Special Verbs" ];
+        
+        const LESSON_DATA = [
+            { class: 1, title: "Pronoun Roles", tipEN: "Differentiates between subject pronouns (I, We) and object pronouns (Me, Us).", tipTE: "సబ్జెక్ట్ ప్రొనౌన్‌లు (I, We) మరియు ఆబ్జెక్ట్ ప్రొనౌన్‌ల (Me, Us) మధ్య తేడాను వివరిస్తుంది." },
+            { class: 2, title: "Self-Introduction", tipEN: "Teaches the full framework for self-presentation (name, family, profession, etc.).", tipTE: "మిమ్మల్ని మీరు పరిచయం చేసుకోవడానికి పూర్తి ఫ్రేమ్‌వర్క్‌ను (పేరు, కుటుంబం, వృత్తి) నేర్పుతుంది." },
+            { class: 3, title: "Regular Verbs", tipEN: "Drills the predictable conjugation patterns (V1, V2, V3, V-ing).", tipTE: "సాధారణ క్రియల యొక్క V1, V2, V3, మరియు V-ing రూపాలను అభ్యాసం చేయిస్తుంది." },
+            { class: 4, title: "Irregular Verbs", tipEN: "Focuses on high-frequency irregular verbs (e.g., eat/ate/eaten).", tipTE: "తరచుగా ఉపయోగించే అక్రమ క్రియల (irregular verbs) రూపాలపై (ఉదా., eat/ate/eaten) దృష్టి పెడుతుంది." },
+            { class: 5, title: "Simple Present Tense", tipEN: "Expressing habitual actions, daily routines, and general truths.", tipTE: "అలవాటైన చర్యలు, రోజువారీ దినచర్యలు మరియు సాధారణ సత్యాలను వ్యక్తీకరించడం." },
+            { class: 6, title: "Simple Present (Do/Does)", tipEN: "Using Do/Does for questions and negative statements.", tipTE: "ప్రశ్నలు మరియు వ్యతిరేక వాక్యాల కోసం Do/Does ఉపయోగించడం." },
+            { class: 7, title: "WH-Questions (Do/Does)", tipEN: "Synthesizes Do/Does with question words (What, Why, Where, How).", tipTE: "Do/Does లను ప్రశ్న పదాలతో (What, Why, Where, How) కలిపి ఉపయోగించడం." },
+            { class: 8, title: "Simple Past Tense", tipEN: "Using the Past Tense form (V2) to describe completed actions.", tipTE: "పూర్తయిన చర్యలను వివరించడానికి పాస్ట్ టెన్స్ ఫార్మ్ (V2) ఉపయోగించడం." },
+            { class: 9, title: "Simple Past (Did)", tipEN: "Using Did/didn't for questions and negatives in the Past Tense.", tipTE: "పాస్ట్ టెన్స్‌లో ప్రశ్నలు మరియు వ్యతిరేకతల కోసం Did/didn't ఉపయోగించడం." },
+            { class: 10, title: "WH-Questions (Did)", tipEN: "Integrates Did with question words to ask about past actions.", tipTE: "గత చర్యల గురించి అడగడానికి Did ను ప్రశ్న పదాలతో ఏకీకృతం చేయడం." },
+            { class: 11, title: "Simple Future Tense", tipEN: "Using Shall/Will to express future intentions and actions.", tipTE: "భవిష్యత్ ఉద్దేశ్యాలు మరియు చర్యలను వ్యక్తీకరించడానికి Shall/Will ఉపయోగించడం." },
+            { class: 12, title: "WH-Questions (Shall/Will)", tipEN: "Applies Shall/Will with WH-Words to inquire about future plans.", tipTE: "భవిష్యత్ ప్రణాళికల గురించి ఆరా తీయడానికి Shall/Will లను WH-పదాలతో వర్తింపజేయడం." },
+            { class: 13, title: "Present Continuous", tipEN: "Using Am/Is/Are + V-ing for actions happening now.", tipTE: "ఇప్పుడు జరుగుతున్న చర్యల కోసం Am/Is/Are + V-ing ఉపయోగించడం." },
+            { class: 14, title: "Past Continuous", tipEN: "Using Was/Were + V-ing for ongoing past actions.", tipTE: "గతంలో జరుగుతున్న చర్యల కోసం Was/Were + V-ing ఉపయోగించడం." },
+            { class: 15, title: "Future Continuous", tipEN: "Using Shall be/Will be + V-ing for actions that will be in progress.", tipTE: "భవిష్యత్తులో జరుగుతూ ఉండే చర్యల కోసం Shall be/Will be + V-ing ఉపయోగించడం." },
+            { class: 16, title: "Can/Could", tipEN: "Expressing present ability (Can) and past ability (Could).", tipTE: "ప్రస్తుత సామర్థ్యాన్ని (Can) మరియు గత సామర్థ్యాన్ని (Could) వ్యక్తీకరించడం." },
+            { class: 17, title: "May/Might", tipEN: "Expressing uncertainty and possibility.", tipTE: "అనిశ్చితిని మరియు అవకాశాన్ని వ్యక్తీకరించడం." },
+            { class: 18, title: "Should", tipEN: "Expressing general advice, responsibility, and duty.", tipTE: "సాధారణ సలహాలు, బాధ్యత మరియు విధిని వ్యక్తీకరించడం." },
+            { class: 19, title: "Must", tipEN: "Expressing strong obligation, determination, or necessity.", tipTE: "బలమైన బాధ్యత, సంకల్పం లేదా ఆవశ్యకతను వ్యక్తీకరించడం." },
+            { class: 20, title: "Would & Synthesis", tipEN: "Using Would for past habits and synthesizing all learned forms.", tipTE: "గత అలవాట్ల కోసం Would ఉపయోగించడం మరియు నేర్చుకున్న అన్ని రూపాలను సంశ్లేషణ చేయడం." },
+            { class: 21, title: "Have/Has (Possession)", tipEN: "Clarifies role in expressing current possession.", tipTE: "ప్రస్తుత స్వాధీనాన్ని వ్యక్తీకరించడంలో పాత్రను స్పష్టం చేస్తుంది." },
+            { class: 22, title: "Present Perfect", tipEN: "Using Have/Has + P.P.F for recent past actions with present relevance.", tipTE: "ప్రస్తుత సంబంధం ఉన్న ఇటీవలి గత చర్యల కోసం Have/Has + P.P.F ఉపయోగించడం." },
+            { class: 23, title: "Past Perfect", tipEN: "Using Had + P.P.F for an action that occurred before another past action.", tipTE: "గతంలో మరొక చర్య జరగడానికి ముందు జరిగిన చర్య కోసం Had + P.P.F ఉపయోగించడం." },
+            { class: 24, title: "Future Perfect", tipEN: "Using Shall have/Will have + P.P.F for actions completed by a future deadline.", tipTE: "భవిష్యత్ గడువు నాటికి పూర్తయ్యే చర్యల కోసం Shall have/Will have + P.P.F ఉపయోగించడం." },
+            { class: 25, title: "Should have/Must have", tipEN: "Expressing past unfulfilled actions or strong assumptions.", tipTE: "గతంలో నెరవేరని చర్యలు లేదా బలమైన అంచనాలను వ్యక్తీకరించడం." },
+            { class: 26, title: "May have/Might have", tipEN: "Expressing degrees of uncertainty about past actions.", tipTE: "గత చర్యల గురించి వివిధ స్థాయిలలో అనిశ్చితిని వ్యక్తీకరించడం." },
+            { class: 27, title: "Would have/Could have", tipEN: "Discussing hypothetical situations in the past (counterfactuals).", tipTE: "గతంలోని ఊహాజనిత పరిస్థితులను (కౌంటర్‌ఫాక్చువల్స్) చర్చించడం." },
+            { class: 28, title: "Past Actions Review", tipEN: "Comprehensive review of all 17 structures for past actions.", tipTE: "గత చర్యల కోసం ఉపయోగించే అన్ని 17 నిర్మాణాల సమగ్ర సమీక్ష." },
+            { class: 29, title: "Present Perfect Continuous", tipEN: "Have been/Has been + V-ing for actions from past to present.", tipTE: "గతం నుండి ఇప్పటి వరకు కొనసాగుతున్న చర్యల కోసం Have been/Has been + V-ing." },
+            { class: 30, title: "Past Perfect Continuous", tipEN: "Had been + V-ing for continuous actions before a past moment.", tipTE: "గతంలో ఒక నిర్దిష్ట క్షణానికి ముందు నిరంతరం జరుగుతున్న చర్యల కోసం Had been + V-ing." },
+            { class: 31, title: "Future Perfect Continuous", tipEN: "Shall have been/Will have been + V-ing for action duration up to a future point.", tipTE: "భవిష్యత్తులో ఒక సమయం వరకు చర్య యొక్క వ్యవధి కోసం Shall have been/Will have been + V-ing." },
+            { class: 32, title: "Continuous Modal Perfects", tipEN: "Introduces structures like 'Should have been doing'.", tipTE: "'Should have been doing' వంటి నిర్మాణాలను పరిచయం చేస్తుంది." },
+            { class: 33, title: "Application of Should/Must Have Been", tipEN: "Drilling continuous modal perfects for past actions.", tipTE: "గత చర్యల కోసం నిరంతర మోడల్ పర్ఫెక్ట్‌లను అభ్యాసం చేయడం." },
+            { class: 34, title: "Application of Would/Could Have Been", tipEN: "Drilling continuous modals for hypothetical past actions.", tipTE: "ఊహాజనిత గత చర్యల కోసం నిరంతర మోడల్‌లను అభ్యాసం చేయడం." },
+            { class: 35, title: "Application of May/Might Have Been & Review", tipEN: "Final review of all modal and perfect forms.", tipTE: "అన్ని మోడల్ మరియు పర్ఫెక్ట్ రూపాల తుది సమీక్ష." },
+            { class: 36, title: "Have to/Has to", tipEN: "Expressing external compulsion in present and future.", tipTE: "ప్రస్తుత మరియు భవిష్యత్తులో బాహ్య ఒత్తిడిని వ్యక్తీకరించడం." },
+            { class: 37, title: "Need to/Dare to/Ought to", tipEN: "Specialized auxiliaries for necessity, courage, and moral obligation.", tipTE: "అవసరం, ధైర్యం మరియు నైతిక బాధ్యత కోసం ప్రత్యేక సహాయక క్రియలు." },
+            { class: 38, title: "Want to/Wish to/Would like to", tipEN: "Covers various expressions of desire and preference.", tipTE: "కోరిక మరియు ప్రాధాన్యత యొక్క వివిధ వ్యక్తీకరణలను కవర్ చేస్తుంది." },
+            { class: 39, title: "Able to, Willing to, Going to", tipEN: "Phrasal auxiliaries for ability, readiness, and planning.", tipTE: "సామర్థ్యం, సంసిద్ధత మరియు ప్రణాళిక కోసం ఫ్రేసల్ సహాయక క్రియలు." },
+            { class: 40, title: "Had to (Past Obligation)", tipEN: "Expressing a necessity or obligation in the past.", tipTE: "గతంలో ఒక అవసరాన్ని లేదా బాధ్యతను వ్యక్తీకరించడం." },
+            { class: 41, title: "Used to (Past Habit)", tipEN: "Expressing a repeated past habit that is no longer performed.", tipTE: "ఇకపై చేయని, గతంలో పునరావృతమయ్యే అలవాటును వ్యక్తీకరించడం." },
+            { class: 42, title: "The 12 Tenses Matrix", tipEN: "Unified map of the English verbal system by time and aspect.", tipTE: "సమయం మరియు అంశం వారీగా ఆంగ్ల క్రియ వ్యవస్థ యొక్క ఏకీకృత పటం." },
+            { class: 43, title: "12 Tenses Application", tipEN: "Drilling a single verb across all twelve tenses.", tipTE: "ఒకే క్రియను మొత్తం పన్నెండు టెన్సెస్‌లో అభ్యాసం చేయడం." },
+            { class: 44, title: "Active & Passive Voice", tipEN: "Introduces voice transformation and auxiliary conversion.", tipTE: "వాయిస్ ట్రాన్స్‌ఫర్మేషన్ మరియు సహాయక క్రియల మార్పిడిని పరిచయం చేస్తుంది." },
+            { class: 45, title: "Be with P.P. Form", tipEN: "Master key for expressing static states in all modal/auxiliary contexts.", tipTE: "అన్ని మోడల్/సహాయక సందర్భాలలో స్థిరమైన స్థితులను వ్యక్తీకరించడానికి మాస్టర్ కీ." }
+        ];
+
         const FONT_OPTIONS = {
             body: [ { label: 'Inter', value: 'Inter, sans-serif' }, { label: 'Roboto', value: 'Roboto, sans-serif' }, { label: 'Source Sans', value: "'Source Sans 3', sans-serif" }, { label: 'Poppins', value: 'Poppins, sans-serif' } ],
             title: [ { label: 'Lora', value: 'Lora, serif' }, { label: 'Merriweather', value: 'Merriweather, serif' }, { label: 'Playfair Display', value: "'Playfair Display', serif" }, { label: 'Montserrat', value: 'Montserrat, sans-serif' } ]
         };
         const COLOR_THEMES = [ { name: 'Indigo', value: '79, 70, 229' }, { name: 'Sky', value: '2, 132, 199' }, { name: 'Emerald', value: '5, 150, 105' }, { name: 'Rose', value: '225, 29, 72' }, { name: 'Amber', value: '217, 119, 6' } ];
 
-        // --- Audio & Haptic Feedback ---
+        // --- All functions are defined first ---
+
         function setupAudio() {
             if (window.Tone) {
                 correctSound = new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.3, release: 0.1 } }).toDestination();
@@ -356,7 +417,7 @@
         }
 
         function playFeedback(isCorrect) {
-            if (window.Tone) {
+            if (window.Tone && correctSound && wrongSound) {
                 if (isCorrect) correctSound.triggerAttackRelease('G5', '8n', Tone.now());
                 else wrongSound.triggerAttackRelease('C3', '4n', Tone.now());
             }
@@ -366,16 +427,15 @@
             }
         }
 
-        function speak(text) {
+        function speak(text, lang = 'en-US') {
             if (synth && text) {
                 synth.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
+                utterance.lang = lang;
                 synth.speak(utterance);
             }
         }
 
-        // --- Data Loading & Parsing ---
         function parseCsvRow(row) {
             const values = [];
             const regex = /("([^"]|"")*"|[^,]*)(,|$)/g;
@@ -394,78 +454,51 @@
 
         async function loadQuestions() {
             try {
-                // IMPROVED: Use a cache-busting parameter for development if needed,
-                // but the service worker handles caching in production.
-                // The path is kept relative, which works well with GitHub Pages structure.
                 const response = await fetch('data.csv');
-
-                if (!response.ok) {
-                    // This will catch HTTP errors like 404 Not Found
-                    throw new Error(`Failed to fetch data. Status: ${response.status} ${response.statusText}`);
-                }
-
+                if (!response.ok) throw new Error(`Failed to fetch data. Status: ${response.status}`);
                 const csvData = await response.text();
+                if (!csvData || csvData.trim().split(/\r?\n/).length <= 1) throw new Error("CSV data is empty or invalid.");
                 
-                // Check if the CSV data is empty or just headers
-                if (!csvData || csvData.trim().split(/\r?\n/).length <= 1) {
-                    throw new Error("CSV data is empty or invalid.");
-                }
-
                 const lines = csvData.trim().split(/\r?\n/);
                 const headers = parseCsvRow(lines[0]);
-                
                 allQuestions = lines.slice(1).map(line => {
                     if (line.trim() === '') return null;
                     const values = parseCsvRow(line);
-                    if (values.length < headers.length) {
-                        console.warn('Skipping malformed CSV row:', line);
-                        return null;
-                    }
+                    if (values.length < headers.length) return null;
                     let question = {};
-                    headers.forEach((header, i) => {
-                        question[header.trim()] = values[i] || '';
-                    });
+                    headers.forEach((header, i) => { question[header.trim()] = values[i] || ''; });
                     return question;
                 }).filter(q => q !== null && q.lesson);
 
-                if (allQuestions.length === 0) {
-                    throw new Error("No valid questions were parsed from the data file.");
-                }
+                if (allQuestions.length === 0) throw new Error("No valid questions were parsed.");
                 
                 isDataLoaded = true;
-                console.log(`Successfully loaded and parsed ${allQuestions.length} questions.`);
-
+                console.log(`Successfully loaded ${allQuestions.length} questions.`);
             } catch (error) {
                 console.error("Failed to load or parse questions:", error);
                 isDataLoaded = false;
-                // IMPROVED: Show a user-friendly error message on the screen.
-                document.getElementById('start-message').innerHTML = `
-                    <strong class="text-red-400">Error: Could not load quiz data.</strong>
-                    <br>
-                    <small>If you are offline, please connect to the internet to download the latest questions. If the problem continues, the data file may be missing or corrupt.</small>
-                `;
+                startMessage.innerHTML = `<strong class="text-red-400">Error: Could not load quiz data.</strong><br><small>Please check your internet connection or try again later.</small>`;
             }
             
-            // This part runs regardless of success or failure to set up the rest of the UI
             selectedClass = parseInt(getLocalStorageSetting('spokenEnglishClass', '1'), 10);
             maxQuestions = parseInt(getLocalStorageSetting('spokenEnglishLength', '10'), 10);
             updateStartScreenMessage();
             updateClassSelectionButton();
             updateQuizLengthButton();
             startButton.disabled = !isDataLoaded;
+            updateLessonTip(selectedClass); // Update tips on load
         }
 
-
-        // --- Game Logic ---
         function startQuiz() {
             const filtered = allQuestions.filter(q => parseInt(q.lesson, 10) === selectedClass);
             currentQuestions = filtered.sort(() => 0.5 - Math.random()).slice(0, maxQuestions);
             if (currentQuestions.length === 0) {
-                 document.getElementById('start-message').textContent = `No questions available for Class ${selectedClass}. Please select another class.`;
+                 startMessage.textContent = `No questions available for Class ${selectedClass}. Please select another class.`;
                  return;
             }
             currentQuestionIndex = 0;
             score = 0;
+            lessonTipsContainer.classList.add('hidden'); // Hide tips
             startScreen.classList.add('hidden');
             resultsScreen.classList.add('hidden');
             quizScreen.classList.remove('hidden');
@@ -475,11 +508,13 @@
         function displayQuestion() {
             nextButton.classList.add('hidden');
             const question = currentQuestions[currentQuestionIndex];
-            document.getElementById('stats').textContent = `Question ${currentQuestionIndex + 1}/${currentQuestions.length}`;
-            document.getElementById('score').textContent = `Score: ${score}`;
-            document.getElementById('progress-bar').style.width = `${((currentQuestionIndex + 1) / currentQuestions.length) * 100}%`;
+            stats.textContent = `Question ${currentQuestionIndex + 1}/${currentQuestions.length}`;
+            scoreEl.textContent = `Score: ${score}`;
+            progressBar.style.width = `${((currentQuestionIndex + 1) / currentQuestions.length) * 100}%`;
+            
             const prompt = `<div class="flex items-center justify-between mb-4"><p class="text-lg subtle-text-color">${question.promptTE}</p><button onclick="speak('${question.promptEN.replace(/'/g, "\\'")}')" class="p-2 rounded-full hover:bg-white/20 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></button></div><h2 class="text-2xl font-bold mb-6 text-white">${question.promptEN}</h2>`;
             let content = '';
+            
             if (question.type === 'mcq') {
                 const options = ['A', 'B', 'C', 'D'].map(opt => `<button onclick="checkAnswer('${opt}', this)" class="w-full text-left p-4 border-2 border-white/30 rounded-lg hover:accent-border hover:bg-white/10 transition-all duration-200">${question[opt]}</button>`).join('');
                 content = `${prompt}<div class="space-y-3">${options}</div>`;
@@ -488,8 +523,9 @@
             }
             questionContainer.innerHTML = `<div class="fade-in">${content}</div><div id="feedback" class="mt-4"></div>`;
         }
-
-        function checkAnswer(selected, element) {
+        
+        // Make checkAnswer global so inline onclick can find it
+        window.checkAnswer = function(selected, element) {
             const question = currentQuestions[currentQuestionIndex];
             const isCorrect = selected === question.correct;
             const buttons = questionContainer.querySelectorAll('button');
@@ -506,7 +542,8 @@
             displayFeedback(isCorrect);
         }
 
-        function checkFillBlank() {
+        // Make checkFillBlank global
+        window.checkFillBlank = function() {
             const input = document.getElementById('fill-blank-input');
             const question = currentQuestions[currentQuestionIndex];
             const isCorrect = input.value.trim().toLowerCase() === question.correct.trim().toLowerCase();
@@ -535,30 +572,37 @@
              quizScreen.classList.add('hidden');
              resultsScreen.classList.remove('hidden');
              const percentage = Math.round((score / currentQuestions.length) * 100);
-             document.getElementById('final-score').textContent = `${score}/${currentQuestions.length} (${percentage}%)`;
-             document.getElementById('results-details').innerHTML = currentQuestions.map((q, i) => `<div class="p-3 rounded-md button-bg-color"><p class="font-semibold text-gray-200">${i+1}. ${q.promptEN}</p><p class="text-green-400">Correct: ${q[q.correct] || q.correct}</p></div>`).join('');
+             finalScoreEl.textContent = `${score}/${currentQuestions.length} (${percentage}%)`;
+             resultsDetails.innerHTML = currentQuestions.map((q, i) => `<div class="p-3 rounded-md button-bg-color"><p class="font-semibold text-gray-200">${i+1}. ${q.promptEN}</p><p class="text-green-400">Correct: ${q[q.correct] || q.correct}</p></div>`).join('');
         }
 
-        // Event Listeners
-        startButton.addEventListener('click', startQuiz);
-        nextButton.addEventListener('click', handleNextQuestion);
-        restartButton.addEventListener('click', () => { resultsScreen.classList.add('hidden'); startScreen.classList.remove('hidden'); });
+        function updateLessonTip(classNumber) {
+            const lessonData = LESSON_DATA.find(l => l.class === classNumber);
+            if (lessonData && lessonTipTitle) {
+                lessonTipTitle.textContent = `Lesson ${classNumber}: ${lessonData.title}`;
+                lessonTipEN.textContent = lessonData.tipEN;
+                lessonTipTE.textContent = lessonData.tipTE;
+                speakENTipButton.onclick = () => speak(lessonData.tipEN, 'en-US'); 
+                speakTETipButton.onclick = () => speak(lessonData.tipTE, 'te-IN'); 
+                lessonTipsContainer.classList.remove('hidden');
+                lessonTipsContainer.classList.add('fade-in');
+            } else if (lessonTipsContainer) {
+                lessonTipsContainer.classList.add('hidden');
+            }
+        }
 
-        // Theming & Settings
         function getLocalStorageSetting(key, defaultValue) { return localStorage.getItem(key) || defaultValue; }
         function setLocalStorageSetting(key, value) { localStorage.setItem(key, value); }
         
         function applyTheme(isDark) {
-            const lightIcon = document.getElementById('theme-icon-light');
-            const darkIcon = document.getElementById('theme-icon-dark');
             if (isDark) {
                 document.documentElement.classList.add('dark');
-                lightIcon.classList.add('hidden');
-                darkIcon.classList.remove('hidden');
+                themeIconLight.classList.add('hidden');
+                themeIconDark.classList.remove('hidden');
             } else {
                 document.documentElement.classList.remove('dark');
-                lightIcon.classList.remove('hidden');
-                darkIcon.classList.add('hidden');
+                themeIconLight.classList.remove('hidden');
+                themeIconDark.classList.add('hidden');
             }
         }
         
@@ -571,13 +615,8 @@
         }
         
         function loadInitialSettings() {
-            const savedTheme = getLocalStorageSetting('theme', 'dark'); // Default to dark glass
+            const savedTheme = getLocalStorageSetting('theme', 'dark');
             applyTheme(savedTheme === 'dark');
-            document.getElementById('theme-toggle').addEventListener('click', () => {
-                const isDark = document.documentElement.classList.contains('dark');
-                applyTheme(!isDark);
-                setLocalStorageSetting('theme', isDark ? 'light' : 'dark');
-            });
             
             setBodyFont(getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value));
             setTitleFont(getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value));
@@ -585,49 +624,50 @@
             updateFontButton('body');
             updateFontButton('title');
             updateColorButton();
-            document.getElementById('settings-button').addEventListener('click', openSettingsModal);
-            curriculumButton.addEventListener('click', openCurriculumModal); // Add listener for curriculum
         }
         
-        // Modals Logic
-        function openSettingsModal() { document.getElementById('settings-modal').classList.remove('hidden'); }
-        function closeSettingsModal() { document.getElementById('settings-modal').classList.add('hidden'); }
+        function openSettingsModal() { settingsModal.classList.remove('hidden'); }
+        function closeSettingsModal() { settingsModal.classList.add('hidden'); }
         function openCurriculumModal() { document.getElementById('curriculum-modal').classList.remove('hidden'); }
         function closeCurriculumModal() { document.getElementById('curriculum-modal').classList.add('hidden'); }
         
-        function openSelectionModal(type) {
+        // Make openSelectionModal global for inline onclick
+        window.openSelectionModal = function(type) {
             if (['bodyFont', 'titleFont', 'color'].includes(type)) {
                 closeSettingsModal();
             }
 
-            const modal = document.getElementById('selection-modal');
-            const title = document.getElementById('modal-title');
-            const optionsContainer = document.getElementById('modal-options');
             let optionsHTML = '';
             const buttonClass = 'w-full text-left p-3 rounded-lg hover:bg-white/10 text-white';
 
             if (type === 'class') {
-                title.textContent = 'Select a Class';
+                modalTitle.textContent = 'Select a Class';
                 optionsHTML = CLASS_TOPICS.map((topic, i) => `<button onclick="handleSelectionChange('class', ${i+1})" class="${buttonClass}">${i+1}: ${topic}</button>`).join('');
             } else if (type === 'count') {
-                title.textContent = 'Select Quiz Length';
+                modalTitle.textContent = 'Select Quiz Length';
                 [4, 5, 10, 15, 20, 25].forEach(count => { optionsHTML += `<button onclick="handleSelectionChange('count', ${count})" class="${buttonClass}">${count} Questions</button>`; });
             } else if (type === 'bodyFont' || type === 'titleFont') {
-                title.textContent = type === 'bodyFont' ? 'Select Body Font' : 'Select Title Font';
+                modalTitle.textContent = type === 'bodyFont' ? 'Select Body Font' : 'Select Title Font';
                 const options = FONT_OPTIONS[type === 'bodyFont' ? 'body' : 'title'];
                 optionsHTML = options.map(opt => `<button onclick="handleSelectionChange('${type}', '${opt.value}')" class="${buttonClass}" style="font-family: ${opt.value};">${opt.label}</button>`).join('');
             } else if (type === 'color') {
-                title.textContent = 'Select Accent Color';
+                modalTitle.textContent = 'Select Accent Color';
                 optionsHTML = COLOR_THEMES.map(theme => `<button onclick="handleSelectionChange('color', '${theme.name}')" class="${buttonClass} flex items-center justify-between"><span>${theme.name}</span><span class="w-6 h-6 rounded-full" style="background-color: rgb(${theme.value})"></span></button>`).join('');
             }
-            optionsContainer.innerHTML = optionsHTML;
-            modal.classList.remove('hidden');
+            modalOptions.innerHTML = optionsHTML;
+            selectionModal.classList.remove('hidden');
         }
 
-        function closeSelectionModal() { document.getElementById('selection-modal').classList.add('hidden'); }
+        function closeSelectionModal() { selectionModal.classList.add('hidden'); }
         
-        function handleSelectionChange(type, value) {
-            if (type === 'class') { selectedClass = value; setLocalStorageSetting('spokenEnglishClass', value); updateClassSelectionButton(); } 
+        // Make handleSelectionChange global for inline onclick
+        window.handleSelectionChange = function(type, value) {
+            if (type === 'class') { 
+                selectedClass = value; 
+                setLocalStorageSetting('spokenEnglishClass', value); 
+                updateClassSelectionButton(); 
+                updateLessonTip(selectedClass); // Update tips on change
+            } 
             else if (type === 'count') { maxQuestions = value; setLocalStorageSetting('spokenEnglishLength', value); updateQuizLengthButton(); } 
             else if (type === 'bodyFont') { setBodyFont(value); updateFontButton('body'); } 
             else if (type === 'titleFont') { setTitleFont(value); updateFontButton('title'); } 
@@ -635,7 +675,6 @@
             closeSelectionModal();
         }
 
-        // Update UI Text
         function getLabel(type, value) {
             if (type === 'class') return `Class ${value}: ${CLASS_TOPICS[value-1]}`;
             if (type === 'count') return `${value} Questions`;
@@ -646,21 +685,101 @@
             return value;
         }
         
-        function updateFontButton(type) { const id = type === 'body' ? 'current-body-font' : 'current-title-font'; const key = type === 'body' ? 'bodyFont' : 'titleFont'; const value = getLocalStorageSetting(key, FONT_OPTIONS[type][0].value); document.getElementById(id).textContent = getLabel(key, value); }
-        function updateColorButton() { const value = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name); document.getElementById('current-accent-color').textContent = value; }
-        function updateClassSelectionButton() { document.getElementById('current-class-selection').textContent = getLabel('class', selectedClass); }
-        function updateQuizLengthButton() { document.getElementById('current-quiz-length').textContent = getLabel('count', maxQuestions); }
+        function updateFontButton(type) { 
+            const id = type === 'body' ? currentBodyFont : currentTitleFont;
+            const key = type === 'body' ? 'bodyFont' : 'titleFont';
+            const value = getLocalStorageSetting(key, FONT_OPTIONS[type][0].value);
+            id.textContent = getLabel(key, value);
+        }
+        function updateColorButton() { 
+            const value = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name); 
+            currentAccentColor.textContent = value; 
+        }
+        function updateClassSelectionButton() { currentClassSelection.textContent = getLabel('class', selectedClass); }
+        function updateQuizLengthButton() { currentQuizLength.textContent = getLabel('count', maxQuestions); }
         
         function updateStartScreenMessage() {
-            // Only update the message if the data has loaded. 
-            // If there was an error, the error message will be preserved.
             if (isDataLoaded) {
-                 document.getElementById('start-message').textContent = `Ready to practice? Select your class and quiz length, then press Start!`;
+                 startMessage.textContent = `Ready to practice? Select your class and quiz length, then press Start!`;
             }
         }
 
-
+        // --- NEW: This is the only thing that runs on page load ---
         window.onload = () => {
+            // --- 1. Assign all DOM Elements ---
+            startScreen = document.getElementById('start-screen');
+            quizScreen = document.getElementById('quiz-screen');
+            resultsScreen = document.getElementById('results-screen');
+            questionContainer = document.getElementById('question-container');
+            startButton = document.getElementById('start-quiz-button');
+            nextButton = document.getElementById('next-question-button');
+            restartButton = document.getElementById('restart-quiz-button');
+            curriculumButton = document.getElementById('curriculum-button');
+            
+            lessonTipsContainer = document.getElementById('lesson-tips-container');
+            lessonTipTitle = document.getElementById('lesson-tip-title');
+            lessonTipEN = document.getElementById('lesson-tip-en');
+            lessonTipTE = document.getElementById('lesson-tip-te');
+            speakENTipButton = document.getElementById('speak-en-tip');
+            speakTETipButton = document.getElementById('speak-te-tip');
+
+            stats = document.getElementById('stats');
+            scoreEl = document.getElementById('score');
+            progressBar = document.getElementById('progress-bar');
+            finalScoreEl = document.getElementById('final-score');
+            resultsDetails = document.getElementById('results-details');
+            selectionModal = document.getElementById('selection-modal');
+            modalTitle = document.getElementById('modal-title');
+            modalOptions = document.getElementById('modal-options');
+            settingsModal = document.getElementById('settings-modal');
+            themeToggle = document.getElementById('theme-toggle');
+            themeIconLight = document.getElementById('theme-icon-light');
+            themeIconDark = document.getElementById('theme-icon-dark');
+            startMessage = document.getElementById('start-message');
+            classSelectionButton = document.getElementById('class-selection-button');
+            lengthSelectionButton = document.getElementById('length-selection-button');
+            currentClassSelection = document.getElementById('current-class-selection');
+            currentQuizLength = document.getElementById('current-quiz-length');
+            closeSelectionModalBtn = document.getElementById('close-selection-modal');
+            closeSettingsModalBtn = document.getElementById('close-settings-modal');
+            closeCurriculumModalBtn = document.getElementById('close-curriculum-modal');
+            bodyFontBtn = document.getElementById('body-font-button');
+            titleFontBtn = document.getElementById('title-font-button');
+            colorBtn = document.getElementById('color-button');
+            currentBodyFont = document.getElementById('current-body-font');
+            currentTitleFont = document.getElementById('current-title-font');
+            currentAccentColor = document.getElementById('current-accent-color');
+            
+            // --- 2. Add all Event Listeners ---
+            startButton.addEventListener('click', startQuiz);
+            nextButton.addEventListener('click', handleNextQuestion);
+            restartButton.addEventListener('click', () => { 
+                resultsScreen.classList.add('hidden'); 
+                startScreen.classList.remove('hidden'); 
+                updateLessonTip(selectedClass); // Show tips again
+            });
+
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.documentElement.classList.contains('dark');
+                applyTheme(!isDark);
+                setLocalStorageSetting('theme', isDark ? 'light' : 'dark');
+            });
+
+            document.getElementById('settings-button').addEventListener('click', openSettingsModal);
+            curriculumButton.addEventListener('click', openCurriculumModal);
+            
+            classSelectionButton.addEventListener('click', () => openSelectionModal('class'));
+            lengthSelectionButton.addEventListener('click', () => openSelectionModal('count'));
+            
+            closeSelectionModalBtn.addEventListener('click', closeSelectionModal);
+            closeSettingsModalBtn.addEventListener('click', closeSettingsModal);
+            closeCurriculumModalBtn.addEventListener('click', closeCurriculumModal);
+            
+            bodyFontBtn.addEventListener('click', () => openSelectionModal('bodyFont'));
+            titleFontBtn.addEventListener('click', () => openSelectionModal('titleFont'));
+            colorBtn.addEventListener('click', () => openSelectionModal('color'));
+
+            // --- 3. Run Setup ---
             setupAudio();
             loadQuestions();
             loadInitialSettings();
@@ -668,6 +787,5 @@
     </script>
 </body>
 </html>
-
 
 

@@ -1,5 +1,5 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
-<html lang="en"> <!-- Removed 'dark' class, theme is now handled by JS -->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,13 +18,11 @@
     </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide-static@latest/dist/lucide.min.js"></script>
 
     <style>
-        /* FONT IMPORTS - Same as other game pages for consistency */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700;900&family=Source+Sans+3:wght@400;700&display=swap');
         
-        /* THEME VARIABLES - Added Light & Dark modes */
         :root {
             --background-start-light: #f3f4f6;
             --background-end-light: #e5e7eb;
@@ -40,12 +38,10 @@
             --text-secondary-dark: #d1d5db;
             --shadow-dark: rgba(0, 0, 0, 0.3);
             
-            /* Default Accent Colors */
             --primary-color: #6366f1;
             --secondary-color: #818cf8;
             --accent-color: #c4b5fd;
             
-            /* Default to light mode variables */
             --bg-start: var(--background-start-light);
             --bg-end: var(--background-end-light);
             --card-bg: var(--card-background-light);
@@ -53,7 +49,6 @@
             --text-sub: var(--text-secondary-light);
             --shadow-color: var(--shadow-light);
 
-            /* Default fonts */
             --font-title: 'Montserrat', sans-serif;
             --font-body: 'Poppins', sans-serif;
         }
@@ -81,16 +76,16 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default; /* Card itself is not clickable */
         }
         .game-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px); /* Reduced hover effect */
             box-shadow: 0 10px 30px var(--shadow-color), 0 0 20px var(--accent-color);
         }
         .icon-circle {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         }
         
-        /* Modal Styles */
         .modal-backdrop {
             background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(5px);
@@ -107,22 +102,59 @@
         .setting-btn:hover {
              background-color: rgba(255, 255, 255, 0.1);
         }
+        
+        .lucide-icon {
+            width: 48px;
+            height: 48px;
+            stroke-width: 2;
+            color: white;
+        }
+        
+        .card-button {
+            margin-top: 1.5rem;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s ease, filter 0.2s ease;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer; /* Button is clickable */
+        }
+        
+        /* When card is hovered, make the button grow slightly */
+        .game-card:hover .card-button {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        
+        .user-id-text {
+            word-break: break-all;
+            background-color: rgba(0,0,0,0.2);
+            padding: 8px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body class="font-body antialiased">
 
     <div class="min-h-screen w-full p-4 sm:p-6 lg:p-8 flex flex-col relative">
-        <!-- Settings Button -->
-        <div class="absolute top-4 right-4 z-20">
+        <!-- Header Buttons: Profile & Settings -->
+        <div class="absolute top-4 right-4 z-20 flex space-x-2">
+            <button onclick="openProfile()" class="w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform duration-300 hover:scale-110" style="background: var(--card-bg); color: var(--text-sub);">
+                <i data-lucide="user" class="w-6 h-6"></i>
+            </button>
             <button onclick="openSettings()" class="w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform duration-300 hover:rotate-45" style="background: var(--card-bg); color: var(--text-sub);">
-                <i class="fas fa-cog"></i>
+                <i data-lucide="settings" class="w-6 h-6"></i>
             </button>
         </div>
 
         <!-- Header Section -->
         <header class="text-center mb-10 md:mb-16 pt-8">
             <h1 class="font-title font-black text-4xl sm:text-5xl md:text-6xl tracking-tighter">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400" style="background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r" style="background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));">
                     English Learning Hub
                 </span>
             </h1>
@@ -135,69 +167,99 @@
         <main class="flex-grow">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 
-                <a href="spoken_english.html" class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
+                <!-- Card 1: Spoken English -->
+                <!-- Removed <a> tag, replaced with <div> -->
+                <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
                     <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                        <i class="fas fa-graduation-cap text-5xl text-white"></i>
+                        <i data-lucide="graduation-cap" class="lucide-icon"></i>
                     </div>
                     <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-main);">Spoken English Quiz</h2>
-                    <p class="flex-grow" style="color: var(--text-sub);">
+                    <p id="spoken-card-progress" class="flex-grow" style="color: var(--text-sub);">
                         Test your knowledge with 45 lessons covering grammar from basic to advanced concepts.
                     </p>
-                    <button class="mt-6 font-semibold bg-white/10 py-2 px-6 rounded-full border border-white/20 group-hover:text-white transition-colors duration-300" style="background-color: var(--primary-color);">
+                    <!-- Replaced <div> with <button> and added onclick -->
+                    <button onclick="window.location.href='spoken_english.html'" class="card-button">
                         Start Learning
                     </button>
-                </a>
+                </div>
 
-                <a href="English vocabulary game.html" class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
+                <!-- Card 2: Vocabulary -->
+                <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
                     <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                        <i class="fas fa-book-open text-5xl text-white"></i>
+                        <i data-lucide="book-open" class="lucide-icon"></i>
                     </div>
                     <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-main);">Vocabulary Builder</h2>
-                    <p class="flex-grow" style="color: var(--text-sub);">
+                    <p id="vocab-card-progress" class="flex-grow" style="color: var(--text-sub);">
                         Expand your word power with a challenging multiple-choice quiz.
                     </p>
-                    <button class="mt-6 font-semibold bg-white/10 py-2 px-6 rounded-full border border-white/20 group-hover:text-white transition-colors duration-300" style="background-color: var(--primary-color);">
+                    <button onclick="window.location.href='English vocabulary game.html'" class="card-button">
                         Build Vocabulary
                     </button>
-                </a>
+                </div>
 
-                <a href="Verbs game.html" class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
+                <!-- Card 3: Verbs -->
+                <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
                     <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                        <i class="fas fa-running text-5xl text-white"></i>
+                        <i data-lucide="run" class="lucide-icon"></i>
                     </div>
-                    <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-main);">Irregular Verbs</h2>
-                    <p class="flex-grow" style="color: var(--text-sub);">
+                    <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-main);">Verbs</h2>
+                    <p id="verbs-card-progress" class="flex-grow" style="color: var(--text-sub);">
                         Master the tricky past tense and participle forms of common English verbs.
                     </p>
-                    <button class="mt-6 font-semibold bg-white/10 py-2 px-6 rounded-full border border-white/20 group-hover:text-white transition-colors duration-300" style="background-color: var(--primary-color);">
+                    <button onclick="window.location.href='Verbs game.html'" class="card-button">
                         Master Verbs
                     </button>
-                </a>
+                </div>
+
             </div>
         </main>
         
         <footer class="text-center py-6 mt-12" style="color: var(--text-sub);">
-            <p>&copy; 2025 English Learning Hub. All rights reserved.</p>
+            <p>&copy; <span id="current-year">2024</span> English Learning Hub. All rights reserved.</p>
         </footer>
+    </div>
+    
+    <!-- Profile Modal (Offline) -->
+    <div id="profile-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+        <div class="modal-content w-full max-w-md rounded-2xl shadow-2xl p-6 relative">
+            <button onclick="closeProfile()" class="absolute top-4 right-4 w-8 h-8 text-xl rounded-full transition-colors" style="color: var(--text-sub); background-color: rgba(255,255,255,0.1);">&times;</button>
+            <h2 class="font-title text-2xl font-bold mb-6" style="color: var(--text-main);">Your Profile & Progress</h2>
+            
+            <div class="space-y-4">
+                <div>
+                    <span class="font-semibold" style="color: var(--text-sub);">Your Local User ID</span>
+                    <p id="user-id" class="user-id-text" style="color: var(--text-main);">Initializing...</p>
+                    <span class="text-xs" style="color: var(--text-sub);">Your progress is saved to this device.</span>
+                </div>
+                
+                <hr style="border-color: rgba(255,255,255,0.1);">
+                
+                <div>
+                    <span class="font-semibold" style="color: var(--text-sub);">Game Progress</span>
+                    <div class="space-y-2 mt-2">
+                        <p style="color: var(--text-main);">Spoken English: <strong id="spoken-progress">0/45</strong> lessons</p>
+                        <p style="color: var(--text-main);">Vocabulary: <strong id="vocab-progress">0</strong> quizzes completed</p>
+                        <p style="color: var(--text-main);">Verbs: <strong id="verbs-progress">0</strong> quizzes completed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Settings Modal -->
     <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
-        <div class="modal-content w-full max-w-md rounded-2xl shadow-2xl p-6 relative">
+         <div class="modal-content w-full max-w-md rounded-2xl shadow-2xl p-6 relative">
             <button onclick="closeSettings()" class="absolute top-4 right-4 w-8 h-8 text-xl rounded-full transition-colors" style="color: var(--text-sub); background-color: rgba(255,255,255,0.1);">&times;</button>
             <h2 class="font-title text-2xl font-bold mb-6" style="color: var(--text-main);">Settings</h2>
             <div class="space-y-4">
-                <!-- Theme Toggle -->
                 <div class="flex items-center justify-between">
                     <span class="font-semibold" style="color: var(--text-sub);">Theme</span>
                     <button id="theme-toggle-btn" onclick="toggleTheme()" class="setting-btn px-4 py-2 rounded-lg text-sm font-semibold"></button>
                 </div>
-                <!-- Accent Color Selection -->
                 <div class="flex items-center justify-between">
                     <span class="font-semibold" style="color: var(--text-sub);">Accent Color</span>
                     <button id="current-color-theme" onclick="openSelectionModal('color')" class="setting-btn px-4 py-2 rounded-lg text-sm font-semibold w-40 flex items-center justify-between truncate"></button>
                 </div>
-                <!-- Font Selection -->
                 <div class="flex items-center justify-between">
                     <span class="font-semibold" style="color: var(--text-sub);">Title Font</span>
                     <button id="current-title-font" onclick="openSelectionModal('title')" class="setting-btn px-4 py-2 rounded-lg text-sm font-semibold w-40 text-left truncate"></button>
@@ -220,6 +282,8 @@
     </div>
     
     <script>
+        // This script now handles settings, UI, and OFFLINE progress
+        
         const FONT_OPTIONS = {
             title: [
                 { value: `'Montserrat', sans-serif`, label: 'Montserrat' },
@@ -251,19 +315,91 @@
             localStorage.setItem(key, value);
         }
 
+        // --- Offline Profile & Progress Logic ---
+        let localUserId = null;
+        let localProgress = { spoken: 0, vocab: 0, verbs: 0 };
+
+        function getLocalUserId() {
+            let id = localStorage.getItem('englishHubUserId');
+            if (!id) {
+                id = 'user_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
+                localStorage.setItem('englishHubUserId', id);
+            }
+            return id;
+        }
+
+        function loadLocalProgress() {
+            localUserId = getLocalUserId();
+            if(document.getElementById('user-id')) {
+                document.getElementById('user-id').textContent = localUserId;
+            }
+
+            const progressString = localStorage.getItem('englishHubProgress');
+            if (progressString) {
+                try {
+                    localProgress = JSON.parse(progressString);
+                } catch (e) {
+                    console.error("Could not parse local progress:", e);
+                    localProgress = { spoken: 0, vocab: 0, verbs: 0 };
+                }
+            } else {
+                localProgress = { spoken: 0, vocab: 0, verbs: 0 };
+            }
+
+            if (typeof localProgress.spoken === 'undefined') localProgress.spoken = 0;
+            if (typeof localProgress.vocab === 'undefined') localProgress.vocab = 0;
+            if (typeof localProgress.verbs === 'undefined') localProgress.verbs = 0;
+
+            if(document.getElementById('spoken-progress')) {
+                document.getElementById('spoken-progress').textContent = `${localProgress.spoken}/45`;
+            }
+            if(document.getElementById('vocab-progress')) {
+                document.getElementById('vocab-progress').textContent = `${localProgress.vocab}`;
+            }
+            if(document.getElementById('verbs-progress')) {
+                document.getElementById('verbs-progress').textContent = `${localProgress.verbs}`;
+            }
+
+            const spokenDesc = document.getElementById('spoken-card-progress');
+            if (spokenDesc) {
+                spokenDesc.innerHTML = `Test your knowledge with 45 lessons...<br><strong class="accent-text" style="color: var(--primary-color);">Completed: ${localProgress.spoken}/45</strong>`;
+            }
+
+            const vocabDesc = document.getElementById('vocab-card-progress');
+            if (vocabDesc) {
+                vocabDesc.innerHTML = `Expand your word power...<br><strong class="accent-text" style="color: var(--primary-color);">Completed: ${localProgress.vocab} quizzes</strong>`;
+            }
+
+            const verbsDesc = document.getElementById('verbs-card-progress');
+            if(verbsDesc) {
+                verbsDesc.innerHTML = `Master the tricky past tense forms...<br><strong class="accent-text" style="color: var(--primary-color);">Completed: ${localProgress.verbs} quizzes</strong>`;
+            }
+        }
+
+        window.openProfile = function() {
+            loadLocalProgress(); // Refresh data every time modal is opened
+            document.getElementById('profile-modal').classList.remove('hidden');
+        }
+        window.closeProfile = function() {
+            document.getElementById('profile-modal').classList.add('hidden');
+        }
+        // --- End of Offline Profile Logic ---
+
+
         // --- Theme Management ---
         function applyTheme(isDark) {
             const root = document.documentElement;
             const toggleBtn = document.getElementById('theme-toggle-btn');
             if (isDark) {
                 root.classList.add('dark-mode');
-                if (toggleBtn) toggleBtn.innerHTML = '<i class="fas fa-sun mr-2"></i> Light Mode';
+                if (toggleBtn) toggleBtn.innerHTML = '<i data-lucide="sun" class="w-4 h-4 mr-2 inline-block"></i> Light Mode';
             } else {
                 root.classList.remove('dark-mode');
-                if (toggleBtn) toggleBtn.innerHTML = '<i class="fas fa-moon mr-2"></i> Dark Mode';
+                if (toggleBtn) toggleBtn.innerHTML = '<i data-lucide="moon" class="w-4 h-4 mr-2 inline-block"></i> Dark Mode';
             }
+            setTimeout(() => lucide.createIcons(), 0);
         }
-        function toggleTheme() {
+        window.toggleTheme = function() {
             const isDark = !document.documentElement.classList.contains('dark-mode');
             applyTheme(isDark);
             setLocalStorageSetting('theme', isDark ? 'dark' : 'light');
@@ -277,6 +413,7 @@
             root.style.setProperty('--secondary-color', theme.secondary);
             root.style.setProperty('--accent-color', theme.accent);
             setLocalStorageSetting('colorTheme', themeName);
+            loadLocalProgress(); // Re-load progress to update accent color
         }
         function updateColorButton() {
             const themeName = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name);
@@ -306,7 +443,9 @@
             const storageKey = type === 'body' ? 'bodyFont' : 'titleFont';
             const defaultFont = type === 'body' ? FONT_OPTIONS.body[0].value : FONT_OPTIONS.title[0].value;
             const value = getLocalStorageSetting(storageKey, defaultFont);
-            document.getElementById(id).textContent = getLabel(type, value);
+            if(document.getElementById(id)) {
+                document.getElementById(id).textContent = getLabel(type, value);
+            }
         }
 
         // --- Modal Management ---
@@ -319,7 +458,7 @@
         }
         function updateSettingsUI() {
             const isDark = document.documentElement.classList.contains('dark-mode');
-            applyTheme(isDark); // Updates the button text
+            applyTheme(isDark);
             updateFontButton('title');
             updateFontButton('body');
             updateColorButton();
@@ -339,7 +478,7 @@
                         <span class="w-5 h-5 rounded-full border border-white/20" style="background-color: ${opt.primary};"></span>
                     </button>
                 `).join('');
-            } else { // 'title' or 'body'
+            } else {
                 document.getElementById('selection-modal-title').textContent = `Select ${type === 'title' ? 'Title' : 'Body'} Font`;
                 const options = FONT_OPTIONS[type];
                 optionsHTML = options.map(opt => 
@@ -379,12 +518,30 @@
             setBodyFont(bodyFont);
             
             const colorTheme = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name);
-            applyAccentColor(colorTheme);
+            applyAccentColor(colorTheme); // This also calls loadLocalProgress
+            
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            lucide.createIcons();
+            
+            // Load progress on initial page load
+            loadLocalProgress();
+            
+            // Add a listener to refresh progress when returning to this page
+            // (e.g., after finishing a quiz)
+            window.addEventListener('pageshow', function(event) {
+                // event.persisted is true if page is from bfcache (back button)
+                if (event.persisted) {
+                    loadLocalProgress();
+                }
+            });
         }
         
         window.onload = loadInitialSettings;
     </script>
 </body>
 </html>
+
+
 
 
