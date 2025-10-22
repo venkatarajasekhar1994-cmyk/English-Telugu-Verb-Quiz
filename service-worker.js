@@ -2,8 +2,8 @@
 
 // CRITICAL: Cache version.
 // Every time you change ANY file that's cached (HTML, CSV, etc.),
-// you MUST increment this version number. This is the most important step.
-const CACHE_NAME = 'my-pwa-cache-v22'; // Version incremented to 22
+// you MUST increment this version number.
+const CACHE_NAME = 'my-pwa-cache-v23'; // Version incremented to 23
 
 // This is the list of all the files that will be saved for offline use.
 // Ensure all paths are correct relative to your website's root.
