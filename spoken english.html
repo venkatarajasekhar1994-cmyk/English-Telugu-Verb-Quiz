@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,8 +25,10 @@
         
         /* --- CSS Variables --- */
         :root {
-            --title-font: 'Lora', serif;
-            --body-font: 'Inter', sans-serif;
+            /* Updated default fonts to match game hub */
+            --title-font: 'Montserrat', sans-serif;
+            --body-font: 'Poppins', sans-serif;
+            
             --accent-color-rgb: 79, 70, 229; /* Indigo RGB */
             --accent-color-hex: #4f46e5; /* Indigo Hex */
             
@@ -221,7 +223,23 @@
         <!-- Results Screen -->
         <div id="results-screen" class="hidden text-center p-6 rounded-2xl glass-effect animated-float">
              <h2 class="text-2xl font-bold mb-2 text-white">Quiz Complete!</h2>
-             <p class="text-lg mb-4 text-gray-200">Your final score is <span id="final-score" class="font-bold accent-text"></span></p>
+             
+             <!-- English Result -->
+             <div class="flex items-center justify-center space-x-2 mb-2">
+                 <p id="final-score-text-en" class="text-lg text-gray-200">Your final score is <span id="final-score" class="font-bold accent-text"></span></p>
+                 <button id="speak-result-en" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                 </button>
+             </div>
+             
+             <!-- Telugu Result -->
+             <div class="flex items-center justify-center space-x-2 mb-4">
+                 <p id="final-score-text-te" class="text-lg text-gray-300">మీ తుది స్కోరు <span id="final-score-te" class="font-bold accent-text"></span></p>
+                 <button id="speak-result-te" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                 </button>
+             </div>
+             
              <div id="results-details" class="text-left mb-6 space-y-2 max-h-40 overflow-y-auto no-scrollbar">
                  <!-- Incorrect answers summary -->
              </div>
@@ -353,7 +371,7 @@
         // --- DOM Elements ---
         let startScreen, quizScreen, resultsScreen, questionContainer, startButton, nextButton, restartButton, curriculumButton;
         let lessonTipsContainer, lessonTipTitle, lessonTipEN, lessonTipTE, speakENTipButton, speakTETipButton;
-        let stats, scoreEl, progressBar, finalScoreEl, resultsDetails, selectionModal, modalTitle, modalOptions;
+        let stats, scoreEl, progressBar, finalScoreEl, finalScoreTeEl, speakResultEnBtn, speakResultTeBtn, resultsDetails, selectionModal, modalTitle, modalOptions;
         let settingsModal, themeToggle, themeIconLight, themeIconDark, startMessage, classSelectionButton, lengthSelectionButton;
         let currentClassSelection, currentQuizLength, closeSelectionModalBtn, closeSettingsModalBtn, closeCurriculumModalBtn;
         let bodyFontBtn, titleFontBtn, colorBtn, currentBodyFont, currentTitleFont, currentAccentColor;
@@ -380,26 +398,43 @@
         let incorrectAnswers = []; 
 
         // --- Constants ---
-        const SETTINGS_KEY = 'spokenEnglishSettings';
+        // *** CHANGED: Use the same global settings key as game hub.html ***
+        const SETTINGS_KEY = 'globalHubSettings';
+        
         const CLASS_TOPICS = [ "Pronoun Roles", "Self-Introduction", "Regular Verbs", "Irregular Verbs", "Simple Present Tense", "Simple Present (Do/Does)", "WH-Questions (Do/Does)", "Simple Past Tense", "Simple Past (Did)", "WH-Questions (Did)", "Simple Future Tense", "WH-Questions (Shall/Will)", "Present Continuous (Am/Is/Are)", "Past Continuous (Was/Were)", "Future Continuous (Shall be/Will be)", "Can/Could", "May/Might", "Should", "Must", "Would (Past Habit) & Synthesis", "Have/Has (Possession)", "Present Perfect Tense", "Past Perfect Tense", "Future Perfect Tense", "Should have/Must have (P.P.F)", "May have/Might have (P.P.F)", "Would have/Could have (P.P.F)", "Past Actions Review", "Present Perfect Continuous", "Past Perfect Continuous", "Future Perfect Continuous", "Continuous Modal Perfects", "Application of Should/Must Have Been", "Application of Would/Could Have Been", "Application of May/Might Have Been & Review", "Have to/Has to (Present/Future)", "Need to/Dare to/Ought to", "Want to/Wish to/Would like to", "Able to, Willing to, Going to, etc.", "Had to (Past Obligation)", "Used to (Past Habit)", "The 12 Tenses Matrix", "12 Tenses Application", "Active Voice & Passive Voice", "Be with P.P. Form and Special Verbs" ];
         const LESSON_DATA = [ /* ... unchanged lesson data ... */ 
              { class: 1, title: "Pronoun Roles", tipEN: "Differentiates between subject pronouns (I, We) and object pronouns (Me, Us).", tipTE: "సబ్జెక్ట్ ప్రొనౌన్‌లు (I, We) మరియు ఆబ్జెక్ట్ ప్రొనౌన్‌ల (Me, Us) మధ్య తేడాను వివరిస్తుంది." }, { class: 2, title: "Self-Introduction", tipEN: "Teaches the full framework for self-presentation (name, family, profession, etc.).", tipTE: "మిమ్మల్ని మీరు పరిచయం చేసుకోవడానికి పూర్తి ఫ్రేమ్‌వర్క్‌ను (పేరు, కుటుంబం, వృత్తి) నేర్పుతుంది." }, { class: 3, title: "Regular Verbs", tipEN: "Drills the predictable conjugation patterns (V1, V2, V3, V-ing).", tipTE: "సాధారణ క్రియల యొక్క V1, V2, V3, మరియు V-ing రూపాలను అభ్యాసం చేయిస్తుంది." }, { class: 4, title: "Irregular Verbs", tipEN: "Focuses on high-frequency irregular verbs (e.g., eat/ate/eaten).", tipTE: "తరచుగా ఉపయోగించే అక్రమ క్రియల (irregular verbs) రూపాలపై (ఉదా., eat/ate/eaten) దృష్టి పెడుతుంది." }, { class: 5, title: "Simple Present Tense", tipEN: "Expressing habitual actions, daily routines, and general truths.", tipTE: "అలవాటైన చర్యలు, రోజువారీ దినచర్యలు మరియు సాధారణ సత్యాలను వ్యక్తీకరించడం." }, { class: 6, title: "Simple Present (Do/Does)", tipEN: "Using Do/Does for questions and negative statements.", tipTE: "ప్రశ్నలు మరియు వ్యతిరేక వాక్యాల కోసం Do/Does ఉపయోగించడం." }, { class: 7, title: "WH-Questions (Do/Does)", tipEN: "Synthesizes Do/Does with question words (What, Why, Where, How).", tipTE: "Do/Does లను ప్రశ్న పదాలతో (What, Why, Where, How) కలిపి ఉపయోగించడం." }, { class: 8, title: "Simple Past Tense", tipEN: "Using the Past Tense form (V2) to describe completed actions.", tipTE: "పూర్తయిన చర్యలను వివరించడానికి పాస్ట్ టెన్స్ ఫార్మ్ (V2) ఉపయోగించడం." }, { class: 9, title: "Simple Past (Did)", tipEN: "Using Did/didn't for questions and negatives in the Past Tense.", tipTE: "పాస్ట్ టెన్స్‌లో ప్రశ్నలు మరియు వ్యతిరేకతల కోసం Did/didn't ఉపయోగించడం." }, { class: 10, title: "WH-Questions (Did)", tipEN: "Integrates Did with question words to ask about past actions.", tipTE: "గత చర్యల గురించి అడగడానికి Did ను ప్రశ్న పదాలతో ఏకీకృతం చేయడం." }, { class: 11, title: "Simple Future Tense", tipEN: "Using Shall/Will to express future intentions and actions.", tipTE: "భవిష్యత్ ఉద్దేశ్యాలు మరియు చర్యలను వ్యక్తీకరించడానికి Shall/Will ఉపయోగించడం." }, { class: 12, title: "WH-Questions (Shall/Will)", tipEN: "Applies Shall/Will with WH-Words to inquire about future plans.", tipTE: "భవిష్యత్ ప్రణాళికల గురించి ఆరా తీయడానికి Shall/Will లను WH-పదాలతో వర్తింపజేయడం." }, { class: 13, title: "Present Continuous", tipEN: "Using Am/Is/Are + V-ing for actions happening now.", tipTE: "ఇప్పుడు జరుగుతున్న చర్యల కోసం Am/Is/Are + V-ing ఉపయోగించడం." }, { class: 14, title: "Past Continuous", tipEN: "Using Was/Were + V-ing for ongoing past actions.", tipTE: "గతంలో జరుగుతున్న చర్యల కోసం Was/Were + V-ing ఉపయోగించడం." }, { class: 15, title: "Future Continuous", tipEN: "Using Shall be/Will be + V-ing for actions that will be in progress.", tipTE: "భవిష్యత్తులో జరుగుతూ ఉండే చర్యల కోసం Shall be/Will be + V-ing ఉపయోగించడం." }, { class: 16, title: "Can/Could", tipEN: "Expressing present ability (Can) and past ability (Could).", tipTE: "ప్రస్తుత సామర్థ్యాన్ని (Can) మరియు గత సామర్థ్యాన్ని (Could) వ్యక్తీకరించడం." }, { class: 17, title: "May/Might", tipEN: "Expressing uncertainty and possibility.", tipTE: "అనిశ్చితిని మరియు అవకాశాన్ని వ్యక్తీకరించడం." }, { class: 18, title: "Should", tipEN: "Expressing general advice, responsibility, and duty.", tipTE: "సాధారణ సలహాలు, బాధ్యత మరియు విధిని వ్యక్తీకరించడం." }, { class: 19, title: "Must", tipEN: "Expressing strong obligation, determination, or necessity.", tipTE: "బలమైన బాధ్యత, సంకల్పం లేదా ఆవశ్యకతను వ్యక్తీకరించడం." }, { class: 20, title: "Would & Synthesis", tipEN: "Using Would for past habits and synthesizing all learned forms.", tipTE: "గత అలవాట్ల కోసం Would ఉపయోగించడం మరియు నేర్చుకున్న అన్ని రూపాలను సంశ్లేషణ చేయడం." }, { class: 21, title: "Have/Has (Possession)", tipEN: "Clarifies role in expressing current possession.", tipTE: "ప్రస్తుత స్వాధీనాన్ని వ్యక్తీకరించడంలో పాత్రను స్పష్టం చేస్తుంది." }, { class: 22, title: "Present Perfect", tipEN: "Using Have/Has + P.P.F for recent past actions with present relevance.", tipTE: "ప్రస్తుత సంబంధం ఉన్న ఇటీవలి గత చర్యల కోసం Have/Has + P.P.F ఉపయోగించడం." }, { class: 23, title: "Past Perfect", tipEN: "Using Had + P.P.F for an action that occurred before another past action.", tipTE: "గతంలో మరొక చర్య జరగడానికి ముందు జరిగిన చర్య కోసం Had + P.P.F ఉపయోగించడం." }, { class: 24, title: "Future Perfect", tipEN: "Using Shall have/Will have + P.P.F for actions completed by a future deadline.", tipTE: "భవిష్యత్ గడువు నాటికి పూర్తయ్యే చర్యల కోసం Shall have/Will have + P.P.F ఉపయోగించడం." }, { class: 25, title: "Should have/Must have", tipEN: "Expressing past unfulfilled actions or strong assumptions.", tipTE: "గతంలో నెరవేరని చర్యలు లేదా బలమైన అంచనాలను వ్యక్తీకరించడం." }, { class: 26, title: "May have/Might have", tipEN: "Expressing degrees of uncertainty about past actions.", tipTE: "గత చర్యల గురించి వివిధ స్థాయిలలో అనిశ్చితిని వ్యక్తీకరించడం." }, { class: 27, title: "Would have/Could have", tipEN: "Discussing hypothetical situations in the past (counterfactuals).", tipTE: "గతంలోని ఊహాజనిత పరిస్థితులను (కౌంటర్‌ఫాక్చువల్స్) చర్చించడం." }, { class: 28, title: "Past Actions Review", tipEN: "Comprehensive review of all 17 structures for past actions.", tipTE: "గత చర్యల కోసం ఉపయోగించే అన్ని 17 నిర్మాణాల సమగ్ర సమీక్ష." }, { class: 29, title: "Present Perfect Continuous", tipEN: "Have been/Has been + V-ing for actions from past to present.", tipTE: "గతం నుండి ఇప్పటి వరకు కొనసాగుతున్న చర్యల కోసం Have been/Has been + V-ing." }, { class: 30, title: "Past Perfect Continuous", tipEN: "Had been + V-ing for continuous actions before a past moment.", tipTE: "గతంలో ఒక నిర్దిష్ట క్షణానికి ముందు నిరంతరం జరుగుతున్న చర్యల కోసం Had been + V-ing." }, { class: 31, title: "Future Perfect Continuous", tipEN: "Shall have been/Will have been + V-ing for action duration up to a future point.", tipTE: "భవిష్యత్తులో ఒక సమయం వరకు చర్య యొక్క వ్యవధి కోసం Shall have been/Will have been + V-ing." }, { class: 32, title: "Continuous Modal Perfects", tipEN: "Introduces structures like 'Should have been doing'.", tipTE: "'Should have been doing' వంటి నిర్మాణాలను పరిచయం చేస్తుంది." }, { class: 33, title: "Application of Should/Must Have Been", tipEN: "Drilling continuous modal perfects for past actions.", tipTE: "గత చర్యల కోసం నిరంతర మోడల్ పర్ఫెక్ట్‌లను అభ్యాసం చేయడం." }, { class: 34, title: "Application of Would/Could Have Been", tipEN: "Drilling continuous modals for hypothetical past actions.", tipTE: "ఊహాజనిత గత చర్యల కోసం నిరంతర మోడల్‌లను అభ్యాసం చేయడం." }, { class: 35, title: "Application of May/Might Have Been & Review", tipEN: "Final review of all modal and perfect forms.", tipTE: "అన్ని మోడల్ మరియు పర్ఫెక్ట్ రూపాల తుది సమీక్ష." }, { class: 36, title: "Have to/Has to", tipEN: "Expressing external compulsion in present and future.", tipTE: "ప్రస్తుత మరియు భవిష్యత్తులో బాహ్య ఒత్తిడిని వ్యక్తీకరించడం." }, { class: 37, title: "Need to/Dare to/Ought to", tipEN: "Specialized auxiliaries for necessity, courage, and moral obligation.", tipTE: "అవసరం, ధైర్యం మరియు నైతిక బాధ్యత కోసం ప్రత్యేక సహాయక క్రియలు." }, { class: 38, title: "Want to/Wish to/Would like to", tipEN: "Covers various expressions of desire and preference.", tipTE: "కోరిక మరియు ప్రాధాన్యత యొక్క వివిధ వ్యక్తీకరణలను కవర్ చేస్తుంది." }, { class: 39, title: "Able to, Willing to, Going to", tipEN: "Phrasal auxiliaries for ability, readiness, and planning.", tipTE: "సామర్థ్యం, సంసిద్ధత మరియు ప్రణాళిక కోసం ఫ్రేసల్ సహాయక క్రియలు." }, { class: 40, title: "Had to (Past Obligation)", tipEN: "Expressing a necessity or obligation in the past.", tipTE: "గతంలో ఒక అవసరాన్ని లేదా బాధ్యతను వ్యక్తీకరించడం." }, { class: 41, title: "Used to (Past Habit)", tipEN: "Expressing a repeated past habit that is no longer performed.", tipTE: "ఇకపై చేయని, గతంలో పునరావృతమయ్యే అలవాటును వ్యక్తీకరించడం." }, { class: 42, title: "The 12 Tenses Matrix", tipEN: "Unified map of the English verbal system by time and aspect.", tipTE: "సమయం మరియు అంశం వారీగా ఆంగ్ల క్రియ వ్యవస్థ యొక్క ఏకీకృత పటం." }, { class: 43, title: "12 Tenses Application", tipEN: "Drilling a single verb across all twelve tenses.", tipTE: "ఒకే క్రియను మొత్తం పన్నెండు టెన్సెస్‌లో అభ్యాసం చేయడం." }, { class: 44, title: "Active & Passive Voice", tipEN: "Introduces voice transformation and auxiliary conversion.", tipTE: "వాయిస్ ట్రాన్స్‌ఫర్మేషన్ మరియు సహాయక క్రియల మార్పిడిని పరిచయం చేస్తుంది." }, { class: 45, title: "Be with P.P. Form", tipEN: "Master key for expressing static states in all modal/auxiliary contexts.", tipTE: "అన్ని మోడల్/సహాయక సందర్భాలలో స్థిరమైన స్థితులను వ్యక్తీకరించడానికి మాస్టర్ కీ." }
         ];
+        
+        // *** CHANGED: Aligned font options and defaults with game hub.html ***
         const FONT_OPTIONS = {
-            body: [ { label: 'Inter', value: 'Inter, sans-serif' }, { label: 'Roboto', value: 'Roboto, sans-serif' }, { label: 'Source Sans', value: "'Source Sans 3', sans-serif" }, { label: 'Poppins', value: 'Poppins, sans-serif' } ],
-            title: [ { label: 'Lora', value: 'Lora, serif' }, { label: 'Merriweather', value: 'Merriweather, serif' }, { label: 'Playfair Display', value: "'Playfair Display', serif" }, { label: 'Montserrat', value: 'Montserrat, sans-serif' } ]
+            body: [ 
+                { label: 'Poppins', value: 'Poppins, sans-serif' },
+                { label: 'Inter', value: 'Inter, sans-serif' }, 
+                { label: 'Roboto', value: 'Roboto, sans-serif' }, 
+                { label: 'Source Sans', value: "'Source Sans 3', sans-serif" },
+                { label: 'Merriweather', value: 'Merriweather, serif' }
+            ],
+            title: [ 
+                { label: 'Montserrat', value: 'Montserrat, sans-serif' },
+                { label: 'Lora', value: 'Lora, serif' }, 
+                { label: 'Merriweather', value: 'Merriweather, serif' }, 
+                { label: 'Playfair Display', value: "'Playfair Display', serif" }
+            ]
         };
+        
+        // *** CHANGED: Aligned color themes with game hub.html (added Teal, removed Emerald) ***
         const COLOR_THEMES = [ 
             { name: 'Indigo', value: '79, 70, 229', hex: '#4f46e5',
               gradient: { light: ['#a5b4fc', '#818cf8', '#6366f1', '#4f46e5'], dark: ['#312e81', '#4338ca', '#4f46e5', '#6366f1'] } }, 
-            { name: 'Sky', value: '2, 132, 199', hex: '#0284c7',
-              gradient: { light: ['#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9'], dark: ['#0c4a6e', '#0369a1', '#0ea5e9', '#38bdf8'] } }, 
-            { name: 'Emerald', value: '5, 150, 105', hex: '#059669',
-              gradient: { light: ['#a7f3d0', '#6ee7b7', '#34d399', '#10b981'], dark: ['#064e3b', '#057a55', '#10b981', '#34d399'] } }, 
+            { name: 'Teal', value: '20, 184, 166', hex: '#14b8a6',
+              gradient: { light: ['#99f6e4', '#5eead4', '#2dd4bf', '#14b8a6'], dark: ['#0f766e', '#0d9488', '#14b8a6', '#2dd4bf'] } },
             { name: 'Rose', value: '225, 29, 72', hex: '#e11d48',
               gradient: { light: ['#fecdd3', '#fda4af', '#fb7185', '#f43f5e'], dark: ['#881337', '#be123c', '#f43f5e', '#fb7185'] } }, 
             { name: 'Amber', value: '217, 119, 6', hex: '#d97706',
-              gradient: { light: ['#fde68a', '#fcd34d', '#fbbf24', '#f59e0b'], dark: ['#78350f', '#b45309', '#f59e0b', '#fbbf24'] } } 
+              gradient: { light: ['#fde68a', '#fcd34d', '#fbbf24', '#f59e0b'], dark: ['#78350f', '#b45309', '#f59e0b', '#fbbf24'] } },
+            { name: 'Sky', value: '2, 132, 199', hex: '#0284c7',
+              gradient: { light: ['#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9'], dark: ['#0c4a6e', '#0369a1', '#0ea5e9', '#38bdf8'] } }
         ];
 
         // --- Functions ---
@@ -445,15 +480,36 @@
             const values = []; const regex = /("([^"]|"")*"|[^,]*)(,|$)/g; let match; let processedRow = row.trim(); if (processedRow.charAt(processedRow.length - 1) !== ',') processedRow += ','; while ((match = regex.exec(processedRow)) !== null) { let value = match[1] || ''; if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1).replace(/""/g, '"'); values.push(value.trim()); if (match[3] === '') break; } if (values.length > 0 && values[values.length - 1] === '') values.pop(); return values;
         }
 
+        // *** Get/Set Local Storage functions now use the global SETTINGS_KEY ***
         function getLocalStorageSetting(key, defaultValue) { 
-             try { const settingsString = localStorage.getItem(SETTINGS_KEY); if (!settingsString) return defaultValue; const settings = JSON.parse(settingsString); if (key === 'selectedClass' || key === 'maxQuestions') { const parsed = parseInt(settings[key]); return isNaN(parsed) ? defaultValue : parsed; } if (key === 'disableSound' || key === 'disableVibration') { return typeof settings[key] === 'boolean' ? settings[key] : defaultValue; } if (typeof settings[key] === 'undefined' || settings[key] === null) return defaultValue; return settings[key]; } catch (e) { console.error(`Error loading local setting key ${key}:`, e); return defaultValue; }
+             try { 
+                 const settingsString = localStorage.getItem(SETTINGS_KEY); 
+                 if (!settingsString) return defaultValue; 
+                 const settings = JSON.parse(settingsString); 
+                 if (key === 'selectedClass' || key === 'maxQuestions') { const parsed = parseInt(settings[key]); return isNaN(parsed) ? defaultValue : parsed; } 
+                 if (key === 'disableSound' || key === 'disableVibration') { return typeof settings[key] === 'boolean' ? settings[key] : defaultValue; } 
+                 // Handle contrast default
+                 if (key === 'contrast' && typeof settings[key] === 'undefined') { return 'default'; }
+                 if (typeof settings[key] === 'undefined' || settings[key] === null) return defaultValue; 
+                 return settings[key]; 
+            } catch (e) { console.error(`Error loading local setting key ${key}:`, e); return defaultValue; }
         }
         function setLocalStorageSetting(key, value) { 
-            try { const settingsString = localStorage.getItem(SETTINGS_KEY); let settings = settingsString ? JSON.parse(settingsString) : {}; settings[key] = value; localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (e) { console.error(`Error saving local setting key ${key}:`, e); }
+            try { 
+                const settingsString = localStorage.getItem(SETTINGS_KEY); 
+                let settings = settingsString ? JSON.parse(settingsString) : {}; 
+                settings[key] = value; 
+                localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); 
+            } catch (e) { console.error(`Error saving local setting key ${key}:`, e); }
         }
 
         async function loadQuestions() { 
-             try { const response = await fetch('data.csv'); if (!response.ok) throw new Error(`Failed to fetch data. Status: ${response.status}`); const csvData = await response.text(); if (!csvData || csvData.trim().split(/\r?\n/).length <= 1) throw new Error("CSV data is empty or invalid."); const lines = csvData.trim().split(/\r?\n/); const headers = parseCsvRow(lines[0]); allQuestions = lines.slice(1).map(line => { if (line.trim() === '') return null; const values = parseCsvRow(line); if (values.length < headers.length) { console.warn('Skipping row, column count mismatch:', values); return null; } let question = {}; headers.forEach((header, i) => { question[header.trim()] = values[i] || ''; }); if (!question.lesson || !question.promptEN || !question.correct) { console.warn('Skipping row, missing essential data:', question); return null; } return question; }).filter(q => q !== null); if (allQuestions.length === 0) throw new Error("No valid questions were parsed."); isDataLoaded = true; console.log(`Successfully loaded ${allQuestions.length} questions.`); } catch (error) { console.error("Failed to load or parse questions:", error); isDataLoaded = false; if(startMessage) startMessage.innerHTML = `<strong class="text-red-400">Error: Could not load quiz data.</strong><br><small>Please check your internet connection or try again later.</small>`; } selectedClass = getLocalStorageSetting('selectedClass', 1); maxQuestions = getLocalStorageSetting('maxQuestions', 10); updateStartScreenUI(); 
+             try { const response = await fetch('data.csv'); if (!response.ok) throw new Error(`Failed to fetch data. Status: ${response.status}`); const csvData = await response.text(); if (!csvData || csvData.trim().split(/\r?\n/).length <= 1) throw new Error("CSV data is empty or invalid."); const lines = csvData.trim().split(/\r?\n/); const headers = parseCsvRow(lines[0]); allQuestions = lines.slice(1).map(line => { if (line.trim() === '') return null; const values = parseCsvRow(line); if (values.length < headers.length) { console.warn('Skipping row, column count mismatch:', values); return null; } let question = {}; headers.forEach((header, i) => { question[header.trim()] = values[i] || ''; }); if (!question.lesson || !question.promptEN || !question.correct) { console.warn('Skipping row, missing essential data:', question); return null; } return question; }).filter(q => q !== null); if (allQuestions.length === 0) throw new Error("No valid questions were parsed."); isDataLoaded = true; console.log(`Successfully loaded ${allQuestions.length} questions.`); } catch (error) { console.error("Failed to load or parse questions:", error); isDataLoaded = false; if(startMessage) startMessage.innerHTML = `<strong class="text-red-400">Error: Could not load quiz data.</strong><br><small>Please check your internet connection or try again later.</small>`; } 
+             // Note: selectedClass and maxQuestions are specific to this app, 
+             // so they are loaded from the global key but won't conflict with the hub.
+             selectedClass = getLocalStorageSetting('selectedClass', 1); 
+             maxQuestions = getLocalStorageSetting('maxQuestions', 10); 
+             updateStartScreenUI(); 
         }
 
         function startQuiz() { 
@@ -511,7 +567,20 @@
              const totalQuestions = currentQuestions.length;
              const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0; 
              
-             if(finalScoreEl) finalScoreEl.textContent = `${score}/${totalQuestions} (${percentage}%)`; 
+             const scoreString = `${score}/${totalQuestions} (${percentage}%)`;
+             const scoreStringEn = `Your final score is ${score} out of ${totalQuestions}, which is ${percentage} percent.`;
+             const scoreStringTe = `మీ తుది స్కోరు ${totalQuestions} కి ${score}, అంటే ${percentage} శాతం.`;
+
+             if(finalScoreEl) finalScoreEl.textContent = scoreString;
+             if(finalScoreTeEl) finalScoreTeEl.textContent = scoreString; // Also update the Telugu span
+
+             // Add speak button listeners
+             if (speakResultEnBtn) {
+                 speakResultEnBtn.onclick = () => speak(scoreStringEn, 'en-US');
+             }
+             if (speakResultTeBtn) {
+                 speakResultTeBtn.onclick = () => speak(scoreStringTe, 'te-IN');
+             }
              
              if(resultsDetails) {
                  resultsDetails.innerHTML = incorrectAnswers.length > 0 
@@ -576,7 +645,7 @@
                          type: "OBJECT",
                          properties: {
                              "feedbackEN": { "type": "STRING", "description": "Overall feedback in English based on the score (1-2 sentences)." },
-                             "feedbackTE": { "type": "STRING", "description": "Overall feedback in Telugu based on the score (1-2 sentences)." },
+                             "feedbackTE": { "type": "STRING", "description": "Overall feedback in Telugu based on the score (1-Unchanged)." },
                              "coachingEN": { "type": "STRING", "description": "Specific coaching advice in English, mentioning areas for improvement based on incorrect answers or lesson topic (1-2 sentences)." },
                              "coachingTE": { "type": "STRING", "description": "Specific coaching advice in Telugu (1-2 sentences)." },
                              "tipsEN": { "type": "STRING", "description": "Relevant tips or tricks in English related to the lesson topic (1-2 sentences)." },
@@ -616,7 +685,7 @@
                         const parsedJson = JSON.parse(jsonText);
 
                         if(feedbackEnEl) feedbackEnEl.textContent = parsedJson.feedbackEN || "N/A";
-                        if(feedbackTeEl) feedbackTeEl.textContent = parsedJson.feedbackTE || "N/A";
+                        if(feedbackTeEl) feedbackTeEl.textContent = parsedJson.feedbackTE || "N/Adding";
                         if(coachingEnEl) coachingEnEl.textContent = parsedJson.coachingEN || "N/A";
                         if(coachingTeEl) coachingTeEl.textContent = parsedJson.coachingTE || "N/A";
                         if(tipsEnEl) tipsEnEl.textContent = parsedJson.tipsEN || "N/A";
@@ -648,7 +717,16 @@
         }
         
         function saveProgress() { 
-             try { let progress = JSON.parse(localStorage.getItem('englishHubProgress') || '{}'); if (typeof progress !== 'object' || progress === null) progress = {}; if (!progress.spoken || typeof progress.spoken !== 'number' || progress.spoken < selectedClass) { progress.spoken = selectedClass; } localStorage.setItem('englishHubProgress', JSON.stringify(progress)); console.log("Progress saved:", progress); } catch (e) { console.error("Failed to save progress:", e); }
+             try { 
+                 // We use 'englishHubProgress' to be consistent with the hub
+                 let progress = JSON.parse(localStorage.getItem('englishHubProgress') || '{}'); 
+                 if (typeof progress !== 'object' || progress === null) progress = {}; 
+                 if (!progress.spoken || typeof progress.spoken !== 'number' || progress.spoken < selectedClass) { 
+                     progress.spoken = selectedClass; 
+                 } 
+                 localStorage.setItem('englishHubProgress', JSON.stringify(progress)); 
+                 console.log("Progress saved:", progress); 
+            } catch (e) { console.error("Failed to save progress:", e); }
          }
 
         function updateLessonTip(classNumber) { 
@@ -659,15 +737,22 @@
             const htmlEl = document.documentElement;
             if (isDark) { htmlEl.classList.add('dark'); if(themeIconLight) themeIconLight.classList.add('hidden'); if(themeIconDark) themeIconDark.classList.remove('hidden'); } 
             else { htmlEl.classList.remove('dark'); if(themeIconLight) themeIconLight.classList.remove('hidden'); if(themeIconDark) themeIconDark.classList.add('hidden'); }
+            // Re-apply accent color to update gradients
             applyAccentColor(getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name)); 
             setLocalStorageSetting('theme', isDark ? 'dark' : 'light'); 
         }
         
         function setBodyFont(font) { 
-            if (font) { document.documentElement.style.setProperty('--body-font', font); setLocalStorageSetting('bodyFont', font); }
+            if (font) { 
+                document.documentElement.style.setProperty('--body-font', font); 
+                setLocalStorageSetting('bodyFont', font); 
+            }
         }
         function setTitleFont(font) { 
-            if (font) { document.documentElement.style.setProperty('--title-font', font); setLocalStorageSetting('titleFont', font); }
+            if (font) { 
+                document.documentElement.style.setProperty('--title-font', font); 
+                setLocalStorageSetting('titleFont', font); 
+            }
         }
         
         function applyAccentColor(name) {
@@ -688,11 +773,32 @@
          }
         
         function applyContrast(contrastValue) { 
-             textContrast = contrastValue; document.body.setAttribute('data-contrast', contrastValue); setLocalStorageSetting('contrast', contrastValue); updateContrastButtonsUI(); 
+             textContrast = contrastValue; 
+             document.body.setAttribute('data-contrast', contrastValue); 
+             setLocalStorageSetting('contrast', contrastValue); 
+             updateContrastButtonsUI(); 
          }
 
         function loadInitialSettings() { 
-             const savedTheme = getLocalStorageSetting('theme', 'dark'); applyTheme(savedTheme === 'dark'); setBodyFont(getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value)); setTitleFont(getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value)); applyAccentColor(getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name)); applyContrast(getLocalStorageSetting('contrast', 'default')); disableSound = getLocalStorageSetting('disableSound', false); disableVibration = getLocalStorageSetting('disableVibration', false); updateSettingsUI(); 
+             // *** CHANGED: Load settings from the global key ***
+             const savedTheme = getLocalStorageSetting('theme', 'dark'); 
+             applyTheme(savedTheme === 'dark'); 
+             
+             // *** CHANGED: Load fonts, falling back to new aligned defaults ***
+             setBodyFont(getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value)); 
+             setTitleFont(getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value)); 
+             
+             // *** CHANGED: Load color, falling back to new aligned default ***
+             applyAccentColor(getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name)); 
+             
+             // *** CHANGED: Load contrast ***
+             applyContrast(getLocalStorageSetting('contrast', 'default')); 
+             
+             // Load app-specific settings (sound/haptics)
+             disableSound = getLocalStorageSetting('disableSound', false); 
+             disableVibration = getLocalStorageSetting('disableVibration', false); 
+             
+             updateSettingsUI(); 
          }
         
         function openSettingsModal() { 
@@ -713,7 +819,19 @@
         function closeSelectionModal() { if(selectionModal) selectionModal.classList.add('hidden'); }
         
         window.handleSelectionChange = function(type, value) { 
-            if (type === 'class') { selectedClass = value; setLocalStorageSetting('selectedClass', value); updateClassSelectionButton(); updateLessonTip(selectedClass); } else if (type === 'count') { maxQuestions = value; setLocalStorageSetting('maxQuestions', value); updateQuizLengthButton(); } else if (type === 'bodyFont') { setBodyFont(value); updateFontButton('body'); } else if (type === 'titleFont') { setTitleFont(value); updateFontButton('title'); } else if (type === 'color') { applyAccentColor(value); } else if (type === 'contrast') { applyContrast(value); } else if (type === 'toggleAudio') { disableSound = !disableSound; setLocalStorageSetting('disableSound', disableSound); updateFeedbackCheckboxesUI(); } else if (type === 'toggleHaptics') { disableVibration = !disableVibration; setLocalStorageSetting('disableVibration', disableVibration); updateFeedbackCheckboxesUI(); } if (!type.startsWith('toggle') && type !== 'contrast') { closeSelectionModal(); }
+            // App-specific settings
+            if (type === 'class') { selectedClass = value; setLocalStorageSetting('selectedClass', value); updateClassSelectionButton(); updateLessonTip(selectedClass); } 
+            else if (type === 'count') { maxQuestions = value; setLocalStorageSetting('maxQuestions', value); updateQuizLengthButton(); } 
+            // Global settings
+            else if (type === 'bodyFont') { setBodyFont(value); updateFontButton('body'); } 
+            else if (type === 'titleFont') { setTitleFont(value); updateFontButton('title'); } 
+            else if (type === 'color') { applyAccentColor(value); } 
+            else if (type === 'contrast') { applyContrast(value); } 
+            // App-specific settings
+            else if (type === 'toggleAudio') { disableSound = !disableSound; setLocalStorageSetting('disableSound', disableSound); updateFeedbackCheckboxesUI(); } 
+            else if (type === 'toggleHaptics') { disableVibration = !disableVibration; setLocalStorageSetting('disableVibration', disableVibration); updateFeedbackCheckboxesUI(); } 
+            
+            if (!type.startsWith('toggle') && type !== 'contrast') { closeSelectionModal(); }
         }
 
         function getLabel(type, value) { 
@@ -721,15 +839,27 @@
         }
         
         function updateFontButton(type) { 
-             const buttonElement = type === 'body' ? currentBodyFont : currentTitleFont; const storageKey = type === 'body' ? 'bodyFont' : 'titleFont'; const defaultValue = FONT_OPTIONS[type === 'body' ? 'body' : 'title'][0].value; const currentValue = getLocalStorageSetting(storageKey, defaultValue); if (buttonElement) { buttonElement.textContent = getLabel(storageKey, currentValue); buttonElement.style.fontFamily = currentValue; }
+             const buttonElement = type === 'body' ? currentBodyFont : currentTitleFont; 
+             const storageKey = type === 'body' ? 'bodyFont' : 'titleFont'; 
+             const defaultValue = FONT_OPTIONS[type === 'body' ? 'body' : 'title'][0].value; 
+             const currentValue = getLocalStorageSetting(storageKey, defaultValue); 
+             if (buttonElement) { 
+                 buttonElement.textContent = getLabel(storageKey, currentValue); 
+                 buttonElement.style.fontFamily = currentValue; 
+             }
          }
         function updateColorButton() { 
-             const themeName = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name); if (currentAccentColor) currentAccentColor.textContent = themeName; if (colorPreview) { const theme = COLOR_THEMES.find(t => t.name === themeName) || COLOR_THEMES[0]; colorPreview.style.backgroundColor = theme.hex; }
+             const themeName = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name); 
+             if (currentAccentColor) currentAccentColor.textContent = themeName; 
+             if (colorPreview) { const theme = COLOR_THEMES.find(t => t.name === themeName) || COLOR_THEMES[0]; colorPreview.style.backgroundColor = theme.hex; }
          }
         function updateClassSelectionButton() { if(currentClassSelection) currentClassSelection.textContent = getLabel('class', selectedClass); }
         function updateQuizLengthButton() { if(currentQuizLength) currentQuizLength.textContent = getLabel('count', maxQuestions); }
         function updateContrastButtonsUI() { 
-             if (contrastDefaultBtn && contrastHighBtn) { contrastDefaultBtn.classList.toggle('active', textContrast === 'default'); contrastHighBtn.classList.toggle('active', textContrast === 'high'); }
+             if (contrastDefaultBtn && contrastHighBtn) { 
+                 contrastDefaultBtn.classList.toggle('active', textContrast === 'default'); 
+                 contrastHighBtn.classList.toggle('active', textContrast === 'high'); 
+             }
          }
         function updateFeedbackCheckboxesUI() { 
             if (toggleAudioCheckbox) toggleAudioCheckbox.checked = disableSound; if (toggleHapticsCheckbox) toggleHapticsCheckbox.checked = disableVibration;
@@ -748,7 +878,13 @@
         // window.onload... 
         window.onload = () => {
             // Assign DOM Elements...
-            startScreen = document.getElementById('start-screen'); quizScreen = document.getElementById('quiz-screen'); resultsScreen = document.getElementById('results-screen'); questionContainer = document.getElementById('question-container'); startButton = document.getElementById('start-quiz-button'); nextButton = document.getElementById('next-question-button'); restartButton = document.getElementById('restart-quiz-button'); curriculumButton = document.getElementById('curriculum-button'); lessonTipsContainer = document.getElementById('lesson-tips-container'); lessonTipTitle = document.getElementById('lesson-tip-title'); lessonTipEN = document.getElementById('lesson-tip-en'); lessonTipTE = document.getElementById('lesson-tip-te'); speakENTipButton = document.getElementById('speak-en-tip'); speakTETipButton = document.getElementById('speak-te-tip'); stats = document.getElementById('stats'); scoreEl = document.getElementById('score'); progressBar = document.getElementById('progress-bar'); finalScoreEl = document.getElementById('final-score'); resultsDetails = document.getElementById('results-details'); selectionModal = document.getElementById('selection-modal'); modalTitle = document.getElementById('modal-title'); modalOptions = document.getElementById('modal-options'); settingsModal = document.getElementById('settings-modal'); themeToggle = document.getElementById('theme-toggle'); themeIconLight = document.getElementById('theme-icon-light'); themeIconDark = document.getElementById('theme-icon-dark'); startMessage = document.getElementById('start-message'); classSelectionButton = document.getElementById('class-selection-button'); lengthSelectionButton = document.getElementById('length-selection-button'); currentClassSelection = document.getElementById('current-class-selection'); currentQuizLength = document.getElementById('current-quiz-length'); closeSelectionModalBtn = document.getElementById('close-selection-modal'); closeSettingsModalBtn = document.getElementById('close-settings-modal'); closeCurriculumModalBtn = document.getElementById('close-curriculum-modal'); bodyFontBtn = document.getElementById('body-font-button'); titleFontBtn = document.getElementById('title-font-button'); colorBtn = document.getElementById('color-button'); currentBodyFont = document.getElementById('current-body-font'); currentTitleFont = document.getElementById('current-title-font'); currentAccentColor = document.getElementById('current-accent-color'); contrastDefaultBtn = document.getElementById('contrast-default'); contrastHighBtn = document.getElementById('contrast-high'); toggleAudioCheckbox = document.getElementById('toggle-audio'); toggleHapticsCheckbox = document.getElementById('toggle-haptics'); colorPreview = document.getElementById('color-preview');
+            startScreen = document.getElementById('start-screen'); quizScreen = document.getElementById('quiz-screen'); resultsScreen = document.getElementById('results-screen'); questionContainer = document.getElementById('question-container'); startButton = document.getElementById('start-quiz-button'); nextButton = document.getElementById('next-question-button'); restartButton = document.getElementById('restart-quiz-button'); curriculumButton = document.getElementById('curriculum-button'); lessonTipsContainer = document.getElementById('lesson-tips-container'); lessonTipTitle = document.getElementById('lesson-tip-title'); lessonTipEN = document.getElementById('lesson-tip-en'); lessonTipTE = document.getElementById('lesson-tip-te'); speakENTipButton = document.getElementById('speak-en-tip'); speakTETipButton = document.getElementById('speak-te-tip'); stats = document.getElementById('stats'); scoreEl = document.getElementById('score'); progressBar = document.getElementById('progress-bar'); 
+            finalScoreEl = document.getElementById('final-score');
+            finalScoreTeEl = document.getElementById('final-score-te');
+            speakResultEnBtn = document.getElementById('speak-result-en');
+            speakResultTeBtn = document.getElementById('speak-result-te');
+            resultsDetails = document.getElementById('results-details'); 
+            selectionModal = document.getElementById('selection-modal'); modalTitle = document.getElementById('modal-title'); modalOptions = document.getElementById('modal-options'); settingsModal = document.getElementById('settings-modal'); themeToggle = document.getElementById('theme-toggle'); themeIconLight = document.getElementById('theme-icon-light'); themeIconDark = document.getElementById('theme-icon-dark'); startMessage = document.getElementById('start-message'); classSelectionButton = document.getElementById('class-selection-button'); lengthSelectionButton = document.getElementById('length-selection-button'); currentClassSelection = document.getElementById('current-class-selection'); currentQuizLength = document.getElementById('current-quiz-length'); closeSelectionModalBtn = document.getElementById('close-selection-modal'); closeSettingsModalBtn = document.getElementById('close-settings-modal'); closeCurriculumModalBtn = document.getElementById('close-curriculum-modal'); bodyFontBtn = document.getElementById('body-font-button'); titleFontBtn = document.getElementById('title-font-button'); colorBtn = document.getElementById('color-button'); currentBodyFont = document.getElementById('current-body-font'); currentTitleFont = document.getElementById('current-title-font'); currentAccentColor = document.getElementById('current-accent-color'); contrastDefaultBtn = document.getElementById('contrast-default'); contrastHighBtn = document.getElementById('contrast-high'); toggleAudioCheckbox = document.getElementById('toggle-audio'); toggleHapticsCheckbox = document.getElementById('toggle-haptics'); colorPreview = document.getElementById('color-preview');
             // AI Elements
             aiFeedbackSection = document.getElementById('ai-feedback-section'); aiLoadingIndicator = document.getElementById('ai-loading-indicator'); aiContent = document.getElementById('ai-content'); aiError = document.getElementById('ai-error'); feedbackEnEl = document.getElementById('feedback-en'); feedbackTeEl = document.getElementById('feedback-te'); coachingEnEl = document.getElementById('coaching-en'); coachingTeEl = document.getElementById('coaching-te'); tipsEnEl = document.getElementById('tips-en'); tipsTeEl = document.getElementById('tips-te');
             // Offline Message Element
@@ -786,7 +922,7 @@
 
             // Run Setup...
             setupAudio();
-            loadInitialSettings(); 
+            loadInitialSettings(); // This will now load the global settings
             loadQuestions(); 
         };
     </script>
