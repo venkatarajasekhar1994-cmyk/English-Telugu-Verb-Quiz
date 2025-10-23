@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,913 +18,1277 @@
     </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Added PapaParse for robust CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <!-- Added diagram_data.js, defer ensures it loads after HTML but before DOMContentLoaded -->
+    <script src="diagram_data.js" defer></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Noto+Sans:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&display=swap');
         
-        /* --- CSS Variables --- */
+        /* Basic theme variables */
         :root {
-            /* Updated default fonts to match game hub */
-            --title-font: 'Montserrat', sans-serif;
-            --body-font: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-title: 'Lora', serif;
             
-            --accent-color-rgb: 79, 70, 229; /* Indigo RGB */
-            --accent-color-hex: #4f46e5; /* Indigo Hex */
-            
-            /* Backgrounds - 4 stops for animation - Set dynamically via JS */
-            --bg-grad-color1: #a5b4fc; /* Default light indigo 1 */
-            --bg-grad-color2: #818cf8; /* Default light indigo 2 */
-            --bg-grad-color3: #6366f1; /* Default light indigo 3 */
-            --bg-grad-color4: #4f46e5; /* Default light indigo 4 */
-            
-            /* Glass Effect (Light Mode Default) */
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --button-bg: rgba(0, 0, 0, 0.1);
-            --button-hover-bg: rgba(0, 0, 0, 0.2);
-            --modal-bg: rgba(255, 255, 255, 0.05);
-            
-            /* Text Colors */
-            --text-main: #f3f4f6;
-            --text-subtle: #d1d5db;
-            --text-contrast-light: #111827;
-            --text-contrast-dark: #f9fafb;
+            --color-bg: #F3F4F6; /* light-gray-100 */
+            --color-card: #FFFFFF;
+            --color-text: #1F2937; /* light-gray-800 */
+            --color-text-dim: #4B5563; /* light-gray-600 */
+            --color-primary: #3B82F6; /* light-blue-500 */
+            --color-primary-hover: #2563EB;
+            --color-primary-text: #FFFFFF;
+            --color-border: #E5E7EB; /* light-gray-200 */
+            --color-correct: #10B981; /* light-green-500 */
+            --color-incorrect: #EF4444; /* light-red-500 */
+            --color-modal-overlay: rgba(0, 0, 0, 0.5);
+            --color-modal-bg: #FFFFFF;
         }
 
-        /* --- Dark Mode Variables --- */
-        .dark:root {
-            /* Backgrounds - 4 stops - Set dynamically via JS */
-            --bg-grad-color1: #312e81; /* Default dark indigo 1 */
-            --bg-grad-color2: #4338ca; /* Default dark indigo 2 */
-            --bg-grad-color3: #4f46e5; /* Default dark indigo 3 */
-            --bg-grad-color4: #6366f1; /* Default dark indigo 4 */
-
-            --glass-bg: rgba(31, 41, 55, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --button-bg: rgba(0, 0, 0, 0.3);
-            --button-hover-bg: rgba(0, 0, 0, 0.5);
-            --modal-bg: rgba(17, 24, 39, 0.6);
-
-            --text-main: #f9fafb;
-            --text-subtle: #9ca3af;
+        /* Dark theme variables */
+        .dark {
+            --color-bg: #111827; /* dark-gray-900 */
+            --color-card: #1F2937; /* dark-gray-800 */
+            --color-text: #F3F4F6; /* dark-gray-100 */
+            --color-text-dim: #9CA3AF; /* dark-gray-400 */
+            --color-primary: #60A5FA; /* dark-blue-400 */
+            --color-primary-hover: #3B82F6;
+            --color-primary-text: #1F2937;
+            --color-border: #374151; /* dark-gray-700 */
+            --color-correct: #34D399; /* dark-green-400 */
+            --color-incorrect: #F87171; /* dark-red-400 */
+            --color-modal-overlay: rgba(0, 0, 0, 0.7);
+            --color-modal-bg: #1F2937;
         }
-        
-        /* --- Text Contrast Application --- */
-        body { color: var(--text-main); }
-        .subtle-text-color { color: var(--text-subtle); }
-        body[data-contrast="high"] { color: var(--text-contrast-light); }
-        body[data-contrast="high"] .subtle-text-color { color: #4b5563; }
-        .dark body[data-contrast="high"] { color: var(--text-contrast-dark); }
-        .dark body[data-contrast="high"] .subtle-text-color { color: #e5e7eb; }
-        .dark body[data-contrast="high"] a,
-        .dark body[data-contrast="high"] button:not(.accent-bg) { color: var(--text-contrast-dark) !important; }
-        body[data-contrast="high"] a,
-        body[data-contrast="high"] button:not(.accent-bg) { color: var(--text-contrast-light) !important; }
-        body[data-contrast="high"] .accent-text { color: var(--accent-color-hex) !important; }
 
-        /* --- Base Styles with Gradient --- */
         body {
-            font-family: var(--body-font);
-            background: linear-gradient(-45deg, var(--bg-grad-color1), var(--bg-grad-color2), var(--bg-grad-color3), var(--bg-grad-color4));
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            transition: color 0.3s ease;
-            min-height: 100vh;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            transition: background-color 0.3s, color 0.3s;
         }
         
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-title);
         }
 
-        h1, h2, h3, .font-title { font-family: var(--title-font); }
-        .accent-bg { background-color: rgb(var(--accent-color-rgb)); }
-        .accent-text { color: rgb(var(--accent-color-rgb)); }
-        .accent-border { border-color: rgb(var(--accent-color-rgb)); }
-        .accent-ring:focus { --tw-ring-color: rgb(var(--accent-color-rgb)); }
-        
-        .glass-effect {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            transition: background 0.3s ease, border 0.3s ease;
+        /* Base styles for modals */
+        .modal {
+            background-color: var(--color-modal-overlay);
+        }
+        .modal-content {
+            background-color: var(--color-modal-bg);
+            color: var(--color-text);
+        }
+
+        /* Other element styles */
+        .card, .modal-content, .selection-item {
+            background-color: var(--color-card);
+            border: 1px solid var(--color-border);
         }
         
-        .button-bg-color { background-color: var(--button-bg); transition: background-color 0.2s ease; }
-        .button-bg-color:hover { background-color: var(--button-hover-bg); }
-        .modal-glass { background: var(--modal-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); }
-        .selection-button { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); transition: background-color 0.2s, border-color 0.2s; }
-        .selection-button:hover { background-color: rgba(255, 255, 255, 0.1); }
-        .selection-button.active { border-color: rgb(var(--accent-color-rgb)); background-color: rgba(var(--accent-color-rgb), 0.2); font-weight: 600; }
-        .animated-float { /* animation: liquid-float 15s ease-in-out infinite; */ } /* Optional: Keep or remove float */
-        @keyframes liquid-float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        input[type="text"] { color: var(--text-main); }
-        .dark body[data-contrast="high"] input[type="text"] { color: var(--text-contrast-dark) !important; }
-        body[data-contrast="high"] input[type="text"] { color: var(--text-contrast-light) !important; }
-         input::placeholder { color: var(--text-subtle); opacity: 0.7; }
-         body[data-contrast="high"] input::placeholder { color: #6b7280; }
-         .dark body[data-contrast="high"] input::placeholder { color: #9ca3af; }
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-primary-text);
+        }
+        .btn-primary:hover {
+            background-color: var(--color-primary-hover);
+        }
+        
+        .btn-secondary {
+             background-color: var(--color-card);
+             color: var(--color-text);
+             border: 1px solid var(--color-border);
+        }
+        .btn-secondary:hover {
+            background-color: var(--color-bg);
+        }
+        
+        /* Custom styles for diagram nodes */
+        .diagram-node {
+            background-color: var(--color-card);
+            border: 2px solid var(--color-primary);
+            color: var(--color-text);
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.875rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 10;
+            /* ADDED: Ensures Telugu characters render beautifully */
+            font-family: var(--font-body), 'Noto Sans Telugu', sans-serif;
+        }
+        .diagram-column-title {
+            font-family: var(--font-title), 'Noto Sans Telugu', sans-serif;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .diagram-svg-line {
+            stroke: var(--color-text-dim);
+            stroke-width: 2px;
+            fill: none;
+        }
 
-        /* --- Loading Spinner --- */
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-left-color: #fff;
+        .option.correct {
+            background-color: var(--color-correct) !important;
+            color: var(--color-primary-text) !important;
+            border-color: var(--color-correct) !important;
+        }
+        .option.incorrect {
+            background-color: var(--color-incorrect) !important;
+            color: var(--color-primary-text) !important;
+            border-color: var(--color-incorrect) !important;
+        }
+        
+        /* Ensure selection items have text color */
+        .selection-item {
+            color: var(--color-text);
+        }
+        
+        .selection-item.selected {
+            background-color: var(--color-primary);
+            color: var(--color-primary-text);
+            border-color: var(--color-primary);
+        }
+
+        /* Basic loading spinner */
+        .loader {
+            border: 4px solid var(--color-border);
+            border-top: 4px solid var(--color-primary);
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 1rem auto; /* Center the spinner */
         }
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
+        
+        /* Icon styles */
+        .icon-btn {
+            color: var(--color-text-dim);
+        }
+        .icon-btn:hover {
+            color: var(--color-text);
+        }
+
     </style>
 </head>
-<body class="transition-colors duration-300">
+<body class="min-h-screen">
 
-    <div id="app" class="max-w-4xl mx-auto p-4 md:p-6">
-        
-        <header class="flex items-center justify-between mb-6">
-            <h1 class="text-3xl md:text-4xl font-bold text-white shadow-sm">Spoken English Quiz</h1>
+    <!-- Main App Container -->
+    <div id="app-container" class="max-w-2xl mx-auto p-4">
+
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-4">
+            <h1 class="text-3xl font-bold" style="font-family: var(--font-title);">Spoken English</h1>
             <div class="flex items-center space-x-2">
-                 <!-- Header buttons... -->
-                 <a href="game hub.html" class="text-gray-200 hover:text-white transition-colors p-2 rounded-full glass-effect">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                </a>
-                <button id="curriculum-button" class="p-2 rounded-full text-gray-200 hover:text-white transition-colors glass-effect">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                <button id="curriculum-button" title="View Curriculum" class="icon-btn p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                 </button>
-                <button id="settings-button" class="p-2 rounded-full text-gray-200 hover:text-white transition-colors glass-effect">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 0 2l-.15.08a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1 0-2l.15.08a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <button id="settings-button" title="Settings" class="icon-btn p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                 </button>
-                <button id="theme-toggle" class="p-2 rounded-full text-gray-200 hover:text-white transition-colors glass-effect">
-                    <svg id="theme-icon-light" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                    <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <button id="theme-toggle" title="Toggle Theme" class="icon-btn p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10">
+                    <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                    <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
                 </button>
             </div>
         </header>
 
-        <div id="start-screen" class="text-center p-6 rounded-2xl glass-effect animated-float">
-            <!-- Start screen content... -->
-            <h2 class="text-2xl font-bold mb-4 text-white">Welcome!</h2>
-            <p id="start-message" class="mb-6 subtle-text-color">Loading data... Please wait.</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                <button id="class-selection-button" class="w-full text-white p-3 rounded-lg text-left button-bg-color hover:button-hover-bg transition-colors">
-                    <span class="text-xs text-gray-400">Class</span><br>
-                    <span id="current-class-selection" class="font-semibold"></span>
-                </button>
-                <button id="length-selection-button" class="w-full text-white p-3 rounded-lg text-left button-bg-color hover:button-hover-bg transition-colors">
-                    <span class="text-xs text-gray-400">Quiz Length</span><br>
-                    <span id="current-quiz-length" class="font-semibold"></span>
-                </button>
-            </div>
-            <div id="lesson-tips-container" class="hidden text-left p-4 rounded-lg button-bg-color mt-6 glass-effect">
-                <h3 id="lesson-tip-title" class="font-bold text-lg text-white mb-2">Lesson Focus:</h3>
-                <div class="flex items-center justify-between">
-                    <p id="lesson-tip-en" class="text-sm text-gray-200 flex-1 pr-2"></p>
-                    <button id="speak-en-tip" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        <!-- Loading State -->
+        <div id="loading-spinner" class="flex justify-center items-center h-64">
+            <div class="loader"></div>
+        </div>
+
+        <!-- Quiz Setup Screen -->
+        <div id="quiz-setup" class="hidden flex flex-col gap-4 p-4">
+            <!-- Setup Controls -->
+            <div class="card rounded-lg p-4 flex flex-col sm:flex-row gap-4">
+                <div class="flex-1">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Class</label>
+                    <button id="class-selection-button" class="btn-secondary w-full text-left p-2 rounded-md shadow-sm">
+                        Class 1: Pronouns
                     </button>
                 </div>
-                <hr class="border-white/20 my-2">
-                <div class="flex items-center justify-between">
-                    <p id="lesson-tip-te" class="text-sm text-gray-300 flex-1 pr-2"></p>
-                    <button id="speak-te-tip" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                <div class="flex-1">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Length</label>
+                    <button id="length-selection-button" class="btn-secondary w-full text-left p-2 rounded-md shadow-sm">
+                        10 Questions
                     </button>
                 </div>
             </div>
-            <button id="start-quiz-button" disabled class="w-full mt-6 accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+
+            <!-- NEW: Lesson Info Card -->
+            <div id="lessonInfoCard" class="card rounded-lg p-4 hidden">
+                <h3 id="lessonInfoTitle" class="text-xl font-bold mb-3" style="font-family: var(--font-title);">Lesson Info</h3>
+                
+                <div id="lessonInfoContent" class="space-y-3">
+                    <!-- Content will be injected by JS -->
+                </div>
+                
+                <button id="viewDiagramBtn" class="btn-secondary w-full text-center p-2 rounded-md shadow-sm mt-4 hidden">
+                    View Lesson Diagram
+                </button>
+            </div>
+            
+            <button id="start-button" class="btn-primary w-full p-3 rounded-lg text-lg font-bold shadow-lg">
                 Start Quiz
             </button>
         </div>
 
-        <div id="quiz-screen" class="hidden animated-float">
-             <!-- Quiz screen content... -->
-             <div class="flex justify-between items-center mb-4">
-                <div id="stats" class="text-sm font-semibold subtle-text-color">Question 1/10</div>
-                <div id="score" class="text-sm font-semibold subtle-text-color">Score: 0</div>
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="hidden">
+            <!-- Quiz Header -->
+            <div class="flex justify-between items-center mb-2">
+                <span id="question-counter" class="text-sm font-medium text-gray-500 dark:text-gray-400">Question 1/10</span>
+                <button id="end-quiz-button" class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">End Quiz</button>
             </div>
-            <div class="w-full rounded-full h-2.5 mb-4 button-bg-color">
-                <div id="progress-bar" class="accent-bg h-2.5 rounded-full" style="width: 10%"></div>
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mb-4">
+                <div id="progress-bar" class="bg-blue-500 dark:bg-blue-400 h-2.5 rounded-full" style="width: 10%; transition: width 0.3s;"></div>
             </div>
-            <div id="question-container" class="p-6 rounded-2xl glass-effect"></div>
-            <button id="next-question-button" class="hidden mt-6 w-full accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 transition-opacity">Next</button>
+            
+            <!-- Question Card -->
+            <div id="question-card" class="card rounded-lg p-5 shadow-md">
+                <p id="prompt-te" class="text-lg mb-2" style="font-family: 'Noto Sans Telugu', sans-serif;">...</p>
+                
+                <div class="flex items-center space-x-2">
+                    <p id="prompt-en" class="text-xl font-semibold mb-4">...</p>
+                    <button id="speak-prompt-btn" title="Speak Prompt" class="icon-btn text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+                
+                <div id="options-container" class="space-y-3">
+                    <!-- Options will be injected here -->
+                </div>
+            </div>
+            
+            <!-- Feedback Card (for Fill-in-the-blanks) -->
+            <div id="fib-card" class="hidden card rounded-lg p-5 shadow-md mt-4">
+                <input type="text" id="fib-input" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700" placeholder="Type your answer...">
+                <button id="fib-submit" class="btn-primary w-full p-2 rounded-lg mt-3">Check</button>
+            </div>
+            
+            <!-- Tip Card -->
+            <div id="tip-card" class="card rounded-lg p-4 mt-4 hidden">
+                 <h4 class="font-bold text-lg mb-2">Tip / Trick</h4>
+                 <div class="flex items-start space-x-2">
+                    <p id="tip-text" class="text-sm flex-1">...</p>
+                    <button id="speak-tip-btn" title="Speak Tip" class="icon-btn text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white pt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Feedback Card -->
+            <div id="feedback-card" class="card rounded-lg p-5 mt-4 hidden">
+                <h3 id="feedback-title" class="text-xl font-bold mb-2"></h3>
+                <p id="feedback-text-te" class="mb-2" style="font-family: 'Noto Sans Telugu', sans-serif;">...</p>
+                <p id="feedback-text-en" class="mb-4">...</p>
+                <button id="next-button" class="btn-primary w-full p-3 rounded-lg text-lg font-bold">Next</button>
+            </div>
         </div>
 
-        <!-- Results Screen -->
-        <div id="results-screen" class="hidden text-center p-6 rounded-2xl glass-effect animated-float">
-             <h2 class="text-2xl font-bold mb-2 text-white">Quiz Complete!</h2>
-             
-             <!-- English Result -->
-             <div class="flex items-center justify-center space-x-2 mb-2">
-                 <p id="final-score-text-en" class="text-lg text-gray-200">Your final score is <span id="final-score" class="font-bold accent-text"></span></p>
-                 <button id="speak-result-en" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                 </button>
-             </div>
-             
-             <!-- Telugu Result -->
-             <div class="flex items-center justify-center space-x-2 mb-4">
-                 <p id="final-score-text-te" class="text-lg text-gray-300">మీ తుది స్కోరు <span id="final-score-te" class="font-bold accent-text"></span></p>
-                 <button id="speak-result-te" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                 </button>
-             </div>
-             
-             <div id="results-details" class="text-left mb-6 space-y-2 max-h-40 overflow-y-auto no-scrollbar">
-                 <!-- Incorrect answers summary -->
-             </div>
-             
-             <!-- AI Feedback Section -->
-             <div id="ai-feedback-section" class="hidden text-left mt-6 border-t border-white/20 pt-4"> <!-- Initially hidden -->
-                 <h3 class="text-xl font-bold mb-3 text-white">AI Coach Feedback</h3>
-                 <!-- Offline message area - now hidden by default -->
-                 <div id="ai-offline-message" class="hidden text-center subtle-text-color p-4 rounded-lg button-bg-color mb-4">
-                     <!-- Content removed as the section will be hidden -->
-                 </div>
-                 <div id="ai-loading-indicator" class="hidden text-center subtle-text-color"> <!-- Initially hidden -->
-                     <div class="spinner"></div>
-                     Generating personalized feedback...
-                 </div>
-                 <div id="ai-content" class="hidden space-y-4 text-sm">
-                    <!-- English Feedback -->
-                    <div class="p-3 rounded-lg button-bg-color">
-                        <strong class="block text-gray-200 mb-1">Feedback (English):</strong>
-                        <p id="feedback-en" class="text-gray-300"></p>
-                    </div>
-                     <!-- Telugu Feedback -->
-                     <div class="p-3 rounded-lg button-bg-color">
-                        <strong class="block text-gray-200 mb-1">ఫీడ్‌బ్యాక్ (తెలుగు):</strong>
-                        <p id="feedback-te" class="text-gray-300"></p>
-                    </div>
-                    <!-- English Coaching -->
-                    <div class="p-3 rounded-lg button-bg-color">
-                        <strong class="block text-gray-200 mb-1">Coaching (English):</strong>
-                        <p id="coaching-en" class="text-gray-300"></p>
-                    </div>
-                     <!-- Telugu Coaching -->
-                     <div class="p-3 rounded-lg button-bg-color">
-                        <strong class="block text-gray-200 mb-1">కోచింగ్ (తెలుగు):</strong>
-                        <p id="coaching-te" class="text-gray-300"></p>
-                    </div>
-                    <!-- English Tips -->
-                    <div class="p-3 rounded-lg button-bg-color">
-                        <strong class="block text-gray-200 mb-1">Tips & Tricks (English):</strong>
-                        <p id="tips-en" class="text-gray-300"></p>
-                    </div>
-                     <!-- Telugu Tips -->
-                     <div class="p-3 rounded-lg button-bg-color">
-                        <strong class="block text-gray-200 mb-1">చిట్కాలు & ఉపాయాలు (తెలుగు):</strong>
-                        <p id="tips-te" class="text-gray-300"></p>
-                    </div>
-                    <p id="ai-error" class="text-red-400 text-center hidden">Could not generate AI feedback at this time.</p>
-                 </div>
-             </div>
-             
-             <button id="restart-quiz-button" class="w-full mt-6 accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 transition-opacity">Play Again</button>
+        <!-- Quiz Results Screen -->
+        <div id="results-screen" class="hidden card rounded-lg p-6 shadow-lg text-center">
+            <h2 class="text-3xl font-bold mb-4">Quiz Complete!</h2>
+            <p class="text-5xl font-bold mb-2"><span id="score-percent">0</span>%</p>
+            <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">You got <span id="score-correct">0</span> out of <span id="score-total">0</span> correct.</p>
+            <div class="space-y-4">
+                <button id="restart-quiz-button" class="btn-primary w-full p-3 rounded-lg text-lg font-bold">Restart Quiz</button>
+                <button id="back-to-setup-button" class="btn-secondary w-full p-3 rounded-lg text-lg font-bold">Change Settings</button>
+            </div>
         </div>
     </div>
 
     <!-- Modals -->
-    <div id="selection-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
-        <div class="rounded-2xl shadow-xl p-6 w-full max-w-sm max-h-[80vh] flex flex-col modal-glass">
-            <div class="flex justify-between items-center mb-4">
-                <h3 id="modal-title" class="text-xl font-bold text-white">Select Option</h3>
-                <button id="close-selection-modal" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
-            </div>
-            <div id="modal-options" class="space-y-2 overflow-y-auto no-scrollbar"></div>
-        </div>
-    </div>
 
-    <div id="settings-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
-        <div class="rounded-2xl shadow-xl p-6 w-full max-w-md modal-glass"> 
-            <!-- Settings content... -->
-             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-white">Settings</h3>
-                <button id="close-settings-modal" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
+    <!-- Selection Modal -->
+    <div id="selectionModal" class="modal fixed inset-0 z-50 hidden items-center justify-center p-4">
+        <div class="modal-content w-full max-w-md rounded-lg shadow-xl overflow-hidden">
+            <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 id="selectionModalTitle" class="text-xl font-bold">Select</h3>
+                <button id="closeSelectionModalBtn" class="icon-btn p-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
             </div>
-            <div class="space-y-4">
-                <button id="color-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white flex justify-between items-center">
-                    <div> <span class="text-xs text-gray-400">Accent Color</span><br> <span id="current-accent-color" class="font-semibold"></span> </div>
-                     <span id="color-preview" class="w-5 h-5 rounded-full border border-white/20"></span>
-                </button>
-                <div>
-                     <span class="text-xs text-gray-400 block mb-1">Text Contrast</span>
-                     <div class="flex space-x-2"> 
-                          <button id="contrast-default" onclick="handleSelectionChange('contrast', 'default')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white">Default</button>
-                          <button id="contrast-high" onclick="handleSelectionChange('contrast', 'high')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white">High Contrast</button>
-                     </div>
-                </div>
-                <button id="body-font-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white">
-                    <span class="text-xs text-gray-400">Body Font</span><br> <span id="current-body-font" class="font-semibold"></span>
-                </button>
-                <button id="title-font-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white">
-                    <span class="text-xs text-gray-400">Title Font</span><br> <span id="current-title-font" class="font-semibold"></span>
-                </button>
-                 <div>
-                     <span class="text-xs text-gray-400 block mb-1">Feedback</span>
-                     <div class="space-y-2">
-                         <label class="flex items-center space-x-3 cursor-pointer p-2 rounded-lg button-bg-color hover:button-hover-bg text-white">
-                            <input type="checkbox" id="toggle-audio" onclick="handleSelectionChange('toggleAudio')" class="form-checkbox h-5 w-5 rounded accent-bg border-gray-500 bg-transparent focus:ring-offset-0 focus:ring-0 text-accent-color-hex">
-                            <span>Disable Sound Effects</span>
-                         </label>
-                         <label class="flex items-center space-x-3 cursor-pointer p-2 rounded-lg button-bg-color hover:button-hover-bg text-white">
-                            <input type="checkbox" id="toggle-haptics" onclick="handleSelectionChange('toggleHaptics')" class="form-checkbox h-5 w-5 rounded accent-bg border-gray-500 bg-transparent focus:ring-offset-0 focus:ring-0 text-accent-color-hex">
-                            <span>Disable Vibration (Haptics)</span>
-                         </label>
-                     </div>
-                </div>
+            <div id="selectionModalContent" class="p-4 max-h-96 overflow-y-auto">
+                <!-- Selection items will be injected here -->
             </div>
         </div>
     </div>
-
-    <div id="curriculum-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
-         <div class="rounded-2xl shadow-xl p-6 w-full max-w-3xl max-h-[80vh] flex flex-col modal-glass">
-            <!-- Curriculum content... -->
-             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-white">45-Day Spoken English Curriculum</h3>
-                <button id="close-curriculum-modal" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
+    
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal fixed inset-0 z-50 hidden items-center justify-center p-4">
+        <div class="modal-content w-full max-w-md rounded-lg shadow-xl overflow-hidden">
+            <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-xl font-bold">Settings</h3>
+                <button id="closeSettingsModalBtn" class="icon-btn p-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
             </div>
-            <div class="space-y-6 overflow-y-auto no-scrollbar pr-2 text-sm text-gray-300">
-                <!-- Curriculum phases... (content unchanged) -->
-                <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase I: Core Action and Simple Tense Mastery (Classes 01–12)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">01</td><td class="p-2">Pronoun Roles</td><td class="p-2">Establishes the core sentence structure (S+V+O) and differentiates between subject and object pronouns.</td></tr> <tr><td class="p-2">02</td><td class="p-2">Self-Introduction</td><td class="p-2">Teaches the full framework for self-presentation.</td></tr> <tr><td class="p-2">03</td><td class="p-2">Regular Verbs</td><td class="p-2">Drills predictable conjugation patterns (V1, V2, V3, V-ing).</td></tr> <tr><td class="p-2">04</td><td class="p-2">Irregular Verbs</td><td class="p-2">Focuses on high-frequency irregular verbs (e.g., eat/ate/eaten).</td></tr> <tr><td class="p-2">05</td><td class="p-2">Simple Present Tense</td><td class="p-2">Expressing habitual actions, daily routines, and general truths.</td></tr> <tr><td class="p-2">06</td><td class="p-2">Simple Present (Do/Does)</td><td class="p-2">Using Do/Does for questions and negative statements.</td></tr> <tr><td class="p-2">07</td><td class="p-2">WH-Questions (Do/Does)</td><td class="p-2">Synthesizes Do/Does with question words (What, Why, Where, How).</td></tr> <tr><td class="p-2">08</td><td class="p-2">Simple Past Tense</td><td class="p-2">Using the Past Tense form (V2) to describe completed actions.</td></tr> <tr><td class="p-2">09</td><td class="p-2">Simple Past (Did)</td><td class="p-2">Using Did/didn't for questions and negatives in the Past Tense.</td></tr> <tr><td class="p-2">10</td><td class="p-2">WH-Questions (Did)</td><td class="p-2">Integrates Did with question words to ask about past actions.</td></tr> <tr><td class="p-2">11</td><td class="p-2">Simple Future Tense</td><td class="p-2">Using Shall/Will to express future intentions and actions.</td></tr> <tr><td class="p-2">12</td><td class="p-2">WH-Questions (Shall/Will)</td><td class="p-2">Applies Shall/Will with WH-Words to inquire about future plans.</td></tr> </tbody> </table> </div>
-                <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase II: Actions in Progress—Mastery of Continuous Forms (Classes 13–15)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">13</td><td class="p-2">Present Continuous</td><td class="p-2">Using Am/Is/Are + V-ing for actions happening now.</td></tr> <tr><td class="p-2">14</td><td class="p-2">Past Continuous</td><td class="p-2">Using Was/Were + V-ing for ongoing past actions.</td></tr> <tr><td class="p-2">15</td><td class="p-2">Future Continuous</td><td class="p-2">Using Shall be/Will be + V-ing for actions that will be in progress.</td></tr> </tbody> </table> </div>
-                <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase III: Modality, Ability, and Obligation (Classes 16–20)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">16</td><td class="p-2">Can/Could</td><td class="p-2">Expressing present ability (Can) and past ability (Could).</td></tr> <tr><td class="p-2">17</td><td class="p-2">May/Might</td><td class="p-2">Expressing uncertainty and possibility.</td></tr> <tr><td class="p-2">18</td><td class="p-2">Should</td><td class="p-2">Expressing general advice, responsibility, and duty.</td></tr> <tr><td class="p-2">19</td><td class="p-2">Must</td><td class="p-2">Expressing strong obligation, determination, or necessity.</td></tr> <tr><td class="p-2">20</td><td class="p-2">Would & Synthesis</td><td class="p-2">Using Would for past habits and synthesizing all learned forms.</td></tr> </tbody> </table> </div>
-                <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase IV: Perfect Tenses and Complex Modal Structures (Classes 21–35)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">21</td><td class="p-2">Have/Has (Possession)</td><td class="p-2">Clarifies role in expressing current possession.</td></tr> <tr><td class="p-2">22</td><td class="p-2">Present Perfect</td><td class="p-2">Using Have/Has + P.P.F for recent past actions with present relevance.</td></tr> <tr><td class="p-2">23</td><td class="p-2">Past Perfect</td><td class="p-2">Using Had + P.P.F for an action that occurred before another past action.</td></tr> <tr><td class="p-2">24</td><td class="p-2">Future Perfect</td><td class="p-2">Using Shall have/Will have + P.P.F for actions completed by a future deadline.</td></tr> <tr><td class="p-2">25</td><td class="p-2">Should have/Must have</td><td class="p-2">Expressing past unfulfilled actions or strong assumptions.</td></tr> <tr><td class="p-2">26</td><td class="p-2">May have/Might have</td><td class="p-2">Expressing degrees of uncertainty about past actions.</td></tr> <tr><td class="p-2">27</td><td class="p-2">Would have/Could have</td><td class="p-2">Discussing hypothetical situations in the past (counterfactuals).</td></tr> <tr><td class="p-2">28</td><td class="p-2">Past Actions Review</td><td class="p-2">Comprehensive review of all 17 structures for past actions.</td></tr> <tr><td class="p-2">29</td><td class="p-2">Present Perfect Continuous</td><td class="p-2">Have been/Has been + V-ing for actions from past to present.</td></tr> <tr><td class="p-2">30</td><td class="p-2">Past Perfect Continuous</td><td class="p-2">Had been + V-ing for continuous actions before a past moment.</td></tr> <tr><td class="p-2">31</td><td class="p-2">Future Perfect Continuous</td><td class="p-2">Shall have been/Will have been + V-ing for action duration up to a future point.</td></tr> <tr><td class="p-2">32</td><td class="p-2">Continuous Modal Perfects</td><td class="p-2">Introduces structures like 'Should have been doing'.</td></tr> <tr><td class="p-2">33</td><td class="p-2">Application of Should/Must Have Been</td><td class="p-2">Drilling continuous modal perfects for past actions.</td></tr> <tr><td class="p-2">34</td><td class="p-2">Application of Would/Could Have Been</td><td class="p-2">Drilling continuous modals for hypothetical past actions.</td></tr> <tr><td class="p-2">35</td><td class="p-2">Application of May/Might Have Been & Review</td><td class="p-2">Final review of all modal and perfect forms.</td></tr> </tbody> </table> </div>
-                <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase V: Necessity, Desire, and Specialized Auxiliaries (Classes 36–41)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">36</td><td class="p-2">Have to/Has to</td><td class="p-2">Expressing external compulsion in present and future.</td></tr> <tr><td class="p-2">37</td><td class="p-2">Need to/Dare to/Ought to</td><td class="p-2">Specialized auxiliaries for necessity, courage, and moral obligation.</td></tr> <tr><td class="p-2">38</td><td class="p-2">Want to/Wish to/Would like to</td><td class="p-2">Covers various expressions of desire and preference.</td></tr> <tr><td class="p-2">39</td><td class="p-2">Able to, Willing to, Going to</td><td class="p-2">Phrasal auxiliaries for ability, readiness, and planning.</td></tr> <tr><td class="p-2">40</td><td class="p-2">Had to (Past Obligation)</td><td class="p-2">Expressing a necessity or obligation in the past.</td></tr> <tr><td class="p-2">41</td><td class="p-2">Used to (Past Habit)</td><td class="p-2">Expressing a repeated past habit that is no longer performed.</td></tr> </tbody> </table> </div>
-                <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase VI: Synthesis, Tenses, and Voice (Classes 42–45)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">42</td><td class="p-2">The 12 Tenses Matrix</td><td class="p-2">Unified map of the English verbal system by time and aspect.</td></tr> <tr><td class="p-2">43</td><td class="p-2">12 Tenses Application</td><td class="p-2">Drilling a single verb across all twelve tenses.</td></tr> <tr><td class="p-2">44</td><td class="p-2">Active & Passive Voice</td><td class="p-2">Introduces voice transformation and auxiliary conversion.</td></tr> <tr><td class="p-2">45</td><td class="p-2">Be with P.P. Form</td><td class="p-2">Master key for expressing static states in all modal/auxiliary contexts.</td></tr> </tbody> </table> </div>
+            <div class="p-4 space-y-4">
+                <button id="bodyFontBtn" class="btn-secondary w-full p-2 rounded-md">Body Font: <span id="bodyFontName">Inter</span></button>
+                <button id="titleFontBtn" class="btn-secondary w-full p-2 rounded-md">Title Font: <span id="titleFontName">Lora</span></button>
+                <button id="colorBtn" class="btn-secondary w-full p-2 rounded-md">Theme Color: <span id="colorName">Blue</span></button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Curriculum Modal -->
+    <div id="curriculumModal" class="modal fixed inset-0 z-50 hidden items-center justify-center p-4">
+        <div class="modal-content w-full max-w-md rounded-lg shadow-xl overflow-hidden">
+            <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-xl font-bold">Curriculum</h3>
+                <button id="closeCurriculumModalBtn" class="icon-btn p-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="curriculumList" class="p-4 max-h-96 overflow-y-auto">
+                <!-- Curriculum items will be injected here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- NEW: Diagram Modal -->
+    <div id="diagramModal" class="modal fixed inset-0 z-50 hidden items-center justify-center p-4">
+        <div class="modal-content w-full max-w-4xl rounded-lg shadow-xl overflow-hidden">
+            <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 id="diagramModalTitle" class="text-xl font-bold">Lesson Diagram</h3>
+                <button id="closeDiagramModalBtn" class="icon-btn p-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="diagramModalTabs" class="p-2 border-b border-gray-200 dark:border-gray-700 flex space-x-2 hidden">
+                <!-- Tabs for multi-diagram lessons will be injected here -->
+            </div>
+            <div id="diagramModalContent" class="p-6 max-h-[70vh] overflow-auto">
+                <!-- Diagram will be rendered here -->
             </div>
         </div>
     </div>
 
 
+    <!-- Main App Logic -->
     <script>
         // --- DOM Elements ---
-        let startScreen, quizScreen, resultsScreen, questionContainer, startButton, nextButton, restartButton, curriculumButton;
-        let lessonTipsContainer, lessonTipTitle, lessonTipEN, lessonTipTE, speakENTipButton, speakTETipButton;
-        let stats, scoreEl, progressBar, finalScoreEl, finalScoreTeEl, speakResultEnBtn, speakResultTeBtn, resultsDetails, selectionModal, modalTitle, modalOptions;
-        let settingsModal, themeToggle, themeIconLight, themeIconDark, startMessage, classSelectionButton, lengthSelectionButton;
-        let currentClassSelection, currentQuizLength, closeSelectionModalBtn, closeSettingsModalBtn, closeCurriculumModalBtn;
-        let bodyFontBtn, titleFontBtn, colorBtn, currentBodyFont, currentTitleFont, currentAccentColor;
-        let contrastDefaultBtn, contrastHighBtn, toggleAudioCheckbox, toggleHapticsCheckbox, colorPreview;
-        // AI Feedback Elements
-        let aiFeedbackSection, aiLoadingIndicator, aiContent, aiError, feedbackEnEl, feedbackTeEl, coachingEnEl, coachingTeEl, tipsEnEl, tipsTeEl;
-        // Offline Message Element
-        let aiOfflineMessage;
-
+        let appContainer, loadingSpinner, quizSetup, startButton, quizContainer, questionCounter, progressBar, questionCard, promptEn, promptTe, speakPromptBtn, optionsContainer, fibCard, fibInput, fibSubmit, feedbackCard, feedbackTitle, feedbackTextEn, feedbackTextTe, nextButton, resultsScreen, scorePercent, scoreCorrect, scoreTotal, restartQuizButton, backToSetupButton, endQuizButton, themeToggle, themeIconLight, themeIconDark, classSelectionButton, lengthSelectionButton, selectionModal, selectionModalTitle, selectionModalContent, closeSelectionModalBtn, settingsModal, closeSettingsModalBtn, curriculumModal, closeCurriculumModalBtn, curriculumList, bodyFontBtn, titleFontBtn, colorBtn, tipCard, tipText, speakTipBtn, lessonInfoCard, lessonInfoTitle, lessonInfoContent, viewDiagramBtn, diagramModal, diagramModalTitle, diagramModalTabs, diagramModalContent, closeDiagramModalBtn, bodyFontName, titleFontName, colorName;
 
         // --- State ---
         let allQuestions = [];
-        let currentQuestions = [];
+        let allLessonDetails = []; // NEW: To store data2.csv
+        let currentQuizQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
-        let isDataLoaded = false;
-        let selectedClass = 1;
-        let maxQuestions = 10;
-        let synth;
-        let correctSound, wrongSound;
-        let disableSound = false;
-        let disableVibration = false;
-        let textContrast = 'default';
-        let incorrectAnswers = []; 
-
-        // --- Constants ---
-        // *** CHANGED: Use the same global settings key as game hub.html ***
-        const SETTINGS_KEY = 'globalHubSettings';
-        
-        const CLASS_TOPICS = [ "Pronoun Roles", "Self-Introduction", "Regular Verbs", "Irregular Verbs", "Simple Present Tense", "Simple Present (Do/Does)", "WH-Questions (Do/Does)", "Simple Past Tense", "Simple Past (Did)", "WH-Questions (Did)", "Simple Future Tense", "WH-Questions (Shall/Will)", "Present Continuous (Am/Is/Are)", "Past Continuous (Was/Were)", "Future Continuous (Shall be/Will be)", "Can/Could", "May/Might", "Should", "Must", "Would (Past Habit) & Synthesis", "Have/Has (Possession)", "Present Perfect Tense", "Past Perfect Tense", "Future Perfect Tense", "Should have/Must have (P.P.F)", "May have/Might have (P.P.F)", "Would have/Could have (P.P.F)", "Past Actions Review", "Present Perfect Continuous", "Past Perfect Continuous", "Future Perfect Continuous", "Continuous Modal Perfects", "Application of Should/Must Have Been", "Application of Would/Could Have Been", "Application of May/Might Have Been & Review", "Have to/Has to (Present/Future)", "Need to/Dare to/Ought to", "Want to/Wish to/Would like to", "Able to, Willing to, Going to, etc.", "Had to (Past Obligation)", "Used to (Past Habit)", "The 12 Tenses Matrix", "12 Tenses Application", "Active Voice & Passive Voice", "Be with P.P. Form and Special Verbs" ];
-        const LESSON_DATA = [ /* ... unchanged lesson data ... */ 
-             { class: 1, title: "Pronoun Roles", tipEN: "Differentiates between subject pronouns (I, We) and object pronouns (Me, Us).", tipTE: "సబ్జెక్ట్ ప్రొనౌన్‌లు (I, We) మరియు ఆబ్జెక్ట్ ప్రొనౌన్‌ల (Me, Us) మధ్య తేడాను వివరిస్తుంది." }, { class: 2, title: "Self-Introduction", tipEN: "Teaches the full framework for self-presentation (name, family, profession, etc.).", tipTE: "మిమ్మల్ని మీరు పరిచయం చేసుకోవడానికి పూర్తి ఫ్రేమ్‌వర్క్‌ను (పేరు, కుటుంబం, వృత్తి) నేర్పుతుంది." }, { class: 3, title: "Regular Verbs", tipEN: "Drills the predictable conjugation patterns (V1, V2, V3, V-ing).", tipTE: "సాధారణ క్రియల యొక్క V1, V2, V3, మరియు V-ing రూపాలను అభ్యాసం చేయిస్తుంది." }, { class: 4, title: "Irregular Verbs", tipEN: "Focuses on high-frequency irregular verbs (e.g., eat/ate/eaten).", tipTE: "తరచుగా ఉపయోగించే అక్రమ క్రియల (irregular verbs) రూపాలపై (ఉదా., eat/ate/eaten) దృష్టి పెడుతుంది." }, { class: 5, title: "Simple Present Tense", tipEN: "Expressing habitual actions, daily routines, and general truths.", tipTE: "అలవాటైన చర్యలు, రోజువారీ దినచర్యలు మరియు సాధారణ సత్యాలను వ్యక్తీకరించడం." }, { class: 6, title: "Simple Present (Do/Does)", tipEN: "Using Do/Does for questions and negative statements.", tipTE: "ప్రశ్నలు మరియు వ్యతిరేక వాక్యాల కోసం Do/Does ఉపయోగించడం." }, { class: 7, title: "WH-Questions (Do/Does)", tipEN: "Synthesizes Do/Does with question words (What, Why, Where, How).", tipTE: "Do/Does లను ప్రశ్న పదాలతో (What, Why, Where, How) కలిపి ఉపయోగించడం." }, { class: 8, title: "Simple Past Tense", tipEN: "Using the Past Tense form (V2) to describe completed actions.", tipTE: "పూర్తయిన చర్యలను వివరించడానికి పాస్ట్ టెన్స్ ఫార్మ్ (V2) ఉపయోగించడం." }, { class: 9, title: "Simple Past (Did)", tipEN: "Using Did/didn't for questions and negatives in the Past Tense.", tipTE: "పాస్ట్ టెన్స్‌లో ప్రశ్నలు మరియు వ్యతిరేకతల కోసం Did/didn't ఉపయోగించడం." }, { class: 10, title: "WH-Questions (Did)", tipEN: "Integrates Did with question words to ask about past actions.", tipTE: "గత చర్యల గురించి అడగడానికి Did ను ప్రశ్న పదాలతో ఏకీకృతం చేయడం." }, { class: 11, title: "Simple Future Tense", tipEN: "Using Shall/Will to express future intentions and actions.", tipTE: "భవిష్యత్ ఉద్దేశ్యాలు మరియు చర్యలను వ్యక్తీకరించడానికి Shall/Will ఉపయోగించడం." }, { class: 12, title: "WH-Questions (Shall/Will)", tipEN: "Applies Shall/Will with WH-Words to inquire about future plans.", tipTE: "భవిష్యత్ ప్రణాళికల గురించి ఆరా తీయడానికి Shall/Will లను WH-పదాలతో వర్తింపజేయడం." }, { class: 13, title: "Present Continuous", tipEN: "Using Am/Is/Are + V-ing for actions happening now.", tipTE: "ఇప్పుడు జరుగుతున్న చర్యల కోసం Am/Is/Are + V-ing ఉపయోగించడం." }, { class: 14, title: "Past Continuous", tipEN: "Using Was/Were + V-ing for ongoing past actions.", tipTE: "గతంలో జరుగుతున్న చర్యల కోసం Was/Were + V-ing ఉపయోగించడం." }, { class: 15, title: "Future Continuous", tipEN: "Using Shall be/Will be + V-ing for actions that will be in progress.", tipTE: "భవిష్యత్తులో జరుగుతూ ఉండే చర్యల కోసం Shall be/Will be + V-ing ఉపయోగించడం." }, { class: 16, title: "Can/Could", tipEN: "Expressing present ability (Can) and past ability (Could).", tipTE: "ప్రస్తుత సామర్థ్యాన్ని (Can) మరియు గత సామర్థ్యాన్ని (Could) వ్యక్తీకరించడం." }, { class: 17, title: "May/Might", tipEN: "Expressing uncertainty and possibility.", tipTE: "అనిశ్చితిని మరియు అవకాశాన్ని వ్యక్తీకరించడం." }, { class: 18, title: "Should", tipEN: "Expressing general advice, responsibility, and duty.", tipTE: "సాధారణ సలహాలు, బాధ్యత మరియు విధిని వ్యక్తీకరించడం." }, { class: 19, title: "Must", tipEN: "Expressing strong obligation, determination, or necessity.", tipTE: "బలమైన బాధ్యత, సంకల్పం లేదా ఆవశ్యకతను వ్యక్తీకరించడం." }, { class: 20, title: "Would & Synthesis", tipEN: "Using Would for past habits and synthesizing all learned forms.", tipTE: "గత అలవాట్ల కోసం Would ఉపయోగించడం మరియు నేర్చుకున్న అన్ని రూపాలను సంశ్లేషణ చేయడం." }, { class: 21, title: "Have/Has (Possession)", tipEN: "Clarifies role in expressing current possession.", tipTE: "ప్రస్తుత స్వాధీనాన్ని వ్యక్తీకరించడంలో పాత్రను స్పష్టం చేస్తుంది." }, { class: 22, title: "Present Perfect", tipEN: "Using Have/Has + P.P.F for recent past actions with present relevance.", tipTE: "ప్రస్తుత సంబంధం ఉన్న ఇటీవలి గత చర్యల కోసం Have/Has + P.P.F ఉపయోగించడం." }, { class: 23, title: "Past Perfect", tipEN: "Using Had + P.P.F for an action that occurred before another past action.", tipTE: "గతంలో మరొక చర్య జరగడానికి ముందు జరిగిన చర్య కోసం Had + P.P.F ఉపయోగించడం." }, { class: 24, title: "Future Perfect", tipEN: "Using Shall have/Will have + P.P.F for actions completed by a future deadline.", tipTE: "భవిష్యత్ గడువు నాటికి పూర్తయ్యే చర్యల కోసం Shall have/Will have + P.P.F ఉపయోగించడం." }, { class: 25, title: "Should have/Must have", tipEN: "Expressing past unfulfilled actions or strong assumptions.", tipTE: "గతంలో నెరవేరని చర్యలు లేదా బలమైన అంచనాలను వ్యక్తీకరించడం." }, { class: 26, title: "May have/Might have", tipEN: "Expressing degrees of uncertainty about past actions.", tipTE: "గత చర్యల గురించి వివిధ స్థాయిలలో అనిశ్చితిని వ్యక్తీకరించడం." }, { class: 27, title: "Would have/Could have", tipEN: "Discussing hypothetical situations in the past (counterfactuals).", tipTE: "గతంలోని ఊహాజనిత పరిస్థితులను (కౌంటర్‌ఫాక్చువల్స్) చర్చించడం." }, { class: 28, title: "Past Actions Review", tipEN: "Comprehensive review of all 17 structures for past actions.", tipTE: "గత చర్యల కోసం ఉపయోగించే అన్ని 17 నిర్మాణాల సమగ్ర సమీక్ష." }, { class: 29, title: "Present Perfect Continuous", tipEN: "Have been/Has been + V-ing for actions from past to present.", tipTE: "గతం నుండి ఇప్పటి వరకు కొనసాగుతున్న చర్యల కోసం Have been/Has been + V-ing." }, { class: 30, title: "Past Perfect Continuous", tipEN: "Had been + V-ing for continuous actions before a past moment.", tipTE: "గతంలో ఒక నిర్దిష్ట క్షణానికి ముందు నిరంతరం జరుగుతున్న చర్యల కోసం Had been + V-ing." }, { class: 31, title: "Future Perfect Continuous", tipEN: "Shall have been/Will have been + V-ing for action duration up to a future point.", tipTE: "భవిష్యత్తులో ఒక సమయం వరకు చర్య యొక్క వ్యవధి కోసం Shall have been/Will have been + V-ing." }, { class: 32, title: "Continuous Modal Perfects", tipEN: "Introduces structures like 'Should have been doing'.", tipTE: "'Should have been doing' వంటి నిర్మాణాలను పరిచయం చేస్తుంది." }, { class: 33, title: "Application of Should/Must Have Been", tipEN: "Drilling continuous modal perfects for past actions.", tipTE: "గత చర్యల కోసం నిరంతర మోడల్ పర్ఫెక్ట్‌లను అభ్యాసం చేయడం." }, { class: 34, title: "Application of Would/Could Have Been", tipEN: "Drilling continuous modals for hypothetical past actions.", tipTE: "ఊహాజనిత గత చర్యల కోసం నిరంతర మోడల్‌లను అభ్యాసం చేయడం." }, { class: 35, title: "Application of May/Might Have Been & Review", tipEN: "Final review of all modal and perfect forms.", tipTE: "అన్ని మోడల్ మరియు పర్ఫెక్ట్ రూపాల తుది సమీక్ష." }, { class: 36, title: "Have to/Has to", tipEN: "Expressing external compulsion in present and future.", tipTE: "ప్రస్తుత మరియు భవిష్యత్తులో బాహ్య ఒత్తిడిని వ్యక్తీకరించడం." }, { class: 37, title: "Need to/Dare to/Ought to", tipEN: "Specialized auxiliaries for necessity, courage, and moral obligation.", tipTE: "అవసరం, ధైర్యం మరియు నైతిక బాధ్యత కోసం ప్రత్యేక సహాయక క్రియలు." }, { class: 38, title: "Want to/Wish to/Would like to", tipEN: "Covers various expressions of desire and preference.", tipTE: "కోరిక మరియు ప్రాధాన్యత యొక్క వివిధ వ్యక్తీకరణలను కవర్ చేస్తుంది." }, { class: 39, title: "Able to, Willing to, Going to", tipEN: "Phrasal auxiliaries for ability, readiness, and planning.", tipTE: "సామర్థ్యం, సంసిద్ధత మరియు ప్రణాళిక కోసం ఫ్రేసల్ సహాయక క్రియలు." }, { class: 40, title: "Had to (Past Obligation)", tipEN: "Expressing a necessity or obligation in the past.", tipTE: "గతంలో ఒక అవసరాన్ని లేదా బాధ్యతను వ్యక్తీకరించడం." }, { class: 41, title: "Used to (Past Habit)", tipEN: "Expressing a repeated past habit that is no longer performed.", tipTE: "ఇకపై చేయని, గతంలో పునరావృతమయ్యే అలవాటును వ్యక్తీకరించడం." }, { class: 42, title: "The 12 Tenses Matrix", tipEN: "Unified map of the English verbal system by time and aspect.", tipTE: "సమయం మరియు అంశం వారీగా ఆంగ్ల క్రియ వ్యవస్థ యొక్క ఏకీకృత పటం." }, { class: 43, title: "12 Tenses Application", tipEN: "Drilling a single verb across all twelve tenses.", tipTE: "ఒకే క్రియను మొత్తం పన్నెండు టెన్సెస్‌లో అభ్యాసం చేయడం." }, { class: 44, title: "Active & Passive Voice", tipEN: "Introduces voice transformation and auxiliary conversion.", tipTE: "వాయిస్ ట్రాన్స్‌ఫర్మేషన్ మరియు సహాయక క్రియల మార్పిడిని పరిచయం చేస్తుంది." }, { class: 45, title: "Be with P.P. Form", tipEN: "Master key for expressing static states in all modal/auxiliary contexts.", tipTE: "అన్ని మోడల్/సహాయక సందర్భాలలో స్థిరమైన స్థితులను వ్యక్తీకరించడానికి మాస్టర్ కీ." }
-        ];
-        
-        // *** CHANGED: Aligned font options and defaults with game hub.html ***
-        const FONT_OPTIONS = {
-            body: [ 
-                { label: 'Poppins', value: 'Poppins, sans-serif' },
-                { label: 'Inter', value: 'Inter, sans-serif' }, 
-                { label: 'Roboto', value: 'Roboto, sans-serif' }, 
-                { label: 'Source Sans', value: "'Source Sans 3', sans-serif" },
-                { label: 'Merriweather', value: 'Merriweather, serif' }
+        let currentClass = 1;
+        let quizLength = 10;
+        let isDark = false;
+        let currentSelectionType = '';
+        let synth = window.speechSynthesis;
+        let lessonTips = {}; // To store tips from data2.csv
+        let currentDiagrams = []; // To hold data for multi-diagram modal
+ 
+        // --- Settings Data ---
+        const fonts = {
+            bodyFont: [
+                { name: 'Inter', value: "'Inter', sans-serif" },
+                { name: 'Roboto', value: "'Roboto', sans-serif" },
+                { name: 'Noto Sans', value: "'Noto Sans', sans-serif" },
+                { name: 'Merriweather', value: "'Merriweather', serif" },
             ],
-            title: [ 
-                { label: 'Montserrat', value: 'Montserrat, sans-serif' },
-                { label: 'Lora', value: 'Lora, serif' }, 
-                { label: 'Merriweather', value: 'Merriweather, serif' }, 
-                { label: 'Playfair Display', value: "'Playfair Display', serif" }
+            titleFont: [
+                { name: 'Lora', value: "'Lora', serif" },
+                { name: 'Merriweather', value: "'Merriweather', serif" },
+                { name: 'Roboto', value: "'Roboto', sans-serif" },
+                { name: 'Noto Sans', value: "'Noto Sans', sans-serif" },
             ]
         };
         
-        // *** CHANGED: Aligned color themes with game hub.html (added Teal, removed Emerald) ***
-        const COLOR_THEMES = [ 
-            { name: 'Indigo', value: '79, 70, 229', hex: '#4f46e5',
-              gradient: { light: ['#a5b4fc', '#818cf8', '#6366f1', '#4f46e5'], dark: ['#312e81', '#4338ca', '#4f46e5', '#6366f1'] } }, 
-            { name: 'Teal', value: '20, 184, 166', hex: '#14b8a6',
-              gradient: { light: ['#99f6e4', '#5eead4', '#2dd4bf', '#14b8a6'], dark: ['#0f766e', '#0d9488', '#14b8a6', '#2dd4bf'] } },
-            { name: 'Rose', value: '225, 29, 72', hex: '#e11d48',
-              gradient: { light: ['#fecdd3', '#fda4af', '#fb7185', '#f43f5e'], dark: ['#881337', '#be123c', '#f43f5e', '#fb7185'] } }, 
-            { name: 'Amber', value: '217, 119, 6', hex: '#d97706',
-              gradient: { light: ['#fde68a', '#fcd34d', '#fbbf24', '#f59e0b'], dark: ['#78350f', '#b45309', '#f59e0b', '#fbbf24'] } },
-            { name: 'Sky', value: '2, 132, 199', hex: '#0284c7',
-              gradient: { light: ['#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9'], dark: ['#0c4a6e', '#0369a1', '#0ea5e9', '#38bdf8'] } }
+        const colors = [
+            { name: 'Blue', value: '#3B82F6', hover: '#2563EB', dark: '#60A5FA', darkHover: '#3B82F6' },
+            { name: 'Green', value: '#10B981', hover: '#059669', dark: '#34D399', darkHover: '#10B981' },
+            { name: 'Red', value: '#EF4444', hover: '#DC2626', dark: '#F87171', darkHover: '#EF4444' },
+            { name: 'Purple', value: '#8B5CF6', hover: '#7C3AED', dark: '#A78BFA', darkHover: '#8B5CF6' },
         ];
-
-        // --- Functions ---
         
-        function setupAudio() { 
-            try {
-                if (window.Tone) {
-                    correctSound = new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.3, release: 0.1 } }).toDestination();
-                    wrongSound = new Tone.Synth({ oscillator: { type: 'sawtooth' }, envelope: { attack: 0.01, decay: 0.2, sustain: 0, release: 0.1 } }).toDestination();
-                } else { console.warn("Tone.js not loaded."); }
-                synth = window.speechSynthesis;
-                if (!synth) { console.warn("Speech Synthesis not available."); }
-            } catch (error) { console.error("Error setting up audio:", error); }
-        }
+        const quizLengths = [10, 20, 30, 'All'];
 
-        function playFeedback(isCorrect) { 
-            try {
-                if (!disableSound && window.Tone && correctSound && wrongSound) {
-                    Tone.start(); 
-                    if (isCorrect) correctSound.triggerAttackRelease('G5', '8n', Tone.now()); 
-                    else wrongSound.triggerAttackRelease('C3', '4n', Tone.now());
-                }
-                if (!disableVibration && navigator.vibrate) { 
-                    if (isCorrect) navigator.vibrate(100); 
-                    else navigator.vibrate([150, 50, 150]); 
-                }
-            } catch (error) { console.error("Error playing feedback:", error); }
-        }
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            bindDOMElements();
+            addGlobalListeners();
+            initApp();
+        });
 
-        function speak(text, lang = 'en-US') { 
-            if (synth && text) { 
-                try {
-                    synth.cancel(); 
-                    const utterance = new SpeechSynthesisUtterance(text); 
-                    utterance.lang = lang; 
-                    utterance.onerror = (event) => { console.error('SpeechSynthesisUtterance.onerror', event); }; 
-                    synth.speak(utterance); 
-                } catch (error) { console.error("Error speaking text:", error); }
-            } else if (!synth) { console.warn("Speech Synthesis not available."); }
-        }
-
-        function parseCsvRow(row) { 
-            const values = []; const regex = /("([^"]|"")*"|[^,]*)(,|$)/g; let match; let processedRow = row.trim(); if (processedRow.charAt(processedRow.length - 1) !== ',') processedRow += ','; while ((match = regex.exec(processedRow)) !== null) { let value = match[1] || ''; if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1).replace(/""/g, '"'); values.push(value.trim()); if (match[3] === '') break; } if (values.length > 0 && values[values.length - 1] === '') values.pop(); return values;
-        }
-
-        // *** Get/Set Local Storage functions now use the global SETTINGS_KEY ***
-        function getLocalStorageSetting(key, defaultValue) { 
-             try { 
-                 const settingsString = localStorage.getItem(SETTINGS_KEY); 
-                 if (!settingsString) return defaultValue; 
-                 const settings = JSON.parse(settingsString); 
-                 if (key === 'selectedClass' || key === 'maxQuestions') { const parsed = parseInt(settings[key]); return isNaN(parsed) ? defaultValue : parsed; } 
-                 if (key === 'disableSound' || key === 'disableVibration') { return typeof settings[key] === 'boolean' ? settings[key] : defaultValue; } 
-                 // Handle contrast default
-                 if (key === 'contrast' && typeof settings[key] === 'undefined') { return 'default'; }
-                 if (typeof settings[key] === 'undefined' || settings[key] === null) return defaultValue; 
-                 return settings[key]; 
-            } catch (e) { console.error(`Error loading local setting key ${key}:`, e); return defaultValue; }
-        }
-        function setLocalStorageSetting(key, value) { 
-            try { 
-                const settingsString = localStorage.getItem(SETTINGS_KEY); 
-                let settings = settingsString ? JSON.parse(settingsString) : {}; 
-                settings[key] = value; 
-                localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); 
-            } catch (e) { console.error(`Error saving local setting key ${key}:`, e); }
-        }
-
-        async function loadQuestions() { 
-             try { const response = await fetch('data.csv'); if (!response.ok) throw new Error(`Failed to fetch data. Status: ${response.status}`); const csvData = await response.text(); if (!csvData || csvData.trim().split(/\r?\n/).length <= 1) throw new Error("CSV data is empty or invalid."); const lines = csvData.trim().split(/\r?\n/); const headers = parseCsvRow(lines[0]); allQuestions = lines.slice(1).map(line => { if (line.trim() === '') return null; const values = parseCsvRow(line); if (values.length < headers.length) { console.warn('Skipping row, column count mismatch:', values); return null; } let question = {}; headers.forEach((header, i) => { question[header.trim()] = values[i] || ''; }); if (!question.lesson || !question.promptEN || !question.correct) { console.warn('Skipping row, missing essential data:', question); return null; } return question; }).filter(q => q !== null); if (allQuestions.length === 0) throw new Error("No valid questions were parsed."); isDataLoaded = true; console.log(`Successfully loaded ${allQuestions.length} questions.`); } catch (error) { console.error("Failed to load or parse questions:", error); isDataLoaded = false; if(startMessage) startMessage.innerHTML = `<strong class="text-red-400">Error: Could not load quiz data.</strong><br><small>Please check your internet connection or try again later.</small>`; } 
-             // Note: selectedClass and maxQuestions are specific to this app, 
-             // so they are loaded from the global key but won't conflict with the hub.
-             selectedClass = getLocalStorageSetting('selectedClass', 1); 
-             maxQuestions = getLocalStorageSetting('maxQuestions', 10); 
-             updateStartScreenUI(); 
-        }
-
-        function startQuiz() { 
-            const filtered = allQuestions.filter(q => parseInt(q.lesson, 10) === selectedClass); currentQuestions = filtered.sort(() => 0.5 - Math.random()).slice(0, maxQuestions); if (currentQuestions.length === 0) { if(startMessage) startMessage.textContent = `No questions available for Class ${selectedClass}. Please select another class.`; return; } currentQuestionIndex = 0; score = 0; incorrectAnswers = []; 
-            if(lessonTipsContainer) lessonTipsContainer.classList.add('hidden'); if(startScreen) startScreen.classList.add('hidden'); if(resultsScreen) resultsScreen.classList.add('hidden'); if(quizScreen) quizScreen.classList.remove('hidden'); displayQuestion();
-        }
-
-        function displayQuestion() { 
-            if(nextButton) nextButton.classList.add('hidden'); const question = currentQuestions[currentQuestionIndex]; if (!question) { console.error("No question data found for index:", currentQuestionIndex); showResults(); return; } if(stats) stats.textContent = `Question ${currentQuestionIndex + 1}/${currentQuestions.length}`; if(scoreEl) scoreEl.textContent = `Score: ${score}`; if(progressBar) progressBar.style.width = `${((currentQuestionIndex + 1) / currentQuestions.length) * 100}%`; const prompt = `<div class="flex items-center justify-between mb-4"> <p class="text-lg subtle-text-color">${question.promptTE || ''}</p> <button onclick="speak('${(question.promptEN || '').replace(/'/g, "\\'")}', 'en-US')" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-300"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div> <h2 class="text-2xl font-bold mb-6 text-white">${question.promptEN || 'Question Text Missing'}</h2>`; let content = ''; if (question.type === 'mcq') { const options = ['A', 'B', 'C', 'D'] .filter(opt => question[opt] !== undefined && question[opt] !== '') .map(opt => ` <div class="flex items-center space-x-2"> <button onclick="checkAnswer('${opt}', this.parentElement)" class="flex-grow text-left p-4 border-2 border-white/30 rounded-lg hover:accent-border hover:bg-white/10 transition-all duration-200"> ${question[opt]} </button> <button onclick="speak('${(question[opt] || '').replace(/'/g, "\\'")}', 'en-US')" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-300 flex-shrink-0"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div>`).join(''); content = `${prompt}<div class="space-y-3">${options}</div>`; } else if (question.type === 'fill_blank') { content = `${prompt}<input id="fill-blank-input" type="text" class="w-full p-4 border-2 border-white/30 rounded-lg bg-transparent focus:outline-none focus:ring-2 accent-ring text-white" placeholder="Type your answer..."><button onclick="checkFillBlank()" class="mt-4 w-full accent-bg text-white font-bold py-3 rounded-lg">Check Answer</button>`; } else { content = `${prompt}<p class="text-red-400">Error: Unknown question type "${question.type}"</p>`; } if(questionContainer) { questionContainer.innerHTML = `<div class="fade-in">${content}</div><div id="feedback" class="mt-4"></div>`; if (textContrast === 'high') document.body.setAttribute('data-contrast', 'high'); } else { console.error("Question container not found!"); }
-        }
-        
-        window.checkAnswer = function(selected, parentElement) { 
-            if (!parentElement) return; const question = currentQuestions[currentQuestionIndex]; if (!question) return; const isCorrect = selected === question.correct; const allOptionDivs = questionContainer?.querySelectorAll('.flex.items-center.space-x-2'); allOptionDivs?.forEach(div => { div.querySelectorAll('button').forEach(btn => btn.disabled = true); }); playFeedback(isCorrect); const firstButton = parentElement.querySelector('button:first-child'); if (!firstButton) return; 
-            if (isCorrect) { 
-                score++; firstButton.classList.add('bg-green-500/50', 'border-green-400'); 
-            } else { 
-                firstButton.classList.add('bg-red-500/50', 'border-red-400'); 
-                incorrectAnswers.push({ 
-                    question: question.promptEN, 
-                    yourAnswer: question[selected] || selected, 
-                    correctAnswer: question[question.correct] || question.correct 
-                });
-                allOptionDivs?.forEach(div => { const button = div.querySelector('button:first-child'); const correctAnswerText = question[question.correct] ? String(question[question.correct]).trim() : ''; if (button && correctAnswerText && button.textContent.trim() === correctAnswerText) { button.classList.add('bg-green-500/50', 'border-green-400'); } }); 
-            } displayFeedback(isCorrect);
-        }
-
-        window.checkFillBlank = function() { 
-            const input = document.getElementById('fill-blank-input'); if (!input) return; const question = currentQuestions[currentQuestionIndex]; if (!question || !question.correct) return; const userAnswer = input.value.trim().toLowerCase().replace(/[.,!?;:]/g, ''); const correctAnswer = question.correct.trim().toLowerCase().replace(/[.,!?;:]/g, ''); const isCorrect = userAnswer === correctAnswer; input.disabled = true; const checkButton = questionContainer?.querySelector('button:not([onclick^="speak"])'); if(checkButton) checkButton.disabled = true; playFeedback(isCorrect); 
-            if (isCorrect) { 
-                score++; input.classList.add('bg-green-500/50', 'border-green-400'); 
-            } else { 
-                input.classList.add('bg-red-500/50', 'border-red-400'); 
-                incorrectAnswers.push({ 
-                    question: question.promptEN, 
-                    yourAnswer: input.value, 
-                    correctAnswer: question.correct 
-                });
-            } displayFeedback(isCorrect);
-        }
-
-        function displayFeedback(isCorrect) { 
-             const feedbackEl = document.getElementById('feedback'); if (!feedbackEl) return; const question = currentQuestions[currentQuestionIndex]; if (!question) return; const icon = isCorrect ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 text-green-300"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 text-red-300"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`; const feedbackContent = ` <div class="fade-in p-4 rounded-lg glass-effect"> <p class="font-semibold">${icon} ${isCorrect ? 'Correct!' : 'Not quite.'}</p> <div class="flex items-center justify-between mt-2"> <p class="text-sm text-gray-300 flex-1 pr-2">${question.feedbackEN || ''}</p> <button onclick="speak('${(question.feedbackEN || '').replace(/'/g, "\\'")}', 'en-US')" class="p-1 rounded-full hover:bg-white/20 transition-colors text-gray-300 flex-shrink-0"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div> <div class="flex items-center justify-between mt-1"> <p class="text-sm text-gray-400 flex-1 pr-2">${question.feedbackTE || ''}</p> <button onclick="speak('${(question.feedbackTE || '').replace(/'/g, "\\'")}', 'te-IN')" class="p-1 rounded-full hover:bg-white/20 transition-colors text-gray-400 flex-shrink-0"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div> </div>`; feedbackEl.innerHTML = feedbackContent; if (nextButton) nextButton.classList.remove('hidden');
-        }
-
-        function handleNextQuestion() { 
-            currentQuestionIndex++; if (currentQuestionIndex < currentQuestions.length) displayQuestion(); else showResults();
-        }
-        
-        function isOnline() { return navigator.onLine; }
-        
-        // UPDATED: showResults checks online status
-        function showResults() { 
-             if(quizScreen) quizScreen.classList.add('hidden'); 
-             if(resultsScreen) resultsScreen.classList.remove('hidden'); 
-             const totalQuestions = currentQuestions.length;
-             const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0; 
-             
-             const scoreString = `${score}/${totalQuestions} (${percentage}%)`;
-             const scoreStringEn = `Your final score is ${score} out of ${totalQuestions}, which is ${percentage} percent.`;
-             const scoreStringTe = `మీ తుది స్కోరు ${totalQuestions} కి ${score}, అంటే ${percentage} శాతం.`;
-
-             if(finalScoreEl) finalScoreEl.textContent = scoreString;
-             if(finalScoreTeEl) finalScoreTeEl.textContent = scoreString; // Also update the Telugu span
-
-             // Add speak button listeners
-             if (speakResultEnBtn) {
-                 speakResultEnBtn.onclick = () => speak(scoreStringEn, 'en-US');
-             }
-             if (speakResultTeBtn) {
-                 speakResultTeBtn.onclick = () => speak(scoreStringTe, 'te-IN');
-             }
-             
-             if(resultsDetails) {
-                 resultsDetails.innerHTML = incorrectAnswers.length > 0 
-                     ? incorrectAnswers.map((item, i) => 
-                         `<div class="p-2 rounded-md button-bg-color text-xs">
-                             <p class="font-semibold text-gray-300">${i+1}. ${item.question}</p>
-                             <p class="text-red-400">You: ${item.yourAnswer}</p>
-                             <p class="text-green-400">Correct: ${item.correctAnswer}</p>
-                          </div>`
-                       ).join('')
-                     : '<p class="text-center text-gray-400 text-sm">No incorrect answers!</p>';
-                 resultsDetails.scrollTop = 0;
-             } 
-             
-             saveProgress();
-             
-             // --- Check online status ---
-             if (isOnline()) {
-                 if (aiFeedbackSection) aiFeedbackSection.classList.remove('hidden'); // Show the AI section
-                 if (aiOfflineMessage) aiOfflineMessage.classList.add('hidden');    // Hide offline msg
-                 getAIFeedback(); // Attempt to get AI feedback
-             } else {
-                 // Completely hide the AI section if offline
-                 if (aiFeedbackSection) aiFeedbackSection.classList.add('hidden'); 
-                 console.log("Offline: Skipping AI feedback generation.");
-             }
-        }
-
-        // Gemini API Call Function (getAIFeedback) - unchanged
-        async function getAIFeedback() {
-            if (!aiLoadingIndicator || !aiContent || !aiError || !aiFeedbackSection) return; 
-
-            // Ensure the AI section is visible before showing loading
-            aiFeedbackSection.classList.remove('hidden'); 
-            aiLoadingIndicator.classList.remove('hidden');
-            aiContent.classList.add('hidden');
-            aiError.classList.add('hidden');
-            if (aiOfflineMessage) aiOfflineMessage.classList.add('hidden'); 
-
-            const lessonTitle = CLASS_TOPICS[selectedClass - 1] || `Lesson ${selectedClass}`;
-            const totalQuestions = currentQuestions.length;
-            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
-
-            const incorrectSummary = incorrectAnswers.length > 0 
-                ? `Incorrect answers included: ${incorrectAnswers.map(item => `Question: "${item.question.substring(0, 50)}...", Your Answer: "${item.yourAnswer}", Correct: "${item.correctAnswer}"`).slice(0, 5).join('; ')}` 
-                : "No incorrect answers.";
-
-            const userQuery = `Completed Spoken English Class ${selectedClass} (${lessonTitle}). Score: ${score}/${totalQuestions} (${percentage}%). ${incorrectSummary}`;
-
-            const systemPrompt = `Act as a friendly and encouraging English tutor. The user just completed a quiz for a specific Spoken English lesson. 
-            Provide concise feedback, coaching, and tips based on their score and the lesson topic. Keep each section brief (1-2 sentences). 
-            Address the user directly. Provide the response in both English and Telugu. 
-            Focus coaching on the general topic if there were no errors, or on the types of errors made if available.
-            Location context: Visakhapatnam, Andhra Pradesh, India. Current time: Thursday, October 23, 2025 at 10:37 AM IST.`; 
-
-             const payload = {
-                 contents: [{ parts: [{ text: userQuery }] }],
-                 systemInstruction: { parts: [{ text: systemPrompt }] },
-                 generationConfig: {
-                     responseMimeType: "application/json",
-                     responseSchema: {
-                         type: "OBJECT",
-                         properties: {
-                             "feedbackEN": { "type": "STRING", "description": "Overall feedback in English based on the score (1-2 sentences)." },
-                             "feedbackTE": { "type": "STRING", "description": "Overall feedback in Telugu based on the score (1-Unchanged)." },
-                             "coachingEN": { "type": "STRING", "description": "Specific coaching advice in English, mentioning areas for improvement based on incorrect answers or lesson topic (1-2 sentences)." },
-                             "coachingTE": { "type": "STRING", "description": "Specific coaching advice in Telugu (1-2 sentences)." },
-                             "tipsEN": { "type": "STRING", "description": "Relevant tips or tricks in English related to the lesson topic (1-2 sentences)." },
-                             "tipsTE": { "type": "STRING", "description": "Relevant tips or tricks in Telugu (1-2 sentences)." }
-                         }
-                     }
-                 }
-             };
-
-            const apiKey = ""; 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+        function bindDOMElements() {
+            appContainer = document.getElementById('app-container');
+            loadingSpinner = document.getElementById('loading-spinner');
+            quizSetup = document.getElementById('quiz-setup');
+            startButton = document.getElementById('start-button');
+            quizContainer = document.getElementById('quiz-container');
+            questionCounter = document.getElementById('question-counter');
+            progressBar = document.getElementById('progress-bar');
+            questionCard = document.getElementById('question-card');
+            promptEn = document.getElementById('prompt-en');
+            promptTe = document.getElementById('prompt-te');
+            speakPromptBtn = document.getElementById('speak-prompt-btn');
+            optionsContainer = document.getElementById('options-container');
+            fibCard = document.getElementById('fib-card');
+            fibInput = document.getElementById('fib-input');
+            fibSubmit = document.getElementById('fib-submit');
+            feedbackCard = document.getElementById('feedback-card');
+            feedbackTitle = document.getElementById('feedback-title');
+            feedbackTextEn = document.getElementById('feedback-text-en');
+            feedbackTextTe = document.getElementById('feedback-text-te');
+            nextButton = document.getElementById('next-button');
+            resultsScreen = document.getElementById('results-screen');
+            scorePercent = document.getElementById('score-percent');
+            scoreCorrect = document.getElementById('score-correct');
+            scoreTotal = document.getElementById('score-total');
+            restartQuizButton = document.getElementById('restart-quiz-button');
+            backToSetupButton = document.getElementById('back-to-setup-button');
+            endQuizButton = document.getElementById('end-quiz-button');
+            themeToggle = document.getElementById('theme-toggle');
+            themeIconLight = document.getElementById('theme-icon-light');
+            themeIconDark = document.getElementById('theme-icon-dark');
+            classSelectionButton = document.getElementById('class-selection-button');
+            lengthSelectionButton = document.getElementById('length-selection-button');
+            selectionModal = document.getElementById('selectionModal');
+            selectionModalTitle = document.getElementById('selectionModalTitle');
+            selectionModalContent = document.getElementById('selectionModalContent');
+            closeSelectionModalBtn = document.getElementById('closeSelectionModalBtn');
+            settingsModal = document.getElementById('settingsModal');
+            closeSettingsModalBtn = document.getElementById('closeSettingsModalBtn');
+            curriculumModal = document.getElementById('curriculumModal');
+            closeCurriculumModalBtn = document.getElementById('closeCurriculumModalBtn');
+            curriculumList = document.getElementById('curriculumList');
+            bodyFontBtn = document.getElementById('bodyFontBtn');
+            titleFontBtn = document.getElementById('titleFontBtn');
+            colorBtn = document.getElementById('colorBtn');
+            tipCard = document.getElementById('tip-card');
+            tipText = document.getElementById('tip-text');
+            speakTipBtn = document.getElementById('speak-tip-btn');
+            bodyFontName = document.getElementById('bodyFontName');
+            titleFontName = document.getElementById('titleFontName');
+            colorName = document.getElementById('colorName');
             
-            let retries = 0;
-            const maxRetries = 3;
-            
-            while (retries < maxRetries) {
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        console.error("API Error Response:", response.status, await response.text());
-                         if (response.status === 429 || response.status >= 500) { 
-                            throw new Error(`API Error: ${response.status}`);
-                        } else {
-                             throw new Error(`API Request Failed: ${response.status}`);
-                        }
-                    }
-
-                    const result = await response.json();
-                    
-                    if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0].text) {
-                        const jsonText = result.candidates[0].content.parts[0].text;
-                        const parsedJson = JSON.parse(jsonText);
-
-                        if(feedbackEnEl) feedbackEnEl.textContent = parsedJson.feedbackEN || "N/A";
-                        if(feedbackTeEl) feedbackTeEl.textContent = parsedJson.feedbackTE || "N/Adding";
-                        if(coachingEnEl) coachingEnEl.textContent = parsedJson.coachingEN || "N/A";
-                        if(coachingTeEl) coachingTeEl.textContent = parsedJson.coachingTE || "N/A";
-                        if(tipsEnEl) tipsEnEl.textContent = parsedJson.tipsEN || "N/A";
-                        if(tipsTeEl) tipsTeEl.textContent = parsedJson.tipsTE || "N/A";
-
-                        aiLoadingIndicator.classList.add('hidden');
-                        aiContent.classList.remove('hidden');
-                        aiError.classList.add('hidden');
-                        return; 
-                    } else {
-                        console.error("Unexpected API response structure:", result);
-                         throw new Error("Invalid API response structure.");
-                    }
-
-                } catch (error) {
-                    console.error("Error fetching AI feedback:", error);
-                    retries++;
-                    if (retries >= maxRetries) {
-                        aiLoadingIndicator.classList.add('hidden');
-                        aiContent.classList.add('hidden');
-                        aiError.classList.remove('hidden');
-                         if(aiError) aiError.textContent = "Sorry, couldn't get AI feedback after multiple attempts. Please try again later.";
-                        break; 
-                    }
-                    const delay = Math.pow(2, retries) * 1000; 
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                }
-            } // end while loop
-        }
-        
-        function saveProgress() { 
-             try { 
-                 // We use 'englishHubProgress' to be consistent with the hub
-                 let progress = JSON.parse(localStorage.getItem('englishHubProgress') || '{}'); 
-                 if (typeof progress !== 'object' || progress === null) progress = {}; 
-                 if (!progress.spoken || typeof progress.spoken !== 'number' || progress.spoken < selectedClass) { 
-                     progress.spoken = selectedClass; 
-                 } 
-                 localStorage.setItem('englishHubProgress', JSON.stringify(progress)); 
-                 console.log("Progress saved:", progress); 
-            } catch (e) { console.error("Failed to save progress:", e); }
-         }
-
-        function updateLessonTip(classNumber) { 
-            const lessonData = LESSON_DATA.find(l => l.class === classNumber); if (lessonData && lessonTipTitle && lessonTipEN && lessonTipTE && speakENTipButton && speakTETipButton && lessonTipsContainer) { lessonTipTitle.textContent = `Lesson ${classNumber}: ${lessonData.title}`; lessonTipEN.textContent = lessonData.tipEN; lessonTipTE.textContent = lessonData.tipTE; speakENTipButton.onclick = () => speak(lessonData.tipEN, 'en-US'); speakTETipButton.onclick = () => speak(lessonData.tipTE, 'te-IN'); lessonTipsContainer.classList.remove('hidden'); lessonTipsContainer.classList.add('fade-in'); } else if (lessonTipsContainer) { lessonTipsContainer.classList.add('hidden'); }
-        }
-        
-        function applyTheme(isDark) {
-            const htmlEl = document.documentElement;
-            if (isDark) { htmlEl.classList.add('dark'); if(themeIconLight) themeIconLight.classList.add('hidden'); if(themeIconDark) themeIconDark.classList.remove('hidden'); } 
-            else { htmlEl.classList.remove('dark'); if(themeIconLight) themeIconLight.classList.remove('hidden'); if(themeIconDark) themeIconDark.classList.add('hidden'); }
-            // Re-apply accent color to update gradients
-            applyAccentColor(getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name)); 
-            setLocalStorageSetting('theme', isDark ? 'dark' : 'light'); 
-        }
-        
-        function setBodyFont(font) { 
-            if (font) { 
-                document.documentElement.style.setProperty('--body-font', font); 
-                setLocalStorageSetting('bodyFont', font); 
-            }
-        }
-        function setTitleFont(font) { 
-            if (font) { 
-                document.documentElement.style.setProperty('--title-font', font); 
-                setLocalStorageSetting('titleFont', font); 
-            }
-        }
-        
-        function applyAccentColor(name) {
-             const theme = COLOR_THEMES.find(t => t.name === name) || COLOR_THEMES[0];
-             const rootStyle = document.documentElement.style;
-             const isDark = document.documentElement.classList.contains('dark');
-             const gradientSet = theme.gradient && theme.gradient[isDark ? 'dark' : 'light'] && theme.gradient[isDark ? 'dark' : 'light'].length === 4 
-                               ? theme.gradient[isDark ? 'dark' : 'light'] 
-                               : COLOR_THEMES[0].gradient[isDark ? 'dark' : 'light']; 
-             rootStyle.setProperty('--accent-color-rgb', theme.value);
-             rootStyle.setProperty('--accent-color-hex', theme.hex); 
-             rootStyle.setProperty('--bg-grad-color1', gradientSet[0]);
-             rootStyle.setProperty('--bg-grad-color2', gradientSet[1]);
-             rootStyle.setProperty('--bg-grad-color3', gradientSet[2]);
-             rootStyle.setProperty('--bg-grad-color4', gradientSet[3]); 
-             setLocalStorageSetting('colorTheme', name);
-             updateColorButton(); 
-         }
-        
-        function applyContrast(contrastValue) { 
-             textContrast = contrastValue; 
-             document.body.setAttribute('data-contrast', contrastValue); 
-             setLocalStorageSetting('contrast', contrastValue); 
-             updateContrastButtonsUI(); 
-         }
-
-        function loadInitialSettings() { 
-             // *** CHANGED: Load settings from the global key ***
-             const savedTheme = getLocalStorageSetting('theme', 'dark'); 
-             applyTheme(savedTheme === 'dark'); 
-             
-             // *** CHANGED: Load fonts, falling back to new aligned defaults ***
-             setBodyFont(getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value)); 
-             setTitleFont(getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value)); 
-             
-             // *** CHANGED: Load color, falling back to new aligned default ***
-             applyAccentColor(getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name)); 
-             
-             // *** CHANGED: Load contrast ***
-             applyContrast(getLocalStorageSetting('contrast', 'default')); 
-             
-             // Load app-specific settings (sound/haptics)
-             disableSound = getLocalStorageSetting('disableSound', false); 
-             disableVibration = getLocalStorageSetting('disableVibration', false); 
-             
-             updateSettingsUI(); 
-         }
-        
-        function openSettingsModal() { 
-            updateSettingsUI(); if(settingsModal) settingsModal.classList.remove('hidden'); 
-        }
-        function closeSettingsModal() { if(settingsModal) settingsModal.classList.add('hidden'); }
-        function openCurriculumModal() { 
-             const modal = document.getElementById('curriculum-modal'); if(modal) modal.classList.remove('hidden'); 
-         }
-        function closeCurriculumModal() { 
-             const modal = document.getElementById('curriculum-modal'); if(modal) modal.classList.add('hidden'); 
-         }
-        
-        window.openSelectionModal = function(type) { 
-             if (['bodyFont', 'titleFont', 'color'].includes(type)) { closeSettingsModal(); } let optionsHTML = ''; const buttonClass = 'w-full text-left p-3 rounded-lg selection-button text-white'; if (type === 'class') { if(modalTitle) modalTitle.textContent = 'Select a Class'; optionsHTML = CLASS_TOPICS.map((topic, i) => `<button onclick="handleSelectionChange('class', ${i+1})" class="${buttonClass} ${selectedClass === (i+1) ? 'active' : ''}">${i+1}: ${topic}</button>`).join(''); } else if (type === 'count') { if(modalTitle) modalTitle.textContent = 'Select Quiz Length'; [4, 5, 10, 15, 20, 25].forEach(count => { optionsHTML += `<button onclick="handleSelectionChange('count', ${count})" class="${buttonClass} ${maxQuestions === count ? 'active' : ''}">${count} Questions</button>`; }); } else if (type === 'bodyFont' || type === 'titleFont') { if(modalTitle) modalTitle.textContent = type === 'bodyFont' ? 'Select Body Font' : 'Select Title Font'; const options = FONT_OPTIONS[type === 'bodyFont' ? 'body' : 'title']; const currentFont = getLocalStorageSetting(type === 'bodyFont' ? 'bodyFont' : 'titleFont'); optionsHTML = options.map(opt => `<button onclick="handleSelectionChange('${type}', '${opt.value}')" class="${buttonClass} ${currentFont === opt.value ? 'active' : ''}" style="font-family: ${opt.value};">${opt.label}</button>`).join(''); } else if (type === 'color') { if(modalTitle) modalTitle.textContent = 'Select Accent Color'; const currentColor = getLocalStorageSetting('colorTheme'); optionsHTML = COLOR_THEMES.map(theme => `<button onclick="handleSelectionChange('color', '${theme.name}')" class="${buttonClass} ${currentColor === theme.name ? 'active' : ''} flex items-center justify-between"><span>${theme.name}</span><span class="w-6 h-6 rounded-full border border-white/20" style="background-color: ${theme.hex}"></span></button>`).join(''); } if(modalOptions) modalOptions.innerHTML = optionsHTML; if(selectionModal) selectionModal.classList.remove('hidden');
-         }
-
-        function closeSelectionModal() { if(selectionModal) selectionModal.classList.add('hidden'); }
-        
-        window.handleSelectionChange = function(type, value) { 
-            // App-specific settings
-            if (type === 'class') { selectedClass = value; setLocalStorageSetting('selectedClass', value); updateClassSelectionButton(); updateLessonTip(selectedClass); } 
-            else if (type === 'count') { maxQuestions = value; setLocalStorageSetting('maxQuestions', value); updateQuizLengthButton(); } 
-            // Global settings
-            else if (type === 'bodyFont') { setBodyFont(value); updateFontButton('body'); } 
-            else if (type === 'titleFont') { setTitleFont(value); updateFontButton('title'); } 
-            else if (type === 'color') { applyAccentColor(value); } 
-            else if (type === 'contrast') { applyContrast(value); } 
-            // App-specific settings
-            else if (type === 'toggleAudio') { disableSound = !disableSound; setLocalStorageSetting('disableSound', disableSound); updateFeedbackCheckboxesUI(); } 
-            else if (type === 'toggleHaptics') { disableVibration = !disableVibration; setLocalStorageSetting('disableVibration', disableVibration); updateFeedbackCheckboxesUI(); } 
-            
-            if (!type.startsWith('toggle') && type !== 'contrast') { closeSelectionModal(); }
+            // NEW elements
+            lessonInfoCard = document.getElementById('lessonInfoCard');
+            lessonInfoTitle = document.getElementById('lessonInfoTitle');
+            lessonInfoContent = document.getElementById('lessonInfoContent');
+            viewDiagramBtn = document.getElementById('viewDiagramBtn');
+            diagramModal = document.getElementById('diagramModal');
+            diagramModalTitle = document.getElementById('diagramModalTitle');
+            diagramModalTabs = document.getElementById('diagramModalTabs');
+            diagramModalContent = document.getElementById('diagramModalContent');
+            closeDiagramModalBtn = document.getElementById('closeDiagramModalBtn');
         }
 
-        function getLabel(type, value) { 
-            const valStr = String(value); if (type === 'class') return `Class ${value}: ${CLASS_TOPICS[value-1] || 'Unknown'}`; if (type === 'count') return `${value} Questions`; if (type === 'bodyFont' || type === 'titleFont') { const options = FONT_OPTIONS[type === 'bodyFont' ? 'body' : 'title']; return (options.find(opt => String(opt.value) === valStr) || {}).label || 'Default'; } return value;
-        }
-        
-        function updateFontButton(type) { 
-             const buttonElement = type === 'body' ? currentBodyFont : currentTitleFont; 
-             const storageKey = type === 'body' ? 'bodyFont' : 'titleFont'; 
-             const defaultValue = FONT_OPTIONS[type === 'body' ? 'body' : 'title'][0].value; 
-             const currentValue = getLocalStorageSetting(storageKey, defaultValue); 
-             if (buttonElement) { 
-                 buttonElement.textContent = getLabel(storageKey, currentValue); 
-                 buttonElement.style.fontFamily = currentValue; 
-             }
-         }
-        function updateColorButton() { 
-             const themeName = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name); 
-             if (currentAccentColor) currentAccentColor.textContent = themeName; 
-             if (colorPreview) { const theme = COLOR_THEMES.find(t => t.name === themeName) || COLOR_THEMES[0]; colorPreview.style.backgroundColor = theme.hex; }
-         }
-        function updateClassSelectionButton() { if(currentClassSelection) currentClassSelection.textContent = getLabel('class', selectedClass); }
-        function updateQuizLengthButton() { if(currentQuizLength) currentQuizLength.textContent = getLabel('count', maxQuestions); }
-        function updateContrastButtonsUI() { 
-             if (contrastDefaultBtn && contrastHighBtn) { 
-                 contrastDefaultBtn.classList.toggle('active', textContrast === 'default'); 
-                 contrastHighBtn.classList.toggle('active', textContrast === 'high'); 
-             }
-         }
-        function updateFeedbackCheckboxesUI() { 
-            if (toggleAudioCheckbox) toggleAudioCheckbox.checked = disableSound; if (toggleHapticsCheckbox) toggleHapticsCheckbox.checked = disableVibration;
-         }
-        function updateSettingsUI() { 
-             updateFontButton('body'); updateFontButton('title'); updateColorButton(); updateContrastButtonsUI(); updateFeedbackCheckboxesUI();
-         }
-        function updateStartScreenUI() { 
-             updateStartScreenMessage(); updateClassSelectionButton(); updateQuizLengthButton(); if(startButton) startButton.disabled = !isDataLoaded; updateLessonTip(selectedClass); 
-         }
-         function updateStartScreenMessage() { 
-             if (isDataLoaded) { if(startMessage) startMessage.textContent = `Ready to practice? Select your class and quiz length, then press Start!`; } 
-             else { if(startMessage) startMessage.innerHTML = `Loading data... Please wait.`; }
-         }
-
-        // window.onload... 
-        window.onload = () => {
-            // Assign DOM Elements...
-            startScreen = document.getElementById('start-screen'); quizScreen = document.getElementById('quiz-screen'); resultsScreen = document.getElementById('results-screen'); questionContainer = document.getElementById('question-container'); startButton = document.getElementById('start-quiz-button'); nextButton = document.getElementById('next-question-button'); restartButton = document.getElementById('restart-quiz-button'); curriculumButton = document.getElementById('curriculum-button'); lessonTipsContainer = document.getElementById('lesson-tips-container'); lessonTipTitle = document.getElementById('lesson-tip-title'); lessonTipEN = document.getElementById('lesson-tip-en'); lessonTipTE = document.getElementById('lesson-tip-te'); speakENTipButton = document.getElementById('speak-en-tip'); speakTETipButton = document.getElementById('speak-te-tip'); stats = document.getElementById('stats'); scoreEl = document.getElementById('score'); progressBar = document.getElementById('progress-bar'); 
-            finalScoreEl = document.getElementById('final-score');
-            finalScoreTeEl = document.getElementById('final-score-te');
-            speakResultEnBtn = document.getElementById('speak-result-en');
-            speakResultTeBtn = document.getElementById('speak-result-te');
-            resultsDetails = document.getElementById('results-details'); 
-            selectionModal = document.getElementById('selection-modal'); modalTitle = document.getElementById('modal-title'); modalOptions = document.getElementById('modal-options'); settingsModal = document.getElementById('settings-modal'); themeToggle = document.getElementById('theme-toggle'); themeIconLight = document.getElementById('theme-icon-light'); themeIconDark = document.getElementById('theme-icon-dark'); startMessage = document.getElementById('start-message'); classSelectionButton = document.getElementById('class-selection-button'); lengthSelectionButton = document.getElementById('length-selection-button'); currentClassSelection = document.getElementById('current-class-selection'); currentQuizLength = document.getElementById('current-quiz-length'); closeSelectionModalBtn = document.getElementById('close-selection-modal'); closeSettingsModalBtn = document.getElementById('close-settings-modal'); closeCurriculumModalBtn = document.getElementById('close-curriculum-modal'); bodyFontBtn = document.getElementById('body-font-button'); titleFontBtn = document.getElementById('title-font-button'); colorBtn = document.getElementById('color-button'); currentBodyFont = document.getElementById('current-body-font'); currentTitleFont = document.getElementById('current-title-font'); currentAccentColor = document.getElementById('current-accent-color'); contrastDefaultBtn = document.getElementById('contrast-default'); contrastHighBtn = document.getElementById('contrast-high'); toggleAudioCheckbox = document.getElementById('toggle-audio'); toggleHapticsCheckbox = document.getElementById('toggle-haptics'); colorPreview = document.getElementById('color-preview');
-            // AI Elements
-            aiFeedbackSection = document.getElementById('ai-feedback-section'); aiLoadingIndicator = document.getElementById('ai-loading-indicator'); aiContent = document.getElementById('ai-content'); aiError = document.getElementById('ai-error'); feedbackEnEl = document.getElementById('feedback-en'); feedbackTeEl = document.getElementById('feedback-te'); coachingEnEl = document.getElementById('coaching-en'); coachingTeEl = document.getElementById('coaching-te'); tipsEnEl = document.getElementById('tips-en'); tipsTeEl = document.getElementById('tips-te');
-            // Offline Message Element
-            aiOfflineMessage = document.getElementById('ai-offline-message');
-            
-            // Add Event Listeners...
-            if(startButton) startButton.addEventListener('click', startQuiz); 
-            if(nextButton) nextButton.addEventListener('click', handleNextQuestion); 
-            if(restartButton) restartButton.addEventListener('click', () => { 
-                if(resultsScreen) resultsScreen.classList.add('hidden'); 
-                if(startScreen) startScreen.classList.remove('hidden'); 
-                // Reset AI feedback section
-                if(aiFeedbackSection) aiFeedbackSection.classList.add('hidden'); // Hide entire AI section
-                if(aiLoadingIndicator) aiLoadingIndicator.classList.add('hidden'); 
-                if(aiOfflineMessage) aiOfflineMessage.classList.add('hidden');    
-                if(aiContent) aiContent.classList.add('hidden');
-                if(aiError) aiError.classList.add('hidden');
-                updateLessonTip(selectedClass); 
-            }); 
-            if(themeToggle) themeToggle.addEventListener('click', () => { 
-                const isDark = document.documentElement.classList.contains('dark'); 
-                applyTheme(!isDark); // applyTheme now handles saving too
-            }); 
-            const settingsBtn = document.getElementById('settings-button'); if(settingsBtn) settingsBtn.addEventListener('click', openSettingsModal); 
-            if(curriculumButton) curriculumButton.addEventListener('click', openCurriculumModal); 
-            if(classSelectionButton) classSelectionButton.addEventListener('click', () => openSelectionModal('class')); 
-            if(lengthSelectionButton) lengthSelectionButton.addEventListener('click', () => openSelectionModal('count')); 
-            if(closeSelectionModalBtn) closeSelectionModalBtn.addEventListener('click', closeSelectionModal); 
-            if(closeSettingsModalBtn) closeSettingsModalBtn.addEventListener('click', closeSettingsModal); 
-            if(closeCurriculumModalBtn) closeCurriculumModalBtn.addEventListener('click', closeCurriculumModal); 
-            if(bodyFontBtn) bodyFontBtn.addEventListener('click', () => openSelectionModal('bodyFont')); 
-            if(titleFontBtn) titleFontBtn.addEventListener('click', () => openSelectionModal('titleFont')); 
-            if(colorBtn) colorBtn.addEventListener('click', () => openSelectionModal('color')); 
-            // Speak buttons for tips already handled in updateLessonTip
-
-            // Run Setup...
+        async function initApp() {
+            console.log("Initializing App...");
+            loadInitialSettings();
             setupAudio();
-            loadInitialSettings(); // This will now load the global settings
-            loadQuestions(); 
-        };
+            
+            try {
+                // Fetch both CSV files in parallel
+                const [questionsData, lessonsData] = await Promise.all([
+                    fetchCsv('data.csv'),
+                    fetchCsv('data2.csv')
+                ]);
+
+                // Process Questions (data.csv)
+                allQuestions = questionsData;
+                console.log(`Loaded ${allQuestions.length} questions.`);
+
+                // Process Lesson Details (data2.csv)
+                allLessonDetails = lessonsData;
+                console.log(`Loaded ${allLessonDetails.length} lesson details.`);
+                
+                // Populate lesson tips and curriculum modal
+                const curriculumItems = [];
+                allLessonDetails.forEach(lesson => {
+                    if (lesson.Class_Number) {
+                        const classNum = parseInt(lesson.Class_Number);
+                        // Store tips
+                        if (lesson.Tips_Tricks_EN || lesson.Tips_Tricks_TE) {
+                            lessonTips[classNum] = {
+                                en: lesson.Tips_Tricks_EN,
+                                te: lesson.Tips_Tricks_TE
+                            };
+                        }
+                        // Add to curriculum list
+                        curriculumItems.push(
+                            `<div class="selection-item p-3 rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700" data-value="${classNum}">
+                                Class ${classNum}: ${lesson.Class_Title_EN}
+                            </div>`
+                        );
+                    }
+                });
+                curriculumList.innerHTML = curriculumItems.join('');
+                // Add click listeners to curriculum items
+                curriculumList.querySelectorAll('.selection-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        updateClass(parseInt(item.dataset.value));
+                        closeCurriculumModal();
+                    });
+                });
+
+                // Now that data is loaded, set up the UI
+                setupQuizUI();
+                
+                // Hide spinner and show setup screen
+                loadingSpinner.classList.add('hidden');
+                quizSetup.classList.remove('hidden');
+                quizSetup.classList.add('flex');
+
+            } catch (error) {
+                console.error("Error loading data:", error);
+                // UPDATED: More helpful error message
+                loadingSpinner.innerHTML = `
+                <div class="text-red-500 dark:text-red-400 text-center p-4 rounded-lg bg-red-100 dark:bg-red-900 border border-red-300 dark:border-red-700">
+                    <p class="font-bold text-lg">Error Loading Data</p>
+                    <p class="mt-1">Could not load <strong>data.csv</strong> or <strong>data2.csv</strong>.</p>
+                    <p class="mt-2 text-sm">Please make sure all files (<code>.html</code>, <code>.csv</code>, <code>.js</code>) are in the same folder, then refresh the page.</p>
+                </div>`;
+            }
+        }
+        
+        // NEW: Fetch and parse CSV using PapaParse
+        function fetchCsv(url) {
+            return new Promise((resolve, reject) => {
+                Papa.parse(url, {
+                    download: true,
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: (results) => {
+                        resolve(results.data);
+                    },
+                    error: (error) => {
+                        reject(error);
+                    }
+                });
+            });
+        }
+        
+        // DEPRECATED: Old loadQuestions, replaced by fetchCsv
+        /*
+        async function loadQuestions() {
+            // ... old logic ...
+        }
+        */
+
+        // --- UI Setup ---
+        
+        function setupQuizUI() {
+            // Update class button text
+            const classDetail = allLessonDetails.find(l => parseInt(l.Class_Number) === currentClass);
+            if (classDetail) {
+                classSelectionButton.textContent = `Class ${currentClass}: ${classDetail.Class_Title_EN}`;
+            } else {
+                classSelectionButton.textContent = `Class ${currentClass}`;
+            }
+            
+            // Update length button text
+            lengthSelectionButton.textContent = (quizLength === 'All') ? 'All Questions' : `${quizLength} Questions`;
+            
+            // NEW: Update Lesson Info Card
+            updateLessonInfoCard(currentClass);
+        }
+        
+        // NEW: Function to update the lesson info card
+        function updateLessonInfoCard(classNum) {
+            const lesson = allLessonDetails.find(l => parseInt(l.Class_Number) === classNum);
+            
+            if (!lesson) {
+                lessonInfoCard.classList.add('hidden');
+                return;
+            }
+            
+            lessonInfoTitle.textContent = `Lesson ${lesson.Class_Number}: ${lesson.Class_Title_EN}`;
+            
+            const contentHTML = `
+                <div class="mb-2">
+                    <h4 class="font-semibold text-sm text-gray-600 dark:text-gray-400">Key Topics (EN)</h4>
+                    <div class="flex items-start space-x-2">
+                        <p class="flex-1">${lesson.Key_Topics_EN || 'N/A'}</p>
+                        <button class="icon-btn speak-info-btn pt-1" data-lang="en-US" data-text="${escape(lesson.Key_Topics_EN || '')}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd" /></svg>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-sm text-gray-600 dark:text-gray-400" style="font-family: 'Noto Sans Telugu', sans-serif;">ముఖ్య అంశాలు (TE)</h4>
+                    <div class="flex items-start space-x-2">
+                        <p class="flex-1" style="font-family: 'Noto Sans Telugu', sans-serif;">${lesson.Key_Topics_TE || 'N/A'}</p>
+                        <button class="icon-btn speak-info-btn pt-1" data-lang="te-IN" data-text="${escape(lesson.Key_Topics_TE || '')}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd" /></svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+            lessonInfoContent.innerHTML = contentHTML;
+            
+            // Add listeners for new speak buttons
+            lessonInfoContent.querySelectorAll('.speak-info-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const target = e.currentTarget;
+                    const text = unescape(target.dataset.text);
+                    const lang = target.dataset.lang;
+                    if (text && text !== 'N/A') {
+                        speak(text, lang);
+                    }
+                });
+            });
+
+            // Check for diagram
+            if (window.DIAGRAM_DATA && window.DIAGRAM_DATA[classNum]) {
+                viewDiagramBtn.classList.remove('hidden');
+            } else {
+                viewDiagramBtn.classList.add('hidden');
+            }
+            
+            lessonInfoCard.classList.remove('hidden');
+        }
+
+        // --- Quiz Logic ---
+
+        function startQuiz() {
+            // Filter questions for the current class
+            const classQuestions = allQuestions.filter(q => parseInt(q.lesson) === currentClass);
+            
+            // Shuffle and slice
+            if (quizLength === 'All' || classQuestions.length <= quizLength) {
+                currentQuizQuestions = shuffleArray(classQuestions);
+            } else {
+                currentQuizQuestions = shuffleArray(classQuestions).slice(0, quizLength);
+            }
+            
+            if (currentQuizQuestions.length === 0) {
+                alert(`No questions found for Class ${currentClass}.`);
+                return;
+            }
+
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            quizSetup.classList.remove('flex');
+            quizSetup.classList.add('hidden');
+            resultsScreen.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            // Hide feedback
+            feedbackCard.classList.add('hidden');
+            tipCard.classList.add('hidden');
+            
+            // Get current question
+            const q = currentQuizQuestions[currentQuestionIndex];
+            
+            // Update UI
+            questionCounter.textContent = `Question ${currentQuestionIndex + 1}/${currentQuizQuestions.length}`;
+            progressBar.style.width = `${((currentQuestionIndex + 1) / currentQuizQuestions.length) * 100}%`;
+            
+            promptEn.textContent = q.promptEN;
+            promptTe.textContent = q.promptTE;
+            
+            // Reset question-specific UI
+            optionsContainer.innerHTML = '';
+            fibCard.classList.add('hidden');
+            questionCard.classList.remove('hidden');
+            
+            if (q.type === 'mcq') {
+                const options = shuffleArray([
+                    { text: q.A, value: 'A' },
+                    { text: q.B, value: 'B' },
+                    { text: q.C, value: 'C' },
+                    { text: q.D, value: 'D' }
+                ]);
+                
+                options.forEach(opt => {
+                    const button = document.createElement('button');
+                    button.textContent = opt.text;
+                    button.classList.add('option', 'btn-secondary', 'w-full', 'p-3', 'rounded-lg', 'text-left', 'transition-colors', 'duration-150');
+                    button.dataset.value = opt.value;
+                    button.addEventListener('click', () => handleAnswer(opt.value));
+                    optionsContainer.appendChild(button);
+                });
+                
+            } else if (q.type === 'fib') {
+                questionCard.classList.add('hidden'); // Hide MCQ card
+                fibCard.classList.remove('hidden');
+                fibInput.value = '';
+                fibInput.focus();
+            }
+            
+            // Update lesson tip
+            updateLessonTip(currentClass);
+        }
+
+        function handleAnswer(selectedAnswer) {
+            const q = currentQuizQuestions[currentQuestionIndex];
+            const isCorrect = (selectedAnswer.trim().toLowerCase() === q.correct.trim().toLowerCase());
+            
+            // Disable options / input
+            if (q.type === 'mcq') {
+                optionsContainer.querySelectorAll('.option').forEach(btn => {
+                    btn.disabled = true;
+                    if (btn.dataset.value === q.correct) {
+                        btn.classList.add('correct');
+                    } else if (btn.dataset.value === selectedAnswer) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+            } else if (q.type === 'fib') {
+                fibInput.disabled = true;
+                fibSubmit.disabled = true;
+            }
+
+            // Update score
+            if (isCorrect) {
+                score++;
+                feedbackTitle.textContent = "Correct! 🎉";
+                feedbackTitle.style.color = 'var(--color-correct)';
+                playTone('C4');
+            } else {
+                feedbackTitle.textContent = "Incorrect 😕";
+                feedbackTitle.style.color = 'var(--color-incorrect)';
+                playTone('C3');
+                
+                // For FIB, show the correct answer
+                if (q.type === 'fib') {
+                    q.feedbackEN = `Correct Answer: ${q[q.correct] || q.correct}. ${q.feedbackEN}`;
+                    q.feedbackTE = `సరైన సమాధానం: ${q[q.correct] || q.correct}. ${q.feedbackTE}`;
+                }
+            }
+            
+            // Show feedback
+            feedbackTextEn.textContent = q.feedbackEN;
+            feedbackTextTe.textContent = q.feedbackTE;
+            feedbackCard.classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentQuizQuestions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function updateLessonTip(classNum) {
+            if (lessonTips[classNum] && Math.random() < 0.3) { // 30% chance to show a tip
+                const tip = lessonTips[classNum];
+                const tipToShow = (tip.en || tip.te);
+                tipText.textContent = `${tip.en || ''} \n\n ${tip.te || ''}`;
+                
+                // Add speak listener for the tip
+                speakTipBtn.onclick = () => {
+                    if (tip.en) speak(tip.en, 'en-US');
+                    if (tip.te) speak(tip.te, 'te-IN');
+                };
+                
+                tipCard.classList.remove('hidden');
+            } else {
+                tipCard.classList.add('hidden');
+            }
+        }
+
+        function showResults() {
+            quizContainer.classList.add('hidden');
+            resultsScreen.classList.remove('hidden');
+            
+            const percent = Math.round((score / currentQuizQuestions.length) * 100);
+            scorePercent.textContent = percent;
+            scoreCorrect.textContent = score;
+            scoreTotal.textContent = currentQuizQuestions.length;
+        }
+
+        function endQuiz() {
+            if (confirm('Are you sure you want to end the quiz?')) {
+                showResults();
+            }
+        }
+
+        function restartQuiz() {
+            startQuiz(); // Re-uses the same settings
+        }
+
+        function backToSetup() {
+            resultsScreen.classList.add('hidden');
+            quizSetup.classList.remove('hidden');
+            quizSetup.classList.add('flex');
+            setupQuizUI(); // Refresh setup UI
+        }
+
+        // --- Helpers ---
+        function shuffleArray(array) {
+            let currentIndex = array.length,  randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function playTone(note) {
+            try {
+                const synth = new Tone.Synth().toDestination();
+                synth.triggerAttackRelease(note, "8n");
+            } catch (e) {
+                console.warn("Tone.js sound failed to play:", e);
+            }
+        }
+
+        // --- Event Listeners ---
+        function addGlobalListeners() {
+            startButton.addEventListener('click', startQuiz);
+            nextButton.addEventListener('click', nextQuestion);
+            endQuizButton.addEventListener('click', endQuiz);
+            restartQuizButton.addEventListener('click', restartQuiz);
+            backToSetupButton.addEventListener('click', backToSetup);
+            fibSubmit.addEventListener('click', () => handleAnswer(fibInput.value));
+            fibInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') handleAnswer(fibInput.value);
+            });
+            speakPromptBtn.addEventListener('click', () => {
+                const q = currentQuizQuestions[currentQuestionIndex];
+                speak(q.promptEN, 'en-US');
+                speak(q.promptTE, 'te-IN');
+            });
+            
+            themeToggle.addEventListener('click', () => {
+                applyTheme(!isDark);
+            });
+            
+            settingsBtn.addEventListener('click', openSettingsModal);
+            curriculumButton.addEventListener('click', openCurriculumModal);
+            
+            classSelectionButton.addEventListener('click', () => openSelectionModal('class'));
+            lengthSelectionButton.addEventListener('click', () => openSelectionModal('count'));
+            
+            closeSelectionModalBtn.addEventListener('click', closeSelectionModal);
+            closeSettingsModalBtn.addEventListener('click', closeSettingsModal);
+            closeCurriculumModalBtn.addEventListener('click', closeCurriculumModal);
+            
+            bodyFontBtn.addEventListener('click', () => openSelectionModal('bodyFont'));
+            titleFontBtn.addEventListener('click', () => openSelectionModal('titleFont'));
+            colorBtn.addEventListener('click', () => openSelectionModal('color'));
+
+            // NEW Listeners
+            viewDiagramBtn.addEventListener('click', openDiagramModal);
+            closeDiagramModalBtn.addEventListener('click', closeDiagramModal);
+        }
+
+        // --- Settings & Modals ---
+
+        function openSelectionModal(type) {
+            currentSelectionType = type;
+            let title = '';
+            let itemsHTML = '';
+            
+            if (type === 'class') {
+                title = 'Select Class';
+                itemsHTML = allLessonDetails.map(lesson => {
+                    const classNum = parseInt(lesson.Class_Number);
+                    const isSelected = classNum === currentClass ? 'selected' : '';
+                    return `<div class="selection-item p-3 rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${isSelected}" data-value="${classNum}">
+                                Class ${classNum}: ${lesson.Class_Title_EN}
+                            </div>`;
+                }).join('');
+                
+            } else if (type === 'count') {
+                title = 'Select Quiz Length';
+                itemsHTML = quizLengths.map(len => {
+                    const isSelected = len === quizLength ? 'selected' : '';
+                    return `<div class="selection-item p-3 rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${isSelected}" data-value="${len}">
+                                ${len === 'All' ? 'All Questions' : `${len} Questions`}
+                            </div>`;
+                }).join('');
+                
+            } else if (type === 'bodyFont' || type === 'titleFont') {
+                const fontList = fonts[type];
+                const currentFont = document.documentElement.style.getPropertyValue(`--font-${type === 'bodyFont' ? 'body' : 'title'}`);
+                title = `Select ${type === 'bodyFont' ? 'Body' : 'Title'} Font`;
+                itemsHTML = fontList.map(font => {
+                    const isSelected = font.value === currentFont ? 'selected' : '';
+                    return `<div class="selection-item p-3 rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${isSelected}" data-value="${font.value}" style="font-family: ${font.value};">
+                                ${font.name}
+                            </div>`;
+                }).join('');
+                
+            } else if (type === 'color') {
+                const currentColor = document.documentElement.style.getPropertyValue('--color-primary');
+                title = 'Select Theme Color';
+                itemsHTML = colors.map(color => {
+                    const isSelected = color.value === currentColor ? 'selected' : '';
+                    return `<div class="selection-item p-3 rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${isSelected}" data-value="${color.value}">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-6 h-6 rounded-full" style="background-color: ${color.value}"></div>
+                                    <span>${color.name}</span>
+                                </div>
+                            </div>`;
+                }).join('');
+            }
+
+            selectionModalTitle.textContent = title;
+            selectionModalContent.innerHTML = itemsHTML;
+            
+            // Add click listeners to new items
+            selectionModalContent.querySelectorAll('.selection-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    handleSelection(item.dataset.value);
+                });
+            });
+            
+            selectionModal.classList.remove('hidden');
+            selectionModal.classList.add('flex');
+        }
+
+        function handleSelection(value) {
+            if (currentSelectionType === 'class') {
+                updateClass(parseInt(value));
+            } else if (currentSelectionType === 'count') {
+                updateLength(value === 'All' ? 'All' : parseInt(value));
+            } else if (currentSelectionType === 'bodyFont') {
+                applyFont('body', value);
+            } else if (currentSelectionType === 'titleFont') {
+                applyFont('title', value);
+            } else if (currentSelectionType === 'color') {
+                applyColor(value);
+            }
+            closeSelectionModal();
+        }
+        
+        function updateClass(newClass) {
+            currentClass = newClass;
+            setupQuizUI();
+        }
+        
+        function updateLength(newLength) {
+            quizLength = newLength;
+            setupQuizUI();
+        }
+
+        function closeSelectionModal() {
+            selectionModal.classList.add('hidden');
+            selectionModal.classList.remove('flex');
+        }
+        
+        function openSettingsModal() {
+            settingsModal.classList.remove('hidden');
+            settingsModal.classList.add('flex');
+        }
+        
+        function closeSettingsModal() {
+            settingsModal.classList.add('hidden');
+            settingsModal.classList.remove('flex');
+        }
+        
+        function openCurriculumModal() {
+            curriculumModal.classList.remove('hidden');
+            curriculumModal.classList.add('flex');
+        }
+        
+        function closeCurriculumModal() {
+            curriculumModal.classList.add('hidden');
+            curriculumModal.classList.remove('flex');
+        }
+        
+        // --- NEW: Diagram Modal Functions ---
+        function openDiagramModal() {
+            if (!window.DIAGRAM_DATA) {
+                console.error("diagram_data.js not loaded or DIAGRAM_DATA is missing.");
+                return;
+            }
+            
+            const diagramData = window.DIAGRAM_DATA[currentClass];
+            if (!diagramData) {
+                console.error(`No diagram data found for class ${currentClass}`);
+                return;
+            }
+            
+            diagramModalContent.innerHTML = ''; // Clear previous
+            diagramModalTabs.innerHTML = ''; // Clear tabs
+            
+            if (Array.isArray(diagramData)) {
+                // Multi-diagram lesson
+                currentDiagrams = diagramData;
+                diagramModalTabs.classList.remove('hidden');
+                diagramData.forEach((diag, index) => {
+                    const tab = document.createElement('button');
+                    tab.textContent = diag.title.split('(')[1] || `Diagram ${index + 1}`;
+                    tab.classList.add('diagram-tab', 'p-2', 'rounded-md', 'text-sm');
+                    if (index === 0) {
+                        tab.classList.add('btn-primary');
+                    } else {
+                        tab.classList.add('btn-secondary');
+                    }
+                    tab.dataset.index = index;
+                    tab.addEventListener('click', () => renderDiagramTab(index));
+                    diagramModalTabs.appendChild(tab);
+                });
+                renderDiagram(diagramData[0]); // Render first diagram
+            } else {
+                // Single diagram lesson
+                currentDiagrams = [];
+                diagramModalTabs.classList.add('hidden');
+                renderDiagram(diagramData);
+            }
+            
+            diagramModal.classList.remove('hidden');
+            diagramModal.classList.add('flex');
+        }
+        
+        function closeDiagramModal() {
+            diagramModal.classList.add('hidden');
+            diagramModal.classList.remove('flex');
+            diagramModalContent.innerHTML = ''; // Clear content
+        }
+        
+        function renderDiagramTab(index) {
+            // Update tab styles
+            diagramModalTabs.querySelectorAll('.diagram-tab').forEach((tab, i) => {
+                tab.classList.toggle('btn-primary', i === index);
+                tab.classList.toggle('btn-secondary', i !== index);
+            });
+            // Render the selected diagram
+            renderDiagram(currentDiagrams[index]);
+        }
+        
+        function renderDiagram(data) {
+            if (!data) return;
+            
+            diagramModalTitle.textContent = data.title || 'Lesson Diagram';
+            
+            const diagramContainer = document.createElement('div');
+            diagramContainer.id = 'diagram-render-area';
+            diagramContainer.className = 'relative w-full min-h-[300px]';
+            
+            // 1. Create SVG layer (will be in the back)
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.id = 'diagram-svg-layer';
+            svg.setAttribute('class', 'absolute top-0 left-0 w-full h-full');
+            svg.style.zIndex = '0';
+            diagramContainer.appendChild(svg);
+            
+            // 2. Create HTML nodes
+            const nodesContainer = document.createElement('div');
+            nodesContainer.className = 'relative z-10 flex space-x-4 p-4';
+            
+            data.columns.forEach(column => {
+                const colDiv = document.createElement('div');
+                colDiv.className = 'flex flex-col items-center space-y-4 flex-1';
+                
+                // Add column title
+                const colTitle = document.createElement('h4');
+                colTitle.className = 'diagram-column-title';
+                colTitle.textContent = column.title;
+                colDiv.appendChild(colTitle);
+                
+                // Add nodes
+                column.items.forEach(item => {
+                    const node = document.createElement('div');
+                    node.id = `diag-node-${item.id}`; // Unique ID for drawing lines
+                    node.className = 'diagram-node';
+                    node.textContent = item.text;
+                    colDiv.appendChild(node);
+                });
+                nodesContainer.appendChild(colDiv);
+            });
+            
+            diagramContainer.appendChild(nodesContainer);
+            diagramModalContent.innerHTML = ''; // Clear
+            diagramModalContent.appendChild(diagramContainer);
+            
+            // 3. Draw connection lines
+            // We need to wait for the DOM to render to get node positions
+            requestAnimationFrame(() => {
+                drawConnections(data.connections, diagramContainer, svg);
+            });
+        }
+        
+        function drawConnections(connections, container, svg) {
+            if (!connections) return;
+            
+            const containerRect = container.getBoundingClientRect();
+            
+            connections.forEach(conn => {
+                const fromNode = document.getElementById(`diag-node-${conn.from}`);
+                const toNode = document.getElementById(`diag-node-${conn.to}`);
+                
+                if (!fromNode || !toNode) {
+                    console.warn(`Could not find nodes for connection: ${conn.from} -> ${conn.to}`);
+                    return;
+                }
+                
+                const fromRect = fromNode.getBoundingClientRect();
+                const toRect = toNode.getBoundingClientRect();
+                
+                // Calculate coordinates relative to the container
+                // From: middle-right edge
+                const x1 = fromRect.right - containerRect.left;
+                const y1 = fromRect.top - containerRect.top + fromRect.height / 2;
+                
+                // To: middle-left edge
+                const x2 = toRect.left - containerRect.left;
+                const y2 = toRect.top - containerRect.top + toRect.height / 2;
+                
+                // Create an SVG path (simple Bezier curve)
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                const midX = (x1 + x2) / 2;
+                const d = `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`;
+                
+                path.setAttribute('d', d);
+                path.setAttribute('class', 'diagram-svg-line');
+                svg.appendChild(path);
+            });
+        }
+
+        // --- Theming & Styles ---
+
+        function loadInitialSettings() {
+            // Theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                applyTheme(true);
+            } else if (savedTheme === 'light') {
+                applyTheme(false);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                applyTheme(true);
+            } else {
+                applyTheme(false);
+            }
+            
+            // Font
+            const savedBodyFont = localStorage.getItem('bodyFont');
+            if (savedBodyFont) applyFont('body', savedBodyFont);
+            
+            const savedTitleFont = localStorage.getItem('titleFont');
+            if (savedTitleFont) applyFont('title', savedTitleFont);
+            
+            // Color
+            const savedColor = localStorage.getItem('themeColor');
+            if (savedColor) applyColor(savedColor);
+            
+            // Quiz settings
+            const savedClass = localStorage.getItem('currentClass');
+            if (savedClass) currentClass = parseInt(savedClass);
+            
+            const savedLength = localStorage.getItem('quizLength');
+            if (savedLength) quizLength = savedLength === 'All' ? 'All' : parseInt(savedLength);
+        }
+
+        function applyTheme(isDarkTheme) {
+            isDark = isDarkTheme;
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                themeIconLight.classList.add('hidden');
+                themeIconDark.classList.remove('hidden');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeIconLight.classList.remove('hidden');
+                themeIconDark.classList.add('hidden');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        
+        function applyFont(type, fontValue) {
+            const prop = type === 'body' ? '--font-body' : '--font-title';
+            document.documentElement.style.setProperty(prop, fontValue);
+            localStorage.setItem(type === 'body' ? 'bodyFont' : 'titleFont', fontValue);
+            
+            // Update settings modal text
+            const font = fonts[type === 'body' ? 'bodyFont' : 'titleFont'].find(f => f.value === fontValue);
+            if (font) {
+                (type === 'body' ? bodyFontName : titleFontName).textContent = font.name;
+            }
+        }
+        
+        function applyColor(colorValue) {
+            const color = colors.find(c => c.value === colorValue);
+            if (!color) return;
+            
+            const root = document.documentElement;
+            root.style.setProperty('--color-primary', color.value);
+            root.style.setProperty('--color-primary-hover', color.hover);
+            root.style.setProperty('--color-primary-text', isDark ? '#1F2937' : '#FFFFFF');
+            
+            // Set dark theme variations
+            const darkRoot = document.querySelector(':root .dark, .dark');
+            if (darkRoot) {
+                 root.style.setProperty('--color-primary', isDark ? color.dark : color.value);
+                 root.style.setProperty('--color-primary-hover', isDark ? color.darkHover : color.hover);
+            } else {
+                 // Fallback if dark class is not on root
+                 root.style.setProperty('--color-primary', color.value);
+                 root.style.setProperty('--color-primary-hover', color.hover);
+            }
+            
+            localStorage.setItem('themeColor', color.value);
+            colorName.textContent = color.name;
+        }
+
+        // --- Audio ---
+        function setupAudio() {
+            // Warm up Tone.js on any user interaction
+            const warmUp = () => {
+                Tone.start();
+                document.body.removeEventListener('click', warmUp);
+                document.body.removeEventListener('keydown', warmUp);
+            };
+            document.body.addEventListener('click', warmUp);
+            document.body.addEventListener('keydown', warmUp);
+        }
+
+        function speak(text, lang) {
+            if (!synth || !text) return;
+            
+            // Stop any previous speech
+            synth.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang || 'en-US';
+            
+            // Try to find a matching voice
+            const voices = synth.getVoices();
+            let selectedVoice = voices.find(v => v.lang === lang);
+            
+            // Fallbacks
+            if (!selectedVoice) {
+                selectedVoice = voices.find(v => v.lang.startsWith(lang.split('-')[0]));
+            }
+            if (!selectedVoice && lang === 'te-IN') {
+                 selectedVoice = voices.find(v => v.lang.startsWith('en-IN')); // Indian English as fallback for Telugu
+            }
+            if (!selectedVoice) {
+                selectedVoice = voices.find(v => v.lang.startsWith('en-')); // Any English
+            }
+            
+            utterance.voice = selectedVoice || voices[0];
+            
+            synth.speak(utterance);
+        }
+        
+        // Ensure voices are loaded
+        synth.getVoices();
+        if (synth.onvoiceschanged !== undefined) {
+          synth.onvoiceschanged = synth.getVoices;
+        }
+
     </script>
 </body>
 </html>
