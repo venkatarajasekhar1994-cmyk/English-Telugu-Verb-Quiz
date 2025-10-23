@@ -2,8 +2,8 @@
 
 // CRITICAL: Cache version.
 // Every time you change ANY file that's cached (HTML, CSV, etc.),
-// you MUST increment this version number (e.g., to 'v25', 'v26').
-const CACHE_NAME = 'my-pwa-cache-v24'; // <-- I've incremented this from v23 to v24
+// you MUST increment this version number (e.g., to 'v26', 'v27').
+const CACHE_NAME = 'my-pwa-cache-v25'; // <-- This is the only change needed.
 
 // This is the list of all the files that will be saved for offline use.
 // Ensure all paths are correct relative to your website's root.
@@ -33,21 +33,19 @@ self.addEventListener('install', event => {
       .then(() => {
         // This command tells the new service worker to take over control immediately
         // once it's installed, instead of waiting for the user to close all tabs.
-        console.log('[Service Worker] Installation successful, skipping waiting.');
-        self.skipWaiting();
-      })
-      .catch(err => {
-        console.error('[Service Worker] Cache addAll failed:', err);
+        console.log('[Service Worker] Skipping waiting and activating immediately.');
+        return self.skipWaiting();
       })
   );
 });
 
+
 // --- ACTIVATION ---
-// This runs after the new service worker is installed and the old one is gone.
-// It's the perfect place to clean up old, unused caches.
+// This runs after the new service worker is installed and ready to take over.
 self.addEventListener('activate', event => {
   console.log(`[Service Worker] Activating version ${CACHE_NAME}`);
   event.waitUntil(
+    // Get all the cache names (e.g., 'my-pwa-cache-v24', 'my-pwa-cache-v23')
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
