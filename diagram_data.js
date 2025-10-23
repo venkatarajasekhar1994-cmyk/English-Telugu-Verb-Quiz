@@ -56,7 +56,7 @@ const diagram_data = {
     { "id": "e_all_pronouns_will", "source": "all_pronouns", "target": "hv_will" },
     { "id": "e_will_base", "source": "hv_will", "target": "v_base" },
     { "id": "e_will_be", "source": "hv_will", "target": "hv_be" },
-    { "id": "e_be_ing", "source": "hv_be", "target": "v_ing" },
+    { "id":li": "e_be_ing", "source": "hv_be", "target": "v_ing" },
     { "id": "e_will_have", "source": "hv_will", "target": "hv_have_f" },
     { "id": "e_have_f_v3", "source": "hv_have_f", "target": "v_v3" },
     { "id": "e_have_f_been", "source": "hv_have_f", "target": "hv_been" },

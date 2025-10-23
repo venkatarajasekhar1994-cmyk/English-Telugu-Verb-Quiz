@@ -1,88 +1,49 @@
 // service-worker.js
 
 // -------------------------------------------------------------------------
-// --- CACHE VERSION v29 ---
+// --- UNINSTALL SCRIPT (v-uninstall) ---
 // -------------------------------------------------------------------------
-// I've updated the version from v28 to v29.
-//
-// THE FIX:
-// I have REMOVED 'spoken%20english.html' from the cache list.
-// This file appears to be missing from your server, which was causing
-// the entire service worker installation to fail (with a 404 error).
-//
-// By removing it, this service worker (v29) will finally install
-// successfully, which will update all your other files, including 'data2.csv'.
+// This file's ONLY job is to "uninstall" the old, broken service worker
+// and delete all of its caches. This will force all browsers to
+// download the new files from the server.
 // -------------------------------------------------------------------------
-const CACHE_NAME = 'my-pwa-cache-v29'; // <-- I updated this from v28 to v29!
 
-const urlsToCache = [
-  './',
-  'index.html',
-  'game%20hub.html',
-  'Verbs%20game.html',
-  'English%20vocabulary%20game.html',
-  'data.csv',
-  'data2.csv',
-  'diagram_data.js',
-  'manifest.json'
-  // 'spoken%20english.html' has been REMOVED because it was missing (404).
-];
-
-// --- INSTALLATION ---
+// --- INSTALL ---
+// Force this new worker to become active immediately.
 self.addEventListener('install', event => {
-  console.log('[Service Worker] Install event for cache:', CACHE_NAME);
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('[Service Worker] Caching all specified files.');
-        return cache.addAll(urlsToCache);
-      })
-      .then(() => {
-        console.log('[Service Worker] All files cached successfully. Forcing activation.');
-        return self.skipWaiting();
-      })
-      .catch(error => {
-        // This log is crucial for debugging!
-        console.error('[Service Worker] Cache addAll() failed:', error);
-      })
-  );
+  console.log('[Service Worker] Install (UNINSTALLER): Forcing activation.');
+  self.skipWaiting();
 });
 
-// --- ACTIVATION & CLEANUP ---
+// --- ACTIVATE & CLEANUP ---
+// This is the most important part.
 self.addEventListener('activate', event => {
-  console.log('[Service Worker] Activate event for cache:', CACHE_NAME);
+  console.log('[Service Worker] Activate (UNINSTALLER): Deleting all caches.');
   event.waitUntil(
     caches.keys().then(cacheNames => {
+      // 1. Delete every cache we find.
       return Promise.all(
         cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('[Service Worker] Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
+          console.log('[Service Worker] Deleting cache:', cacheName);
+          return caches.delete(cacheName);
         })
       );
     }).then(() => {
-      console.log('[Service Worker] Claiming clients (v29).');
+      // 2. Take control of all open pages.
+      console.log('[Service Worker] (UNINSTALLER): Claiming clients.');
       return self.clients.claim();
+    }).then(() => {
+      // 3. UNREGISTER ourselves. We are done.
+      console.log('[Service Worker] (UNINSTALLER): Unregistering itself.');
+      self.registration.unregister();
     })
   );
 });
 
-
-// --- FETCH INTERCEPTION (CACHE-FIRST) ---
+// --- FETCH ---
+// Do not serve anything from cache. Go directly to the network.
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') {
-    return;
-  }
-
-  event.respondWith(
-    caches.match(event.request)
-      .then(cachedResponse => {
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-        return fetch(event.request);
-      })
-  );
+  // console.log('[Service Worker] (UNINSTALLER): Bypassing cache, fetching from network.');
+  event.respondWith(fetch(event.request));
 });
 
