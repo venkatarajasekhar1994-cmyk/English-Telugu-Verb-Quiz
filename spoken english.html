@@ -154,6 +154,11 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        
+        /* Helper class for speak buttons in modals */
+        .speak-button {
+             @apply p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white flex-shrink-0;
+        }
     </style>
 </head>
 <body class="transition-colors duration-300">
@@ -199,19 +204,22 @@
                 </button>
             </div>
             
-            <!-- Lesson Tips -->
-            <div id="lesson-tips-container" class="hidden text-left p-4 rounded-lg button-bg-color mt-6 glass-effect">
-                <h3 id="lesson-tip-title" class="font-bold text-lg text-white mb-2">Lesson Focus:</h3>
+            <!-- ***** MODIFIED: Lesson Tips (Now Clickable) ***** -->
+            <div id="lesson-tips-container" class="hidden text-left p-4 rounded-lg button-bg-color mt-6 glass-effect cursor-pointer hover:bg-white/10 transition-colors duration-200">
+                <div class_="flex justify-between items-center">
+                    <h3 id="lesson-tip-title" class="font-bold text-lg text-white mb-2">Lesson Focus:</h3>
+                    <p class="text-xs text-gray-400 text-right -mt-6">Click to see full lesson</p>
+                </div>
                 <div class="flex items-center justify-between">
                     <p id="lesson-tip-en" class="text-sm text-gray-200 flex-1 pr-2"></p>
-                    <button id="speak-en-tip" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white" aria-label="Speak tip in English">
+                    <button id="speak-en-tip" class="speak-button" aria-label="Speak tip in English">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                     </button>
                 </div>
                 <hr class="border-white/20 my-2">
                 <div class="flex items-center justify-between">
                     <p id="lesson-tip-te" class="text-sm text-gray-300 flex-1 pr-2"></p>
-                    <button id="speak-te-tip" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white" aria-label="Speak tip in Telugu">
+                    <button id="speak-te-tip" class="speak-button" aria-label="Speak tip in Telugu">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                     </button>
                 </div>
@@ -248,7 +256,7 @@
              <!-- English Result -->
              <div class="flex items-center justify-center space-x-2 mb-2">
                  <p id="final-score-text-en" class="text-lg text-gray-200">Your final score is <span id="final-score" class="font-bold accent-text"></span></p>
-                 <button id="speak-result-en" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white" aria-label="Speak score in English">
+                 <button id="speak-result-en" class="speak-button" aria-label="Speak score in English">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                  </button>
              </div>
@@ -256,7 +264,7 @@
              <!-- Telugu Result -->
              <div class="flex items-center justify-center space-x-2 mb-4">
                  <p id="final-score-text-te" class="text-lg text-gray-300">మీ తుది స్కోరు <span id="final-score-te" class="font-bold accent-text"></span></p>
-                 <button id="speak-result-te" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white" aria-label="Speak score in Telugu">
+                 <button id="speak-result-te" class="speak-button" aria-label="Speak score in Telugu">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                  </button>
              </div>
@@ -313,15 +321,8 @@
                  </div>
              </div>
              
-             <!-- "Move to Next Class" Button -->
-             <button id="next-class-button" class="hidden w-full mt-6 accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 transition-opacity">
-                Move to Next Class
-             </button>
-             
-             <!-- "Play Again" Button -->
-             <button id="restart-quiz-button" class="w-full mt-4 button-bg-color text-white font-bold py-3 px-6 rounded-lg shadow-md hover:button-hover-bg transition-opacity">
-                Play Again (This Class)
-             </button>
+             <!-- Restart Button -->
+             <button id="restart-quiz-button" class="w-full mt-6 accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 transition-opacity">Play Again</button>
         </div>
     </div>
 
@@ -395,14 +396,28 @@
                 <button id="close-curriculum-modal" class="text-gray-300 hover:text-white text-2xl font-bold" aria-label="Close curriculum modal">&times;</button>
             </div>
             <!-- Curriculum content (tables) -->
-            <!-- This table is still hardcoded as it's a large static block of reference text -->
             <div class="space-y-6 overflow-y-auto no-scrollbar pr-2 text-sm text-gray-300">
                 <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase I: Core Action and Simple Tense Mastery (Classes 01–12)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">01</td><td class="p-2">Pronoun Roles</td><td class="p-2">Establishes the core sentence structure (S+V+O) and differentiates between subject and object pronouns.</td></tr> <tr><td class="p-2">02</td><td class="p-2">Self-Introduction</td><td class="p-2">Teaches the full framework for self-presentation.</td></tr> <tr><td class="p-2">03</td><td class="p-2">Regular Verbs</td><td class="p-2">Drills predictable conjugation patterns (V1, V2, V3, V-ing).</td></tr> <tr><td class="p-2">04</td><td class="p-2">Irregular Verbs</td><td class="p-2">Focuses on high-frequency irregular verbs (e.g., eat/ate/eaten).</td></tr> <tr><td class="p-2">05</td><td class="p-2">Simple Present Tense</td><td class="p-2">Expressing habitual actions, daily routines, and general truths.</td></tr> <tr><td class="p-2">06</td><td class="p-2">Simple Present (Do/Does)</td><td class="p-2">Using Do/Does for questions and negative statements.</td></tr> <tr><td class="p-2">07</td><td class="p-2">WH-Questions (Do/Does)</td><td class="p-2">Synthesizes Do/Does with question words (What, Why, Where, How).</td></tr> <tr><td class="p-2">08</td><td class="p-2">Simple Past Tense</td><td class="p-2">Using the Past Tense form (V2) to describe completed actions.</td></tr> <tr><td class="p-2">09</td><td class="p-2">Simple Past (Did)</td><td class="p-2">Using Did/didn't for questions and negatives in the Past Tense.</td></tr> <tr><td class="p-2">10</td><td class="p-2">WH-Questions (Did)</td><td class="p-2">Integrates Did with question words to ask about past actions.</td></tr> <tr><td class="p-2">11</td><td class="p-2">Simple Future Tense</td><td class="p-2">Using Shall/Will to express future intentions and actions.</td></tr> <tr><td class="p-2">12</td><td class="p-2">WH-Questions (Shall/Will)</td><td class="p-2">Applies Shall/Will with WH-Words to inquire about future plans.</td></tr> </tbody> </table> </div>
                 <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase II: Actions in Progress—Mastery of Continuous Forms (Classes 13–15)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">13</td><td class="p-2">Present Continuous</td><td class="p-2">Using Am/Is/Are + V-ing for actions happening now.</td></tr> <tr><td class="p-2">14</td><td class="p-2">Past Continuous</td><td class="p-2">Using Was/Were + V-ing for ongoing past actions.</td></tr> <tr><td class="p-2">15</td><td class="p-2">Future Continuous</td><td class="p-2">Using Shall be/Will be + V-ing for actions that will be in progress.</td></tr> </tbody> </table> </div>
-                <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase III: Modality, Ability, and Obligation (Classes 16–20)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><td class="p-2 w-3/12">Focus</td><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">16</td><td class="p-2">Can/Could</td><td class="p-2">Expressing present ability (Can) and past ability (Could).</td></tr> <tr><td class="p-2">17</td><td class="p-2">May/Might</td><td class="p-2">Expressing uncertainty and possibility.</td></tr> <tr><td class="p-2">18</td><td class="p-2">Should</td><td class="p-2">Expressing general advice, responsibility, and duty.</td></tr> <tr><td class="p-2">19</td><td class="p-2">Must</td><td class="p-2">Expressing strong obligation, determination, or necessity.</td></tr> <tr><td class="p-2">20</td><td class="p-2">Would & Synthesis</td><td class="p-2">Using Would for past habits and synthesizing all learned forms.</td></tr> </tbody> </table> </div>
+                <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase III: Modality, Ability, and Obligation (Classes 16–20)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">16</td><td class="p-2">Can/Could</td><td class="p-2">Expressing present ability (Can) and past ability (Could).</td></tr> <tr><td class="p-2">17</td><td class="p-2">May/Might</td><td class="p-2">Expressing uncertainty and possibility.</td></tr> <tr><td class="p-2">18</td><td class="p-2">Should</td><td class="p-2">Expressing general advice, responsibility, and duty.</td></tr> <tr><td class="p-2">19</td><td class="p-2">Must</td><td class="p-2">Expressing strong obligation, determination, or necessity.</td></tr> <tr><td class="p-2">20</td><td class="p-2">Would & Synthesis</td><td class="p-2">Using Would for past habits and synthesizing all learned forms.</td></tr> </tbody> </table> </div>
                 <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase IV: Perfect Tenses and Complex Modal Structures (Classes 21–35)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">21</td><td class="p-2">Have/Has (Possession)</td><td class="p-2">Clarifies role in expressing current possession.</td></tr> <tr><td class="p-2">22</td><td class="p-2">Present Perfect</td><td class="p-2">Using Have/Has + P.P.F for recent past actions with present relevance.</td></tr> <tr><td class="p-2">23</td><td class="p-2">Past Perfect</td><td class="p-2">Using Had + P.P.F for an action that occurred before another past action.</td></tr> <tr><td class="p-2">24</td><td class="p-2">Future Perfect</td><td class="p-2">Using Shall have/Will have + P.P.F for actions completed by a future deadline.</td></tr> <tr><td class="p-2">25</td><td class="p-2">Should have/Must have</td><td class="p-2">Expressing past unfulfilled actions or strong assumptions.</td></tr> <tr><td class="p-2">26</td><td class="p-2">May have/Might have</td><td class="p-2">Expressing degrees of uncertainty about past actions.</td></tr> <tr><td class="p-2">27</td><td class="p-2">Would have/Could have</td><td class="p-2">Discussing hypothetical situations in the past (counterfactuals).</td></tr> <tr><td class="p-2">28</td><td class="p-2">Past Actions Review</td><td class="p-2">Comprehensive review of all 17 structures for past actions.</td></tr> <tr><td class="p-2">29</td><td class="p-2">Present Perfect Continuous</td><td class="p-2">Have been/Has been + V-ing for actions from past to present.</td></tr> <tr><td class="p-2">30</td><td class="p-2">Past Perfect Continuous</td><td class="p-2">Had been + V-ing for continuous actions before a past moment.</td></tr> <tr><td class="p-2">31</td><td class="p-2">Future Perfect Continuous</td><td class="p-2">Shall have been/Will have been + V-ing for action duration up to a future point.</td></tr> <tr><td class="p-2">32</td><td class="p-2">Continuous Modal Perfects</td><td class="p-2">Introduces structures like 'Should have been doing'.</td></tr> <tr><td class="p-2">33</td><td class="p-2">Application of Should/Must Have Been</td><td class="p-2">Drilling continuous modal perfects for past actions.</td></tr> <tr><td class="p-2">34</td><td class="p-2">Application of Would/Could Have Been</td><td class="p-2">Drilling continuous modals for hypothetical past actions.</td></tr> <tr><td class="p-2">35</td><td class="p-2">Application of May/Might Have Been & Review</td><td class="p-2">Final review of all modal and perfect forms.</td></tr> </tbody> </table> </div>
                 <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase V: Necessity, Desire, and Specialized Auxiliaries (Classes 36–41)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">36</td><td class="p-2">Have to/Has to</td><td class="p-2">Expressing external compulsion in present and future.</td></tr> <tr><td class="p-2">37</td><td class="p-2">Need to/Dare to/Ought to</td><td class="p-2">Specialized auxiliaries for necessity, courage, and moral obligation.</td></tr> <tr><td class="p-2">38</td><td class="p-2">Want to/Wish to/Would like to</td><td class="p-2">Covers various expressions of desire and preference.</td></tr> <tr><td class="p-2">39</td><td class="p-2">Able to, Willing to, Going to</td><td class="p-2">Phrasal auxiliaries for ability, readiness, and planning.</td></tr> <tr><td class="p-2">40</td><td class="p-2">Had to (Past Obligation)</td><td class="p-2">Expressing a necessity or obligation in the past.</td></tr> <tr><td class="p-2">41</td><td class="p-2">Used to (Past Habit)</td><td class="p-2">Expressing a repeated past habit that is no longer performed.</td></tr> </tbody> </table> </div>
                 <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase VI: Synthesis, Tenses, and Voice (Classes 42–45)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">42</td><td class="p-2">The 12 Tenses Matrix</td><td class="p-2">Unified map of the English verbal system by time and aspect.</td></tr> <tr><td class="p-2">43</td><td class="p-2">12 Tenses Application</td><td class="p-2">Drilling a single verb across all twelve tenses.</td></tr> <tr><td class="p-2">44</td><td class="p-2">Active & Passive Voice</td><td class="p-2">Introduces voice transformation and auxiliary conversion.</td></tr> <tr><td class="p-2">45</td><td class="p-2">Be with P.P. Form</td><td class="p-2">Master key for expressing static states in all modal/auxiliary contexts.</td></tr> </tbody> </table> </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ***** NEW: Lesson Details Modal ***** -->
+    <div id="lesson-details-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
+         <div class="rounded-2xl shadow-xl p-6 w-full max-w-2xl max-h-[80vh] flex flex-col modal-glass">
+             <div class="flex justify-between items-center mb-4">
+                <h3 id="lesson-details-title" class="text-xl font-bold text-white">Lesson Details</h3>
+                <button id="close-lesson-details-modal" class="text-gray-300 hover:text-white text-2xl font-bold" aria-label="Close lesson details modal">&times;</button>
+            </div>
+            <!-- Dynamic Lesson Content -->
+            <div id="lesson-details-content" class="space-y-4 overflow-y-auto no-scrollbar pr-2 text-sm text-gray-300">
+                <!-- Content will be injected by JavaScript -->
+                <p>Loading lesson...</p>
             </div>
         </div>
     </div>
@@ -412,7 +427,6 @@
     <script>
         // --- DOM Elements ---
         let startScreen, quizScreen, resultsScreen, questionContainer, startButton, nextButton, restartButton, curriculumButton;
-        let nextClassButton;
         let lessonTipsContainer, lessonTipTitle, lessonTipEN, lessonTipTE, speakENTipButton, speakTETipButton;
         let stats, scoreEl, progressBar, finalScoreEl, finalScoreTeEl, speakResultEnBtn, speakResultTeBtn, resultsDetails, selectionModal, modalTitle, modalOptions;
         let settingsModal, themeToggle, themeIconLight, themeIconDark, startMessage, classSelectionButton, lengthSelectionButton;
@@ -423,6 +437,8 @@
         let aiFeedbackSection, aiLoadingIndicator, aiContent, aiError, feedbackEnEl, feedbackTeEl, coachingEnEl, coachingTeEl, tipsEnEl, tipsTeEl;
         // Offline Message Element
         let aiOfflineMessage;
+        // ***** NEW: Lesson Details Modal Elements *****
+        let lessonDetailsModal, closeLessonDetailsModalBtn, lessonDetailsTitle, lessonDetailsContent;
 
 
         // --- State ---
@@ -431,8 +447,8 @@
         let currentQuestionIndex = 0;
         let score = 0;
         let isDataLoaded = false;
-        // ***** NEW *****
-        let isLessonDataLoaded = false; // Flag for data2.csv
+        // ***** NEW: Flag for data2.csv *****
+        let isLessonDataLoaded = false; 
         let selectedClass = 1;
         let maxQuestions = 10;
         let synth;
@@ -514,7 +530,7 @@
         function speak(text, lang = 'en-US') { 
             if (synth && text) { 
                 try {
-                    synth.cancel(); 
+                    synth.cancel(); // Stop any previous speech
                     const utterance = new SpeechSynthesisUtterance(text); 
                     utterance.lang = lang; 
                     utterance.onerror = (event) => { console.error('SpeechSynthesisUtterance.onerror', event); }; 
@@ -587,7 +603,7 @@
                  isDataLoaded = false; 
              } 
         }
-        
+
         // ***** NEW FUNCTION: Load lesson data from data2.csv *****
         async function loadLessonData() {
             try {
@@ -600,15 +616,24 @@
                 const headers = parseCsvRow(lines[0]);
                 
                 // Find indices of required columns by name
-                const classNumIdx = headers.indexOf('Class_Number');
-                const titleEnIdx = headers.indexOf('Class_Title_EN');
-                const tipEnIdx = headers.indexOf('Tips_Tricks_EN');
-                const tipTeIdx = headers.indexOf('Tips_Tricks_TE');
-
-                if (classNumIdx === -1 || titleEnIdx === -1 || tipEnIdx === -1 || tipTeIdx === -1) {
-                    throw new Error("data2.csv is missing required columns (Class_Number, Class_Title_EN, Tips_Tricks_EN, Tips_Tricks_TE).");
+                const idx = {
+                    classNum: headers.indexOf('Class_Number'),
+                    titleEN: headers.indexOf('Class_Title_EN'),
+                    tipEN: headers.indexOf('Tips_Tricks_EN'),
+                    tipTE: headers.indexOf('Tips_Tricks_TE'),
+                    keyTopicsEN: headers.indexOf('Key_Topics_EN'),
+                    keyTopicsTE: headers.indexOf('Key_Topics_TE'),
+                    instructionsEN: headers.indexOf('Instructions_EN'),
+                    instructionsTE: headers.indexOf('Instructions_TE'),
+                    usesEN: headers.indexOf('Uses_EN'),
+                    usesTE: headers.indexOf('Uses_TE')
+                };
+                
+                // Check if all essential columns are present
+                if (idx.classNum === -1 || idx.titleEN === -1 || idx.tipEN === -1 || idx.tipTE === -1) {
+                    throw new Error("data2.csv is missing required columns (e.g., Class_Number, Class_Title_EN, Tips_Tricks_EN, Tips_Tricks_TE).");
                 }
-
+                
                 const parsedLessonData = [];
                 const parsedClassTopics = [];
 
@@ -620,8 +645,8 @@
                         return;
                     }
 
-                    const classNum = parseInt(values[classNumIdx], 10);
-                    const titleEN = values[titleEnIdx];
+                    const classNum = parseInt(values[idx.classNum], 10);
+                    const titleEN = values[idx.titleEN];
                     
                     if (!classNum || !titleEN) {
                          console.warn('Skipping lesson row, missing class number or title:', values);
@@ -631,8 +656,14 @@
                     parsedLessonData.push({
                         class: classNum,
                         title: titleEN,
-                        tipEN: values[tipEnIdx] || "No tip available.",
-                        tipTE: values[tipTeIdx] || "చిట్కా అందుబాటులో లేదు."
+                        tipEN: values[idx.tipEN] || "No tip available.",
+                        tipTE: values[idx.tipTE] || "చిట్కా అందుబాటులో లేదు.",
+                        keyTopicsEN: values[idx.keyTopicsEN] || "No key topics available.",
+                        keyTopicsTE: values[idx.keyTopicsTE] || "ముఖ్య విషయాలు అందుబాటులో లేవు.",
+                        instructionsEN: values[idx.instructionsEN] || "No instructions available.",
+                        instructionsTE: values[idx.instructionsTE] || "సూచనలు అందుబాటులో లేవు.",
+                        usesEN: values[idx.usesEN] || "No usage examples available.",
+                        usesTE: values[idx.usesTE] || "వాడుక ఉదాహరణలు అందుబాటులో లేవు."
                     });
                     
                     // Assuming class numbers are sequential and 1-based
@@ -665,7 +696,7 @@
 
         // Display the current question
         function displayQuestion() { 
-            if(nextButton) nextButton.classList.add('hidden'); const question = currentQuestions[currentQuestionIndex]; if (!question) { console.error("No question data found for index:", currentQuestionIndex); showResults(); return; } if(stats) stats.textContent = `Question ${currentQuestionIndex + 1}/${currentQuestions.length}`; if(scoreEl) scoreEl.textContent = `Score: ${score}`; if(progressBar) progressBar.style.width = `${((currentQuestionIndex + 1) / currentQuestions.length) * 100}%`; const prompt = `<div class="flex items-center justify-between mb-4"> <p class="text-lg subtle-text-color">${question.promptTE || ''}</p> <button onclick="speak('${(question.promptEN || '').replace(/'/g, "\\'")}', 'en-US')" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-300" aria-label="Speak prompt in English"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div> <h2 class="text-2xl font-bold mb-6 text-white">${question.promptEN || 'Question Text Missing'}</h2>`; let content = ''; if (question.type === 'mcq') { const options = ['A', 'B', 'C', 'D'] .filter(opt => question[opt] !== undefined && question[opt] !== '') .map(opt => ` <div class="flex items-center space-x-2"> <button onclick="checkAnswer('${opt}', this.parentElement)" class="flex-grow text-left p-4 border-2 border-white/30 rounded-lg hover:accent-border hover:bg-white/10 transition-all duration-200"> ${question[opt]} </button> <button onclick="speak('${(question[opt] || '').replace(/'/g, "\\'")}', 'en-US')" class="p-2 rounded-full hover:bg-white/20 transition-colors text-gray-300 flex-shrink-0" aria-label="Speak option"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div>`).join(''); content = `${prompt}<div class="space-y-3">${options}</div>`; } else if (question.type === 'fill_blank') { content = `${prompt}<input id="fill-blank-input" type="text" class="w-full p-4 border-2 border-white/30 rounded-lg bg-transparent focus:outline-none focus:ring-2 accent-ring text-white" placeholder="Type your answer..."><button onclick="checkFillBlank()" class="mt-4 w-full accent-bg text-white font-bold py-3 rounded-lg">Check Answer</button>`; } else { content = `${prompt}<p class="text-red-400">Error: Unknown question type "${question.type}"</p>`; } if(questionContainer) { questionContainer.innerHTML = `<div class="fade-in">${content}</div><div id="feedback" class="mt-4"></div>`; if (textContrast === 'high') document.body.setAttribute('data-contrast', 'high'); } else { console.error("Question container not found!"); }
+            if(nextButton) nextButton.classList.add('hidden'); const question = currentQuestions[currentQuestionIndex]; if (!question) { console.error("No question data found for index:", currentQuestionIndex); showResults(); return; } if(stats) stats.textContent = `Question ${currentQuestionIndex + 1}/${currentQuestions.length}`; if(scoreEl) scoreEl.textContent = `Score: ${score}`; if(progressBar) progressBar.style.width = `${((currentQuestionIndex + 1) / currentQuestions.length) * 100}%`; const prompt = `<div class="flex items-center justify-between mb-4"> <p class="text-lg subtle-text-color">${question.promptTE || ''}</p> <button onclick="speak('${(question.promptEN || '').replace(/'/g, "\\'")}', 'en-US')" class="speak-button" aria-label="Speak prompt in English"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div> <h2 class="text-2xl font-bold mb-6 text-white">${question.promptEN || 'Question Text Missing'}</h2>`; let content = ''; if (question.type === 'mcq') { const options = ['A', 'B', 'C', 'D'] .filter(opt => question[opt] !== undefined && question[opt] !== '') .map(opt => ` <div class="flex items-center space-x-2"> <button onclick="checkAnswer('${opt}', this.parentElement)" class="flex-grow text-left p-4 border-2 border-white/30 rounded-lg hover:accent-border hover:bg-white/10 transition-all duration-200"> ${question[opt]} </button> <button onclick="speak('${(question[opt] || '').replace(/'/g, "\\'")}', 'en-US')" class="speak-button -mr-2" aria-label="Speak option"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div>`).join(''); content = `${prompt}<div class="space-y-3">${options}</div>`; } else if (question.type === 'fill_blank') { content = `${prompt}<input id="fill-blank-input" type="text" class="w-full p-4 border-2 border-white/30 rounded-lg bg-transparent focus:outline-none focus:ring-2 accent-ring text-white" placeholder="Type your answer..."><button onclick="checkFillBlank()" class="mt-4 w-full accent-bg text-white font-bold py-3 rounded-lg">Check Answer</button>`; } else { content = `${prompt}<p class="text-red-400">Error: Unknown question type "${question.type}"</p>`; } if(questionContainer) { questionContainer.innerHTML = `<div class="fade-in">${content}</div><div id="feedback" class="mt-4"></div>`; if (textContrast === 'high') document.body.setAttribute('data-contrast', 'high'); } else { console.error("Question container not found!"); }
         }
         
         // Check answer for MCQ
@@ -744,7 +775,7 @@
 
         // Display feedback after an answer
         function displayFeedback(isCorrect) { 
-             const feedbackEl = document.getElementById('feedback'); if (!feedbackEl) return; const question = currentQuestions[currentQuestionIndex]; if (!question) return; const icon = isCorrect ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 text-green-300"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 text-red-300"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`; const feedbackContent = ` <div class="fade-in p-4 rounded-lg glass-effect"> <p class="font-semibold">${icon} ${isCorrect ? 'Correct!' : 'Not quite.'}</p> <div class="flex items-center justify-between mt-2"> <p class="text-sm text-gray-300 flex-1 pr-2">${question.feedbackEN || ''}</p> <button onclick="speak('${(question.feedbackEN || '').replace(/'/g, "\\'")}', 'en-US')" class="p-1 rounded-full hover:bg-white/20 transition-colors text-gray-300 flex-shrink-0" aria-label="Speak feedback in English"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div> <div class="flex items-center justify-between mt-1"> <p class="text-sm text-gray-400 flex-1 pr-2">${question.feedbackTE || ''}</p> <button onclick="speak('${(question.feedbackTE || '').replace(/'/g, "\\'")}', 'te-IN')" class="p-1 rounded-full hover:bg-white/20 transition-colors text-gray-400 flex-shrink-0" aria-label="Speak feedback in Telugu"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div> </div>`; feedbackEl.innerHTML = feedbackContent; if (nextButton) nextButton.classList.remove('hidden');
+             const feedbackEl = document.getElementById('feedback'); if (!feedbackEl) return; const question = currentQuestions[currentQuestionIndex]; if (!question) return; const icon = isCorrect ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 text-green-300"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 text-red-300"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`; const feedbackContent = ` <div class="fade-in p-4 rounded-lg glass-effect"> <p class="font-semibold">${icon} ${isCorrect ? 'Correct!' : 'Not quite.'}</p> <div class="flex items-center justify-between mt-2"> <p class="text-sm text-gray-300 flex-1 pr-2">${question.feedbackEN || ''}</p> <button onclick="speak('${(question.feedbackEN || '').replace(/'/g, "\\'")}', 'en-US')" class="speak-button -mr-1" aria-label="Speak feedback in English"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div> <div class="flex items-center justify-between mt-1"> <p class="text-sm text-gray-400 flex-1 pr-2">${question.feedbackTE || ''}</p> <button onclick="speak('${(question.feedbackTE || '').replace(/'/g, "\\'")}', 'te-IN')" class="speak-button -mr-1" aria-label="Speak feedback in Telugu"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg> </button> </div> </div>`; feedbackEl.innerHTML = feedbackContent; if (nextButton) nextButton.classList.remove('hidden');
         }
 
         // Move to the next question or show results
@@ -799,16 +830,6 @@
              
              saveProgress();
              
-             // Show 'Next Class' button if score is >= 50% and not the last class
-             if(nextClassButton) {
-                 if (percentage >= 50 && selectedClass < CLASS_TOPICS.length) {
-                     nextClassButton.classList.remove('hidden');
-                     nextClassButton.textContent = `Move to Class ${selectedClass + 1}`;
-                 } else {
-                     nextClassButton.classList.add('hidden'); // Ensure it's hidden if condition not met
-                 }
-             }
-
              // --- Check online status for AI Feedback ---
              if (isOnline()) {
                  if (aiFeedbackSection) aiFeedbackSection.classList.remove('hidden'); // Show the AI section
@@ -848,7 +869,7 @@
             Provide concise feedback, coaching, and tips based on their score and the lesson topic. Keep each section brief (1-2 sentences). 
             Address the user directly. Provide the response in both English and Telugu. 
             Focus coaching on the general topic if there were no errors, or on the types of errors made if available.
-            Location context: Visakhapatnam, Andhra Pradesh, India. Current time: Friday, October 24, 2025 at 1:39 AM IST.`; 
+            Location context: Visakhapatnam, Andhra Pradesh, India. Current time: Friday, October 24, 2025 at 2:09 AM IST.`;
 
              const payload = {
                  contents: [{ parts: [{ text: userQuery }] }],
@@ -958,8 +979,11 @@
                 lessonTipTitle.textContent = `Lesson ${classNumber}: ${lessonData.title}`; 
                 lessonTipEN.textContent = lessonData.tipEN; 
                 lessonTipTE.textContent = lessonData.tipTE; 
-                speakENTipButton.onclick = () => speak(lessonData.tipEN, 'en-US'); 
-                speakTETipButton.onclick = () => speak(lessonData.tipTE, 'te-IN'); 
+                
+                // Stop propagation to prevent modal from opening when clicking speak buttons
+                speakENTipButton.onclick = (e) => { e.stopPropagation(); speak(lessonData.tipEN, 'en-US'); }; 
+                speakTETipButton.onclick = (e) => { e.stopPropagation(); speak(lessonData.tipTE, 'te-IN'); }; 
+                
                 lessonTipsContainer.classList.remove('hidden'); 
                 lessonTipsContainer.classList.add('fade-in'); 
             } else if (lessonTipsContainer) { 
@@ -1055,6 +1079,65 @@
         function closeCurriculumModal() { 
              const modal = document.getElementById('curriculum-modal'); if(modal) modal.classList.add('hidden'); 
          }
+         
+        // ***** NEW: Lesson Details Modal Functions *****
+        function openLessonDetailsModal() {
+            if (!isLessonDataLoaded) {
+                console.error("Lesson data is not loaded yet.");
+                return;
+            }
+            const lesson = LESSON_DATA.find(l => l.class === selectedClass);
+            if (!lesson) {
+                console.error(`No lesson data found for class ${selectedClass}`);
+                return;
+            }
+            
+            // Stop any speaking tips
+            if (synth) synth.cancel();
+
+            if (lessonDetailsTitle) lessonDetailsTitle.textContent = `Class ${lesson.class}: ${lesson.title}`;
+            if (lessonDetailsContent) {
+                // Function to create a clean, speakable string
+                const cleanText = (text) => (text || '').replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, " ");
+
+                // Helper to create a content block
+                const createSection = (title, enText, teText) => {
+                    const enClean = cleanText(enText);
+                    const teClean = cleanText(teText);
+                    return `
+                        <h4 class="font-bold text-lg mb-2 text-white">${title}</h4>
+                        <div class="p-3 rounded-lg button-bg-color mb-2">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm text-gray-200 flex-1 pr-2">${enText || 'N/A'}</p>
+                                <button onclick="speak('${enClean}', 'en-US')" class="speak-button" aria-label="Speak ${title} in English">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-lg button-bg-color mb-4">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm text-gray-300 flex-1 pr-2">${teText || 'N/A'}</p>
+                                <button onclick="speak('${teClean}', 'te-IN')" class="speak-button" aria-label="Speak ${title} in Telugu">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                };
+
+                lessonDetailsContent.innerHTML = 
+                    createSection('Key Topics', lesson.keyTopicsEN, lesson.keyTopicsTE) +
+                    createSection('Instructions', lesson.instructionsEN, lesson.instructionsTE) +
+                    createSection('Uses', lesson.usesEN, lesson.usesTE);
+            }
+            
+            if (lessonDetailsModal) lessonDetailsModal.classList.remove('hidden');
+        }
+
+        function closeLessonDetailsModal() {
+            if (lessonDetailsModal) lessonDetailsModal.classList.add('hidden');
+            if (synth) synth.cancel(); // Stop speech when closing modal
+        }
         
         // Open the generic selection modal
         window.openSelectionModal = function(type) { 
@@ -1124,30 +1207,6 @@
             } 
             return value;
         }
-
-        // Move to the next class
-        function moveToNextClass() {
-            if (selectedClass < CLASS_TOPICS.length) {
-                selectedClass++; // Increment the class
-                setLocalStorageSetting('selectedClass', selectedClass); // Save it
-                updateClassSelectionButton(); // Update the UI element for the start screen
-                updateLessonTip(selectedClass); // Update the tip for the new class
-                
-                // Now, go back to the start screen (similar to restart)
-                if(resultsScreen) resultsScreen.classList.add('hidden'); 
-                if(startScreen) startScreen.classList.remove('hidden'); 
-                
-                // Reset AI feedback section
-                if(aiFeedbackSection) aiFeedbackSection.classList.add('hidden');
-                if(aiLoadingIndicator) aiLoadingIndicator.classList.add('hidden'); 
-                if(aiOfflineMessage) aiOfflineMessage.classList.add('hidden');    
-                if(aiContent) aiContent.classList.add('hidden');
-                if(aiError) aiError.classList.add('hidden');
-                
-                // Ensure the 'next class' button is hidden for the next run
-                if(nextClassButton) nextClassButton.classList.add('hidden');
-            }
-        }
         
         // --- UI Update Functions ---
         
@@ -1202,38 +1261,47 @@
         window.onload = async () => {
             // Assign DOM Elements
             startScreen = document.getElementById('start-screen'); quizScreen = document.getElementById('quiz-screen'); resultsScreen = document.getElementById('results-screen'); questionContainer = document.getElementById('question-container'); startButton = document.getElementById('start-quiz-button'); nextButton = document.getElementById('next-question-button'); restartButton = document.getElementById('restart-quiz-button'); curriculumButton = document.getElementById('curriculum-button'); 
-            nextClassButton = document.getElementById('next-class-button');
-            lessonTipsContainer = document.getElementById('lesson-tips-container'); lessonTipTitle = document.getElementById('lesson-tip-title'); lessonTipEN = document.getElementById('lesson-tip-en'); lessonTipTE = document.getElementById('lesson-tip-te'); speakENTipButton = document.getElementById('speak-en-tip'); speakTETipButton = document.getElementById('speak-te-tip'); stats = document.getElementById('stats'); scoreEl = document.getElementById('score'); progressBar = document.getElementById('progress-bar'); 
+            lessonTipsContainer = document.getElementById('lesson-tips-container'); lessonTipTitle = document.getElementById('lesson-tip-title'); lessonTipEN = document.getElementById('lesson-tip-en'); lessonTipTE = document.getElementById('lesson-tip-te'); speakENTipButton = document.getElementById('speak-en-tip'); speakTETipButton = document.getElementById('speak-te-tip'); 
+            stats = document.getElementById('stats'); scoreEl = document.getElementById('score'); progressBar = document.getElementById('progress-bar'); 
             finalScoreEl = document.getElementById('final-score');
             finalScoreTeEl = document.getElementById('final-score-te');
             speakResultEnBtn = document.getElementById('speak-result-en');
             speakResultTeBtn = document.getElementById('speak-result-te');
             resultsDetails = document.getElementById('results-details'); 
-            selectionModal = document.getElementById('selection-modal'); modalTitle = document.getElementById('modal-title'); modalOptions = document.getElementById('modal-options'); settingsModal = document.getElementById('settings-modal'); themeToggle = document.getElementById('theme-toggle'); themeIconLight = document.getElementById('theme-icon-light'); themeIconDark = document.getElementById('theme-icon-dark'); startMessage = document.getElementById('start-message'); classSelectionButton = document.getElementById('class-selection-button'); lengthSelectionButton = document.getElementById('length-selection-button'); currentClassSelection = document.getElementById('current-class-selection'); currentQuizLength = document.getElementById('current-quiz-length'); closeSelectionModalBtn = document.getElementById('close-selection-modal'); closeSettingsModalBtn = document.getElementById('close-settings-modal'); closeCurriculumModalBtn = document.getElementById('close-curriculum-modal'); bodyFontBtn = document.getElementById('body-font-button'); titleFontBtn = document.getElementById('title-font-button'); colorBtn = document.getElementById('color-button'); currentBodyFont = document.getElementById('current-body-font'); currentTitleFont = document.getElementById('current-title-font'); currentAccentColor = document.getElementById('current-accent-color'); contrastDefaultBtn = document.getElementById('contrast-default'); contrastHighBtn = document.getElementById('contrast-high'); toggleAudioCheckbox = document.getElementById('toggle-audio'); toggleHapticsCheckbox = document.getElementById('toggle-haptics'); colorPreview = document.getElementById('color-preview');
+            selectionModal = document.getElementById('selection-modal'); modalTitle = document.getElementById('modal-title'); modalOptions = document.getElementById('modal-options'); 
+            settingsModal = document.getElementById('settings-modal'); 
+            themeToggle = document.getElementById('theme-toggle'); themeIconLight = document.getElementById('theme-icon-light'); themeIconDark = document.getElementById('theme-icon-dark'); 
+            startMessage = document.getElementById('start-message'); 
+            classSelectionButton = document.getElementById('class-selection-button'); lengthSelectionButton = document.getElementById('length-selection-button'); 
+            currentClassSelection = document.getElementById('current-class-selection'); currentQuizLength = document.getElementById('current-quiz-length'); 
+            closeSelectionModalBtn = document.getElementById('close-selection-modal'); closeSettingsModalBtn = document.getElementById('close-settings-modal'); closeCurriculumModalBtn = document.getElementById('close-curriculum-modal'); 
+            bodyFontBtn = document.getElementById('body-font-button'); titleFontBtn = document.getElementById('title-font-button'); colorBtn = document.getElementById('color-button'); 
+            currentBodyFont = document.getElementById('current-body-font'); currentTitleFont = document.getElementById('current-title-font'); currentAccentColor = document.getElementById('current-accent-color'); 
+            contrastDefaultBtn = document.getElementById('contrast-default'); contrastHighBtn = document.getElementById('contrast-high'); 
+            toggleAudioCheckbox = document.getElementById('toggle-audio'); toggleHapticsCheckbox = document.getElementById('toggle-haptics'); 
+            colorPreview = document.getElementById('color-preview');
             // AI Elements
             aiFeedbackSection = document.getElementById('ai-feedback-section'); aiLoadingIndicator = document.getElementById('ai-loading-indicator'); aiContent = document.getElementById('ai-content'); aiError = document.getElementById('ai-error'); feedbackEnEl = document.getElementById('feedback-en'); feedbackTeEl = document.getElementById('feedback-te'); coachingEnEl = document.getElementById('coaching-en'); coachingTeEl = document.getElementById('coaching-te'); tipsEnEl = document.getElementById('tips-en'); tipsTeEl = document.getElementById('tips-te');
             // Offline Message Element
             aiOfflineMessage = document.getElementById('ai-offline-message');
+            // ***** NEW: Assign Lesson Details Modal Elements *****
+            lessonDetailsModal = document.getElementById('lesson-details-modal');
+            closeLessonDetailsModalBtn = document.getElementById('close-lesson-details-modal');
+            lessonDetailsTitle = document.getElementById('lesson-details-title');
+            lessonDetailsContent = document.getElementById('lesson-details-content');
             
             // Add Event Listeners
             if(startButton) startButton.addEventListener('click', startQuiz); 
             if(nextButton) nextButton.addEventListener('click', handleNextQuestion); 
-            if(nextClassButton) nextClassButton.addEventListener('click', moveToNextClass);
-            
             if(restartButton) restartButton.addEventListener('click', () => { 
                 if(resultsScreen) resultsScreen.classList.add('hidden'); 
                 if(startScreen) startScreen.classList.remove('hidden'); 
-                
                 // Reset AI feedback section
                 if(aiFeedbackSection) aiFeedbackSection.classList.add('hidden'); // Hide entire AI section
                 if(aiLoadingIndicator) aiLoadingIndicator.classList.add('hidden'); 
                 if(aiOfflineMessage) aiOfflineMessage.classList.add('hidden');    
                 if(aiContent) aiContent.classList.add('hidden');
                 if(aiError) aiError.classList.add('hidden');
-                
-                // Also hide the next class button
-                if(nextClassButton) nextClassButton.classList.add('hidden');
-                
                 updateLessonTip(selectedClass); 
             }); 
             if(themeToggle) themeToggle.addEventListener('click', () => { 
@@ -1250,7 +1318,10 @@
             if(bodyFontBtn) bodyFontBtn.addEventListener('click', () => openSelectionModal('bodyFont')); 
             if(titleFontBtn) titleFontBtn.addEventListener('click', () => openSelectionModal('titleFont')); 
             if(colorBtn) colorBtn.addEventListener('click', () => openSelectionModal('color')); 
-            // Speak buttons for tips already handled in updateLessonTip
+            
+            // ***** NEW: Lesson Details Modal Listeners *****
+            if(lessonTipsContainer) lessonTipsContainer.addEventListener('click', openLessonDetailsModal);
+            if(closeLessonDetailsModalBtn) closeLessonDetailsModalBtn.addEventListener('click', closeLessonDetailsModal);
 
             // Run Setup
             setupAudio();

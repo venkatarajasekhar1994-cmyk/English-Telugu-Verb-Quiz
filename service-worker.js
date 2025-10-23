@@ -4,21 +4,20 @@
 // --- THE MOST IMPORTANT PART ---\
 // -------------------------------------------------------------------------\
 // This cache version number is the "magic key" to updating your app.
-// Your old file said 'v26'. I have changed it to 'v34'.
+// Your old file said 'v26'. I have changed it to 'v35'.
 //
 // **YOUR GOLDEN RULE:**
 // Every time you change ANY file (like spoken english.html or data.csv)
 // and upload it, you MUST come into this file and
-// increment this version number (e.g., to 'v35', then 'v36', etc.).
+// increment this version number (e.g., to 'v36', then 'v37', etc.).
 //
 // This tells the browser your app has an update, forcing it
 // to delete the old cache and download all the new files.
 // If you don't change this, the browser will *always* use the old files.
 // -------------------------------------------------------------------------\
-const CACHE_NAME = 'my-pwa-cache-v34'; // <-- I updated this from v26 to v34!
+const CACHE_NAME = 'my-pwa-cache-v35'; // <-- I updated this from v26 to v35!
 
 // This is the list of all the files that will be saved for offline use.
-// This list looks correct and matches all the files you provided.
 const urlsToCache = [
   './', // Caches the root directory, which serves index.html
   'index.html',
@@ -64,12 +63,12 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   console.log('[Service Worker] Activate event starting.');
   event.waitUntil(
-    // Get all the existing cache "keys" (which are the cache names, like 'v25', 'v26')\
+    // Get all the existing cache "keys" (which are the cache names, like 'v34', 'v35')\
     caches.keys().then(cacheNames => {
       // We use Promise.all to wait for all deletion promises to complete.\
       return Promise.all(
         cacheNames.map(cacheName => {
-          // If the cache name is old (e.g., 'v33' after 'v34' is activated), delete it.\
+          // If the cache name is old (e.g., 'v34' after 'v35' is activated), delete it.\
           if (cacheName !== CACHE_NAME) {
             console.log('[Service Worker] Deleting old cache:', cacheName);
             return caches.delete(cacheName);
