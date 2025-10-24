@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -494,6 +494,116 @@
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
+    </style>
+
+    <!-- === NEW ICON STYLES === -->
+    <style>
+        /* --- Icon Base Styling --- */
+        /* Utility class to apply primary theme color */
+        .icon-primary {
+            color: var(--color-primary-hex) !important;
+        }
+        
+        /* --- Icon Animations --- */
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        @keyframes wiggle-icon {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        @keyframes bounce-icon {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-4px) rotate(3deg); }
+        }
+
+        /* --- 1. Game Hub (Home) Icon --- */
+        /* Apply primary color */
+        #game-container a[href="game hub.html"] svg {
+            color: var(--color-primary-hex) !important;
+            transition: transform 0.3s ease;
+        }
+        /* Add hover animation */
+        #game-container a[href="game hub.html"]:hover svg {
+            animation: bounce-icon 0.6s ease-in-out;
+        }
+
+        /* --- 2. Hamburger Menu Icon --- */
+        /* Apply primary color */
+        #hamburger-button svg {
+            color: var(--color-primary-hex) !important;
+            transition: transform 0.3s ease;
+        }
+        /* Add hover animation */
+        #hamburger-button:hover svg {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        /* --- 3. Dropdown Arrow Icon (Chevrons) --- */
+        /* Color the dropdown arrows */
+        .frosted-option svg {
+            color: var(--color-primary-hex);
+            transition: transform 0.3s ease;
+        }
+        /* Animate on button hover */
+        .frosted-option:hover svg {
+            transform: scale(1.2);
+        }
+
+        /* --- 4. Close (X) Icon --- */
+        /* Color it red for "close" action */
+        #hamburger-menu button[onclick*="toggleHamburgerMenu"] svg,
+        #selection-modal button[onclick*="closeSelectionModal"] svg {
+            color: #ef4444; /* Red-500 */
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        /* Add hover animation */
+        #hamburger-menu button[onclick*="toggleHamburgerMenu"]:hover svg,
+        #selection-modal button[onclick*="closeSelectionModal"]:hover svg {
+            transform: scale(1.2) rotate(90deg);
+            color: #b91c1c; /* Red-700 */
+        }
+        .dark-mode #hamburger-menu button[onclick*="toggleHamburgerMenu"] svg,
+        .dark-mode #selection-modal button[onclick*="closeSelectionModal"] svg {
+            color: #f87171; /* Red-400 */
+        }
+        .dark-mode #hamburger-menu button[onclick*="toggleHamburgerMenu"]:hover svg,
+        .dark-mode #selection-modal button[onclick*="closeSelectionModal"]:hover svg {
+            color: #ef4444; /* Red-500 */
+        }
+
+        /* --- 5. Theme Toggle Icons (Sun, Moon, System) --- */
+        /* These are colored by JS, animated here */
+        #menu-theme-toggle:hover #menu-theme-icon[class*="text-yellow-500"] {
+             transform: rotate(90deg) scale(1.1); /* Sun */
+        }
+        #menu-theme-toggle:hover #menu-theme-icon[class*="text-purple-400"] {
+             transform: scale(1.15); /* Moon */
+        }
+         #menu-theme-toggle:hover #menu-theme-icon[class*="icon-primary"] {
+             transform: scale(1.1); /* System */
+        }
+        
+        /* --- 6. Manage Data Icon (Database) --- */
+        /* Icon is already white on primary, just add hover animation */
+        button[onclick*="openDataManagementFromMenu"] svg {
+            transition: transform 0.3s ease;
+        }
+        button[onclick*="openDataManagementFromMenu"]:hover svg {
+            animation: pulse-icon 1.2s infinite ease-in-out;
+        }
+
+        /* --- 7. App Settings Icon (Sliders) --- */
+        /* Apply primary color and animation */
+        button[onclick*="openSettings"] svg {
+            color: var(--color-primary-hex);
+            transition: transform 0.3s ease;
+        }
+        button[onclick*="openSettings"]:hover svg {
+            animation: wiggle-icon 0.5s ease-in-out;
+        }
+        
     </style>
 </head>
 <body class="min-h-screen p-4 flex flex-col items-center">
@@ -1338,22 +1448,28 @@
             }
         }
 
-        // Hamburger menu UI (reads game-specific storage)
+        // --- MODIFIED: Hamburger menu UI (reads game-specific storage and adds color) ---
         function updateHamburgerMenuUI() {
             const savedTheme = getLocalStorageSetting('theme', 'system');
             const iconContainer = document.getElementById('menu-theme-icon');
             const textContainer = document.getElementById('menu-theme-text');
+            
+            // Base classes for the icon
+            iconContainer.className = "w-6 h-6 transition-transform duration-300"; // Keep base classes
 
             if (savedTheme === 'system') {
                 // System Icon (AdjustmentsVertical)
+                iconContainer.classList.add('icon-primary'); // Use primary theme color
                 iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 12h16.5m-16.5 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3zm9-6h3.75m-3.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 18h16.5m-16.5 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3z" />`;
                 textContainer.textContent = "Theme: System";
             } else if (savedTheme === 'light') {
                 // Sun Icon
+                iconContainer.classList.add('text-yellow-500'); // Bright yellow for sun
                 iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`;
                 textContainer.textContent = "Theme: Light";
             } else { // 'dark'
                 // Moon Icon
+                iconContainer.classList.add('text-purple-400'); // Cool purple for moon
                 iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.593.748-3.752A9.753 9.753 0 009 12.75a9.75 9.75 0 0011.002 9.75z" />`;
                 textContainer.textContent = "Theme: Dark";
             }
