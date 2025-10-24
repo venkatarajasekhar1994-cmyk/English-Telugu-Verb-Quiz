@@ -8,13 +8,13 @@
 // (e.g., you update 'spoken english.html' or 'Verbs.csv'),
 // you MUST come into this file and change this version number.
 //
-// For example, change 'v39' to 'v40', then 'v41', and so on.
+// For example, change 'v40' to 'v41', then 'v42', and so on.
 //
 // This is the *only* way to tell the browser to delete the old
 // cached files and download your new ones.
 //
 // -------------------------------------------------------------------------\
-const CACHE_NAME = 'my-pwa-cache-v39'; // I've updated this from your previous version
+const CACHE_NAME = 'my-pwa-cache-v40'; // <-- I've updated this from v39 to v40!
 
 // This list includes all the files needed for your app to work offline.
 // It correctly includes all HTML pages and their required CSV data files.
@@ -98,7 +98,7 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       // 1. Try to fetch from the network first.
       // We use 'no-store' to bypass the browser's HTTP cache,
-      // forcing a request to the server for the *absolute latest* file.
+      // forcing a request to the *absolute latest* file from the server.
       fetch(event.request, { cache: 'no-store' })
         .then(networkResponse => {
           // 2. If the network request succeeds (user is online):

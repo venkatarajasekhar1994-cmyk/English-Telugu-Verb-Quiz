@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,7 +27,7 @@
     
     <style>
         /* Import all available fonts for customization */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght==400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght==400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
         
         /* --- CSS Variables for Theme Management --- */
         
@@ -45,7 +45,7 @@
         
         /* Default: Indigo */
         :root,
-        body[data-color="indigo"] {
+        body[data-color="Indigo"] { /* UPDATED: Match hub key 'Indigo' */
             --color-primary: 79, 70, 229; /* Indigo 600 RGB */
             --color-primary-hex: #4f46e5;
             --color-primary-light: 165, 180, 252; /* Indigo 300 RGB */
@@ -58,95 +58,122 @@
         }
 
         /* Teal Theme */
-        body[data-color="teal"] {
+        body[data-color="Teal"] { /* UPDATED: Match hub key 'Teal' */
             --color-primary: 20, 184, 166; /* Teal 600 RGB */
             --color-primary-hex: #14b8a6;
             --color-primary-light: 94, 234, 212; /* Teal 300 RGB */
             --color-bg-light-start: #2dd4bf;
             --color-bg-light-mid: #5eead4;
             --color-bg-light-end: #0d9488;
+            --color-bg-dark-start: #134e4a;
+            --color-bg-dark-mid: #115e59;
+            --color-bg-dark-end: #0f766e;
         }
 
         /* Rose Theme */
-        body[data-color="rose"] {
+        body[data-color="Rose"] { /* UPDATED: Match hub key 'Rose' */
             --color-primary: 225, 29, 72; /* Rose 600 RGB */
             --color-primary-hex: #e11d48;
             --color-primary-light: 251, 207, 232; /* Rose 300 RGB */
             --color-bg-light-start: #fda4af;
             --color-bg-light-mid: #f43f5e;
             --color-bg-light-end: #e11d48;
+            --color-bg-dark-start: #500724;
+            --color-bg-dark-mid: #881337;
+            --color-bg-dark-end: #9f1239;
         }
 
-        /* Amber Theme (New) */
-        body[data-color="amber"] {
+        /* Amber Theme */
+        body[data-color="Amber"] { /* UPDATED: Match hub key 'Amber' */
             --color-primary: 245, 158, 11; /* Amber 600 RGB */
             --color-primary-hex: #f59e0b;
             --color-primary-light: 253, 230, 138; /* Amber 300 RGB */
             --color-bg-light-start: #fcd34d;
             --color-bg-light-mid: #f59e0b;
             --color-bg-light-end: #fbbf24;
+            --color-bg-dark-start: #78350f;
+            --color-bg-dark-mid: #92400e;
+            --color-bg-dark-end: #b45309;
         }
         
-        /* Emerald Theme (New) */
-        body[data-color="emerald"] {
+        /* Emerald Theme */
+        body[data-color="Emerald"] { /* UPDATED: Match hub key 'Emerald' */
             --color-primary: 5, 150, 105; /* Emerald 600 RGB */
             --color-primary-hex: #059669;
             --color-primary-light: 110, 231, 183; /* Emerald 300 RGB */
             --color-bg-light-start: #34d399;
             --color-bg-light-mid: #10b981;
             --color-bg-light-end: #059669;
+            --color-bg-dark-start: #064e3b;
+            --color-bg-dark-mid: #065f46;
+            --color-bg-dark-end: #047857;
         }
         
-        /* Cyan Theme (New) */
-        body[data-color="cyan"] {
+        /* Cyan Theme */
+        body[data-color="Cyan"] { /* UPDATED: Match hub key 'Cyan' */
             --color-primary: 8, 145, 178; /* Cyan 600 RGB */
             --color-primary-hex: #0891b2;
-            --color-primary-light: 103, 232, 249; /* Cyan 300 RGB */
+            --color-primary-light: 165, 243, 252; /* Cyan 200 RGB */
             --color-bg-light-start: #22d3ee;
             --color-bg-light-mid: #06b6d4;
             --color-bg-light-end: #0891b2;
+            --color-bg-dark-start: #164e63;
+            --color-bg-dark-mid: #155e75;
+            --color-bg-dark-end: #0e7490;
         }
 
-        /* Pink Theme (New) */
-        body[data-color="pink"] {
+        /* Pink Theme */
+        body[data-color="Pink"] { /* UPDATED: Match hub key 'Pink' */
             --color-primary: 219, 39, 119; /* Pink 600 RGB */
             --color-primary-hex: #db2777;
-            --color-primary-light: 249, 168, 212; /* Pink 300 RGB */
-            --color-bg-light-start: #fbcfe8;
+            --color-primary-light: 251, 207, 232; /* Pink 200 RGB */
+            --color-bg-light-start: #f9a8d4;
             --color-bg-light-mid: #f472b6;
             --color-bg-light-end: #ec4899;
+            --color-bg-dark-start: #500724;
+            --color-bg-dark-mid: #831843;
+            --color-bg-dark-end: #9d174d;
         }
 
-        /* Orange Theme (New) */
-        body[data-color="orange"] {
+        /* Orange Theme */
+        body[data-color="Orange"] { /* UPDATED: Match hub key 'Orange' */
             --color-primary: 234, 88, 12; /* Orange 600 RGB */
             --color-primary-hex: #ea580c;
-            --color-primary-light: 253, 186, 116; /* Orange 300 RGB */
+            --color-primary-light: 254, 215, 170; /* Orange 200 RGB */
             --color-bg-light-start: #fbbf24;
             --color-bg-light-mid: #f97316;
             --color-bg-light-end: #ea580c;
+            --color-bg-dark-start: #7c2d12;
+            --color-bg-dark-mid: #9a3412;
+            --color-bg-dark-end: #c2410c;
         }
 
-        /* Purple Theme (New) */
-        body[data-color="purple"] {
+        /* Purple Theme */
+        body[data-color="Purple"] { /* UPDATED: Match hub key 'Purple' */
             --color-primary: 147, 51, 234; /* Purple 600 RGB */
             --color-primary-hex: #9333ea;
-            --color-primary-light: 209, 196, 247; /* Purple 300 RGB */
+            --color-primary-light: 221, 214, 254; /* Purple 200 RGB */
             --color-bg-light-start: #c084fc;
             --color-bg-light-mid: #a855f7;
             --color-bg-light-end: #9333ea;
+            --color-bg-dark-start: #3b0764;
+            --color-bg-dark-mid: #581c87;
+            --color-bg-dark-end: #6b21a8;
         }
         
-        /* Sky Theme (New) */
-        body[data-color="sky"] {
+        /* Sky Theme */
+        body[data-color="Sky"] { /* UPDATED: Match hub key 'Sky' */
             --color-primary: 2, 132, 199; /* Sky 600 RGB */
             --color-primary-hex: #0284c7;
-            --color-primary-light: 125, 211, 252; /* Sky 300 RGB */
+            --color-primary-light: 186, 230, 253; /* Sky 200 RGB */
             --color-bg-light-start: #38bdf8;
             --color-bg-light-mid: #0ea5e9;
             --color-bg-light-end: #0284c7;
+            --color-bg-dark-start: #0c4a6e;
+            --color-bg-dark-mid: #075985;
+            --color-bg-dark-end: #0369a1;
         }
-
+        
         /* --- Base Styles --- */
         body {
             font-family: var(--font-body);
@@ -154,6 +181,7 @@
             padding: 1rem;
             color: var(--text-color-light); 
             background: linear-gradient(135deg, var(--color-bg-light-start), var(--color-bg-light-mid), var(--color-bg-light-end));
+            transition: background 0.5s ease, color 0.3s ease;
         }
         
         .elegant-title {
@@ -173,7 +201,7 @@
             transition: all 0.3s ease;
         }
         
-        /* Frosted Glass Effect for Settings Options (New Class) */
+        /* Frosted Glass Effect for Settings Options */
         .frosted-option {
             background: rgba(255, 255, 255, 0.5); /* Lighter background for better contrast */
             backdrop-filter: blur(10px);
@@ -188,8 +216,7 @@
             transform: scale(0.98); 
         }
         
-        /* Custom selector list items (NEW) */
-        /* Used for floating selection modals */
+        /* Custom selector list items */
         .selector-item {
             cursor: pointer;
             padding: 0.75rem 1rem;
@@ -210,7 +237,7 @@
             transform: scale(0.98); 
         }
         
-        /* Custom radio circle (NEW) */
+        /* Custom radio circle */
         .radio-circle {
             width: 1.25rem;
             height: 1.25rem;
@@ -244,7 +271,7 @@
             border-color: rgba(var(--color-primary), 0.5);
         }
         
-        input[type="text"], textarea {
+        input[type="text"], input[type="number"], textarea {
             font-family: var(--font-body);
             background-color: rgba(255, 255, 255, 0.5) !important;
             border: 1px solid rgba(156, 163, 175, 0.3);
@@ -254,6 +281,31 @@
             border-radius: var(--input-border-radius); 
             box-shadow: var(--input-shadow);
         }
+        
+        /* Multiple choice buttons */
+        .mc-option {
+            transition: all 0.2s ease;
+            border: 2px solid #e5e7eb;
+            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+        }
+        .mc-option:hover:not(.selected):not(.correct):not(.incorrect) {
+            border-color: rgba(var(--color-primary), 0.5);
+            background-color: rgba(var(--color-primary-light), 0.2);
+        }
+        /* UPDATED: Neutral selection color */
+        .mc-option.selected {
+            border-color: var(--color-primary-hex) !important;
+            background-color: rgba(var(--color-primary-light), 0.4);
+            box-shadow: 0 4px 6px rgba(var(--color-primary), 0.2);
+        }
+        /* Lock styling after checking */
+        .mc-option.locked {
+            pointer-events: none;
+            cursor: default;
+        }
+
 
         .text-primary { color: var(--color-primary-hex); }
         .border-primary { border-color: var(--color-primary-hex); }
@@ -263,14 +315,14 @@
 
         /* --- Feedback styling --- */
         .correct {
-            border: 2px solid rgba(16, 185, 129, 0.5) !important;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.1)) !important;
+            border: 2px solid rgba(16, 185, 129, 0.7) !important;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(16, 185, 129, 0.1)) !important;
             backdrop-filter: blur(5px);
             box-shadow: 0 0 10px rgba(16, 185, 129, 0.5) !important;
         }
         .incorrect {
-            border: 2px solid rgba(239, 68, 68, 0.5) !important;
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(239, 68, 68, 0.1)) !important;
+            border: 2px solid rgba(239, 68, 68, 0.7) !important;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.35), rgba(239, 68, 68, 0.1)) !important;
             backdrop-filter: blur(5px);
             box-shadow: 0 0 10px rgba(239, 68, 68, 0.5) !important;
         }
@@ -312,20 +364,18 @@
             opacity: 1;
             transition: 0s;
         }
-        
-        /* Icon Hover Animations */
-        .icon-btn svg {
-            transition: transform 0.2s ease-in-out;
-        }
-        .icon-btn:hover svg {
-            transform: scale(1.15) rotate(5deg);
-        }
 
 
         /* --- Dark Mode Styles --- */
         .dark-mode {
             background: linear-gradient(135deg, var(--color-bg-dark-start), var(--color-bg-dark-mid), var(--color-bg-dark-end)); 
             color: var(--text-color-dark);
+        }
+        
+        .dark-mode[data-text-hue="themed"] .text-gray-700,
+        .dark-mode[data-text-hue="themed"] .text-gray-800,
+        .dark-mode[data-text-hue="themed"] .text-gray-600 { 
+            color: var(--color-primary-light); /* Use light primary color for text tint */
         }
         
         .dark-mode .liquid-glass-card {
@@ -360,7 +410,7 @@
         .dark-mode h1,
         .dark-mode .elegant-title { color: #ffffff; }
 
-        .dark-mode input[type="text"], .dark-mode textarea {
+        .dark-mode input[type="text"], .dark-mode input[type="number"], .dark-mode textarea {
             background-color: rgba(31, 41, 55, 0.6) !important;
             color: var(--text-color-dark) !important; 
             border-color: rgba(107, 114, 128, 0.4);
@@ -386,15 +436,53 @@
             background: linear-gradient(135deg, rgba(248, 113, 113, 0.25), rgba(248, 113, 113, 0.1)) !important;
             box-shadow: 0 0 10px rgba(248, 113, 113, 0.6) !important;
         }
+        
+        .dark-mode .mc-option {
+            background-color: rgba(31, 41, 55, 0.7);
+            border: 2px solid #374151; /* Gray 700 */
+        }
+        .dark-mode .mc-option:hover:not(.selected):not(.correct):not(.incorrect) {
+            border-color: rgba(var(--color-primary), 0.7);
+            background-color: rgba(var(--color-primary-light), 0.2);
+        }
+        .dark-mode .mc-option.selected {
+            border-color: var(--color-primary-hex) !important;
+            background-color: rgba(var(--color-primary-light), 0.2);
+        }
 
         /* Set color variables for all text based on theme */
-        body .text-gray-700,
-        body .text-gray-800,
-        body .text-gray-600 { color: var(--text-color-light) !important; }
+        body:not(.dark-mode)[data-contrast="default"] .text-gray-700,
+        body:not(.dark-mode)[data-contrast="default"] .text-gray-800,
+        body:not(.dark-mode)[data-contrast="default"] .text-gray-600 { color: var(--text-color-light) !important; }
         
-        .dark-mode .text-gray-700,
-        .dark-mode .text-gray-800,
-        .dark-mode .text-gray-600 { color: var(--text-color-dark) !important; }
+        .dark-mode[data-contrast="default"] .text-gray-700,
+        .dark-mode[data-contrast="default"] .text-gray-800,
+        .dark-mode[data-contrast="default"] .text-gray-600 { color: var(--text-color-dark) !important; }
+
+        /* NEW: High Contrast Text Styles */
+        body:not(.dark-mode)[data-contrast="high"] .text-gray-700,
+        body:not(.dark-mode)[data-contrast="high"] .text-gray-800,
+        body:not(.dark-mode)[data-contrast="high"] .text-gray-600,
+        body:not(.dark-mode)[data-contrast="high"] {
+            color: var(--text-color-light) !important;
+        }
+        
+        .dark-mode[data-contrast="high"] .text-gray-700,
+        .dark-mode[data-contrast="high"] .text-gray-800,
+        .dark-mode[data-contrast="high"] .text-gray-600,
+        .dark-mode[data-contrast="high"] {
+            color: var(--text-color-dark) !important;
+        }
+        
+        /* Ensure input text is also high contrast */
+        body[data-contrast="high"] input,
+        body[data-contrast="high"] textarea {
+             color: var(--text-color-light) !important;
+        }
+         .dark-mode[data-contrast="high"] input,
+         .dark-mode[data-contrast="high"] textarea {
+             color: var(--text-color-dark) !important;
+        }
 
 
         /* Modal styles */
@@ -424,6 +512,103 @@
             to { opacity: 1; transform: scale(1); }
         }
     </style>
+    
+    <!-- Icon Styles (from English Vocab Game) -->
+    <style>
+        /* --- Icon Base Styling --- */
+        .icon-primary {
+            color: var(--color-primary-hex) !important;
+        }
+        
+        /* --- Icon Animations --- */
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        @keyframes wiggle-icon {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        @keyframes bounce-icon {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-4px) rotate(3deg); }
+        }
+
+        /* --- 1. Game Hub (Home) Icon --- */
+        #game-container a[href="game hub.html"] svg {
+            color: var(--color-primary-hex) !important;
+            transition: transform 0.3s ease;
+        }
+        #game-container a[href="game hub.html"]:hover svg {
+            animation: bounce-icon 0.6s ease-in-out;
+        }
+
+        /* --- 2. Hamburger Menu Icon --- */
+        #hamburger-button svg {
+            color: var(--color-primary-hex) !important;
+            transition: transform 0.3s ease;
+        }
+        #hamburger-button:hover svg {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        /* --- 3. Dropdown Arrow Icon (Chevrons) --- */
+        .frosted-option svg {
+            color: var(--color-primary-hex);
+            transition: transform 0.3s ease;
+        }
+        .frosted-option:hover svg {
+            transform: scale(1.2);
+        }
+
+        /* --- 4. Close (X) Icon --- */
+        #hamburger-menu button[onclick*="toggleHamburgerMenu"] svg,
+        #selection-modal button[onclick*="closeSelectionModal"] svg {
+            color: #ef4444; /* Red-500 */
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        #hamburger-menu button[onclick*="toggleHamburgerMenu"]:hover svg,
+        #selection-modal button[onclick*="closeSelectionModal"]:hover svg {
+            transform: scale(1.2) rotate(90deg);
+            color: #b91c1c; /* Red-700 */
+        }
+        .dark-mode #hamburger-menu button[onclick*="toggleHamburgerMenu"] svg,
+        .dark-mode #selection-modal button[onclick*="closeSelectionModal"] svg {
+            color: #f87171; /* Red-400 */
+        }
+        .dark-mode #hamburger-menu button[onclick*="toggleHamburgerMenu"]:hover svg,
+        .dark-mode #selection-modal button[onclick*="closeSelectionModal"]:hover svg {
+            color: #ef4444; /* Red-500 */
+        }
+
+        /* --- 5. Theme Toggle Icons (Sun, Moon, System) --- */
+        #menu-theme-toggle:hover #menu-theme-icon[class*="text-yellow-500"] {
+             transform: rotate(90deg) scale(1.1); /* Sun */
+        }
+        #menu-theme-toggle:hover #menu-theme-icon[class*="text-purple-400"] {
+             transform: scale(1.15); /* Moon */
+        }
+         #menu-theme-toggle:hover #menu-theme-icon[class*="icon-primary"] {
+             transform: scale(1.1); /* System */
+        }
+        
+        /* --- 6. Manage Data Icon (Database) --- */
+        button[onclick*="openDataManagementFromMenu"] svg {
+            transition: transform 0.3s ease;
+        }
+        button[onclick*="openDataManagementFromMenu"]:hover svg {
+            animation: pulse-icon 1.2s infinite ease-in-out;
+        }
+
+        /* --- 7. App Settings Icon (Sliders) --- */
+        button[onclick*="openSettings"] svg {
+            color: var(--color-primary-hex);
+            transition: transform 0.3s ease;
+        }
+        button[onclick*="openSettings"]:hover svg {
+            animation: wiggle-icon 0.5s ease-in-out;
+        }
+    </style>
 </head>
 <body class="min-h-screen p-4 flex flex-col items-center">
 
@@ -431,24 +616,25 @@
         
         <div class="flex justify-between items-center mb-6 border-b-2 pb-2 border-primary">
             
-            <div class="flex items-center space-x-3"> 
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark-mode:text-gray-50 mb-0 elegant-title">
-                    ENGLISH VERBS QUIZ (TELUGU)
+            <div class="flex items-center space-x-3">
+                 <!-- Anchor tag points to the hub -->
+                 <a href="game hub.html"
+                    class="ripple-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex"
+                    aria-label="Go to Game Hub">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" />
+                     </svg>
+                 </a>
+                 <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark-mode:text-gray-50 mb-0 elegant-title">
+                    VERB FORMS QUIZ
                 </h1>
             </div>
 
             <div class="flex space-x-2">
-                 <button id="home-button" onclick="window.location.href='game hub.html'" 
-                        class="ripple-btn icon-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex">
-                    <svg class="w-6 h-6 text-gray-800 dark-mode:text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
-                </button>
-                
                 <button id="hamburger-button" onclick="window.toggleHamburgerMenu()" 
-                        class="ripple-btn icon-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex">
-                    <svg id="hamburger-icon" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        class="ripple-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex">
+                    <svg id="hamburger-icon" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
                 </button>
             </div>
@@ -470,24 +656,39 @@
 
 
         <div id="start-screen" class="mt-8 text-center">
-            <h2 class="text-3xl font-bold text-primary mb-4 elegant-title">Welcome to the Verb Quiz!</h2>
+            <h2 class="text-3xl font-bold text-primary mb-4 elegant-title">Welcome to the Verb Forms Quiz!</h2>
             <p id="start-message" class="text-lg text-gray-700 dark-mode:text-gray-300 mb-8">
-                Load up your memory and challenge yourself to master irregular English verbs. You are currently set to practice **15 questions**.
+                Ready to test your knowledge? Set your quiz options below.
             </p>
 
-            <div class="mb-8 p-4 bg-primary/5 rounded-xl frosted-option">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Length</h3>
-                <button id="quiz-length-button" onclick="handleUiTapFeedback(); openSelectionModal('count')"
-                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
-                    <span id="current-quiz-length" class="font-semibold">15 Questions (Default)</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                    </svg>
-                </button>
+            <div class="space-y-4">
+
+                <div class="p-4 bg-primary/5 rounded-xl frosted-option">
+                    <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Length</h3>
+                    <button id="quiz-length-button" onclick="handleUiTapFeedback(); openSelectionModal('count')"
+                            class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                        <span id="current-quiz-length" class="font-semibold">15 Questions (Default)</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="p-4 bg-primary/5 rounded-xl frosted-option">
+                    <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Verb Tense</h3>
+                    <button id="tense-level-button" onclick="handleUiTapFeedback(); openSelectionModal('tense')"
+                            class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                        <span id="current-tense-level" class="font-semibold">All Tenses</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                        </svg>
+                    </button>
+                </div>
+
             </div>
             
             <button id="start-quiz-button" onclick="handleUiTapFeedback(); startQuiz()"
-                    class="ripple-btn w-full px-4 py-4 bg-green-600 text-white font-extrabold rounded-2xl shadow-xl shadow-green-500/50 hover:bg-green-700 transition duration-300 transform hover:scale-[1.01] text-xl disabled:bg-gray-400 disabled:shadow-none"
+                    class="ripple-btn w-full px-4 py-4 mt-8 bg-green-600 text-white font-extrabold rounded-2xl shadow-xl shadow-green-500/50 hover:bg-green-700 transition duration-300 transform hover:scale-[1.01] text-xl disabled:bg-gray-400 disabled:shadow-none"
                     disabled>
                 Start Quiz
             </button>
@@ -495,26 +696,36 @@
 
         </div>
         <div id="question-area" class="space-y-4 hidden">
+            <div class="prompt-box p-4 rounded-xl border-2 border-primary text-center">
+                <p id="question-text" class="text-xl text-indigo-900 font-semibold mb-1 dark-mode:text-gray-100"></p>
+                <p id="question-metadata" class="text-sm text-indigo-700 dark-mode:text-gray-300"></p>
             </div>
+            
+            <div id="options-container" class="grid grid-cols-1 gap-3">
+                <!-- Options injected by JS -->
+            </div>
+            
+            <div id="explanation-area" class="hidden p-3 mt-4 rounded-xl border-2 border-primary bg-primary/10 dark-mode:bg-primary/5">
+                <p class="font-bold text-sm mb-1 text-primary">Explanation:</p>
+                <p id="explanation-text" class="text-gray-800 dark-mode:text-gray-200 text-base"></p>
+            </div>
+        </div>
 
         <div id="quiz-action-buttons" class="mt-8 grid grid-cols-12 gap-4 hidden">
-            <button id="skip-button" onclick="handleUiTapFeedback(); processAnswer(true)"
-                    class="ripple-btn col-span-4 px-2 py-3 bg-yellow-600 text-white font-bold rounded-xl shadow-lg shadow-yellow-500/50 hover:opacity-90 transition duration-150 disabled:bg-gray-400 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-opacity-50 text-sm md:text-base"
+            <button id="main-action-button" onclick="handleUiTapFeedback(); processAction()"
+                    class="ripple-btn col-span-12 px-2 py-3 bg-primary text-white font-bold rounded-xl shadow-lg shadow-indigo-500/50 hover:opacity-90 transition duration-150 disabled:bg-gray-400 focus:outline-none focus:ring-4 focus:ring-primary-hex focus:ring-opacity-50 text-base md:text-lg"
                     disabled>
-                Skip
-            </button>
-            <button id="main-action-button" onclick="handleUiTapFeedback(); processAnswer(false)"
-                    class="ripple-btn col-span-8 px-2 py-3 bg-primary text-white font-bold rounded-xl shadow-lg shadow-indigo-500/50 hover:opacity-90 transition duration-150 disabled:bg-gray-400 focus:outline-none focus:ring-4 focus:ring-primary-hex focus:ring-opacity-50 text-base md:text-lg"
-                    disabled>
-                Check Answer
+                Select an Answer
             </button>
         </div>
         
         <div id="final-results" class="hidden mt-8 text-center p-4 bg-yellow-300/40 liquid-glass-card border-yellow-300 border-2">
-            </div>
+            <!-- Results injected by JS -->
+        </div>
 
     </div>
 
+    <!-- Hamburger Menu -->
     <div id="hamburger-menu" class="fixed top-0 right-0 h-full w-64 z-50 transform translate-x-full transition-transform duration-300 bg-white dark-mode:bg-gray-800 shadow-2xl p-6">
         <div class="flex justify-end">
             <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700">
@@ -526,17 +737,20 @@
 
         <h3 class="text-xl font-bold mb-6 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">Menu</h3>
 
+        <!-- Theme Toggle Button -->
         <button id="menu-theme-toggle" onclick="handleUiTapFeedback(); toggleTheme()" 
                 class="ripple-btn w-full flex items-center justify-between p-3 mb-4 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150">
             <span id="menu-theme-text" class="font-semibold"></span>
             <svg id="menu-theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                </svg>
+                <!-- Icon injected by JS -->
+            </svg>
         </button>
         
         <div class="mb-4 p-3 bg-gray-100 dark-mode:bg-gray-700 rounded-xl text-xs text-gray-600 dark-mode:text-gray-400 overflow-x-auto break-all">
             <span class="font-bold">Status:</span> <span id="user-id-display">Local Data Storage</span>
         </div>
 
+        <!-- Manage Data Button -->
         <button onclick="handleUiTapFeedback(); openDataManagementFromMenu()"
                 class="ripple-btn w-full flex items-center p-3 mb-4 rounded-xl text-white font-bold bg-primary hover:opacity-90 transition duration-150 shadow-md shadow-indigo-500/50">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-2">
@@ -545,74 +759,79 @@
             Manage Verb Data
         </button>
 
+        <!-- App Settings Button -->
         <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu(); openSettings();"
-                class="ripple-btn icon-btn w-full flex items-center p-3 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150 shadow-md shadow-gray-500/10">
+                class="ripple-btn w-full flex items-center p-3 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150 shadow-md shadow-gray-500/10">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 12h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3zm9-6h3.75m-3.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 18h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0" />
             </svg>
-            Quiz Settings
+            App Settings
         </button>
     </div>
     
+    <!-- Hamburger Menu Overlay -->
     <div id="hamburger-overlay" class="hidden fixed inset-0 z-40 bg-black opacity-50" onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()"></div>
 
-
+    <!-- App Settings Modal -->
     <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
         <div class="modal-content liquid-glass-card w-full max-w-sm p-6 overflow-y-auto max-h-[90vh]">
             <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">App Settings</h2>
 
             <div class="bg-blue-100 dark-mode:bg-blue-900/40 border border-blue-400 text-blue-800 dark-mode:text-blue-200 text-sm p-3 rounded-xl mb-4">
-                <p class="font-semibold">All settings are saved automatically to this device only.</p>
+                <p class="font-semibold">Shared settings (Theme, Color, Font, Contrast) are synced across all games. Game-specific settings are saved for this game only.</p>
             </div>
 
+            <!-- Color Accent -->
             <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3">Color Accent</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3">Color Accent (Shared)</h3>
                 <div class="grid grid-cols-5 gap-2">
-                    <button onclick="setThemeColor('cyan')" data-color-id="cyan"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-cyan-600 hover:opacity-90 text-sm">
-                        Cyan
-                    </button>
-                    <button onclick="setThemeColor('pink')" data-color-id="pink"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-pink-600 hover:opacity-90 text-sm">
-                        Pink
-                    </button>
-                    <button onclick="setThemeColor('orange')" data-color-id="orange"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-orange-600 hover:opacity-90 text-sm">
-                        Orange
-                    </button>
-                    <button onclick="setThemeColor('purple')" data-color-id="purple"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-purple-600 hover:opacity-90 text-sm">
-                        Purple
-                    </button>
-                    <button onclick="setThemeColor('emerald')" data-color-id="emerald"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-emerald-600 hover:opacity-90 text-sm">
-                        Emerald
-                    </button>
-                    <button onclick="setThemeColor('sky')" data-color-id="sky"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-sky-600 hover:opacity-90 text-sm">
-                        Sky
-                    </button>
-                    <button onclick="setThemeColor('amber')" data-color-id="amber"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-amber-600 hover:opacity-90 text-sm">
-                        Amber
-                    </button>
-                    <button onclick="setThemeColor('rose')" data-color-id="rose"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-rose-600 hover:opacity-90 text-sm">
-                        Rose
-                    </button>
-                    <button onclick="setThemeColor('teal')" data-color-id="teal"
-                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-teal-600 hover:opacity-90 text-sm">
-                        Teal
-                    </button>
-                    <button onclick="setThemeColor('indigo')" data-color-id="indigo"
+                    <button onclick="setThemeColor('Indigo')" data-color-id="Indigo"
                             class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-indigo-600 hover:opacity-90 text-sm">
                         Indigo
                     </button>
-                </div>
+                    <button onclick="setThemeColor('Teal')" data-color-id="Teal"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-teal-600 hover:opacity-90 text-sm">
+                        Teal
+                    </button>
+                    <button onclick="setThemeColor('Rose')" data-color-id="Rose"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-rose-600 hover:opacity-90 text-sm">
+                        Rose
+                    </button>
+                    <button onclick="setThemeColor('Amber')" data-color-id="Amber"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-amber-600 hover:opacity-90 text-sm">
+                        Amber
+                    </button>
+                    <button onclick="setThemeColor('Emerald')" data-color-id="Emerald"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-emerald-600 hover:opacity-90 text-sm">
+                        Emerald
+                    </button>
+                    
+                    <button onclick="setThemeColor('Cyan')" data-color-id="Cyan"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-cyan-600 hover:opacity-90 text-sm">
+                        Cyan
+                    </button>
+                    <button onclick="setThemeColor('Pink')" data-color-id="Pink"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-pink-600 hover:opacity-90 text-sm">
+                        Pink
+                    </button>
+                    <button onclick="setThemeColor('Orange')" data-color-id="Orange"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-orange-600 hover:opacity-90 text-sm">
+                        Orange
+                    </button>
+                    <button onclick="setThemeColor('Purple')" data-color-id="Purple"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-purple-600 hover:opacity-90 text-sm">
+                        Purple
+                    </button>
+                    <button onclick="setThemeColor('Sky')" data-color-id="Sky"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-sky-600 hover:opacity-90 text-sm">
+                        Sky
+                    </button>
+                    </div>
             </div>
 
+            <!-- Text Contrast -->
             <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Text Contrast</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Text Contrast (Shared)</h3>
                 <div class="flex space-x-4">
                     <button onclick="setTextContrast('default')" data-contrast-id="default" id="contrast-default"
                             class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
@@ -625,8 +844,34 @@
                 </div>
             </div>
 
+            <!-- Body Font -->
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Input Style</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Body Font (Shared)</h3>
+                <button id="body-font-button" onclick="handleUiTapFeedback(); openSelectionModal('body')"
+                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                    <span id="current-body-font" class="font-semibold">Inter (Sans-serif, Default)</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Title Font -->
+            <div class="mb-6">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Title Font (Shared)</h3>
+                <button id="title-font-button" onclick="handleUiTapFeedback(); openSelectionModal('title')"
+                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                    <span id="current-title-font" class="font-semibold">Lora (Serif, Default)</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                    </svg>
+                </button>
+            </div>
+
+
+            <!-- Game-Specific Settings -->
+            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Input Style (Game Specific)</h3>
                 <div class="flex space-x-4">
                     <button onclick="setInputStyle('rounded')" data-style-id="rounded" id="style-rounded"
                             class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
@@ -640,7 +885,7 @@
             </div>
 
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Feedback</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Feedback (Game Specific)</h3>
                 <div class="flex flex-col space-y-2">
                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-audio" onclick="toggleAudio()" 
@@ -656,14 +901,8 @@
             </div>
 
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Display</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Display (Game Specific)</h3>
                 <div class="flex flex-col space-y-2">
-                    <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
-                        <input type="checkbox" id="toggle-telugu" onclick="toggleTelugu()" 
-                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
-                        <span class="text-gray-700 dark-mode:text-gray-300">Hide Telugu Meaning (in Question)</span>
-                    </label>
-                    
                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-text-hue" onclick="toggleTextHue()" 
                                 class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
@@ -671,30 +910,8 @@
                     </label>
                 </div>
             </div>
-
-
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Body Font</h3>
-                <button id="body-font-button" onclick="handleUiTapFeedback(); openSelectionModal('body')"
-                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
-                    <span id="current-body-font" class="font-semibold">Inter (Sans-serif, Default)</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                    </svg>
-                </button>
-            </div>
-
-            <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Title Font</h3>
-                <button id="title-font-button" onclick="handleUiTapFeedback(); openSelectionModal('title')"
-                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
-                    <span id="current-title-font" class="font-semibold">Lora (Serif, Default)</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                    </svg>
-                </button>
-            </div>
-
+            
+            <!-- Close Button -->
             <button onclick="handleUiTapFeedback(); closeSettings()"
                     class="ripple-btn mt-8 w-full py-3 bg-gray-500 text-white font-bold rounded-xl hover:bg-gray-600 transition duration-150">
                 Close Settings
@@ -702,6 +919,7 @@
         </div>
     </div>
     
+    <!-- Selection Modal (for Fonts, Quiz Length, Difficulty) -->
     <div id="selection-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-overlay">
         <div class="selection-modal-content liquid-glass-card w-full max-w-sm p-0">
             <div class="p-4 flex justify-between items-center border-b dark-mode:border-gray-700">
@@ -713,83 +931,69 @@
                 </button>
             </div>
             <div id="selection-modal-list" class="max-h-80 overflow-y-auto rounded-b-xl">
-                </div>
+                <!-- Options injected by JS -->
+            </div>
         </div>
     </div>
 
 
+    <!-- Data Management Modal -->
     <div id="data-management-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
         <div class="modal-content liquid-glass-card w-full max-w-3xl p-6 overflow-y-auto max-h-[90vh]">
             <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">
-                Manage Verb Data (<span id="current-verb-count">0</span> Total)
+                Manage Verb Data (<span id="current-question-count">0</span> Total)
             </h2>
             
+            <button id="refresh-base-data" onclick="handleUiTapFeedback(); refreshBaseData()"
+                    class="ripple-btn w-full py-2 mb-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg hover:bg-blue-700 transition duration-150">
+                Fetch Latest Verbs.csv
+            </button>
+            <p id="refresh-feedback" class="text-center text-sm font-semibold mt-2 hidden"></p>
+
+            
+            <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2 mt-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+                Manually Add a Custom Verb (All 5 Forms)
+            </h3>
             <p class="text-sm text-gray-600 dark-mode:text-gray-400 mb-4">
-                Enter all 10 fields for a new verb row. Use a forward slash (/) to separate multiple correct answers (e.g., 'got/gotten').
+                Enter the verb and its 4 other forms. This is added to your **Custom Verbs** list.
             </p>
             
             <div id="add-data-form" class="space-y-4 p-4 bg-primary/5 rounded-xl border border-primary/20 frosted-option">
-                <div class="hidden md:grid md:grid-cols-2 gap-4 text-sm font-bold text-gray-700 dark-mode:text-gray-300">
-                    <div class="text-center border-b pb-2">English Forms</div>
-                    <div class="text-center border-b pb-2">Telugu Meanings</div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="space-y-2">
+                        <label for="add-v1" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V1 (Base Form)</label>
+                        <input type="text" id="add-v1" placeholder="e.g., 'go'" class="w-full p-3">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="add-v3s" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V (s/es Form)</label>
+                        <input type="text" id="add-v3s" placeholder="e.g., 'goes'" class="w-full p-3">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="add-ving" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V-ing (Present Participle)</label>
+                        <input type="text" id="add-ving" placeholder="e.g., 'going'" class="w-full p-3">
+                    </div>
                 </div>
-
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-2">
-                        <label for="add-base" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Base Form</label>
-                        <input type="text" id="add-base" placeholder="e.g., 'go'" class="w-full p-3">
+                        <label for="add-v2" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V2 (Past Simple)</label>
+                        <input type="text" id="add-v2" placeholder="e.g., 'went'" class="w-full p-3">
                     </div>
                     <div class="space-y-2">
-                        <label for="add-telugu-base" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Telugu (Base)</label>
-                        <input type="text" id="add-telugu-base" placeholder="తెలుగు అర్థం" class="w-full p-3">
-                    </div>
-                    
-                    <div class="space-y-2">
-                        <label for="add-third" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">3rd Person Singular</label>
-                        <input type="text" id="add-third" placeholder="e.g., 'goes'" class="w-full p-3">
-                    </div>
-                    <div class="space-y-2">
-                        <label for="add-telugu-third" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Telugu (3rd Person)</label>
-                        <input type="text" id="add-telugu-third" placeholder="తెలుగు అర్థం" class="w-full p-3">
-                    </div>
-
-                    <div class="space-y-2">
-                        <label for="add-ing" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">-ing Form</label>
-                        <input type="text" id="add-ing" placeholder="e.g., 'going'" class="w-full p-3">
-                    </div>
-                    <div class="space-y-2">
-                        <label for="add-telugu-ing" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Telugu (-ing)</label>
-                        <input type="text" id="add-telugu-ing" placeholder="తెలుగు అర్థం" class="w-full p-3">
-                    </div>
-
-                    <div class="space-y-2">
-                        <label for="add-simple" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Past Simple</label>
-                        <input type="text" id="add-simple" placeholder="e.g., 'went'" class="w-full p-3">
-                    </div>
-                    <div class="space-y-2">
-                        <label for="add-telugu-simple" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Telugu (Past Simple)</label>
-                        <input type="text" id="add-telugu-simple" placeholder="తెలుగు అర్థం" class="w-full p-3">
-                    </div>
-
-                    <div class="space-y-2">
-                        <label for="add-participle" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Past Participle</label>
-                        <input type="text" id="add-participle" placeholder="e.g., 'gone'" class="w-full p-3">
-                    </div>
-                    <div class="space-y-2">
-                        <label for="add-telugu-participle" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Telugu (Past Participle)</label>
-                        <input type="text" id="add-telugu-participle" placeholder="తెలుగు అర్థం" class="w-full p-3">
+                        <label for="add-v3" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V3 (Past Participle)</label>
+                        <input type="text" id="add-v3" placeholder="e.g., 'gone'" class="w-full p-3">
                     </div>
                 </div>
 
-                <button id="save-verb-button" onclick="handleUiTapFeedback(); saveNewVerbData()"
+                <button id="save-question-button" onclick="handleUiTapFeedback(); saveNewQuestionData()"
                         class="ripple-btn w-full py-3 mt-4 bg-primary text-white font-bold rounded-xl shadow-lg hover:opacity-90 transition duration-150 disabled:bg-gray-400">
-                    Add Verb Row
+                    Add Verb
                 </button>
                 <p id="data-management-feedback" class="text-center text-sm font-semibold mt-2 hidden"></p>
             </div>
             
             <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2 mt-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                Custom Verbs Added (Local):
+                Custom Verbs Added:
             </h3>
             
             <div id="user-data-list" class="space-y-2 max-h-48 overflow-y-auto p-2 border rounded-lg frosted-option">
@@ -806,34 +1010,29 @@
 
 
     <script>
-        // --- Data is now loaded from Verbs.csv ---
-        let initialCsvData = ''; // This will be populated by fetchVerbData()
-
-        // NEW FUNCTION to fetch data
-        async function fetchVerbData() {
-            try {
-                // Fetch from 'Verbs.csv' (assuming it's in the same directory)
-                const response = await fetch('Verbs.csv'); 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                initialCsvData = await response.text();
-                console.log('Verbs.csv loaded successfully.');
-            } catch (e) {
-                console.error("Failed to load verbs.csv:", e);
-                document.getElementById('loading-indicator').textContent = 'Error: Could not load default verbs. Custom verbs may still work.';
-                // initialCsvData remains empty, parseAndLoadVerbs will handle this
-            }
-        }
+        // Data provided by the user (parsed from the uploaded CSV/Excel sheet)
+        const INITIAL_DEFAULT_DATA_KEY = 'initialDefaultVerbData';
         
         // --- Configuration ---
-        const QUESTION_OPTIONS = [5, 10, 15, 20, 30];
+        const QUESTION_OPTIONS = [5, 10, 15, 20, 30, 50]; 
+        const TENSE_LEVELS = [
+            { value: 'all', label: 'All Tenses' },
+            { value: 'v1', label: 'V1 (Base Form)' },
+            { value: 'v3s', label: 'V (s/es Form)' },
+            { value: 'ving', label: 'V-ing (Present Participle)' },
+            { value: 'v2', label: 'V2 (Past Simple)' },
+            { value: 'v3', label: 'V3 (Past Participle)' },
+        ];
+        
+        // --- START: MODIFIED FONT/COLOR OPTIONS TO MATCH HUB ---
+        // (These must be identical to game hub.html)
         const FONT_OPTIONS = {
             body: [
                 { value: 'Inter', label: 'Inter (Sans-serif, Default)' },
                 { value: 'Roboto', label: 'Roboto (Sans-serif)' },
                 { value: 'Source Sans 3', label: 'Source Sans 3 (Sans-serif)' },
-                { value: 'Merriweather', label: 'Merriweather (Serif)' }
+                { value: 'Merriweather', label: 'Merriweather (Serif)' },
+                { value: 'Poppins', label: 'Poppins (Sans-serif)' }
             ],
             title: [
                 { value: 'Lora', label: 'Lora (Serif, Default)' },
@@ -842,52 +1041,66 @@
                 { value: 'Merriweather', label: 'Merriweather (Serif)' }
             ]
         };
+        
+        // NEW: Added COLOR_OPTIONS from game hub.html
+        const COLOR_OPTIONS = [
+            { id: 'Indigo', bg: 'bg-indigo-600' },
+            { id: 'Teal', bg: 'bg-teal-600' },
+            { id: 'Rose', bg: 'bg-rose-600' },
+            { id: 'Amber', bg: 'bg-amber-600' },
+            { id: 'Emerald', bg: 'bg-emerald-600' },
+            { id: 'Cyan', bg: 'bg-cyan-600' },
+            { id: 'Pink', bg: 'bg-pink-600' },
+            { id: 'Orange', bg: 'bg-orange-600' },
+            { id: 'Purple', bg: 'bg-purple-600' },
+            { id: 'Sky', bg: 'bg-sky-600' },
+        ];
+        // --- END: MODIFIED FONT/COLOR OPTIONS ---
+        
+        // Default game settings
         const DEFAULT_MAX_QUESTIONS = 15;
+        const DEFAULT_TENSE = 'all';
+
 
         // --- Game State ---
         let maxQuestions = DEFAULT_MAX_QUESTIONS;
-        let verbs = [];
-        let currentVerb = null;
-        let hiddenFormKey = null;
+        let selectedTense = DEFAULT_TENSE;
+        let verbs = []; // All available verbs (Base + Custom)
+        let questionPool = []; // Final selected questions (objects)
+        let quizLimit = DEFAULT_MAX_QUESTIONS; // Max questions for the current run
+        
+        let currentQuestionData = null;
+        let selectedOption = null;
         let score = 0;
         let questionsAsked = 0; 
-        let verbIndicesPool = []; 
         let quizResults = [];
         let isDataLoaded = false;
         let currentSelectionType = null;
-        
-        // NEW: Key for Local Storage of Custom Data
-        const CUSTOM_VERB_KEY = 'customVerbData';
-        // MODIFIED: Key for Global Settings
-        const GLOBAL_SETTINGS_KEY = 'globalQuizSettings';
+        let quizPhase = 'select'; // 'select' (choosing answer) or 'next' (showing answer/ready for next)
 
-        // --- Column Indices ---
-        const COL_BASE = 0;
-        const COL_TELUGU_BASE = 1;
-        const COL_THIRD = 2;
-        const COL_TELUGU_THIRD = 3;
-        const COL_ING = 4;
-        const COL_TELUGU_ING = 5;
-        const COL_SIMPLE = 6;
-        const COL_TELUGU_SIMPLE = 7;
-        const COL_PARTICIPLE = 8;
-        const COL_TELUGU_PARTICIPLE = 9;
-        
-        const FORM_KEYS = {
-            base: "Base Form",
-            third: "3rd Person Singular (he/she/it)",
-            ing: "-ing Form",
-            simple: "Past Simple",
-            participle: "Past Participle",
-        };
-        const TELUGU_KEYS = {
-            base: 'telugu_base',
-            third: 'telugu_third',
-            ing: 'telugu_ing',
-            simple: 'telugu_simple',
-            participle: 'telugu_participle',
-        };
+        // --- START: MODIFIED STORAGE KEYS ---
+        // Key for SHARED settings across all games (from game hub)
+        const GLOBAL_SETTINGS_KEY = 'globalHubSettings'; 
+        // Key for settings SPECIFIC to this verb game
+        const SETTINGS_KEY = 'verbQuizSettings'; // Changed from 'quizSettings' for clarity
+        // Key for custom verb data
+        const CUSTOM_DATA_KEY = 'customVerbData';
+        // --- END: MODIFIED STORAGE KEYS ---
 
+        // --- Column Indices (10-column CSV structure) ---
+        // Base Form,Telugu,3rd Person Singular,Telugu ( he she it),-ing Form,Telugu4,Past Simple,Telugu2,Past Participle,Telugu3
+        const COL_V1 = 0;
+        const COL_V1_TE = 1;
+        const COL_V3S = 2;
+        const COL_V3S_TE = 3;
+        const COL_VING = 4;
+        const COL_VING_TE = 5;
+        const COL_V2 = 6;
+        const COL_V2_TE = 7;
+        const COL_V3 = 8;
+        const COL_V3_TE = 9;
+        const EXPECTED_COLUMNS = 10;
+        
         // --- Tone.js Audio Setup ---
         let correctSynth;
         let incorrectSynth;
@@ -904,28 +1117,28 @@
         }
 
         const playCorrect = () => { 
-            const disableSound = getGlobalSetting('disableSound', false);
+            const disableSound = getLocalSetting('disableSound', false);
             if (!disableSound) { Tone.context.resume().then(() => { correctSynth.triggerAttackRelease("G5", "8n"); }); } 
         }
         const playIncorrect = () => { 
-            const disableSound = getGlobalSetting('disableSound', false);
+            const disableSound = getLocalSetting('disableSound', false);
             if (!disableSound) { Tone.context.resume().then(() => { incorrectSynth.triggerAttackRelease("16n"); }); } 
         }
         const playClick = () => {
-            const disableSound = getGlobalSetting('disableSound', false);
+            const disableSound = getLocalSetting('disableSound', false);
             if (!disableSound) { Tone.context.resume().then(() => { clickSynth.triggerAttackRelease("C5", "32n"); }); } 
         }
         
         const vibrateCorrect = () => { 
-            const disableVibration = getGlobalSetting('disableVibration', false);
+            const disableVibration = getLocalSetting('disableVibration', false);
             if (!disableVibration && navigator.vibrate) { navigator.vibrate(100); } 
         };
         const vibrateIncorrect = () => { 
-            const disableVibration = getGlobalSetting('disableVibration', false);
-            if (!disableVibration && navigator.vibrate) { navigator.vibrate([100, 50, 100, 50, 100]); } 
+            const disableVibration = getLocalSetting('disableVibration', false);
+            if (!disableVibration && navigator.vibrate) { navigator.vibrate([100, 50, 100]); } 
         };
         const vibrateClick = () => { 
-            const disableVibration = getGlobalSetting('disableVibration', false);
+            const disableVibration = getLocalSetting('disableVibration', false);
             if (!disableVibration && navigator.vibrate) { navigator.vibrate(30); } 
         };
 
@@ -933,128 +1146,144 @@
             playClick();
             vibrateClick();
         }
-        // --- End Haptic Feedback Setup ---
+        // --- End Haptic/Audio Feedback Setup ---
 
-        // --- Theme and Settings Management (LOCAL STORAGE) ---
+        // --- Theme and Settings Management ---
         const DARK_CLASS = 'dark-mode';
         
-        // MODIFIED: Renamed to getGlobalSetting and uses GLOBAL_SETTINGS_KEY
-        const getGlobalSetting = (key, defaultValue) => {
+        // --- START: MODIFIED SETTINGS FUNCTIONS ---
+        // (These now match game hub.html and English vocabulary game.html)
+
+        // Gets GAME-SPECIFIC settings
+        const getLocalSetting = (key, defaultValue) => {
             try {
-                const settingsString = localStorage.getItem(GLOBAL_SETTINGS_KEY);
+                const settingsString = localStorage.getItem(SETTINGS_KEY);
                 if (!settingsString) return defaultValue;
                 
                 const settings = JSON.parse(settingsString);
                 
-                // Handle complex types/defaults
-                if (key === 'maxQuestions') { // Keep local override for maxQuestions if needed
-                    const localMax = localStorage.getItem('quizSettings') ? JSON.parse(localStorage.getItem('quizSettings')).maxQuestions : null;
-                    if (localMax !== null && !isNaN(parseInt(localMax))) return parseInt(localMax);
-                    
+                if (key === 'maxQuestions') {
                     const parsed = parseInt(settings[key]);
                     return isNaN(parsed) ? defaultValue : parsed;
                 }
+                
                 if (typeof settings[key] === 'undefined' || settings[key] === null) {
                     return defaultValue;
                 }
                 return settings[key];
 
             } catch (e) {
-                console.error(`Error loading global setting key ${key}:`, e);
+                console.error(`Error loading local setting key ${key}:`, e);
                 return defaultValue;
             }
         };
 
-        // MODIFIED: Renamed to saveGlobalSetting and uses GLOBAL_SETTINGS_KEY
-        const saveGlobalSetting = (key, value) => {
+        // Saves GAME-SPECIFIC settings
+        const saveLocalSetting = (key, value) => {
             try {
-                // Special case: Keep maxQuestions potentially local?
-                // For simplicity now, saving maxQuestions globally too. 
-                // If you want maxQuestions specific to this game, we need more logic here.
-                
-                const settingsString = localStorage.getItem(GLOBAL_SETTINGS_KEY);
+                const settingsString = localStorage.getItem(SETTINGS_KEY);
                 let settings = settingsString ? JSON.parse(settingsString) : {};
                 
                 settings[key] = value;
-                localStorage.setItem(GLOBAL_SETTINGS_KEY, JSON.stringify(settings));
+                localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
                 
+            } catch (e)
+                {
+                console.error(`Error saving local setting key ${key}:`, e);
+            }
+        }
+
+        // Gets GLOBAL (shared) settings (from hub)
+        const getGlobalSetting = (key, defaultValue) => {
+            try {
+                const settingsString = localStorage.getItem(GLOBAL_SETTINGS_KEY);
+                if (!settingsString) return defaultValue;
+                const settings = JSON.parse(settingsString);
+                return (settings && typeof settings[key] !== 'undefined') ? settings[key] : defaultValue;
             } catch (e) {
-                console.error(`Error saving global setting key ${key}:`, e);
+                console.error("Error reading global setting:", key, e);
+                return defaultValue;
             }
+        };
+
+        // Saves GLOBAL (shared) settings (from hub)
+        const setGlobalSetting = (key, value) => {
+            try {
+                const settingsString = localStorage.getItem(GLOBAL_SETTINGS_KEY);
+                let settings = settingsString ? JSON.parse(settingsString) : {};
+                settings[key] = value;
+                localStorage.setItem(GLOBAL_SETTINGS_KEY, JSON.stringify(settings));
+            } catch (e) {
+                console.error("Error saving global setting:", key, e);
+            }
+        };
+        
+        // --- NEW: applyAccentColor (from hub) ---
+        function applyAccentColor(colorName) {
+            if (!colorName || !COLOR_OPTIONS.find(c => c.id === colorName)) {
+                colorName = 'Indigo'; // Default
+            }
+            document.body.setAttribute('data-color', colorName);
         }
 
-        // NEW: Function to apply settings when storage changes
-        function applyGlobalSettings() {
-            console.log('Storage change detected, applying global settings.');
-            
-            // 1. Apply visual theme (mode, color, fonts, contrast, text hue)
-            applyTheme(); // This reads from storage and applies styles
-            
-            // 2. Update the UI toggles/buttons in the modal to reflect the new state
-            updateSettingsUI();
+        // --- NEW: applyTheme (from hub) ---
+        // This function *only* handles dark/light mode
+        function applyTheme(isDark) {
+            const body = document.body;
+            const savedTheme = getGlobalSetting('theme', 'auto');
 
-            // 3. Update max questions display (if stored globally)
-            // maxQuestions = getGlobalSetting('maxQuestions', DEFAULT_MAX_QUESTIONS); 
-            // updateQuizLengthButton(); // Only needed if maxQuestions is global
-            // updateStartScreenMessage(); // Only needed if maxQuestions is global
+            if (isDark) {
+                body.classList.add(DARK_CLASS);
+            } else {
+                body.classList.remove(DARK_CLASS);
+            }
+            updateHamburgerMenuUI(savedTheme);
         }
 
+        // --- NEW: applyFont (from hub) ---
+        function applyFont(type, fontFamily) {
+            const root = document.documentElement.style;
+            let fallback = 'sans-serif';
+            let defaultFont = 'Inter';
+            let key = '--font-body';
 
-        function setThemeColor(color) {
-            saveGlobalSetting('color', color);
-            applyTheme();
-            updateSettingsUI();
-        }
+            if (type === 'title') {
+                fallback = 'serif';
+                defaultFont = 'Lora';
+                key = '--font-title';
+            }
 
-        function setThemeMode(mode) {
-            saveGlobalSetting('theme', mode);
-            applyTheme(); // No parameter needed, it will read the setting
-            updateSettingsUI();
-        }
-
-        function toggleTheme() {
-            const currentMode = getGlobalSetting('theme', 'system'); // Default to system
-            
-            let nextMode;
-            if (currentMode === 'light') {
-                nextMode = 'dark';
-            } else if (currentMode === 'dark') {
-                nextMode = 'system';
-            } else { // 'system'
-                nextMode = 'light';
+            if (!fontFamily || !FONT_OPTIONS[type].find(f => f.value === fontFamily)) {
+                fontFamily = defaultFont;
             }
             
-            setThemeMode(nextMode); // This saves the setting and calls applyTheme()
+            // Check if selected font is serif to adjust fallback
+            if (fontFamily === 'Merriweather' || fontFamily === 'Lora' || fontFamily === 'Playfair Display') {
+                fallback = 'serif';
+            } else {
+                fallback = 'sans-serif';
+            }
+
+            root.setProperty(key, `"${fontFamily}", ${fallback}`);
         }
         
-        function setTextContrast(contrast) {
-            saveGlobalSetting('contrast', contrast);
-            applyTheme(); 
-            updateSettingsUI();
+        // --- NEW: applyContrast (from hub) ---
+        function applyContrast(contrast) {
+            if (contrast !== 'high') {
+                contrast = 'default';
+            }
+            document.body.setAttribute('data-contrast', contrast);
         }
         
-        window.setBodyFont = function(font) {
-            saveGlobalSetting('bodyFont', font);
-            const fallback = font.includes('serif') ? 'serif' : 'sans-serif';
-            document.documentElement.style.setProperty('--font-body', `"${font}", ${fallback}`);
-            updateSettingsUI(); 
+        // --- NEW: applyTextHue (LOCAL setting) ---
+        function applyTextHue() {
+            const textHue = getLocalSetting('textHue', false);
+            document.body.setAttribute('data-text-hue', textHue ? 'themed' : 'default');
         }
 
-        window.setTitleFont = function(font) {
-            saveGlobalSetting('titleFont', font);
-            const fallback = font.includes('serif') ? 'serif' : 'sans-serif'; 
-            document.documentElement.style.setProperty('--font-title', `"${font}", ${fallback}`);
-            updateSettingsUI(); 
-        }
-        
-        function setInputStyle(style) {
-            saveGlobalSetting('inputStyle', style);
-            applyInputStyles();
-            updateSettingsUI();
-        }
-
+        // --- NEW: applyInputStyles (LOCAL setting) ---
         function applyInputStyles() {
-            const style = getGlobalSetting('inputStyle', 'rounded');
+            const style = getLocalSetting('inputStyle', 'rounded');
             const root = document.documentElement.style;
             if (style === 'square') {
                 root.setProperty('--input-border-radius', '0.5rem'); 
@@ -1063,124 +1292,115 @@
                 root.setProperty('--input-border-radius', '1.5rem'); 
                 root.setProperty('--input-shadow', '0 4px 6px rgba(0,0,0,0.05)');
             }
-            // Also apply to dynamically created/existing inputs
-            const inputs = document.querySelectorAll('input[type="text"], textarea');
-            inputs.forEach(input => {
-                input.style.borderRadius = `var(--input-border-radius)`;
-                input.style.boxShadow = `var(--input-shadow)`;
-            });
         }
         
+        // UPDATED: Cycles theme and saves to GLOBAL
+        function toggleTheme() {
+            const currentMode = getGlobalSetting('theme', 'auto'); // Hub uses 'auto'
+            let newMode;
+            
+            if (currentMode === 'auto') {
+                newMode = 'light';
+            } else if (currentMode === 'light') {
+                newMode = 'dark';
+            } else { // 'dark'
+                newMode = 'auto';
+            }
+            
+            setGlobalSetting('theme', newMode); // Save to global
+            
+            // Apply the change
+            let isDark;
+            if (newMode === 'auto') {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            } else {
+                isDark = (newMode === 'dark');
+            }
+            applyTheme(isDark);
+        }
+        
+        // UPDATED: Saves to GLOBAL using hub's key 'colorTheme'
+        function setThemeColor(color) { // color is 'Indigo', 'Teal'
+            setGlobalSetting('colorTheme', color); // Use hub's key
+            applyAccentColor(color);
+            updateSettingsUI();
+        }
+        
+        // UPDATED: Saves to GLOBAL
+        function setTextContrast(contrast) {
+            setGlobalSetting('contrast', contrast);
+            applyContrast(contrast);
+            updateSettingsUI();
+        }
+        
+        // UPDATED: Saves to GLOBAL using hub's simple format
+        window.setBodyFont = function(font) { // font is 'Inter', 'Roboto'
+            setGlobalSetting('bodyFont', font); // Hub just saves the name
+            applyFont('body', font);
+            updateSettingsUI(); 
+        }
+
+        // UPDATED: Saves to GLOBAL using hub's simple format
+        window.setTitleFont = function(font) { // font is 'Lora', 'Montserrat'
+            setGlobalSetting('titleFont', font); // Hub just saves the name
+            applyFont('title', font);
+            updateSettingsUI(); 
+        }
+        
+        // Saves GAME-SPECIFIC (LOCAL) setting
+        function setInputStyle(style) {
+            saveLocalSetting('inputStyle', style);
+            applyInputStyles();
+            updateSettingsUI();
+        }
+
+        // Saves GAME-SPECIFIC (LOCAL) setting
         function toggleAudio() {
-            const currentState = getGlobalSetting('disableSound', false);
-            saveGlobalSetting('disableSound', !currentState);
+            const currentState = getLocalSetting('disableSound', false);
+            saveLocalSetting('disableSound', !currentState);
             updateSettingsUI();
         }
 
+        // Saves GAME-SPECIFIC (LOCAL) setting
         function toggleHaptics() {
-            const currentState = getGlobalSetting('disableVibration', false);
-            saveGlobalSetting('disableVibration', !currentState);
-            updateSettingsUI();
-        }
-
-        // Keep local settings for game-specific things if needed
-        function getLocalSetting(key, defaultValue) {
-             try {
-                const settingsString = localStorage.getItem('quizSettings'); // Use the old key for local
-                if (!settingsString) return defaultValue;
-                const settings = JSON.parse(settingsString);
-                 if (typeof settings[key] === 'undefined' || settings[key] === null) {
-                    return defaultValue;
-                }
-                return settings[key];
-            } catch (e) {
-                console.error(`Error loading local setting key ${key}:`, e);
-                return defaultValue;
-            }
-        }
-        function saveLocalSetting(key, value) {
-             try {
-                const settingsString = localStorage.getItem('quizSettings');
-                let settings = settingsString ? JSON.parse(settingsString) : {};
-                settings[key] = value;
-                localStorage.setItem('quizSettings', JSON.stringify(settings));
-            } catch (e) {
-                console.error(`Error saving local setting key ${key}:`, e);
-            }
-        }
-
-        function toggleTelugu() {
-            const currentState = getLocalSetting('hideTelugu', false); // Keep hideTelugu local
-            saveLocalSetting('hideTelugu', !currentState);
-            if (currentVerb) renderQuestion();
+            const currentState = getLocalSetting('disableVibration', false);
+            saveLocalSetting('disableVibration', !currentState);
             updateSettingsUI();
         }
         
+        // UPDATED: Saves to GAME-SPECIFIC (LOCAL) setting
         function toggleTextHue() {
-            const currentState = getGlobalSetting('textHue', false);
-            saveGlobalSetting('textHue', !currentState);
-            applyTheme();
+            const currentState = getLocalSetting('textHue', false);
+            saveLocalSetting('textHue', !currentState); // Use local storage
+            applyTextHue();
             updateSettingsUI();
         }
 
+        // NEW: UI update for quiz settings handlers (Game-specific)
         window.handleQuestionCountChange = function(value) {
             const count = parseInt(value);
             maxQuestions = count;
-            saveLocalSetting('maxQuestions', count); // Keep maxQuestions local
-
-            const limit = Math.min(verbs.length, maxQuestions);
-             if (document.getElementById('question-counter')) { // Check if element exists
-                 document.getElementById('question-counter').textContent = `${questionsAsked}/${limit}`;
-             }
-            if (questionsAsked > 0) {
-                 updateProgressBar();
-            }
+            quizLimit = count;
+            saveLocalSetting('maxQuestions', count);
             updateStartScreenMessage();
         }
         
-        function applyTheme() { // Reads global settings
-            const mode = getGlobalSetting('theme', 'system'); 
-            let isDark;
-
-            if (mode === 'light') {
-                isDark = false;
-            } else if (mode === 'dark') {
-                isDark = true;
-            } else { // 'system'
-                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            }
-        
-            const color = getGlobalSetting('color', 'indigo');
-            const contrast = getGlobalSetting('contrast', 'default');
-            const textHue = getGlobalSetting('textHue', false);
-            const bodyFont = getGlobalSetting('bodyFont', 'Inter');
-            const titleFont = getGlobalSetting('titleFont', 'Lora');
-            
-            const body = document.body;
-            body.setAttribute('data-color', color);
-            body.setAttribute('data-contrast', contrast);
-            body.setAttribute('data-text-hue', textHue ? 'themed' : 'default');
-
-            if (isDark) {
-                body.classList.add(DARK_CLASS);
-            } else {
-                body.classList.remove(DARK_CLASS);
-            }
-            
-            window.setBodyFont(bodyFont);
-            window.setTitleFont(titleFont);
-            applyInputStyles();
-            updateHamburgerMenuUI(); 
+        // NEW: UI update for tense level button (Game-specific)
+        window.handleTenseLevelChange = function(value) {
+            selectedTense = value;
+            saveLocalSetting('selectedTense', value);
+            updateStartScreenMessage();
         }
-
-        function updateSettingsUI() { // Reads global settings for appearance, local for game logic
-            const color = getGlobalSetting('color', 'indigo');
-            const contrast = getGlobalSetting('contrast', 'default');
-            const inputStyle = getGlobalSetting('inputStyle', 'rounded');
-            const disableSound = getGlobalSetting('disableSound', false);
-            const disableVibration = getGlobalSetting('disableVibration', false);
-            const hideTelugu = getLocalSetting('hideTelugu', false); // Read local
-            const textHue = getGlobalSetting('textHue', false);
+        
+        // This function updates the UI based on GAME-SPECIFIC storage
+        function updateSettingsUI() {
+            // Read all settings
+            const color = getGlobalSetting('colorTheme', 'Indigo'); // Read from global
+            const contrast = getGlobalSetting('contrast', 'default'); // Read from global
+            const inputStyle = getLocalSetting('inputStyle', 'rounded'); // Read from local
+            const disableSound = getLocalSetting('disableSound', false); // Read from local
+            const disableVibration = getLocalSetting('disableVibration', false); // Read from local
+            const textHue = getLocalSetting('textHue', false); // Read from local
             
             // Highlight active color
             document.querySelectorAll('.color-option').forEach(btn => {
@@ -1195,63 +1415,103 @@
                 btn.classList.toggle('ring-primary-hex', isActive);
             });
             
-            // Update toggles
-            const toggleAudioEl = document.getElementById('toggle-audio');
-            const toggleHapticsEl = document.getElementById('toggle-haptics');
-            const toggleTeluguEl = document.getElementById('toggle-telugu');
-            const toggleTextHueEl = document.getElementById('toggle-text-hue');
-
-            if(toggleAudioEl) toggleAudioEl.checked = disableSound;
-            if(toggleHapticsEl) toggleHapticsEl.checked = disableVibration;
-            if(toggleTeluguEl) toggleTeluguEl.checked = hideTelugu; // Use local value
-            if(toggleTextHueEl) toggleTextHueEl.checked = textHue;
+            // Update toggles (game-specific)
+            document.getElementById('toggle-audio').checked = disableSound;
+            document.getElementById('toggle-haptics').checked = disableVibration;
+            document.getElementById('toggle-text-hue').checked = textHue;
             
             // Update buttons reflecting selected values
-            updateQuizLengthButton(); // Reads local maxQuestions
-            updateFontButton('body'); // Reads global
-            updateFontButton('title'); // Reads global
+            updateQuizLengthButton(); // game-specific
+            updateTenseLevelButton(); // game-specific
+            updateFontButton('body'); // shared
+            updateFontButton('title'); // shared
 
-            const scoreDisplay = document.getElementById('score-display');
-            const questionCounter = document.getElementById('question-counter');
-            if(scoreDisplay) scoreDisplay.style.color = `var(--color-primary-hex)`;
-            if(questionCounter) questionCounter.style.color = `var(--color-primary-hex)`;
+            document.getElementById('score-display').style.color = `var(--color-primary-hex)`;
+            document.getElementById('question-counter').style.color = `var(--color-primary-hex)`;
         }
-
-        function updateHamburgerMenuUI() {
-            const mode = getGlobalSetting('theme', 'system'); // Get current user preference
-            
-            const iconContainer = document.getElementById('menu-theme-icon');
-            const textContainer = document.getElementById('menu-theme-text');
-
-            if (!iconContainer || !textContainer) return; // Exit if elements not found
-
-            if (mode === 'light') {
-                // Current is Light, next is Dark
-                iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.593.748-3.752A9.753 9.753 0 009 12.75a9.75 9.75 0 0011.002 9.75z" />`; // Moon
-                textContainer.textContent = "Switch to Dark Mode";
-            } else if (mode === 'dark') {
-                // Current is Dark, next is System
-                 iconContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21M9 17.25v-10.5a2.25 2.25 0 00-2.25-2.25H4.5a2.25 2.25 0 00-2.25 2.25v10.5m3.75-10.5h.008v.008h-.008v-.008zm0 10.5h.008v.008h-.008v-.008zM9 17.25h6.75A2.25 2.25 0 0018 15V6.75A2.25 2.25 0 0015.75 4.5H9M15 17.25h.008v.008h-.008v-.008z" />
-                </svg>`; // System/Desktop icon
-                textContainer.textContent = "Switch to System Mode";
-            } else { // 'system'
-                // Current is System, next is Light
-                iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`; // Sun
-                textContainer.textContent = "Switch to Light Mode";
+        
+        // UI update for tense level button (Game-specific)
+        function updateTenseLevelButton() {
+            const button = document.getElementById('current-tense-level');
+            const level = getLabel('tense', selectedTense);
+            if (button) {
+                button.textContent = level;
             }
         }
         
-        function loadInitialTheme() {
-            // Load local max questions early
-            maxQuestions = getLocalSetting('maxQuestions', DEFAULT_MAX_QUESTIONS);
-            
-            applyTheme(); // Reads global 'theme', defaults to 'system'
-            updateSettingsUI(); // Applies all settings based on storage
-            
-            const loadingIndicator = document.getElementById('loading-indicator');
-            if(loadingIndicator) loadingIndicator.textContent = 'Data loaded and ready.';
+        // UI update for quiz length button (Game-specific)
+        function updateQuizLengthButton() {
+            const button = document.getElementById('current-quiz-length');
+            if (button) {
+                const label = getLabel('count', maxQuestions); 
+                button.textContent = label;
+            }
         }
+
+        // Hamburger menu UI (MODIFIED to match vocab game colors)
+        function updateHamburgerMenuUI(savedTheme) {
+            if (!savedTheme) {
+                 savedTheme = getGlobalSetting('theme', 'auto'); // Hub uses 'auto'
+            }
+            const iconContainer = document.getElementById('menu-theme-icon');
+            const textContainer = document.getElementById('menu-theme-text');
+            
+            iconContainer.className = "w-6 h-6 transition-transform duration-300";
+
+            if (savedTheme === 'auto') { // Hub uses 'auto'
+                iconContainer.classList.add('icon-primary'); 
+                iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 12h16.5m-16.5 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3zm9-6h3.75m-3.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 18h16.5m-16.5 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3z" />`;
+                textContainer.textContent = "Theme: System";
+            } else if (savedTheme === 'light') {
+                iconContainer.classList.add('text-yellow-500'); 
+                iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`;
+                textContainer.textContent = "Theme: Light";
+            } else { // 'dark'
+                iconContainer.classList.add('text-purple-400'); 
+                iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.593.748-3.752A9.753 9.753 0 009 12.75a9.75 9.75 0 0011.002 9.75z" />`;
+                textContainer.textContent = "Theme: Dark";
+            }
+        }
+        
+        // --- REPLACED: loadInitialTheme() with loadInitialSettings() from hub ---
+        function loadInitialSettings() {
+            // --- 1. Load GLOBAL Settings (from hub) ---
+            const savedTheme = getGlobalSetting('theme', 'auto'); // Hub uses 'auto'
+            const colorTheme = getGlobalSetting('colorTheme', 'Indigo'); // Hub uses 'colorTheme'
+            const bodyFont = getGlobalSetting('bodyFont', 'Inter'); // Hub saves simple name
+            const titleFont = getGlobalSetting('titleFont', 'Lora'); // Hub saves simple name
+            const savedContrast = getGlobalSetting('contrast', 'default');
+            
+            // Determine dark mode
+            let isDark;
+            if (savedTheme === 'auto') {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            } else {
+                isDark = (savedTheme === 'dark');
+            }
+            
+            // Apply GLOBAL settings
+            applyTheme(isDark); // Applies dark mode & updates icon
+            applyAccentColor(colorTheme); // Applies color
+            applyFont('body', bodyFont); // Applies body font
+            applyFont('title', titleFont); // Applies title font
+            applyContrast(savedContrast); // Applies contrast
+            
+            // --- 2. Load LOCAL Settings (Game-Specific) ---
+            maxQuestions = getLocalSetting('maxQuestions', DEFAULT_MAX_QUESTIONS);
+            quizLimit = maxQuestions;
+            selectedTense = getLocalSetting('selectedTense', DEFAULT_TENSE);
+            
+            // Apply LOCAL settings
+            applyInputStyles(); // Applies local input style
+            applyTextHue(); // Applies local text hue
+            
+            // --- 3. Update UI ---
+            // This updates the modal UI to reflect all loaded settings
+            updateSettingsUI(); 
+        }
+        // --- END: REPLACEMENT ---
+        
         // --- End Theme and Settings Management ---
         
         // --- Modals and Helpers (Globalized for button access) ---
@@ -1261,29 +1521,38 @@
             const modal = document.getElementById('selection-modal');
             const titleEl = document.getElementById('selection-modal-title');
             const listEl = document.getElementById('selection-modal-list');
-
-            if (!modal || !titleEl || !listEl) return; // Exit if elements not found
             
             listEl.innerHTML = '';
             let optionsHTML = '';
+            let currentVal;
 
             switch(type) {
                 case 'count':
                     titleEl.textContent = 'Select Quiz Length';
+                    currentVal = maxQuestions;
                     optionsHTML = QUESTION_OPTIONS.map(count => 
-                        renderOption('count', count, `${count} Questions${count === DEFAULT_MAX_QUESTIONS ? ' (Default)' : ''}`, maxQuestions, 'handleSelectionChange')
+                        renderOption('count', count, `${count} Questions${count === DEFAULT_MAX_QUESTIONS ? ' (Default)' : ''}`, currentVal, 'handleSelectionChange')
+                    ).join('');
+                    break;
+                case 'tense':
+                    titleEl.textContent = 'Select Tense';
+                    currentVal = selectedTense;
+                    optionsHTML = TENSE_LEVELS.map(level => 
+                        renderOption('tense', level.value, level.label, currentVal, 'handleSelectionChange')
                     ).join('');
                     break;
                 case 'body':
                     titleEl.textContent = 'Select Body Font';
+                    currentVal = getGlobalSetting('bodyFont', 'Inter'); // Read from global
                     optionsHTML = FONT_OPTIONS.body.map(font => 
-                        renderOption('body-font', font.value, font.label, getGlobalSetting('bodyFont', 'Inter'), 'handleSelectionChange')
+                        renderOption('body-font', font.value, font.label, currentVal, 'handleSelectionChange')
                     ).join('');
                     break;
                 case 'title':
                     titleEl.textContent = 'Select Title Font';
+                    currentVal = getGlobalSetting('titleFont', 'Lora'); // Read from global
                     optionsHTML = FONT_OPTIONS.title.map(font => 
-                        renderOption('title-font', font.value, font.label, getGlobalSetting('titleFont', 'Lora'), 'handleSelectionChange')
+                        renderOption('title-font', font.value, font.label, currentVal, 'handleSelectionChange')
                     ).join('');
                     break;
             }
@@ -1293,23 +1562,26 @@
         }
         
         window.closeSelectionModal = function() {
-            const modal = document.getElementById('selection-modal');
-            if(modal) modal.classList.add('hidden');
+            document.getElementById('selection-modal').classList.add('hidden');
             currentSelectionType = null;
         }
 
         window.handleSelectionChange = function(value) {
             switch(currentSelectionType) {
                 case 'count':
-                    handleQuestionCountChange(value); // Saves locally
+                    handleQuestionCountChange(value);
                     updateQuizLengthButton();
                     break;
+                case 'tense':
+                    handleTenseLevelChange(value);
+                    updateTenseLevelButton();
+                    break;
                 case 'body':
-                    setBodyFont(value); // Saves globally
+                    setBodyFont(value); // This now syncs to global
                     updateFontButton('body');
                     break;
                 case 'title':
-                    setTitleFont(value); // Saves globally
+                    setTitleFont(value); // This now syncs to global
                     updateFontButton('title');
                     break;
             }
@@ -1317,22 +1589,15 @@
         }
 
         window.openSettings = function() { 
-            const modal = document.getElementById('settings-modal');
-            if(modal) modal.classList.remove('hidden'); 
+            document.getElementById('settings-modal').classList.remove('hidden'); 
             updateSettingsUI();
         }
-        window.closeSettings = function() { 
-            const modal = document.getElementById('settings-modal');
-            if(modal) modal.classList.add('hidden'); 
-        }
+        window.closeSettings = function() { document.getElementById('settings-modal').classList.add('hidden'); }
         
         window.toggleHamburgerMenu = function() {
             handleUiTapFeedback();
             const menu = document.getElementById('hamburger-menu');
             const overlay = document.getElementById('hamburger-overlay');
-
-            if (!menu || !overlay) return; // Exit if elements not found
-
             const isOpen = menu.classList.contains('translate-x-full');
             
             if (isOpen) {
@@ -1346,33 +1611,33 @@
                 overlay.classList.add('hidden');
                 document.body.style.overflow = '';
             }
-            updateHamburgerMenuUI();
+            updateHamburgerMenuUI(); // Pass no param, it will read from storage
         }
         
         window.openDataManagement = function() {
-            const modal = document.getElementById('data-management-modal');
-             if(modal) modal.classList.remove('hidden');
+            document.getElementById('data-management-modal').classList.remove('hidden');
             renderUserDataList();
-            const countEl = document.getElementById('current-verb-count');
-            if(countEl) countEl.textContent = verbs.length;
+            document.getElementById('current-question-count').textContent = verbs.length;
+            
+            // Clear refresh feedback message on open
+            const feedbackEl = document.getElementById('refresh-feedback');
+            feedbackEl.classList.add('hidden');
+            feedbackEl.textContent = '';
         }
 
         window.openDataManagementFromMenu = function() {
-            window.toggleHamburgerMenu(); // Close menu first
-             // Use setTimeout to ensure the menu is closed before opening the next modal
-            setTimeout(window.openDataManagement, 300); // Adjust delay if needed
+            window.toggleHamburgerMenu();
+            window.openDataManagement();
         }
 
         window.closeDataManagement = function() {
-            const modal = document.getElementById('data-management-modal');
-             if(modal) modal.classList.add('hidden');
+            document.getElementById('data-management-modal').classList.add('hidden');
             resetQuizAndReloadData(); 
             showDataFeedback('', 'green', true);
         }
 
         function showDataFeedback(message, type = 'gray', hide = false) {
             const feedbackEl = document.getElementById('data-management-feedback');
-            if (!feedbackEl) return; // Exit if element not found
             feedbackEl.textContent = message;
             feedbackEl.className = `text-center text-sm font-semibold mt-2 text-${type}-600`;
             if (hide) {
@@ -1381,14 +1646,14 @@
                  feedbackEl.classList.remove('hidden');
             }
         }
-        
+
         function renderOption(type, value, label, currentValue, handler) {
             const isSelected = value.toString() === currentValue.toString();
             const selectedClass = isSelected ? 'selected' : '';
             
             let styleAttr = '';
             if (type.includes('font')) {
-                const fallback = value.includes('serif') ? 'serif' : 'sans-serif'; 
+                const fallback = (value === 'Lora' || value === 'Playfair Display' || value === 'Merriweather') ? 'serif' : 'sans-serif'; 
                 styleAttr = `style="font-family: '${value}', ${fallback};"`;
             }
 
@@ -1405,37 +1670,30 @@
         }
         
         function getLabel(type, value) {
-            if (type === 'count') {
-                return `${value} Questions${value === DEFAULT_MAX_QUESTIONS ? ' (Default)' : ''}`;
+             if (type === 'count') {
+                const limit = parseInt(value);
+                return `${limit} Questions${limit === DEFAULT_MAX_QUESTIONS ? ' (Default)' : ''}`;
+            }
+             if (type === 'tense') {
+                const level = TENSE_LEVELS.find(l => l.value === value);
+                return level ? level.label : 'All Tenses';
             }
             const options = FONT_OPTIONS[type];
-            if (!options) return value; // Fallback
+            if (!options) return value;
             const option = options.find(opt => opt.value === value);
             return option ? option.label : value;
         }
 
-        function updateQuizLengthButton() {
-            const button = document.getElementById('current-quiz-length');
-            if (button) {
-                button.textContent = getLabel('count', maxQuestions); // Uses local maxQuestions
-            }
-        }
-
         function updateFontButton(type) {
             const id = type === 'body' ? 'current-body-font' : 'current-title-font';
-            const value = getGlobalSetting(type === 'body' ? 'bodyFont' : 'titleFont', type === 'body' ? 'Inter' : 'Lora'); // Reads global
+            const defaultFont = type === 'body' ? 'Inter' : 'Lora';
+            const value = getGlobalSetting(type === 'body' ? 'bodyFont' : 'titleFont', defaultFont); // Read from global
             const button = document.getElementById(id);
             if (button) {
                 button.textContent = getLabel(type, value);
             }
         }
         
-        const normalize = (value) => {
-            if (typeof value !== 'string') return '';
-            return value.toLowerCase().trim().replace(/[\s,]+/g, '/');
-        };
-
-        // --- Data Handling (LOCAL STORAGE - Custom Verbs specific to this game) ---
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -1443,93 +1701,136 @@
             }
         }
         
+        function getRandomItems(arr, n) {
+            let result = new Array(n),
+                len = arr.length,
+                taken = new Array(len);
+            if (n > len)
+                throw new RangeError("getRandom: more elements taken than available");
+            while (n--) {
+                let x = Math.floor(Math.random() * len);
+                result[n] = arr[x in taken ? taken[x] : x];
+                taken[x] = --len in taken ? taken[len] : len;
+            }
+            return result;
+        }
+
+
+        // --- Data Parsing and Management ---
+
+        let baseCsvContent = ''; // Store the fetched CSV content
+
+        /** Fetches the Verbs.csv file and stores its content */
+        async function fetchVerbData() {
+             // Initialize default data if it doesn't exist
+            if (!localStorage.getItem(INITIAL_DEFAULT_DATA_KEY)) {
+                document.getElementById('loading-indicator').textContent = 'Fetching verbs data...';
+                try {
+                    const response = await fetch(`Verbs.csv?t=${new Date().getTime()}`); 
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const csvText = await response.text();
+                    localStorage.setItem(INITIAL_DEFAULT_DATA_KEY, csvText); 
+                    baseCsvContent = csvText;
+                } catch (e) {
+                    console.error("Failed to fetch initial Verbs.csv:", e);
+                    document.getElementById('start-message').innerHTML = '<strong>Error:</strong> Could not load <code>Verbs.csv</code>. Please ensure the file is in the same directory as this HTML file and refresh the page.';
+                    document.getElementById('loading-indicator').textContent = 'Load failed.';
+                    return; // Stop initialization
+                }
+            } else {
+                 baseCsvContent = localStorage.getItem(INITIAL_DEFAULT_DATA_KEY);
+            }
+        }
+
+        function parseCSVLine(line) {
+            const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
+            return columns.map(col => 
+                col.trim().replace(/^"|"$/g, '').trim() 
+            );
+        }
+
+        function createVerbObject(dataArray, isCustom = false) {
+            if (!isCustom && dataArray.length < EXPECTED_COLUMNS) return null;
+            if (isCustom && dataArray.length < 5) return null; // v1, v3s, ving, v2, v3
+
+            const getField = (index) => dataArray[index] ? dataArray[index].trim() : '';
+            
+            if (isCustom) {
+                return {
+                    v1: getField(0),
+                    v3s: getField(1),
+                    ving: getField(2),
+                    v2: getField(3),
+                    v3: getField(4),
+                    telugu: { v1: 'N/A', v3s: 'N/A', ving: 'N/A', v2: 'N/A', v3: 'N/A' },
+                    source: 'custom'
+                }
+            } else {
+                 return {
+                    v1: getField(COL_V1),
+                    v3s: getField(COL_V3S),
+                    ving: getField(COL_VING),
+                    v2: getField(COL_V2),
+                    v3: getField(COL_V3),
+                    telugu: {
+                        v1: getField(COL_V1_TE),
+                        v3s: getField(COL_V3S_TE),
+                        ving: getField(COL_VING_TE),
+                        v2: getField(COL_V2_TE),
+                        v3: getField(COL_V3_TE)
+                    },
+                    source: 'base'
+                };
+            }
+        }
+        
         function loadCustomVerbs() {
             try {
-                const customData = localStorage.getItem(CUSTOM_VERB_KEY);
+                const customData = localStorage.getItem(CUSTOM_DATA_KEY);
                 return customData ? JSON.parse(customData) : [];
             } catch (e) {
                 console.error("Error loading custom verbs from storage:", e);
-                localStorage.removeItem(CUSTOM_VERB_KEY);
+                localStorage.removeItem(CUSTOM_DATA_KEY);
                 return [];
             }
         }
         
         function saveCustomVerbs(data) {
             try {
-                localStorage.setItem(CUSTOM_VERB_KEY, JSON.stringify(data));
+                localStorage.setItem(CUSTOM_DATA_KEY, JSON.stringify(data));
             } catch (e) {
                 console.error("Error saving custom verbs to storage:", e);
             }
         }
         
-        function createVerbObject(dataArray) {
-            if (dataArray.length < 10) return null;
-
-            const getField = (index) => dataArray[index] ? dataArray[index].trim() : '';
-
-            return {
-                base: getField(COL_BASE),
-                telugu_base: getField(COL_TELUGU_BASE),
-                third: getField(COL_THIRD),
-                telugu_third: getField(COL_TELUGU_THIRD),
-                ing: getField(COL_ING),
-                telugu_ing: getField(COL_TELUGU_ING),
-                simple: getField(COL_SIMPLE),
-                telugu_simple: getField(COL_TELUGU_SIMPLE),
-                participle: getField(COL_PARTICIPLE),
-                telugu_participle: getField(COL_TELUGU_PARTICIPLE),
-                source: 'custom' // Mark as custom
-            };
-        }
-
         function parseAndLoadVerbs() {
-            verbs = [];
-            
-            // Parse default verbs from fetched CSV data
-            if (initialCsvData && initialCsvData.trim() !== '') {
-                const lines = initialCsvData.trim().split('\n');
-                const dataLines = lines.slice(1);
+            let baseVerbs = [];
+            const lines = baseCsvContent.trim().split('\n');
+            const dataLines = lines.slice(1);
+            let validBaseVerbs = 0;
 
-                for (const line of dataLines) {
-                     // Simple check for line validity, adjust as needed
-                    if (line.split(',').length >= 10) { 
-                        const columns = line.split(',');
-                        const verb = createVerbObject(columns);
-                        if (verb && verb.base) {
-                            verb.source = 'initial'; // Mark as initial/default
-                            verbs.push(verb);
-                        }
-                    } else {
-                        console.warn("Skipping invalid CSV line:", line);
-                    }
+            dataLines.forEach(line => {
+                const columns = parseCSVLine(line);
+                const verb = createVerbObject(columns, false);
+                if (verb) {
+                    baseVerbs.push(verb);
+                    validBaseVerbs++;
                 }
-            } else {
-                 console.warn("Initial CSV data is empty or failed to load.");
-            }
+            });
             
-            // Load and add custom verbs from local storage
             const customVerbs = loadCustomVerbs();
-            verbs.push(...customVerbs); // Add custom verbs after default ones
-            
-            // Prepare the pool of questions for the quiz
-            let allIndices = Array.from({ length: verbs.length }, (_, i) => i);
-            shuffleArray(allIndices);
-
-             // Use the locally stored maxQuestions
-            const limit = Math.min(verbs.length, maxQuestions); 
-            verbIndicesPool = allIndices.slice(0, limit);
-            
-            // Update verb count display
-            const countEl = document.getElementById('current-verb-count');
-            if(countEl) countEl.textContent = verbs.length;
+            verbs = [...baseVerbs, ...customVerbs];
             
             isDataLoaded = true;
-            updateStartScreenMessage(); // Update UI now that data is ready
+            document.getElementById('current-question-count').textContent = verbs.length;
+            updateStartScreenMessage();
+            return validBaseVerbs;
         }
-        
+
         function renderUserDataList() {
             const listEl = document.getElementById('user-data-list');
-             if (!listEl) return; // Exit if element not found
             const customVerbs = loadCustomVerbs();
             listEl.innerHTML = '';
             
@@ -1538,13 +1839,14 @@
                 return;
             }
             
-            customVerbs.forEach((verb, index) => {
+            customVerbs.forEach((v, index) => {
                 const item = document.createElement('div');
-                item.className = 'flex justify-between items-center p-2 border-b dark-mode:border-gray-700 hover:bg-opacity-80 rounded-md transition duration-150';
+                item.className = 'flex justify-between items-start p-2 border-b dark-mode:border-gray-700 hover:bg-opacity-80 rounded-md transition duration-150';
                 item.innerHTML = `
-                    <span class="font-semibold text-primary dark-mode:text-primary-light">${verb.base}</span>
-                    <span class="text-xs text-gray-600 dark-mode:text-gray-400">(${verb.telugu_base || 'N/A'})</span>
-                    <button onclick="handleUiTapFeedback(); deleteCustomVerb(${index})" class="ripple-btn p-2 rounded-lg text-red-500 hover:text-red-700 text-sm">
+                    <div class="flex-1 min-w-0 mr-4">
+                        <span class="font-semibold text-primary dark-mode:text-primary-light line-clamp-1">${v.v1} / ${v.v3s} / ${v.ving} / ${v.v2} / ${v.v3}</span>
+                    </div>
+                    <button onclick="handleUiTapFeedback(); deleteCustomQuestion(${index})" class="ripple-btn p-2 rounded-lg text-red-500 hover:text-red-700 text-sm flex-shrink-0">
                         Remove
                     </button>
                 `;
@@ -1552,505 +1854,393 @@
             });
         }
         
-        window.deleteCustomVerb = function(index) {
+        window.deleteCustomQuestion = function(index) {
             const customVerbs = loadCustomVerbs();
             if (index >= 0 && index < customVerbs.length) {
                 customVerbs.splice(index, 1);
                 saveCustomVerbs(customVerbs);
-                parseAndLoadVerbs(); // Reload all verbs to update the total count and pool
-                renderUserDataList(); // Re-render the list in the modal
-                showDataFeedback('Verb removed successfully!', 'green');
+                renderUserDataList();
+                document.getElementById('current-question-count').textContent = verbs.length;
+                showDataFeedback('Verb removed successfully! Restart quiz to see change.', 'green');
             }
         }
         
-        window.saveNewVerbData = function() {
-            const inputIds = ['add-base', 'add-telugu-base', 'add-third', 'add-telugu-third', 'add-ing', 'add-telugu-ing', 'add-simple', 'add-telugu-simple', 'add-participle', 'add-telugu-participle'];
+        window.saveNewQuestionData = function() {
+            const inputIds = ['add-v1', 'add-v3s', 'add-ving', 'add-v2', 'add-v3'];
             const inputs = inputIds.map(id => document.getElementById(id));
-            
-             // Check if all input elements were found
-            if (inputs.some(input => !input)) {
-                console.error("One or more input fields for adding verbs not found.");
-                showDataFeedback('Error: Input fields missing.', 'red');
-                return;
-            }
-            
-            const values = inputs.map(input => input.value.trim());
+            const values = inputs.map(input => input.value.trim().toLowerCase()); // Standardize to lowercase
 
-            
             if (values.some(val => val === '')) {
-                showDataFeedback('Please fill in ALL 10 fields.', 'red');
+                showDataFeedback('Please fill in ALL 5 verb forms.', 'red');
                 return;
             }
+
+            const newVerb = createVerbObject(values, true);
             
-            const newVerb = createVerbObject(values); // Already marks source as 'custom'
-            if (!newVerb || !newVerb.base) {
-                 showDataFeedback('Failed to create verb object. Base form is missing.', 'red');
+            if (!newVerb) {
+                 showDataFeedback('Error creating verb object.', 'red');
                 return;
             }
 
             const customVerbs = loadCustomVerbs();
-            // Check against both custom and initial verbs to prevent duplicates
-            if (verbs.some(verb => normalize(verb.base) === normalize(newVerb.base))) {
-                showDataFeedback(`Error: Verb "${newVerb.base}" already exists.`, 'red');
+            
+            if (customVerbs.some(v => v.v1.toLowerCase() === newVerb.v1.toLowerCase())) {
+                showDataFeedback(`Error: Verb '${newVerb.v1}' already exists in your custom list.`, 'red');
                 return;
             }
             
             customVerbs.push(newVerb);
             saveCustomVerbs(customVerbs);
 
-            inputs.forEach(input => input.value = ''); // Clear inputs
-            parseAndLoadVerbs(); // Reload all verbs
-            renderUserDataList(); // Update modal list
-            showDataFeedback(`Verb "${newVerb.base}" added successfully!`, 'green');
+            inputs.forEach(input => input.value = '');
+            showDataFeedback(`Verb '${newVerb.v1}' added! Restart quiz to see change.`, 'green');
+            renderUserDataList();
         }
-        
+
+        window.refreshBaseData = async function() {
+            const feedbackEl = document.getElementById('refresh-feedback');
+            feedbackEl.className = 'text-center text-sm font-semibold mt-2 text-primary';
+            feedbackEl.textContent = 'Fetching latest Verbs.csv...';
+            feedbackEl.classList.remove('hidden');
+
+            try {
+                const response = await fetch(`Verbs.csv?t=${new Date().getTime()}`); 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const csvText = await response.text();
+                
+                localStorage.setItem(INITIAL_DEFAULT_DATA_KEY, csvText); 
+                baseCsvContent = csvText; // Update the in-memory content
+                const baseVerbCount = parseAndLoadVerbs(); 
+                
+                feedbackEl.className = 'text-center text-sm font-semibold mt-2 text-green-600';
+                feedbackEl.textContent = `Success! Reloaded ${baseVerbCount} base verbs (${verbs.length} total). Close this window to restart.`;
+                document.getElementById('current-question-count').textContent = verbs.length;
+
+            } catch (e) {
+                console.error("Failed to refresh Verbs.csv:", e);
+                feedbackEl.className = 'text-center text-sm font-semibold mt-2 text-red-600';
+                feedbackEl.textContent = 'Error: Could not fetch file. Please check connection and file location.';
+            }
+        }
+
+
         // --- Game Logic ---
         
         window.startQuiz = function() {
-            if (!isDataLoaded || verbs.length === 0) {
-                 console.warn("Attempted to start quiz, but data not loaded or verbs array is empty.");
-                updateStartScreenMessage();
+            let availableVerbs = verbs;
+            
+            if (availableVerbs.length < 4) {
+                document.getElementById('start-message').innerHTML = `Error: At least 4 verbs are needed to create a quiz. Please add more custom verbs or load the base data.`;
+                document.getElementById('loading-indicator').classList.remove('hidden');
+                document.getElementById('loading-indicator').textContent = '';
                 return;
             }
             
-            const startScreen = document.getElementById('start-screen');
-            const statusBar = document.getElementById('quiz-status-bar');
-            const questionArea = document.getElementById('question-area');
-            const actionButtons = document.getElementById('quiz-action-buttons');
-            const questionCounterEl = document.getElementById('question-counter');
-            const scoreDisplayEl = document.getElementById('score-display');
-
-            if (!startScreen || !statusBar || !questionArea || !actionButtons || !questionCounterEl || !scoreDisplayEl) {
-                 console.error("One or more essential quiz UI elements not found. Cannot start quiz.");
-                 return;
-            }
-
-            startScreen.classList.add('hidden');
-            statusBar.classList.remove('hidden');
-            questionArea.classList.remove('hidden');
-            actionButtons.classList.remove('hidden');
+            quizLimit = Math.min(maxQuestions, availableVerbs.length);
             
-            // Re-parse data and set up the question pool based on current maxQuestions
-            parseAndLoadVerbs(); 
+            shuffleArray(availableVerbs);
+            questionPool = availableVerbs.slice(0, quizLimit); 
             
-            const limit = Math.min(verbs.length, maxQuestions);
-            questionCounterEl.textContent = `0/${limit}`;
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-status-bar').classList.remove('hidden');
+            document.getElementById('question-area').classList.remove('hidden');
+            document.getElementById('quiz-action-buttons').classList.remove('hidden');
+            
+            document.getElementById('question-counter').textContent = `0/${quizLimit}`;
             
             score = 0;
             questionsAsked = 0;
             quizResults = [];
-            scoreDisplayEl.textContent = score;
+            document.getElementById('score-display').textContent = score;
             
-            startNextQuestion(); // Start the first question
+            startNextQuestion();
         }
 
         window.startNextQuestion = function() {
-             // Check if the game should end
-            if (questionsAsked >= maxQuestions || verbIndicesPool.length === 0) {
+            
+            if (questionsAsked >= quizLimit || questionPool.length === 0) {
                 endGame();
                 return;
             }
 
-            // Reset UI elements for the new question
-            const feedbackMsg = document.getElementById('feedback-message');
-            const finalResults = document.getElementById('final-results');
+            document.getElementById('feedback-message').textContent = '';
+            document.getElementById('final-results').classList.add('hidden');
+            document.getElementById('explanation-area').classList.add('hidden');
+            
             const mainButton = document.getElementById('main-action-button');
-            const skipButton = document.getElementById('skip-button');
-
-             if (!feedbackMsg || !finalResults || !mainButton || !skipButton) {
-                 console.error("Required UI elements for next question not found.");
-                 return;
-             }
-
-            feedbackMsg.textContent = '';
-            finalResults.classList.add('hidden');
-
-            mainButton.textContent = 'Check Answer';
-            mainButton.onclick = () => { handleUiTapFeedback(); processAnswer(false); };
-            mainButton.disabled = true; // Disable until user types something
+            mainButton.textContent = 'Select an Answer';
+            mainButton.disabled = true;
             
-            skipButton.disabled = false;
+            document.querySelectorAll('.mc-option').forEach(btn => {
+                btn.classList.remove('selected', 'locked', 'correct', 'incorrect');
+            });
 
-            // Select the next verb randomly from the remaining pool
-            // const poolIndex = Math.floor(Math.random() * verbIndicesPool.length); // Already shuffled, just take the next one
-            const verbIndex = verbIndicesPool[questionsAsked]; // Get index based on how many asked
-            
-            // verbIndicesPool.splice(poolIndex, 1); // No need to splice if we take sequentially from shuffled pool
-            
-            currentVerb = verbs[verbIndex];
-            if (!currentVerb) {
-                 console.error(`Error: Could not retrieve verb at index ${verbIndex}. Pool size: ${verbIndicesPool.length}, questions asked: ${questionsAsked}`);
-                 endGame(); // End game if verb data is missing
-                 return;
-            }
+            quizPhase = 'select';
+            selectedOption = null;
+
+            const correctVerb = questionPool.shift(); 
             questionsAsked++;
 
-            // Randomly choose which verb form to hide/ask for
-            const formKeys = Object.keys(FORM_KEYS);
-            const hiddenFormIndex = Math.floor(Math.random() * formKeys.length);
-            hiddenFormKey = formKeys[hiddenFormIndex];
+            // --- Generate the Question ---
+            let questionTense = selectedTense;
+            const allTenses = ['v1', 'v3s', 'ving', 'v2', 'v3'];
+            
+            if (questionTense === 'all') {
+                 questionTense = allTenses[Math.floor(Math.random() * allTenses.length)];
+            }
+            
+            // Determine the question and answer forms
+            const questionForm = 'v1'; // Always ask for the V1 form
+            const answerForm = questionTense;
+            
+            const questionText = `What is the **${getLabel('tense', answerForm)}** of **${correctVerb[questionForm]}**?`;
+            const correctAnswer = correctVerb[answerForm];
+            
+            // Get 3 incorrect options from other verbs
+            let otherVerbs = verbs.filter(v => v.v1 !== correctVerb.v1);
+            let incorrectOptions = getRandomItems(otherVerbs, 3).map(v => v[answerForm]);
+            
+            // Add the correct answer and shuffle
+            let allOptions = [correctAnswer, ...incorrectOptions];
+            shuffleArray(allOptions);
 
-            renderQuestion(); // Display the question UI
-            updateProgressBar(); // Update the progress bar
+            currentQuestionData = {
+                text: questionText,
+                teluguHint: `(${correctVerb.telugu[questionForm]} -> ${correctVerb.telugu[answerForm]})`,
+                options: {
+                    A: allOptions[0],
+                    B: allOptions[1],
+                    C: allOptions[2],
+                    D: allOptions[3],
+                },
+                correct: '', // We'll find this next
+                explanation: `The ${getLabel('tense', answerForm)} of '${correctVerb.v1}' is '${correctAnswer}'.`
+            };
+            
+            // Find the letter of the correct answer
+            for (const [letter, optionText] of Object.entries(currentQuestionData.options)) {
+                if (optionText === correctAnswer) {
+                    currentQuestionData.correct = letter;
+                    break;
+                }
+            }
+            
+            // Fallback in case of duplicate options (highly unlikely but safe)
+            if (!currentQuestionData.correct) {
+                currentQuestionData.options.A = correctAnswer;
+                currentQuestionData.correct = 'A';
+            }
+            // --- End Question Generation ---
+
+            renderQuestion();
+            updateProgressBar();
         }
 
+
         function renderQuestion() {
-            const questionArea = document.getElementById('question-area');
-            const questionCounterEl = document.getElementById('question-counter');
+            if (!currentQuestionData) return;
 
-            if (!questionArea || !questionCounterEl) {
-                console.error("Question area or counter element not found.");
-                return;
-            }
-             if (!currentVerb || !hiddenFormKey) {
-                 questionArea.innerHTML = '<p class="text-center text-red-500">Error: Could not load question data.</p>';
-                 console.error("Error rendering question: currentVerb or hiddenFormKey is null.");
-                 return;
-             }
+            document.getElementById('question-counter').textContent = `${questionsAsked}/${quizLimit}`;
+            
+            document.getElementById('question-text').innerHTML = currentQuestionData.text;
+            document.getElementById('question-metadata').textContent = `Telugu Hint: ${currentQuestionData.teluguHint}`;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            const letters = ['A', 'B', 'C', 'D'];
+            
+            letters.forEach(letter => {
+                const optionText = currentQuestionData.options[letter];
+                
+                const button = document.createElement('button');
+                button.textContent = `${letter}: ${optionText}`;
+                button.className = 'mc-option ripple-btn w-full text-left px-4 py-3 rounded-xl shadow-md';
+                button.dataset.letter = letter;
+                button.onclick = (e) => handleOptionSelection(e.currentTarget, letter);
+                
+                optionsContainer.appendChild(button);
+            });
+        }
+        
+        window.handleOptionSelection = function(button, letter) {
+            if (quizPhase !== 'select') return;
+            handleUiTapFeedback();
+            
+            selectedOption = letter;
 
-            const teluguKey = TELUGU_KEYS[hiddenFormKey];
-            const givenFormValue = currentVerb[hiddenFormKey] || '[Form missing]'; // Fallback
-            const teluguMeaning = currentVerb[teluguKey] || 'N/A'; // Fallback
+            document.querySelectorAll('.mc-option').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+            
+            document.getElementById('main-action-button').textContent = 'Check Answer';
+            document.getElementById('main-action-button').disabled = false;
+        }
 
-            let html = '';
-
-            const limit = Math.min(verbs.length, maxQuestions);
-            questionCounterEl.textContent = `${questionsAsked}/${limit}`;
-
-            const hideTelugu = getLocalSetting('hideTelugu', false); // Use local setting
-            const teluguDisplayClass = hideTelugu ? 'opacity-0 h-0 p-0 m-0 invisible' : 'opacity-100 h-auto visible'; // Added invisible
-
-            // Display the given form and its Telugu meaning (conditionally)
-            html += `<div class="prompt-box p-4 rounded-xl border-2 border-primary text-center mb-4">
-                        <p class="text-xl font-semibold mb-1 dark-mode:text-gray-100">Given Form: <span class="text-2xl font-bold text-primary">${givenFormValue}</span></p>
-                        <p class="text-sm text-indigo-700 dark-mode:text-gray-300">(${FORM_KEYS[hiddenFormKey]})</p>
-                        <p class="text-base text-gray-800 mt-2 dark-mode:text-gray-200 transition-all duration-300 ${teluguDisplayClass}">Telugu: <span class="font-bold text-primary">${teluguMeaning}</span></p>
-                    </div>`;
-
-            // Create input fields for the other forms
-            html += '<div class="space-y-4">';
-            let firstInputId = null; 
-
-            for (const key of Object.keys(FORM_KEYS)) {
-                if (key !== hiddenFormKey) { // Don't show input for the given form
-                    const label = FORM_KEYS[key];
-                    const inputId = `input-${key}`;
-                    
-                    if (firstInputId === null) {
-                        firstInputId = inputId; // Mark the first input for autofocus
-                    }
-
-                    const autofocusAttr = (firstInputId === inputId) ? 'autofocus' : ''; 
-
-                    html += `
-                        <div class="flex flex-col">
-                            <label for="${inputId}" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 mb-1">${label}</label>
-                            <input type="text" id="${inputId}" placeholder="Enter the ${label}" 
-                                   class="w-full p-3 border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150"
-                                   data-form-key="${key}" 
-                                   oninput="document.getElementById('main-action-button').disabled = false; document.getElementById('skip-button').disabled = false;"
-                                   ${autofocusAttr}>
-                            <span id="result-${key}" class="text-xs mt-1 font-medium italic"></span>
-                        </div>
-                    `;
-                }
-            }
-
-            html += '</div>';
-            questionArea.innerHTML = html; // Update the DOM
-            applyInputStyles(); // Ensure inputs match current style setting
-
-            // Focus the first input field
-            if (firstInputId) {
-                const firstInput = document.getElementById(firstInputId);
-                if (firstInput) {
-                    // Timeout helps ensure the element is fully rendered before focusing
-                    setTimeout(() => firstInput.focus(), 100); 
-                }
+        window.processAction = function() {
+            if (quizPhase === 'select') {
+                processAnswer();
+            } else if (quizPhase === 'next') {
+                startNextQuestion();
             }
         }
         
-        window.processAnswer = function(isSkipped = false) {
-             if (!currentVerb) {
-                 console.error("Cannot process answer: currentVerb is null.");
-                 return;
-             }
+        function processAnswer() {
+            if (!currentQuestionData || !selectedOption) {
+                document.getElementById('feedback-message').textContent = 'Please select an answer first.';
+                document.getElementById('feedback-message').className = 'text-base font-medium text-red-500';
+                return;
+            }
 
             const mainButton = document.getElementById('main-action-button');
-            const skipButton = document.getElementById('skip-button');
-            const feedbackMsg = document.getElementById('feedback-message');
-            const scoreDisplayEl = document.getElementById('score-display');
-
-             if (!mainButton || !skipButton || !feedbackMsg || !scoreDisplayEl) {
-                 console.error("Cannot process answer: one or more required UI elements missing.");
-                 return;
-             }
-
-            mainButton.disabled = true; // Prevent multiple clicks
-            skipButton.disabled = true; 
+            const isCorrect = (selectedOption === currentQuestionData.correct);
+            const correctLetter = currentQuestionData.correct;
             
-            let allCorrect = true;
-            let correctCount = 0;
-            
-            const FORM_TO_TELUGU_KEY = {
-                'base': 'telugu_base', 'third': 'telugu_third', 'ing': 'telugu_ing', 
-                'simple': 'telugu_simple', 'participle': 'telugu_participle'
-            };
+            quizPhase = 'next';
+            document.querySelectorAll('.mc-option').forEach(btn => btn.classList.add('locked'));
 
-
-            let questionResults = {
-                questionNumber: questionsAsked,
-                verb: currentVerb.base,
-                hiddenForm: FORM_KEYS[hiddenFormKey],
-                hiddenFormTelugu: currentVerb[TELUGU_KEYS[hiddenFormKey]] || 'N/A',
-                allCorrect: true, 
-                forms: [], 
-                correctCount: 0,
-                skipped: isSkipped,
-            };
-
-            const inputElements = document.querySelectorAll('#question-area input');
-
-            inputElements.forEach(input => {
-                const key = input.dataset.formKey;
-                 if (!key) {
-                     console.warn("Input element missing data-form-key:", input);
-                     return; // Skip this input if key is missing
-                 }
-                const userInput = normalize(input.value);
-                const correctEnglish = currentVerb[key] || ''; // Get correct answer from verb object
-                const correctAnswers = correctEnglish.split('/').map(normalize).filter(a => a.length > 0); // Handle multiple answers like 'got/gotten'
+            document.querySelectorAll('.mc-option').forEach(btn => {
+                const letter = btn.dataset.letter;
                 
-                const teluguMeaningKey = FORM_TO_TELUGU_KEY[key];
-                const teluguMeaning = currentVerb[teluguMeaningKey] || 'N/A'; // Get Telugu meaning
-
-                const isCorrect = correctAnswers.some(correct => correct === userInput) && userInput.length > 0;
-                
-                // Store result details for this specific form
-                questionResults.forms.push({
-                    key: FORM_KEYS[key],
-                    userInput: input.value, // Store original user input
-                    correctAnswer: correctEnglish,
-                    isCorrect: isSkipped ? false : isCorrect,
-                    teluguMeaning: teluguMeaning 
-                });
-
-                const resultSpan = document.getElementById(`result-${key}`);
-                 if (!resultSpan) {
-                     console.warn(`Result span not found for key: ${key}`);
-                     return; // Skip if result span is missing
-                 }
-
-                input.readOnly = true; // Disable input after checking
-                input.classList.remove('focus:ring-primary-hex', 'focus:border-primary-hex', 'border-gray-300', 'dark-mode:border-gray-600');
-                
-                // Provide visual feedback
-                if (isSkipped) {
-                    input.value = correctEnglish; // Show correct answer if skipped
-                    input.classList.add('incorrect'); // Style as incorrect (visually)
-                    resultSpan.textContent = `Skipped. Correct: ${correctEnglish} (${teluguMeaning})`;
-                    resultSpan.className = 'text-xs mt-1 font-medium italic text-yellow-600 dark:text-yellow-400';
-                    allCorrect = false;
-                } else if (isCorrect) {
-                    input.classList.add('correct');
-                    resultSpan.textContent = `Correct! (${teluguMeaning})`;
-                     resultSpan.className = 'text-xs mt-1 font-medium italic text-green-600 dark:text-green-400';
-                    correctCount++;
+                if (letter === correctLetter) {
+                    btn.classList.add('correct');
+                    btn.classList.remove('selected');
+                } else if (letter === selectedOption) {
+                    btn.classList.add('incorrect');
                 } else {
-                    input.classList.add('incorrect');
-                    resultSpan.textContent = `Incorrect. Correct: ${correctEnglish} (${teluguMeaning})`;
-                    resultSpan.className = 'text-xs mt-1 font-medium italic text-red-500 dark:text-red-400';
-                    allCorrect = false;
+                    btn.classList.remove('selected');
                 }
             });
 
-            // Update overall question result
-            questionResults.allCorrect = allCorrect;
-            questionResults.correctCount = correctCount;
-            quizResults.push(questionResults); // Add to the list of results
+            if (isCorrect) {
+                score++;
+                document.getElementById('feedback-message').textContent = 'Correct! Fantastic work!';
+                document.getElementById('feedback-message').className = 'text-base font-medium text-green-600';
+                playCorrect();
+                vibrateCorrect();
+            } else {
+                document.getElementById('feedback-message').textContent = `Incorrect. The correct answer was ${correctLetter}.`;
+                document.getElementById('feedback-message').className = 'text-base font-medium text-red-500';
+                playIncorrect();
+                vibrateIncorrect();
+            }
+            document.getElementById('score-display').textContent = score;
             
-            // Provide overall feedback and update score
-            if (!isSkipped) {
-                if (allCorrect) {
-                    score++;
-                    feedbackMsg.textContent = 'Perfect! All forms correct.';
-                    feedbackMsg.className = 'text-base font-medium text-right text-green-600 dark:text-green-400';
-                    playCorrect();
-                    vibrateCorrect();
-                } else {
-                    feedbackMsg.textContent = `Got ${correctCount} / ${Object.keys(FORM_KEYS).length - 1} correct.`;
-                    feedbackMsg.className = 'text-base font-medium text-right text-red-500 dark:text-red-400';
-                    playIncorrect();
-                    vibrateIncorrect();
-                }
-            } else {
-                feedbackMsg.textContent = 'Question Skipped.';
-                feedbackMsg.className = 'text-base font-medium text-right text-yellow-600 dark:text-yellow-400';
-                 // Optionally play a skip sound/vibration here
-            }
+            document.getElementById('explanation-text').innerHTML = currentQuestionData.explanation;
+            document.getElementById('explanation-area').classList.remove('hidden');
 
-
-            scoreDisplayEl.textContent = score; // Update score display
-
-            // Change main button text and action
-            if (questionsAsked >= maxQuestions || verbIndicesPool.length === 0) {
+            if (questionsAsked >= quizLimit) {
                 mainButton.textContent = 'Finish Quiz';
-                mainButton.onclick = () => { handleUiTapFeedback(); endGame(); };
             } else {
-                mainButton.textContent = 'Next Verb';
-                mainButton.onclick = startNextQuestion; // Set to load next question
+                mainButton.textContent = 'Next Question';
             }
-            mainButton.disabled = false; // Re-enable button
+            mainButton.disabled = false;
+            
+            quizResults.push({
+                questionNumber: questionsAsked,
+                question: currentQuestionData.text,
+                selected: selectedOption,
+                correct: correctLetter,
+                isCorrect: isCorrect,
+                explanation: currentQuestionData.explanation
+            });
         }
         
         window.endGame = function() {
-            const questionArea = document.getElementById('question-area');
-            const actionButtons = document.getElementById('quiz-action-buttons');
-            const statusBar = document.getElementById('quiz-status-bar');
-            const finalResultsEl = document.getElementById('final-results');
-            const feedbackMsg = document.getElementById('feedback-message');
-
-             if (!questionArea || !actionButtons || !statusBar || !finalResultsEl || !feedbackMsg) {
-                 console.error("Cannot end game: one or more required UI elements missing.");
-                 return;
-             }
-
-            questionArea.innerHTML = ''; // Clear question area
-            questionArea.classList.add('hidden'); // Hide question area
-            actionButtons.classList.add('hidden'); // Hide action buttons
-            statusBar.classList.add('hidden'); // Hide score/progress bar
-            feedbackMsg.textContent = ''; // Clear feedback message
+            document.getElementById('question-area').classList.add('hidden');
+            document.getElementById('quiz-action-buttons').classList.add('hidden');
+            document.getElementById('quiz-status-bar').classList.add('hidden');
             
-            updateProgressBar(); // Update progress bar one last time (should be 100%)
+            document.getElementById('feedback-message').textContent = '';
+            
+            updateProgressBar();
 
-            const percentage = maxQuestions > 0 ? ((score / maxQuestions) * 100).toFixed(1) : 0.0;
+            const totalQuestions = quizLimit;
+            const percentage = totalQuestions > 0 ? ((score / totalQuestions) * 100).toFixed(1) : 0.0;
+            const statusColorClass = (percentage >= 70) ? 'text-green-700' : (percentage >= 40 ? 'text-yellow-700' : 'text-red-700');
+            const resultBgClass = (percentage >= 70) ? 'bg-green-300/40 border-green-300' : (percentage >= 40 ? 'bg-yellow-300/40 border-yellow-300' : 'bg-red-300/40 border-red-300');
+
 
             let resultsHTML = `
-                <h3 class="text-2xl font-bold text-yellow-800 dark:text-yellow-300 mb-2">Quiz Complete!</h3>
+                <h3 class="text-2xl font-bold ${statusColorClass} mb-2">Quiz Complete!</h3>
                 <p class="text-lg text-gray-700 dark-mode:text-gray-300 mb-4">
                     Your Final Score: <span class="font-bold text-2xl text-primary">${score}</span> 
-                    out of <span class="font-bold text-2xl text-primary">${maxQuestions}</span> questions!
+                    out of <span class="font-bold text-2xl text-primary">${totalQuestions}</span> questions!
                 </p>
                 <p class="text-xl font-bold text-gray-900 dark-mode:text-gray-100 mb-4">
                     Percentage: <span class="text-3xl text-primary">${percentage}%</span>
                 </p>
                 
                 <div class="border-t pt-4 mt-4 border-gray-300 dark-mode:border-gray-700 text-left">
-                    <h4 class="text-lg font-bold text-gray-900 dark-mode:text-gray-100 mb-3">Detailed Results:</h4>
+                    <h4 class="text-lg font-bold text-gray-900 dark-mode:text-gray-100 mb-3">Detailed Summary:</h4>
                     
                     <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
             `;
 
-            // Iterate through stored results and build HTML
             quizResults.forEach(result => {
-                let statusClass = '';
-                let statusText = '';
-                
-                if (result.skipped) {
-                    statusClass = 'bg-yellow-100 dark-mode:bg-yellow-900/40 border-yellow-400';
-                    statusText = 'SKIPPED';
-                } else if (result.allCorrect) {
-                    statusClass = 'bg-green-100 dark-mode:bg-green-900/40 border-green-400';
-                    statusText = 'CORRECT';
-                } else {
-                    statusClass = 'bg-red-100 dark-mode:bg-red-900/40 border-red-400';
-                    statusText = `INCORRECT (${result.correctCount}/${result.forms.length})`;
-                }
-
+                const statusClass = result.isCorrect ? 'bg-green-100 dark-mode:bg-green-900/40 border-green-400' : 'bg-red-100 dark-mode:bg-red-900/40 border-red-400';
+                const statusText = result.isCorrect ? 'CORRECT' : 'INCORRECT';
 
                 resultsHTML += `
                     <div class="p-3 rounded-xl border-2 ${statusClass}">
-                        <p class="font-bold text-lg flex justify-between items-center mb-1 text-gray-800 dark:text-gray-100">
-                            <span>Q${result.questionNumber}: ${result.verb}</span>
-                            <span class="text-sm font-extrabold ${result.allCorrect ? 'text-green-700 dark:text-green-400' : (result.skipped ? 'text-yellow-700 dark:text-yellow-400' : 'text-red-700 dark:text-red-400')}">${statusText}</span>
+                        <p class="font-bold text-lg flex justify-between items-center mb-1">
+                            <span>Q${result.questionNumber}</span>
+                            <span class="text-sm font-extrabold ${result.isCorrect ? 'text-green-700 dark-mode:text-green-400' : 'text-red-700 dark-mode:text-red-400'}">${statusText}</span>
                         </p>
-                        <p class="text-sm italic text-primary dark-mode:text-primary-light mb-2">
-                           Given: ${result.hiddenForm} (${result.hiddenFormTelugu || 'N/A'})
+                        <p class="text-sm italic text-gray-800 dark-mode:text-gray-200 mb-2">
+                            ${result.question}
                         </p>
-                        <ul class="text-sm space-y-1 pl-2">
+                        <p class="text-xs text-gray-600 dark-mode:text-gray-400">
+                            You chose: <span class="${result.isCorrect ? 'text-green-700' : 'text-red-700'}">${result.selected}</span> | 
+                            Correct: <span class="text-green-700">${result.correct}</span>
+                        </p>
+                    </div>
                 `;
-
-                // Display each form's result within the question
-                result.forms.forEach(form => {
-                    const formStatusClass = form.isCorrect ? 'text-green-700 dark:text-green-300' : (result.skipped ? 'text-yellow-700 dark:text-yellow-300' : 'text-red-700 dark:text-red-300');
-                    const userDisplay = form.userInput.trim() ? `"${form.userInput}"` : '<span class="text-gray-500 dark:text-gray-500">[No Answer]</span>';
-                    
-                    const correctDetails = (!form.isCorrect && !result.skipped) 
-                        ? `<span class="text-xs text-gray-600 dark:text-gray-400">(Correct: ${form.correctAnswer} - ${form.teluguMeaning || 'N/A'})</span>`
-                        : `<span class="text-xs text-gray-600 dark:text-gray-400">(${form.teluguMeaning || 'N/A'})</span>`;
-
-                    resultsHTML += `
-                        <li class="border-t border-gray-200 dark-mode:border-gray-700 pt-1">
-                            <span class="font-semibold text-gray-800 dark-mode:text-gray-200">${form.key}:</span> 
-                            <span class="${formStatusClass}">${userDisplay}</span> 
-                            ${correctDetails}
-                        </li>
-                    `;
-                });
-
-                resultsHTML += `</ul></div>`;
             });
 
             resultsHTML += `
                     </div>
                 </div>
-                <button onclick="handleUiTapFeedback(); resetQuizAndReloadData()" 
-                        class="ripple-btn mt-6 px-6 py-3 bg-primary text-white font-bold rounded-xl shadow-lg hover:opacity-90 transition duration-150">
-                    Start New Quiz
-                </button>
+                <button onclick="handleUiTapFeedback(); resetQuizAndReloadData()" class="mt-4 inline-block text-primary font-semibold hover:underline">Start a new quiz?</button>
             `;
             
-            finalResultsEl.innerHTML = resultsHTML;
-            finalResultsEl.classList.remove('hidden'); // Show the results section
+            document.getElementById('final-results').innerHTML = resultsHTML;
+            document.getElementById('final-results').className = `hidden mt-8 text-center p-4 liquid-glass-card border-2 ${resultBgClass}`;
+            document.getElementById('final-results').classList.remove('hidden');
         }
         
         window.resetQuizAndReloadData = function() {
-            // Reset game state variables
             score = 0;
             questionsAsked = 0;
             quizResults = [];
-            currentVerb = null;
+            currentQuestionData = null;
+            selectedOption = null;
+            quizPhase = 'select';
             
-            // Hide game elements, show start screen
-            const statusBar = document.getElementById('quiz-status-bar');
-            const questionArea = document.getElementById('question-area');
-            const actionButtons = document.getElementById('quiz-action-buttons');
-            const finalResults = document.getElementById('final-results');
-            const startScreen = document.getElementById('start-screen');
-            const scoreDisplayEl = document.getElementById('score-display');
-            const feedbackMsg = document.getElementById('feedback-message');
+            document.getElementById('quiz-status-bar').classList.add('hidden');
+            document.getElementById('question-area').classList.add('hidden');
+            document.getElementById('quiz-action-buttons').classList.add('hidden');
+            document.getElementById('final-results').classList.add('hidden');
 
-
-            if(statusBar) statusBar.classList.add('hidden');
-            if(questionArea) questionArea.classList.add('hidden');
-            if(actionButtons) actionButtons.classList.add('hidden');
-            if(finalResults) finalResults.classList.add('hidden');
-            if(startScreen) startScreen.classList.remove('hidden');
-            if(scoreDisplayEl) scoreDisplayEl.textContent = score;
-            if(feedbackMsg) feedbackMsg.textContent = '';
+            document.getElementById('start-screen').classList.remove('hidden');
             
-             // Re-parse and set up verb pool based on current settings
+            document.getElementById('score-display').textContent = score;
+            document.getElementById('feedback-message').textContent = '';
+            
             parseAndLoadVerbs(); 
-            updateProgressBar(); // Reset progress bar
         }
 
         function updateProgressBar() {
             const progressBar = document.getElementById('progress-bar');
-            if (!progressBar) return; // Exit if not found
-            const totalQuestions = Math.min(verbs.length, maxQuestions); 
+            const totalQuestions = quizLimit; 
             
             let percentage = 0;
-             // Prevent division by zero if maxQuestions or totalQuestions is 0
-            if (totalQuestions > 0) { 
-                // Ensure questionsAsked doesn't exceed totalQuestions for calculation
-                const currentProgress = Math.min(questionsAsked, totalQuestions); 
-                percentage = (currentProgress / totalQuestions) * 100;
-            } else if (questionsAsked > 0) {
-                 // If totalQuestions is somehow 0 but we asked questions, show 100%
-                 percentage = 100; 
+            if (totalQuestions > 0) {
+                percentage = (questionsAsked / totalQuestions) * 100;
             }
             
-            percentage = Math.max(0, Math.min(100, percentage)); // Clamp between 0 and 100
+            percentage = Math.max(0, Math.min(100, percentage));
             progressBar.style.width = `${percentage}%`;
         }
         
@@ -2058,8 +2248,6 @@
             const messageEl = document.getElementById('start-message');
             const startButton = document.getElementById('start-quiz-button');
             const indicator = document.getElementById('loading-indicator');
-
-            if (!messageEl || !startButton || !indicator) return; // Exit if elements missing
 
             if (!isDataLoaded) {
                  messageEl.textContent = 'Loading verb data...';
@@ -2069,14 +2257,25 @@
             }
 
             indicator.classList.add('hidden');
+            
+            updateQuizLengthButton();
+            updateTenseLevelButton();
 
+            let availableCount = verbs.length;
+            
+            const effectiveLimit = Math.min(maxQuestions, availableCount);
+            
             if (verbs.length === 0) {
-                messageEl.textContent = 'Error: No verb data loaded. Add custom verbs or check verbs.csv file.';
+                messageEl.innerHTML = 'Error: No verbs available. Please add custom data to start a quiz.';
                 startButton.disabled = true;
+            } else if (effectiveLimit < 4) {
+                 messageEl.innerHTML = `Warning: At least 4 verbs are needed to create a quiz. You only have ${availableCount}. Please add more data.`;
+                 startButton.disabled = true;
             } else {
-                 // Use the locally stored maxQuestions for the message
-                const limit = Math.min(verbs.length, maxQuestions); 
-                messageEl.innerHTML = `Ready to test your knowledge? Challenge yourself with **${limit} questions**.`;
+                const quizLengthText = effectiveLimit < maxQuestions 
+                    ? `(limited by available data)` 
+                    : ``;
+                messageEl.innerHTML = `Your next quiz will contain **${effectiveLimit}** questions on **${getLabel('tense', selectedTense)}** ${quizLengthText}.`;
                 startButton.disabled = false;
             }
         }
@@ -2084,15 +2283,15 @@
         // Initialize the game when the window loads
         window.onload = async () => {
             setupAudio();
-            loadInitialTheme(); // Applies global settings on load
+            loadInitialSettings(); // UPDATED: Applies global settings on load
             await fetchVerbData(); // Wait for the CSV to load
             parseAndLoadVerbs(); // Parse CSV and custom verbs
 
-            // Listen for system theme changes ONLY if mode is 'system'
+            // Listen for system theme changes ONLY if mode is 'auto' (hub's key)
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-                const currentSetting = getGlobalSetting('theme', 'system');
-                if (currentSetting === 'system') {
-                    applyTheme(); // Re-apply theme based on new system setting
+                const currentSetting = getGlobalSetting('theme', 'auto'); // Hub uses 'auto'
+                if (currentSetting === 'auto') {
+                    applyTheme(event.matches); // Re-apply theme based on new system setting
                 }
             });
 
@@ -2100,14 +2299,22 @@
             window.addEventListener('storage', (event) => {
                 if (event.key === GLOBAL_SETTINGS_KEY) {
                     // Settings changed in another tab. Apply them here.
-                    applyGlobalSettings();
+                    console.log("Global settings changed in another tab. Applying...");
+                    loadInitialSettings(); // UPDATED: Re-load all settings
                 }
-                 // Optional: Listen for local setting changes if needed for things like maxQuestions
-                 // if (event.key === 'quizSettings') {
-                 //    maxQuestions = getLocalSetting('maxQuestions', DEFAULT_MAX_QUESTIONS);
-                 //    updateQuizLengthButton();
-                 //    updateStartScreenMessage();
-                 // }
+                 if (event.key === SETTINGS_KEY) {
+                    // Game-specific settings changed (e.g., sound)
+                    console.log("Local settings changed in another tab. Applying...");
+                    loadInitialSettings(); // Re-load all settings
+                 }
+            });
+            
+            // NEW: Added pageshow listener from hub to handle bfcache (back/forward)
+            window.addEventListener('pageshow', function(event) {
+                if (event.persisted) {
+                    console.log("Page shown from bfcache. Reloading settings.");
+                    loadInitialSettings();
+                }
             });
         };
 
@@ -2115,3 +2322,4 @@
 
 </body>
 </html>
+
