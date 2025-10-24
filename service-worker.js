@@ -4,18 +4,19 @@
 // --- THE MOST IMPORTANT PART ---\
 // -------------------------------------------------------------------------\
 // This cache version number is the "magic key" to updating your app.
-// Your old file said 'v26'. I have changed it to 'v35'.
+// We just updated 'spoken english.html', so I have changed the
+// version from 'v35' to 'v36'.
 //
 // **YOUR GOLDEN RULE:**
 // Every time you change ANY file (like spoken english.html or data.csv)
 // and upload it, you MUST come into this file and
-// increment this version number (e.g., to 'v36', then 'v37', etc.).
+// increment this version number (e.g., to 'v37', then 'v38', etc.).
 //
 // This tells the browser your app has an update, forcing it
 // to delete the old cache and download all the new files.
 // If you don't change this, the browser will *always* use the old files.
 // -------------------------------------------------------------------------\
-const CACHE_NAME = 'my-pwa-cache-v35'; // <-- I updated this from v26 to v35!
+const CACHE_NAME = 'my-pwa-cache-v36'; // <-- I updated this from v35 to v36!
 
 // This is the list of all the files that will be saved for offline use.
 const urlsToCache = [
@@ -26,7 +27,7 @@ const urlsToCache = [
   'Verbs game.html',
   'English vocabulary game.html',
   'data.csv',
-  'data2.csv', // <-- ADDED this new file
+  'data2.csv',
   'manifest.json'
   // NOTE: If you add any images, CSS, or new HTML files, add them here!
 ];
@@ -63,12 +64,12 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   console.log('[Service Worker] Activate event starting.');
   event.waitUntil(
-    // Get all the existing cache "keys" (which are the cache names, like 'v34', 'v35')\
+    // Get all the existing cache "keys" (which are the cache names, like 'v35', 'v36')\
     caches.keys().then(cacheNames => {
       // We use Promise.all to wait for all deletion promises to complete.\
       return Promise.all(
         cacheNames.map(cacheName => {
-          // If the cache name is old (e.g., 'v34' after 'v35' is activated), delete it.\
+          // If the cache name is old (e.g., 'v35' after 'v36' is activated), delete it.\
           if (cacheName !== CACHE_NAME) {
             console.log('[Service Worker] Deleting old cache:', cacheName);
             return caches.delete(cacheName);

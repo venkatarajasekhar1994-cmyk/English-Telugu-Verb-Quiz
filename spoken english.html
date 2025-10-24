@@ -204,7 +204,7 @@
                 </button>
             </div>
             
-            <!-- ***** MODIFIED: Lesson Tips (Now Clickable) ***** -->
+            <!-- Lesson Tips (Clickable) -->
             <div id="lesson-tips-container" class="hidden text-left p-4 rounded-lg button-bg-color mt-6 glass-effect cursor-pointer hover:bg-white/10 transition-colors duration-200">
                 <div class_="flex justify-between items-center">
                     <h3 id="lesson-tip-title" class="font-bold text-lg text-white mb-2">Lesson Focus:</h3>
@@ -321,8 +321,20 @@
                  </div>
              </div>
              
-             <!-- Restart Button -->
-             <button id="restart-quiz-button" class="w-full mt-6 accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 transition-opacity">Play Again</button>
+             <!-- ***** MODIFIED: Action Buttons ***** -->
+             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- "Next Class" button (conditionally shown) -->
+                <button id="next-class-button" class="hidden w-full accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 transition-opacity">
+                    Move to Next Class
+                </button>
+                
+                <!-- "Play Again" button (always shown) -->
+                <!-- This button will span full width if "Next Class" is hidden -->
+                <button id="restart-quiz-button" class="w-full button-bg-color text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:button-hover-bg transition-opacity sm:col-span-1">
+                    Play Again (This Class)
+                </button>
+            </div>
+            <!-- ***** END OF MODIFICATION ***** -->
         </div>
     </div>
 
@@ -407,7 +419,7 @@
         </div>
     </div>
     
-    <!-- ***** NEW: Lesson Details Modal ***** -->
+    <!-- Lesson Details Modal -->
     <div id="lesson-details-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
          <div class="rounded-2xl shadow-xl p-6 w-full max-w-2xl max-h-[80vh] flex flex-col modal-glass">
              <div class="flex justify-between items-center mb-4">
@@ -437,8 +449,10 @@
         let aiFeedbackSection, aiLoadingIndicator, aiContent, aiError, feedbackEnEl, feedbackTeEl, coachingEnEl, coachingTeEl, tipsEnEl, tipsTeEl;
         // Offline Message Element
         let aiOfflineMessage;
-        // ***** NEW: Lesson Details Modal Elements *****
+        // Lesson Details Modal Elements
         let lessonDetailsModal, closeLessonDetailsModalBtn, lessonDetailsTitle, lessonDetailsContent;
+        // ***** NEW: Next Class Button Element *****
+        let nextClassButton;
 
 
         // --- State ---
@@ -447,7 +461,6 @@
         let currentQuestionIndex = 0;
         let score = 0;
         let isDataLoaded = false;
-        // ***** NEW: Flag for data2.csv *****
         let isLessonDataLoaded = false; 
         let selectedClass = 1;
         let maxQuestions = 10;
@@ -462,7 +475,6 @@
         // Use the same global settings key as game hub.html
         const SETTINGS_KEY = 'globalHubSettings';
         
-        // ***** CHANGED: These are now loaded from data2.csv *****
         let CLASS_TOPICS = [];
         let LESSON_DATA = [];
         
@@ -567,7 +579,7 @@
             } catch (e) { console.error(`Error saving local setting key ${key}:`, e); }
         }
 
-        // ***** CHANGED: Load question data from data.csv *****
+        // Load question data from data.csv
         async function loadQuestions() { 
              try { 
                  const response = await fetch('data.csv'); 
@@ -604,7 +616,7 @@
              } 
         }
 
-        // ***** NEW FUNCTION: Load lesson data from data2.csv *****
+        // Load lesson data from data2.csv
         async function loadLessonData() {
             try {
                 const response = await fetch('data2.csv');
@@ -840,6 +852,32 @@
                  if (aiFeedbackSection) aiFeedbackSection.classList.add('hidden'); 
                  console.log("Offline: Skipping AI feedback generation.");
              }
+             
+            // --- ***** NEW: Logic for "Next Class" button ***** ---
+            if (nextClassButton && restartButton) {
+                const isLastClass = selectedClass >= LESSON_DATA.length; // Use LESSON_DATA.length
+                
+                if (percentage >= 50 && !isLastClass) {
+                    // Show "Next Class" button
+                    nextClassButton.classList.remove('hidden');
+                    // Make "Play Again" button secondary
+                    restartButton.classList.add('sm:col-span-1');
+                    restartButton.classList.remove('sm:col-span-2');
+                    restartButton.classList.remove('accent-bg'); // Remove primary color
+                    restartButton.classList.add('button-bg-color', 'font-semibold'); // Add secondary color
+                    restartButton.textContent = "Play Again (This Class)";
+                } else {
+                    // Hide "Next Class" button
+                    nextClassButton.classList.add('hidden');
+                    // Make "Play Again" button primary and full-width
+                    restartButton.classList.remove('sm:col-span-1');
+                    restartButton.classList.add('sm:col-span-2'); // Span full width
+                    restartButton.classList.add('accent-bg'); // Add primary color
+                    restartButton.classList.remove('button-bg-color', 'font-semibold'); // Remove secondary color
+                    restartButton.textContent = "Play Again";
+                }
+            }
+            // --- ***** END OF NEW LOGIC ***** ---
         }
 
         // Get AI Feedback from Gemini API
@@ -853,7 +891,6 @@
             aiError.classList.add('hidden');
             if (aiOfflineMessage) aiOfflineMessage.classList.add('hidden'); 
 
-            // ***** CHANGED: Use dynamic CLASS_TOPICS array *****
             const lessonTitle = CLASS_TOPICS[selectedClass - 1] || `Lesson ${selectedClass}`;
             const totalQuestions = currentQuestions.length;
             const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
@@ -973,7 +1010,6 @@
 
         // Update the lesson tip on the start screen
         function updateLessonTip(classNumber) { 
-            // ***** CHANGED: Uses dynamic LESSON_DATA array *****
             const lessonData = LESSON_DATA.find(l => l.class === classNumber); 
             if (lessonData && lessonTipTitle && lessonTipEN && lessonTipTE && speakENTipButton && speakTETipButton && lessonTipsContainer) { 
                 lessonTipTitle.textContent = `Lesson ${classNumber}: ${lessonData.title}`; 
@@ -1061,7 +1097,7 @@
              disableSound = getLocalStorageSetting('disableSound', false); 
              disableVibration = getLocalStorageSetting('disableVibration', false); 
              
-             // ***** ADDED: Load class/quiz length here *****
+             // Load class/quiz length here
              selectedClass = getLocalStorageSetting('selectedClass', 1); 
              maxQuestions = getLocalStorageSetting('maxQuestions', 10); 
              
@@ -1080,7 +1116,7 @@
              const modal = document.getElementById('curriculum-modal'); if(modal) modal.classList.add('hidden'); 
          }
          
-        // ***** NEW: Lesson Details Modal Functions *****
+        // Lesson Details Modal Functions
         function openLessonDetailsModal() {
             if (!isLessonDataLoaded) {
                 console.error("Lesson data is not loaded yet.");
@@ -1141,7 +1177,6 @@
         
         // Open the generic selection modal
         window.openSelectionModal = function(type) { 
-             // ***** CHANGED: Check if lesson data is loaded before opening class list *****
              if (type === 'class' && !isLessonDataLoaded) {
                  console.warn("Lesson data not loaded yet. Cannot open class selection.");
                  return;
@@ -1151,7 +1186,6 @@
              const buttonClass = 'w-full text-left p-3 rounded-lg selection-button text-white'; 
              if (type === 'class') { 
                  if(modalTitle) modalTitle.textContent = 'Select a Class'; 
-                 // ***** CHANGED: Use dynamic CLASS_TOPICS array *****
                  optionsHTML = CLASS_TOPICS.map((topic, i) => `<button onclick="handleSelectionChange('class', ${i+1})" class="${buttonClass} ${selectedClass === (i+1) ? 'active' : ''}">${i+1}: ${topic}</button>`).join(''); 
              } else if (type === 'count') { 
                  if(modalTitle) modalTitle.textContent = 'Select Quiz Length'; 
@@ -1197,7 +1231,6 @@
         function getLabel(type, value) { 
             const valStr = String(value); 
             if (type === 'class') { 
-                // ***** CHANGED: Use dynamic CLASS_TOPICS array *****
                 return `Class ${value}: ${CLASS_TOPICS[value-1] || 'Unknown'}`; 
             } 
             if (type === 'count') return `${value} Questions`; 
@@ -1257,7 +1290,6 @@
          }
 
         // --- Window Onload (Initialization) ---
-        // ***** CHANGED: Made window.onload async *****
         window.onload = async () => {
             // Assign DOM Elements
             startScreen = document.getElementById('start-screen'); quizScreen = document.getElementById('quiz-screen'); resultsScreen = document.getElementById('results-screen'); questionContainer = document.getElementById('question-container'); startButton = document.getElementById('start-quiz-button'); nextButton = document.getElementById('next-question-button'); restartButton = document.getElementById('restart-quiz-button'); curriculumButton = document.getElementById('curriculum-button'); 
@@ -1284,11 +1316,13 @@
             aiFeedbackSection = document.getElementById('ai-feedback-section'); aiLoadingIndicator = document.getElementById('ai-loading-indicator'); aiContent = document.getElementById('ai-content'); aiError = document.getElementById('ai-error'); feedbackEnEl = document.getElementById('feedback-en'); feedbackTeEl = document.getElementById('feedback-te'); coachingEnEl = document.getElementById('coaching-en'); coachingTeEl = document.getElementById('coaching-te'); tipsEnEl = document.getElementById('tips-en'); tipsTeEl = document.getElementById('tips-te');
             // Offline Message Element
             aiOfflineMessage = document.getElementById('ai-offline-message');
-            // ***** NEW: Assign Lesson Details Modal Elements *****
+            // Lesson Details Modal Elements
             lessonDetailsModal = document.getElementById('lesson-details-modal');
             closeLessonDetailsModalBtn = document.getElementById('close-lesson-details-modal');
             lessonDetailsTitle = document.getElementById('lesson-details-title');
             lessonDetailsContent = document.getElementById('lesson-details-content');
+            // ***** NEW: Assign Next Class Button *****
+            nextClassButton = document.getElementById('next-class-button');
             
             // Add Event Listeners
             if(startButton) startButton.addEventListener('click', startQuiz); 
@@ -1319,15 +1353,40 @@
             if(titleFontBtn) titleFontBtn.addEventListener('click', () => openSelectionModal('titleFont')); 
             if(colorBtn) colorBtn.addEventListener('click', () => openSelectionModal('color')); 
             
-            // ***** NEW: Lesson Details Modal Listeners *****
+            // Lesson Details Modal Listeners
             if(lessonTipsContainer) lessonTipsContainer.addEventListener('click', openLessonDetailsModal);
             if(closeLessonDetailsModalBtn) closeLessonDetailsModalBtn.addEventListener('click', closeLessonDetailsModal);
+
+            // ***** NEW: Next Class Button Listener *****
+            if (nextClassButton) {
+                nextClassButton.addEventListener('click', () => {
+                    if (selectedClass < LESSON_DATA.length) {
+                        selectedClass++; // Move to the next class
+                        setLocalStorageSetting('selectedClass', selectedClass); // Save it
+                        
+                        // Go back to start screen
+                        if(resultsScreen) resultsScreen.classList.add('hidden');
+                        if(startScreen) startScreen.classList.remove('hidden');
+                        
+                        // Reset AI feedback section
+                        if(aiFeedbackSection) aiFeedbackSection.classList.add('hidden');
+                        if(aiLoadingIndicator) aiLoadingIndicator.classList.add('hidden');
+                        if(aiOfflineMessage) aiOfflineMessage.classList.add('hidden');
+                        if(aiContent) aiContent.classList.add('hidden');
+                        if(aiError) aiError.classList.add('hidden');
+                        
+                        // Update UI for the *new* class
+                        updateClassSelectionButton(); 
+                        updateLessonTip(selectedClass); 
+                    }
+                });
+            }
 
             // Run Setup
             setupAudio();
             loadInitialSettings(); // This now loads selectedClass and maxQuestions
             
-            // ***** NEW LOADING LOGIC *****
+            // NEW LOADING LOGIC
             // Show loading message
             if(startMessage) startMessage.innerHTML = `Loading data... Please wait.`;
 
@@ -1355,7 +1414,6 @@
                 if(startMessage) startMessage.innerHTML = `<strong class="text-red-400">${errorMsg}</strong><br><small>Please check your internet connection or try again later.</small>`;
                 if(startButton) startButton.disabled = true;
             }
-            // ***** END OF NEW LOADING LOGIC *****
         };
     </script>
 </body>
