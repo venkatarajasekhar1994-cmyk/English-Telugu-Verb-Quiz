@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -215,10 +215,11 @@
     <div class="min-h-screen w-full p-4 sm:p-6 lg:p-8 flex flex-col relative">
         <!-- Header Buttons: Profile & Settings -->
         <div class="absolute top-4 right-4 z-20 flex space-x-2">
-            <button onclick="openProfile()" class="w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform duration-300 hover:scale-110 glass-effect text-secondary-color">
+            <!-- UPDATED BUTTONS: Added 'setting-btn' class for visibility -->
+            <button onclick="openProfile()" class="setting-btn w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform duration-300 hover:scale-110">
                 <i data-lucide="user" class="w-6 h-6"></i>
             </button>
-            <button onclick="openSettings()" class="w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform duration-300 hover:rotate-45 glass-effect text-secondary-color">
+            <button onclick="openSettings()" class="setting-btn w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform duration-300 hover:rotate-45">
                 <i data-lucide="settings" class="w-6 h-6"></i>
             </button>
         </div>
@@ -386,7 +387,12 @@
             { name: 'Teal', primary: '#14b8a6', secondary: '#2dd4bf', accent: '#5eead4' },
             { name: 'Rose', primary: '#f43f5e', secondary: '#fb7185', accent: '#fda4af' },
             { name: 'Amber', primary: '#f59e0b', secondary: '#fbbf24', accent: '#fcd34d' },
-            { name: 'Sky', primary: '#38bdf8', secondary: '#7dd3fc', accent: '#bae6fd' }
+            { name: 'Sky', primary: '#38bdf8', secondary: '#7dd3fc', accent: '#bae6fd' },
+            { name: 'Emerald', primary: '#10b981', secondary: '#34d399', accent: '#6ee7b7' },
+            { name: 'Purple', primary: '#a855f7', secondary: '#c084fc', accent: '#d8b4fe' },
+            { name: 'Orange', primary: '#f97316', secondary: '#fb923c', accent: '#fdba74' },
+            { name: 'Pink', primary: '#ec4899', secondary: '#f472b6', accent: '#f9a8d4' },
+            { name: 'Cyan', primary: '#06b6d4', secondary: '#22d3ee', accent: '#67e8f9' }
         ];
         let currentSelectionType = null;
         let textContrast = 'default'; // NEW: State for contrast
@@ -471,25 +477,52 @@
         }
         // --- End of Offline Profile Logic ---
 
-        // --- Theme Management ---
+        // --- Theme Management (UPDATED) ---
         function applyTheme(isDark) {
             const root = document.documentElement;
             const toggleBtn = document.getElementById('theme-toggle-btn');
+            const currentSetting = getLocalStorageSetting('theme', 'auto'); // Get the setting
+
             if (isDark) {
                 root.classList.add('dark');
-                if (toggleBtn) toggleBtn.innerHTML = '<i data-lucide="sun" class="w-4 h-4 mr-2 inline-block"></i> Light Mode';
             } else {
                 root.classList.remove('dark');
-                if (toggleBtn) toggleBtn.innerHTML = '<i data-lucide="moon" class="w-4 h-4 mr-2 inline-block"></i> Dark Mode';
             }
+            
+            // Update button text based on the *setting*, not just the current visual state
+            if (toggleBtn) {
+                if (currentSetting === 'light') {
+                    toggleBtn.innerHTML = '<i data-lucide="moon" class="w-4 h-4 mr-2 inline-block"></i> Dark Mode';
+                } else if (currentSetting === 'dark') {
+                    toggleBtn.innerHTML = '<i data-lucide="cog" class="w-4 h-4 mr-2 inline-block"></i> System';
+                } else { // 'auto'
+                    toggleBtn.innerHTML = '<i data-lucide="sun" class="w-4 h-4 mr-2 inline-block"></i> Light Mode';
+                }
+            }
+            
             applyAccentColor(getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name));
             applyContrast(getLocalStorageSetting('contrast', 'default')); // Re-apply contrast on theme change
             setTimeout(() => { if (typeof lucide !== 'undefined') lucide.createIcons(); }, 0); 
         }
+
         window.toggleTheme = function() {
-            const isDark = !document.documentElement.classList.contains('dark');
-            setLocalStorageSetting('theme', isDark ? 'dark' : 'light'); 
-            applyTheme(isDark); 
+            const currentSetting = getLocalStorageSetting('theme', 'auto');
+            let newSetting;
+            let isDark;
+
+            if (currentSetting === 'light') {
+                newSetting = 'dark';
+                isDark = true;
+            } else if (currentSetting === 'dark') {
+                newSetting = 'auto';
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches; // Check OS
+            } else { // 'auto'
+                newSetting = 'light';
+                isDark = false;
+            }
+            
+            setLocalStorageSetting('theme', newSetting); 
+            applyTheme(isDark); // Pass the visual state
         }
 
         // --- Accent Color Management ---
@@ -562,8 +595,16 @@
             document.getElementById('settings-modal').classList.add('hidden');
         }
         function updateSettingsUI() {
-            const isDark = document.documentElement.classList.contains('dark');
-            applyTheme(isDark); 
+            // Re-run the logic from loadInitialSettings to apply correct theme and button
+            const savedTheme = getLocalStorageSetting('theme', 'auto');
+            let isDark;
+            if (savedTheme === 'auto') {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            } else {
+                isDark = (savedTheme === 'dark');
+            }
+            applyTheme(isDark); // This will set the correct button text and theme
+
             updateFontButton('title');
             updateFontButton('body');
             updateColorButton();
@@ -629,10 +670,18 @@
             }
         }
         
-        // --- Initialization ---
+        // --- Initialization (UPDATED) ---
         function loadInitialSettings() {
-            const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-            applyTheme(currentMode === 'dark'); 
+            // UPDATED theme logic to default to 'auto'
+            const savedTheme = getLocalStorageSetting('theme', 'auto'); 
+            let isDark;
+
+            if (savedTheme === 'auto') {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            } else {
+                isDark = (savedTheme === 'dark');
+            }
+            applyTheme(isDark); 
 
             const titleFont = getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value);
             const bodyFont = getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value);
@@ -646,6 +695,15 @@
             const savedContrast = getLocalStorageSetting('contrast', 'default');
             applyContrast(savedContrast);
 
+            // NEW: Add listener for live OS theme changes
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            mediaQuery.addEventListener('change', (e) => {
+                const currentSetting = getLocalStorageSetting('theme', 'auto');
+                if (currentSetting === 'auto') {
+                    applyTheme(e.matches); // e.matches is true for dark
+                }
+            });
+
             const yearEl = document.getElementById('current-year');
             if (yearEl) yearEl.textContent = new Date().getFullYear();
             
@@ -655,12 +713,21 @@
             
             loadLocalProgress();
             
+            // UPDATED pageshow listener
             window.addEventListener('pageshow', function(event) {
                 if (event.persisted) {
                     loadLocalProgress();
-                    const currentMode = getLocalStorageSetting('theme');
-                    applyTheme(currentMode === 'dark');
-                     const colorTheme = getLocalStorageSetting('colorTheme');
+                    
+                    const savedTheme = getLocalStorageSetting('theme', 'auto');
+                    let isDark;
+                    if (savedTheme === 'auto') {
+                        isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    } else {
+                        isDark = (savedTheme === 'dark');
+                    }
+                    applyTheme(isDark);
+                    
+                    const colorTheme = getLocalStorageSetting('colorTheme');
                     applyAccentColor(colorTheme);
                     const savedContrast = getLocalStorageSetting('contrast'); // Reload contrast too
                     applyContrast(savedContrast);
@@ -673,5 +740,4 @@
     </script>
 </body>
 </html>
-
 

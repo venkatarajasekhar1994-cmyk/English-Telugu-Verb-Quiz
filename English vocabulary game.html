@@ -1,17 +1,13 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- CRITICAL for device compatibility, responsiveness, and preventing horizontal scrolling -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vocabulary Multiple-Choice Quiz</title>
     
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Tone.js for sound effects -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     
-    <!-- CUSTOM STYLES & THEMING (COPIED FROM index.html to ensure consistency) -->
     <style>
         /* Import all available fonts for customization */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght==400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans 3:wght@400;700&display=swap');
@@ -52,6 +48,9 @@
             --color-bg-light-start: #2dd4bf;
             --color-bg-light-mid: #5eead4;
             --color-bg-light-end: #0d9488;
+            --color-bg-dark-start: #134e4a;
+            --color-bg-dark-mid: #115e59;
+            --color-bg-dark-end: #0f766e;
         }
 
         /* Rose Theme */
@@ -62,6 +61,9 @@
             --color-bg-light-start: #fda4af;
             --color-bg-light-mid: #f43f5e;
             --color-bg-light-end: #e11d48;
+            --color-bg-dark-start: #500724;
+            --color-bg-dark-mid: #881337;
+            --color-bg-dark-end: #9f1239;
         }
 
         /* Amber Theme (New) */
@@ -72,6 +74,9 @@
             --color-bg-light-start: #fcd34d;
             --color-bg-light-mid: #f59e0b;
             --color-bg-light-end: #fbbf24;
+            --color-bg-dark-start: #78350f;
+            --color-bg-dark-mid: #92400e;
+            --color-bg-dark-end: #b45309;
         }
         
         /* Emerald Theme (New) */
@@ -82,7 +87,80 @@
             --color-bg-light-start: #34d399;
             --color-bg-light-mid: #10b981;
             --color-bg-light-end: #059669;
+            --color-bg-dark-start: #064e3b;
+            --color-bg-dark-mid: #065f46;
+            --color-bg-dark-end: #047857;
         }
+
+        /* --- START: NEW THEMES --- */
+        
+        /* Cyan Theme */
+        body[data-color="cyan"] {
+            --color-primary: 8, 145, 178; /* Cyan 600 RGB */
+            --color-primary-hex: #0891b2;
+            --color-primary-light: 165, 243, 252; /* Cyan 200 RGB */
+            --color-bg-light-start: #22d3ee;
+            --color-bg-light-mid: #06b6d4;
+            --color-bg-light-end: #0891b2;
+            --color-bg-dark-start: #164e63;
+            --color-bg-dark-mid: #155e75;
+            --color-bg-dark-end: #0e7490;
+        }
+
+        /* Pink Theme */
+        body[data-color="pink"] {
+            --color-primary: 219, 39, 119; /* Pink 600 RGB */
+            --color-primary-hex: #db2777;
+            --color-primary-light: 251, 207, 232; /* Pink 200 RGB */
+            --color-bg-light-start: #f9a8d4;
+            --color-bg-light-mid: #f472b6;
+            --color-bg-light-end: #ec4899;
+            --color-bg-dark-start: #500724;
+            --color-bg-dark-mid: #831843;
+            --color-bg-dark-end: #9d174d;
+        }
+
+        /* Orange Theme */
+        body[data-color="orange"] {
+            --color-primary: 234, 88, 12; /* Orange 600 RGB */
+            --color-primary-hex: #ea580c;
+            --color-primary-light: 254, 215, 170; /* Orange 200 RGB */
+            --color-bg-light-start: #fbbf24;
+            --color-bg-light-mid: #f97316;
+            --color-bg-light-end: #ea580c;
+            --color-bg-dark-start: #7c2d12;
+            --color-bg-dark-mid: #9a3412;
+            --color-bg-dark-end: #c2410c;
+        }
+
+        /* Purple Theme */
+        body[data-color="purple"] {
+            --color-primary: 147, 51, 234; /* Purple 600 RGB */
+            --color-primary-hex: #9333ea;
+            --color-primary-light: 221, 214, 254; /* Purple 200 RGB */
+            --color-bg-light-start: #c084fc;
+            --color-bg-light-mid: #a855f7;
+            --color-bg-light-end: #9333ea;
+            --color-bg-dark-start: #3b0764;
+            --color-bg-dark-mid: #581c87;
+            --color-bg-dark-end: #6b21a8;
+        }
+        
+        /* Sky Theme */
+        body[data-color="sky"] {
+            --color-primary: 2, 132, 199; /* Sky 600 RGB */
+            --color-primary-hex: #0284c7;
+            --color-primary-light: 186, 230, 253; /* Sky 200 RGB */
+            --color-bg-light-start: #38bdf8;
+            --color-bg-light-mid: #0ea5e9;
+            --color-bg-light-end: #0284c7;
+            --color-bg-dark-start: #0c4a6e;
+            --color-bg-dark-mid: #075985;
+            --color-bg-dark-end: #0369a1;
+        }
+        
+        /* --- END: NEW THEMES --- */
+        
         
         /* --- Base Styles --- */
         body {
@@ -401,11 +479,17 @@
 
     <div id="game-container" class="w-full max-w-xl liquid-glass-card p-6 md:p-8 my-8">
         
-        <!-- Header, Title, and Controls -->
         <div class="flex justify-between items-center mb-6 border-b-2 pb-2 border-primary">
             
-            <div class="flex items-center space-x-3"> 
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark-mode:text-gray-50 mb-0 elegant-title">
+            <div class="flex items-center space-x-3">
+                 <a href="game hub.html"
+                    class="ripple-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex"
+                    aria-label="Go to Game Hub">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" />
+                     </svg>
+                 </a>
+                 <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark-mode:text-gray-50 mb-0 elegant-title">
                     VOCABULARY QUIZ
                 </h1>
             </div>
@@ -420,36 +504,29 @@
             </div>
         </div>
 
-        <!-- SCORE, PROGRESS, & FEEDBACK BAR -->
         <div id="quiz-status-bar" class="hidden">
             <div class="grid grid-cols-2 gap-4 items-center mb-3">
-                <!-- Score and Counter Group -->
                 <div class="flex items-center space-x-4">
                     <span class="text-gray-600 dark-mode:text-gray-400 text-base">Score: <span id="score-display" class="text-primary text-2xl font-bold">0</span></span>
                     <span class="text-gray-600 dark-mode:text-gray-400 text-base">Q: <span id="question-counter" class="text-primary text-2xl font-bold">0/15</span></span>
                 </div>
-                <!-- Feedback Message -->
                 <span id="feedback-message" class="text-base font-medium text-right"></span>
             </div>
             
-            <!-- PROGRESS BAR -->
             <div id="progress-bar-container" class="w-full h-2 bg-gray-200 dark-mode:bg-gray-700 rounded-full overflow-hidden mb-6 shadow-inner">
                 <div id="progress-bar" class="h-full rounded-full" style="width: 0%;"></div>
             </div>
         </div>
 
 
-        <!-- START SCREEN CONTENT (Visible at start) -->
         <div id="start-screen" class="mt-8 text-center">
             <h2 class="text-3xl font-bold text-primary mb-4 elegant-title">Welcome to the Vocabulary Quiz!</h2>
             <p id="start-message" class="text-lg text-gray-700 dark-mode:text-gray-300 mb-8">
                 Ready to test your knowledge? Set your quiz options below.
             </p>
 
-            <!-- Quiz Settings Container -->
             <div class="space-y-4">
 
-                <!-- 1. Question Count Setting -->
                 <div class="p-4 bg-primary/5 rounded-xl frosted-option">
                     <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Length</h3>
                     <button id="quiz-length-button" onclick="handleUiTapFeedback(); openSelectionModal('count')"
@@ -461,7 +538,6 @@
                     </button>
                 </div>
                 
-                <!-- 2. Difficulty Level Setting -->
                 <div class="p-4 bg-primary/5 rounded-xl frosted-option">
                     <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Difficulty Level</h3>
                     <button id="difficulty-level-button" onclick="handleUiTapFeedback(); openSelectionModal('difficulty')"
@@ -483,32 +559,22 @@
             <p id="loading-indicator" class="mt-4 text-sm text-gray-500">Loading initial data...</p>
 
         </div>
-        <!-- END START SCREEN CONTENT -->
-
-
-        <!-- QUESTION AREA (Hidden at start) -->
         <div id="question-area" class="space-y-4 hidden">
-            <!-- Question text -->
             <div class="prompt-box p-4 rounded-xl border-2 border-primary text-center">
                 <p id="question-text" class="text-xl text-indigo-900 font-semibold mb-1 dark-mode:text-gray-100"></p>
                 <p id="question-metadata" class="text-sm text-indigo-700 dark-mode:text-gray-300"></p>
             </div>
             
-            <!-- Options (Multiple Choice Buttons) -->
             <div id="options-container" class="grid grid-cols-1 gap-3">
-                <!-- Options injected here -->
-            </div>
+                </div>
             
-            <!-- Explanation/Details area (Hidden until checked) -->
             <div id="explanation-area" class="hidden p-3 mt-4 rounded-xl border-2 border-primary bg-primary/10 dark-mode:bg-primary/5">
                 <p class="font-bold text-sm mb-1 text-primary">Explanation:</p>
                 <p id="explanation-text" class="text-gray-800 dark-mode:text-gray-200 text-base"></p>
             </div>
         </div>
 
-        <!-- QUIZ ACTION BUTTONS (Hidden at start) -->
         <div id="quiz-action-buttons" class="mt-8 grid grid-cols-12 gap-4 hidden">
-            <!-- MAIN ACTION BUTTON (Col 5-12) - Combines Check Answer / Next Question / Finish Quiz -->
             <button id="main-action-button" onclick="handleUiTapFeedback(); processAction()"
                     class="ripple-btn col-span-12 px-2 py-3 bg-primary text-white font-bold rounded-xl shadow-lg shadow-indigo-500/50 hover:opacity-90 transition duration-150 disabled:bg-gray-400 focus:outline-none focus:ring-4 focus:ring-primary-hex focus:ring-opacity-50 text-base md:text-lg"
                     disabled>
@@ -516,19 +582,14 @@
             </button>
         </div>
         
-        <!-- Final Results section will be populated dynamically -->
         <div id="final-results" class="hidden mt-8 text-center p-4 bg-yellow-300/40 liquid-glass-card border-yellow-300 border-2">
-            <!-- Content generated by endGame() -->
-        </div>
+            </div>
 
     </div>
 
-    <!-- NEW: Hamburger Menu Off-Canvas -->
     <div id="hamburger-menu" class="fixed top-0 right-0 h-full w-64 z-50 transform translate-x-full transition-transform duration-300 bg-white dark-mode:bg-gray-800 shadow-2xl p-6">
         <div class="flex justify-end">
-            <!-- Close Button -->
             <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700">
-                <!-- X Icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -537,34 +598,27 @@
 
         <h3 class="text-xl font-bold mb-6 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">Menu</h3>
 
-        <!-- Dark Mode Toggle -->
         <button id="menu-theme-toggle" onclick="handleUiTapFeedback(); toggleTheme()" 
                 class="ripple-btn w-full flex items-center justify-between p-3 mb-4 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150">
             <span id="menu-theme-text" class="font-semibold"></span>
             <svg id="menu-theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                <!-- Icon will be set by JS -->
-            </svg>
+                </svg>
         </button>
         
-        <!-- User ID Display (LOCAL STATUS) -->
         <div class="mb-4 p-3 bg-gray-100 dark-mode:bg-gray-700 rounded-xl text-xs text-gray-600 dark-mode:text-gray-400 overflow-x-auto break-all">
             <span class="font-bold">Status:</span> <span id="user-id-display">Local Data Storage</span>
         </div>
 
-        <!-- Manage Vocabulary Data Button (NEW POSITION) -->
         <button onclick="handleUiTapFeedback(); openDataManagementFromMenu()"
                 class="ripple-btn w-full flex items-center p-3 mb-4 rounded-xl text-white font-bold bg-primary hover:opacity-90 transition duration-150 shadow-md shadow-indigo-500/50">
-            <!-- Database Icon -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.69 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.69-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0c0 2.278-3.69 4.125-8.25 4.125S3.75 12.331 3.75 10.056m16.5 0v3.75m-16.5-3.75v3.75m16.5 0c0 2.278-3.69 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
             </svg>
             Manage Vocabulary Data
         </button>
 
-        <!-- Link to full settings (NEW POSITION) -->
         <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu(); openSettings();"
                 class="ripple-btn w-full flex items-center p-3 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150 shadow-md shadow-gray-500/10">
-            <!-- Cog Icon -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 12h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3zm9-6h3.75m-3.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 18h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0" />
             </svg>
@@ -572,25 +626,19 @@
         </button>
     </div>
     
-    <!-- NEW: Overlay for Hamburger Menu -->
     <div id="hamburger-overlay" class="hidden fixed inset-0 z-40 bg-black opacity-50" onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()"></div>
 
 
-    <!-- Settings Modal (Used for general settings) -->
     <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
-        <!-- ADDED overflow-y-auto and max-h-[90vh] for scrollability -->
         <div class="modal-content liquid-glass-card w-full max-w-sm p-6 overflow-y-auto max-h-[90vh]">
             <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">App Settings</h2>
 
-            <!-- Settings Persistence Note -->
             <div class="bg-blue-100 dark-mode:bg-blue-900/40 border border-blue-400 text-blue-800 dark-mode:text-blue-200 text-sm p-3 rounded-xl mb-4">
                 <p class="font-semibold">All settings are saved automatically to this device only.</p>
             </div>
 
-            <!-- Color Palette Selection -->
             <div class="mb-6">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3">Color Accent</h3>
-                <!-- INCREASED OPTIONS -->
                 <div class="grid grid-cols-5 gap-2">
                     <button onclick="setThemeColor('indigo')" data-color-id="indigo"
                             class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-indigo-600 hover:opacity-90 text-sm">
@@ -612,10 +660,30 @@
                             class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-emerald-600 hover:opacity-90 text-sm">
                         Emerald
                     </button>
-                </div>
+                    
+                    <button onclick="setThemeColor('cyan')" data-color-id="cyan"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-cyan-600 hover:opacity-90 text-sm">
+                        Cyan
+                    </button>
+                    <button onclick="setThemeColor('pink')" data-color-id="pink"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-pink-600 hover:opacity-90 text-sm">
+                        Pink
+                    </button>
+                    <button onclick="setThemeColor('orange')" data-color-id="orange"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-orange-600 hover:opacity-90 text-sm">
+                        Orange
+                    </button>
+                    <button onclick="setThemeColor('purple')" data-color-id="purple"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-purple-600 hover:opacity-90 text-sm">
+                        Purple
+                    </button>
+                    <button onclick="setThemeColor('sky')" data-color-id="sky"
+                            class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-sky-600 hover:opacity-90 text-sm">
+                        Sky
+                    </button>
+                    </div>
             </div>
 
-            <!-- Text Contrast Setting -->
             <div class="mb-6">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Text Contrast</h3>
                 <div class="flex space-x-4">
@@ -630,7 +698,6 @@
                 </div>
             </div>
 
-            <!-- Input Style -->
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Input Style (MC unused here)</h3>
                 <div class="flex space-x-4">
@@ -647,7 +714,6 @@
 
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Feedback</h3>
-                <!-- Audio and Haptic Feedback Toggles - Added ripple-btn to label for touch feedback -->
                 <div class="flex flex-col space-y-2">
                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-audio" onclick="toggleAudio()" 
@@ -664,7 +730,6 @@
 
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Display</h3>
-                <!-- New Themed Text Hue Toggle - Added ripple-btn to label for touch feedback -->
                 <div class="flex flex-col space-y-2">
                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-text-hue" onclick="toggleTextHue()" 
@@ -675,7 +740,6 @@
             </div>
 
 
-            <!-- Body Font Family (Button that opens modal) -->
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Body Font</h3>
                 <button id="body-font-button" onclick="handleUiTapFeedback(); openSelectionModal('body')"
@@ -687,7 +751,6 @@
                 </button>
             </div>
 
-            <!-- Title Font Family (Button that opens modal) -->
             <div class="mb-6">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Title Font</h3>
                 <button id="title-font-button" onclick="handleUiTapFeedback(); openSelectionModal('title')"
@@ -706,9 +769,7 @@
         </div>
     </div>
     
-    <!-- NEW: Generic Selection Modal (Slide up from bottom) -->
     <div id="selection-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-overlay">
-        <!-- Adjusted styling classes for positioning -->
         <div class="selection-modal-content liquid-glass-card w-full max-w-sm p-0">
             <div class="p-4 flex justify-between items-center border-b dark-mode:border-gray-700">
                 <h3 id="selection-modal-title" class="text-xl font-bold text-gray-900 dark-mode:text-gray-100">Select Option</h3>
@@ -719,48 +780,44 @@
                 </button>
             </div>
             <div id="selection-modal-list" class="max-h-80 overflow-y-auto rounded-b-xl">
-                <!-- Content populated dynamically -->
-            </div>
+                </div>
         </div>
     </div>
 
 
-    <!-- NEW: Data Management Modal (Wider: max-w-3xl) -->
     <div id="data-management-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
         <div class="modal-content liquid-glass-card w-full max-w-3xl p-6 overflow-y-auto max-h-[90vh]">
             <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">
                 Manage Vocabulary Data (<span id="current-question-count">0</span> Total)
             </h2>
             
-            <!-- REMOVED: CSV IMPORT SECTION (Section 1) -->
-            <!-- NOTE: The border-t on the next section is removed to connect it directly to the title -->
+            <button id="refresh-base-data" onclick="handleUiTapFeedback(); refreshBaseData()"
+                    class="ripple-btn w-full py-2 mb-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg hover:bg-blue-700 transition duration-150">
+                Fetch Latest Vocabulary.csv
+            </button>
+            <p id="refresh-feedback" class="text-center text-sm font-semibold mt-2 hidden"></p>
+
             
-            <!-- MANUAL ADD SECTION -->
-            <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">
+            <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2 mt-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
                 Manually Add a Custom Question (Category: Vocabulary)
             </h3>
             <p class="text-sm text-gray-600 dark-mode:text-gray-400 mb-4">
                 Enter the 8 required fields below. The **Correct Answer (Letter)** must be A, B, C, or D. This is added to your **Custom Questions** list.
             </p>
             
-            <!-- Input Grid Layout -->
             <div id="add-data-form" class="space-y-4 p-4 bg-primary/5 rounded-xl border border-primary/20 frosted-option">
-                <!-- Input Rows -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- REMOVED CATEGORY INPUT -->
                     <div class="space-y-2 col-span-1 md:col-span-2">
                         <label for="add-difficulty" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Difficulty (Easy/Medium/Hard)</label>
                         <input type="text" id="add-difficulty" value="Medium" placeholder="e.g., 'Medium'" class="w-full p-3">
                     </div>
                 </div>
 
-                <!-- Question Text -->
                 <div class="space-y-2">
                     <label for="add-question-text" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Question Text</label>
                     <textarea id="add-question-text" rows="2" placeholder="e.g., 'What is the synonym for **happy**?'" class="w-full p-3"></textarea>
                 </div>
 
-                <!-- Options -->
                 <div class="grid grid-cols-2 gap-4">
                     <div class="space-y-2">
                         <label for="add-option-a" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Option A</label>
@@ -780,7 +837,6 @@
                     </div>
                 </div>
 
-                <!-- Correct Answer / Explanation -->
                 <div class="grid grid-cols-3 gap-4">
                     <div class="space-y-2 col-span-1">
                         <label for="add-correct-answer" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Correct (A/B/C/D)</label>
@@ -803,7 +859,6 @@
                 Custom Questions Added:
             </h3>
             
-            <!-- Display area for the currently added verb data -->
             <div id="user-data-list" class="space-y-2 max-h-48 overflow-y-auto p-2 border rounded-lg frosted-option">
                 <p class="text-center text-gray-500" id="no-user-data">No custom questions added yet.</p>
             </div>
@@ -822,325 +877,7 @@
         const INITIAL_DEFAULT_DATA_KEY = 'initialDefaultVocabData';
         
         // --- START OF UPDATED defaultCsvData ---
-        const defaultCsvData = `Category,Difficulty,Question Text,Option A,Option B,Option C,Option D,Correct Answer (Letter),Explanation / Notes
-Vocabulary,Easy,"Which word is a synonym for **happy**?",Gloomy,Joyful,Tired,Angry,B,"Joyful' means feeling, exhibiting, or inspiring joy; synonymous with happy."
-Vocabulary,Medium,"What does the word **'pensive'** mean?",Happy,Thoughtful,Angry,Energetic,B,"'Pensive' means engaged in, or reflecting deep or serious thought."
-Vocabulary,Hard,"What is the antonym of **benevolent**?",Kind,Generous,Malicious,Thoughtful,C,"'Benevolent' means kind and well-meaning; 'malicious' means intending to do harm."
-Vocabulary,Easy,"What is the plural form of the word **'child'**?",childs,childrens,children,childes,C,"'Children' is an irregular plural noun."
-Vocabulary,Hard,"A person who is **'ubiquitous'** is:",Rarely seen,Found everywhere,Very intelligent,Always late,B,"'Ubiquitous' means present, appearing, or found everywhere."
-Vocabulary,Medium,"What does the word **'skeptical'** mean?",Belief,Doubt,Happiness,Excitement,B,"'Skeptical' means not easily convinced; having doubts or reservations."
-Vocabulary,Hard,"Find the synonym for **'ephemeral'**.",Lasting,Permanent,Temporary,Strong,C,"'Ephemeral' means lasting for a very short time; 'temporary' is the closest synonym."
-Vocabulary,Easy,"The opposite of **'loud'** is:",Quiet,Noisy,Big,Fast,A,"'Quiet' is the antonym of 'loud'."
-Vocabulary,Hard,"What is the synonym for **'gregarious'**?",Shy,Quiet,Sociable,Angry,C,"'Gregarious' means fond of company; sociable."
-Vocabulary,Medium,"Find the synonym for **'prohibit'**.",Allow,Permit,Forbid,Encourage,C,"'Prohibit' means to formally forbid something by law, rule, or authority; synonymous with forbid."
-Vocabulary,Hard,"What does **'acrimony'** mean?",Friendliness,Kindness,Bitterness,Laughter,C,"'Acrimony' means bitterness or ill-feeling."
-Vocabulary,Medium,"What does the word **'redundant'** mean?",Necessary,Essential,Unnecessary,Unique,C,"'Redundant' means no longer needed or useful."
-Vocabulary,Easy,"The opposite of **'arrive'** is:",Come,Go,Leave,Get,C,"'Leave' is the antonym of 'arrive'."
-Vocabulary,Medium,"The word **'tenuous'** means:",Solid,Strong,Weak,Heavy,C,"'Tenuous' means very weak or slight."
-Vocabulary,Hard,"What is the antonym of **'prudent'**?",Careful,Wise,Reckless,Cautious,C,"'Prudent' means acting with care; 'reckless' is the opposite."
-Vocabulary,Easy,"What is the past tense of the verb **'run'**?",ranned,runned,ran,runing,C,"'Ran' is the simple past tense of 'run'."
-Vocabulary,Hard,"A **'dichotomy'** is a division between two:",Similar things,Opposing things,Equal things,Old things,B,"A 'dichotomy' is a division or contrast between two things that are or are represented as being opposed or entirely different."
-Vocabulary,Medium,"Find the synonym for **'alleviate'**.",Worsen,Relieve,Increase,Hinder,B,"'Alleviate' means to make suffering, deficiency, or a problem less severe; synonymous with relieve."
-Vocabulary,Easy,"What is the adjective form of the noun **'beauty'**?",beautifully,beautify,beauties,beautiful,D,"'Beautiful' is the adjective form."
-Vocabulary,Hard,"What does the word **'capricious'** describe?",Constant,Predictable,Fickle,Stable,C,"'Capricious' means given to sudden and unaccountable changes of mood or behavior; synonymous with fickle."
-Vocabulary,Medium,"The opposite of **'commence'** is:",Finish,Start,Begin,Continue,A,"'Commence' means to begin; 'finish' means to end."
-Vocabulary,Easy,"Which word is a synonym for **'large'**?",Small,Tiny,Huge,Short,C,"'Huge' means extremely large; synonymous with large."
-Vocabulary,Hard,"Find the antonym for **'exacerbate'**.",Worsen,Aggravate,Improve,Intensify,C,"'Exacerbate' means to make a problem or situation worse; 'improve' is the antonym."
-Vocabulary,Medium,"What does **'irascible'** mean?",Easily pleased,Easily provoked to anger,Always cheerful,Very calm,B,"'Irascible' means having or showing a tendency to be easily angered."
-Vocabulary,Easy,"What is the comparative form of the adjective **'big'**?",biggest,biger,more big,bigger,D,"The comparative form is 'bigger'."
-Vocabulary,Hard,"A **'panacea'** is a solution or remedy for:",A specific disease,All difficulties or diseases,Financial problems only,Psychological distress,B,"A 'panacea' is a solution or remedy for all difficulties or diseases."
-Vocabulary,Medium,"Find the synonym for **'plausible'**.",Unbelievable,Possible,Impossible,Unlikely,B,"'Plausible' means seeming reasonable or probable; synonymous with possible."
-Vocabulary,Easy,"What is the plural form of **'mouse'**?",mouses,mousen,mice,mousees,C,"'Mice' is the irregular plural form."
-Vocabulary,Hard,"What does **'sycophant'** mean?",A critic,A follower,A flattering person,An enemy,C,"A 'sycophant' is a servile flatterer; a person who acts obsequiously toward someone important in order to gain advantage."
-Vocabulary,Medium,"The opposite of **'synthetic'** is:",Artificial,Man-made,Natural,Complex,C,"'Synthetic' means made by chemical synthesis; 'natural' is the antonym."
-Vocabulary,Easy,"Which word is a synonym for **'quick'**?",Slow,Fast,Dull,Weak,B,"'Fast' means moving or capable of moving at high speed; synonymous with quick."
-Vocabulary,Hard,"What is the antonym for **'profligate'**?",Wasteful,Extravagant,Thrifty,Reckless,C,"'Profligate' means recklessly extravagant or wasteful in the use of resources; 'thrifty' is the opposite."
-Vocabulary,Medium,"The word **'innocuous'** means:",Harmful,Dangerous,Harmless,Loud,C,"'Innocuous' means not harmful or offensive."
-Vocabulary,Easy,"What is the past participle of **'go'**?",goed,went,gone,going,C,"'Gone' is the past participle of 'go'."
-Vocabulary,Hard,"What does **'precarious'** mean?",Safe,Stable,Dangerous,Firm,C,"'Precarious' means not securely held or in position; dangerously likely to fall or collapse."
-Vocabulary,Medium,"The synonym for **'diligent'** is:",Lazy,Hardworking,Careless,Slow,B,"'Diligent' means having or showing care and conscientiousness in one's work or duties; synonymous with hardworking."
-Vocabulary,Easy,"The opposite of **'cold'** is:",Cool,Warm,Freeze,Ice,B,"'Warm' is the antonym of 'cold'."
-Vocabulary,Hard,"Find the synonym for **'mendacious'**.",Truthful,Honest,Lying,Sincere,C,"'Mendacious' means not telling the truth; lying."
-Vocabulary,Medium,"What does **'subside'** mean?",Increase,Grow,Decrease,Rise,C,"'Subside' means to become less intense, violent, or severe."
-Vocabulary,Easy,"What is the comparative form of the adjective **'good'**?",gooder,best,better,more good,C,"The comparative form is 'better'."
-Vocabulary,Hard,"An **'inchoate'** idea is one that is:",Fully formed,Recent,Not yet fully developed,Outdated,C,"'Inchoate' means just begun and so not fully formed or developed; rudimentary."
-Vocabulary,Medium,"The opposite of **'turbulent'** is:",Chaotic,Violent,Calm,Disorderly,C,"'Turbulent' means characterized by conflict, disorder, or confusion; 'calm' is the antonym."
-Vocabulary,Easy,"Which word is a synonym for **'clever'**?",Stupid,Smart,Dull,Clumsy,B,"'Smart' means having or showing a quick-witted intelligence; synonymous with clever."
-Vocabulary,Hard,"A **'querulous'** person is known for:",Complaining,Laughing,Being silent,Being friendly,A,"'Querulous' means complaining in a petulant or whining manner."
-Vocabulary,Medium,"Find the synonym for **'ostentatious'**.",Simple,Modest,Showy,Humble,C,"'Ostentatious' means characterized by pretentious or showy display intended to impress others."
-Vocabulary,Easy,"What is the plural form of **'foot'**?",foots,feets,footies,feet,D,"'Feet' is the irregular plural form."
-Vocabulary,Hard,"What does **'fatuous'** mean?",Intelligent,Serious,Silly and pointless,Wise,C,"'Fatuous' means silly and pointless."
-Vocabulary,Medium,"The opposite of **'transient'** is:",Fleeting,Short-lived,Permanent,Moving,C,"'Transient' means lasting only for a short time; 'permanent' is the antonym."
-Vocabulary,Easy,"Which word is a synonym for **'gift'**?",Present,Work,Task,Debt,A,"'Present' means a thing given as a gift."
-Vocabulary,Medium,"Find the synonym for **'paradox'**.",Simple truth,Contradiction,Agreement,Solution,B,"A 'paradox' is a seemingly absurd or self-contradictory statement that when investigated or explained may prove to be well founded or true."
-Vocabulary,Medium,"The word **'fortuitous'** means:",Unlucky,Accidental,Planned,Unpleasant,B,"'Fortuitous' means happening by accident or chance, typically resulting in a favorable outcome."
-Vocabulary,Hard,"What is the antonym of **'recalcitrant'**?",Obedient,Rebellious,Stubborn,Defiant,A,"'Recalcitrant' means having an uncooperative attitude; 'obedient' is the antonym."
-Vocabulary,Easy,"What is the noun form of the verb **'decide'**?",decisive,decided,decision,deciding,C,"'Decision' is the noun form."
-Vocabulary,Medium,"Find the synonym for **'innate'**.",Learned,Acquired,Inborn,External,C,"'Innate' means inborn or natural."
-Vocabulary,Hard,"What does **'perfunctory'** mean?",Thorough,Enthusiastic,Carried out with minimum effort,Deeply felt,C,"'Perfunctory' means carried out with a minimum of effort or reflection."
-Vocabulary,Easy,"The opposite of **'wet'** is:",Damp,Moist,Dry,Soggy,C,"'Dry' is the antonym of 'wet'."
-Vocabulary,Medium,"The word **'clandestine'** means:",Open,Secret,Loud,Honest,B,"'Clandestine' means kept secret or done secretively, especially because illicit."
-Vocabulary,Hard,"Find the synonym for **'alacrity'**.",Slowness,Eagerness,Reluctance,Sadness,B,"'Alacrity' means brisk and cheerful readiness; synonymous with eagerness."
-Vocabulary,Easy,"What is the comparative form of the adjective **'happy'**?",happier,happiest,more happy,happyer,A,"The comparative form is 'happier'."
-Vocabulary,Medium,"What does **'fastidious'** mean?",Easy to please,Very attentive to detail,Careless,Quick to anger,B,"'Fastidious' means very attentive to and concerned about accuracy and detail."
-Vocabulary,Hard,"What is the antonym of **'deleterious'**?",Beneficial,Harmful,Damaging,Toxic,A,"'Deleterious' means causing harm or damage; 'beneficial' is the antonym."
-Vocabulary,Easy,"Which word is a synonym for **'speak'**?",Listen,Hear,Talk,Look,C,"'Talk' means to speak in order to give information or express ideas; synonymous with speak."
-Vocabulary,Medium,"Find the synonym for **'amalgamate'**.",Separate,Divide,Combine,Exclude,C,"'Amalgamate' means to combine or unite to form one organization or structure."
-Vocabulary,Hard,"What does **'obfuscate'** mean?",Clarify,Simplify,Confuse,Explain,C,"'Obfuscate' means to make something obscure, unclear, or unintelligible; synonymous with confuse."
-Vocabulary,Easy,"What is the plural form of the word **'wolf'**?",wolfs,wolves,wolfies,wolfen,B,"'Wolves' is the irregular plural form."
-Vocabulary,Medium,"The word **'nefarious'** means:",Good,Wicked,Funny,Kind,B,"'Nefarious' means typically of an action or activity, wicked or criminal."
-Vocabulary,Hard,"Find the antonym for **'garrulous'**?",Talkative,Silent,Loud,Friendly,B,"'Garrulous' means excessively talkative, especially on trivial matters; 'silent' is the antonym."
-Vocabulary,Easy,"The opposite of **'cheap'** is:",Affordable,Inexpensive,Expensive,Low-cost,C,"'Expensive' is the antonym of 'cheap'."
-Vocabulary,Medium,"What does **'mitigate'** mean?",Intensify,Worsen,Lessen,Increase,C,"'Mitigate' means to make something less severe, serious, or painful."
-Vocabulary,Hard,"A **'lugubrious'** expression is:",Joyful,Mournful,Angry,Excited,B,"'Lugubrious' means looking or sounding sad and dismal, often to an exaggerated degree."
-Vocabulary,Easy,"What is the past tense of the verb **'write'**?",writed,wrote,written,writing,B,"'Wrote' is the simple past tense of 'write'."
-Vocabulary,Hard,"What does **'inscrutable'** mean?",Easy to understand,Mysterious,Clear,Obvious,B,"'Inscrutable' means impossible to understand or interpret."
-Vocabulary,Easy,"Which word is a synonym for **'end'**?",Start,Middle,Finish,Go,C,"'Finish' means to complete an activity or period of time; synonymous with end."
-Vocabulary,Medium,"The opposite of **'transitory'** is:",Temporary,Momentary,Lasting,Moving,C,"'Transitory' means temporary; 'lasting' is the antonym."
-Vocabulary,Hard,"What is the antonym of **'veracity'**?",Truthfulness,Honesty,Deceit,Accuracy,C,"'Veracity' means accuracy or truthfulness; 'deceit' is the antonym."
-Vocabulary,Easy,"What is the superlative form of the adjective **'bad'**?",badder,worse,worst,most bad,C,"The superlative form is 'worst'."
-Vocabulary,Medium,"What does **'cogent'** mean?",Weak,Unconvincing,Clear and logical,Emotional,C,"'Cogent' means clear, logical, and convincing."
-Vocabulary,Hard,"Find the synonym for **'specious'**.",Genuine,Misleading,Sincere,Truthful,B,"'Specious' means seemingly plausible but actually wrong; misleadingly attractive."
-Vocabulary,Easy,"The opposite of **'full'** is:",Empty,Packed,Crowded,Loaded,A,"'Empty' is the antonym of 'full'."
-Vocabulary,Medium,"The word **'dearth'** means:",Abundance,Lack,Excess,Wealth,B,"'Dearth' means a scarcity or lack of something."
-Vocabulary,Hard,"What does **'ignominious'** mean?",Honorable,Shameful,Famous,Successful,B,"'Ignominious' means deserving or causing public disgrace or shame."
-Vocabulary,Easy,"What is the past participle of **'eat'**?",eated,ate,eaten,eating,C,"'Eaten' is the past participle of 'eat'."
-Vocabulary,Medium,"Find the synonym for **'impeccable'**.",Flawed,Perfect,Dirty,Faulty,B,"'Impeccable' means in accordance with the highest standards of propriety; faultless/perfect."
-Vocabulary,Hard,"What is the antonym of **'replete'**?",Full,Empty,Crowded,Abundant,B,"'Replete' means fully supplied or filled; 'empty' is the antonym."
-Vocabulary,Easy,"Which word is a synonym for **'begin'**?",Stop,End,Start,Pause,C,"'Start' means to begin or take the first step in a course of action; synonymous with begin."
-Vocabulary,Medium,"The word **'auspicious'** means:",Unfavorable,Favorable,Neutral,Accidental,B,"'Auspicious' means conducive to success; favorable."
-Vocabulary,Hard,"Find the synonym for **'diffident'**.",Confident,Shy,Bold,Arrogant,B,"'Diffident' means modest or shy because of a lack of self-confidence."
-Vocabulary,Easy,"What is the noun form of the verb **'know'**?",knowing,known,knowledge,knowable,C,"'Knowledge' is the noun form."
-Vocabulary,Medium,"What does **'juxtapose'** mean?",Separate,Place close together for contrasting effect,Mix together,Hide,B,"'Juxtapose' means to place or deal with close together for contrasting effect."
-Vocabulary,Hard,"What is the antonym of **'sedulous'**?",Diligent,Careful,Lazy,Attentive,C,"'Sedulous' means showing dedication and diligence; 'lazy' is the antonym."
-Vocabulary,Easy,"The opposite of **'up'** is:",Above,Down,Over,Under,B,"'Down' is the antonym of 'up'."
-Vocabulary,Medium,"The word **'culminate'** means:",Begin,Reach the highest point,Decline,End abruptly,B,"'Culminate' means reach a climax or point of highest development."
-Vocabulary,Hard,"Find the synonym for **'obsequious'**?",Dominating,Servile,Angry,Honest,B,"'Obsequious' means obedient or attentive to an excessive or servile degree."
-Vocabulary,Easy,"What is the plural form of the word **'person'**?",persons,people,peoples,persones,B,"'People' is the irregular plural form of 'person'."
-Vocabulary,Medium,"What does **'acumen'** mean?",Stupidity,Inability,Sharpness of mind,Laziness,C,"'Acumen' means the ability to make good judgments and quick decisions, typically in a particular domain."
-Vocabulary,Hard,"The opposite of **'reticent'** is:",Quiet,Reserved,Talkative,Shy,C,"'Reticent' means reserved or restrained; 'talkative' is the opposite."
-Vocabulary,Easy,"Which word is a synonym for **'nice'**?",Mean,Pleasant,Rude,Unkind,B,"'Pleasant' means giving a sense of happy satisfaction or enjoyment; synonymous with nice."
-Vocabulary,Medium,"Find the synonym for **'sardonic'**.",Sincere,Mocking,Friendly,Serious,B,"'Sardonic' means grimly mocking or cynical."
-Vocabulary,Hard,"What does **'deleterious'** mean?",Helpful,Harmful,Beneficial,Neutral,B,"'Deleterious' means causing harm or damage."
-Vocabulary,Medium,"The word **'parochial'** means:",Broad-minded,Narrowly restricted in scope or outlook,Global,Tolerant,B,"'Parochial' means having a limited or narrow outlook or scope."
-Vocabulary,Hard,"What is the antonym of **'reprobate'**?",Scoundrel,Virtuous person,Criminal,Wretch,B,"A 'reprobate' is an unprincipled person; a 'virtuous person' is the antonym."
-Vocabulary,Easy,"What is the past tense of the verb **'take'**?",taked,took,taken,taking,B,"'Took' is the simple past tense of 'take'."
-Vocabulary,Medium,"Find the synonym for **'tacit'**.",Explicit,Stated,Understood without being openly expressed,Loud,C,"'Tacit' means understood or implied without being stated."
-Vocabulary,Hard,"What does **'mendicant'** mean?",A rich person,A beggar,A doctor,A teacher,B,"A 'mendicant' is a beggar or someone who lives by begging."
-Vocabulary,Easy,"The opposite of **'always'** is:",Often,Never,Sometimes,Rarely,B,"'Never' is the antonym of 'always'."
-Vocabulary,Medium,"The word **'chicanery'** means:",Honesty,Honorable conduct,Deception or trickery,Friendship,C,"'Chicanery' means the use of trickery to achieve a political, financial, or legal purpose."
-Vocabulary,Hard,"Find the synonym for **'pusillanimous'**.",Brave,Cowardly,Strong,Aggressive,B,"'Pusillanimous' means showing a lack of courage or determination; synonymous with cowardly."
-Vocabulary,Easy,"What is the superlative form of the adjective **'old'**?",older,oldest,more old,oldier,B,"The superlative form is 'oldest'."
-Vocabulary,Medium,"What does **'ignoble'** mean?",Honorable,Noble,Dishonorable,Famous,C,"'Ignoble' means not noble; dishonorable."
-Vocabulary,Hard,"What is the antonym of **'vociferous'**?",Loud,Boisterous,Quiet,Energetic,C,"'Vociferous' means vehemently expressing feelings; 'quiet' is the antonym."
-Vocabulary,Easy,"Which word is a synonym for **'sad'**?",Cheerful,Unhappy,Excited,Calm,B,"'Unhappy' means not happy; synonymous with sad."
-Vocabulary,Medium,"Find the synonym for **'irrevocable'**.",Reversible,Changeable,Final,Temporary,C,"'Irrevocable' means not able to be changed, reversed, or recovered; final."
-Vocabulary,Hard,"What does **'quixotic'** mean?",Practical,Realistic,Exceedingly idealistic; unrealistic,Dull,C,"'Quixotic' means exceedingly idealistic; unrealistic and impractical."
-Vocabulary,Easy,"What is the plural form of the word **'focus'**?",focuses,foci,focuss,focuses or foci,D,"Both 'focuses' and 'foci' are accepted plural forms."
-Vocabulary,Medium,"The word **'surreptitious'** means:",Open,Secret,Loud,Obvious,B,"'Surreptitious' means kept secret, especially because it would not be approved of."
-Vocabulary,Hard,"Find the synonym for **'assiduous'**.",Lazy,Hardworking,Careless,Slow,B,"'Assiduous' means showing great care and perseverance; synonymous with hardworking."
-Vocabulary,Easy,"The opposite of **'outside'** is:",Above,Below,Inside,Near,C,"'Inside' is the antonym of 'outside'."
-Vocabulary,Medium,"What does **'inundate'** mean?",Drain,Flood,Dry,Empty,B,"'Inundate' means to overwhelm or flood."
-Vocabulary,Hard,"A **'nonchalant'** attitude is:",Excited,Anxious,Calm and unconcerned,Aggressive,C,"'Nonchalant' means feeling or appearing casually calm and relaxed; unconcerned."
-Vocabulary,Easy,"What is the noun form of the verb **'explain'**?",explaining,explaination,explanation,explained,C,"'Explanation' is the noun form."
-Vocabulary,Medium,"Find the synonym for **'ubiquitous'**.",Rare,Everywhere,Scarce,Hidden,B,"'Ubiquitous' means present, appearing, or found everywhere."
-Vocabulary,Hard,"What is the antonym of **'perfidious'**?",Faithful,Deceitful,Treacherous,Disloyal,A,"'Perfidious' means deceitful and untrustworthy; 'faithful' is the antonym."
-Vocabulary,Easy,"Which word is a synonym for **'idea'**?",Fact,Thought,Object,Place,B,"'Thought' means an idea or opinion produced by thinking."
-Vocabulary,Medium,"The word **'gregarious'** means:",Shy,Quiet,Sociable,Rude,C,"'Gregarious' means fond of company; sociable."
-Vocabulary,Hard,"What does **'epicure'** refer to?",A health expert,A person devoted to sensual enjoyment,A strict disciplinarian,A philosopher,B,"An 'epicure' is a person devoted to sensual enjoyment, especially that derived from fine food and drink."
-Vocabulary,Easy,"What is the past tense of the verb **'know'**?",knew,knowed,known,knows,A,"'Knew' is the simple past tense of 'know'."
-Vocabulary,Medium,"Find the synonym for **'precarious'**.",Safe,Secure,Unstable,Stable,C,"'Precarious' means not securely held or in position; dangerously unstable."
-Vocabulary,Hard,"What does **'exigent'** mean?",Unimportant,Trivial,Pressing; demanding,Easygoing,C,"'Exigent' means pressing; demanding."
-Vocabulary,Easy,"The opposite of **'difficult'** is:",Hard,Challenging,Easy,Complex,C,"'Easy' is the antonym of 'difficult'."
-Vocabulary,Medium,"The word **'rancor'** means:",Goodwill,Friendliness,Bitterness or resentfulness,Happiness,C,"'Rancor' means bitterness or resentfulness, especially long-standing."
-Vocabulary,Hard,"What is the antonym of **'ameliorate'**?",Improve,Worsen,Fix,Help,B,"'Ameliorate' means to make something better; 'worsen' is the antonym."
-Vocabulary,Easy,"What is the past participle of **'sing'**?",sang,sung,singed,singing,B,"'Sung' is the past participle of 'sing'."
-Vocabulary,Medium,"Find the synonym for **'transient'**.",Permanent,Temporary,Lasting,Eternal,B,"'Transient' means lasting only for a short time; synonymous with temporary."
-Vocabulary,Hard,"What does **'inchoate'** mean?",Fully developed,Rudimentary,Perfect,Finished,B,"'Inchoate' means not fully formed or developed; rudimentary."
-Vocabulary,Easy,"Which word is a synonym for **'strong'**?",Weak,Powerful,Fragile,Soft,B,"'Powerful' means having great power or strength; synonymous with strong."
-Vocabulary,Medium,"The word **'adroit'** means:",Clumsy,Skillful,Awkward,Slow,B,"'Adroit' means clever or skillful in using the hands or mind."
-Vocabulary,Hard,"Find the antonym for **'obdurate'**?",Stubborn,Yielding,Firm,Unwavering,B,"'Obdurate' means stubbornly refusing to change one's opinion; 'yielding' is the antonym."
-Vocabulary,Easy,"What is the noun form of the adjective **'free'**?",freely,freedom,freer,freeing,B,"'Freedom' is the noun form."
-Vocabulary,Medium,"What does **'callous'** mean?",Sensitive,Uncaring,Kind,Tender,B,"'Callous' means showing an insensitive and cruel disregard for others."
-Vocabulary,Hard,"A **'redolent'** smell is:",Odorless,Fragrant,Unpleasant,Mild,B,"'Redolent' means strongly reminiscent or suggestive of something; fragrant."
-Vocabulary,Easy,"The opposite of **'open'** is:",Wide,Close,Start,Door,B,"'Close' is the antonym of 'open'."
-Vocabulary,Medium,"The word **'prodigious'** means:",Small,Average,Enormous,Weak,C,"'Prodigious' means remarkably or impressively great in extent, size, or degree; enormous."
-Vocabulary,Hard,"Find the synonym for **'puerile'**.",Mature,Childish,Serious,Adult,B,"'Puerile' means childishly silly and trivial."
-Vocabulary,Easy,"What is the plural form of the word **'knife'**?",knifes,knives,knifees,knifez,B,"'Knives' is the irregular plural form."
-Vocabulary,Medium,"What does **'eschew'** mean?",Embrace,Avoid,Welcome,Seek,B,"'Eschew' means deliberately avoid using; abstain from."
-Vocabulary,Hard,"What is the antonym of **'reprobation'**?",Disapproval,Condemnation,Approval,Censure,C,"'Reprobation' means strong disapproval; 'approval' is the antonym."
-Vocabulary,Easy,"Which word is a synonym for **'true'**?",False,Fake,Correct,Wrong,C,"'Correct' means free from error; synonymous with true."
-Vocabulary,Medium,"Find the synonym for **'mitigate'**.",Aggravate,Worsen,Alleviate,Increase,C,"'Mitigate' means to make less severe, serious, or painful; synonymous with alleviate."
-Vocabulary,Hard,"The word **'soporific'** means:",Awakening,Energizing,Tending to induce drowsiness or sleep,Exciting,C,"'Soporific' means tending to induce drowsiness or sleep."
-Vocabulary,Hard,"What is the antonym of **'mercurial'**?",Stable,Volatile,Changing,Erratic,A,"'Mercurial' means subject to sudden or unpredictable changes; 'stable' is the opposite."
-Vocabulary,Easy,"Which word is a synonym for **'allow'**?",Forbid,Permit,Stop,Delay,B,"'Permit' means to give authorization or consent; synonymous with allow."
-Vocabulary,Medium,"Find the synonym for **'gregarious'**.",Quiet,Aloof,Sociable,Rude,C,"'Gregarious' means fond of company; sociable."
-Vocabulary,Hard,"What does **'churlish'** mean?",Polite,Gracious,Rude and mean-spirited,Friendly,C,"'Churlish' means rude in a mean-spirited and surly way."
-Vocabulary,Medium,"The word **'deleterious'** means:",Helpful,Harmful,Beneficial,Neutral,B,"'Deleterious' means causing harm or damage."
-Vocabulary,Hard,"Find the synonym for **'probity'**.",Dishonesty,Integrity,Corruption,Doubt,B,"'Probity' means the quality of having strong moral principles; honesty and decency (integrity)."
-Vocabulary,Easy,"What is the plural form of the word **'shelf'**?",shelfs,shelves,shelfes,sheles,B,"'Shelves' is the irregular plural form."
-Vocabulary,Medium,"What does **'plethora'** mean?",Scarcity,Lack,Excess,Shortage,C,"'Plethora' means a large or excessive amount of something."
-Vocabulary,Hard,"What is the antonym of **'inculcate'**?",Instill,Erase,Teach,Impart,B,"'Inculcate' means to instill an idea or attitude; 'erase' is the antonym."
-Vocabulary,Easy,"Which word is a synonym for **'small'**?",Big,Large,Tiny,Huge,C,"'Tiny' means extremely small; synonymous with small."
-Vocabulary,Hard,"What does **'salutary'** mean?",Harmful,Detrimental,Beneficial,Injurious,C,"'Salutary' means producing good effects; beneficial."
-Vocabulary,Easy,"What is the past tense of the verb **'sleep'**?",sleeped,slept,sleepen,sleeping,B,"'Slept' is the simple past tense of 'sleep'."
-Vocabulary,Medium,"The word **'ephemeral'** means:",Lasting,Permanent,Fleeting,Eternal,C,"'Ephemeral' means lasting for a very short time; fleeting."
-Vocabulary,Hard,"Find the antonym for **'languid'**?",Weak,Listless,Energetic,Slow,C,"'Languid' means slow and relaxed, lacking in spirit; 'energetic' is the opposite."
-Vocabulary,Easy,"The opposite of **'before'** is:",Early,After,Next,Past,B,"'After' is the antonym of 'before'."
-Vocabulary,Medium,"What does **'sardonic'** mean?",Sincere,Friendly,Mocking or cynical,Serious,C,"'Sardonic' means grimly mocking or cynical."
-Vocabulary,Hard,"A **'pusillanimous'** person is:",Brave,Courageous,Cowardly,Bold,C,"'Pusillanimous' means showing a lack of courage or determination; cowardly."
-Vocabulary,Easy,"What is the adjective form of the noun **'friend'**?",friendship,friendly,friending,friendless,B,"'Friendly' is the adjective form."
-Vocabulary,Medium,"Find the synonym for **'ameliorate'**.",Worsen,Improve,Aggravate,Hinder,B,"'Ameliorate' means to make something better; synonymous with improve."
-Vocabulary,Hard,"What does **'neophyte'** refer to?",Expert,Veteran,Beginner,Master,C,"A 'neophyte' is a person who is new to a subject, skill, or belief; a beginner."
-Vocabulary,Medium,"The word **'alacrity'** means:",Slowness,Eagerness,Reluctance,Hesitation,B,"'Alacrity' means brisk and cheerful readiness; eagerness."
-Vocabulary,Hard,"What is the antonym of **'redoubtable'**?",Formidable,Awe-inspiring,Ordinary,Powerful,C,"'Redoubtable' means formidable or deserving great respect; 'ordinary' is the antonym."
-Vocabulary,Easy,"What is the plural form of **'tooth'**?",tooths,teeths,toothies,teeth,D,"'Teeth' is the irregular plural form."
-Vocabulary,Medium,"What does **'transitory'** mean?",Permanent,Temporary,Lasting,Enduring,B,"'Transitory' means lasting only for a short time; temporary."
-Vocabulary,Hard,"Find the synonym for **'capricious'**.",Stable,Predictable,Fickle,Consistent,C,"'Capricious' means given to sudden, unaccountable changes of mood; fickle."
-Vocabulary,Easy,"The opposite of **'near'** is:",Close,Far,Beside,With,B,"'Far' is the antonym of 'near'."
-Vocabulary,Medium,"The word **'expedient'** means:",Inconvenient,Convenient or practical,Unwise,Difficult,B,"'Expedient' means convenient and practical, although possibly improper or immoral."
-Vocabulary,Hard,"What is the antonym of **'craven'**?",Cowardly,Brave,Fearful,Timid,B,"'Craven' means contemptibly lacking in courage; cowardly; 'brave' is the antonym."
-Vocabulary,Easy,"What is the past participle of **'break'**?",breaked,broke,broken,breaking,C,"'Broken' is the past participle of 'break'."
-Vocabulary,Medium,"Find the synonym for **'callous'**.",Sensitive,Caring,Cruel,Kind,C,"'Callous' means showing an insensitive and cruel disregard for others."
-Vocabulary,Hard,"What does **'pellucid'** mean?",Cloudy,Opaque,Translucent; clearly expressed,Dull,C,"'Pellucid' means transparently clear; clearly expressed."
-Vocabulary,Easy,"Which word is a synonym for **'start'**?",Stop,Begin,Finish,Pause,B,"'Begin' means to start; synonymous with start."
-Vocabulary,Medium,"The word **'dogmatic'** means:",Open-minded,Asserting opinions as facts,Flexible,Doubtful,B,"'Dogmatic' means asserting opinions as facts without evidence."
-Vocabulary,Hard,"Find the antonym for **'accolade'**?",Praise,Award,Censure,Honor,C,"An 'accolade' is an award or expression of praise; 'censure' (disapproval) is the antonym."
-Vocabulary,Easy,"What is the noun form of the verb **'imagine'**?",imagining,imagined,imagination,imaginative,C,"'Imagination' is the noun form."
-Vocabulary,Medium,"What does **'censure'** mean?",Praise,Approve,Express severe disapproval,Celebrate,C,"'Censure' means to express severe disapproval of someone or something."
-Vocabulary,Hard,"A **'maverick'** is a person who is:",Conformist,Team player,Independent and nonconformist,Obedient,C,"A 'maverick' is an independent-minded person."
-Vocabulary,Easy,"The opposite of **'first'** is:",Middle,Second,Last,Start,C,"'Last' is the antonym of 'first'."
-Vocabulary,Medium,"The word **'circumspect'** means:",Rash,Careful,Reckless,Hasty,B,"'Circumspect' means wary and unwilling to take risks; careful."
-Vocabulary,Hard,"Find the synonym for **'exigent'**.",Unimportant,Pressing,Trivial,Minor,B,"'Exigent' means pressing; demanding."
-Vocabulary,Medium,"What does **'ubiquitous'** mean?",Rare,Everywhere,Scarce,Hidden,B,"'Ubiquitous' means present, appearing, or found everywhere."
-Vocabulary,Hard,"The opposite of **'impertinent'** is:",Rude,Insolent,Polite,Disrespectful,C,"'Polite' is the antonym."
-Vocabulary,Easy,"Which word is a synonym for **'answer'**?",Question,Reply,Ask,Query,B,"'Reply' means to say something in response; synonymous with answer."
-Vocabulary,Medium,"Find the synonym for **'prodigious'**.",Small,Ordinary,Enormous,Weak,C,"'Prodigious' means remarkably or impressively great in extent, size, or degree; enormous."
-Vocabulary,Hard,"The word **'sycophant'** means:",Critic,Admirer,Flatterer,Teacher,C,"A 'sycophant' is a servile flatterer; a person who acts obsequiously to gain advantage."
-Vocabulary,Medium,"The word **'acumen'** means:",Stupidity,Sharpness of mind,Inability,Laziness,B,"'Acumen' means the ability to make good judgments and quick decisions."
-Vocabulary,Hard,"What is the antonym of **'enervate'**?",Strengthen,Weaken,Exhaust,Tire,A,"'Enervate' means to cause someone to feel drained of energy; 'strengthen' is the opposite."
-Vocabulary,Easy,"What is the noun form of the verb **'create'**?",creating,creativity,creation,creator,C,"'Creation' is the noun form referring to the act of creating."
-Vocabulary,Medium,"Find the synonym for **'repudiate'**.",Accept,Reject,Support,Confirm,B,"'Repudiate' means to refuse to accept or be associated with."
-Vocabulary,Hard,"What does **'curmudgeon'** mean?",A cheerful person,A bad-tempered person,A singer,A dancer,B,"A 'curmudgeon' is a bad-tempered or surly person."
-Vocabulary,Medium,"The word **'haphazard'** means:",Organized,Random,Planned,Careful,B,"'Haphazard' means lacking any obvious principle of organization; random."
-Vocabulary,Hard,"Find the synonym for **'assuage'**.",Worsen,Intensify,Soothe,Aggravate,C,"'Assuage' means to make an unpleasant feeling less intense; soothe."
-Vocabulary,Easy,"What is the superlative form of the adjective **'high'**?",higher,highest,more high,highiest,B,"The superlative form is 'highest'."
-Vocabulary,Medium,"What does **'oblivious'** mean?",Aware,Unaware,Careful,Interested,B,"'Oblivious' means not aware of or not concerned about what is happening around one."
-Vocabulary,Hard,"What is the antonym of **'abstruse'**?",Obscure,Complex,Clear,Profound,C,"'Abstruse' means difficult to understand; 'clear' is the antonym."
-Vocabulary,Easy,"Which word is a synonym for **'simple'**?",Complex,Easy,Difficult,Hard,B,"'Easy' means achieved without great effort; synonymous with simple."
-Vocabulary,Medium,"Find the synonym for **'perfunctory'**.",Thorough,Enthusiastic,Cursory,Detailed,C,"'Perfunctory' means carried out with a minimum of effort or reflection; cursory."
-Vocabulary,Hard,"What does **'inure'** mean?",Soften,Harden,Sensitize,Weaken,B,"'Inure' means to accustom (someone) to something, especially something unpleasant."
-Vocabulary,Easy,"What is the plural form of the word **'datum'**?",datums,datas,data,datu,C,"'Data' is the traditional plural form of 'datum' (though 'data' is often used as a singular mass noun)."
-Vocabulary,Medium,"The word **'epistolary'** relates to:",Speeches,Writing,Letters,Poetry,C,"'Epistolary' means relating to or denoting the writing of letters."
-Vocabulary,Hard,"Find the synonym for **'ignominious'**.",Honorable,Shameful,Famous,Successful,B,"'Ignominious' means deserving or causing public disgrace or shame."
-Vocabulary,Easy,"The opposite of **'exit'** is:",Leave,Enter,Go,Away,B,"'Enter' is the antonym of 'exit'."
-Vocabulary,Hard,"A **'largesse'** is:",Stinginess,Generosity,Smallness,Difficulty,B,"'Largesse' means generosity in giving money or gifts."
-Vocabulary,Easy,"What is the past tense of the verb **'ring'**?",ringed,rang,rung,ringing,B,"'Rang' is the simple past tense of 'ring'."
-Vocabulary,Medium,"Find the synonym for **'candid'**.",Deceitful,Honest,Secretive,Tricky,B,"'Candid' means truthful and straightforward; honest."
-Vocabulary,Easy,"Which word is a synonym for **'polite'**?",Rude,Courteous,Mean,Angry,B,"'Courteous' means showing politeness in one's attitude and behavior."
-Vocabulary,Medium,"The word **'morose'** means:",Happy,Cheerful,Sullen and ill-tempered,Excited,C,"'Morose' means sullen and ill-tempered."
-Vocabulary,Hard,"What is the antonym of **'inchoate'**?",Rudimentary,Developed,Basic,Beginning,B,"'Inchoate' means not fully developed; 'developed' is the opposite."
-Vocabulary,Easy,"What is the adjective form of the noun **'health'**?",healthy,healthily,healthier,healthfulness,A,"'Healthy' is the adjective form."
-Vocabulary,Medium,"What does **'dearth'** mean?",Abundance,Scarcity,Excess,Wealth,B,"'Dearth' means a scarcity or lack of something."
-Vocabulary,Hard,"Find the synonym for **'querulous'**?",Complaining,Cheerful,Silent,Happy,A,"'Querulous' means complaining in a petulant or whining manner."
-Vocabulary,Easy,"The opposite of **'weak'** is:",Fragile,Feeble,Strong,Tired,C,"'Strong' is the antonym of 'weak'."
-Vocabulary,Medium,"The word **'venerate'** means:",Disrespect,Revere,Ignore,Condemn,B,"'Venerate' means to regard with great respect; revere."
-Vocabulary,Easy,"What is the past participle of **'drive'**?",drived,drove,driven,driving,C,"'Driven' is the past participle of 'drive'."
-Vocabulary,Medium,"Find the synonym for **'paucity'**.",Plenty,Scarcity,Abundance,Wealth,B,"'Paucity' means the presence of something only in small or insufficient quantities or amounts; scarcity."
-Vocabulary,Hard,"What does **'sycophantic'** mean?",Critical,Flattering,Honest,Angry,B,"Sycophantic' means excessively flattering or subservient."
-Vocabulary,Easy,"Which word is a synonym for **'talk'**?",Whisper,Speak,Silent,Mumble,B,"'Speak' means to say something; synonymous with talk."
-Vocabulary,Medium,"The word **'alleviate'** means:",Worsen,Relieve,Increase,Hinder,B,"'Alleviate' means to make suffering, deficiency, or a problem less severe; relieve."
-Vocabulary,Hard,"Find the antonym for **'obsequious'**?",Servile,Assertive,Flattering,Compliant,B,"'Obsequious' means obedient or attentive to an excessive degree; 'assertive' is the opposite."
-Vocabulary,Easy,"What is the plural form of the word **'crisis'**?",crisises,crises,crisiss,crices,B,"'Crises' is the irregular plural form."
-Vocabulary,Medium,"What does **'inadvertent'** mean?",Deliberate,Accidental,Planned,Intentional,B,"'Inadvertent' means resulting from or characterized by lack of attention; accidental."
-Vocabulary,Hard,"A **'redolent'** quality is:",Unpleasant,Fragrant,Odorless,Dull,B,"'Redolent' means strongly reminiscent or suggestive of something; fragrant."
-Vocabulary,Medium,"The word **'sanctimonious'** means:",Humble,Making a show of being morally superior,Sincere,Honest,B,"'Sanctimonious' means making a show of being morally superior to other people."
-Vocabulary,Hard,"Find the synonym for **'meretricious'**.",Genuine,Showily attractive but lacking value,Subtle,Valuable,B,"'Meretricious' means seemingly attractive but having in reality no value or integrity."
-Vocabulary,Easy,"What is the comparative form of the adjective **'far'**?",farer,farthest,further/farther,more far,C,"'Further' and 'farther' are the comparative forms."
-Vocabulary,Medium,"What does **'rancor'** mean?",Goodwill,Bitterness,Friendliness,Calmness,B,"'Rancor' means bitterness or resentfulness, especially long-standing."
-Vocabulary,Easy,"Which word is a synonym for **'mistake'**?",Error,Correctness,Truth,Success,A,"'Error' means a mistake; synonymous with mistake."
-Vocabulary,Hard,"What is the antonym of **'garrulous'**?",Talkative,Quiet,Loud,Verbose,B,"'Garrulous' means excessively talkative; 'quiet' is the antonym."
-Vocabulary,Easy,"What is the past tense of the verb **'catch'**?",catched,caught,catchten,catching,B,"'Caught' is the simple past tense of 'catch'."
-Vocabulary,Medium,"Find the synonym for **'prudent'**.",Reckless,Careful,Careless,Hasty,B,"'Prudent' means acting with or showing care for the future; synonymous with careful."
-Vocabulary,Hard,"What does **'chicanery'** mean?",Honesty,Deception,Truth,Sincerity,B,"'Chicanery' means the use of trickery or deception."
-Vocabulary,Medium,"The word **'fastidious'** means:",Easygoing,Attentive to detail,Careless,Lazy,B,"'Fastidious' means very attentive to and concerned about accuracy and detail."
-Vocabulary,Hard,"Find the synonym for **'profligate'**.",Thrifty,Wasteful,Economical,Careful,B,"'Profligate' means recklessly extravagant or wasteful."
-Vocabulary,Easy,"What is the superlative form of the adjective **'many'**?",more,most,manyer,maniest,B,"The superlative form is 'most' (used for count nouns)."
-Vocabulary,Medium,"What does **'auspicious'** mean?",Unfavorable,Favorable,Neutral,Accidental,B,"'Auspicious' means conducive to success; favorable."
-Vocabulary,Hard,"What is the antonym of **'perfunctory'**?",Careless,Thorough,Hasty,Brief,B,"'Perfunctory' means carried out with minimal effort; 'thorough' is the opposite."
-Vocabulary,Easy,"Which word is a synonym for **'brave'**?",Cowardly,Courageous,Fearful,Timid,B,"'Courageous' means having or showing courage; synonymous with brave."
-Vocabulary,Medium,"Find the synonym for **'juxtapose'**.",Separate,Contrast,Place side-by-side,Mix,C,"'Juxtapose' means to place or deal with close together for contrasting effect."
-Vocabulary,Hard,"What does **'soporific'** mean?",Awakening,Drowsiness-inducing,Energizing,Exciting,B,"'Soporific' means tending to induce drowsiness or sleep."
-Vocabulary,Easy,"What is the plural form of the word **'photo'**?",photos,photoes,photies,photoz,A,"'Photos' is the plural form."
-Vocabulary,Medium,"The word **'candid'** means:",Deceitful,Honest,Secretive,Tricky,B,"'Candid' means truthful and straightforward; honest."
-Vocabulary,Hard,"Find the synonym for **'sedulous'**.",Lazy,Diligent,Careless,Slow,B,"'Sedulous' means showing dedication and diligence."
-Vocabulary,Easy,"The opposite of **'light'** (weight) is:",Bright,Heavy,Soft,Fast,B,"'Heavy' is the antonym of 'light' (in weight)."
-Vocabulary,Medium,"What does **'adroit'** mean?",Clumsy,Skillful,Awkward,Slow,B,"'Adroit' means clever or skillful in using the hands or mind."
-Vocabulary,Hard,"A **'lugubrious'** mood is:",Joyful,Mournful,Angry,Excited,B,"'Lugubrious' means looking or sounding sad and dismal; mournful."
-Vocabulary,Hard,"What does **'obdurate'** mean?",Yielding,Stubborn,Flexible,Soft,B,"'Obdurate' means stubbornly refusing to change one's opinion."
-Vocabulary,Easy,"Which word is a synonym for **'job'**?",Hobby,Work,Leisure,Rest,B,"'Work' means activity involving mental or physical effort done in order to achieve a purpose or result; synonymous with job."
-Vocabulary,Medium,"The word **'mitigate'** means:",Intensify,Lessen,Worsen,Increase,B,"'Mitigate' means to make something less severe, serious, or painful."
-Vocabulary,Hard,"What is the antonym of **'querulous'**?",Complaining,Contented,Whining,Fussy,B,"'Querulous' means complaining; 'contented' is the opposite."
-Vocabulary,Easy,"What is the past tense of the verb **'bring'**?",bringed,brought,bringten,bringing,B,"'Brought' is the simple past tense of 'bring'."
-Vocabulary,Medium,"What does **'paucity'** mean?",Plenty,Scarcity,Abundance,Excess,B,"'Paucity' means the presence of something only in small or insufficient quantities; scarcity."
-Vocabulary,Hard,"Find the synonym for **'capitulate'**?",Resist,Surrender,Fight,Conquer,B,"'Capitulate' means to cease to resist an opponent or an unwelcome demand; surrender."
-Vocabulary,Easy,"The opposite of **'new'** is:",Modern,Old,Fresh,Recent,B,"'Old' is the antonym of 'new'."
-Vocabulary,Medium,"The word **'irrevocable'** means:",Reversible,Final,Changeable,Temporary,B,"'Irrevocable' means not able to be changed, reversed, or recovered; final."
-Vocabulary,Easy,"What is the past participle of **'swim'**?",swam,swimmed,swum,swimming,C,"'Swum' is the past participle of 'swim'."
-Vocabulary,Medium,"Find the synonym for **'inadvertent'**.",Deliberate,Accidental,Planned,Intentional,B,"'Inadvertent' means resulting from or characterized by lack of attention; accidental."
-Vocabulary,Hard,"What does **'maverick'** mean?",Conformist,Traditionalist,Independent,Obedient,C,"A 'maverick' is an independent-minded person."
-Vocabulary,Easy,"Which word is a synonym for **'finish'**?",Begin,End,Start,Open,B,"'End' means to stop or conclude; synonymous with finish."
-Vocabulary,Easy,"What is the plural form of the word **'radius'**?",radiuses,radii,radises,radi,B,"'Radii' is the irregular plural form."
-Vocabulary,Hard,"The opposite of **'acrimony'** is:",Bitterness,Harmony,Hostility,Anger,B,"'Acrimony' means bitterness; 'harmony' is the opposite."
-Vocabulary,Easy,"The opposite of **'soft'** is:",Gentle,Hard,Easy,Tender,B,"'Hard' is the antonym of 'soft'."
-Vocabulary,Hard,"Find the synonym for **'dichotomy'**.",Agreement,Division,Unity,Similarity,B,"A 'dichotomy' is a division or contrast between two things that are or are represented as being opposed."
-Vocabulary,Easy,"What is the comparative form of the adjective **'tall'**?",taller,tallest,more tall,tallest,A,"The comparative form is 'taller'."
-Vocabulary,Medium,"What does **'morose'** mean?",Happy,Cheerful,Sullen,Excited,C,"'Morose' means sullen and ill-tempered."
-Vocabulary,Easy,"Which word is a synonym for **'big'**?",Small,Large,Tiny,Little,B,"'Large' means of considerable or relatively great size; synonymous with big."
-Vocabulary,Hard,"The word **'mendacious'** means:",Truthful,Honest,Lying,Sincere,C,"'Mendacious' means not telling the truth; lying."
-Vocabulary,Medium,"The word **'skeptical'** means:",Believing,Doubting,Certain,Trusting,B,"'Skeptical' means having doubts or reservations."
-Vocabulary,Easy,"What is the noun form of the verb **'judge'**?",judging,judged,judgment,judicial,C,"'Judgment' (or 'judgement') is the noun form."
-Vocabulary,Medium,"Find the synonym for **'venerate'**?",Disrespect,Revere,Ignore,Condemn,B,"'Venerate' means to regard with great respect; revere."
-Vocabulary,Hard,"What does **'recalcitrant'** mean?",Obedient,Uncooperative,Yielding,Agreeable,B,"'Recalcitrant' means having an uncooperative attitude toward authority or discipline."
-Vocabulary,Easy,"What is the past tense of the verb **'spend'**?",spended,spent,spenden,spending,B,"'Spent' is the simple past tense of 'spend'."
-Vocabulary,Hard,"What is the antonym of **'ubiquitous'**?",Everywhere,Rare,Common,Present,B,"'Ubiquitous' means found everywhere; 'rare' is the antonym."
-Vocabulary,Medium,"Find the synonym for **'inundate'**?",Drain,Flood,Dry,Empty,B,"'Inundate' means to overwhelm or flood."
-Vocabulary,Easy,"What is the plural form of the word **'mouse'**?",mouses,mice,mousees,mouseen,B,"'Mice' is the irregular plural form."
-Vocabulary,Easy,"The opposite of **'buy'** is:",Keep,Sell,Take,Have,B,"'Sell' is the antonym of 'buy'."
-Vocabulary,Medium,"What does **'innocuous'** mean?",Harmful,Dangerous,Harmless,Offensive,C,"'Inncouous' means not harmful or offensive."
-Vocabulary,Hard,"A **'panacea'** is a solution for:",A specific disease,All difficulties,Financial problems,Political issues,B,"A 'panacea' is a solution or remedy for all difficulties or diseases."
-Vocabulary,Easy,"What is the past participle of the verb **'fall'**?",falled,fell,fallen,falling,C,"'Fallen' is the past participle of 'fall'."
-Vocabulary,Hard,"What is the antonym of **'parochial'**?",Narrow-minded,Global,Local,Restricted,B,"'Parochial' means narrowly restricted in scope; 'global' is the antonym."
-Vocabulary,Easy,"What is the plural form of the word **'man'**?",mans,mens,men,manies,C,"'Men' is the irregular plural form."
-Vocabulary,Easy,"The opposite of **'in'** is:",Into,Out,Inside,With,B,"'Out' is the antonym of 'in'."
-Vocabulary,Medium,"The word **'oblivious'** means:",Aware,Unaware,Careful,Interested,B,"'Oblivious' means not aware of or not concerned about what is happening around one."
-Vocabulary,Easy,"What is the superlative form of the adjective **'little'**?",littler,least,less,littlest,B,"The superlative form is 'least' (used for non-count nouns)."
-Vocabulary,Medium,"Find the synonym for **'pensive'**?",Happy,Thoughtful,Angry,Energetic,B,"'Pensive' means engaged in, or reflecting deep or serious thought."
-Vocabulary,Hard,"What does **'mercurial'** mean?",Stable,Unpredictable,Constant,Calm,B,"'Mercurial' means subject to sudden or unpredictable changes of mood or mind."
-Vocabulary,Easy,"Which word is a synonym for **'fast'**?",Slow,Quick,Dull,Weak,B,"'Quick' means moving or capable of moving at high speed; synonymous with fast."
-Vocabulary,Easy,"What is the noun form of the verb **'think'**?",thinking,thought,thinker,thoughtful,B,"'Thought' is the noun form."
-Vocabulary,Medium,"What does **'culminate'** mean?",Begin,Reach the highest point,Decline,End abruptly,B,"'Culminate' means reach a climax or point of highest development."
-Vocabulary,Medium,"The word **'sardonic'** means:",Sincere,Mocking,Friendly,Serious,B,"'Sardonic' means grimly mocking or cynical."
-Vocabulary,Medium,"What does **'irrevocable'** mean?",Reversible,Final,Changeable,Temporary,B,"'Irrevocable' means not able to be changed, reversed, or recovered; final."
-Vocabulary,Hard,"What is the antonym of **'sycophant'**?",Flatterer,Critic,Admirer,Follower,B,"A 'sycophant' is a servile flatterer; a 'critic' is the opposite."
-Vocabulary,Easy,"Which word is a synonym for **'look'**?",Hear,See,Taste,Touch,B,"'See' means to perceive with the eyes; synonymous with look."
-Vocabulary,Hard,"What is the antonym of **'assiduous'**?",Diligent,Lazy,Careful,Attentive,B,"'Assiduous' means showing great care and perseverance; 'lazy' is the antonym."
-Vocabulary,Easy,"What is the plural form of the word **'bus'**?",buss,buses,bussies,busses,B,"'Buses' is the plural form."
-Vocabulary,Medium,"Find the synonym for **'fastidious'**?",Easy to please,Attentive to detail,Careless,Quick to anger,B,"'Fastidious' means very attentive to and concerned about accuracy and detail."
-Vocabulary,Easy,"What is the past tense of the verb **'draw'**?",drawed,drew,drawn,drawing,B,"'Drew' is the simple past tense of 'draw'."
-Vocabulary,Hard,"What is the antonym of **'languid'**?",Weak,Listless,Energetic,Slow,C,"'Languid' means lacking spirit; 'energetic' is the opposite."
-Vocabulary,Hard,"What does **'probity'** mean?",Dishonesty,Integrity,Corruption,Doubt,B,"'Probity' means the quality of having strong moral principles; integrity."
-Vocabulary,Hard,"A **'redoubtable'** person is:",Ordinary,Formidable,Simple,Common,B,"'Redoubtable' means formidable or deserving great respect."
-Vocabulary,Easy,"What is the past participle of the verb **'see'**?",seed,saw,seen,seeing,C,"'Seen' is the past participle of 'see'."
-Vocabulary,Easy,"Which word is a synonym for **'old'**?",Modern,Aged,New,Recent,B,"'Aged' means having lived for a long time; synonymous with old."
-Vocabulary,Easy,"What is the plural form of the word **'foot'**?",foots,feets,footies,feet,D,"'Feet' is the irregular plural form."
-Vocabulary,Medium,"The word **'plethora'** means:",Scarcity,Lack,Excess,Shortage,C,"'Plethora' means a large or excessive amount of something."
-Vocabulary,Easy,"What is the comparative form of the adjective **'many'**?",more,most,manyer,maniest,A,"The comparative form is 'more'."
-Vocabulary,Medium,"The word **'diligent'** means:",Lazy,Hardworking,Careless,Slow,B,"'Diligent' means having or showing care and conscientiousness in one's work; hardworking."
-Vocabulary,Hard,"Find the antonym for **'abstruse'**?",Obscure,Complex,Clear,Profound,C,"'Abstruse' means difficult to understand; 'clear' is the antonym."
-Vocabulary,Easy,"What is the noun form of the adjective **'happy'**?",happily,happiest,happiness,happier,C,"'Happiness' is the noun form."
-Vocabulary,Hard,"Find the synonym for **'churlish'**?",Polite,Gracious,Rude and mean-spirited,Friendly,C,"'Churlish' means rude in a mean-spirited and surly way."
-Vocabulary,Hard,"What is the antonym of **'lugubrious'**?",Mournful,Cheerful,Dismal,Serious,B,"'Lugubrious' means looking sad and dismal; 'cheerful' is the opposite."`;
+        // REMOVED: The large 'const defaultCsvData' string is now gone.
         // --- END OF UPDATED defaultCsvData ---
 
 
@@ -1294,26 +1031,51 @@ Vocabulary,Hard,"What is the antonym of **'lugubrious'**?",Mournful,Cheerful,Dis
 
         function setThemeColor(color) {
             saveLocalStorageSetting('color', color);
-            applyTheme(getLocalStorageSetting('theme', 'light') === 'dark');
+            applyCurrentTheme(); // Use the new helper
             updateSettingsUI();
         }
 
-        function setThemeMode(mode) {
-            saveLocalStorageSetting('theme', mode);
-            applyTheme(mode === 'dark');
-            updateSettingsUI();
+        // --- START: MODIFIED THEME FUNCTIONS ---
+
+        // NEW: Helper function to apply theme based on saved setting
+        function applyCurrentTheme() {
+            const savedTheme = getLocalStorageSetting('theme', 'system');
+            let isDark;
+
+            if (savedTheme === 'light') {
+                isDark = false;
+            } else if (savedTheme === 'dark') {
+                isDark = true;
+            } else { // 'system'
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+            
+            applyTheme(isDark); // This function already calls updateHamburgerMenuUI
         }
 
+        // UPDATED: Cycles theme: System -> Light -> Dark -> System
         function toggleTheme() {
-            const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-            setThemeMode(currentMode === 'dark' ? 'light' : 'dark');
-            updateHamburgerMenuUI();
+            const currentMode = getLocalStorageSetting('theme', 'system');
+            let newMode;
+            
+            if (currentMode === 'system') {
+                newMode = 'light';
+            } else if (currentMode === 'light') {
+                newMode = 'dark';
+            } else { // 'dark'
+                newMode = 'system';
+            }
+            
+            saveLocalStorageSetting('theme', newMode);
+            applyCurrentTheme();
         }
+        
+        // --- END: MODIFIED THEME FUNCTIONS ---
         
         function setTextContrast(contrast) {
             saveLocalStorageSetting('contrast', contrast);
             document.body.setAttribute('data-contrast', contrast);
-            applyTheme(getLocalStorageSetting('theme', 'light') === 'dark'); 
+            applyCurrentTheme(); // Use the new helper
             updateSettingsUI();
         }
         
@@ -1364,7 +1126,7 @@ Vocabulary,Hard,"What is the antonym of **'lugubrious'**?",Mournful,Cheerful,Dis
         function toggleTextHue() {
             const currentState = getLocalStorageSetting('textHue', false);
             saveLocalStorageSetting('textHue', !currentState);
-            applyTheme(getLocalStorageSetting('theme', 'light') === 'dark');
+            applyCurrentTheme(); // Use the new helper
             updateSettingsUI();
         }
 
@@ -1464,33 +1226,52 @@ Vocabulary,Hard,"What is the antonym of **'lugubrious'**?",Mournful,Cheerful,Dis
             }
         }
 
-
+        // --- START: MODIFIED THEME UI FUNCTION ---
         function updateHamburgerMenuUI() {
-            const isDark = document.body.classList.contains(DARK_CLASS);
+            const savedTheme = getLocalStorageSetting('theme', 'system');
             const iconContainer = document.getElementById('menu-theme-icon');
             const textContainer = document.getElementById('menu-theme-text');
 
-            if (isDark) {
-                iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.593.748-3.752A9.753 9.753 0 009 12.75a9.75 9.75 0 0011.002 9.75z" />`;
-                textContainer.textContent = "Switch to Light Mode";
-            } else {
+            if (savedTheme === 'system') {
+                // System Icon (AdjustmentsVertical)
+                iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 12h16.5m-16.5 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3zm9-6h3.75m-3.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 18h16.5m-16.5 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3z" />`;
+                textContainer.textContent = "Theme: System";
+            } else if (savedTheme === 'light') {
+                // Sun Icon
                 iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`;
-                textContainer.textContent = "Switch to Dark Mode";
+                textContainer.textContent = "Theme: Light";
+            } else { // 'dark'
+                // Moon Icon
+                iconContainer.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.593.748-3.752A9.753 9.753 0 009 12.75a9.75 9.75 0 0011.002 9.75z" />`;
+                textContainer.textContent = "Theme: Dark";
             }
         }
+        // --- END: MODIFIED THEME UI FUNCTION ---
         
+        // --- START: MODIFIED THEME LOAD FUNCTION ---
         function loadInitialTheme() {
             // Load settings
             maxQuestions = getLocalStorageSetting('maxQuestions', DEFAULT_MAX_QUESTIONS);
             selectedDifficulty = getLocalStorageSetting('selectedDifficulty', DEFAULT_DIFFICULTY);
             quizLimit = maxQuestions; // Set quiz limit initially to maxQuestions
             
-            const currentMode = getLocalStorageSetting('theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-            applyTheme(currentMode === 'dark');
+            // UPDATED: Apply theme based on 'system', 'light', or 'dark' setting
+            applyCurrentTheme(); 
+            
+            // UPDATED: Add listener for live system changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                // Only apply if theme is set to 'system'
+                if (getLocalStorageSetting('theme', 'system') === 'system') {
+                    applyTheme(e.matches); // e.matches is true if system is dark
+                }
+            });
+
             updateSettingsUI();
             
             document.getElementById('loading-indicator').textContent = 'Data loaded and ready.';
         }
+        // --- END: MODIFIED THEME LOAD FUNCTION ---
+        
         // --- End Theme and Settings Management ---
         
         // --- Modals and Helpers (Globalized for button access) ---
@@ -1596,10 +1377,10 @@ Vocabulary,Hard,"What is the antonym of **'lugubrious'**?",Mournful,Cheerful,Dis
             renderUserDataList();
             document.getElementById('current-question-count').textContent = questions.length;
             
-            // Populate CSV area with current base data when opening
-            // This is kept here even though the section is removed in the HTML, 
-            // but the import logic is also removed/changed in closeDataManagement for safety.
-            // document.getElementById('csv-import-area').value = getBaseData() || ''; 
+            // Clear refresh feedback message on open
+            const feedbackEl = document.getElementById('refresh-feedback');
+            feedbackEl.classList.add('hidden');
+            feedbackEl.textContent = '';
         }
 
         window.openDataManagementFromMenu = function() {
@@ -1608,27 +1389,7 @@ Vocabulary,Hard,"What is the antonym of **'lugubrious'**?",Mournful,Cheerful,Dis
         }
 
         window.closeDataManagement = function() {
-             // OLD LOGIC: Check if CSV area content has changed before closing.
-             // Since the CSV area is removed, we simplify this function.
-            
-            // const currentBaseData = getBaseData();
-            // const csvDataArea = document.getElementById('csv-import-area').value.trim();
-
-            // if (csvDataArea !== currentBaseData) {
-            //     // Perform the import if data has changed
-            //     setBaseData(csvDataArea);
-            //     const count = parseAndLoadQuestions();
-                
-            //     if (count > 0) {
-            //          // Using a standard alert here for data import warning, as this isn't part of the main game loop.
-            //         alert(`Successfully loaded ${count} base questions. Restarting quiz data now.`);
-            //     } else {
-            //         // Revert to original data if import failed
-            //         setBaseData(currentBaseData); 
-            //         parseAndLoadQuestions(); 
-            //         alert('Error: Could not parse any valid questions from the data. Reverting to previous data.');
-            //     }
-            // }
+             // OLD LOGIC (Removed): Check if CSV area content has changed before closing.
             
             document.getElementById('data-management-modal').classList.add('hidden');
             resetQuizAndReloadData(); 
@@ -1701,9 +1462,10 @@ Vocabulary,Hard,"What is the antonym of **'lugubrious'**?",Mournful,Cheerful,Dis
 
         // --- Data Parsing and Management ---
 
-        /** Retrieves the current base CSV data from LocalStorage or the default. */
+        /** Retrieves the current base CSV data from LocalStorage. */
         function getBaseData() {
-            return localStorage.getItem(INITIAL_DEFAULT_DATA_KEY) || defaultCsvData;
+            // UPDATED: Removed fallback to 'defaultCsvData' as it will be fetched on load
+            return localStorage.getItem(INITIAL_DEFAULT_DATA_KEY) || '';
         }
 
         /** Saves the provided CSV string as the new base data. */
@@ -1795,22 +1557,7 @@ Vocabulary,Hard,"What is the antonym of **'lugubrious'**?",Mournful,Cheerful,Dis
         /** Processes the CSV from the textarea and sets it as the new base data. 
          * NOTE: This function is no longer needed/used.
         window.importCsvData = function() {
-            const csvData = document.getElementById('csv-import-area').value.trim();
-            if (!csvData) {
-                showDataFeedback('Please paste CSV data into the box first.', 'red');
-                return;
-            }
-
-            setBaseData(csvData);
-            const count = parseAndLoadQuestions();
-            
-            if (count > 0) {
-                showDataFeedback(`Successfully loaded ${count} base questions. Closing will restart the quiz with this new data.`, 'green');
-            } else {
-                setBaseData(defaultCsvData); 
-                parseAndLoadQuestions(); 
-                showDataFeedback('Error: Could not parse any valid questions from the data. Check header and formatting (expected 9 columns).', 'red');
-            }
+            // ... (Logic removed as per user request to remove CSV box)
         }
         */
 
@@ -1891,6 +1638,39 @@ Vocabulary,Hard,"What is the antonym of **'lugubrious'**?",Mournful,Cheerful,Dis
             showDataFeedback(`Question added successfully! Restart quiz to see change.`, 'green');
             renderUserDataList();
         }
+
+        // NEW: Function to refresh base data from the linked CSV
+        window.refreshBaseData = async function() {
+            const feedbackEl = document.getElementById('refresh-feedback');
+            feedbackEl.className = 'text-center text-sm font-semibold mt-2 text-primary';
+            feedbackEl.textContent = 'Fetching latest Vocabulary.csv...';
+            feedbackEl.classList.remove('hidden');
+
+            try {
+                // Add a cache-busting query parameter
+                const response = await fetch(`Vocabulary.csv?t=${new Date().getTime()}`); 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const csvText = await response.text();
+                
+                // Overwrite the base data in localStorage
+                setBaseData(csvText); 
+                
+                // Reload all questions (base + custom)
+                const baseQuestionCount = parseAndLoadQuestions(); 
+                
+                feedbackEl.className = 'text-center text-sm font-semibold mt-2 text-green-600';
+                feedbackEl.textContent = `Success! Reloaded ${baseQuestionCount} base questions (${questions.length} total). Close this window to restart.`;
+                document.getElementById('current-question-count').textContent = questions.length;
+
+            } catch (e) {
+                console.error("Failed to refresh Vocabulary.csv:", e);
+                feedbackEl.className = 'text-center text-sm font-semibold mt-2 text-red-600';
+                feedbackEl.textContent = 'Error: Could not fetch file. Please check connection and file location.';
+            }
+        }
+
 
         // --- Game Logic ---
         
@@ -2219,10 +1999,28 @@ Vocabulary,Hard,"What is the antonym of **'lugubrious'**?",Mournful,Cheerful,Dis
         }
 
         // Initialize the game when the window loads
-        window.onload = () => {
+        // UPDATED: Made 'onload' async to handle fetching the external CSV
+        window.onload = async () => {
              // Initialize default data if it doesn't exist (first run only)
             if (!localStorage.getItem(INITIAL_DEFAULT_DATA_KEY)) {
-                setBaseData(defaultCsvData);
+                document.getElementById('loading-indicator').textContent = 'Fetching vocabulary data...';
+                try {
+                    // Fetch the external CSV file. 
+                    // Assumes 'Vocabulary.csv' is in the same folder as the HTML file.
+                    const response = await fetch('Vocabulary.csv'); 
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const csvText = await response.text();
+                    
+                    // Save the fetched data to localStorage as the new base
+                    setBaseData(csvText); 
+                } catch (e) {
+                    console.error("Failed to fetch initial Vocabulary.csv:", e);
+                    document.getElementById('start-message').innerHTML = '<strong>Error:</strong> Could not load <code>Vocabulary.csv</code>. Please ensure the file is in the same directory as this HTML file and refresh the page.';
+                    document.getElementById('loading-indicator').textContent = 'Load failed.';
+                    return; // Stop initialization
+                }
             }
             
             // Load settings and set initial state
@@ -2231,7 +2029,7 @@ Vocabulary,Hard,"What is the antonym of **'lugubrious'**?",Mournful,Cheerful,Dis
             quizLimit = maxQuestions;
             
             setupAudio();
-            loadInitialTheme();
+            loadInitialTheme(); // This already updates the loading indicator text
             parseAndLoadQuestions(); 
         };
 
