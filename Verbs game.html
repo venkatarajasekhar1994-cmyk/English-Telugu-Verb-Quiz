@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -271,6 +271,7 @@
             border-color: rgba(var(--color-primary), 0.5);
         }
         
+        /* --- START: MODIFIED INPUT STYLING --- */
         input[type="text"], input[type="number"], textarea {
             font-family: var(--font-body);
             background-color: rgba(255, 255, 255, 0.5) !important;
@@ -280,9 +281,27 @@
             
             border-radius: var(--input-border-radius); 
             box-shadow: var(--input-shadow);
+            
+            /* For Quiz Inputs */
+            padding: 0.75rem 1rem;
+            width: 100%;
         }
         
-        /* Multiple choice buttons */
+        /* Override for quiz inputs to add feedback borders */
+        input.quiz-input {
+             border-width: 2px;
+             transition: all 0.2s ease;
+        }
+        
+        input.quiz-input:focus {
+             border-color: var(--color-primary-hex) !important;
+             box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.3);
+             outline: none;
+        }
+        /* --- END: MODIFIED INPUT STYLING --- */
+
+        
+        /* Multiple choice buttons (No longer used for quiz, but kept for settings) */
         .mc-option {
             transition: all 0.2s ease;
             border: 2px solid #e5e7eb;
@@ -294,13 +313,11 @@
             border-color: rgba(var(--color-primary), 0.5);
             background-color: rgba(var(--color-primary-light), 0.2);
         }
-        /* UPDATED: Neutral selection color */
         .mc-option.selected {
             border-color: var(--color-primary-hex) !important;
             background-color: rgba(var(--color-primary-light), 0.4);
             box-shadow: 0 4px 6px rgba(var(--color-primary), 0.2);
         }
-        /* Lock styling after checking */
         .mc-option.locked {
             pointer-events: none;
             cursor: default;
@@ -314,16 +331,15 @@
 
 
         /* --- Feedback styling --- */
+        /* --- MODIFIED: For inputs instead of buttons --- */
         .correct {
-            border: 2px solid rgba(16, 185, 129, 0.7) !important;
+            border-color: rgba(16, 185, 129, 0.7) !important;
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(16, 185, 129, 0.1)) !important;
-            backdrop-filter: blur(5px);
             box-shadow: 0 0 10px rgba(16, 185, 129, 0.5) !important;
         }
         .incorrect {
-            border: 2px solid rgba(239, 68, 68, 0.7) !important;
+            border-color: rgba(239, 68, 68, 0.7) !important;
             background: linear-gradient(135deg, rgba(239, 68, 68, 0.35), rgba(239, 68, 68, 0.1)) !important;
-            backdrop-filter: blur(5px);
             box-shadow: 0 0 10px rgba(239, 68, 68, 0.5) !important;
         }
         
@@ -425,6 +441,7 @@
             color: #eef2ff;
         }
         
+        /* --- MODIFIED: Dark mode feedback for inputs --- */
         .dark-mode .correct {
             border-color: rgba(52, 211, 153, 0.7) !important;
             background: linear-gradient(135deg, rgba(52, 211, 153, 0.25), rgba(52, 211, 153, 0.1)) !important;
@@ -437,6 +454,7 @@
             box-shadow: 0 0 10px rgba(248, 113, 113, 0.6) !important;
         }
         
+        /* (Keep MCQ dark mode styles for settings modal) */
         .dark-mode .mc-option {
             background-color: rgba(31, 41, 55, 0.7);
             border: 2px solid #374151; /* Gray 700 */
@@ -449,6 +467,8 @@
             border-color: var(--color-primary-hex) !important;
             background-color: rgba(var(--color-primary-light), 0.2);
         }
+        /* --- END DARK MODE STYLES --- */
+
 
         /* Set color variables for all text based on theme */
         body:not(.dark-mode)[data-contrast="default"] .text-gray-700,
@@ -513,7 +533,6 @@
         }
     </style>
     
-    <!-- Icon Styles (from English Vocab Game) -->
     <style>
         /* --- Icon Base Styling --- */
         .icon-primary {
@@ -617,7 +636,6 @@
         <div class="flex justify-between items-center mb-6 border-b-2 pb-2 border-primary">
             
             <div class="flex items-center space-x-3">
-                 <!-- Anchor tag points to the hub -->
                  <a href="game hub.html"
                     class="ripple-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex"
                     aria-label="Go to Game Hub">
@@ -674,8 +692,8 @@
                     </button>
                 </div>
                 
-                <div class="p-4 bg-primary/5 rounded-xl frosted-option">
-                    <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Verb Tense</h3>
+                <div id="tense-level-button-container" class="hidden p-4 bg-primary/5 rounded-xl frosted-option">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Verb Tense</h3>
                     <button id="tense-level-button" onclick="handleUiTapFeedback(); openSelectionModal('tense')"
                             class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
                         <span id="current-tense-level" class="font-semibold">All Tenses</span>
@@ -695,37 +713,37 @@
             <p id="loading-indicator" class="mt-4 text-sm text-gray-500">Loading initial data...</p>
 
         </div>
+        
         <div id="question-area" class="space-y-4 hidden">
             <div class="prompt-box p-4 rounded-xl border-2 border-primary text-center">
-                <p id="question-text" class="text-xl text-indigo-900 font-semibold mb-1 dark-mode:text-gray-100"></p>
-                <p id="question-metadata" class="text-sm text-indigo-700 dark-mode:text-gray-300"></p>
+                <p id="given-form-label" class="text-lg text-indigo-700 dark-mode:text-gray-300">Given Form (Base Form):</p>
+                <p id="question-text" class="text-3xl text-indigo-900 font-bold mb-1 dark-mode:text-gray-100">tease</p>
+                <p id="question-metadata" class="text-lg text-indigo-700 dark-mode:text-gray-300">ఏడిపించడం</p>
             </div>
             
-            <div id="options-container" class="grid grid-cols-1 gap-3">
-                <!-- Options injected by JS -->
-            </div>
+            <div id="forms-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                </div>
             
             <div id="explanation-area" class="hidden p-3 mt-4 rounded-xl border-2 border-primary bg-primary/10 dark-mode:bg-primary/5">
-                <p class="font-bold text-sm mb-1 text-primary">Explanation:</p>
+                <p class="font-bold text-sm mb-1 text-primary">Correct Answers:</p>
                 <p id="explanation-text" class="text-gray-800 dark-mode:text-gray-200 text-base"></p>
             </div>
         </div>
-
-        <div id="quiz-action-buttons" class="mt-8 grid grid-cols-12 gap-4 hidden">
-            <button id="main-action-button" onclick="handleUiTapFeedback(); processAction()"
-                    class="ripple-btn col-span-12 px-2 py-3 bg-primary text-white font-bold rounded-xl shadow-lg shadow-indigo-500/50 hover:opacity-90 transition duration-150 disabled:bg-gray-400 focus:outline-none focus:ring-4 focus:ring-primary-hex focus:ring-opacity-50 text-base md:text-lg"
-                    disabled>
-                Select an Answer
+        <div id="quiz-action-buttons" class="mt-8 grid grid-cols-2 gap-4 hidden">
+            <button id="skip-button" onclick="handleUiTapFeedback(); skipQuestion()"
+                    class="ripple-btn px-2 py-3 bg-yellow-500 text-white font-bold rounded-xl shadow-lg shadow-yellow-500/50 hover:bg-yellow-600 transition duration-150 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-opacity-50 text-base md:text-lg">
+                Skip
+            </button>
+            <button id="main-action-button" onclick="handleUiTapFeedback(); checkAnswer()"
+                    class="ripple-btn px-2 py-3 bg-primary text-white font-bold rounded-xl shadow-lg shadow-indigo-500/50 hover:opacity-90 transition duration-150 disabled:bg-gray-400 focus:outline-none focus:ring-4 focus:ring-primary-hex focus:ring-opacity-50 text-base md:text-lg">
+                Check Answer
             </button>
         </div>
-        
         <div id="final-results" class="hidden mt-8 text-center p-4 bg-yellow-300/40 liquid-glass-card border-yellow-300 border-2">
-            <!-- Results injected by JS -->
-        </div>
+            </div>
 
     </div>
 
-    <!-- Hamburger Menu -->
     <div id="hamburger-menu" class="fixed top-0 right-0 h-full w-64 z-50 transform translate-x-full transition-transform duration-300 bg-white dark-mode:bg-gray-800 shadow-2xl p-6">
         <div class="flex justify-end">
             <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700">
@@ -737,20 +755,17 @@
 
         <h3 class="text-xl font-bold mb-6 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">Menu</h3>
 
-        <!-- Theme Toggle Button -->
         <button id="menu-theme-toggle" onclick="handleUiTapFeedback(); toggleTheme()" 
                 class="ripple-btn w-full flex items-center justify-between p-3 mb-4 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150">
             <span id="menu-theme-text" class="font-semibold"></span>
             <svg id="menu-theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                <!-- Icon injected by JS -->
-            </svg>
+                </svg>
         </button>
         
         <div class="mb-4 p-3 bg-gray-100 dark-mode:bg-gray-700 rounded-xl text-xs text-gray-600 dark-mode:text-gray-400 overflow-x-auto break-all">
             <span class="font-bold">Status:</span> <span id="user-id-display">Local Data Storage</span>
         </div>
 
-        <!-- Manage Data Button -->
         <button onclick="handleUiTapFeedback(); openDataManagementFromMenu()"
                 class="ripple-btn w-full flex items-center p-3 mb-4 rounded-xl text-white font-bold bg-primary hover:opacity-90 transition duration-150 shadow-md shadow-indigo-500/50">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-2">
@@ -759,7 +774,6 @@
             Manage Verb Data
         </button>
 
-        <!-- App Settings Button -->
         <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu(); openSettings();"
                 class="ripple-btn w-full flex items-center p-3 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150 shadow-md shadow-gray-500/10">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-2">
@@ -769,10 +783,8 @@
         </button>
     </div>
     
-    <!-- Hamburger Menu Overlay -->
     <div id="hamburger-overlay" class="hidden fixed inset-0 z-40 bg-black opacity-50" onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()"></div>
 
-    <!-- App Settings Modal -->
     <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
         <div class="modal-content liquid-glass-card w-full max-w-sm p-6 overflow-y-auto max-h-[90vh]">
             <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">App Settings</h2>
@@ -781,7 +793,6 @@
                 <p class="font-semibold">Shared settings (Theme, Color, Font, Contrast) are synced across all games. Game-specific settings are saved for this game only.</p>
             </div>
 
-            <!-- Color Accent -->
             <div class="mb-6">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3">Color Accent (Shared)</h3>
                 <div class="grid grid-cols-5 gap-2">
@@ -829,7 +840,6 @@
                     </div>
             </div>
 
-            <!-- Text Contrast -->
             <div class="mb-6">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Text Contrast (Shared)</h3>
                 <div class="flex space-x-4">
@@ -844,7 +854,6 @@
                 </div>
             </div>
 
-            <!-- Body Font -->
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Body Font (Shared)</h3>
                 <button id="body-font-button" onclick="handleUiTapFeedback(); openSelectionModal('body')"
@@ -856,7 +865,6 @@
                 </button>
             </div>
 
-            <!-- Title Font -->
             <div class="mb-6">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Title Font (Shared)</h3>
                 <button id="title-font-button" onclick="handleUiTapFeedback(); openSelectionModal('title')"
@@ -869,7 +877,6 @@
             </div>
 
 
-            <!-- Game-Specific Settings -->
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
                 <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Input Style (Game Specific)</h3>
                 <div class="flex space-x-4">
@@ -911,7 +918,6 @@
                 </div>
             </div>
             
-            <!-- Close Button -->
             <button onclick="handleUiTapFeedback(); closeSettings()"
                     class="ripple-btn mt-8 w-full py-3 bg-gray-500 text-white font-bold rounded-xl hover:bg-gray-600 transition duration-150">
                 Close Settings
@@ -919,7 +925,6 @@
         </div>
     </div>
     
-    <!-- Selection Modal (for Fonts, Quiz Length, Difficulty) -->
     <div id="selection-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-overlay">
         <div class="selection-modal-content liquid-glass-card w-full max-w-sm p-0">
             <div class="p-4 flex justify-between items-center border-b dark-mode:border-gray-700">
@@ -931,13 +936,11 @@
                 </button>
             </div>
             <div id="selection-modal-list" class="max-h-80 overflow-y-auto rounded-b-xl">
-                <!-- Options injected by JS -->
-            </div>
+                </div>
         </div>
     </div>
 
 
-    <!-- Data Management Modal -->
     <div id="data-management-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
         <div class="modal-content liquid-glass-card w-full max-w-3xl p-6 overflow-y-auto max-h-[90vh]">
             <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">
@@ -959,29 +962,50 @@
             </p>
             
             <div id="add-data-form" class="space-y-4 p-4 bg-primary/5 rounded-xl border border-primary/20 frosted-option">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                     <div class="space-y-2">
                         <label for="add-v1" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V1 (Base Form)</label>
                         <input type="text" id="add-v1" placeholder="e.g., 'go'" class="w-full p-3">
                     </div>
                     <div class="space-y-2">
+                        <label for="add-v1-te" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V1 (Telugu Meaning)</label>
+                        <input type="text" id="add-v1-te" placeholder="e.g., 'వెళ్ళు'" class="w-full p-3">
+                    </div>
+                    
+                    <div class="space-y-2">
                         <label for="add-v3s" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V (s/es Form)</label>
                         <input type="text" id="add-v3s" placeholder="e.g., 'goes'" class="w-full p-3">
                     </div>
                     <div class="space-y-2">
+                        <label for="add-v3s-te" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V (s/es) (Telugu Meaning)</label>
+                        <input type="text" id="add-v3s-te" placeholder="e.g., 'వెళ్తాడు/వెళ్తుంది'" class="w-full p-3">
+                    </div>
+                    
+                    <div class="space-y-2">
                         <label for="add-ving" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V-ing (Present Participle)</label>
                         <input type="text" id="add-ving" placeholder="e.g., 'going'" class="w-full p-3">
                     </div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label for="add-ving-te" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V-ing (Telugu Meaning)</label>
+                        <input type="text" id="add-ving-te" placeholder="e.g., 'వెళుతూ'" class="w-full p-3">
+                    </div>
+                    
                     <div class="space-y-2">
                         <label for="add-v2" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V2 (Past Simple)</label>
                         <input type="text" id="add-v2" placeholder="e.g., 'went'" class="w-full p-3">
                     </div>
                     <div class="space-y-2">
+                        <label for="add-v2-te" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V2 (Telugu Meaning)</label>
+                        <input type="text" id="add-v2-te" placeholder="e.g., 'వెళ్ళింది'" class="w-full p-3">
+                    </div>
+
+                    <div class="space-y-2">
                         <label for="add-v3" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V3 (Past Participle)</label>
                         <input type="text" id="add-v3" placeholder="e.g., 'gone'" class="w-full p-3">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="add-v3-te" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">V3 (Telugu Meaning)</label>
+                        <input type="text" id="add-v3-te" placeholder="e.g., 'వెళ్ళిపోయాడు'" class="w-full p-3">
                     </div>
                 </div>
 
@@ -991,7 +1015,6 @@
                 </button>
                 <p id="data-management-feedback" class="text-center text-sm font-semibold mt-2 hidden"></p>
             </div>
-            
             <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2 mt-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
                 Custom Verbs Added:
             </h3>
@@ -1015,14 +1038,8 @@
         
         // --- Configuration ---
         const QUESTION_OPTIONS = [5, 10, 15, 20, 30, 50]; 
-        const TENSE_LEVELS = [
-            { value: 'all', label: 'All Tenses' },
-            { value: 'v1', label: 'V1 (Base Form)' },
-            { value: 'v3s', label: 'V (s/es Form)' },
-            { value: 'ving', label: 'V-ing (Present Participle)' },
-            { value: 'v2', label: 'V2 (Past Simple)' },
-            { value: 'v3', label: 'V3 (Past Participle)' },
-        ];
+        
+        // --- MODIFIED: Removed TENSE_LEVELS, as this game mode doesn't need it ---
         
         // --- START: MODIFIED FONT/COLOR OPTIONS TO MATCH HUB ---
         // (These must be identical to game hub.html)
@@ -1059,24 +1076,24 @@
         
         // Default game settings
         const DEFAULT_MAX_QUESTIONS = 15;
-        const DEFAULT_TENSE = 'all';
+        // --- MODIFIED: Removed DEFAULT_TENSE ---
 
 
         // --- Game State ---
         let maxQuestions = DEFAULT_MAX_QUESTIONS;
-        let selectedTense = DEFAULT_TENSE;
+        // --- MODIFIED: Removed selectedTense ---
         let verbs = []; // All available verbs (Base + Custom)
         let questionPool = []; // Final selected questions (objects)
         let quizLimit = DEFAULT_MAX_QUESTIONS; // Max questions for the current run
         
-        let currentQuestionData = null;
-        let selectedOption = null;
+        let currentQuestionData = null; // This will now be the full verb object
+        // --- MODIFIED: Removed selectedOption ---
         let score = 0;
         let questionsAsked = 0; 
         let quizResults = [];
         let isDataLoaded = false;
         let currentSelectionType = null;
-        let quizPhase = 'select'; // 'select' (choosing answer) or 'next' (showing answer/ready for next)
+        let quizPhase = 'select'; // 'select' (checking answer) or 'next' (ready for next)
 
         // --- START: MODIFIED STORAGE KEYS ---
         // Key for SHARED settings across all games (from game hub)
@@ -1101,7 +1118,7 @@
         const COL_V3_TE = 9;
         const EXPECTED_COLUMNS = 10;
         
-        // --- Tone.js Audio Setup ---
+        // --- Tone.js Audio Setup (No changes) ---
         let correctSynth;
         let incorrectSynth;
         let clickSynth;
@@ -1148,7 +1165,7 @@
         }
         // --- End Haptic/Audio Feedback Setup ---
 
-        // --- Theme and Settings Management ---
+        // --- Theme and Settings Management (No changes) ---
         const DARK_CLASS = 'dark-mode';
         
         // --- START: MODIFIED SETTINGS FUNCTIONS ---
@@ -1385,12 +1402,7 @@
             updateStartScreenMessage();
         }
         
-        // NEW: UI update for tense level button (Game-specific)
-        window.handleTenseLevelChange = function(value) {
-            selectedTense = value;
-            saveLocalSetting('selectedTense', value);
-            updateStartScreenMessage();
-        }
+        // --- MODIFIED: Removed handleTenseLevelChange ---
         
         // This function updates the UI based on GAME-SPECIFIC storage
         function updateSettingsUI() {
@@ -1422,7 +1434,7 @@
             
             // Update buttons reflecting selected values
             updateQuizLengthButton(); // game-specific
-            updateTenseLevelButton(); // game-specific
+            // --- MODIFIED: Removed updateTenseLevelButton call ---
             updateFontButton('body'); // shared
             updateFontButton('title'); // shared
 
@@ -1430,14 +1442,7 @@
             document.getElementById('question-counter').style.color = `var(--color-primary-hex)`;
         }
         
-        // UI update for tense level button (Game-specific)
-        function updateTenseLevelButton() {
-            const button = document.getElementById('current-tense-level');
-            const level = getLabel('tense', selectedTense);
-            if (button) {
-                button.textContent = level;
-            }
-        }
+        // --- MODIFIED: Removed updateTenseLevelButton function ---
         
         // UI update for quiz length button (Game-specific)
         function updateQuizLengthButton() {
@@ -1500,7 +1505,7 @@
             // --- 2. Load LOCAL Settings (Game-Specific) ---
             maxQuestions = getLocalSetting('maxQuestions', DEFAULT_MAX_QUESTIONS);
             quizLimit = maxQuestions;
-            selectedTense = getLocalSetting('selectedTense', DEFAULT_TENSE);
+            // --- MODIFIED: Removed selectedTense ---
             
             // Apply LOCAL settings
             applyInputStyles(); // Applies local input style
@@ -1534,13 +1539,7 @@
                         renderOption('count', count, `${count} Questions${count === DEFAULT_MAX_QUESTIONS ? ' (Default)' : ''}`, currentVal, 'handleSelectionChange')
                     ).join('');
                     break;
-                case 'tense':
-                    titleEl.textContent = 'Select Tense';
-                    currentVal = selectedTense;
-                    optionsHTML = TENSE_LEVELS.map(level => 
-                        renderOption('tense', level.value, level.label, currentVal, 'handleSelectionChange')
-                    ).join('');
-                    break;
+                // --- MODIFIED: Removed 'tense' case ---
                 case 'body':
                     titleEl.textContent = 'Select Body Font';
                     currentVal = getGlobalSetting('bodyFont', 'Inter'); // Read from global
@@ -1572,10 +1571,7 @@
                     handleQuestionCountChange(value);
                     updateQuizLengthButton();
                     break;
-                case 'tense':
-                    handleTenseLevelChange(value);
-                    updateTenseLevelButton();
-                    break;
+                // --- MODIFIED: Removed 'tense' case ---
                 case 'body':
                     setBodyFont(value); // This now syncs to global
                     updateFontButton('body');
@@ -1674,10 +1670,7 @@
                 const limit = parseInt(value);
                 return `${limit} Questions${limit === DEFAULT_MAX_QUESTIONS ? ' (Default)' : ''}`;
             }
-             if (type === 'tense') {
-                const level = TENSE_LEVELS.find(l => l.value === value);
-                return level ? level.label : 'All Tenses';
-            }
+            // --- MODIFIED: Removed 'tense' case ---
             const options = FONT_OPTIONS[type];
             if (!options) return value;
             const option = options.find(opt => opt.value === value);
@@ -1701,22 +1694,28 @@
             }
         }
         
-        function getRandomItems(arr, n) {
-            let result = new Array(n),
-                len = arr.length,
-                taken = new Array(len);
-            if (n > len)
-                throw new RangeError("getRandom: more elements taken than available");
-            while (n--) {
-                let x = Math.floor(Math.random() * len);
-                result[n] = arr[x in taken ? taken[x] : x];
-                taken[x] = --len in taken ? taken[len] : len;
+        // --- MODIFIED: Removed getRandomItems, as it's not needed for this game type ---
+
+        // --- START: MODIFIED - Added helper function ---
+        /**
+         * Returns a human-readable label for a verb form key.
+         * @param {string} formKey - e.g., 'v1', 'v3s', 'ving', 'v2', 'v3'
+         * @returns {string} - e.g., 'Base Form (V1)'
+         */
+        function getFormLabel(formKey) {
+            switch (formKey) {
+                case 'v1': return 'Base Form (V1)';
+                case 'v3s': return '3rd Person Singular';
+                case 'ving': return '-ing Form';
+                case 'v2': return 'Past Simple (V2)';
+                case 'v3': return 'Past Participle (V3)';
+                default: return 'Unknown Form';
             }
-            return result;
         }
+        // --- END: MODIFIED ---
 
 
-        // --- Data Parsing and Management ---
+        // --- Data Parsing and Management (No changes) ---
 
         let baseCsvContent = ''; // Store the fetched CSV content
 
@@ -1751,20 +1750,29 @@
             );
         }
 
+        // --- START: JAVASCRIPT MODIFIED ---
         function createVerbObject(dataArray, isCustom = false) {
+            // Base CSV parsing
             if (!isCustom && dataArray.length < EXPECTED_COLUMNS) return null;
-            if (isCustom && dataArray.length < 5) return null; // v1, v3s, ving, v2, v3
+            // Custom data parsing (now expects 10 fields: 5 English, 5 Telugu)
+            if (isCustom && dataArray.length < 10) return null; 
 
             const getField = (index) => dataArray[index] ? dataArray[index].trim() : '';
             
             if (isCustom) {
                 return {
-                    v1: getField(0),
-                    v3s: getField(1),
-                    ving: getField(2),
-                    v2: getField(3),
-                    v3: getField(4),
-                    telugu: { v1: 'N/A', v3s: 'N/A', ving: 'N/A', v2: 'N/A', v3: 'N/A' },
+                    v1: getField(0),      // English V1
+                    v3s: getField(2),     // English V3s
+                    ving: getField(4),    // English V-ing
+                    v2: getField(6),      // English V2
+                    v3: getField(8),      // English V3
+                    telugu: { 
+                        v1: getField(1),   // Telugu V1
+                        v3s: getField(3),  // Telugu V3s
+                        ving: getField(5), // Telugu V-ing
+                        v2: getField(7),   // Telugu V2
+                        v3: getField(9)    // Telugu V3
+                    },
                     source: 'custom'
                 }
             } else {
@@ -1785,6 +1793,7 @@
                 };
             }
         }
+        // --- END: JAVASCRIPT MODIFIED ---
         
         function loadCustomVerbs() {
             try {
@@ -1829,6 +1838,7 @@
             return validBaseVerbs;
         }
 
+        // --- START: JAVASCRIPT MODIFIED ---
         function renderUserDataList() {
             const listEl = document.getElementById('user-data-list');
             const customVerbs = loadCustomVerbs();
@@ -1844,7 +1854,8 @@
                 item.className = 'flex justify-between items-start p-2 border-b dark-mode:border-gray-700 hover:bg-opacity-80 rounded-md transition duration-150';
                 item.innerHTML = `
                     <div class="flex-1 min-w-0 mr-4">
-                        <span class="font-semibold text-primary dark-mode:text-primary-light line-clamp-1">${v.v1} / ${v.v3s} / ${v.ving} / ${v.v2} / ${v.v3}</span>
+                        <span class="font-semibold text-primary dark-mode:text-primary-light line-clamp-1">${v.v1} (${v.telugu.v1 || 'N/A'})</span>
+                        <p class="text-xs text-gray-600 dark-mode:text-gray-400 truncate">${v.v3s} / ${v.ving} / ${v.v2} / ${v.v3}</p>
                     </div>
                     <button onclick="handleUiTapFeedback(); deleteCustomQuestion(${index})" class="ripple-btn p-2 rounded-lg text-red-500 hover:text-red-700 text-sm flex-shrink-0">
                         Remove
@@ -1860,22 +1871,43 @@
                 customVerbs.splice(index, 1);
                 saveCustomVerbs(customVerbs);
                 renderUserDataList();
+                // --- Re-parse all verbs after deletion ---
+                parseAndLoadVerbs(); 
                 document.getElementById('current-question-count').textContent = verbs.length;
                 showDataFeedback('Verb removed successfully! Restart quiz to see change.', 'green');
             }
         }
         
         window.saveNewQuestionData = function() {
-            const inputIds = ['add-v1', 'add-v3s', 'add-ving', 'add-v2', 'add-v3'];
+            const inputIds = [
+                'add-v1', 'add-v1-te', 
+                'add-v3s', 'add-v3s-te',
+                'add-ving', 'add-ving-te',
+                'add-v2', 'add-v2-te',
+                'add-v3', 'add-v3-te'
+            ];
             const inputs = inputIds.map(id => document.getElementById(id));
-            const values = inputs.map(input => input.value.trim().toLowerCase()); // Standardize to lowercase
+            
+            // Standardize all to lowercase, except Telugu fields
+            const values = inputs.map((input, index) => {
+                const isTeluguField = index % 2 === 1; // 1, 3, 5, 7, 9
+                return isTeluguField ? input.value.trim() : input.value.trim().toLowerCase();
+            });
 
-            if (values.some(val => val === '')) {
-                showDataFeedback('Please fill in ALL 5 verb forms.', 'red');
+            // Check only the English fields for validation (indices 0, 2, 4, 6, 8)
+            const englishValues = [values[0], values[2], values[4], values[6], values[8]];
+            if (englishValues.some(val => val === '')) {
+                showDataFeedback('Please fill in ALL 5 English verb forms. (Telugu is optional)', 'red');
                 return;
             }
+            
+            // Fill 'N/A' for any empty Telugu fields (indices 1, 3, 5, 7, 9)
+            const finalValues = values.map((val, index) => {
+                const isTeluguField = index % 2 === 1;
+                return (isTeluguField && val === '') ? 'N/A' : val;
+            });
 
-            const newVerb = createVerbObject(values, true);
+            const newVerb = createVerbObject(finalValues, true);
             
             if (!newVerb) {
                  showDataFeedback('Error creating verb object.', 'red');
@@ -1884,6 +1916,7 @@
 
             const customVerbs = loadCustomVerbs();
             
+            // Check based on V1 (index 0)
             if (customVerbs.some(v => v.v1.toLowerCase() === newVerb.v1.toLowerCase())) {
                 showDataFeedback(`Error: Verb '${newVerb.v1}' already exists in your custom list.`, 'red');
                 return;
@@ -1891,11 +1924,16 @@
             
             customVerbs.push(newVerb);
             saveCustomVerbs(customVerbs);
-
-            inputs.forEach(input => input.value = '');
+            
+            // --- Re-parse all verbs after adding ---
+            parseAndLoadVerbs();
+            
+            inputs.forEach(input => input.value = ''); // Clear all 10 inputs
             showDataFeedback(`Verb '${newVerb.v1}' added! Restart quiz to see change.`, 'green');
             renderUserDataList();
+            document.getElementById('current-question-count').textContent = verbs.length;
         }
+        // --- END: JAVASCRIPT MODIFIED ---
 
         window.refreshBaseData = async function() {
             const feedbackEl = document.getElementById('refresh-feedback');
@@ -1926,13 +1964,14 @@
         }
 
 
-        // --- Game Logic ---
+        // --- START: MODIFIED GAME LOGIC ---
         
         window.startQuiz = function() {
             let availableVerbs = verbs;
             
-            if (availableVerbs.length < 4) {
-                document.getElementById('start-message').innerHTML = `Error: At least 4 verbs are needed to create a quiz. Please add more custom verbs or load the base data.`;
+            // --- MODIFIED: Changed minimum verbs from 4 to 1 ---
+            if (availableVerbs.length < 1) {
+                document.getElementById('start-message').innerHTML = `Error: At least 1 verb is needed to start. Please add a custom verb or load the base data.`;
                 document.getElementById('loading-indicator').classList.remove('hidden');
                 document.getElementById('loading-indicator').textContent = '';
                 return;
@@ -1970,71 +2009,23 @@
             document.getElementById('explanation-area').classList.add('hidden');
             
             const mainButton = document.getElementById('main-action-button');
-            mainButton.textContent = 'Select an Answer';
-            mainButton.disabled = true;
+            mainButton.textContent = 'Check Answer';
+            mainButton.disabled = false;
             
-            document.querySelectorAll('.mc-option').forEach(btn => {
-                btn.classList.remove('selected', 'locked', 'correct', 'incorrect');
-            });
+            document.getElementById('skip-button').disabled = false;
 
             quizPhase = 'select';
-            selectedOption = null;
-
-            const correctVerb = questionPool.shift(); 
+            
+            currentQuestionData = questionPool.shift(); 
             questionsAsked++;
 
-            // --- Generate the Question ---
-            let questionTense = selectedTense;
-            const allTenses = ['v1', 'v3s', 'ving', 'v2', 'v3'];
-            
-            if (questionTense === 'all') {
-                 questionTense = allTenses[Math.floor(Math.random() * allTenses.length)];
-            }
-            
-            // Determine the question and answer forms
-            const questionForm = 'v1'; // Always ask for the V1 form
-            const answerForm = questionTense;
-            
-            const questionText = `What is the **${getLabel('tense', answerForm)}** of **${correctVerb[questionForm]}**?`;
-            const correctAnswer = correctVerb[answerForm];
-            
-            // Get 3 incorrect options from other verbs
-            let otherVerbs = verbs.filter(v => v.v1 !== correctVerb.v1);
-            let incorrectOptions = getRandomItems(otherVerbs, 3).map(v => v[answerForm]);
-            
-            // Add the correct answer and shuffle
-            let allOptions = [correctAnswer, ...incorrectOptions];
-            shuffleArray(allOptions);
+            // --- START: MODIFIED - Pick a random form to give ---
+            const allForms = ['v1', 'v3s', 'ving', 'v2', 'v3'];
+            // This adds a new property to the verb object just for this question
+            currentQuestionData.givenFormKey = allForms[Math.floor(Math.random() * allForms.length)];
+            // --- END: MODIFIED ---
 
-            currentQuestionData = {
-                text: questionText,
-                teluguHint: `(${correctVerb.telugu[questionForm]} -> ${correctVerb.telugu[answerForm]})`,
-                options: {
-                    A: allOptions[0],
-                    B: allOptions[1],
-                    C: allOptions[2],
-                    D: allOptions[3],
-                },
-                correct: '', // We'll find this next
-                explanation: `The ${getLabel('tense', answerForm)} of '${correctVerb.v1}' is '${correctAnswer}'.`
-            };
-            
-            // Find the letter of the correct answer
-            for (const [letter, optionText] of Object.entries(currentQuestionData.options)) {
-                if (optionText === correctAnswer) {
-                    currentQuestionData.correct = letter;
-                    break;
-                }
-            }
-            
-            // Fallback in case of duplicate options (highly unlikely but safe)
-            if (!currentQuestionData.correct) {
-                currentQuestionData.options.A = correctAnswer;
-                currentQuestionData.correct = 'A';
-            }
-            // --- End Question Generation ---
-
-            renderQuestion();
+            renderQuestion(); // This will now use the givenFormKey
             updateProgressBar();
         }
 
@@ -2042,93 +2033,125 @@
         function renderQuestion() {
             if (!currentQuestionData) return;
 
+            // --- START: MODIFIED - Get dynamic form info ---
+            const givenFormKey = currentQuestionData.givenFormKey;
+            const givenFormValue = currentQuestionData[givenFormKey];
+            const givenFormLabel = getFormLabel(givenFormKey);
+            // --- END: MODIFIED ---
+
             document.getElementById('question-counter').textContent = `${questionsAsked}/${quizLimit}`;
             
-            document.getElementById('question-text').innerHTML = currentQuestionData.text;
-            document.getElementById('question-metadata').textContent = `Telugu Hint: ${currentQuestionData.teluguHint}`;
+            // --- START: MODIFIED - Set dynamic prompt text ---
+            // Set the prompt text (e.g., "goes")
+            document.getElementById('question-text').textContent = givenFormValue;
+            // Set the label (e.g., "Given Form (3rd Person Singular):")
+            document.getElementById('given-form-label').textContent = `Given Form (${givenFormLabel}):`;
+            // Set the telugu meaning for that specific form
+            document.getElementById('question-metadata').textContent = currentQuestionData.telugu[givenFormKey] || '(No meaning available)';
+            // --- END: MODIFIED ---
             
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-            
-            const letters = ['A', 'B', 'C', 'D'];
-            
-            letters.forEach(letter => {
-                const optionText = currentQuestionData.options[letter];
-                
-                const button = document.createElement('button');
-                button.textContent = `${letter}: ${optionText}`;
-                button.className = 'mc-option ripple-btn w-full text-left px-4 py-3 rounded-xl shadow-md';
-                button.dataset.letter = letter;
-                button.onclick = (e) => handleOptionSelection(e.currentTarget, letter);
-                
-                optionsContainer.appendChild(button);
+            const formsContainer = document.getElementById('forms-container');
+            formsContainer.innerHTML = '';
+
+            // --- START: MODIFIED - Dynamically render the 4 OTHER inputs ---
+            const allForms = ['v1', 'v3s', 'ving', 'v2', 'v3'];
+            let firstInputId = null;
+
+            allForms.forEach(formKey => {
+                // Skip the form that was given as the prompt
+                if (formKey === givenFormKey) return; 
+
+                const formLabel = getFormLabel(formKey);
+                const inputId = `${formKey}-input`;
+                if (!firstInputId) firstInputId = inputId; // Store the ID of the first input to focus it
+
+                formsContainer.innerHTML += `
+                    <div class="space-y-1">
+                        <label for="${inputId}" class="text-sm font-semibold text-gray-700 dark-mode:text-gray-300 ml-2">${formLabel}</label>
+                        <input type="text" id="${inputId}" class="quiz-input" placeholder="Enter the ${formLabel}" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false">
+                    </div>
+                `;
             });
-        }
-        
-        window.handleOptionSelection = function(button, letter) {
-            if (quizPhase !== 'select') return;
-            handleUiTapFeedback();
             
-            selectedOption = letter;
-
-            document.querySelectorAll('.mc-option').forEach(btn => btn.classList.remove('selected'));
-            button.classList.add('selected');
-            
-            document.getElementById('main-action-button').textContent = 'Check Answer';
-            document.getElementById('main-action-button').disabled = false;
-        }
-
-        window.processAction = function() {
-            if (quizPhase === 'select') {
-                processAnswer();
-            } else if (quizPhase === 'next') {
-                startNextQuestion();
+            // Focus the first input field
+            if (firstInputId) {
+                document.getElementById(firstInputId).focus();
             }
+            // --- END: MODIFIED ---
         }
         
-        function processAnswer() {
-            if (!currentQuestionData || !selectedOption) {
-                document.getElementById('feedback-message').textContent = 'Please select an answer first.';
-                document.getElementById('feedback-message').className = 'text-base font-medium text-red-500';
+        // --- MODIFIED: Removed handleOptionSelection ---
+
+        // --- MODIFIED: Replaced processAction with checkAnswer ---
+        window.checkAnswer = function() {
+            if (quizPhase === 'next') {
+                startNextQuestion();
                 return;
             }
-
-            const mainButton = document.getElementById('main-action-button');
-            const isCorrect = (selectedOption === currentQuestionData.correct);
-            const correctLetter = currentQuestionData.correct;
+            
+            if (!currentQuestionData) return;
             
             quizPhase = 'next';
-            document.querySelectorAll('.mc-option').forEach(btn => btn.classList.add('locked'));
+            
+            // --- START: MODIFIED - Dynamically find and check inputs ---
+            const givenFormKey = currentQuestionData.givenFormKey;
+            const allForms = ['v1', 'v3s', 'ving', 'v2', 'v3'];
+            const inputs = {};
+            const userAnswers = {};
+            const correctAnswers = {};
+            
+            let allCorrect = true;
+            let explanation = [];
+            
+            // Check each answer
+            allForms.forEach(formKey => {
+                // Skip the form that was given
+                if (formKey === givenFormKey) return; 
 
-            document.querySelectorAll('.mc-option').forEach(btn => {
-                const letter = btn.dataset.letter;
+                const inputEl = document.getElementById(`${formKey}-input`);
+                const formLabel = getFormLabel(formKey);
                 
-                if (letter === correctLetter) {
-                    btn.classList.add('correct');
-                    btn.classList.remove('selected');
-                } else if (letter === selectedOption) {
-                    btn.classList.add('incorrect');
+                inputs[formKey] = inputEl;
+                userAnswers[formKey] = inputEl.value.trim().toLowerCase();
+                correctAnswers[formKey] = currentQuestionData[formKey].toLowerCase();
+                
+                inputEl.disabled = true; // Lock the input
+                
+                if (userAnswers[formKey] === correctAnswers[formKey]) {
+                    inputEl.classList.add('correct');
+                    explanation.push(`<strong>${formLabel}:</strong> ${correctAnswers[formKey]} (Correct)`);
                 } else {
-                    btn.classList.remove('selected');
+                    inputEl.classList.add('incorrect');
+                    // Show the correct answer in the input
+                    inputEl.value = correctAnswers[formKey];
+                    allCorrect = false;
+                    explanation.push(`<strong>${formLabel}:</strong> ${correctAnswers[formKey]} (You wrote: ${userAnswers[formKey] || 'nothing'})`);
                 }
             });
+            // --- END: MODIFIED ---
 
-            if (isCorrect) {
+            // Update UI
+            const mainButton = document.getElementById('main-action-button');
+            document.getElementById('skip-button').disabled = true;
+            
+            if (allCorrect) {
                 score++;
                 document.getElementById('feedback-message').textContent = 'Correct! Fantastic work!';
                 document.getElementById('feedback-message').className = 'text-base font-medium text-green-600';
                 playCorrect();
                 vibrateCorrect();
             } else {
-                document.getElementById('feedback-message').textContent = `Incorrect. The correct answer was ${correctLetter}.`;
+                document.getElementById('feedback-message').textContent = 'Not quite. Check the answers.';
                 document.getElementById('feedback-message').className = 'text-base font-medium text-red-500';
                 playIncorrect();
                 vibrateIncorrect();
+                
+                // Show the explanation box with all answers
+                document.getElementById('explanation-text').innerHTML = explanation.join('<br>');
+                document.getElementById('explanation-area').classList.remove('hidden');
             }
-            document.getElementById('score-display').textContent = score;
             
-            document.getElementById('explanation-text').innerHTML = currentQuestionData.explanation;
-            document.getElementById('explanation-area').classList.remove('hidden');
+            document.getElementById('score-display').textContent = score;
 
             if (questionsAsked >= quizLimit) {
                 mainButton.textContent = 'Finish Quiz';
@@ -2137,14 +2160,40 @@
             }
             mainButton.disabled = false;
             
+            // --- START: MODIFIED - Store more info for results ---
             quizResults.push({
                 questionNumber: questionsAsked,
-                question: currentQuestionData.text,
-                selected: selectedOption,
-                correct: correctLetter,
-                isCorrect: isCorrect,
-                explanation: currentQuestionData.explanation
+                promptForm: givenFormKey,
+                promptValue: currentQuestionData[givenFormKey],
+                correctAnswers: currentQuestionData, // Store the whole verb object
+                isCorrect: allCorrect,
+                isSkipped: false
             });
+            // --- END: MODIFIED ---
+        }
+        
+        // --- NEW: Added skipQuestion function ---
+        window.skipQuestion = function() {
+            if (quizPhase !== 'select' || !currentQuestionData) return;
+            
+            quizPhase = 'next'; // Prevent double skipping
+            
+            document.getElementById('feedback-message').textContent = 'Question Skipped.';
+            document.getElementById('feedback-message').className = 'text-base font-medium text-yellow-600';
+
+            // --- START: MODIFIED - Store info for results ---
+            quizResults.push({
+                questionNumber: questionsAsked,
+                promptForm: currentQuestionData.givenFormKey,
+                promptValue: currentQuestionData[currentQuestionData.givenFormKey],
+                correctAnswers: currentQuestionData, // Store the whole verb object
+                isCorrect: false, // Skipped is incorrect
+                isSkipped: true
+            });
+            // --- END: MODIFIED ---
+            
+            // Immediately go to the next question
+            startNextQuestion();
         }
         
         window.endGame = function() {
@@ -2154,14 +2203,14 @@
             
             document.getElementById('feedback-message').textContent = '';
             
-            updateProgressBar();
+            updateProgressBar(); // Should be 100% here
 
             const totalQuestions = quizLimit;
             const percentage = totalQuestions > 0 ? ((score / totalQuestions) * 100).toFixed(1) : 0.0;
             const statusColorClass = (percentage >= 70) ? 'text-green-700' : (percentage >= 40 ? 'text-yellow-700' : 'text-red-700');
             const resultBgClass = (percentage >= 70) ? 'bg-green-300/40 border-green-300' : (percentage >= 40 ? 'bg-yellow-300/40 border-yellow-300' : 'bg-red-300/40 border-red-300');
 
-
+            // --- START: MODIFIED - Updated results HTML for the new game type ---
             let resultsHTML = `
                 <h3 class="text-2xl font-bold ${statusColorClass} mb-2">Quiz Complete!</h3>
                 <p class="text-lg text-gray-700 dark-mode:text-gray-300 mb-4">
@@ -2173,27 +2222,33 @@
                 </p>
                 
                 <div class="border-t pt-4 mt-4 border-gray-300 dark-mode:border-gray-700 text-left">
-                    <h4 class="text-lg font-bold text-gray-900 dark-mode:text-gray-100 mb-3">Detailed Summary:</h4>
+                    <h4 class="text-lg font-bold text-gray-900 dark-mode:text-gray-100 mb-3">Verbs to Review:</h4>
                     
                     <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
             `;
+            
+            const incorrectVerbs = quizResults.filter(r => !r.isCorrect);
+            
+            if (incorrectVerbs.length === 0) {
+                 resultsHTML += `<p class="text-center text-green-600 dark-mode:text-green-400 font-semibold">Perfect score! You don't have any verbs to review.</p>`;
+            }
 
-            quizResults.forEach(result => {
-                const statusClass = result.isCorrect ? 'bg-green-100 dark-mode:bg-green-900/40 border-green-400' : 'bg-red-100 dark-mode:bg-red-900/40 border-red-400';
-                const statusText = result.isCorrect ? 'CORRECT' : 'INCORRECT';
+            incorrectVerbs.forEach(result => {
+                const statusClass = 'bg-red-100 dark-mode:bg-red-900/40 border-red-400';
+                const statusText = result.isSkipped ? 'SKIPPED' : 'INCORRECT';
+                
+                const givenLabel = getFormLabel(result.promptForm);
+                const givenValue = result.promptValue;
+                const v = result.correctAnswers; // The full verb object
 
                 resultsHTML += `
                     <div class="p-3 rounded-xl border-2 ${statusClass}">
                         <p class="font-bold text-lg flex justify-between items-center mb-1">
-                            <span>Q${result.questionNumber}</span>
-                            <span class="text-sm font-extrabold ${result.isCorrect ? 'text-green-700 dark-mode:text-green-400' : 'text-red-700 dark-mode:text-red-400'}">${statusText}</span>
-                        </p>
-                        <p class="text-sm italic text-gray-800 dark-mode:text-gray-200 mb-2">
-                            ${result.question}
+                            <span>Q${result.questionNumber}: ${givenValue} (${givenLabel})</span>
+                            <span class="text-sm font-extrabold text-red-700 dark-mode:text-red-400">${statusText}</span>
                         </p>
                         <p class="text-xs text-gray-600 dark-mode:text-gray-400">
-                            You chose: <span class="${result.isCorrect ? 'text-green-700' : 'text-red-700'}">${result.selected}</span> | 
-                            Correct: <span class="text-green-700">${result.correct}</span>
+                            <strong>Correct:</strong> ${v.v1} / ${v.v3s} / ${v.ving} / ${v.v2} / ${v.v3}
                         </p>
                     </div>
                 `;
@@ -2204,6 +2259,7 @@
                 </div>
                 <button onclick="handleUiTapFeedback(); resetQuizAndReloadData()" class="mt-4 inline-block text-primary font-semibold hover:underline">Start a new quiz?</button>
             `;
+            // --- END: MODIFIED ---
             
             document.getElementById('final-results').innerHTML = resultsHTML;
             document.getElementById('final-results').className = `hidden mt-8 text-center p-4 liquid-glass-card border-2 ${resultBgClass}`;
@@ -2215,7 +2271,6 @@
             questionsAsked = 0;
             quizResults = [];
             currentQuestionData = null;
-            selectedOption = null;
             quizPhase = 'select';
             
             document.getElementById('quiz-status-bar').classList.add('hidden');
@@ -2259,7 +2314,7 @@
             indicator.classList.add('hidden');
             
             updateQuizLengthButton();
-            updateTenseLevelButton();
+            // --- MODIFIED: Removed updateTenseLevelButton call ---
 
             let availableCount = verbs.length;
             
@@ -2268,17 +2323,19 @@
             if (verbs.length === 0) {
                 messageEl.innerHTML = 'Error: No verbs available. Please add custom data to start a quiz.';
                 startButton.disabled = true;
-            } else if (effectiveLimit < 4) {
-                 messageEl.innerHTML = `Warning: At least 4 verbs are needed to create a quiz. You only have ${availableCount}. Please add more data.`;
+            } else if (effectiveLimit < 1) { // --- MODIFIED: Changed min from 4 to 1 ---
+                 messageEl.innerHTML = `Warning: At least 1 verb is needed to create a quiz. You only have ${availableCount}. Please add more data.`;
                  startButton.disabled = true;
             } else {
                 const quizLengthText = effectiveLimit < maxQuestions 
                     ? `(limited by available data)` 
                     : ``;
-                messageEl.innerHTML = `Your next quiz will contain **${effectiveLimit}** questions on **${getLabel('tense', selectedTense)}** ${quizLengthText}.`;
+                // --- MODIFIED: Removed 'tense' from message ---
+                messageEl.innerHTML = `Your next quiz will contain **${effectiveLimit}** questions ${quizLengthText}.`;
                 startButton.disabled = false;
             }
         }
+        // --- END: MODIFIED GAME LOGIC ---
 
         // Initialize the game when the window loads
         window.onload = async () => {
@@ -2286,6 +2343,9 @@
             loadInitialSettings(); // UPDATED: Applies global settings on load
             await fetchVerbData(); // Wait for the CSV to load
             parseAndLoadVerbs(); // Parse CSV and custom verbs
+            
+            // --- MODIFIED: Hide the tense selection button container as it's not used ---
+            document.getElementById('tense-level-button-container').style.display = 'none';
 
             // Listen for system theme changes ONLY if mode is 'auto' (hub's key)
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
@@ -2319,7 +2379,5 @@
         };
 
     </script>
-
-</body>
+    </body>
 </html>
-
