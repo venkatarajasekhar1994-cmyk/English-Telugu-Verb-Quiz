@@ -8,13 +8,13 @@
 // (e.g., you update 'spoken english.html' or 'Verbs.csv'),
 // you MUST come into this file and change this version number.
 //
-// For example, change 'v41' to 'v42', then 'v43', and so on.
+// For example, change 'v42' to 'v43', then 'v44', and so on.
 //
 // This is the *only* way to tell the browser to delete the old
 // cached files and download your new ones.
 //
 // -------------------------------------------------------------------------\
-const CACHE_NAME = 'my-pwa-cache-v41'; // <-- I've updated this from v40 to v41!
+const CACHE_NAME = 'my-pwa-cache-v42'; // <-- I've updated this from v41 to v42!
 
 
 // This list includes all the files needed for your app to work offline.
@@ -125,7 +125,7 @@ self.addEventListener('fetch', event => {
 
   // --- Strategy 2: Cache-First for App Shell (all other files) ---
   // For HTML, JSON, etc., we want to be fast and offline-first.
-  event.respondwith(
+  event.respondWith(
     // 1. Try to find a match in the cache.
     caches.match(event.request)
       .then(cachedResponse => {

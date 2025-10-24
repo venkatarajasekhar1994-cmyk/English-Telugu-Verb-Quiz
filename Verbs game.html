@@ -381,6 +381,19 @@
             transition: 0s;
         }
 
+        /* --- START: Added styles for TTS --- */
+        .tts-icon {
+            display: inline-block;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            font-size: 1.1em; /* Adjust size as needed */
+            vertical-align: middle;
+            transition: transform 0.1s ease;
+        }
+        .tts-icon:active {
+            transform: scale(0.9);
+        }
+        /* --- END: Added styles for TTS --- */
 
         /* --- Dark Mode Styles --- */
         .dark-mode {
@@ -717,11 +730,14 @@
         <div id="question-area" class="space-y-4 hidden">
             <div class="prompt-box p-4 rounded-xl border-2 border-primary text-center">
                 <p id="given-form-label" class="text-lg text-indigo-700 dark-mode:text-gray-300">Given Form (Base Form):</p>
-                <p id="question-text" class="text-3xl text-indigo-900 font-bold mb-1 dark-mode:text-gray-100">tease</p>
-                <p id="question-metadata" class="text-lg text-indigo-700 dark-mode:text-gray-300">ఏడిపించడం</p>
+                <p id="question-text" class="text-3xl text-indigo-900 font-bold mb-1 dark-mode:text-gray-100">
+                    <span id="question-english-text">tease</span><span class="tts-icon" onclick="speakText(document.getElementById('question-english-text').innerText, 'en-US')">🔊</span>
+                </p>
+                <p id="question-metadata" class="text-lg text-indigo-700 dark-mode:text-gray-300">
+                    <span id="question-telugu-text">ఏడిపించడం</span><span class="tts-icon" onclick="speakText(document.getElementById('question-telugu-text').innerText, 'te-IN')">🔊</span>
+                </p>
             </div>
-            
-            <div id="forms-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div id="forms-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 </div>
             
             <div id="explanation-area" class="hidden p-3 mt-4 rounded-xl border-2 border-primary bg-primary/10 dark-mode:bg-primary/5">
@@ -729,6 +745,7 @@
                 <p id="explanation-text" class="text-gray-800 dark-mode:text-gray-200 text-base"></p>
             </div>
         </div>
+
         <div id="quiz-action-buttons" class="mt-8 grid grid-cols-2 gap-4 hidden">
             <button id="skip-button" onclick="handleUiTapFeedback(); skipQuestion()"
                     class="ripple-btn px-2 py-3 bg-yellow-500 text-white font-bold rounded-xl shadow-lg shadow-yellow-500/50 hover:bg-yellow-600 transition duration-150 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-opacity-50 text-base md:text-lg">
@@ -1164,6 +1181,52 @@
             vibrateClick();
         }
         // --- End Haptic/Audio Feedback Setup ---
+        
+        // --- START: Added TTS Function ---
+        /**
+         * Speaks the given text using the specified language code.
+         * @param {string} text - The text to speak.
+         * @param {string} lang - The language code (e.g., 'en-US', 'te-IN').
+         */
+        function speakText(text, lang) {
+            if (!text || typeof text !== 'string' || text.trim() === '' || text.trim().toLowerCase() === 'n/a') {
+                console.warn("TTS: No valid text provided.");
+                return;
+            }
+            if (!('speechSynthesis' in window)) {
+                console.warn("TTS: Speech synthesis not supported by this browser.");
+                // Optionally show a message to the user
+                return;
+            }
+            
+            // Cancel any ongoing speech
+            window.speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            
+            // Optional: Find a specific voice if available (enhances Telugu support if multiple voices exist)
+            const voices = window.speechSynthesis.getVoices();
+            const specificVoice = voices.find(voice => voice.lang === lang);
+            if (specificVoice) {
+                 utterance.voice = specificVoice;
+            } else {
+                 console.warn(`TTS: No specific voice found for lang=${lang}. Using default.`);
+            }
+
+            utterance.onerror = (event) => {
+                console.error(`TTS Error: ${event.error}`);
+                // Optionally inform the user about the error
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Pre-load voices (recommended for better performance/reliability)
+        if ('speechSynthesis' in window && window.speechSynthesis.onvoiceschanged !== undefined) {
+             window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+        }
+        // --- END: Added TTS Function ---
 
         // --- Theme and Settings Management (No changes) ---
         const DARK_CLASS = 'dark-mode';
@@ -1767,11 +1830,11 @@
                     v2: getField(6),      // English V2
                     v3: getField(8),      // English V3
                     telugu: { 
-                        v1: getField(1),   // Telugu V1
-                        v3s: getField(3),  // Telugu V3s
-                        ving: getField(5), // Telugu V-ing
-                        v2: getField(7),   // Telugu V2
-                        v3: getField(9)    // Telugu V3
+                        v1: getField(1) || 'N/A',   // Telugu V1 (default to N/A if empty)
+                        v3s: getField(3) || 'N/A',  // Telugu V3s
+                        ving: getField(5) || 'N/A', // Telugu V-ing
+                        v2: getField(7) || 'N/A',   // Telugu V2
+                        v3: getField(9) || 'N/A'    // Telugu V3
                     },
                     source: 'custom'
                 }
@@ -1783,11 +1846,11 @@
                     v2: getField(COL_V2),
                     v3: getField(COL_V3),
                     telugu: {
-                        v1: getField(COL_V1_TE),
-                        v3s: getField(COL_V3S_TE),
-                        ving: getField(COL_VING_TE),
-                        v2: getField(COL_V2_TE),
-                        v3: getField(COL_V3_TE)
+                        v1: getField(COL_V1_TE) || 'N/A', // Default to N/A if empty in CSV
+                        v3s: getField(COL_V3S_TE) || 'N/A',
+                        ving: getField(COL_VING_TE) || 'N/A',
+                        v2: getField(COL_V2_TE) || 'N/A',
+                        v3: getField(COL_V3_TE) || 'N/A'
                     },
                     source: 'base'
                 };
@@ -1838,7 +1901,7 @@
             return validBaseVerbs;
         }
 
-        // --- START: JAVASCRIPT MODIFIED ---
+        // --- START: JAVASCRIPT MODIFIED (Display V1 Telugu in list) ---
         function renderUserDataList() {
             const listEl = document.getElementById('user-data-list');
             const customVerbs = loadCustomVerbs();
@@ -1852,9 +1915,11 @@
             customVerbs.forEach((v, index) => {
                 const item = document.createElement('div');
                 item.className = 'flex justify-between items-start p-2 border-b dark-mode:border-gray-700 hover:bg-opacity-80 rounded-md transition duration-150';
+                // Display V1 English and V1 Telugu
+                const teluguV1 = (v.telugu && v.telugu.v1 && v.telugu.v1 !== 'N/A') ? ` (${v.telugu.v1})` : '';
                 item.innerHTML = `
                     <div class="flex-1 min-w-0 mr-4">
-                        <span class="font-semibold text-primary dark-mode:text-primary-light line-clamp-1">${v.v1} (${v.telugu.v1 || 'N/A'})</span>
+                        <span class="font-semibold text-primary dark-mode:text-primary-light line-clamp-1">${v.v1}${teluguV1}</span>
                         <p class="text-xs text-gray-600 dark-mode:text-gray-400 truncate">${v.v3s} / ${v.ving} / ${v.v2} / ${v.v3}</p>
                     </div>
                     <button onclick="handleUiTapFeedback(); deleteCustomQuestion(${index})" class="ripple-btn p-2 rounded-lg text-red-500 hover:text-red-700 text-sm flex-shrink-0">
@@ -1901,13 +1966,8 @@
                 return;
             }
             
-            // Fill 'N/A' for any empty Telugu fields (indices 1, 3, 5, 7, 9)
-            const finalValues = values.map((val, index) => {
-                const isTeluguField = index % 2 === 1;
-                return (isTeluguField && val === '') ? 'N/A' : val;
-            });
-
-            const newVerb = createVerbObject(finalValues, true);
+            // Use the values directly, createVerbObject handles N/A default
+            const newVerb = createVerbObject(values, true);
             
             if (!newVerb) {
                  showDataFeedback('Error creating verb object.', 'red');
@@ -2041,13 +2101,16 @@
 
             document.getElementById('question-counter').textContent = `${questionsAsked}/${quizLimit}`;
             
-            // --- START: MODIFIED - Set dynamic prompt text ---
+            // --- START: MODIFIED - Set dynamic prompt text & use specific span IDs ---
             // Set the prompt text (e.g., "goes")
-            document.getElementById('question-text').textContent = givenFormValue;
+            document.getElementById('question-english-text').textContent = givenFormValue;
             // Set the label (e.g., "Given Form (3rd Person Singular):")
             document.getElementById('given-form-label').textContent = `Given Form (${givenFormLabel}):`;
             // Set the telugu meaning for that specific form
-            document.getElementById('question-metadata').textContent = currentQuestionData.telugu[givenFormKey] || '(No meaning available)';
+            const teluguMeaning = (currentQuestionData.telugu && currentQuestionData.telugu[givenFormKey] && currentQuestionData.telugu[givenFormKey] !== 'N/A') 
+                                 ? currentQuestionData.telugu[givenFormKey] 
+                                 : '(No meaning available)';
+            document.getElementById('question-telugu-text').textContent = teluguMeaning;
             // --- END: MODIFIED ---
             
             const formsContainer = document.getElementById('forms-container');
@@ -2075,7 +2138,11 @@
             
             // Focus the first input field
             if (firstInputId) {
-                document.getElementById(firstInputId).focus();
+                // Use a small timeout to ensure the element is focusable after rendering
+                setTimeout(() => {
+                     const firstInput = document.getElementById(firstInputId);
+                     if (firstInput) firstInput.focus();
+                }, 100);
             }
             // --- END: MODIFIED ---
         }
@@ -2090,6 +2157,13 @@
             }
             
             if (!currentQuestionData) return;
+            
+            // --- START: Added TTS stop ---
+            // Stop any currently playing speech before checking
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            // --- END: Added TTS stop ---
             
             quizPhase = 'next';
             
@@ -2110,23 +2184,34 @@
 
                 const inputEl = document.getElementById(`${formKey}-input`);
                 const formLabel = getFormLabel(formKey);
+                const engCorrect = currentQuestionData[formKey];
+                const telCorrect = (currentQuestionData.telugu && currentQuestionData.telugu[formKey] && currentQuestionData.telugu[formKey] !== 'N/A') 
+                                   ? ` (${currentQuestionData.telugu[formKey]})` 
+                                   : '';
                 
                 inputs[formKey] = inputEl;
                 userAnswers[formKey] = inputEl.value.trim().toLowerCase();
-                correctAnswers[formKey] = currentQuestionData[formKey].toLowerCase();
+                correctAnswers[formKey] = engCorrect.toLowerCase();
                 
                 inputEl.disabled = true; // Lock the input
                 
+                // --- START: MODIFIED Explanation ---
+                let explanationLine = `<strong>${formLabel}:</strong> ${engCorrect}${telCorrect}`;
+                explanationLine += `<span class="tts-icon" onclick="speakText('${engCorrect}', 'en-US')">🔊</span>`; // Add TTS icon
+                
                 if (userAnswers[formKey] === correctAnswers[formKey]) {
                     inputEl.classList.add('correct');
-                    explanation.push(`<strong>${formLabel}:</strong> ${correctAnswers[formKey]} (Correct)`);
+                    explanationLine += ` (Correct)`;
                 } else {
                     inputEl.classList.add('incorrect');
                     // Show the correct answer in the input
-                    inputEl.value = correctAnswers[formKey];
+                    inputEl.value = engCorrect;
                     allCorrect = false;
-                    explanation.push(`<strong>${formLabel}:</strong> ${correctAnswers[formKey]} (You wrote: ${userAnswers[formKey] || 'nothing'})`);
+                    const userAnswerText = userAnswers[formKey] || 'nothing';
+                    explanationLine += ` (You wrote: ${userAnswerText})`;
                 }
+                explanation.push(explanationLine);
+                 // --- END: MODIFIED Explanation ---
             });
             // --- END: MODIFIED ---
 
@@ -2176,6 +2261,13 @@
         window.skipQuestion = function() {
             if (quizPhase !== 'select' || !currentQuestionData) return;
             
+             // --- START: Added TTS stop ---
+            // Stop any currently playing speech before skipping
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            // --- END: Added TTS stop ---
+            
             quizPhase = 'next'; // Prevent double skipping
             
             document.getElementById('feedback-message').textContent = 'Question Skipped.';
@@ -2197,6 +2289,13 @@
         }
         
         window.endGame = function() {
+             // --- START: Added TTS stop ---
+            // Stop any currently playing speech before showing results
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            // --- END: Added TTS stop ---
+            
             document.getElementById('question-area').classList.add('hidden');
             document.getElementById('quiz-action-buttons').classList.add('hidden');
             document.getElementById('quiz-status-bar').classList.add('hidden');
@@ -2210,7 +2309,7 @@
             const statusColorClass = (percentage >= 70) ? 'text-green-700' : (percentage >= 40 ? 'text-yellow-700' : 'text-red-700');
             const resultBgClass = (percentage >= 70) ? 'bg-green-300/40 border-green-300' : (percentage >= 40 ? 'bg-yellow-300/40 border-yellow-300' : 'bg-red-300/40 border-red-300');
 
-            // --- START: MODIFIED - Updated results HTML for the new game type ---
+            // --- START: MODIFIED - Updated results HTML for the new game type & TTS ---
             let resultsHTML = `
                 <h3 class="text-2xl font-bold ${statusColorClass} mb-2">Quiz Complete!</h3>
                 <p class="text-lg text-gray-700 dark-mode:text-gray-300 mb-4">
@@ -2240,6 +2339,7 @@
                 const givenLabel = getFormLabel(result.promptForm);
                 const givenValue = result.promptValue;
                 const v = result.correctAnswers; // The full verb object
+                const teluguV1 = (v.telugu && v.telugu.v1 && v.telugu.v1 !== 'N/A') ? v.telugu.v1 : '';
 
                 resultsHTML += `
                     <div class="p-3 rounded-xl border-2 ${statusClass}">
@@ -2247,8 +2347,12 @@
                             <span>Q${result.questionNumber}: ${givenValue} (${givenLabel})</span>
                             <span class="text-sm font-extrabold text-red-700 dark-mode:text-red-400">${statusText}</span>
                         </p>
+                        <p class="text-sm text-gray-800 dark-mode:text-gray-200">
+                           Correct (V1): ${v.v1} <span class="tts-icon" onclick="speakText('${v.v1}', 'en-US')">🔊</span>
+                           ${teluguV1 ? `<span class="italic text-primary dark-mode:text-primary-light">(${teluguV1})</span><span class="tts-icon" onclick="speakText('${teluguV1}', 'te-IN')">🔊</span>` : ''}
+                        </p>
                         <p class="text-xs text-gray-600 dark-mode:text-gray-400">
-                            <strong>Correct:</strong> ${v.v1} / ${v.v3s} / ${v.ving} / ${v.v2} / ${v.v3}
+                            <strong>All Forms:</strong> ${v.v1} / ${v.v3s} / ${v.ving} / ${v.v2} / ${v.v3}
                         </p>
                     </div>
                 `;
@@ -2376,6 +2480,15 @@
                     loadInitialSettings();
                 }
             });
+            
+             // --- START: Added TTS stop on page unload ---
+            // Stop TTS if the user navigates away or closes the tab
+             window.addEventListener('beforeunload', () => {
+                 if ('speechSynthesis' in window) {
+                     window.speechSynthesis.cancel();
+                 }
+             });
+            // --- END: Added TTS stop on page unload ---
         };
 
     </script>
