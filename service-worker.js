@@ -8,7 +8,7 @@
 //
 // **YOUR GOLDEN RULE:**
 // Every time you change ANY file (like spoken english.html or data.csv)
-// and upload it, you MUST come into this file and
+// and upload it to GitHub, you MUST come into this file and
 // increment this version number (e.g., to 'v39', then 'v40', etc.).
 //
 // This tells the browser your app has an update, forcing it
@@ -33,73 +33,71 @@ const urlsToCache = [
   // NOTE: If you add any images, CSS, or new HTML files, add them here!
 ];
 
-// --- INSTALLATION ---
-// This code runs when the service worker is first installed.
-// It opens our cache and adds all the files listed above.
+// --- 1. Install Event ---
+// This runs when the service worker is first installed or updated.
+// It opens the cache and saves all the files listed in urlsToCache.
 self.addEventListener('install', event => {
-  console.log(`[Service Worker] Installing cache: ${CACHE_NAME}`);
+  console.log('[Service Worker] Install event triggered. Caching app shell.');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('[Service Worker] Caching all app shell files');
-        // We use addAll to fetch and cache all the files in urlsToCache
+        console.log('[Service Worker] Caching files:', urlsToCache);
         return cache.addAll(urlsToCache);
       })
-      .then(() => {
-        console.log('[Service Worker] Installation complete. Activating...');
-        // Force the new service worker to become active immediately
-        return self.skipWaiting();
-      })
-      .catch(error => {
-        console.error('[Service Worker] Cache addAll failed:', error);
+      .catch(err => {
+        console.error('[Service Worker] Cache addAll failed:', err);
       })
   );
+  // Force the new service worker to become active immediately.
+  self.skipWaiting();
 });
 
-// --- ACTIVATION ---
-// This code runs when the new service worker becomes active.
-// Its job is to delete all *old* caches to save space.
+// --- 2. Activate Event ---
+// This runs after the install event.
+// Its main job is to clean up old caches.
 self.addEventListener('activate', event => {
-  console.log(`[Service Worker] Activating new service worker...`);
+  console.log('[Service Worker] Activate event triggered. Cleaning old caches.');
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
-          // If the cacheName is not our current one, delete it!
+          // If the cacheName is not our current one, delete it.
           if (cacheName !== CACHE_NAME) {
-            console.log(`[Service Worker] Deleting old cache: ${cacheName}`);
+            console.log('[Service Worker] Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
-    }).then(() => {
-        // Tell the service worker to take control of all open pages
-        return self.clients.claim();
     })
   );
+  // Tell the service worker to take control of all open pages.
+  return self.clients.claim();
 });
 
-// --- FETCH (INTERCEPTING REQUESTS) ---
-// This is where the magic happens. Every time your app
-// tries to fetch a file (like 'data.csv' or 'game hub.html'),
-// this code intercepts the request.
+// --- 3. Fetch Event ---
+// This runs every time your app makes a network request (e.g., for a file or data).
+// This is where we decide how to respond: from the cache or from the network.
 self.addEventListener('fetch', event => {
   const requestUrl = new URL(event.request.url);
 
-  // --- Strategy 1: Network-First for CSV data files ---
-  // This is for your data files: data.csv, data2.csv, Vocabulary.csv
-  // We want to get the *newest* data if possible, but use the
-  // *cached* data if the user is offline.
+  // We only want to handle 'GET' requests.
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
+  // --- Strategy 1: Network-First for CSV files ---
+  // This is for your data files (data.csv, data2.csv, Vocabulary.csv).
+  // We want to get the *newest* data from the network first.
+  // If the network fails (offline), we'll use the cached version.
   if (requestUrl.pathname.endsWith('.csv')) {
     event.respondWith(
-      // 1. Open our cache.
       caches.open(CACHE_NAME).then(cache => {
-        // 2. Try to fetch the file from the network (internet).
+        // 1. Try to fetch from the network.
         return fetch(event.request).then(networkResponse => {
-          // 3. If successful, update the cache with the new file.
-          console.log(`[Service Worker] Fetched from network and caching: ${requestUrl.pathname}`);
+          // 2. If successful, update the cache with the new file.
+          console.log(`[Service Worker] Network-First: Fetched ${requestUrl.pathname} from network, updating cache.`);
           cache.put(event.request, networkResponse.clone());
-          // 4. Return the new file from the network.
+          // 3. Return the new response from the network.
           return networkResponse;
         }).catch(() => {
           // 4. If the network fetch fails (offline), try to get it from the cache.
@@ -112,7 +110,8 @@ self.addEventListener('fetch', event => {
   }
 
   // --- Strategy 2: Cache-First for all other files (HTML, JSON, etc.) ---
-  // This is fast and good for the main app "shell".
+  // This is for your main app "shell" (index.html, game hub.html, etc.).
+  // This is fast and good for offline use.
   // It serves from the cache immediately if available.
   // It only goes to the network if the file isn't in the cache.
   event.respondWith(
@@ -125,10 +124,11 @@ self.addEventListener('fetch', event => {
         }
 
         // 3. If it's not in the cache, fetch it from the network.
-        // This is important for external requests (like Google Fonts or Tailwind).
+        // This is important for the very first load or for files
+        // you forgot to add to urlsToCache.
         return fetch(event.request).then(networkResponse => {
-            // Note: We don't cache these external files by default,
-            // but you could add logic here to cache them if you wanted.
+            // Note: We don't cache these files by default,
+            // because they *should* have been in the urlsToCache list.
             return networkResponse;
         }).catch(error => {
             console.error('[Service Worker] Fetch failed, and not in cache:', error);

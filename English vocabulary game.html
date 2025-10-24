@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     
     <style>
         /* Import all available fonts for customization */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght==400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans 3:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght==400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
         
         /* --- CSS Variables for Theme Management --- */
         
@@ -66,7 +66,7 @@
             --color-bg-dark-end: #9f1239;
         }
 
-        /* Amber Theme (New) */
+        /* Amber Theme */
         body[data-color="amber"] {
             --color-primary: 245, 158, 11; /* Amber 600 RGB */
             --color-primary-hex: #f59e0b;
@@ -79,7 +79,7 @@
             --color-bg-dark-end: #b45309;
         }
         
-        /* Emerald Theme (New) */
+        /* Emerald Theme */
         body[data-color="emerald"] {
             --color-primary: 5, 150, 105; /* Emerald 600 RGB */
             --color-primary-hex: #059669;
@@ -91,8 +91,6 @@
             --color-bg-dark-mid: #065f46;
             --color-bg-dark-end: #047857;
         }
-
-        /* --- START: NEW THEMES --- */
         
         /* Cyan Theme */
         body[data-color="cyan"] {
@@ -159,9 +157,6 @@
             --color-bg-dark-end: #0369a1;
         }
         
-        /* --- END: NEW THEMES --- */
-        
-        
         /* --- Base Styles --- */
         body {
             font-family: var(--font-body);
@@ -169,6 +164,7 @@
             padding: 1rem;
             color: var(--text-color-light); 
             background: linear-gradient(135deg, var(--color-bg-light-start), var(--color-bg-light-mid), var(--color-bg-light-end));
+            transition: background 0.5s ease, color 0.3s ease;
         }
         
         .elegant-title {
@@ -438,13 +434,38 @@
         }
 
         /* Set color variables for all text based on theme */
-        body:not(.dark-mode) .text-gray-700,
-        body:not(.dark-mode) .text-gray-800,
-        body:not(.dark-mode) .text-gray-600 { color: var(--text-color-light) !important; }
+        body:not(.dark-mode)[data-contrast="default"] .text-gray-700,
+        body:not(.dark-mode)[data-contrast="default"] .text-gray-800,
+        body:not(.dark-mode)[data-contrast="default"] .text-gray-600 { color: var(--text-color-light) !important; }
         
-        .dark-mode[data-text-hue="default"] .text-gray-700,
-        .dark-mode[data-text-hue="default"] .text-gray-800,
-        .dark-mode[data-text-hue="default"] .text-gray-600 { color: var(--text-color-dark) !important; }
+        .dark-mode[data-contrast="default"] .text-gray-700,
+        .dark-mode[data-contrast="default"] .text-gray-800,
+        .dark-mode[data-contrast="default"] .text-gray-600 { color: var(--text-color-dark) !important; }
+
+        /* NEW: High Contrast Text Styles */
+        body:not(.dark-mode)[data-contrast="high"] .text-gray-700,
+        body:not(.dark-mode)[data-contrast="high"] .text-gray-800,
+        body:not(.dark-mode)[data-contrast="high"] .text-gray-600,
+        body:not(.dark-mode)[data-contrast="high"] {
+            color: var(--text-color-light) !important;
+        }
+        
+        .dark-mode[data-contrast="high"] .text-gray-700,
+        .dark-mode[data-contrast="high"] .text-gray-800,
+        .dark-mode[data-contrast="high"] .text-gray-600,
+        .dark-mode[data-contrast="high"] {
+            color: var(--text-color-dark) !important;
+        }
+        
+        /* Ensure input text is also high contrast */
+        body[data-contrast="high"] input,
+        body[data-contrast="high"] textarea {
+             color: var(--text-color-light) !important;
+        }
+         .dark-mode[data-contrast="high"] input,
+         .dark-mode[data-contrast="high"] textarea {
+             color: var(--text-color-dark) !important;
+        }
 
 
         /* Modal styles */
@@ -482,6 +503,7 @@
         <div class="flex justify-between items-center mb-6 border-b-2 pb-2 border-primary">
             
             <div class="flex items-center space-x-3">
+                 <!-- Anchor tag points to the hub -->
                  <a href="game hub.html"
                     class="ripple-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex"
                     aria-label="Go to Game Hub">
@@ -566,7 +588,8 @@
             </div>
             
             <div id="options-container" class="grid grid-cols-1 gap-3">
-                </div>
+                <!-- Options injected by JS -->
+            </div>
             
             <div id="explanation-area" class="hidden p-3 mt-4 rounded-xl border-2 border-primary bg-primary/10 dark-mode:bg-primary/5">
                 <p class="font-bold text-sm mb-1 text-primary">Explanation:</p>
@@ -583,10 +606,12 @@
         </div>
         
         <div id="final-results" class="hidden mt-8 text-center p-4 bg-yellow-300/40 liquid-glass-card border-yellow-300 border-2">
-            </div>
+            <!-- Results injected by JS -->
+        </div>
 
     </div>
 
+    <!-- Hamburger Menu -->
     <div id="hamburger-menu" class="fixed top-0 right-0 h-full w-64 z-50 transform translate-x-full transition-transform duration-300 bg-white dark-mode:bg-gray-800 shadow-2xl p-6">
         <div class="flex justify-end">
             <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700">
@@ -598,17 +623,20 @@
 
         <h3 class="text-xl font-bold mb-6 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">Menu</h3>
 
+        <!-- Theme Toggle Button -->
         <button id="menu-theme-toggle" onclick="handleUiTapFeedback(); toggleTheme()" 
                 class="ripple-btn w-full flex items-center justify-between p-3 mb-4 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150">
             <span id="menu-theme-text" class="font-semibold"></span>
             <svg id="menu-theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                </svg>
+                <!-- Icon injected by JS -->
+            </svg>
         </button>
         
         <div class="mb-4 p-3 bg-gray-100 dark-mode:bg-gray-700 rounded-xl text-xs text-gray-600 dark-mode:text-gray-400 overflow-x-auto break-all">
             <span class="font-bold">Status:</span> <span id="user-id-display">Local Data Storage</span>
         </div>
 
+        <!-- Manage Data Button -->
         <button onclick="handleUiTapFeedback(); openDataManagementFromMenu()"
                 class="ripple-btn w-full flex items-center p-3 mb-4 rounded-xl text-white font-bold bg-primary hover:opacity-90 transition duration-150 shadow-md shadow-indigo-500/50">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-2">
@@ -617,28 +645,31 @@
             Manage Vocabulary Data
         </button>
 
+        <!-- App Settings Button -->
         <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu(); openSettings();"
                 class="ripple-btn w-full flex items-center p-3 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150 shadow-md shadow-gray-500/10">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 12h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3zm9-6h3.75m-3.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 18h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0" />
             </svg>
-            Quiz Settings
+            App Settings
         </button>
     </div>
     
+    <!-- Hamburger Menu Overlay -->
     <div id="hamburger-overlay" class="hidden fixed inset-0 z-40 bg-black opacity-50" onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()"></div>
 
-
+    <!-- App Settings Modal -->
     <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
         <div class="modal-content liquid-glass-card w-full max-w-sm p-6 overflow-y-auto max-h-[90vh]">
             <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">App Settings</h2>
 
             <div class="bg-blue-100 dark-mode:bg-blue-900/40 border border-blue-400 text-blue-800 dark-mode:text-blue-200 text-sm p-3 rounded-xl mb-4">
-                <p class="font-semibold">All settings are saved automatically to this device only.</p>
+                <p class="font-semibold">Shared settings (Theme, Color, Font, Contrast) are synced across all games. Game-specific settings are saved for this game only.</p>
             </div>
 
+            <!-- Color Accent -->
             <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3">Color Accent</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3">Color Accent (Shared)</h3>
                 <div class="grid grid-cols-5 gap-2">
                     <button onclick="setThemeColor('indigo')" data-color-id="indigo"
                             class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-indigo-600 hover:opacity-90 text-sm">
@@ -684,8 +715,9 @@
                     </div>
             </div>
 
+            <!-- Text Contrast -->
             <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Text Contrast</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Text Contrast (Shared)</h3>
                 <div class="flex space-x-4">
                     <button onclick="setTextContrast('default')" data-contrast-id="default" id="contrast-default"
                             class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
@@ -698,8 +730,34 @@
                 </div>
             </div>
 
+            <!-- Body Font -->
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Input Style (MC unused here)</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Body Font (Shared)</h3>
+                <button id="body-font-button" onclick="handleUiTapFeedback(); openSelectionModal('body')"
+                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                    <span id="current-body-font" class="font-semibold">Inter (Sans-serif, Default)</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Title Font -->
+            <div class="mb-6">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Title Font (Shared)</h3>
+                <button id="title-font-button" onclick="handleUiTapFeedback(); openSelectionModal('title')"
+                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                    <span id="current-title-font" class="font-semibold">Lora (Serif, Default)</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                    </svg>
+                </button>
+            </div>
+
+
+            <!-- Game-Specific Settings -->
+            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Input Style (Game Specific)</h3>
                 <div class="flex space-x-4">
                     <button onclick="setInputStyle('rounded')" data-style-id="rounded" id="style-rounded"
                             class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
@@ -713,7 +771,7 @@
             </div>
 
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Feedback</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Feedback (Game Specific)</h3>
                 <div class="flex flex-col space-y-2">
                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-audio" onclick="toggleAudio()" 
@@ -729,7 +787,7 @@
             </div>
 
             <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Display</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Display (Game Specific)</h3>
                 <div class="flex flex-col space-y-2">
                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-text-hue" onclick="toggleTextHue()" 
@@ -738,30 +796,8 @@
                     </label>
                 </div>
             </div>
-
-
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Body Font</h3>
-                <button id="body-font-button" onclick="handleUiTapFeedback(); openSelectionModal('body')"
-                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
-                    <span id="current-body-font" class="font-semibold">Inter (Sans-serif, Default)</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                    </svg>
-                </button>
-            </div>
-
-            <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Title Font</h3>
-                <button id="title-font-button" onclick="handleUiTapFeedback(); openSelectionModal('title')"
-                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
-                    <span id="current-title-font" class="font-semibold">Lora (Serif, Default)</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                    </svg>
-                </button>
-            </div>
-
+            
+            <!-- Close Button -->
             <button onclick="handleUiTapFeedback(); closeSettings()"
                     class="ripple-btn mt-8 w-full py-3 bg-gray-500 text-white font-bold rounded-xl hover:bg-gray-600 transition duration-150">
                 Close Settings
@@ -769,6 +805,7 @@
         </div>
     </div>
     
+    <!-- Selection Modal (for Fonts, Quiz Length, Difficulty) -->
     <div id="selection-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-overlay">
         <div class="selection-modal-content liquid-glass-card w-full max-w-sm p-0">
             <div class="p-4 flex justify-between items-center border-b dark-mode:border-gray-700">
@@ -780,11 +817,13 @@
                 </button>
             </div>
             <div id="selection-modal-list" class="max-h-80 overflow-y-auto rounded-b-xl">
-                </div>
+                <!-- Options injected by JS -->
+            </div>
         </div>
     </div>
 
 
+    <!-- Data Management Modal -->
     <div id="data-management-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
         <div class="modal-content liquid-glass-card w-full max-w-3xl p-6 overflow-y-auto max-h-[90vh]">
             <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">
@@ -876,13 +915,7 @@
         // Data provided by the user (parsed from the uploaded CSV/Excel sheet)
         const INITIAL_DEFAULT_DATA_KEY = 'initialDefaultVocabData';
         
-        // --- START OF UPDATED defaultCsvData ---
-        // REMOVED: The large 'const defaultCsvData' string is now gone.
-        // --- END OF UPDATED defaultCsvData ---
-
-
         // --- Configuration ---
-        // UPDATED: Used the options set in the previous turn.
         const QUESTION_OPTIONS = [5, 10, 15, 20, 30, 50]; 
         const DIFFICULTY_LEVELS = [
             { value: 'mixed', label: 'Mixed (All Difficulties)' },
@@ -895,17 +928,18 @@
                 { value: 'Inter', label: 'Inter (Sans-serif, Default)' },
                 { value: 'Roboto', label: 'Roboto (Sans-serif)' },
                 { value: 'Source Sans 3', label: 'Source Sans 3 (Sans-serif)' },
-                { value: 'Merriweather', label: 'Merriweather (Serif)' }
+                { value: 'Merriweather', label: 'Merriweather (Serif)' },
+                { value: 'Poppins', label: 'Poppins (Sans-serif)' } // Added Poppins
             ],
             title: [
                 { value: 'Lora', label: 'Lora (Serif, Default)' },
                 { value: 'Playfair Display', label: 'Playfair Display (Serif)' },
-                { value: 'Montserrat', label: 'Montserrat (Sans-serif)' },
+                { value: 'Montserrat', label: 'Montserrat (Sans-serif)' }, // Added Montserrat
                 { value: 'Merriweather', label: 'Merriweather (Serif)' }
             ]
         };
         
-        // NEW: Default settings
+        // Default game settings
         const DEFAULT_MAX_QUESTIONS = 15;
         const DEFAULT_DIFFICULTY = 'mixed';
 
@@ -926,9 +960,14 @@
         let currentSelectionType = null;
         let quizPhase = 'select'; // 'select' (choosing answer) or 'next' (showing answer/ready for next)
 
-        // NEW: Key for Local Storage of Settings & Custom Data
+        // --- START: MODIFIED STORAGE KEYS ---
+        // Key for SHARED settings across all games
+        const GLOBAL_SETTINGS_KEY = 'globalHubSettings'; 
+        // Key for settings SPECIFIC to this vocab game
         const SETTINGS_KEY = 'vocabQuizSettings';
+        // Key for custom vocab data
         const CUSTOM_DATA_KEY = 'customVocabData';
+        // --- END: MODIFIED STORAGE KEYS ---
 
         // --- Column Indices (9-column CSV structure including Category) ---
         const COL_CATEGORY = 0;
@@ -942,7 +981,7 @@
         const COL_EXPLANATION = 8;
         const EXPECTED_COLUMNS = 9;
         
-        // --- Tone.js Audio Setup (COPIED) ---
+        // --- Tone.js Audio Setup ---
         let correctSynth;
         let incorrectSynth;
         let clickSynth;
@@ -989,9 +1028,12 @@
         }
         // --- End Haptic/Audio Feedback Setup ---
 
-        // --- Theme and Settings Management (COPIED) ---
+        // --- Theme and Settings Management ---
         const DARK_CLASS = 'dark-mode';
         
+        // --- START: MODIFIED SETTINGS FUNCTIONS ---
+
+        // Gets GAME-SPECIFIC settings
         const getLocalStorageSetting = (key, defaultValue) => {
             try {
                 const settingsString = localStorage.getItem(SETTINGS_KEY);
@@ -1015,6 +1057,7 @@
             }
         };
 
+        // Saves GAME-SPECIFIC settings
         const saveLocalStorageSetting = (key, value) => {
             try {
                 const settingsString = localStorage.getItem(SETTINGS_KEY);
@@ -1028,17 +1071,51 @@
             }
         }
 
+        // NEW: Gets GLOBAL (shared) settings
+        const getGlobalSetting = (key, defaultValue) => {
+            try {
+                const settingsString = localStorage.getItem(GLOBAL_SETTINGS_KEY);
+                if (!settingsString) return defaultValue;
+                const settings = JSON.parse(settingsString);
+                return (settings && typeof settings[key] !== 'undefined') ? settings[key] : defaultValue;
+            } catch (e) {
+                console.error("Error reading global setting:", key, e);
+                return defaultValue;
+            }
+        };
 
-        function setThemeColor(color) {
+        // NEW: Saves GLOBAL (shared) settings
+        const setGlobalSetting = (key, value) => {
+            try {
+                const settingsString = localStorage.getItem(GLOBAL_SETTINGS_KEY);
+                let settings = settingsString ? JSON.parse(settingsString) : {};
+                settings[key] = value;
+                localStorage.setItem(GLOBAL_SETTINGS_KEY, JSON.stringify(settings));
+            } catch (e) {
+                console.error("Error saving global setting:", key, e);
+            }
+        };
+        
+        // --- END: MODIFIED SETTINGS FUNCTIONS ---
+
+
+        // UPDATED: Saves to local AND global settings
+        function setThemeColor(color) { // color is 'indigo', 'teal'
             saveLocalStorageSetting('color', color);
-            applyCurrentTheme(); // Use the new helper
+            
+            // --- NEW: Sync to Global Settings ---
+            // Map 'indigo' -> 'Indigo'
+            const globalColorName = color.charAt(0).toUpperCase() + color.slice(1);
+            setGlobalSetting('colorTheme', globalColorName);
+            // --- End Sync ---
+
+            applyCurrentTheme(); // Use the helper
             updateSettingsUI();
         }
 
-        // --- START: MODIFIED THEME FUNCTIONS ---
-
-        // NEW: Helper function to apply theme based on saved setting
+        // Helper function to apply theme based on saved setting
         function applyCurrentTheme() {
+            // Reads from game-specific storage
             const savedTheme = getLocalStorageSetting('theme', 'system');
             let isDark;
 
@@ -1053,7 +1130,7 @@
             applyTheme(isDark); // This function already calls updateHamburgerMenuUI
         }
 
-        // UPDATED: Cycles theme: System -> Light -> Dark -> System
+        // UPDATED: Cycles theme and saves to local AND global settings
         function toggleTheme() {
             const currentMode = getLocalStorageSetting('theme', 'system');
             let newMode;
@@ -1067,38 +1144,67 @@
             }
             
             saveLocalStorageSetting('theme', newMode);
+            
+            // --- NEW: Sync to Global Settings ---
+            // Map 'system' -> 'auto' for the hub
+            const globalTheme = (newMode === 'system') ? 'auto' : newMode;
+            setGlobalSetting('theme', globalTheme); 
+            // --- End Sync ---
+
             applyCurrentTheme();
         }
         
-        // --- END: MODIFIED THEME FUNCTIONS ---
-        
+        // UPDATED: Saves to local AND global settings
         function setTextContrast(contrast) {
             saveLocalStorageSetting('contrast', contrast);
+            
+            // --- NEW: Sync to Global Settings ---
+            setGlobalSetting('contrast', contrast); // Direct match
+            // --- End Sync ---
+
             document.body.setAttribute('data-contrast', contrast);
-            applyCurrentTheme(); // Use the new helper
+            applyCurrentTheme(); // Use the helper
             updateSettingsUI();
         }
         
-        window.setBodyFont = function(font) {
+        // UPDATED: Saves to local AND global settings
+        window.setBodyFont = function(font) { // font is 'Inter', 'Roboto'
             saveLocalStorageSetting('bodyFont', font);
-            const fallback = font.includes('serif') ? 'serif' : 'sans-serif';
-            document.documentElement.style.setProperty('--font-body', `"${font}", ${fallback}`);
+            
+            // --- NEW: Sync to Global Settings ---
+            const fallback = (font === 'Merriweather') ? 'serif' : 'sans-serif';
+            const globalFontValue = `'${font}', ${fallback}`;
+            setGlobalSetting('bodyFont', globalFontValue);
+            // --- End Sync ---
+
+            const fallbackCss = (font === 'Merriweather') ? 'serif' : 'sans-serif';
+            document.documentElement.style.setProperty('--font-body', `"${font}", ${fallbackCss}`);
             updateSettingsUI(); 
         }
 
-        window.setTitleFont = function(font) {
+        // UPDATED: Saves to local AND global settings
+        window.setTitleFont = function(font) { // font is 'Lora', 'Montserrat'
             saveLocalStorageSetting('titleFont', font);
-            const fallback = font.includes('serif') ? 'serif' : 'sans-serif'; 
-            document.documentElement.style.setProperty('--font-title', `"${font}", ${fallback}`);
+
+            // --- NEW: Sync to Global Settings ---
+            const fallback = (font === 'Lora' || font === 'Playfair Display' || font === 'Merriweather') ? 'serif' : 'sans-serif'; 
+            const globalFontValue = `'${font}', ${fallback}`;
+            setGlobalSetting('titleFont', globalFontValue);
+            // --- End Sync ---
+
+            const fallbackCss = (font === 'Lora' || font === 'Playfair Display' || font === 'Merriweather') ? 'serif' : 'sans-serif'; 
+            document.documentElement.style.setProperty('--font-title', `"${font}", ${fallbackCss}`);
             updateSettingsUI(); 
         }
         
+        // Saves GAME-SPECIFIC setting
         function setInputStyle(style) {
             saveLocalStorageSetting('inputStyle', style);
             applyInputStyles();
             updateSettingsUI();
         }
 
+        // Applies GAME-SPECIFIC style
         function applyInputStyles() {
             const style = getLocalStorageSetting('inputStyle', 'rounded');
             const root = document.documentElement.style;
@@ -1111,26 +1217,29 @@
             }
         }
         
+        // Saves GAME-SPECIFIC setting
         function toggleAudio() {
             const currentState = getLocalStorageSetting('disableSound', false);
             saveLocalStorageSetting('disableSound', !currentState);
             updateSettingsUI();
         }
 
+        // Saves GAME-SPECIFIC setting
         function toggleHaptics() {
             const currentState = getLocalStorageSetting('disableVibration', false);
             saveLocalStorageSetting('disableVibration', !currentState);
             updateSettingsUI();
         }
         
+        // Saves GAME-SPECIFIC setting
         function toggleTextHue() {
             const currentState = getLocalStorageSetting('textHue', false);
             saveLocalStorageSetting('textHue', !currentState);
-            applyCurrentTheme(); // Use the new helper
+            applyCurrentTheme(); // Use the helper
             updateSettingsUI();
         }
 
-        // NEW: Update quiz settings handlers
+        // NEW: Update quiz settings handlers (Game-specific)
         window.handleQuestionCountChange = function(value) {
             const count = parseInt(value);
             maxQuestions = count;
@@ -1139,12 +1248,14 @@
             updateStartScreenMessage();
         }
         
+        // NEW: UI update for difficulty level button (Game-specific)
         window.handleDifficultyLevelChange = function(value) {
             selectedDifficulty = value;
             saveLocalStorageSetting('selectedDifficulty', value);
             updateStartScreenMessage();
         }
         
+        // This function applies settings read from GAME-SPECIFIC storage
         function applyTheme(isDark) {
             const color = getLocalStorageSetting('color', 'indigo');
             const contrast = getLocalStorageSetting('contrast', 'default');
@@ -1163,13 +1274,16 @@
                 body.classList.remove(DARK_CLASS);
             }
             
+            // Apply fonts using the setters (which now handle fallbacks)
             window.setBodyFont(bodyFont);
             window.setTitleFont(titleFont);
-            applyInputStyles();
+            applyInputStyles(); // Applies game-specific style
             updateHamburgerMenuUI(); 
         }
 
+        // This function updates the UI based on GAME-SPECIFIC storage
         function updateSettingsUI() {
+            // Read all settings from game-specific storage
             const color = getLocalStorageSetting('color', 'indigo');
             const contrast = getLocalStorageSetting('contrast', 'default');
             const inputStyle = getLocalStorageSetting('inputStyle', 'rounded');
@@ -1190,23 +1304,23 @@
                 btn.classList.toggle('ring-primary-hex', isActive);
             });
             
-            // Update toggles
+            // Update toggles (game-specific)
             document.getElementById('toggle-audio').checked = disableSound;
             document.getElementById('toggle-haptics').checked = disableVibration;
             document.getElementById('toggle-text-hue').checked = textHue;
             
             // Update buttons reflecting selected values
-            updateQuizLengthButton();
-            updateDifficultyLevelButton();
-            updateFontButton('body');
-            updateFontButton('title');
+            updateQuizLengthButton(); // game-specific
+            updateDifficultyLevelButton(); // game-specific
+            updateFontButton('body'); // shared
+            updateFontButton('title'); // shared
 
 
             document.getElementById('score-display').style.color = `var(--color-primary-hex)`;
             document.getElementById('question-counter').style.color = `var(--color-primary-hex)`;
         }
         
-        // NEW: UI update for difficulty level button
+        // UI update for difficulty level button (Game-specific)
         function updateDifficultyLevelButton() {
             const button = document.getElementById('current-difficulty-level');
             const level = getLabel('difficulty', selectedDifficulty);
@@ -1215,18 +1329,16 @@
             }
         }
         
-        // NEW: UI update for quiz length button
+        // UI update for quiz length button (Game-specific)
         function updateQuizLengthButton() {
             const button = document.getElementById('current-quiz-length');
             if (button) {
-                // If maxQuestions is set to 50, but only 30 are available, it displays "50 Questions" here.
-                // The actual quiz length will be capped in startQuiz, but the button reflects the user's setting.
                 const label = getLabel('count', maxQuestions); 
                 button.textContent = label;
             }
         }
 
-        // --- START: MODIFIED THEME UI FUNCTION ---
+        // Hamburger menu UI (reads game-specific storage)
         function updateHamburgerMenuUI() {
             const savedTheme = getLocalStorageSetting('theme', 'system');
             const iconContainer = document.getElementById('menu-theme-icon');
@@ -1246,21 +1358,58 @@
                 textContainer.textContent = "Theme: Dark";
             }
         }
-        // --- END: MODIFIED THEME UI FUNCTION ---
         
         // --- START: MODIFIED THEME LOAD FUNCTION ---
         function loadInitialTheme() {
-            // Load settings
+            // --- Load Game-Specific Settings (Unchanged) ---
             maxQuestions = getLocalStorageSetting('maxQuestions', DEFAULT_MAX_QUESTIONS);
             selectedDifficulty = getLocalStorageSetting('selectedDifficulty', DEFAULT_DIFFICULTY);
             quizLimit = maxQuestions; // Set quiz limit initially to maxQuestions
             
-            // UPDATED: Apply theme based on 'system', 'light', or 'dark' setting
+            // --- Load Global Settings ---
+            const globalTheme = getGlobalSetting('theme', 'auto'); // 'auto', 'light', 'dark'
+            const globalColorName = getGlobalSetting('colorTheme', 'Indigo'); // 'Indigo', 'Teal'
+            const globalBodyFont = getGlobalSetting('bodyFont', "'Inter', sans-serif"); // "'Poppins', sans-serif"
+            const globalTitleFont = getGlobalSetting('titleFont', "'Lora', serif"); // "'Montserrat', sans-serif"
+            const globalContrast = getGlobalSetting('contrast', 'default'); // 'default', 'high'
+
+            // --- Translate and Apply Global Settings ---
+
+            // 1. Translate and Save Theme (vocab game uses 'system' for 'auto')
+            const localTheme = (globalTheme === 'auto') ? 'system' : globalTheme;
+            saveLocalStorageSetting('theme', localTheme); // Save to its own settings
+            
+            // 2. Translate and Save Color
+            // Map 'Indigo' -> 'indigo', 'Teal' -> 'teal'
+            const localColor = globalColorName.toLowerCase();
+            saveLocalStorageSetting('color', localColor); // Save to its own settings
+
+            // 3. Translate and Save Fonts
+            // Extract font name: "'Poppins', sans-serif" -> "Poppins"
+            const extractFontName = (fontFamily) => {
+                if (!fontFamily) return 'Inter'; // Default for vocab
+                const name = fontFamily.split(',')[0].replace(/'/g, '').trim();
+                // Ensure font is available in vocab game
+                const availableFonts = FONT_OPTIONS.body.map(f => f.value).concat(FONT_OPTIONS.title.map(f => f.value));
+                return availableFonts.includes(name) ? name : (fontFamily.includes('serif') ? 'Lora' : 'Inter');
+            };
+            
+            const localBodyFont = extractFontName(globalBodyFont);
+            const localTitleFont = extractFontName(globalTitleFont);
+            
+            saveLocalStorageSetting('bodyFont', localBodyFont); // Save to its own settings
+            saveLocalStorageSetting('titleFont', localTitleFont); // Save to its own settings
+
+            // 4. Save Contrast (Direct match)
+            saveLocalStorageSetting('contrast', globalContrast); // Save to its own settings
+
+            // --- Apply Settings (using vocab game's functions) ---
+            // This will now read the settings we just saved to this game's local storage
             applyCurrentTheme(); 
             
-            // UPDATED: Add listener for live system changes
+            // Add listener for live system changes
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                // Only apply if theme is set to 'system'
+                // Only apply if theme is set to 'system' (reading from game-specific storage)
                 if (getLocalStorageSetting('theme', 'system') === 'system') {
                     applyTheme(e.matches); // e.matches is true if system is dark
                 }
@@ -1284,33 +1433,35 @@
             
             listEl.innerHTML = '';
             let optionsHTML = '';
+            let currentVal;
 
             switch(type) {
                 case 'count':
                     titleEl.textContent = 'Select Quiz Length';
-                    // UPDATED: Use fixed list from QUESTION_OPTIONS
-                    const uniqueAvailableCounts = QUESTION_OPTIONS;
-
-                    optionsHTML = uniqueAvailableCounts.map(count => 
-                        renderOption('count', count, `${count} Questions${count === DEFAULT_MAX_QUESTIONS ? ' (Default)' : ''}`, maxQuestions, 'handleSelectionChange')
+                    currentVal = maxQuestions;
+                    optionsHTML = QUESTION_OPTIONS.map(count => 
+                        renderOption('count', count, `${count} Questions${count === DEFAULT_MAX_QUESTIONS ? ' (Default)' : ''}`, currentVal, 'handleSelectionChange')
                     ).join('');
                     break;
                 case 'difficulty':
                     titleEl.textContent = 'Select Difficulty';
+                    currentVal = selectedDifficulty;
                     optionsHTML = DIFFICULTY_LEVELS.map(level => 
-                        renderOption('difficulty', level.value, level.label, selectedDifficulty, 'handleSelectionChange')
+                        renderOption('difficulty', level.value, level.label, currentVal, 'handleSelectionChange')
                     ).join('');
                     break;
                 case 'body':
                     titleEl.textContent = 'Select Body Font';
+                    currentVal = getLocalStorageSetting('bodyFont', 'Inter');
                     optionsHTML = FONT_OPTIONS.body.map(font => 
-                        renderOption('body-font', font.value, font.label, getLocalStorageSetting('bodyFont', 'Inter'), 'handleSelectionChange')
+                        renderOption('body-font', font.value, font.label, currentVal, 'handleSelectionChange')
                     ).join('');
                     break;
                 case 'title':
                     titleEl.textContent = 'Select Title Font';
+                    currentVal = getLocalStorageSetting('titleFont', 'Lora');
                     optionsHTML = FONT_OPTIONS.title.map(font => 
-                        renderOption('title-font', font.value, font.label, getLocalStorageSetting('titleFont', 'Lora'), 'handleSelectionChange')
+                        renderOption('title-font', font.value, font.label, currentVal, 'handleSelectionChange')
                     ).join('');
                     break;
             }
@@ -1335,11 +1486,11 @@
                     updateDifficultyLevelButton();
                     break;
                 case 'body':
-                    setBodyFont(value);
+                    setBodyFont(value); // This now syncs to global
                     updateFontButton('body');
                     break;
                 case 'title':
-                    setTitleFont(value);
+                    setTitleFont(value); // This now syncs to global
                     updateFontButton('title');
                     break;
             }
@@ -1389,8 +1540,6 @@
         }
 
         window.closeDataManagement = function() {
-             // OLD LOGIC (Removed): Check if CSV area content has changed before closing.
-            
             document.getElementById('data-management-modal').classList.add('hidden');
             resetQuizAndReloadData(); 
             showDataFeedback('', 'green', true);
@@ -1413,7 +1562,7 @@
             
             let styleAttr = '';
             if (type.includes('font')) {
-                const fallback = value.includes('serif') ? 'serif' : 'sans-serif'; 
+                const fallback = (value === 'Lora' || value === 'Playfair Display' || value === 'Merriweather') ? 'serif' : 'sans-serif'; 
                 styleAttr = `style="font-family: '${value}', ${fallback};"`;
             }
 
@@ -1431,7 +1580,6 @@
         
         function getLabel(type, value) {
              if (type === 'count') {
-                // UPDATED: Removed dynamic "All" option text logic
                 const limit = parseInt(value);
                 return `${limit} Questions${limit === DEFAULT_MAX_QUESTIONS ? ' (Default)' : ''}`;
             }
@@ -1440,13 +1588,15 @@
                 return level ? level.label : 'Mixed';
             }
             const options = FONT_OPTIONS[type];
+            if (!options) return value;
             const option = options.find(opt => opt.value === value);
             return option ? option.label : value;
         }
 
         function updateFontButton(type) {
             const id = type === 'body' ? 'current-body-font' : 'current-title-font';
-            const value = getLocalStorageSetting(type === 'body' ? 'bodyFont' : 'titleFont', type === 'body' ? 'Inter' : 'Lora');
+            const defaultFont = type === 'body' ? 'Inter' : 'Lora';
+            const value = getLocalStorageSetting(type === 'body' ? 'bodyFont' : 'titleFont', defaultFont);
             const button = document.getElementById(id);
             if (button) {
                 button.textContent = getLabel(type, value);
@@ -1464,7 +1614,6 @@
 
         /** Retrieves the current base CSV data from LocalStorage. */
         function getBaseData() {
-            // UPDATED: Removed fallback to 'defaultCsvData' as it will be fetched on load
             return localStorage.getItem(INITIAL_DEFAULT_DATA_KEY) || '';
         }
 
@@ -1474,7 +1623,6 @@
         }
 
         function parseCSVLine(line) {
-            // Updated regex to handle 9 columns, including commas inside quotes
             const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
             return columns.map(col => 
                 col.trim().replace(/^"|"$/g, '').trim() 
@@ -1490,7 +1638,6 @@
             
             if (!['A', 'B', 'C', 'D'].includes(correctLetter)) return null;
             
-            // Ensure data is structured correctly based on new 9-column index
             return {
                 category: getField(COL_CATEGORY),
                 difficulty: getField(COL_DIFFICULTY).toLowerCase().trim(), // Normalize difficulty
@@ -1503,7 +1650,7 @@
                 },
                 correct: correctLetter,
                 explanation: getField(COL_EXPLANATION),
-                source: 'custom' // Default to 'custom' for manually added, changed to 'base' in parseAndLoadQuestions if from base
+                source: 'custom' // Default to 'custom'
             };
         }
         
@@ -1526,8 +1673,6 @@
             }
         }
         
-        /** Parses the base CSV data (from localStorage or default) and custom data, 
-         * loading all into the 'questions' array. */
         function parseAndLoadQuestions() {
             let baseQuestions = [];
             const baseCsv = getBaseData();
@@ -1553,13 +1698,6 @@
             updateStartScreenMessage();
             return validBaseQuestions;
         }
-
-        /** Processes the CSV from the textarea and sets it as the new base data. 
-         * NOTE: This function is no longer needed/used.
-        window.importCsvData = function() {
-            // ... (Logic removed as per user request to remove CSV box)
-        }
-        */
 
         function renderUserDataList() {
             const listEl = document.getElementById('user-data-list');
@@ -1599,7 +1737,6 @@
         }
         
         window.saveNewQuestionData = function() {
-            // Note: Manually added questions always default to Category: Vocabulary
             const inputIds = ['add-difficulty', 'add-question-text', 'add-option-a', 'add-option-b', 'add-option-c', 'add-option-d', 'add-correct-answer', 'add-explanation'];
             const inputs = inputIds.map(id => document.getElementById(id));
             const values = inputs.map(input => input.value.trim());
@@ -1609,7 +1746,6 @@
                 return;
             }
             
-            // Re-map values to include the implicit 'Vocabulary' category at index 0
             const fullValues = ['Vocabulary', values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]];
 
             const newQuestion = createQuestionObject(fullValues);
@@ -1629,7 +1765,6 @@
             customQuestions.push(newQuestion);
             saveCustomQuestions(customQuestions);
 
-            // Clear inputs, but keep default difficulty
             inputs.forEach(input => {
                 if (input.id !== 'add-difficulty') {
                     input.value = '';
@@ -1639,7 +1774,6 @@
             renderUserDataList();
         }
 
-        // NEW: Function to refresh base data from the linked CSV
         window.refreshBaseData = async function() {
             const feedbackEl = document.getElementById('refresh-feedback');
             feedbackEl.className = 'text-center text-sm font-semibold mt-2 text-primary';
@@ -1647,17 +1781,13 @@
             feedbackEl.classList.remove('hidden');
 
             try {
-                // Add a cache-busting query parameter
                 const response = await fetch(`Vocabulary.csv?t=${new Date().getTime()}`); 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const csvText = await response.text();
                 
-                // Overwrite the base data in localStorage
                 setBaseData(csvText); 
-                
-                // Reload all questions (base + custom)
                 const baseQuestionCount = parseAndLoadQuestions(); 
                 
                 feedbackEl.className = 'text-center text-sm font-semibold mt-2 text-green-600';
@@ -1675,7 +1805,6 @@
         // --- Game Logic ---
         
         window.startQuiz = function() {
-            // Filter questions based on selected difficulty
             let availableQuestions = questions;
 
             if (selectedDifficulty !== 'mixed') {
@@ -1689,14 +1818,11 @@
                 return;
             }
 
-            // Determine final quiz limit based on the number requested vs available in the filtered pool
             quizLimit = Math.min(maxQuestions, availableQuestions.length);
             
-            // Shuffle and set the final pool
             shuffleArray(availableQuestions);
             questionPool = availableQuestions.slice(0, quizLimit); 
             
-            // --- UI and State Reset ---
             document.getElementById('start-screen').classList.add('hidden');
             document.getElementById('quiz-status-bar').classList.remove('hidden');
             document.getElementById('question-area').classList.remove('hidden');
@@ -1727,7 +1853,6 @@
             mainButton.textContent = 'Select an Answer';
             mainButton.disabled = true;
             
-            // Clear selections and unlocks
             document.querySelectorAll('.mc-option').forEach(btn => {
                 btn.classList.remove('selected', 'locked', 'correct', 'incorrect');
             });
@@ -1736,7 +1861,6 @@
             quizPhase = 'select';
             selectedOption = null;
 
-            // Get the next question from the front of the pre-shuffled questionPool
             currentQuestionData = questionPool.shift(); 
             questionsAsked++;
 
@@ -1750,7 +1874,6 @@
             document.getElementById('question-counter').textContent = `${questionsAsked}/${quizLimit}`;
             
             document.getElementById('question-text').innerHTML = currentQuestionData.text;
-            // Updated to only show Difficulty
             document.getElementById('question-metadata').textContent = `Difficulty: ${currentQuestionData.difficulty.toUpperCase()} | Category: ${currentQuestionData.category}`;
             
             const optionsContainer = document.getElementById('options-container');
@@ -1777,7 +1900,6 @@
             
             selectedOption = letter;
 
-            // Remove selected class from all and add to the current one
             document.querySelectorAll('.mc-option').forEach(btn => btn.classList.remove('selected'));
             button.classList.add('selected');
             
@@ -1804,11 +1926,9 @@
             const isCorrect = (selectedOption === currentQuestionData.correct);
             const correctLetter = currentQuestionData.correct;
             
-            // Move to 'next' phase and disable options
             quizPhase = 'next';
             document.querySelectorAll('.mc-option').forEach(btn => btn.classList.add('locked'));
 
-            // Highlight results
             document.querySelectorAll('.mc-option').forEach(btn => {
                 const letter = btn.dataset.letter;
                 
@@ -1822,7 +1942,6 @@
                 }
             });
 
-            // Update Score and Feedback
             if (isCorrect) {
                 score++;
                 document.getElementById('feedback-message').textContent = 'Correct! Fantastic work!';
@@ -1837,11 +1956,9 @@
             }
             document.getElementById('score-display').textContent = score;
             
-            // Show explanation
             document.getElementById('explanation-text').innerHTML = currentQuestionData.explanation;
             document.getElementById('explanation-area').classList.remove('hidden');
 
-            // Determine next button text
             if (questionsAsked >= quizLimit) {
                 mainButton.textContent = 'Finish Quiz';
             } else {
@@ -1849,7 +1966,6 @@
             }
             mainButton.disabled = false;
             
-            // Record result
             quizResults.push({
                 questionNumber: questionsAsked,
                 question: currentQuestionData.text,
@@ -1974,7 +2090,6 @@
             updateQuizLengthButton();
             updateDifficultyLevelButton();
 
-            // Calculate current available questions based on selected difficulty
             let availableCount = questions.length;
             if (selectedDifficulty !== 'mixed') {
                  availableCount = questions.filter(q => q.difficulty === selectedDifficulty).length;
@@ -1989,7 +2104,6 @@
                  messageEl.innerHTML = `Warning: There are no **${getLabel('difficulty', selectedDifficulty)}** questions available for the selected quantity. Please change the level or quiz length.`;
                  startButton.disabled = true;
             } else {
-                // UPDATED: Removed the total questions available from the message (kept from previous turn)
                 const quizLengthText = effectiveLimit < maxQuestions 
                     ? `(limited by available data)` 
                     : ``;
@@ -1998,22 +2112,16 @@
             }
         }
 
-        // Initialize the game when the window loads
-        // UPDATED: Made 'onload' async to handle fetching the external CSV
         window.onload = async () => {
-             // Initialize default data if it doesn't exist (first run only)
+             // Initialize default data if it doesn't exist
             if (!localStorage.getItem(INITIAL_DEFAULT_DATA_KEY)) {
                 document.getElementById('loading-indicator').textContent = 'Fetching vocabulary data...';
                 try {
-                    // Fetch the external CSV file. 
-                    // Assumes 'Vocabulary.csv' is in the same folder as the HTML file.
                     const response = await fetch('Vocabulary.csv'); 
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const csvText = await response.text();
-                    
-                    // Save the fetched data to localStorage as the new base
                     setBaseData(csvText); 
                 } catch (e) {
                     console.error("Failed to fetch initial Vocabulary.csv:", e);
@@ -2023,13 +2131,9 @@
                 }
             }
             
-            // Load settings and set initial state
-            maxQuestions = getLocalStorageSetting('maxQuestions', DEFAULT_MAX_QUESTIONS);
-            selectedDifficulty = getLocalStorageSetting('selectedDifficulty', DEFAULT_DIFFICULTY);
-            quizLimit = maxQuestions;
-            
             setupAudio();
-            loadInitialTheme(); // This already updates the loading indicator text
+            // This function now loads GLOBAL settings first, then applies them
+            loadInitialTheme(); 
             parseAndLoadQuestions(); 
         };
 
