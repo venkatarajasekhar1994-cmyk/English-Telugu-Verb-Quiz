@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -432,6 +432,23 @@
             border-color: var(--color-primary-hex) !important;
             background-color: rgba(var(--color-primary-light), 0.2);
         }
+
+        /* === START: CSS FIX 1 - Added dark mode overrides for results page === */
+        .dark-mode .text-gray-900 { color: #f9fafb !important; } /* gray-50 */
+        .dark-mode .text-gray-800 { color: #f3f4f6 !important; } /* gray-100 */
+        .dark-mode .text-gray-700 { color: #e5e7eb !important; } /* gray-200 */
+        .dark-mode .text-gray-600 { color: #d1d5db !important; } /* gray-300 */
+        
+        .dark-mode .text-green-700 { color: #22c55e !important; } /* green-500 */
+        .dark-mode .text-red-700 { color: #f87171 !important; }   /* red-400 */
+        
+        .dark-mode .bg-green-100 { 
+            background-color: rgba(20, 83, 45, 0.4) !important; /* This is green-900/40 */
+        }
+        .dark-mode .bg-red-100 { 
+            background-color: rgba(127, 29, 29, 0.4) !important; /* This is red-900/40 */
+        }
+        /* === END: CSS FIX 1 === */
 
         /* Set color variables for all text based on theme */
         body:not(.dark-mode)[data-contrast="default"] .text-gray-700,
@@ -2092,6 +2109,7 @@
             });
         }
         
+        // === START: JAVASCRIPT FIX 3 - Cleaned endGame function ===
         window.endGame = function() {
             document.getElementById('question-area').classList.add('hidden');
             document.getElementById('quiz-action-buttons').classList.add('hidden');
@@ -2103,41 +2121,46 @@
 
             const totalQuestions = quizLimit;
             const percentage = totalQuestions > 0 ? ((score / totalQuestions) * 100).toFixed(1) : 0.0;
+            
             const statusColorClass = (percentage >= 70) ? 'text-green-700' : (percentage >= 40 ? 'text-yellow-700' : 'text-red-700');
             const resultBgClass = (percentage >= 70) ? 'bg-green-300/40 border-green-300' : (percentage >= 40 ? 'bg-yellow-300/40 border-yellow-300' : 'bg-red-300/40 border-red-300');
 
-
+            // --- FIX: Removed all `{/* */}` comments and `dark-mode:` prefixes ---
             let resultsHTML = `
                 <h3 class="text-2xl font-bold ${statusColorClass} mb-2">Quiz Complete!</h3>
-                <p class="text-lg text-gray-700 dark-mode:text-gray-300 mb-4">
+                <p class="text-lg text-gray-700 mb-4">
                     Your Final Score: <span class="font-bold text-2xl text-primary">${score}</span> 
                     out of <span class="font-bold text-2xl text-primary">${totalQuestions}</span> questions!
                 </p>
-                <p class="text-xl font-bold text-gray-900 dark-mode:text-gray-100 mb-4">
+                <p class="text-xl font-bold text-gray-900 mb-4">
                     Percentage: <span class="text-3xl text-primary">${percentage}%</span>
                 </p>
                 
                 <div class="border-t pt-4 mt-4 border-gray-300 dark-mode:border-gray-700 text-left">
-                    <h4 class="text-lg font-bold text-gray-900 dark-mode:text-gray-100 mb-3">Detailed Summary:</h4>
+                    <h4 class="text-lg font-bold text-gray-900 mb-3">Detailed Summary:</h4>
                     
                     <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
             `;
 
             quizResults.forEach(result => {
-                const statusClass = result.isCorrect ? 'bg-green-100 dark-mode:bg-green-900/40 border-green-400' : 'bg-red-100 dark-mode:bg-red-900/40 border-red-400';
+                const statusClass = result.isCorrect ? 'bg-green-100 border-green-400' : 'bg-red-100 border-red-400';
                 const statusText = result.isCorrect ? 'CORRECT' : 'INCORRECT';
+                const statusTextColor = result.isCorrect ? 'text-green-700' : 'text-red-700';
+                
+                // --- FIX: Removed asterisks from question text ---
+                const cleanQuestionText = result.question.replace(/\*\*/g, ''); 
 
                 resultsHTML += `
                     <div class="p-3 rounded-xl border-2 ${statusClass}">
                         <p class="font-bold text-lg flex justify-between items-center mb-1">
-                            <span>Q${result.questionNumber}</span>
-                            <span class="text-sm font-extrabold ${result.isCorrect ? 'text-green-700 dark-mode:text-green-400' : 'text-red-700 dark-mode:text-red-400'}">${statusText}</span>
+                            <span class="text-gray-900">Q${result.questionNumber}</span>
+                            <span class="text-sm font-extrabold ${statusTextColor}">${statusText}</span>
                         </p>
-                        <p class="text-sm italic text-gray-800 dark-mode:text-gray-200 mb-2">
-                            ${result.question}
+                        <p class="text-sm italic text-gray-800 mb-2">
+                            ${cleanQuestionText} 
                         </p>
-                        <p class="text-xs text-gray-600 dark-mode:text-gray-400">
-                            You chose: <span class="${result.isCorrect ? 'text-green-700' : 'text-red-700'}">${result.selected}</span> | 
+                        <p class="text-xs text-gray-600">
+                            You chose: <span class="${statusTextColor}">${result.selected}</span> | 
                             Correct: <span class="text-green-700">${result.correct}</span>
                         </p>
                     </div>
@@ -2154,6 +2177,7 @@
             document.getElementById('final-results').className = `hidden mt-8 text-center p-4 liquid-glass-card border-2 ${resultBgClass}`;
             document.getElementById('final-results').classList.remove('hidden');
         }
+        // === END: JAVASCRIPT FIX 3 ===
         
         window.resetQuizAndReloadData = function() {
             score = 0;
@@ -2257,4 +2281,5 @@
 
 </body>
 </html>
+
 

@@ -1,14 +1,12 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spoken English Course Quiz</title>
     
-    <!-- PWA Manifest Link -->
     <link rel="manifest" href="manifest.json">
     
-    <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -19,11 +17,9 @@
         }
     </script>
     
-    <!-- External Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     
-    <!-- Styles -->
     <style>
         /* Google Fonts Import */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
@@ -163,14 +159,11 @@
 </head>
 <body class="transition-colors duration-300">
 
-    <!-- Main App Container -->
     <div id="app" class="max-w-4xl mx-auto p-4 md:p-6">
         
-        <!-- Header -->
         <header class="flex items-center justify-between mb-6">
             <h1 class="text-3xl md:text-4xl font-bold text-white shadow-sm">Spoken English Quiz</h1>
             <div class="flex items-center space-x-2">
-                 <!-- Header buttons -->
                  <a href="game hub.html" class="text-gray-200 hover:text-white transition-colors p-2 rounded-full glass-effect" aria-label="Go to Game Hub">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                 </a>
@@ -180,22 +173,18 @@
                 <button id="settings-button" class="p-2 rounded-full text-gray-200 hover:text-white transition-colors glass-effect" aria-label="Open Settings">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 0 2l-.15.08a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1 0-2l.15.08a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                 </button>
-                <!-- THEME TOGGLE BUTTON -->
                 <button id="theme-toggle" class="p-2 rounded-full text-gray-200 hover:text-white transition-colors glass-effect" aria-label="Toggle Theme">
                     <svg id="theme-icon-light" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
                     <svg id="theme-icon-dark" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                    <!-- NEW: System Icon -->
                     <svg id="theme-icon-system" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                 </button>
             </div>
         </header>
 
-        <!-- Start Screen -->
         <div id="start-screen" class="text-center p-6 rounded-2xl glass-effect animated-float">
             <h2 class="text-2xl font-bold mb-4 text-white">Welcome!</h2>
             <p id="start-message" class="mb-6 subtle-text-color">Loading data... Please wait.</p>
             
-            <!-- Class and Length Selection -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <button id="class-selection-button" class="w-full text-white p-3 rounded-lg text-left button-bg-color hover:button-hover-bg transition-colors">
                     <span class="text-xs text-gray-400">Class</span><br>
@@ -207,7 +196,6 @@
                 </button>
             </div>
             
-            <!-- Lesson Tips (Clickable) -->
             <div id="lesson-tips-container" class="hidden text-left p-4 rounded-lg button-bg-color mt-6 glass-effect cursor-pointer hover:bg-white/10 transition-colors duration-200">
                 <div class_="flex justify-between items-center">
                     <h3 id="lesson-tip-title" class="font-bold text-lg text-white mb-2">Lesson Focus:</h3>
@@ -228,15 +216,12 @@
                 </div>
             </div>
             
-            <!-- Start Button -->
             <button id="start-quiz-button" disabled class="w-full mt-6 accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
                 Start Quiz
             </button>
         </div>
 
-        <!-- Quiz Screen -->
         <div id="quiz-screen" class="hidden animated-float">
-             <!-- Stats and Progress -->
              <div class="flex justify-between items-center mb-4">
                 <div id="stats" class="text-sm font-semibold subtle-text-color">Question 1/10</div>
                 <div id="score" class="text-sm font-semibold subtle-text-color">Score: 0</div>
@@ -245,18 +230,14 @@
                 <div id="progress-bar" class="accent-bg h-2.5 rounded-full" style="width: 10%"></div>
             </div>
             
-            <!-- Question Container -->
             <div id="question-container" class="p-6 rounded-2xl glass-effect"></div>
             
-            <!-- Next Button -->
             <button id="next-question-button" class="hidden mt-6 w-full accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 transition-opacity">Next</button>
         </div>
 
-        <!-- Results Screen -->
         <div id="results-screen" class="hidden text-center p-6 rounded-2xl glass-effect animated-float">
              <h2 class="text-2xl font-bold mb-2 text-white">Quiz Complete!</h2>
              
-             <!-- English Result -->
              <div class="flex items-center justify-center space-x-2 mb-2">
                  <p id="final-score-text-en" class="text-lg text-gray-200">Your final score is <span id="final-score" class="font-bold accent-text"></span></p>
                  <button id="speak-result-en" class="speak-button" aria-label="Speak score in English">
@@ -264,7 +245,6 @@
                  </button>
              </div>
              
-             <!-- Telugu Result -->
              <div class="flex items-center justify-center space-x-2 mb-4">
                  <p id="final-score-text-te" class="text-lg text-gray-300">మీ తుది స్కోరు <span id="final-score-te" class="font-bold accent-text"></span></p>
                  <button id="speak-result-te" class="speak-button" aria-label="Speak score in Telugu">
@@ -272,50 +252,37 @@
                  </button>
              </div>
              
-             <!-- Results Details: Shows ALL questions (correct and incorrect) -->
              <h3 class="text-lg font-bold text-white mb-2 text-left">Question Summary</h3>
              <div id="results-details" class="text-left mb-6 space-y-2 max-h-40 overflow-y-auto no-scrollbar button-bg-color p-3 rounded-lg">
-                 <!-- All answers summary will be injected here -->
-             </div>
-             
-             <!-- AI Feedback Section -->
-             <div id="ai-feedback-section" class="hidden text-left mt-6 border-t border-white/20 pt-4"> <!-- Initially hidden -->
-                 <h3 class="text-xl font-bold mb-3 text-white">AI Coach Feedback</h3>
-                 <!-- Offline message area - now hidden by default -->
-                 <div id="ai-offline-message" class="hidden text-center subtle-text-color p-4 rounded-lg button-bg-color mb-4">
-                     <!-- Content removed as the section will be hidden -->
                  </div>
-                 <div id="ai-loading-indicator" class="hidden text-center subtle-text-color"> <!-- Initially hidden -->
-                     <div class="spinner"></div>
+             
+             <div id="ai-feedback-section" class="hidden text-left mt-6 border-t border-white/20 pt-4"> <h3 class="text-xl font-bold mb-3 text-white">AI Coach Feedback</h3>
+                 <div id="ai-offline-message" class="hidden text-center subtle-text-color p-4 rounded-lg button-bg-color mb-4">
+                     </div>
+                 <div id="ai-loading-indicator" class="hidden text-center subtle-text-color"> <div class="spinner"></div>
                      Generating personalized feedback...
                  </div>
                  <div id="ai-content" class="hidden space-y-4 text-sm">
-                    <!-- English Feedback -->
                     <div class="p-3 rounded-lg button-bg-color">
                         <strong class="block text-gray-200 mb-1">Feedback (English):</strong>
                         <p id="feedback-en" class="text-gray-300"></p>
                     </div>
-                     <!-- Telugu Feedback -->
                      <div class="p-3 rounded-lg button-bg-color">
                         <strong class="block text-gray-200 mb-1">ఫీడ్‌బ్యాక్ (తెలుగు):</strong>
                         <p id="feedback-te" class="text-gray-300"></p>
                     </div>
-                    <!-- English Coaching -->
                     <div class="p-3 rounded-lg button-bg-color">
                         <strong class="block text-gray-200 mb-1">Coaching (English):</strong>
                         <p id="coaching-en" class="text-gray-300"></p>
                     </div>
-                     <!-- Telugu Coaching -->
                      <div class="p-3 rounded-lg button-bg-color">
                         <strong class="block text-gray-200 mb-1">కోచింగ్ (తెలుగు):</strong>
                         <p id="coaching-te" class="text-gray-300"></p>
                     </div>
-                    <!-- English Tips -->
                     <div class="p-3 rounded-lg button-bg-color">
                         <strong class="block text-gray-200 mb-1">Tips & Tricks (English):</strong>
                         <p id="tips-en" class="text-gray-300"></p>
                     </div>
-                     <!-- Telugu Tips -->
                      <div class="p-3 rounded-lg button-bg-color">
                         <strong class="block text-gray-200 mb-1">చిట్కాలు & ఉపాయాలు (తెలుగు):</strong>
                         <p id="tips-te" class="text-gray-300"></p>
@@ -324,26 +291,18 @@
                  </div>
              </div>
              
-             <!-- ***** MODIFIED: Action Buttons ***** -->
              <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- "Next Class" button (conditionally shown) -->
                 <button id="next-class-button" class="hidden w-full accent-bg text-white font-bold py-3 px-6 rounded-lg shadow-md hover:opacity-90 transition-opacity">
                     Move to Next Class
                 </button>
                 
-                <!-- "Play Again" button (always shown) -->
-                <!-- This button will span full width if "Next Class" is hidden -->
                 <button id="restart-quiz-button" class="w-full button-bg-color text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:button-hover-bg transition-opacity sm:col-span-1">
                     Play Again (This Class)
                 </button>
             </div>
-            <!-- ***** END OF MODIFICATION ***** -->
-        </div>
+            </div>
     </div>
 
-    <!-- Modals -->
-    
-    <!-- Generic Selection Modal -->
     <div id="selection-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
         <div class="rounded-2xl shadow-xl p-6 w-full max-w-sm max-h-[80vh] flex flex-col modal-glass">
             <div class="flex justify-between items-center mb-4">
@@ -351,12 +310,10 @@
                 <button id="close-selection-modal" class="text-gray-300 hover:text-white text-2xl font-bold" aria-label="Close modal">&times;</button>
             </div>
             <div id="modal-options" class="space-y-2 overflow-y-auto no-scrollbar">
-                <!-- Dynamic options inserted here -->
-            </div>
+                </div>
         </div>
     </div>
 
-    <!-- Settings Modal -->
     <div id="settings-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
         <div class="rounded-2xl shadow-xl p-6 w-full max-w-md modal-glass"> 
              <div class="flex justify-between items-center mb-6">
@@ -364,13 +321,11 @@
                 <button id="close-settings-modal" class="text-gray-300 hover:text-white text-2xl font-bold" aria-label="Close settings modal">&times;</button>
             </div>
             <div class="space-y-4">
-                <!-- Accent Color -->
                 <button id="color-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white flex justify-between items-center">
                     <div> <span class="text-xs text-gray-400">Accent Color</span><br> <span id="current-accent-color" class="font-semibold"></span> </div>
                      <span id="color-preview" class="w-5 h-5 rounded-full border border-white/20"></span>
                 </button>
                 
-                <!-- NEW: Theme Selection -->
                 <div>
                      <span class="text-xs text-gray-400 block mb-1">Theme</span>
                      <div class="flex space-x-2"> 
@@ -380,7 +335,6 @@
                      </div>
                 </div>
 
-                <!-- Text Contrast -->
                 <div>
                      <span class="text-xs text-gray-400 block mb-1">Text Contrast</span>
                      <div class="flex space-x-2"> 
@@ -388,16 +342,13 @@
                           <button id="contrast-high" onclick="handleSelectionChange('contrast', 'high')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white">High Contrast</button>
                      </div>
                 </div>
-                <!-- Body Font -->
                 <button id="body-font-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white">
                     <span class="text-xs text-gray-400">Body Font</span><br> <span id="current-body-font" class="font-semibold"></span>
                 </button>
-                <!-- Title Font -->
                 <button id="title-font-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white">
                     <span class="text-xs text-gray-400">Title Font</span><br> <span id="current-title-font" class="font-semibold"></span>
                 </button>
-                <!-- Feedback Toggles -->
-                 <div>
+                <div>
                      <span class="text-xs text-gray-400 block mb-1">Feedback</span>
                      <div class="space-y-2">
                          <label class="flex items-center space-x-3 cursor-pointer p-2 rounded-lg button-bg-color hover:button-hover-bg text-white">
@@ -414,14 +365,12 @@
         </div>
     </div>
 
-    <!-- Curriculum Modal -->
     <div id="curriculum-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
          <div class="rounded-2xl shadow-xl p-6 w-full max-w-3xl max-h-[80vh] flex flex-col modal-glass">
              <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold text-white">45-Day Spoken English Curriculum</h3>
                 <button id="close-curriculum-modal" class="text-gray-300 hover:text-white text-2xl font-bold" aria-label="Close curriculum modal">&times;</button>
             </div>
-            <!-- Curriculum content (tables) -->
             <div class="space-y-6 overflow-y-auto no-scrollbar pr-2 text-sm text-gray-300">
                 <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase I: Core Action and Simple Tense Mastery (Classes 01–12)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">01</td><td class="p-2">Pronoun Roles</td><td class="p-2">Establishes the core sentence structure (S+V+O) and differentiates between subject and object pronouns.</td></tr> <tr><td class="p-2">02</td><td class="p-2">Self-Introduction</td><td class="p-2">Teaches the full framework for self-presentation.</td></tr> <tr><td class="p-2">03</td><td class="p-2">Regular Verbs</td><td class="p-2">Drills predictable conjugation patterns (V1, V2, V3, V-ing).</td></tr> <tr><td class="p-2">04</td><td class="p-2">Irregular Verbs</td><td class="p-2">Focuses on high-frequency irregular verbs (e.g., eat/ate/eaten).</td></tr> <tr><td class="p-2">05</td><td class="p-2">Simple Present Tense</td><td class="p-2">Expressing habitual actions, daily routines, and general truths.</td></tr> <tr><td class="p-2">06</td><td class="p-2">Simple Present (Do/Does)</td><td class="p-2">Using Do/Does for questions and negative statements.</td></tr> <tr><td class="p-2">07</td><td class="p-2">WH-Questions (Do/Does)</td><td class="p-2">Synthesizes Do/Does with question words (What, Why, Where, How).</td></tr> <tr><td class="p-2">08</td><td class="p-2">Simple Past Tense</td><td class="p-2">Using the Past Tense form (V2) to describe completed actions.</td></tr> <tr><td class="p-2">09</td><td class="p-2">Simple Past (Did)</td><td class="p-2">Using Did/didn't for questions and negatives in the Past Tense.</td></tr> <tr><td class="p-2">10</td><td class="p-2">WH-Questions (Did)</td><td class="p-2">Integrates Did with question words to ask about past actions.</td></tr> <tr><td class="p-2">11</td><td class="p-2">Simple Future Tense</td><td class="p-2">Using Shall/Will to express future intentions and actions.</td></tr> <tr><td class="p-2">12</td><td class="p-2">WH-Questions (Shall/Will)</td><td class="p-2">Applies Shall/Will with WH-Words to inquire about future plans.</td></tr> </tbody> </table> </div>
                 <div> <h4 class="font-bold text-lg mb-2 accent-text">Phase II: Actions in Progress—Mastery of Continuous Forms (Classes 13–15)</h4> <table class="w-full text-left"> <thead class="border-b border-white/20"> <tr><th class="p-2 w-1/12">Class</th><th class="p-2 w-3/12">Focus</th><th class="p-2 w-8/12">Summary</th></tr> </thead> <tbody> <tr><td class="p-2">13</td><td class="p-2">Present Continuous</td><td class="p-2">Using Am/Is/Are + V-ing for actions happening now.</td></tr> <tr><td class="p-2">14</td><td class="p-2">Past Continuous</td><td class="p-2">Using Was/Were + V-ing for ongoing past actions.</td></tr> <tr><td class="p-2">15</td><td class="p-2">Future Continuous</td><td class="p-2">Using Shall be/Will be + V-ing for actions that will be in progress.</td></tr> </tbody> </table> </div>
@@ -433,23 +382,21 @@
         </div>
     </div>
     
-    <!-- Lesson Details Modal -->
     <div id="lesson-details-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
          <div class="rounded-2xl shadow-xl p-6 w-full max-w-2xl max-h-[80vh] flex flex-col modal-glass">
              <div class="flex justify-between items-center mb-4">
                 <h3 id="lesson-details-title" class="text-xl font-bold text-white">Lesson Details</h3>
                 <button id="close-lesson-details-modal" class="text-gray-300 hover:text-white text-2xl font-bold" aria-label="Close lesson details modal">&times;</button>
             </div>
-            <!-- Dynamic Lesson Content -->
             <div id="lesson-details-content" class="space-y-4 overflow-y-auto no-scrollbar pr-2 text-sm text-gray-300">
-                <!-- Content will be injected by JavaScript -->
                 <p>Loading lesson...</p>
             </div>
         </div>
     </div>
 
 
-    <!-- Main JavaScript Logic -->
+    <script src="diagram_data.js"></script>
+
     <script>
         // --- DOM Elements ---
         let startScreen, quizScreen, resultsScreen, questionContainer, startButton, nextButton, restartButton, curriculumButton;
@@ -1210,7 +1157,96 @@
              const modal = document.getElementById('curriculum-modal'); if(modal) modal.classList.add('hidden'); 
          }
          
-        // Lesson Details Modal Functions
+        // --- *** NEW HELPER FUNCTIONS FOR DIAGRAMS *** ---
+        // (Add these two functions here, inside the main script)
+
+        /**
+         * Renders a flowchart diagram into an HTML string.
+         * @param {object} diagram - The diagram object from allLessonDiagrams.
+         * @returns {string} HTML string for the flowchart.
+         */
+        function renderFlowchart(diagram) {
+            const rulesHTML = diagram.rules.map(rule => {
+                const subjectsHTML = rule.subjects ? `<div class="p-2 bg-black/20 rounded text-center"><strong class="block text-white">${rule.subjects.join(', ')}</strong><span class="text-xs text-gray-300">${(rule.subjectsTelugu || []).join(', ')}</span></div>` : '';
+                const helpingVerbHTML = rule.helpingVerb ? `<div class="p-2 bg-black/20 rounded text-center"><strong class="block text-white">${rule.helpingVerb}</strong><span class="text-xs text-gray-300">${rule.helpingVerbTelugu || ''}</span></div>` : '';
+                const verbFormHTML = rule.verbForm ? `<div class="p-2 bg-black/20 rounded text-center"><strong class="block text-white">${rule.verbForm}</strong><span class="text-xs text-gray-300">${rule.verbFormTelugu || ''}</span></div>` : '';
+                const objectsHTML = rule.objects ? `<div class="p-2 bg-black/20 rounded text-center"><strong class="block text-white">${rule.objects.join(', ')}</strong><span class="text-xs text-gray-300">${(rule.objectsTelugu || []).join(', ')}</span></div>` : '';
+                
+                // Arrow symbol
+                const arrow = `<div class="text-2xl text-gray-400 flex-shrink-0 mx-2">&rarr;</div>`;
+                
+                return `
+                    <div class="mt-3 p-3 rounded-lg button-bg-color">
+                        <div class="flex items-center justify-center flex-wrap gap-2">
+                            ${subjectsHTML}
+                            ${subjectsHTML && (helpingVerbHTML || verbFormHTML) ? arrow : ''}
+                            ${helpingVerbHTML}
+                            ${helpingVerbHTML && verbFormHTML ? arrow : ''}
+                            ${verbFormHTML}
+                            ${verbFormHTML && objectsHTML ? arrow : ''}
+                            ${objectsHTML}
+                        </div>
+                        ${rule.example ? `<p class="text-xs text-gray-300 mt-2 text-center">e.g., ${rule.example} (${rule.exampleTelugu || ''})</p>` : ''}
+                    </div>
+                `;
+            }).join('');
+
+            return `
+                <div class="mt-4">
+                    <h4 class="font-bold text-lg mb-2 text-white">${diagram.title} <span class="text-gray-300">(${diagram.titleTelugu})</span></h4>
+                    <p class="text-xs text-gray-300 mb-2">${diagram.use} (${diagram.useTelugu})</p>
+                    ${rulesHTML}
+                </div>
+            `;
+        }
+
+        /**
+         * Renders a mindmap diagram into an HTML string.
+         * @param {object} diagram - The diagram object from allLessonDiagrams.
+         * @returns {string} HTML string for the mindmap.
+         */
+        function renderMindmap(diagram) {
+            // Recursive function to render branches and sub-branches
+            const renderBranches = (branches, isSubBranch = false) => {
+                const listTag = isSubBranch ? 'ul' : 'ul';
+                const itemTag = 'li';
+                // Use different styling for top-level branches vs sub-branches
+                const itemClass = isSubBranch ? 'ml-4 mt-1 text-xs' : 'p-3 rounded-lg button-bg-color mt-2';
+                
+                return `<${listTag} class="${isSubBranch ? 'list-disc list-inside' : 'space-y-2'}">
+                    ${branches.map(branch => {
+                        const subBranchesHTML = (branch.subBranches && branch.subBranches.length > 0) ? renderBranches(branch.subBranches, true) : '';
+                        return `
+                            <${itemTag} class="${itemClass}">
+                                <strong class="text-white">${branch.text}</strong>
+                                ${branch.telugu ? `<span class="text-gray-300"> (${branch.telugu})</span>` : ''}
+                                ${branch.example ? `<p class="text-xs text-gray-400">e.g., ${branch.example}</p>` : ''}
+                                ${subBranchesHTML}
+                            </${itemTag}>
+                        `;
+                    }).join('')}
+                </${listTag}>`;
+            };
+            
+            const branchesHTML = renderBranches(diagram.branches || []);
+
+            return `
+                <div class="mt-4">
+                    <h4 class="font-bold text-lg mb-2 text-white">${diagram.title} <span class="text-gray-300">(${diagram.titleTelugu})</span></h4>
+                    <div class="text-center p-3 rounded-lg accent-bg text-white font-bold my-3 whitespace-pre-wrap">${diagram.centralTopic}</div>
+                    ${branchesHTML}
+                </div>
+            `;
+        }
+
+         
+        // --- *** REPLACE THIS ENTIRE FUNCTION *** ---
+        // (The old one is removed and replaced with this new one)
+        
+        /**
+         * Opens the Lesson Details modal, populating it with data from
+         * LESSON_DATA (data2.csv) and allLessonDiagrams (diagram_data.js).
+         */
         function openLessonDetailsModal() {
             if (!isLessonDataLoaded) {
                 console.error("Lesson data is not loaded yet.");
@@ -1227,10 +1263,11 @@
 
             if (lessonDetailsTitle) lessonDetailsTitle.textContent = `Class ${lesson.class}: ${lesson.title}`;
             if (lessonDetailsContent) {
+                
                 // Function to create a clean, speakable string
                 const cleanText = (text) => (text || '').replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, " ");
 
-                // Helper to create a content block
+                // Helper to create a content block (This is local to this function)
                 const createSection = (title, enText, teText) => {
                     const enClean = cleanText(enText);
                     const teClean = cleanText(teText);
@@ -1255,13 +1292,47 @@
                     `;
                 };
 
+                // --- NEW DIAGRAM LOGIC ---
+                let diagramsHTML = '';
+                try {
+                    // Check if allLessonDiagrams is loaded (from diagram_data.js)
+                    if (typeof allLessonDiagrams !== 'undefined' && allLessonDiagrams.length > 0) {
+                        const classIdString = "Class " + String(selectedClass).padStart(2, '0');
+                        const diagramInfo = allLessonDiagrams.find(d => d.classId === classIdString);
+
+                        if (diagramInfo && diagramInfo.diagrams && diagramInfo.diagrams.length > 0) {
+                            diagramsHTML = '<hr class="border-white/20 my-4">'; // Add a separator
+                            diagramsHTML += diagramInfo.diagrams.map(diag => {
+                                if (diag.type === 'flowchart') {
+                                    return renderFlowchart(diag); // Use the new helper function
+                                } else if (diag.type === 'mindmap') {
+                                    return renderMindmap(diag); // Use the new helper function
+                                }
+                                return ''; // Handle unknown types
+                            }).join('');
+                        }
+                    } else {
+                         console.warn("diagram_data.js might not be loaded or is empty.");
+                    }
+                } catch (e) {
+                    console.error("Error rendering diagrams:", e);
+                    diagramsHTML = '<p class="text-red-400">Error loading diagrams.</p>';
+                }
+                // --- END NEW DIAGRAM LOGIC ---
+
+                // Combine existing sections with new diagrams
                 lessonDetailsContent.innerHTML = 
                     createSection('Key Topics', lesson.keyTopicsEN, lesson.keyTopicsTE) +
                     createSection('Instructions', lesson.instructionsEN, lesson.instructionsTE) +
-                    createSection('Uses', lesson.usesEN, lesson.usesTE);
+                    createSection('Uses', lesson.usesEN, lesson.usesTE) +
+                    diagramsHTML; // Append the new HTML
             }
             
-            if (lessonDetailsModal) lessonDetailsModal.classList.remove('hidden');
+            if (lessonDetailsModal) {
+                 lessonDetailsModal.classList.remove('hidden');
+                 // Scroll the content to the top
+                 if (lessonDetailsContent) lessonDetailsContent.scrollTop = 0;
+            }
         }
 
         function closeLessonDetailsModal() {
@@ -1529,6 +1600,4 @@
     </script>
 </body>
 </html>
-
-
 

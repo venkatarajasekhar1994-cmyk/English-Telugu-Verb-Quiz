@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -467,6 +467,21 @@
             box-shadow: 0 0 10px rgba(248, 113, 113, 0.6) !important;
         }
         
+        /* --- START: Added dark mode overrides for results page --- */
+        .dark-mode .bg-green-100 { 
+            background-color: rgba(20, 83, 45, 0.4) !important; /* This is green-900/40 */
+        }
+        .dark-mode .bg-red-100 { 
+            background-color: rgba(127, 29, 29, 0.4) !important; /* This is red-900/40 */
+        }
+        .dark-mode .text-green-700 { 
+            color: #22c55e !important; /* A light green, e.g., green-500 */
+        }
+        .dark-mode .text-red-700 { 
+            color: #f87171 !important; /* A light red, e.g., red-400 */
+        }
+        /* --- END: Added dark mode overrides for results page --- */
+
         /* (Keep MCQ dark mode styles for settings modal) */
         .dark-mode .mc-option {
             background-color: rgba(31, 41, 55, 0.7);
@@ -544,6 +559,14 @@
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
+
+        /* --- START: Added specific dark mode text colors needed --- */
+        .dark-mode .text-gray-900 { color: #f9fafb !important; } /* gray-50 */
+        .dark-mode .text-gray-800 { color: #f3f4f6 !important; } /* gray-100 */
+        .dark-mode .text-gray-700 { color: #e5e7eb !important; } /* gray-200 */
+        .dark-mode .text-gray-600 { color: #d1d5db !important; } /* gray-300 */
+        /* --- END: Added specific dark mode text colors needed --- */
+
     </style>
     
     <style>
@@ -742,7 +765,7 @@
             
             <div id="explanation-area" class="hidden p-3 mt-4 rounded-xl border-2 border-primary bg-primary/10 dark-mode:bg-primary/5">
                 <p class="font-bold text-sm mb-1 text-primary">Correct Answers:</p>
-                <p id="explanation-text" class="text-gray-800 dark-mode:text-gray-200 text-base"></p>
+                <p id="explanation-text" class="text-gray-800 dark-mode:text-gray-200 text-base" style="line-height: 1.8;"></p>
             </div>
         </div>
 
@@ -1777,6 +1800,14 @@
         }
         // --- END: MODIFIED ---
 
+        // <!--- START: NEW TTS HELPER FUNCTIONS (MOVED HERE) --->
+        // Helper to safely escape text for onclick attribute
+        const escape = (text) => text ? text.replace(/'/g, "\\'") : '';
+        
+        // Helper to create a TTS icon
+        const tts = (text, lang) => text ? `<span class="tts-icon" onclick="speakText('${escape(text)}', '${lang}')">🔊</span>` : '';
+        // <!--- END: NEW TTS HELPER FUNCTIONS --->
+
 
         // --- Data Parsing and Management (No changes) ---
 
@@ -1788,6 +1819,7 @@
             if (!localStorage.getItem(INITIAL_DEFAULT_DATA_KEY)) {
                 document.getElementById('loading-indicator').textContent = 'Fetching verbs data...';
                 try {
+                    // --- MODIFICATION: Added cache-busting query parameter ---
                     const response = await fetch(`Verbs.csv?t=${new Date().getTime()}`); 
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
@@ -1879,18 +1911,24 @@
         
         function parseAndLoadVerbs() {
             let baseVerbs = [];
-            const lines = baseCsvContent.trim().split('\n');
-            const dataLines = lines.slice(1);
-            let validBaseVerbs = 0;
+            // --- MODIFICATION: Handle empty baseCsvContent ---
+            if (!baseCsvContent) {
+                console.warn("parseAndLoadVerbs: baseCsvContent is empty. Skipping parse.");
+                // We still need to load custom verbs, though.
+            } else {
+                const lines = baseCsvContent.trim().split('\n');
+                const dataLines = lines.slice(1);
+                let validBaseVerbs = 0;
 
-            dataLines.forEach(line => {
-                const columns = parseCSVLine(line);
-                const verb = createVerbObject(columns, false);
-                if (verb) {
-                    baseVerbs.push(verb);
-                    validBaseVerbs++;
-                }
-            });
+                dataLines.forEach(line => {
+                    const columns = parseCSVLine(line);
+                    const verb = createVerbObject(columns, false);
+                    if (verb) {
+                        baseVerbs.push(verb);
+                        validBaseVerbs++;
+                    }
+                });
+            }
             
             const customVerbs = loadCustomVerbs();
             verbs = [...baseVerbs, ...customVerbs];
@@ -1898,7 +1936,7 @@
             isDataLoaded = true;
             document.getElementById('current-question-count').textContent = verbs.length;
             updateStartScreenMessage();
-            return validBaseVerbs;
+            return baseVerbs.length; // Return count of base verbs
         }
 
         // --- START: JAVASCRIPT MODIFIED (Display V1 Telugu in list) ---
@@ -2002,6 +2040,7 @@
             feedbackEl.classList.remove('hidden');
 
             try {
+                // --- MODIFICATION: Added cache-busting query parameter ---
                 const response = await fetch(`Verbs.csv?t=${new Date().getTime()}`); 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -2149,7 +2188,7 @@
         
         // --- MODIFIED: Removed handleOptionSelection ---
 
-        // --- MODIFIED: Replaced processAction with checkAnswer ---
+        // <!--- START: EDITED checkAnswer function to add Telugu TTS --->
         window.checkAnswer = function() {
             if (quizPhase === 'next') {
                 startNextQuestion();
@@ -2185,9 +2224,12 @@
                 const inputEl = document.getElementById(`${formKey}-input`);
                 const formLabel = getFormLabel(formKey);
                 const engCorrect = currentQuestionData[formKey];
-                const telCorrect = (currentQuestionData.telugu && currentQuestionData.telugu[formKey] && currentQuestionData.telugu[formKey] !== 'N/A') 
-                                   ? ` (${currentQuestionData.telugu[formKey]})` 
+                
+                // --- NEW: Get Telugu text ---
+                const telCorrectText = (currentQuestionData.telugu && currentQuestionData.telugu[formKey] && currentQuestionData.telugu[formKey] !== 'N/A') 
+                                   ? currentQuestionData.telugu[formKey] 
                                    : '';
+                const telCorrectDisplay = telCorrectText ? ` (${telCorrectText})` : '';
                 
                 inputs[formKey] = inputEl;
                 userAnswers[formKey] = inputEl.value.trim().toLowerCase();
@@ -2195,9 +2237,12 @@
                 
                 inputEl.disabled = true; // Lock the input
                 
-                // --- START: MODIFIED Explanation ---
-                let explanationLine = `<strong>${formLabel}:</strong> ${engCorrect}${telCorrect}`;
-                explanationLine += `<span class="tts-icon" onclick="speakText('${engCorrect}', 'en-US')">🔊</span>`; // Add TTS icon
+                // --- START: MODIFIED Explanation with Telugu TTS ---
+                let explanationLine = `<strong>${formLabel}:</strong> ${engCorrect}${telCorrectDisplay}`;
+                explanationLine += tts(engCorrect, 'en-US'); // Add English TTS
+                if (telCorrectText) {
+                    explanationLine += tts(telCorrectText, 'te-IN'); // Add Telugu TTS
+                }
                 
                 if (userAnswers[formKey] === correctAnswers[formKey]) {
                     inputEl.classList.add('correct');
@@ -2256,6 +2301,7 @@
             });
             // --- END: MODIFIED ---
         }
+        // <!--- END: EDITED checkAnswer function --->
         
         // --- NEW: Added skipQuestion function ---
         window.skipQuestion = function() {
@@ -2288,6 +2334,7 @@
             startNextQuestion();
         }
         
+        // <!--- START: JAVASCRIPT FIX 2 - Replaced endGame function --->
         window.endGame = function() {
              // --- START: Added TTS stop ---
             // Stop any currently playing speech before showing results
@@ -2306,53 +2353,78 @@
 
             const totalQuestions = quizLimit;
             const percentage = totalQuestions > 0 ? ((score / totalQuestions) * 100).toFixed(1) : 0.0;
+            
+            // --- FIX: Use base text color, the CSS override will handle dark mode ---
             const statusColorClass = (percentage >= 70) ? 'text-green-700' : (percentage >= 40 ? 'text-yellow-700' : 'text-red-700');
+            
             const resultBgClass = (percentage >= 70) ? 'bg-green-300/40 border-green-300' : (percentage >= 40 ? 'bg-yellow-300/40 border-yellow-300' : 'bg-red-300/40 border-red-300');
 
-            // --- START: MODIFIED - Updated results HTML for the new game type & TTS ---
             let resultsHTML = `
                 <h3 class="text-2xl font-bold ${statusColorClass} mb-2">Quiz Complete!</h3>
-                <p class="text-lg text-gray-700 dark-mode:text-gray-300 mb-4">
+                <p class="text-lg text-gray-700 mb-4">
                     Your Final Score: <span class="font-bold text-2xl text-primary">${score}</span> 
                     out of <span class="font-bold text-2xl text-primary">${totalQuestions}</span> questions!
                 </p>
-                <p class="text-xl font-bold text-gray-900 dark-mode:text-gray-100 mb-4">
+                <p class="text-xl font-bold text-gray-900 mb-4">
                     Percentage: <span class="text-3xl text-primary">${percentage}%</span>
                 </p>
                 
                 <div class="border-t pt-4 mt-4 border-gray-300 dark-mode:border-gray-700 text-left">
-                    <h4 class="text-lg font-bold text-gray-900 dark-mode:text-gray-100 mb-3">Verbs to Review:</h4>
+                    <h4 class="text-lg font-bold text-gray-900 mb-3">Full Review:</h4>
                     
                     <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
             `;
             
-            const incorrectVerbs = quizResults.filter(r => !r.isCorrect);
-            
-            if (incorrectVerbs.length === 0) {
-                 resultsHTML += `<p class="text-center text-green-600 dark-mode:text-green-400 font-semibold">Perfect score! You don't have any verbs to review.</p>`;
+            const allWereCorrect = quizResults.every(r => r.isCorrect);
+            if (allWereCorrect && quizResults.length > 0) {
+                 resultsHTML += `<p class="text-center text-green-600 font-semibold">Perfect score! Review your answers below.</p>`;
+            } else if (quizResults.length === 0) {
+                 resultsHTML += `<p class="text-center text-gray-500">No questions were answered.</p>`;
             }
 
-            incorrectVerbs.forEach(result => {
-                const statusClass = 'bg-red-100 dark-mode:bg-red-900/40 border-red-400';
-                const statusText = result.isSkipped ? 'SKIPPED' : 'INCORRECT';
+            quizResults.forEach(result => {
+                let statusClass, statusText, statusTextColor;
+                
+                // --- FIX: Removed non-functional 'dark-mode:' prefixes. The CSS now handles this. ---
+                if (result.isCorrect) {
+                    statusClass = 'bg-green-100 border-green-400';
+                    statusText = 'CORRECT';
+                    statusTextColor = 'text-green-700'; // CSS override will make this light in dark mode
+                } else {
+                    statusClass = 'bg-red-100 border-red-400';
+                    statusText = result.isSkipped ? 'SKIPPED' : 'INCORRECT';
+                    statusTextColor = 'text-red-700'; // CSS override will make this light in dark mode
+                }
                 
                 const givenLabel = getFormLabel(result.promptForm);
                 const givenValue = result.promptValue;
                 const v = result.correctAnswers; // The full verb object
+                
                 const teluguV1 = (v.telugu && v.telugu.v1 && v.telugu.v1 !== 'N/A') ? v.telugu.v1 : '';
+                
+                // Create the "All Forms" string with TTS for each form
+                const allFormsWithTTS = [
+                    `${v.v1} ${tts(v.v1, 'en-US')}`,
+                    `${v.v3s} ${tts(v.v3s, 'en-US')}`,
+                    `${v.ving} ${tts(v.ving, 'en-US')}`,
+                    `${v.v2} ${tts(v.v2, 'en-US')}`,
+                    `${v.v3} ${tts(v.v3, 'en-US')}`
+                ].join(' / ');
 
+                // --- FIX: Removed all junk comments and 'dark:' prefixes. ---
+                // The base 'text-gray-XXX' classes will now be correctly overridden by your existing CSS.
                 resultsHTML += `
                     <div class="p-3 rounded-xl border-2 ${statusClass}">
                         <p class="font-bold text-lg flex justify-between items-center mb-1">
-                            <span>Q${result.questionNumber}: ${givenValue} (${givenLabel})</span>
-                            <span class="text-sm font-extrabold text-red-700 dark-mode:text-red-400">${statusText}</span>
+                            <span class="text-gray-900">Q${result.questionNumber}: ${givenValue} (${givenLabel})</span>
+                            <span class="text-sm font-extrabold ${statusTextColor}">${statusText}</span>
                         </p>
-                        <p class="text-sm text-gray-800 dark-mode:text-gray-200">
-                           Correct (V1): ${v.v1} <span class="tts-icon" onclick="speakText('${v.v1}', 'en-US')">🔊</span>
-                           ${teluguV1 ? `<span class="italic text-primary dark-mode:text-primary-light">(${teluguV1})</span><span class="tts-icon" onclick="speakText('${teluguV1}', 'te-IN')">🔊</span>` : ''}
+                        <p class="text-sm text-gray-800">
+                           Correct (V1): ${v.v1} ${tts(v.v1, 'en-US')}
+                           ${teluguV1 ? `<span class="italic text-primary">(${teluguV1})</span>${tts(teluguV1, 'te-IN')}` : ''}
                         </p>
-                        <p class="text-xs text-gray-600 dark-mode:text-gray-400">
-                            <strong>All Forms:</strong> ${v.v1} / ${v.v3s} / ${v.ving} / ${v.v2} / ${v.v3}
+                        <p class="text-xs text-gray-600" style="line-height: 1.8;">
+                            <strong>All Forms:</strong> ${allFormsWithTTS}
                         </p>
                     </div>
                 `;
@@ -2369,6 +2441,7 @@
             document.getElementById('final-results').className = `hidden mt-8 text-center p-4 liquid-glass-card border-2 ${resultBgClass}`;
             document.getElementById('final-results').classList.remove('hidden');
         }
+        // <!--- END: JAVASCRIPT FIX 2 --->
         
         window.resetQuizAndReloadData = function() {
             score = 0;
@@ -2494,3 +2567,4 @@
     </script>
     </body>
 </html>
+
