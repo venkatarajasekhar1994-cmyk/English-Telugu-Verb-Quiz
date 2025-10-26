@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,12 +18,13 @@
     </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Use specific version for stability -->
     <script src="https://unpkg.com/lucide@0.294.0/dist/umd/lucide.js"></script>
 
     <style>
-        /* Import specific weights */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700;900&family=Poppins:wght@400;600;700&family=Source+Sans+3:wght@400;700&display=swap');
+        /* * MODIFIED: Added new fonts:
+         * DM Sans, DM Serif Display, Outfit, Lexend
+        */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700;900&family=Poppins:wght@400;600;700&family=Source+Sans+3:wght@400;700&family=DM+Sans:wght@400;700&family=DM+Serif+Display&family=Outfit:wght@700&family=Lexend:wght@400;700&display=swap');
         
         :root {
             /* Light Mode Defaults */
@@ -46,9 +47,11 @@
             --secondary-color-hex: #818cf8;
             --accent-color-hex: #c4b5fd;
 
-            /* Fonts - Set by JS */
+            /* * MODIFIED: Updated default fonts to Default 2 (Modern)
+             * These are now set by JS, but the values are updated
+            */
             --font-title: 'Montserrat', sans-serif;
-            --font-body: 'Poppins', sans-serif;
+            --font-body: 'Lexend', sans-serif;
 
             /* Icon Glow Variables (Light Mode Defaults) */
             --icon-glow-opacity: 0.6;
@@ -213,9 +216,7 @@
 <body class="font-body antialiased">
 
     <div class="min-h-screen w-full p-4 sm:p-6 lg:p-8 flex flex-col relative">
-        <!-- Header Buttons: Profile & Settings -->
         <div class="absolute top-4 right-4 z-20 flex space-x-2">
-            <!-- UPDATED BUTTONS: Added 'setting-btn' class for visibility -->
             <button onclick="openProfile()" class="setting-btn w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform duration-300 hover:scale-110">
                 <i data-lucide="user" class="w-6 h-6"></i>
             </button>
@@ -224,7 +225,6 @@
             </button>
         </div>
 
-        <!-- Header Section -->
         <header class="text-center mb-10 md:mb-16 pt-8">
             <h1 class="font-title font-black text-4xl sm:text-5xl md:text-6xl tracking-tighter">
                 <span class="bg-clip-text text-transparent bg-gradient-to-r" style="background-image: linear-gradient(to right, var(--primary-color-hex), var(--secondary-color-hex));">
@@ -236,11 +236,9 @@
             </p>
         </header>
 
-        <!-- Games Grid -->
         <main class="flex-grow">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 
-                <!-- Card 1: Spoken English -->
                 <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
                     <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
                         <i data-lucide="graduation-cap" class="lucide-icon"></i>
@@ -254,7 +252,6 @@
                     </button>
                 </div>
 
-                <!-- Card 2: Vocabulary -->
                 <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
                     <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
                         <i data-lucide="book-open-text" class="lucide-icon"></i> 
@@ -268,7 +265,6 @@
                     </button>
                 </div>
 
-                <!-- Card 3: Verbs -->
                 <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
                     <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
                         <i data-lucide="list-checks" class="lucide-icon"></i> 
@@ -290,7 +286,6 @@
         </footer>
     </div>
     
-    <!-- Profile Modal (Offline) -->
     <div id="profile-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
         <div class="modal-content w-full max-w-md rounded-2xl shadow-2xl p-6 relative">
             <button onclick="closeProfile()" class="absolute top-4 right-4 w-8 h-8 text-xl rounded-full transition-colors text-secondary-color" style="background-color: rgba(255,255,255,0.1);">&times;</button>
@@ -317,23 +312,19 @@
         </div>
     </div>
     
-    <!-- Settings Modal -->
     <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
          <div class="modal-content w-full max-w-md rounded-2xl shadow-2xl p-6 relative">
             <button onclick="closeSettings()" class="absolute top-4 right-4 w-8 h-8 text-xl rounded-full transition-colors text-secondary-color" style="background-color: rgba(255,255,255,0.1);">&times;</button>
             <h2 class="font-title text-2xl font-bold mb-6" style="color: var(--text-primary);">Settings</h2>
             <div class="space-y-4">
-                <!-- Theme Toggle -->
                 <div class="flex items-center justify-between">
                     <span class="font-semibold text-secondary-color">Theme</span>
                     <button id="theme-toggle-btn" onclick="toggleTheme()" class="setting-btn px-4 py-2 rounded-lg text-sm font-semibold w-32 text-center"></button>
                 </div>
-                <!-- Accent Color -->
                 <div class="flex items-center justify-between">
                     <span class="font-semibold text-secondary-color">Accent Color</span>
                     <button id="current-color-theme" onclick="openSelectionModal('color')" class="setting-btn px-4 py-2 rounded-lg text-sm font-semibold w-40 flex items-center justify-between truncate"></button>
                 </div>
-                <!-- NEW: Text Contrast -->
                 <div>
                      <span class="font-semibold text-secondary-color block mb-1">Text Contrast</span>
                      <div class="flex space-x-2"> 
@@ -341,12 +332,24 @@
                           <button id="contrast-high" onclick="handleSelectionChange('contrast', 'high')" class="flex-1 py-2 px-3 rounded-lg text-sm setting-btn">High Contrast</button>
                      </div>
                 </div>
-                <!-- Title Font -->
+                
+                <div>
+                     <span class="font-semibold text-secondary-color block mb-2">Font Combination</span>
+                     <div id="font-combo-btns" class="grid grid-cols-2 gap-2"> 
+                          <button onclick="applyFontCombination('default1')" data-combo="default1" class="flex-1 py-2 px-3 rounded-lg text-sm setting-btn text-center">
+                              <strong>Default 1</strong><br><span class="text-xs text-secondary-color">Elegant Serif</span>
+                          </button>
+                          <button onclick="applyFontCombination('default2')" data-combo="default2" class="flex-1 py-2 px-3 rounded-lg text-sm setting-btn text-center">
+                              <strong>Default 2</strong><br><span class="text-xs text-secondary-color">Modern Sans</span>
+                          </button>
+                     </div>
+                </div>
+                <hr style="border-color: var(--button-border);">
+                <span class="font-semibold text-secondary-color text-sm text-center block -mt-2 mb-2">Or Customize Manually:</span>
                 <div class="flex items-center justify-between">
                     <span class="font-semibold text-secondary-color">Title Font</span>
                     <button id="current-title-font" onclick="openSelectionModal('title')" class="setting-btn px-4 py-2 rounded-lg text-sm font-semibold w-40 text-left truncate"></button>
                 </div>
-                <!-- Body Font -->
                 <div class="flex items-center justify-between">
                     <span class="font-semibold text-secondary-color">Body Font</span>
                     <button id="current-body-font" onclick="openSelectionModal('body')" class="setting-btn px-4 py-2 rounded-lg text-sm font-semibold w-40 text-left truncate"></button>
@@ -355,10 +358,8 @@
         </div>
     </div>
 
-    <!-- Font & Color Selection Modal -->
     <div id="selection-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
-        <div class="modal-content w-full max-w-sm rounded-2xl shadow-2xl p-6 relative"> <!-- Adjusted max-width -->
-            <button onclick="closeSelectionModal()" class="absolute top-4 right-4 w-8 h-8 text-xl rounded-full text-secondary-color" style="background-color: rgba(255,255,255,0.1);">&times;</button>
+        <div class="modal-content w-full max-w-sm rounded-2xl shadow-2xl p-6 relative"> <button onclick="closeSelectionModal()" class="absolute top-4 right-4 w-8 h-8 text-xl rounded-full text-secondary-color" style="background-color: rgba(255,255,255,0.1);">&times;</button>
             <h2 id="selection-modal-title" class="font-title text-2xl font-bold mb-4" style="color: var(--text-primary);">Select</h2>
             <div id="selection-list" class="max-h-60 overflow-y-auto space-y-2 pr-2"></div>
         </div>
@@ -368,20 +369,38 @@
         // Use a shared key for settings across all pages
         const GLOBAL_SETTINGS_KEY = 'globalHubSettings'; 
         
+        /* * MODIFIED: FONT_OPTIONS
+         * - Values are now clean names (e.g., 'Poppins') for consistency.
+         * - Added new fonts (Merriweather, DM Serif, Outfit, DM Sans, Lexend).
+         * - Set new default to 'Montserrat' and 'Lexend' (Default 2).
+        */
         const FONT_OPTIONS = {
             title: [
-                { value: `'Montserrat', sans-serif`, label: 'Montserrat (Default)' },
-                { value: `'Lora', serif`, label: 'Lora' },
-                { value: `'Playfair Display', serif`, label: 'Playfair Display' },
+                { value: 'Montserrat', label: 'Montserrat (Modern)' }, // Default
+                { value: 'DM Serif Display', label: 'DM Serif Display (Elegant)' },
+                { value: 'Outfit', label: 'Outfit (Modern)' },
+                { value: 'Lora', label: 'Lora (Serif)' },
+                { value: 'Playfair Display', label: 'Playfair Display (Serif)' },
+                { value: 'Merriweather', label: 'Merriweather (Serif)' }
             ],
             body: [
-                { value: `'Poppins', sans-serif`, label: 'Poppins (Default)' },
-                { value: `'Inter', sans-serif`, label: 'Inter' },
-                { value: `'Roboto', sans-serif`, label: 'Roboto' },
-                { value: `'Source Sans 3', sans-serif`, label: 'Source Sans 3'},
-                { value: `'Merriweather', serif`, label: 'Merriweather' },
+                { value: 'Lexend', label: 'Lexend (Clear)' }, // Default
+                { value: 'DM Sans', label: 'DM Sans (Elegant)' },
+                { value: 'Poppins', label: 'Poppins (Friendly)' },
+                { value: 'Inter', label: 'Inter (Professional)' },
+                { value: 'Roboto', label: 'Roboto (System)' },
+                { value: 'Source Sans 3', label: 'Source Sans 3 (Formal)'},
+                { value: 'Merriweather', label: 'Merriweather (Serif)' }
             ]
         };
+        
+        /* * NEW: Font Combination Definitions
+        */
+        const FONT_COMBINATIONS = {
+            'default1': { title: 'DM Serif Display', body: 'DM Sans' }, // Elegant
+            'default2': { title: 'Montserrat', body: 'Lexend' } // Modern
+        };
+        
         const COLOR_THEMES = [
             { name: 'Indigo', primary: '#6366f1', secondary: '#818cf8', accent: '#c4b5fd' },
             { name: 'Teal', primary: '#14b8a6', secondary: '#2dd4bf', accent: '#5eead4' },
@@ -560,31 +579,95 @@
             }
         }
 
-        // --- Font Management ---
+        /* * MODIFIED: Font Management
+         * - apply... functions now handle fallback logic.
+         * - They save ONLY the clean font name (e.g., 'Poppins') for consistency.
+         * - getFontLabel is updated to read clean names or old "dirty" names.
+        */
         function applyBodyFont(fontFamily) {
-            document.documentElement.style.setProperty('--font-body', fontFamily);
-            setLocalStorageSetting('bodyFont', fontFamily);
+            let fontValue = fontFamily;
+            let fontName = fontFamily.split(',')[0].replace(/'/g, ''); // Clean the name from old storage values
+
+            // Add fallback
+            const fallback = (fontName === 'Merriweather') ? 'serif' : 'sans-serif';
+            fontValue = `'${fontName}', ${fallback}`;
+            
+            document.documentElement.style.setProperty('--font-body', fontValue);
+            setLocalStorageSetting('bodyFont', fontName); // Save ONLY the name
+            updateFontCombinationUI(); // Update combo buttons
         }
+
         function applyTitleFont(fontFamily) {
-            document.documentElement.style.setProperty('--font-title', fontFamily);
-            setLocalStorageSetting('titleFont', fontFamily);
+            let fontValue = fontFamily;
+            let fontName = fontFamily.split(',')[0].replace(/'/g, ''); // Clean the name from old storage values
+            
+            // Add fallback
+            const fallback = (fontName === 'Lora' || fontName === 'Playfair Display' || fontName === 'Merriweather' || fontName === 'DM Serif Display') ? 'serif' : 'sans-serif';
+            fontValue = `'${fontName}', ${fallback}`;
+
+            document.documentElement.style.setProperty('--font-title', fontValue);
+            setLocalStorageSetting('titleFont', fontName); // Save ONLY the name
+            updateFontCombinationUI(); // Update combo buttons
         }
+        
         function getFontLabel(type, value) {
             const options = FONT_OPTIONS[type];
-            const option = options.find(opt => opt.value === value);
+            // Clean the value from storage (it might be "'Poppins', sans-serif" or "Poppins")
+            const fontName = value.split(',')[0].replace(/'/g, '');
+            const option = options.find(opt => opt.value === fontName);
             return option ? option.label : 'Default'; 
         }
+
         function updateFontButton(type) {
             const id = type === 'body' ? 'current-body-font' : 'current-title-font';
             const storageKey = type === 'body' ? 'bodyFont' : 'titleFont';
             const defaultFont = type === 'body' ? FONT_OPTIONS.body[0].value : FONT_OPTIONS.title[0].value;
+            
+            // Get the clean name from storage
             const value = getLocalStorageSetting(storageKey, defaultFont);
             const button = document.getElementById(id);
+            
             if(button) {
                 button.textContent = getFontLabel(type, value);
-                button.style.fontFamily = value; 
+                // Apply the clean name to the button's style
+                const fallback = (value === 'Lora' || value === 'Playfair Display' || value === 'Merriweather' || value === 'DM Serif Display') ? 'serif' : 'sans-serif';
+                button.style.fontFamily = `'${value}', ${fallback}`; 
             }
         }
+        
+        /* * NEW: Font Combination Functions
+         */
+        function applyFontCombination(comboName) {
+            const combo = FONT_COMBINATIONS[comboName];
+            if (combo) {
+                applyTitleFont(combo.title);
+                applyBodyFont(combo.body);
+                // Update individual dropdowns
+                updateFontButton('title');
+                updateFontButton('body');
+            }
+            updateFontCombinationUI(); // Update button active state
+        }
+
+        function updateFontCombinationUI() {
+            const currentTitle = getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value);
+            const currentBody = getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value);
+
+            const default1 = FONT_COMBINATIONS['default1'];
+            const default2 = FONT_COMBINATIONS['default2'];
+
+            let activeCombo = null;
+            if (currentTitle === default1.title && currentBody === default1.body) {
+                activeCombo = 'default1';
+            } else if (currentTitle === default2.title && currentBody === default2.body) {
+                activeCombo = 'default2';
+            }
+
+            document.querySelectorAll('#font-combo-btns button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.combo === activeCombo);
+            });
+        }
+        // --- End Font Management ---
 
         // --- Modal Management ---
         window.openSettings = function() {
@@ -608,7 +691,8 @@
             updateFontButton('title');
             updateFontButton('body');
             updateColorButton();
-            updateContrastButtonsUI(); // NEW
+            updateContrastButtonsUI();
+            updateFontCombinationUI(); // NEW: Update combo buttons
         }
 
         window.openSelectionModal = function(type) {
@@ -635,13 +719,15 @@
                 const defaultFont = type === 'body' ? FONT_OPTIONS.body[0].value : FONT_OPTIONS.title[0].value;
                 const currentFont = getLocalStorageSetting(storageKey, defaultFont);
                 
-                optionsHTML = options.map(opt => 
-                    `<button onclick="handleSelectionChange('${type}', '${opt.value}')" 
-                             class="w-full text-left p-3 rounded-lg setting-btn ${currentFont === opt.value ? activeClass : ''}" 
-                             style="font-family: ${opt.value};">
-                        ${opt.label}
-                     </button>`
-                ).join('');
+                optionsHTML = options.map(opt => {
+                    // Get correct fallback for styling the button itself
+                    const fallback = (opt.value === 'Lora' || opt.value === 'Playfair Display' || opt.value === 'Merriweather' || opt.value === 'DM Serif Display') ? 'serif' : 'sans-serif';
+                    return `<button onclick="handleSelectionChange('${type}', '${opt.value}')" 
+                                     class="w-full text-left p-3 rounded-lg setting-btn ${currentFont === opt.value ? activeClass : ''}" 
+                                     style="font-family: '${opt.value}', ${fallback};">
+                                ${opt.label}
+                             </button>`
+                }).join('');
             }
             
             if(listEl) listEl.innerHTML = optionsHTML;
@@ -651,13 +737,14 @@
             document.getElementById('selection-modal').classList.add('hidden');
             currentSelectionType = null;
         }
-        // UPDATED handleSelectionChange to include contrast
+        
+        // UPDATED handleSelectionChange
         window.handleSelectionChange = function(type, value) {
             if (type === 'body') {
-                applyBodyFont(value);
+                applyBodyFont(value); // Value is now 'Poppins', etc.
                 updateFontButton(type);
             } else if (type === 'title') {
-                applyTitleFont(value);
+                applyTitleFont(value); // Value is now 'Montserrat', etc.
                 updateFontButton(type);
             } else if (type === 'color') {
                 applyAccentColor(value); // This handles saving and UI update
@@ -683,10 +770,12 @@
             }
             applyTheme(isDark); 
 
+            // Get the clean font name (e.g., "Poppins") from storage
             const titleFont = getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value);
             const bodyFont = getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value);
-            applyTitleFont(titleFont);
-            applyBodyFont(bodyFont);
+            
+            applyTitleFont(titleFont); // This function now handles adding fallbacks
+            applyBodyFont(bodyFont); // This function now handles adding fallbacks
             
             const colorTheme = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name);
             applyAccentColor(colorTheme); 
@@ -731,13 +820,21 @@
                     applyAccentColor(colorTheme);
                     const savedContrast = getLocalStorageSetting('contrast'); // Reload contrast too
                     applyContrast(savedContrast);
+                    
+                    // Reload fonts from storage
+                    const titleFont = getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value);
+                    const bodyFont = getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value);
+                    applyTitleFont(titleFont);
+                    applyBodyFont(bodyFont);
+                    
                     setTimeout(() => { if (typeof lucide !== 'undefined') lucide.createIcons(); }, 0);
                 }
             });
+            
+            updateFontCombinationUI(); // Call this once on load
         }
         
         window.onload = loadInitialSettings;
     </script>
 </body>
 </html>
-

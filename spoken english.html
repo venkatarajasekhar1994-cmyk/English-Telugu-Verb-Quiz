@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,14 +21,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     
     <style>
-        /* Google Fonts Import */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
+        /* MODIFIED: Google Fonts Import - Added DM Sans, DM Serif Display, Outfit, Lexend */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700;900&family=Poppins:wght@400;600;700&family=Source+Sans+3:wght@400;700&family=DM+Sans:wght@400;700&family=DM+Serif+Display&family=Outfit:wght@700&family=Lexend:wght@400;700&display=swap');
         
         /* --- CSS Variables --- */
         :root {
-            /* Updated default fonts to match game hub */
+            /* MODIFIED: Updated default fonts */
             --title-font: 'Montserrat', sans-serif;
-            --body-font: 'Poppins', sans-serif;
+            --body-font: 'Lexend', sans-serif;
             
             --accent-color-rgb: 79, 70, 229; /* Indigo RGB */
             --accent-color-hex: #4f46e5; /* Indigo Hex */
@@ -154,6 +154,11 @@
         /* Helper class for speak buttons in modals */
         .speak-button {
              @apply p-2 rounded-full hover:bg-white/20 transition-colors text-gray-200 hover:text-white flex-shrink-0;
+        }
+        
+        /* --- MODIFICATION: Make speak buttons in lesson details modal contrast with new backgrounds --- */
+        #lesson-details-content .speak-button {
+            @apply text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
         }
     </style>
 </head>
@@ -342,6 +347,23 @@
                           <button id="contrast-high" onclick="handleSelectionChange('contrast', 'high')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white">High Contrast</button>
                      </div>
                 </div>
+
+                <!-- MODIFIED: Added Font Combination buttons -->
+                <div>
+                     <span class="text-xs text-gray-400 block mb-1">Font Combination</span>
+                     <div id="font-combo-btns" class="grid grid-cols-2 gap-2">
+                         <button onclick="applyFontCombination('default1')" data-combo="default1" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white text-center">
+                             <strong>Default 1</strong><br><span class="text-xs text-gray-400">Elegant Serif</span>
+                         </button>
+                         <button onclick="applyFontCombination('default2')" data-combo="default2" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white text-center">
+                             <strong>Default 2</strong><br><span class="text-xs text-gray-400">Modern Sans</span>
+                         </button>
+                     </div>
+                </div>
+                <hr class="border-white/20">
+                <span class="text-xs text-gray-400 text-center block -mt-2 mb-2">Or Customize Manually:</span>
+                <!-- End of modification -->
+
                 <button id="body-font-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white">
                     <span class="text-xs text-gray-400">Body Font</span><br> <span id="current-body-font" class="font-semibold"></span>
                 </button>
@@ -388,7 +410,8 @@
                 <h3 id="lesson-details-title" class="text-xl font-bold text-white">Lesson Details</h3>
                 <button id="close-lesson-details-modal" class="text-gray-300 hover:text-white text-2xl font-bold" aria-label="Close lesson details modal">&times;</button>
             </div>
-            <div id="lesson-details-content" class="space-y-4 overflow-y-auto no-scrollbar pr-2 text-sm text-gray-300">
+            <!-- Diagram content will be styled by new CSS rule for .speak-button -->
+            <div id="lesson-details-content" class="space-y-4 overflow-y-auto no-scrollbar pr-2 text-sm">
                 <p>Loading lesson...</p>
             </div>
         </div>
@@ -440,20 +463,24 @@
         let CLASS_TOPICS = [];
         let LESSON_DATA = [];
         
-        // Aligned font options and defaults with game hub.html
+        // MODIFIED: FONT_OPTIONS use clean names (e.g., 'Lexend')
         const FONT_OPTIONS = {
-            body: [ 
-                { label: 'Poppins', value: 'Poppins, sans-serif' },
-                { label: 'Inter', value: 'Inter, sans-serif' }, 
-                { label: 'Roboto', value: 'Roboto, sans-serif' }, 
-                { label: 'Source Sans', value: "'Source Sans 3', sans-serif" },
-                { label: 'Merriweather', value: 'Merriweather, serif' }
+            body: [
+                { label: 'Lexend', value: 'Lexend' }, // Default
+                { label: 'DM Sans', value: 'DM Sans' },
+                { label: 'Poppins', value: 'Poppins' },
+                { label: 'Inter', value: 'Inter' },
+                { label: 'Roboto', value: 'Roboto' },
+                { label: 'Source Sans 3', value: 'Source Sans 3' },
+                { label: 'Merriweather', value: 'Merriweather' }
             ],
-            title: [ 
-                { label: 'Montserrat', value: 'Montserrat, sans-serif' },
-                { label: 'Lora', value: 'Lora, serif' }, 
-                { label: 'Merriweather', value: 'Merriweather, serif' }, 
-                { label: 'Playfair Display', value: "'Playfair Display', serif" }
+            title: [
+                { label: 'Montserrat', value: 'Montserrat' }, // Default
+                { label: 'DM Serif Display', value: 'DM Serif Display' },
+                { label: 'Outfit', value: 'Outfit' },
+                { label: 'Lora', value: 'Lora' },
+                { label: 'Playfair Display', value: 'Playfair Display' },
+                { label: 'Merriweather', value: 'Merriweather' }
             ]
         };
         
@@ -480,6 +507,12 @@
             { name: 'Emerald', value: '5, 150, 105', hex: '#059669',
               gradient: { light: ['#a7f3d0', '#6ee7b7', '#34d399', '#10b981'], dark: ['#064e3b', '#065f46', '#059669', '#10b981'] } }
         ];
+
+        // NEW: Font Combination Definitions
+        const FONT_COMBINATIONS = {
+            'default1': { title: 'DM Serif Display', body: 'DM Sans' }, // Elegant
+            'default2': { title: 'Montserrat', body: 'Lexend' } // Modern
+        };
 
         // --- NEW: Theme logic variables ---
         let systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
@@ -892,7 +925,7 @@
             Provide concise feedback, coaching, and tips based on their score and the lesson topic. Keep each section brief (1-2 sentences). 
             Address the user directly. Provide the response in both English and Telugu. 
             Focus coaching on the general topic if there were no errors, or on the types of errors made if available.
-            Location context: Visakhapatnam, Andhra Pradesh, India. Current time: Friday, October 24, 2025 at 2:09 AM IST.`;
+            Location context: Visakhapatnam, Andhra Pradesh, India. Current time: Sunday, October 26, 2025 at 12:08 PM IST.`;
 
              const payload = {
                  contents: [{ parts: [{ text: userQuery }] }],
@@ -1078,17 +1111,27 @@
             if (themeSystemBtn) themeSystemBtn.classList.toggle('active', currentTheme === 'system');
         }
         
-        // Apply font settings
-        function setBodyFont(font) { 
-            if (font) { 
-                document.documentElement.style.setProperty('--body-font', font); 
-                setLocalStorageSetting('bodyFont', font); 
+        // MODIFIED: Apply font settings (accepts clean name)
+        function setBodyFont(fontName) { 
+            if (fontName) {
+                // Add fallback
+                const fallback = (fontName === 'Merriweather') ? 'serif' : 'sans-serif';
+                const fontValue = `'${fontName}', ${fallback}`;
+                
+                document.documentElement.style.setProperty('--body-font', fontValue); 
+                setLocalStorageSetting('bodyFont', fontName); // Save ONLY the name
+                updateFontCombinationUI(); // Update combo buttons
             }
         }
-        function setTitleFont(font) { 
-            if (font) { 
-                document.documentElement.style.setProperty('--title-font', font); 
-                setLocalStorageSetting('titleFont', font); 
+        function setTitleFont(fontName) { 
+            if (fontName) {
+                // Add fallback
+                const fallback = (fontName === 'Lora' || fontName === 'Playfair Display' || fontName === 'Merriweather' || fontName === 'DM Serif Display') ? 'serif' : 'sans-serif';
+                const fontValue = `'${fontName}', ${fallback}`;
+                
+                document.documentElement.style.setProperty('--title-font', fontValue); 
+                setLocalStorageSetting('titleFont', fontName); // Save ONLY the name
+                updateFontCombinationUI(); // Update combo buttons
             }
         }
         
@@ -1124,7 +1167,7 @@
              const savedTheme = getLocalStorageSetting('theme', 'system'); // Default to system
              applyTheme(savedTheme); // applyTheme now handles logic and saving
              
-             // Load fonts, falling back to new aligned defaults
+             // MODIFIED: Load fonts, falling back to new aligned defaults (clean names)
              setBodyFont(getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value)); 
              setTitleFont(getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value)); 
              
@@ -1142,7 +1185,8 @@
              selectedClass = getLocalStorageSetting('selectedClass', 1); 
              maxQuestions = getLocalStorageSetting('maxQuestions', 10); 
              
-             updateSettingsUI(); 
+             updateSettingsUI();
+             updateFontCombinationUI(); // NEW: Add this call
          }
         
         // Modal open/close functions
@@ -1157,8 +1201,8 @@
              const modal = document.getElementById('curriculum-modal'); if(modal) modal.classList.add('hidden'); 
          }
          
-        // --- *** NEW HELPER FUNCTIONS FOR DIAGRAMS *** ---
-        // (Add these two functions here, inside the main script)
+        // --- *** MODIFIED HELPER FUNCTIONS FOR DIAGRAMS *** ---
+        // (Styling updated for color, opacity, and contrast)
 
         /**
          * Renders a flowchart diagram into an HTML string.
@@ -1167,16 +1211,17 @@
          */
         function renderFlowchart(diagram) {
             const rulesHTML = diagram.rules.map(rule => {
-                const subjectsHTML = rule.subjects ? `<div class="p-2 bg-black/20 rounded text-center"><strong class="block text-white">${rule.subjects.join(', ')}</strong><span class="text-xs text-gray-300">${(rule.subjectsTelugu || []).join(', ')}</span></div>` : '';
-                const helpingVerbHTML = rule.helpingVerb ? `<div class="p-2 bg-black/20 rounded text-center"><strong class="block text-white">${rule.helpingVerb}</strong><span class="text-xs text-gray-300">${rule.helpingVerbTelugu || ''}</span></div>` : '';
-                const verbFormHTML = rule.verbForm ? `<div class="p-2 bg-black/20 rounded text-center"><strong class="block text-white">${rule.verbForm}</strong><span class="text-xs text-gray-300">${rule.verbFormTelugu || ''}</span></div>` : '';
-                const objectsHTML = rule.objects ? `<div class="p-2 bg-black/20 rounded text-center"><strong class="block text-white">${rule.objects.join(', ')}</strong><span class="text-xs text-gray-300">${(rule.objectsTelugu || []).join(', ')}</span></div>` : '';
+                // Colorful, solid backgrounds for each part
+                const subjectsHTML = rule.subjects ? `<div class="p-2 bg-indigo-100 dark:bg-indigo-800 rounded text-center shadow-sm"><strong class="block text-indigo-900 dark:text-indigo-100">${rule.subjects.join(', ')}</strong><span class="text-xs text-indigo-700 dark:text-indigo-200">${(rule.subjectsTelugu || []).join(', ')}</span></div>` : '';
+                const helpingVerbHTML = rule.helpingVerb ? `<div class="p-2 bg-teal-100 dark:bg-teal-800 rounded text-center shadow-sm"><strong class="block text-teal-900 dark:text-teal-100">${rule.helpingVerb}</strong><span class="text-xs text-teal-700 dark:text-teal-200">${rule.helpingVerbTelugu || ''}</span></div>` : '';
+                const verbFormHTML = rule.verbForm ? `<div class="p-2 bg-rose-100 dark:bg-rose-800 rounded text-center shadow-sm"><strong class="block text-rose-900 dark:text-rose-100">${rule.verbForm}</strong><span class="text-xs text-rose-700 dark:text-rose-200">${rule.verbFormTelugu || ''}</span></div>` : '';
+                const objectsHTML = rule.objects ? `<div class="p-2 bg-amber-100 dark:bg-amber-800 rounded text-center shadow-sm"><strong class="block text-amber-900 dark:text-amber-100">${rule.objects.join(', ')}</strong><span class="text-xs text-amber-700 dark:text-amber-200">${(rule.objectsTelugu || []).join(', ')}</span></div>` : '';
                 
-                // Arrow symbol
-                const arrow = `<div class="text-2xl text-gray-400 flex-shrink-0 mx-2">&rarr;</div>`;
+                // Arrow symbol with better contrast
+                const arrow = `<div class="text-2xl text-gray-600 dark:text-gray-400 flex-shrink-0 mx-2">&rarr;</div>`;
                 
                 return `
-                    <div class="mt-3 p-3 rounded-lg button-bg-color">
+                    <div class="mt-3 p-3 rounded-lg bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-white/20 dark:border-gray-700 shadow-sm">
                         <div class="flex items-center justify-center flex-wrap gap-2">
                             ${subjectsHTML}
                             ${subjectsHTML && (helpingVerbHTML || verbFormHTML) ? arrow : ''}
@@ -1186,7 +1231,7 @@
                             ${verbFormHTML && objectsHTML ? arrow : ''}
                             ${objectsHTML}
                         </div>
-                        ${rule.example ? `<p class="text-xs text-gray-300 mt-2 text-center">e.g., ${rule.example} (${rule.exampleTelugu || ''})</p>` : ''}
+                        ${rule.example ? `<p class="text-sm text-gray-700 dark:text-gray-300 mt-3 text-center p-2 bg-gray-100 dark:bg-gray-700/50 rounded">e.g., ${rule.example} (${rule.exampleTelugu || ''})</p>` : ''}
                     </div>
                 `;
             }).join('');
@@ -1194,11 +1239,12 @@
             return `
                 <div class="mt-4">
                     <h4 class="font-bold text-lg mb-2 text-white">${diagram.title} <span class="text-gray-300">(${diagram.titleTelugu})</span></h4>
-                    <p class="text-xs text-gray-300 mb-2">${diagram.use} (${diagram.useTelugu})</p>
+                    <p class="text-sm text-gray-100 dark:text-gray-300 mb-2">${diagram.use} (${diagram.useTelugu})</p>
                     ${rulesHTML}
                 </div>
             `;
         }
+
 
         /**
          * Renders a mindmap diagram into an HTML string.
@@ -1210,17 +1256,35 @@
             const renderBranches = (branches, isSubBranch = false) => {
                 const listTag = isSubBranch ? 'ul' : 'ul';
                 const itemTag = 'li';
-                // Use different styling for top-level branches vs sub-branches
-                const itemClass = isSubBranch ? 'ml-4 mt-1 text-xs' : 'p-3 rounded-lg button-bg-color mt-2';
                 
+                // NEW STYLING:
+                // Top-level branches: Opaque, colorful background
+                // Sub-branches: Lighter background, indented
+                
+                const itemClass = isSubBranch 
+                    ? 'ml-4 mt-2 p-2 rounded-lg bg-white/60 dark:bg-gray-700/60 text-xs' 
+                    : 'p-3 rounded-lg bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-white/20 dark:border-gray-700 mt-2 shadow-sm';
+                
+                const strongClass = isSubBranch
+                    ? 'text-gray-800 dark:text-white'
+                    : 'text-lg text-gray-900 dark:text-white'; // Make top-level text larger
+                
+                const teluguClass = isSubBranch
+                    ? 'text-gray-600 dark:text-gray-300'
+                    : 'text-gray-700 dark:text-gray-300';
+
+                const exampleClass = isSubBranch
+                    ? 'text-xs text-gray-500 dark:text-gray-400'
+                    : 'text-sm text-gray-600 dark:text-gray-400';
+
                 return `<${listTag} class="${isSubBranch ? 'list-disc list-inside' : 'space-y-2'}">
                     ${branches.map(branch => {
                         const subBranchesHTML = (branch.subBranches && branch.subBranches.length > 0) ? renderBranches(branch.subBranches, true) : '';
                         return `
                             <${itemTag} class="${itemClass}">
-                                <strong class="text-white">${branch.text}</strong>
-                                ${branch.telugu ? `<span class="text-gray-300"> (${branch.telugu})</span>` : ''}
-                                ${branch.example ? `<p class="text-xs text-gray-400">e.g., ${branch.example}</p>` : ''}
+                                <strong class="${strongClass}">${branch.text}</strong>
+                                ${branch.telugu ? `<span class="${teluguClass}"> (${branch.telugu})</span>` : ''}
+                                ${branch.example ? `<p class="${exampleClass} mt-1">e.g., ${branch.example}</p>` : ''}
                                 ${subBranchesHTML}
                             </${itemTag}>
                         `;
@@ -1233,15 +1297,15 @@
             return `
                 <div class="mt-4">
                     <h4 class="font-bold text-lg mb-2 text-white">${diagram.title} <span class="text-gray-300">(${diagram.titleTelugu})</span></h4>
-                    <div class="text-center p-3 rounded-lg accent-bg text-white font-bold my-3 whitespace-pre-wrap">${diagram.centralTopic}</div>
+                    <div class="text-center p-3 rounded-lg accent-bg text-white font-bold my-3 whitespace-pre-wrap shadow-lg">${diagram.centralTopic}</div>
                     ${branchesHTML}
                 </div>
             `;
         }
 
          
-        // --- *** REPLACE THIS ENTIRE FUNCTION *** ---
-        // (The old one is removed and replaced with this new one)
+        // --- *** MODIFIED: openLessonDetailsModal *** ---
+        // (Styling of text and speak buttons updated for new diagram backgrounds)
         
         /**
          * Opens the Lesson Details modal, populating it with data from
@@ -1267,23 +1331,24 @@
                 // Function to create a clean, speakable string
                 const cleanText = (text) => (text || '').replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, " ");
 
-                // Helper to create a content block (This is local to this function)
+                // Helper to create a content block
+                // MODIFIED: Using more opaque backgrounds for readability
                 const createSection = (title, enText, teText) => {
                     const enClean = cleanText(enText);
                     const teClean = cleanText(teText);
                     return `
                         <h4 class="font-bold text-lg mb-2 text-white">${title}</h4>
-                        <div class="p-3 rounded-lg button-bg-color mb-2">
+                        <div class="p-3 rounded-lg bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-white/20 dark:border-gray-700 shadow-sm mb-2">
                             <div class="flex items-center justify-between">
-                                <p class="text-sm text-gray-200 flex-1 pr-2">${enText || 'N/A'}</p>
+                                <p class="text-sm text-gray-800 dark:text-gray-100 flex-1 pr-2">${enText || 'N/A'}</p>
                                 <button onclick="speak('${enClean}', 'en-US')" class="speak-button" aria-label="Speak ${title} in English">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                                 </button>
                             </div>
                         </div>
-                        <div class="p-3 rounded-lg button-bg-color mb-4">
+                        <div class="p-3 rounded-lg bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-white/20 dark:border-gray-700 shadow-sm mb-4">
                             <div class="flex items-center justify-between">
-                                <p class="text-sm text-gray-300 flex-1 pr-2">${teText || 'N/A'}</p>
+                                <p class="text-sm text-gray-700 dark:text-gray-200 flex-1 pr-2">${teText || 'N/A'}</p>
                                 <button onclick="speak('${teClean}', 'te-IN')" class="speak-button" aria-label="Speak ${title} in Telugu">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                                 </button>
@@ -1292,7 +1357,7 @@
                     `;
                 };
 
-                // --- NEW DIAGRAM LOGIC ---
+                // --- DIAGRAM LOGIC (Unchanged, uses new render functions) ---
                 let diagramsHTML = '';
                 try {
                     // Check if allLessonDiagrams is loaded (from diagram_data.js)
@@ -1318,14 +1383,17 @@
                     console.error("Error rendering diagrams:", e);
                     diagramsHTML = '<p class="text-red-400">Error loading diagrams.</p>';
                 }
-                // --- END NEW DIAGRAM LOGIC ---
+                // --- END DIAGRAM LOGIC ---
 
                 // Combine existing sections with new diagrams
-                lessonDetailsContent.innerHTML = 
-                    createSection('Key Topics', lesson.keyTopicsEN, lesson.keyTopicsTE) +
-                    createSection('Instructions', lesson.instructionsEN, lesson.instructionsTE) +
-                    createSection('Uses', lesson.usesEN, lesson.usesTE) +
-                    diagramsHTML; // Append the new HTML
+                // MODIFIED: Changed text color for main modal content
+                lessonDetailsContent.innerHTML = `
+                    <div class="text-gray-900 dark:text-gray-100"> 
+                        ${createSection('Key Topics', lesson.keyTopicsEN, lesson.keyTopicsTE)}
+                        ${createSection('Instructions', lesson.instructionsEN, lesson.instructionsTE)}
+                        ${createSection('Uses', lesson.usesEN, lesson.usesTE)}
+                    </div>
+                    ${diagramsHTML}`; // Append the new HTML
             }
             
             if (lessonDetailsModal) {
@@ -1338,6 +1406,41 @@
         function closeLessonDetailsModal() {
             if (lessonDetailsModal) lessonDetailsModal.classList.add('hidden');
             if (synth) synth.cancel(); // Stop speech when closing modal
+        }
+
+        // NEW: Function to apply font combination
+        window.applyFontCombination = function(comboName) {
+            const combo = FONT_COMBINATIONS[comboName];
+            if (combo) {
+                setTitleFont(combo.title);
+                setBodyFont(combo.body);
+                // Update individual dropdowns
+                updateFontButton('title');
+                updateFontButton('body');
+            }
+            updateFontCombinationUI(); // Update button active state
+        }
+
+        // NEW: Function to update font combination buttons UI
+        function updateFontCombinationUI() {
+            if (typeof FONT_COMBINATIONS === 'undefined') return; // Ensure constant is defined
+            
+            const currentTitle = getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value);
+            const currentBody = getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value);
+
+            const default1 = FONT_COMBINATIONS['default1'];
+            const default2 = FONT_COMBINATIONS['default2'];
+
+            let activeCombo = null;
+            if (currentTitle === default1.title && currentBody === default1.body) {
+                activeCombo = 'default1';
+            } else if (currentTitle === default2.title && currentBody === default2.body) {
+                activeCombo = 'default2';
+            }
+
+            document.querySelectorAll('#font-combo-btns button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.combo === activeCombo);
+            });
         }
         
         // Open the generic selection modal
@@ -1357,11 +1460,17 @@
                  [4, 5, 10, 15, 20, 25].forEach(count => { 
                      optionsHTML += `<button onclick="handleSelectionChange('count', ${count})" class="${buttonClass} ${maxQuestions === count ? 'active' : ''}">${count} Questions</button>`; 
                  }); 
+            // MODIFIED: Logic for font modals
              } else if (type === 'bodyFont' || type === 'titleFont') { 
                  if(modalTitle) modalTitle.textContent = type === 'bodyFont' ? 'Select Body Font' : 'Select Title Font'; 
                  const options = FONT_OPTIONS[type === 'bodyFont' ? 'body' : 'title']; 
-                 const currentFont = getLocalStorageSetting(type === 'bodyFont' ? 'bodyFont' : 'titleFont'); 
-                 optionsHTML = options.map(opt => `<button onclick="handleSelectionChange('${type}', '${opt.value}')" class="${buttonClass} ${currentFont === opt.value ? 'active' : ''}" style="font-family: ${opt.value};">${opt.label}</button>`).join(''); 
+                 const currentFont = getLocalStorageSetting(type === 'bodyFont' ? 'bodyFont' : 'titleFont'); // This is now 'Lexend'
+                 optionsHTML = options.map(opt => {
+                     // opt.value is 'Lexend', currentFont is 'Lexend'
+                     // Re-construct CSS string for button preview
+                     const fallback = (opt.value === 'Merriweather' || opt.value === 'Lora' || opt.value === 'Playfair Display' || opt.value === 'DM Serif Display') ? 'serif' : 'sans-serif';
+                     return `<button onclick="handleSelectionChange('${type}', '${opt.value}')" class="${buttonClass} ${currentFont === opt.value ? 'active' : ''}" style="font-family: '${opt.value}', ${fallback};">${opt.label}</button>`
+                 }).join('');
              } else if (type === 'color') { 
                  if(modalTitle) modalTitle.textContent = 'Select Accent Color'; 
                  const currentColor = getLocalStorageSetting('colorTheme'); 
@@ -1381,8 +1490,8 @@
             else if (type === 'count') { maxQuestions = value; setLocalStorageSetting('maxQuestions', value); updateQuizLengthButton(); } 
             // Global settings
             else if (type === 'theme') { applyTheme(value); } // NEW: Handle theme change
-            else if (type === 'bodyFont') { setBodyFont(value); updateFontButton('body'); } 
-            else if (type === 'titleFont') { setTitleFont(value); updateFontButton('title'); } 
+            else if (type === 'bodyFont') { setBodyFont(value); updateFontButton('body'); } // MODIFIED: Value is clean name
+            else if (type === 'titleFont') { setTitleFont(value); updateFontButton('title'); } // MODIFIED: Value is clean name
             else if (type === 'color') { applyAccentColor(value); } 
             else if (type === 'contrast') { applyContrast(value); } 
             // App-specific settings (toggles)
@@ -1393,30 +1502,34 @@
             if (!type.startsWith('toggle') && type !== 'contrast' && type !== 'theme') { closeSelectionModal(); }
         }
 
-        // Get the display label for a setting
+        // MODIFIED: Get the display label for a setting
         function getLabel(type, value) { 
-            const valStr = String(value); 
+            // value is now a clean name like 'Lexend'
             if (type === 'class') { 
                 return `Class ${value}: ${CLASS_TOPICS[value-1] || 'Unknown'}`; 
             } 
             if (type === 'count') return `${value} Questions`; 
             if (type === 'bodyFont' || type === 'titleFont') { 
-                const options = FONT_OPTIONS[type === 'bodyFont' ? 'body' : 'title']; 
-                return (options.find(opt => String(opt.value) === valStr) || {}).label || 'Default'; 
+                const options = FONT_OPTIONS[type === 'bodyFont' ? 'body' : 'title'];
+                // Find by 'value' which is the clean name
+                return (options.find(opt => opt.value === value) || {}).label || 'Default'; 
             } 
             return value;
         }
         
         // --- UI Update Functions ---
         
+        // MODIFIED: Update font button UI
         function updateFontButton(type) { 
              const buttonElement = type === 'body' ? currentBodyFont : currentTitleFont; 
              const storageKey = type === 'body' ? 'bodyFont' : 'titleFont'; 
              const defaultValue = FONT_OPTIONS[type === 'body' ? 'body' : 'title'][0].value; 
-             const currentValue = getLocalStorageSetting(storageKey, defaultValue); 
+             const currentFontName = getLocalStorageSetting(storageKey, defaultValue); // This is now 'Lexend'
              if (buttonElement) { 
-                 buttonElement.textContent = getLabel(storageKey, currentValue); 
-                 buttonElement.style.fontFamily = currentValue; 
+                 buttonElement.textContent = getLabel(storageKey, currentFontName); // getLabel now works with clean names
+                 // Re-construct the CSS font-family string for the button preview
+                 const fallback = (currentFontName === 'Merriweather' || currentFontName === 'Lora' || currentFontName === 'Playfair Display' || currentFontName === 'DM Serif Display') ? 'serif' : 'sans-serif';
+                 buttonElement.style.fontFamily = `'${currentFontName}', ${fallback}`; 
              }
          }
         function updateColorButton() { 
@@ -1439,6 +1552,7 @@
         function updateSettingsUI() { 
              updateFontButton('body'); updateFontButton('title'); updateColorButton(); updateContrastButtonsUI(); updateFeedbackCheckboxesUI();
              updateThemeButtonsUI(); // NEW: Update theme buttons
+             updateFontCombinationUI(); // NEW: Add this call
          }
         // Update the start screen UI (message, buttons)
         function updateStartScreenUI() { 
@@ -1600,4 +1714,6 @@
     </script>
 </body>
 </html>
+
+
 

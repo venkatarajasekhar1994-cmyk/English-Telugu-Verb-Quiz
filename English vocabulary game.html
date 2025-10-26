@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     
     <style>
         /* Import all available fonts for customization */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght==400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Source+Sans+3:wght@400;700&family=Poppins:wght@400;600;700&family=Lexend:wght@400;700&family=DM+Sans:wght@400;700&family=DM+Serif+Display:wght@700&family=Outfit:wght@700&display=swap');
         
         /* --- CSS Variables for Theme Management --- */
         
@@ -171,7 +171,7 @@
             font-family: var(--font-title); 
             font-weight: 700;
             letter-spacing: 0.05em; 
-            color: #1e293b;
+            color: #1e293b; /* Adjusted dark title color for light mode */
         }
 
         /* Main Glass Card */
@@ -191,6 +191,7 @@
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             transition: all 0.2s ease, transform 0.1s ease;
+            color: #374151; /* Default text color for light mode */
         }
         .frosted-option:hover {
             background: rgba(255, 255, 255, 0.7);
@@ -367,13 +368,20 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); 
         }
 
+        /* START: Dark mode frosted option fix */
         .dark-mode .frosted-option {
             background: rgba(31, 41, 55, 0.6);
             border: 1px solid rgba(107, 114, 128, 0.4);
+            color: var(--text-color-dark); /* Ensure text color is correct */
         }
         .dark-mode .frosted-option:hover {
             background: rgba(31, 41, 55, 0.8);
         }
+        /* Correct Dark Mode for Status Block */
+        .dark-mode .bg-gray-100 {
+             background-color: #374151 !important; /* Tailwind gray-700 */
+        }
+        /* END: Dark mode fixes */
         
         /* Dark mode custom selector styles */
         .dark-mode .selector-item {
@@ -632,21 +640,21 @@
             <div class="flex items-center space-x-3">
                  <!-- Anchor tag points to the hub -->
                  <a href="game hub.html"
-                    class="ripple-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex"
+                    class="ripple-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex"
                     aria-label="Go to Game Hub">
-                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark:text-gray-200">
                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" />
                      </svg>
                  </a>
-                 <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark-mode:text-gray-50 mb-0 elegant-title">
+                 <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-50 mb-0 elegant-title">
                     VOCABULARY QUIZ
                 </h1>
             </div>
 
             <div class="flex space-x-2">
                 <button id="hamburger-button" onclick="window.toggleHamburgerMenu()" 
-                        class="ripple-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex">
-                    <svg id="hamburger-icon" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        class="ripple-btn p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary-hex">
+                    <svg id="hamburger-icon" class="w-6 h-6 text-gray-800 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
                 </button>
@@ -656,13 +664,13 @@
         <div id="quiz-status-bar" class="hidden">
             <div class="grid grid-cols-2 gap-4 items-center mb-3">
                 <div class="flex items-center space-x-4">
-                    <span class="text-gray-600 dark-mode:text-gray-400 text-base">Score: <span id="score-display" class="text-primary text-2xl font-bold">0</span></span>
-                    <span class="text-gray-600 dark-mode:text-gray-400 text-base">Q: <span id="question-counter" class="text-primary text-2xl font-bold">0/15</span></span>
+                    <span class="text-gray-600 dark:text-gray-400 text-base">Score: <span id="score-display" class="text-primary text-2xl font-bold">0</span></span>
+                    <span class="text-gray-600 dark:text-gray-400 text-base">Q: <span id="question-counter" class="text-primary text-2xl font-bold">0/15</span></span>
                 </div>
                 <span id="feedback-message" class="text-base font-medium text-right"></span>
             </div>
             
-            <div id="progress-bar-container" class="w-full h-2 bg-gray-200 dark-mode:bg-gray-700 rounded-full overflow-hidden mb-6 shadow-inner">
+            <div id="progress-bar-container" class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-6 shadow-inner">
                 <div id="progress-bar" class="h-full rounded-full" style="width: 0%;"></div>
             </div>
         </div>
@@ -670,16 +678,16 @@
 
         <div id="start-screen" class="mt-8 text-center">
             <h2 class="text-3xl font-bold text-primary mb-4 elegant-title">Welcome to the Vocabulary Quiz!</h2>
-            <p id="start-message" class="text-lg text-gray-700 dark-mode:text-gray-300 mb-8">
+            <p id="start-message" class="text-lg text-gray-700 dark:text-gray-300 mb-8">
                 Ready to test your knowledge? Set your quiz options below.
             </p>
 
             <div class="space-y-4">
 
                 <div class="p-4 bg-primary/5 rounded-xl frosted-option">
-                    <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Length</h3>
+                    <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-2">Quiz Length</h3>
                     <button id="quiz-length-button" onclick="handleUiTapFeedback(); openSelectionModal('count')"
-                            class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                            class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark:text-gray-100 frosted-option">
                         <span id="current-quiz-length" class="font-semibold">15 Questions (Default)</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
@@ -688,9 +696,9 @@
                 </div>
                 
                 <div class="p-4 bg-primary/5 rounded-xl frosted-option">
-                    <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Difficulty Level</h3>
+                    <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-2">Difficulty Level</h3>
                     <button id="difficulty-level-button" onclick="handleUiTapFeedback(); openSelectionModal('difficulty')"
-                            class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                            class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark:text-gray-100 frosted-option">
                         <span id="current-difficulty-level" class="font-semibold">Mixed (All Difficulties)</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
@@ -710,17 +718,17 @@
         </div>
         <div id="question-area" class="space-y-4 hidden">
             <div class="prompt-box p-4 rounded-xl border-2 border-primary text-center">
-                <p id="question-text" class="text-xl text-indigo-900 font-semibold mb-1 dark-mode:text-gray-100"></p>
-                <p id="question-metadata" class="text-sm text-indigo-700 dark-mode:text-gray-300"></p>
+                <p id="question-text" class="text-xl font-semibold mb-1 dark:text-gray-100"></p>
+                <p id="question-metadata" class="text-sm text-indigo-700 dark:text-gray-300"></p>
             </div>
             
             <div id="options-container" class="grid grid-cols-1 gap-3">
                 <!-- Options injected by JS -->
             </div>
             
-            <div id="explanation-area" class="hidden p-3 mt-4 rounded-xl border-2 border-primary bg-primary/10 dark-mode:bg-primary/5">
+            <div id="explanation-area" class="hidden p-3 mt-4 rounded-xl border-2 border-primary bg-primary/10 dark:bg-primary/5">
                 <p class="font-bold text-sm mb-1 text-primary">Explanation:</p>
-                <p id="explanation-text" class="text-gray-800 dark-mode:text-gray-200 text-base"></p>
+                <p id="explanation-text" class="text-gray-800 dark:text-gray-200 text-base"></p>
             </div>
         </div>
 
@@ -739,27 +747,27 @@
     </div>
 
     <!-- Hamburger Menu -->
-    <div id="hamburger-menu" class="fixed top-0 right-0 h-full w-64 z-50 transform translate-x-full transition-transform duration-300 bg-white dark-mode:bg-gray-800 shadow-2xl p-6">
+    <div id="hamburger-menu" class="fixed top-0 right-0 h-full w-64 z-50 transform translate-x-full transition-transform duration-300 bg-white dark:bg-gray-800 shadow-2xl p-6">
         <div class="flex justify-end">
-            <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200">
+            <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark:text-gray-200">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
         </div>
 
-        <h3 class="text-xl font-bold mb-6 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">Menu</h3>
+        <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-gray-100 border-b pb-2 border-primary">Menu</h3>
 
         <!-- Theme Toggle Button -->
         <button id="menu-theme-toggle" onclick="handleUiTapFeedback(); toggleTheme()" 
-                class="ripple-btn w-full flex items-center justify-between p-3 mb-4 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150">
+                class="ripple-btn w-full flex items-center justify-between p-3 mb-4 rounded-xl text-gray-800 dark:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150">
             <span id="menu-theme-text" class="font-semibold"></span>
             <svg id="menu-theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                 <!-- Icon injected by JS -->
             </svg>
         </button>
         
-        <div class="mb-4 p-3 bg-gray-100 dark-mode:bg-gray-700 rounded-xl text-xs text-gray-600 dark-mode:text-gray-400 overflow-x-auto break-all">
+        <div class="mb-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-xl text-xs text-gray-600 dark:text-gray-400 overflow-x-auto break-all">
             <span class="font-bold">Status:</span> <span id="user-id-display">Local Data Storage</span>
         </div>
 
@@ -774,7 +782,7 @@
 
         <!-- App Settings Button -->
         <button onclick="handleUiTapFeedback(); window.toggleHamburgerMenu(); openSettings();"
-                class="ripple-btn w-full flex items-center p-3 rounded-xl text-gray-800 dark-mode:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150 shadow-md shadow-gray-500/10">
+                class="ripple-btn w-full flex items-center p-3 rounded-xl text-gray-800 dark:text-gray-200 frosted-option hover:bg-opacity-80 transition duration-150 shadow-md shadow-gray-500/10">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 12h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0h3zm9-6h3.75m-3.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 18h9.75m-9.75 0a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0" />
             </svg>
@@ -788,15 +796,15 @@
     <!-- App Settings Modal -->
     <div id="settings-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
         <div class="modal-content liquid-glass-card w-full max-w-sm p-6 overflow-y-auto max-h-[90vh]">
-            <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">App Settings</h2>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100 border-b pb-2 border-primary">App Settings</h2>
 
-            <div class="bg-blue-100 dark-mode:bg-blue-900/40 border border-blue-400 text-blue-800 dark-mode:text-blue-200 text-sm p-3 rounded-xl mb-4">
+            <div class="bg-blue-100 dark:bg-blue-900/40 border border-blue-400 text-blue-800 dark:text-blue-200 text-sm p-3 rounded-xl mb-4">
                 <p class="font-semibold">Shared settings (Theme, Color, Font, Contrast) are synced across all games. Game-specific settings are saved for this game only.</p>
             </div>
 
             <!-- Color Accent -->
             <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-3">Color Accent (Shared)</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-3">Color Accent (Shared)</h3>
                 <div class="grid grid-cols-5 gap-2">
                     <button onclick="setThemeColor('indigo')" data-color-id="indigo"
                             class="ripple-btn color-option p-2 rounded-xl shadow-md border-2 border-transparent transition duration-150 text-white font-bold bg-indigo-600 hover:opacity-90 text-sm">
@@ -844,24 +852,46 @@
 
             <!-- Text Contrast -->
             <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Text Contrast (Shared)</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-2">Text Contrast (Shared)</h3>
                 <div class="flex space-x-4">
                     <button onclick="setTextContrast('default')" data-contrast-id="default" id="contrast-default"
-                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
+                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent frosted-option hover:bg-opacity-80 transition duration-150">
                         Default
                     </button>
                     <button onclick="setTextContrast('high')" data-contrast-id="high" id="contrast-high"
-                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
+                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent frosted-option hover:bg-opacity-80 transition duration-150">
                         High Contrast
                     </button>
                 </div>
             </div>
 
+            <!-- Font Combination -->
+            <div class="mb-6 border-t pt-4 border-gray-300 dark:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-2">Font Combination (Shared)</h3>
+                <div id="font-combo-btns" class="grid grid-cols-2 gap-4"> 
+                    <button onclick="applyFontCombination('default1')" data-combo="default1" 
+                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent frosted-option hover:bg-opacity-80 transition duration-150 text-center">
+                        <strong>Default 1</strong><br><span class="text-xs text-gray-600 dark:text-gray-400">Elegant Serif</span>
+                    </button>
+                    <button onclick="applyFontCombination('default2')" data-combo="default2" 
+                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent frosted-option hover:bg-opacity-80 transition duration-150 text-center">
+                        <strong>Default 2</strong><br><span class="text-xs text-gray-600 dark:text-gray-400">Modern Sans</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Separator and "Customize Manually" text -->
+            <div class="relative my-6 border-t border-gray-300 dark:border-gray-700">
+                 <h4 class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 px-3 font-semibold text-base text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                    Or Customize Manually:
+                 </h4>
+            </div>
+            
             <!-- Body Font -->
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Body Font (Shared)</h3>
+            <div class="mb-6 pt-2"> <!-- Added padding-top -->
+                <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-2">Body Font (Shared)</h3>
                 <button id="body-font-button" onclick="handleUiTapFeedback(); openSelectionModal('body')"
-                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 frosted-option">
                     <span id="current-body-font" class="font-semibold">Inter (Sans-serif, Default)</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
@@ -871,9 +901,9 @@
 
             <!-- Title Font -->
             <div class="mb-6">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Title Font (Shared)</h3>
+                <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-2">Title Font (Shared)</h3>
                 <button id="title-font-button" onclick="handleUiTapFeedback(); openSelectionModal('title')"
-                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark-mode:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 text-gray-800 dark-mode:text-gray-100 frosted-option">
+                        class="ripple-btn w-full p-3 flex justify-between items-center rounded-xl border-2 border-gray-300 dark:border-gray-600 focus:ring-primary-hex focus:border-primary-hex transition duration-150 frosted-option">
                     <span id="current-title-font" class="font-semibold">Lora (Serif, Default)</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-500">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
@@ -883,43 +913,43 @@
 
 
             <!-- Game-Specific Settings -->
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Input Style (Game Specific)</h3>
+            <div class="mb-6 border-t pt-4 border-gray-300 dark:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-2">Input Style (Game Specific)</h3>
                 <div class="flex space-x-4">
                     <button onclick="setInputStyle('rounded')" data-style-id="rounded" id="style-rounded"
-                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
+                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent frosted-option hover:bg-opacity-80 transition duration-150">
                         Rounded
                     </button>
                     <button onclick="setInputStyle('square')" data-style-id="square" id="style-square"
-                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent text-gray-700 dark-mode:text-gray-300 frosted-option hover:bg-opacity-80 transition duration-150">
+                            class="ripple-btn flex-1 p-3 rounded-xl border-2 border-transparent frosted-option hover:bg-opacity-80 transition duration-150">
                         Square
                     </button>
                 </div>
             </div>
 
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Feedback (Game Specific)</h3>
+            <div class="mb-6 border-t pt-4 border-gray-300 dark:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-2">Feedback (Game Specific)</h3>
                 <div class="flex flex-col space-y-2">
                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-audio" onclick="toggleAudio()" 
-                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
-                        <span class="text-gray-700 dark-mode:text-gray-300">Disable Sound Effects</span>
+                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark:bg-gray-700 transition duration-150 focus:ring-primary-hex">
+                        <span class="text-gray-700 dark:text-gray-300">Disable Sound Effects</span>
                     </label>
                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-haptics" onclick="toggleHaptics()" 
-                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
-                        <span class="text-gray-700 dark-mode:text-gray-300">Disable Vibration (Haptics)</span>
+                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark:bg-gray-700 transition duration-150 focus:ring-primary-hex">
+                        <span class="text-gray-700 dark:text-gray-300">Disable Vibration (Haptics)</span>
                     </label>
                 </div>
             </div>
 
-            <div class="mb-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
-                <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2">Quiz Display (Game Specific)</h3>
+            <div class="mb-6 border-t pt-4 border-gray-300 dark:border-gray-700">
+                <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-2">Quiz Display (Game Specific)</h3>
                 <div class="flex flex-col space-y-2">
                     <label class="ripple-btn flex items-center space-x-3 cursor-pointer p-2 rounded-xl frosted-option hover:bg-opacity-80">
                         <input type="checkbox" id="toggle-text-hue" onclick="toggleTextHue()" 
-                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark-mode:bg-gray-700 transition duration-150 focus:ring-primary-hex">
-                        <span class="text-gray-700 dark-mode:text-gray-300">Themed Text Hue (Subtle Color Tint)</span>
+                                class="form-checkbox h-5 w-5 rounded text-primary-hex border-gray-300 dark:bg-gray-700 transition duration-150 focus:ring-primary-hex">
+                        <span class="text-gray-700 dark:text-gray-300">Themed Text Hue (Subtle Color Tint)</span>
                     </label>
                 </div>
             </div>
@@ -935,10 +965,10 @@
     <!-- Selection Modal (for Fonts, Quiz Length, Difficulty) -->
     <div id="selection-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-overlay">
         <div class="selection-modal-content liquid-glass-card w-full max-w-sm p-0">
-            <div class="p-4 flex justify-between items-center border-b dark-mode:border-gray-700">
-                <h3 id="selection-modal-title" class="text-xl font-bold text-gray-900 dark-mode:text-gray-100">Select Option</h3>
-                <button onclick="handleUiTapFeedback(); closeSelectionModal()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark-mode:hover:bg-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark-mode:text-gray-200">
+            <div class="p-4 flex justify-between items-center border-b dark:border-gray-700">
+                <h3 id="selection-modal-title" class="text-xl font-bold text-gray-900 dark:text-gray-100">Select Option</h3>
+                <button onclick="handleUiTapFeedback(); closeSelectionModal()" class="ripple-btn p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-800 dark:text-gray-200">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
@@ -953,7 +983,7 @@
     <!-- Data Management Modal -->
     <div id="data-management-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
         <div class="modal-content liquid-glass-card w-full max-w-3xl p-6 overflow-y-auto max-h-[90vh]">
-            <h2 class="text-2xl font-bold mb-4 text-gray-900 dark-mode:text-gray-100 border-b pb-2 border-primary">
+            <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100 border-b pb-2 border-primary">
                 Manage Vocabulary Data (<span id="current-question-count">0</span> Total)
             </h2>
             
@@ -964,52 +994,52 @@
             <p id="refresh-feedback" class="text-center text-sm font-semibold mt-2 hidden"></p>
 
             
-            <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2 mt-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+            <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-2 mt-6 border-t pt-4 border-gray-300 dark:border-gray-700">
                 Manually Add a Custom Question (Category: Vocabulary)
             </h3>
-            <p class="text-sm text-gray-600 dark-mode:text-gray-400 mb-4">
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
                 Enter the 8 required fields below. The **Correct Answer (Letter)** must be A, B, C, or D. This is added to your **Custom Questions** list.
             </p>
             
             <div id="add-data-form" class="space-y-4 p-4 bg-primary/5 rounded-xl border border-primary/20 frosted-option">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-2 col-span-1 md:col-span-2">
-                        <label for="add-difficulty" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Difficulty (Easy/Medium/Hard)</label>
+                        <label for="add-difficulty" class="text-sm font-medium text-gray-700 dark:text-gray-300 block">Difficulty (Easy/Medium/Hard)</label>
                         <input type="text" id="add-difficulty" value="Medium" placeholder="e.g., 'Medium'" class="w-full p-3">
                     </div>
                 </div>
 
                 <div class="space-y-2">
-                    <label for="add-question-text" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Question Text</label>
+                    <label for="add-question-text" class="text-sm font-medium text-gray-700 dark:text-gray-300 block">Question Text</label>
                     <textarea id="add-question-text" rows="2" placeholder="e.g., 'What is the synonym for **happy**?'" class="w-full p-3"></textarea>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div class="space-y-2">
-                        <label for="add-option-a" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Option A</label>
+                        <label for="add-option-a" class="text-sm font-medium text-gray-700 dark:text-gray-300 block">Option A</label>
                         <input type="text" id="add-option-a" placeholder="Option A" class="w-full p-3">
                     </div>
                     <div class="space-y-2">
-                        <label for="add-option-b" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Option B</label>
+                        <label for="add-option-b" class="text-sm font-medium text-gray-700 dark:text-gray-300 block">Option B</label>
                         <input type="text" id="add-option-b" placeholder="Option B" class="w-full p-3">
                     </div>
                     <div class="space-y-2">
-                        <label for="add-option-c" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Option C</label>
+                        <label for="add-option-c" class="text-sm font-medium text-gray-700 dark:text-gray-300 block">Option C</label>
                         <input type="text" id="add-option-c" placeholder="Option C" class="w-full p-3">
                     </div>
                     <div class="space-y-2">
-                        <label for="add-option-d" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Option D</label>
+                        <label for="add-option-d" class="text-sm font-medium text-gray-700 dark:text-gray-300 block">Option D</label>
                         <input type="text" id="add-option-d" placeholder="Option D" class="w-full p-3">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-3 gap-4">
                     <div class="space-y-2 col-span-1">
-                        <label for="add-correct-answer" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Correct (A/B/C/D)</label>
+                        <label for="add-correct-answer" class="text-sm font-medium text-gray-700 dark:text-gray-300 block">Correct (A/B/C/D)</label>
                         <input type="text" id="add-correct-answer" placeholder="A, B, C, or D" maxlength="1" class="w-full p-3 uppercase">
                     </div>
                     <div class="space-y-2 col-span-2">
-                        <label for="add-explanation" class="text-sm font-medium text-gray-700 dark-mode:text-gray-300 block">Explanation / Notes</label>
+                        <label for="add-explanation" class="text-sm font-medium text-gray-700 dark:text-gray-300 block">Explanation / Notes</label>
                         <input type="text" id="add-explanation" placeholder="Detailed explanation" class="w-full p-3">
                     </div>
                 </div>
@@ -1021,7 +1051,7 @@
                 <p id="data-management-feedback" class="text-center text-sm font-semibold mt-2 hidden"></p>
             </div>
             
-            <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-gray-300 mb-2 mt-6 border-t pt-4 border-gray-300 dark-mode:border-gray-700">
+            <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-300 mb-2 mt-6 border-t pt-4 border-gray-300 dark:border-gray-700">
                 Custom Questions Added:
             </h3>
             
@@ -1052,18 +1082,28 @@
         ];
         const FONT_OPTIONS = {
             body: [
-                { value: 'Inter', label: 'Inter (Sans-serif, Default)' },
+                { value: 'Lexend', label: 'Lexend (Sans-serif, Default)' },
+                { value: 'DM Sans', label: 'DM Sans (Sans-serif)' },
+                { value: 'Poppins', label: 'Poppins (Sans-serif)' },
+                { value: 'Inter', label: 'Inter (Sans-serif)' },
                 { value: 'Roboto', label: 'Roboto (Sans-serif)' },
                 { value: 'Source Sans 3', label: 'Source Sans 3 (Sans-serif)' },
-                { value: 'Merriweather', label: 'Merriweather (Serif)' },
-                { value: 'Poppins', label: 'Poppins (Sans-serif)' } // Added Poppins
+                { value: 'Merriweather', label: 'Merriweather (Serif)' }
             ],
             title: [
-                { value: 'Lora', label: 'Lora (Serif, Default)' },
+                { value: 'Montserrat', label: 'Montserrat (Sans-serif, Default)' },
+                { value: 'DM Serif Display', label: 'DM Serif Display (Serif)' },
+                { value: 'Outfit', label: 'Outfit (Sans-serif)' },
+                { value: 'Lora', label: 'Lora (Serif)' },
                 { value: 'Playfair Display', label: 'Playfair Display (Serif)' },
-                { value: 'Montserrat', label: 'Montserrat (Sans-serif)' }, // Added Montserrat
                 { value: 'Merriweather', label: 'Merriweather (Serif)' }
             ]
+        };
+        
+        // NEW: Font Combination Definitions
+        const FONT_COMBINATIONS = {
+            'default1': { title: 'DM Serif Display', body: 'DM Sans' }, // Elegant
+            'default2': { title: 'Montserrat', body: 'Lexend' } // Modern
         };
         
         // Default game settings
@@ -1314,12 +1354,12 @@
             saveLocalStorageSetting('titleFont', font);
 
             // --- NEW: Sync to Global Settings ---
-            const fallback = (font === 'Lora' || font === 'Playfair Display' || font === 'Merriweather') ? 'serif' : 'sans-serif'; 
+            const fallback = (font === 'Lora' || font === 'Playfair Display' || font === 'Merriweather' || font === 'DM Serif Display') ? 'serif' : 'sans-serif'; 
             const globalFontValue = `'${font}', ${fallback}`;
             setGlobalSetting('titleFont', globalFontValue);
             // --- End Sync ---
 
-            const fallbackCss = (font === 'Lora' || font === 'Playfair Display' || font === 'Merriweather') ? 'serif' : 'sans-serif'; 
+            const fallbackCss = (font === 'Lora' || font === 'Playfair Display' || font === 'Merriweather' || font === 'DM Serif Display') ? 'serif' : 'sans-serif'; 
             document.documentElement.style.setProperty('--font-title', `"${font}", ${fallbackCss}`);
             updateSettingsUI(); 
         }
@@ -1387,8 +1427,8 @@
             const color = getLocalStorageSetting('color', 'indigo');
             const contrast = getLocalStorageSetting('contrast', 'default');
             const textHue = getLocalStorageSetting('textHue', false);
-            const bodyFont = getLocalStorageSetting('bodyFont', 'Inter');
-            const titleFont = getLocalStorageSetting('titleFont', 'Lora');
+            const bodyFont = getLocalStorageSetting('bodyFont', 'Lexend');
+            const titleFont = getLocalStorageSetting('titleFont', 'Montserrat');
             
             const body = document.body;
             body.setAttribute('data-color', color);
@@ -1427,6 +1467,7 @@
             // Highlight active contrast/input style
             document.querySelectorAll('[data-contrast-id], [data-style-id]').forEach(btn => {
                 const isActive = (btn.dataset.contrastId === contrast) || (btn.dataset.styleId === inputStyle);
+                 // Use ring for contrast/input style, consistent with font combo buttons
                 btn.classList.toggle('ring-4', isActive);
                 btn.classList.toggle('ring-primary-hex', isActive);
             });
@@ -1441,6 +1482,7 @@
             updateDifficultyLevelButton(); // game-specific
             updateFontButton('body'); // shared
             updateFontButton('title'); // shared
+            updateFontCombinationUI(); // NEW: Update font combo buttons
 
 
             document.getElementById('score-display').style.color = `var(--color-primary-hex)`;
@@ -1502,8 +1544,8 @@
             // --- Load Global Settings ---
             const globalTheme = getGlobalSetting('theme', 'auto'); // 'auto', 'light', 'dark'
             const globalColorName = getGlobalSetting('colorTheme', 'Indigo'); // 'Indigo', 'Teal'
-            const globalBodyFont = getGlobalSetting('bodyFont', "'Inter', sans-serif"); // "'Poppins', sans-serif"
-            const globalTitleFont = getGlobalSetting('titleFont', "'Lora', serif"); // "'Montserrat', sans-serif"
+            const globalBodyFont = getGlobalSetting('bodyFont', "'Lexend', sans-serif"); // "'Poppins', sans-serif"
+            const globalTitleFont = getGlobalSetting('titleFont', "'Montserrat', sans-serif"); // "'Montserrat', sans-serif"
             const globalContrast = getGlobalSetting('contrast', 'default'); // 'default', 'high'
 
             // --- Translate and Apply Global Settings ---
@@ -1520,11 +1562,11 @@
             // 3. Translate and Save Fonts
             // Extract font name: "'Poppins', sans-serif" -> "Poppins"
             const extractFontName = (fontFamily) => {
-                if (!fontFamily) return 'Inter'; // Default for vocab
+                if (!fontFamily) return 'Lexend'; // Default for vocab
                 const name = fontFamily.split(',')[0].replace(/'/g, '').trim();
                 // Ensure font is available in vocab game
                 const availableFonts = FONT_OPTIONS.body.map(f => f.value).concat(FONT_OPTIONS.title.map(f => f.value));
-                return availableFonts.includes(name) ? name : (fontFamily.includes('serif') ? 'Lora' : 'Inter');
+                return availableFonts.includes(name) ? name : (fontFamily.includes('serif') ? 'DM Serif Display' : 'Lexend');
             };
             
             const localBodyFont = extractFontName(globalBodyFont);
@@ -1585,14 +1627,14 @@
                     break;
                 case 'body':
                     titleEl.textContent = 'Select Body Font';
-                    currentVal = getLocalStorageSetting('bodyFont', 'Inter');
+                    currentVal = getLocalStorageSetting('bodyFont', 'Lexend');
                     optionsHTML = FONT_OPTIONS.body.map(font => 
                         renderOption('body-font', font.value, font.label, currentVal, 'handleSelectionChange')
                     ).join('');
                     break;
                 case 'title':
                     titleEl.textContent = 'Select Title Font';
-                    currentVal = getLocalStorageSetting('titleFont', 'Lora');
+                    currentVal = getLocalStorageSetting('titleFont', 'Montserrat');
                     optionsHTML = FONT_OPTIONS.title.map(font => 
                         renderOption('title-font', font.value, font.label, currentVal, 'handleSelectionChange')
                     ).join('');
@@ -1695,7 +1737,7 @@
             
             let styleAttr = '';
             if (type.includes('font')) {
-                const fallback = (value === 'Lora' || value === 'Playfair Display' || value === 'Merriweather') ? 'serif' : 'sans-serif'; 
+                const fallback = (value === 'Lora' || value === 'Playfair Display' || value === 'Merriweather' || value === 'DM Serif Display') ? 'serif' : 'sans-serif'; 
                 styleAttr = `style="font-family: '${value}', ${fallback};"`;
             }
 
@@ -1728,13 +1770,56 @@
 
         function updateFontButton(type) {
             const id = type === 'body' ? 'current-body-font' : 'current-title-font';
-            const defaultFont = type === 'body' ? 'Inter' : 'Lora';
+            const defaultFont = type === 'body' ? 'Lexend' : 'Montserrat';
             const value = getLocalStorageSetting(type === 'body' ? 'bodyFont' : 'titleFont', defaultFont);
             const button = document.getElementById(id);
             if (button) {
                 button.textContent = getLabel(type, value);
             }
         }
+        
+        // --- NEW: Font Combination Functions ---
+        window.applyFontCombination = function(comboName) {
+            const combo = FONT_COMBINATIONS[comboName];
+            if (combo) {
+                // Use the existing setters
+                window.setTitleFont(combo.title); 
+                window.setBodyFont(combo.body);
+                // Update individual dropdowns
+                updateFontButton('title');
+                updateFontButton('body');
+            }
+            updateFontCombinationUI(); // Update button active state
+        }
+
+        function updateFontCombinationUI() {
+            const currentTitle = getLocalStorageSetting('titleFont', 'Montserrat'); // Use vocab game's default
+            const currentBody = getLocalStorageSetting('bodyFont', 'Lexend'); // Use vocab game's default
+
+            const default1 = FONT_COMBINATIONS['default1'];
+            const default2 = FONT_COMBINATIONS['default2'];
+
+            let activeCombo = null;
+            if (currentTitle === default1.title && currentBody === default1.body) {
+                activeCombo = 'default1';
+            } else if (currentTitle === default2.title && currentBody === default2.body) {
+                activeCombo = 'default2';
+            }
+
+            // Adapt selector for vocab game's button style (use ring)
+            document.querySelectorAll('#font-combo-btns button').forEach(btn => {
+                const isActive = btn.dataset.combo === activeCombo;
+                btn.classList.toggle('ring-4', isActive); // Use the 'active' style from vocab game
+                btn.classList.toggle('ring-primary-hex', isActive);
+                 // Also ensure the text color is correct when active/inactive
+                btn.classList.toggle('text-gray-700', !isActive);
+                btn.classList.toggle('dark:text-gray-300', !isActive);
+                btn.classList.toggle('text-gray-900', isActive); // Example active text color
+                btn.classList.toggle('dark:text-white', isActive); // Example active dark text color
+
+            });
+        }
+        // --- End Font Combination Functions ---
         
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -1844,11 +1929,11 @@
             
             customQuestions.forEach((q, index) => {
                 const item = document.createElement('div');
-                item.className = 'flex justify-between items-start p-2 border-b dark-mode:border-gray-700 hover:bg-opacity-80 rounded-md transition duration-150';
+                item.className = 'flex justify-between items-start p-2 border-b dark:border-gray-700 hover:bg-opacity-80 rounded-md transition duration-150';
                 item.innerHTML = `
                     <div class="flex-1 min-w-0 mr-4">
-                        <span class="font-semibold text-primary dark-mode:text-primary-light line-clamp-1">${q.text}</span>
-                        <span class="text-xs text-gray-600 dark-mode:text-gray-400 block">Correct: ${q.correct} (${q.options[q.correct]}) (Difficulty: ${q.difficulty.toUpperCase()})</span>
+                        <span class="font-semibold text-primary dark:text-primary-light line-clamp-1">${q.text}</span>
+                        <span class="text-xs text-gray-600 dark:text-gray-400 block">Correct: ${q.correct} (${q.options[q.correct]}) (Difficulty: ${q.difficulty.toUpperCase()})</span>
                     </div>
                     <button onclick="handleUiTapFeedback(); deleteCustomQuestion(${index})" class="ripple-btn p-2 rounded-lg text-red-500 hover:text-red-700 text-sm flex-shrink-0">
                         Remove
@@ -2136,7 +2221,7 @@
                     Percentage: <span class="text-3xl text-primary">${percentage}%</span>
                 </p>
                 
-                <div class="border-t pt-4 mt-4 border-gray-300 dark-mode:border-gray-700 text-left">
+                <div class="border-t pt-4 mt-4 border-gray-300 dark:border-gray-700 text-left">
                     <h4 class="text-lg font-bold text-gray-900 mb-3">Detailed Summary:</h4>
                     
                     <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
