@@ -1,7 +1,8 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Removed duplicate viewport tags, kept one -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Learning Game Hub</title>
     
@@ -63,7 +64,12 @@
             --text-contrast-dark: #ffffff;  /* White for dark mode high contrast */
         }
 
-        .dark {
+        /* --- DARK MODE FIX ---
+         * Changed selector from ".dark" to ":root.dark"
+         * This ensures the dark mode variables correctly override the :root defaults
+         * when the .dark class is applied to the <html> (root) element.
+        */
+        :root.dark {
             --background-start: #111827;
             --background-end: #1f2937;
             --card-background: rgba(31, 41, 55, 0.6); /* Darker card */
@@ -92,21 +98,23 @@
             font-family: var(--font-body); /* Apply body font globally */
         }
 
-        /* NEW: High Contrast Styles */
+        /* --- DARK MODE FIX ---
+         * Also updated high-contrast rules to use :root.dark
+        */
         body[data-contrast="high"] { color: var(--text-contrast-light); }
         body[data-contrast="high"] .text-secondary-color { color: #374151; } /* Darker gray for light high contrast */
-        .dark body[data-contrast="high"] { color: var(--text-contrast-dark); }
-        .dark body[data-contrast="high"] .text-secondary-color { color: #f3f4f6; } /* Lighter gray for dark high contrast */
+        :root.dark body[data-contrast="high"] { color: var(--text-contrast-dark); }
+        :root.dark body[data-contrast="high"] .text-secondary-color { color: #f3f4f6; } /* Lighter gray for dark high contrast */
         /* Ensure buttons remain readable */
         body[data-contrast="high"] .setting-btn,
         body[data-contrast="high"] .modal-content h2,
         body[data-contrast="high"] .modal-content span { color: var(--text-contrast-light) !important; }
-        .dark body[data-contrast="high"] .setting-btn,
-        .dark body[data-contrast="high"] .modal-content h2,
-        .dark body[data-contrast="high"] .modal-content span { color: var(--text-contrast-dark) !important; }
+        :root.dark body[data-contrast="high"] .setting-btn,
+        :root.dark body[data-contrast="high"] .modal-content h2,
+        :root.dark body[data-contrast="high"] .modal-content span { color: var(--text-contrast-dark) !important; }
         /* Keep accent colors for visual cues */
         body[data-contrast="high"] .accent-text,
-        .dark body[data-contrast="high"] .accent-text { color: var(--primary-color-hex) !important; }
+        :root.dark body[data-contrast="high"] .accent-text { color: var(--primary-color-hex) !important; }
 
 
         .game-card {
@@ -237,6 +245,11 @@
         </header>
 
         <main class="flex-grow">
+            <!-- 
+              NOTE: Grid is md:grid-cols-2 lg:grid-cols-3
+              The new 4th card will wrap to the next line on large screens,
+              which looks clean and doesn't require changing grid columns.
+            -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 
                 <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
@@ -278,6 +291,20 @@
                     </button>
                 </div>
 
+                <!-- NEW: Teluginglish Dictionary Card -->
+                <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
+                    <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                        <i data-lucide="book-heart" class="lucide-icon"></i> <!-- New icon -->
+                    </div>
+                    <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-primary);">Teluginglish Dictionary</h2> 
+                    <p id="dictionary-card-progress" class="flex-grow text-secondary-color">
+                        Explore a crowd-sourced dictionary for Telugu-English conversational words.
+                    </p>
+                    <button onclick="window.location.href='Teluginglish dictionary.html'" class="card-button">
+                        Open Dictionary
+                    </button>
+                </div>
+
             </div>
         </main>
         
@@ -306,6 +333,8 @@
                         <p style="color: var(--text-primary);">Spoken English: <strong id="spoken-progress">0/45</strong> lessons</p>
                         <p style="color: var(--text-primary);">Vocabulary: <strong id="vocab-progress">0</strong> quizzes completed</p>
                         <p style="color: var(--text-primary);">Verbs: <strong id="verbs-progress">0</strong> quizzes completed</p>
+                        <!-- NEW: Dictionary Progress Line -->
+                        <p style="color: var(--text-primary);">Dictionary: <strong id="dictionary-progress">0</strong> words added</p>
                     </div>
                 </div>
             </div>
@@ -446,7 +475,7 @@
         // --- Offline Profile & Progress Logic ---
         const PROGRESS_KEY = 'englishHubProgress'; 
         let localUserId = null;
-        let localProgress = { spoken: 0, vocab: 0, verbs: 0 };
+        let localProgress = { spoken: 0, vocab: 0, verbs: 0 }; // MODIFIED: Removed dictionary, will be loaded separately
 
         function getLocalUserId() {
             let id = localStorage.getItem('englishHubUserId'); 
@@ -457,11 +486,13 @@
             return id;
         }
 
+        // MODIFIED: This function now also loads dictionary progress from GLOBAL_SETTINGS_KEY
         function loadLocalProgress() {
             localUserId = getLocalUserId();
             const userIdEl = document.getElementById('user-id');
             if(userIdEl) userIdEl.textContent = localUserId;
 
+            // Load game progress
             const progressString = localStorage.getItem(PROGRESS_KEY);
             localProgress = { spoken: 0, vocab: 0, verbs: 0 }; // Reset defaults
             if (progressString) {
@@ -472,19 +503,41 @@
             localProgress.vocab = localProgress.vocab || 0;
             localProgress.verbs = localProgress.verbs || 0;
             
+            // NEW: Load dictionary progress from global settings
+            let dictionaryWordCount = 0;
+            try {
+                const settingsString = localStorage.getItem(GLOBAL_SETTINGS_KEY);
+                if (settingsString) {
+                    const globalSettings = JSON.parse(settingsString);
+                    if (globalSettings.customWords && Array.isArray(globalSettings.customWords)) {
+                        dictionaryWordCount = globalSettings.customWords.length;
+                    }
+                }
+            } catch (e) {
+                console.error("Error reading dictionary progress:", e);
+            }
+
+            // Update profile modal
             const spokenProgressEl = document.getElementById('spoken-progress');
             if(spokenProgressEl) spokenProgressEl.textContent = `${localProgress.spoken}/45`;
             const vocabProgressEl = document.getElementById('vocab-progress');
             if(vocabProgressEl) vocabProgressEl.textContent = `${localProgress.vocab}`;
             const verbsProgressEl = document.getElementById('verbs-progress');
             if(verbsProgressEl) verbsProgressEl.textContent = `${localProgress.verbs}`;
+            const dictionaryProgressEl = document.getElementById('dictionary-progress'); // NEW
+            if(dictionaryProgressEl) dictionaryProgressEl.textContent = `${dictionaryWordCount}`; // NEW
             
+            // Update game cards
             const spokenDesc = document.getElementById('spoken-card-progress');
             if (spokenDesc) spokenDesc.innerHTML = `Test your knowledge with 45 lessons...<br><strong class="accent-text" style="color: var(--primary-color-hex);">Completed: ${localProgress.spoken}/45</strong>`;
             const vocabDesc = document.getElementById('vocab-card-progress');
             if (vocabDesc) vocabDesc.innerHTML = `Expand your word power...<br><strong class="accent-text" style="color: var(--primary-color-hex);">Completed: ${localProgress.vocab} quizzes</strong>`;
             const verbsDesc = document.getElementById('verbs-card-progress');
             if(verbsDesc) verbsDesc.innerHTML = `Master the tricky past tense forms...<br><strong class="accent-text" style="color: var(--primary-color-hex);">Completed: ${localProgress.verbs} quizzes</strong>`;
+            
+            // NEW: Update dictionary card
+            const dictionaryDesc = document.getElementById('dictionary-card-progress');
+            if(dictionaryDesc) dictionaryDesc.innerHTML = `Explore a crowd-sourced dictionary...<br><strong class="accent-text" style="color: var(--primary-color-hex);">Words Added: ${dictionaryWordCount}</strong>`;
         }
 
         window.openProfile = function() {
@@ -508,14 +561,14 @@
                 root.classList.remove('dark');
             }
             
-            // Update button text based on the *setting*, not just the current visual state
+            // *** BUG FIX: Changed logic to show the CURRENT theme, not the NEXT theme ***
             if (toggleBtn) {
                 if (currentSetting === 'light') {
-                    toggleBtn.innerHTML = '<i data-lucide="moon" class="w-4 h-4 mr-2 inline-block"></i> Dark Mode';
-                } else if (currentSetting === 'dark') {
-                    toggleBtn.innerHTML = '<i data-lucide="cog" class="w-4 h-4 mr-2 inline-block"></i> System';
-                } else { // 'auto'
                     toggleBtn.innerHTML = '<i data-lucide="sun" class="w-4 h-4 mr-2 inline-block"></i> Light Mode';
+                } else if (currentSetting === 'dark') {
+                    toggleBtn.innerHTML = '<i data-lucide="moon" class="w-4 h-4 mr-2 inline-block"></i> Dark Mode';
+                } else { // 'auto'
+                    toggleBtn.innerHTML = '<i data-lucide="cog" class="w-4 h-4 mr-2 inline-block"></i> System';
                 }
             }
             
@@ -804,6 +857,8 @@
             
             // UPDATED pageshow listener
             window.addEventListener('pageshow', function(event) {
+                // This logic ensures that if you use the browser's back button,
+                // the theme and progress are correctly re-loaded.
                 if (event.persisted) {
                     loadLocalProgress();
                     
@@ -816,12 +871,12 @@
                     }
                     applyTheme(isDark);
                     
-                    const colorTheme = getLocalStorageSetting('colorTheme');
-                    applyAccentColor(colorTheme);
-                    const savedContrast = getLocalStorageSetting('contrast'); // Reload contrast too
+                    // Re-apply color, contrast, and fonts
+                    const colorTheme = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name);
+                    applyAccentColor(colorTheme); 
+                    const savedContrast = getLocalStorageSetting('contrast', 'default');
                     applyContrast(savedContrast);
                     
-                    // Reload fonts from storage
                     const titleFont = getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value);
                     const bodyFont = getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value);
                     applyTitleFont(titleFont);
@@ -838,3 +893,4 @@
     </script>
 </body>
 </html>
+

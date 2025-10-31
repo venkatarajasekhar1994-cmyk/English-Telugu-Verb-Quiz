@@ -8,13 +8,14 @@
 // (e.g., you update 'spoken english.html' or 'Verbs.csv'),
 // you MUST come into this file and change this version number.
 //
-// For example, change 'v47' to 'v48', then 'v49', and so on.
+// For example, change 'v48' to 'v49', and so on.
 //
 // This is the *only* way to tell the browser to delete the old
 // cached files and download your new ones.
 //
 // -------------------------------------------------------------------------\
-const CACHE_NAME = 'my-pwa-cache-v47'; // <-- Updated from v46 to v47
+// UPDATED: Incremented from v47 to v48 to force an update.
+const CACHE_NAME = 'my-pwa-cache-v48';
 
 // This list includes all the files needed for your app to work offline.
 // It correctly includes all HTML pages and their required data files.
@@ -36,41 +37,47 @@ const urlsToCache = [
 
   // Game 3: Verbs Game
   'Verbs game.html',
-  'Verbs.csv'
+  'Verbs.csv',
 
-  // NOTE: If you add any new pages, images, or CSS files, add them here!
+  // NEW: Added Dictionary and its data file
+  'Teluginglish dictionary.html',
+  'english2telugu.csv'
 ];
 
-// --- 1. INSTALL: Cache all the core app files ---
+
+// -------------------------------------------------------------------------\
+// --- Install Event ---\
+// -------------------------------------------------------------------------\
 // This runs when the service worker is first installed.
+// It opens our cache and adds all the files listed above.
 self.addEventListener('install', event => {
   console.log('[Service Worker] Install event');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('[Service Worker] Caching all app shell files');
+        console.log('[Service Worker] Caching app shell');
         return cache.addAll(urlsToCache);
       })
       .then(() => {
-        console.log('[Service Worker] All files cached. Ready to activate.');
-        // Force the new service worker to become active immediately.
+        console.log('[Service Worker] All files cached. Activating...');
+        // Force the new service worker to become active immediately
         return self.skipWaiting();
-      })
-      .catch(error => {
-        console.error('[Service Worker] Failed to cache files:', error);
       })
   );
 });
 
-// --- 2. ACTIVATE: Clean up old caches ---
-// This runs after 'install' and when the new service worker takes control.
+
+// -------------------------------------------------------------------------\
+// --- Activate Event ---\
+// -------------------------------------------------------------------------\
+// This runs after 'install' and is where we clean up old caches.
 self.addEventListener('activate', event => {
   console.log('[Service Worker] Activate event');
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
-          // If a cache's name is different from our new CACHE_NAME, delete it.
+          // If the cacheName is not our new one, delete it
           if (cacheName !== CACHE_NAME) {
             console.log(`[Service Worker] Deleting old cache: ${cacheName}`);
             return caches.delete(cacheName);
@@ -78,41 +85,43 @@ self.addEventListener('activate', event => {
         })
       );
     }).then(() => {
-      console.log('[Service Worker] Old caches cleared. Claiming clients.');
-      // Take control of all open pages immediately.
+      console.log('[Service Worker] Claiming clients');
+      // Take control of all open pages immediately
       return self.clients.claim();
     })
   );
 });
 
-// --- 3. FETCH: Intercept network requests ---
-// This runs every time the app makes a network request (e.g., for a file or data).
+
+// -------------------------------------------------------------------------\
+// --- Fetch Event ---\
+// -------------------------------------------------------------------------\
+// This runs every time the app makes a network request (e.g., for a file).
+// It uses two strategies:
+// 1. Network-First (for data files): Tries network, falls back to cache.
+// 2. Cache-First (for app shell): Tries cache, falls back to network.
 self.addEventListener('fetch', event => {
   const requestUrl = new URL(event.request.url);
 
-  // --- Strategy 1: Network-First for .csv and .js data files ---
-  // This ensures that if the user is online, they *always* get the
-  // freshest data. If they are offline, it falls back to the cache.
+  // --- Strategy 1: Network-First (Stale-While-Revalidate) for Data ---\
+  // We use this for CSV and JS files because we want the user to get
+  // the freshest data if they are online, but still work if offline.
   if (requestUrl.pathname.endsWith('.csv') || requestUrl.pathname.endsWith('.js')) {
-    // console.log(`[Service Worker] Fetching (Network-First): ${requestUrl.pathname}`);
     event.respondWith(
-      // 1. Try to fetch from the network first.
+      // 1. Try to fetch from the network.
       fetch(event.request)
         .then(networkResponse => {
           // 2. If successful, cache the new response and return it.
-          // console.log(`[Service Worker] Fetched from Network: ${requestUrl.pathname}`);
-          // Clone the response because it can only be read once.
+          // We must clone the response because it can only be read once.
           const responseToCache = networkResponse.clone();
-          // Open our cache and put the new, fresh file into it.
-          caches.open(CACHE_NAME)
-            .then(cache => {
-              cache.put(event.request, responseToCache);
-            });
-          // Return the fresh response to the page.
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseToCache);
+          });
+          // console.log(`[Service Worker] Serving from Network (and caching): ${requestUrl.pathname}`);
           return networkResponse;
         })
         .catch(error => {
-          // 3. If the network request fails (user is offline):
+          // 3. If the network fails (offline), try to get it from the cache.
           console.log(`[Service Worker] Network failed for ${requestUrl.pathname}, serving from cache.`);
           // Try to get the file from the cache instead.
           return caches.match(event.request);
@@ -146,7 +155,7 @@ self.addEventListener('fetch', event => {
       })
       .catch(error => {
         console.error('[Service Worker] Fetch failed:', error);
-        // You could return a fallback offline page here if you had one.
+        // You could return a fallback offline page here if needed
       })
   );
 });

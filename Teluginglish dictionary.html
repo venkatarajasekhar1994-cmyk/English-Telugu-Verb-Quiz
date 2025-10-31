@@ -1,0 +1,1121 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="te"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-key="appTitle">తెలుగు - ఇంగ్లీష్ డిక్షనరీ</title>
+    
+    <link rel="manifest" href="manifest.json">
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js', { scope: './' })
+                    .then(registration => console.log('Service Worker registered with scope: ', registration.scope))
+                    .catch(error => console.error('Service Worker registration failed: ', error));
+            });
+        }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    
+    <style>
+        /* --- Google Fonts Import (Merged from both files) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=DM+Serif+Display&family=Outfit:wght@700&family=Lora:wght@700&family=Playfair+Display:wght@700&family=Merriweather:wght@400;700&family=Lexend:wght@400;700&family=DM+Sans:wght@400;700&family=Poppins:wght@400;600;700&family=Inter:wght@400;600;700&family=Roboto:wght@400;700&family=Source+Sans+3:wght@400;700&family=Noto+Sans+Telugu:wght@400;500;700&display=swap');
+
+        /* --- CSS Variables (Based on Spoken English App) --- */
+        :root {
+            --title-font: 'Montserrat', 'Noto Sans Telugu', sans-serif; /* Default Title */
+            --body-font: 'Lexend', 'Noto Sans Telugu', sans-serif;   /* Default Body */
+            
+            --accent-color-rgb: 20, 184, 166; /* Teal RGB */
+            --accent-color-hex: #14b8a6; /* Teal Hex */
+            
+            /* Backgrounds - 4 stops for animation - Light Teal */
+            --bg-grad-color1: #99f6e4;
+            --bg-grad-color2: #5eead4;
+            --bg-grad-color3: #2dd4bf;
+            --bg-grad-color4: #14b8a6;
+            
+            /* Glass Effect (Light Mode) */
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --button-bg: rgba(0, 0, 0, 0.1);
+            --button-hover-bg: rgba(0, 0, 0, 0.2);
+            --modal-bg: rgba(255, 255, 255, 0.05);
+            --input-bg: rgba(255, 255, 255, 0.08); /* Specific for input */
+             
+            /* Text Colors (Light Mode) */
+            --text-main: #f3f4f6; /* Light text for gradient */
+            --text-subtle: #d1d5db;
+            --text-contrast-light: #111827; /* For high contrast */
+            --text-contrast-dark: #f9fafb; /* For high contrast in dark */
+        }
+
+        /* --- Dark Mode Variables --- */
+        .dark:root {
+            /* Backgrounds - 4 stops - Dark Teal */
+            --bg-grad-color1: #0f766e;
+            --bg-grad-color2: #0d9488;
+            --bg-grad-color3: #14b8a6;
+            --bg-grad-color4: #2dd4bf;
+
+            /* Glass Effect (Dark Mode) */
+            --glass-bg: rgba(31, 41, 55, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --button-bg: rgba(0, 0, 0, 0.3);
+            --button-hover-bg: rgba(0, 0, 0, 0.5);
+            --modal-bg: rgba(17, 24, 39, 0.6);
+            --input-bg: rgba(0, 0, 0, 0.25); /* Specific for input */
+
+            /* Text Colors (Dark Mode) */
+            --text-main: #f9fafb;
+            --text-subtle: #9ca3af;
+        }
+        
+        /* --- Text Contrast Application --- */
+        body { color: var(--text-main); }
+        .subtle-text-color { color: var(--text-subtle); } /* Use this class for secondary text */
+        body[data-contrast="high"] { color: var(--text-contrast-light); }
+        body[data-contrast="high"] .subtle-text-color { color: #4b5563; }
+        .dark body[data-contrast="high"] { color: var(--text-contrast-dark); }
+        .dark body[data-contrast="high"] .subtle-text-color { color: #e5e7eb; }
+        /* High contrast for specific elements */
+        body[data-contrast="high"] button:not(.accent-bg),
+        body[data-contrast="high"] a:not(.accent-bg) { color: var(--text-contrast-light) !important; border-color: rgba(0,0,0,0.3) !important; }
+        .dark body[data-contrast="high"] button:not(.accent-bg),
+        .dark body[data-contrast="high"] a:not(.accent-bg) { color: var(--text-contrast-dark) !important; border-color: rgba(255,255,255,0.3) !important; }
+        body[data-contrast="high"] .search-input { color: var(--text-contrast-light) !important; background: var(--glass-bg); }
+        .dark body[data-contrast="high"] .search-input { color: var(--text-contrast-dark) !important; background: var(--glass-bg); }
+        body[data-contrast="high"] .accent-text { color: var(--accent-color-hex) !important; }
+        body[data-contrast="high"] .result-card { background: rgba(255,255,255,0.2); } /* Slightly more opaque */
+        .dark body[data-contrast="high"] .result-card { background: rgba(0,0,0,0.3); }
+
+
+        /* --- Base Styles with Gradient --- */
+        body {
+            font-family: var(--body-font);
+            background: linear-gradient(-45deg, var(--bg-grad-color1), var(--bg-grad-color2), var(--bg-grad-color3), var(--bg-grad-color4));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            transition: color 0.3s ease;
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- Utility & Component Styles (Adapted for Dictionary) --- */
+        h1, h2, h3, h4, .font-title { font-family: var(--title-font); }
+        .accent-bg { background-color: rgb(var(--accent-color-rgb)); }
+        .accent-text { color: rgb(var(--accent-color-rgb)); }
+        .accent-border { border-color: rgb(var(--accent-color-rgb)); }
+        .accent-ring:focus { --tw-ring-color: rgb(var(--accent-color-rgb)); }
+        
+        /* Main container and Modals */
+        .glass-effect {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2); /* Softer shadow */
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+        /* Modal specific glass */
+        .modal-glass { 
+            background: var(--modal-bg); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px); 
+            border: 1px solid var(--glass-border); 
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); 
+        }
+        
+        /* Buttons */
+        .button-bg-color { background-color: var(--button-bg); transition: background-color 0.2s ease; border: 1px solid var(--glass-border); }
+        .button-bg-color:hover { background-color: var(--button-hover-bg); }
+        .selection-button { 
+            background-color: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: background-color 0.2s, border-color 0.2s; 
+            color: var(--text-main); /* Ensure text is light */
+        }
+        .selection-button:hover { background-color: rgba(255, 255, 255, 0.1); }
+        .selection-button.active { 
+            border-color: rgb(var(--accent-color-rgb)); 
+            background-color: rgba(var(--accent-color-rgb), 0.2); 
+            font-weight: 600; 
+        }
+        .btn-primary { /* Add Word Button */
+            @apply accent-bg text-white font-bold py-2.5 px-6 rounded-full shadow-md hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all;
+        }
+         .btn-secondary { /* Header buttons, swap lang */
+             @apply p-2 rounded-full text-gray-200 hover:text-white transition-colors glass-effect;
+         }
+         
+        /* Search Input */
+         .search-input {
+             background: var(--input-bg);
+             border: 1px solid var(--glass-border);
+             color: var(--text-main);
+             backdrop-filter: blur(5px);
+             -webkit-backdrop-filter: blur(5px);
+         }
+         .search-input:focus { border-color: rgb(var(--accent-color-rgb)); --tw-ring-color: transparent; }
+         input::placeholder { color: var(--text-subtle); opacity: 0.7; }
+         body[data-contrast="high"] input::placeholder { color: #6b7280; }
+         .dark body[data-contrast="high"] input::placeholder { color: #9ca3af; }
+
+        /* Tabs */
+        .tabs { border-bottom-color: var(--glass-border); }
+        .tab-btn { color: var(--text-subtle); border-bottom-color: transparent; }
+        .tab-btn.active { color: var(--text-main); border-bottom-color: rgb(var(--accent-color-rgb)); }
+        
+        /* Result Card */
+        .result-card { 
+             @apply glass-effect p-4 rounded-2xl shadow-sm transition-all duration-200; 
+        }
+        .result-card:hover { 
+            background: rgba(255, 255, 255, 0.15); /* Slightly lighter on hover */
+            transform: translateY(-2px);
+        }
+        .dark .result-card:hover { background: rgba(255, 255, 255, 0.08); }
+        .result-word { color: var(--text-main); } /* Main text color */
+        .result-pos { @apply subtle-text-color text-sm font-medium uppercase; }
+        .result-speak-btn, .bookmark-btn { 
+            @apply p-2 rounded-full text-gray-200 hover:text-white transition-colors; 
+            background-color: transparent; /* No extra bg needed */
+        }
+        .result-speak-btn:hover, .bookmark-btn:hover { background-color: rgba(255, 255, 255, 0.1); }
+        .bookmark-btn .icon-bookmarked { display: none; }
+        .bookmark-btn .icon-unbookmarked { display: block; }
+        .bookmark-btn.bookmarked .icon-bookmarked { display: block; }
+        .bookmark-btn.bookmarked .icon-unbookmarked { display: none; }
+        .bookmark-btn.bookmarked { color: rgb(var(--accent-color-rgb)); } /* Use accent color when active */
+
+        /* NEW: History Item Style */
+        .history-item-btn {
+            @apply w-full text-left p-3 rounded-lg selection-button text-lg;
+        }
+        
+        /* NEW: Clear History Button Style */
+        .btn-danger {
+             @apply bg-rose-800/60 text-white font-semibold py-2 px-5 rounded-full shadow-md hover:bg-rose-700/80 disabled:opacity-50 disabled:cursor-not-allowed transition-all;
+        }
+
+        /* Animation & Scrollbar */
+        .animated-float { animation: liquid-float 15s ease-in-out infinite; }
+        @keyframes liquid-float { 0% { transform: translateY(0px); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0px); } }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+        
+        /* Spinner */
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-left-color: var(--text-main); /* Use main text color */
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        /* Feedback Checkboxes (from Spoken English) */
+         .feedback-checkbox {
+             @apply flex items-center space-x-3 cursor-pointer p-2 rounded-lg button-bg-color hover:button-hover-bg text-white;
+         }
+         .feedback-checkbox input {
+              @apply h-5 w-5 rounded border-gray-500 bg-transparent focus:ring-offset-0 focus:ring-0 text-accent-color-hex;
+              accent-color: var(--accent-color-hex); /* For better browser compatibility */
+         }
+
+    </style>
+</head>
+<body class="transition-colors duration-300" style="font-size: 16px;"> <div class="max-w-2xl mx-auto p-4 md:p-6">
+        
+        <header class="flex items-center justify-between mb-6">
+            <h1 class="text-3xl md:text-4xl font-bold text-white shadow-sm font-title" data-i18n-key="title">డిక్షనరీ</h1>
+            <div class="flex items-center space-x-2">
+                 <a href="game hub.html" class="btn-secondary" aria-label="Game Hub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </a>
+                <button id="settings-button" class="btn-secondary" aria-label="Settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 0 2l-.15.08a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1 0-2l.15.08a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+                <button id="theme-toggle" class="btn-secondary" aria-label="Toggle Theme">
+                    <svg id="theme-icon-light" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg id="theme-icon-dark" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <svg id="theme-icon-system" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                </button>
+            </div>
+        </header>
+
+        <div id="startScreen" class="text-center p-6 rounded-2xl glass-effect animated-float">
+            <h1 class="text-3xl sm:text-4xl font-bold mb-4 font-title text-white" data-i18n-key="appTitle">
+                తెలుగు-ఇంగ్లీష్ డిక్షనరీ
+            </h1>
+            <p id="startMessage" class="text-lg subtle-text-color mb-8 min-h-[3em]" data-i18n-key="loading">
+                డిక్షనరీ డేటా లోడ్ అవుతోంది...
+            </p>
+             <div id="loading-spinner" class="spinner mx-auto"></div>
+        </div>
+
+        <main id="mainCard" class="glass-effect rounded-2xl p-4 sm:p-6 hidden animated-float">
+            <div class="tabs mb-4 flex space-x-1">
+                <button id="search-tab-btn" class="tab-btn active flex-1" data-i18n-key="searchTab">Search</button>
+                <button id="bookmarks-tab-btn" class="tab-btn flex-1" data-i18n-key="bookmarksTab">Bookmarks</button>
+                <button id="history-tab-btn" class="tab-btn flex-1" data-i18n-key="historyTab">History</button>
+            </div>
+            
+            <div id="search-container">
+                <div class="flex items-center space-x-2 mb-4">
+                    <input type="text" id="search-bar" class="search-input w-full px-5 py-3 rounded-full focus:outline-none focus:ring-2 text-lg accent-ring" placeholder="Search...">
+                    
+                    <button id="multi-action-btn" class="btn-secondary flex-shrink-0 !p-3 relative" aria-label="Long press to change type">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 2.1l4 4-4 4"/>
+                            <path d="M3 12.2v-2a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 21.9l-4-4 4-4"/>
+                            <path d="M21 11.8v2a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                        <span id="search-type-indicator" class="absolute -top-1.5 -right-1.5 accent-bg text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center border-2" style="border-color: var(--glass-border);">
+                            C
+                        </span>
+                    </button>
+                </div>
+                
+                <button id="add-word-btn" class="btn-primary w-full" data-i18n-key="addWordBtn">
+                    + Add New Word
+                </button>
+            </div>
+            
+            <div id="bookmarks-container" class="hidden space-y-3 mt-6 max-h-[60vh] overflow-y-auto no-scrollbar pr-2">
+                <p id="bookmarks-message" class="text-center p-6 text-lg subtle-text-color" data-i18n-key="noBookmarks">You have no bookmarked words.</p>
+                </div>
+
+            <div id="history-container" class="hidden space-y-3 mt-6 max-h-[60vh] overflow-y-auto no-scrollbar pr-2">
+                <div id="history-header" class="flex justify-end mb-2 hidden">
+                    <button id="clear-history-btn" class="btn-danger text-sm" data-i18n-key="clearHistory">
+                        Clear History
+                    </button>
+                </div>
+                <p id="history-message" class="text-center p-6 text-lg subtle-text-color" data-i18n-key="noHistory">You have no search history.</p>
+                </div>
+
+
+            <div id="results-container" class="space-y-3 mt-6 max-h-[60vh] overflow-y-auto no-scrollbar pr-2">
+                <p id="results-message" class="text-center p-6 text-lg subtle-text-color" data-i18n-key="searchPrompt">ఫలితాల కోసం శోధించండి</p>
+            </div>
+        </main>
+    </div>
+
+    <div id="settings-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
+        <div class="modal-glass rounded-2xl shadow-xl p-6 w-full max-w-md"> 
+             <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-white font-title" data-i18n-key="settings">Settings</h3>
+                <button id="close-settings-modal" class="text-gray-300 hover:text-white text-2xl font-bold" aria-label="Close settings modal">&times;</button>
+            </div>
+            <div class="space-y-4 max-h-[70vh] overflow-y-auto no-scrollbar pr-2">
+                <button id="language-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white flex justify-between items-center">
+                    <div>
+                        <span class="text-xs subtle-text-color" data-i18n-key="language">Language</span><br>
+                        <span id="current-language" class="font-semibold"></span> 
+                    </div>
+                 </button>
+                 
+                <button id="color-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white flex justify-between items-center">
+                    <div>
+                        <span class="text-xs subtle-text-color" data-i18n-key="themeColor">Accent Color</span><br>
+                        <span id="current-accent-color" class="font-semibold"></span> 
+                    </div>
+                     <span id="color-preview" class="w-5 h-5 rounded-full border border-white/20"></span>
+                </button>
+                
+                <div>
+                     <span class="text-xs subtle-text-color block mb-1" data-i18n-key="themeMode">Theme</span>
+                     <div class="flex space-x-2"> 
+                          <button id="theme-light" onclick="handleSelectionChange('theme', 'light')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button" data-i18n-key="lightMode">Light</button>
+                          <button id="theme-dark" onclick="handleSelectionChange('theme', 'dark')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button" data-i18n-key="darkMode">Dark</button>
+                          <button id="theme-system" onclick="handleSelectionChange('theme', 'system')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button" data-i18n-key="systemMode">System</button>
+                     </div>
+                </div>
+
+                <div>
+                     <span class="text-xs subtle-text-color block mb-1" data-i18n-key="textContrast">Text Contrast</span>
+                     <div class="flex space-x-2"> 
+                          <button id="contrast-default" onclick="handleSelectionChange('contrast', 'default')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button" data-i18n-key="contrastDefault">Default</button>
+                          <button id="contrast-high" onclick="handleSelectionChange('contrast', 'high')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button" data-i18n-key="contrastHigh">High Contrast</button>
+                     </div>
+                </div>
+
+                <div>
+                     <span class="text-xs subtle-text-color block mb-1" data-i18n-key="fontCombination">Font Combination</span>
+                     <div id="font-combo-btns" class="grid grid-cols-2 gap-2">
+                         <button onclick="applyFontCombination('default1')" data-combo="default1" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-center">
+                             <strong data-i18n-key="fontCombo1_title">Default 1</strong><br><span class="text-xs subtle-text-color" data-i18n-key="fontCombo1_desc">Elegant Serif</span>
+                         </button>
+                         <button onclick="applyFontCombination('default2')" data-combo="default2" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-center">
+                             <strong data-i18n-key="fontCombo2_title">Default 2</strong><br><span class="text-xs subtle-text-color" data-i18n-key="fontCombo2_desc">Modern Sans</span>
+                         </button>
+                     </div>
+                </div>
+                <hr class="border-white/20">
+                <span class="text-xs subtle-text-color text-center block -mt-2 mb-2" data-i18n-key="fontCustomize">Or Customize Manually:</span>
+                
+                <button id="body-font-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white">
+                    <span class="text-xs subtle-text-color" data-i18n-key="bodyFontSelect">Body Font</span><br>
+                    <span id="current-body-font" class="font-semibold"></span>
+                </button>
+                <button id="title-font-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white">
+                    <span class="text-xs subtle-text-color" data-i18n-key="titleFontSelect">Title Font</span><br>
+                    <span id="current-title-font" class="font-semibold"></span>
+                </button>
+                
+                <div>
+                    <label for="fontSizeSlider" class="text-xs subtle-text-color block mb-1" data-i18n-key="fontSize">Font Size: <span id="fontSizeValue">16px</span></label>
+                    <input type="range" id="fontSizeSlider" min="14" max="22" step="1" value="16" class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-white/20 accent-bg">
+                </div>
+                
+                <button id="en-voice-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white">
+                    <span class="text-xs subtle-text-color" data-i18n-key="enVoice">Indian English Voice</span><br>
+                    <span id="current-en-voice" class="font-semibold"></span>
+                </button>
+                 <button id="te-voice-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white">
+                    <span class="text-xs subtle-text-color" data-i18n-key="teVoice">Telugu Voice</span><br>
+                    <span id="current-te-voice" class="font-semibold"></span>
+                </button>
+                
+                <div>
+                     <span class="text-xs subtle-text-color block mb-1">Feedback</span>
+                     <div class="space-y-2">
+                         <label class="feedback-checkbox">
+                            <input type="checkbox" id="toggle-audio" onclick="handleSelectionChange('toggleAudio')">
+                            <span data-i18n-key="disableSound">Disable Sound Effects</span>
+                         </label>
+                         <label class="feedback-checkbox">
+                            <input type="checkbox" id="toggle-haptics" onclick="handleSelectionChange('toggleHaptics')">
+                            <span data-i18n-key="disableHaptics">Disable Vibration (Haptics)</span>
+                         </label>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="selection-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
+        <div class="modal-glass rounded-2xl shadow-xl p-6 w-full max-w-sm max-h-[80vh] flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-xl font-bold text-white font-title">Select Option</h3>
+                <button id="close-selection-modal" class="text-gray-300 hover:text-white text-2xl font-bold" aria-label="Close modal">&times;</button>
+            </div>
+            <div id="modal-options" class="space-y-2 overflow-y-auto no-scrollbar pr-1">
+                </div>
+        </div>
+    </div>
+
+    <div id="addWordModal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-40">
+        <div class="modal-glass rounded-2xl shadow-xl w-full max-w-md">
+            <form id="add-word-form">
+                <div class="flex justify-between items-center p-5 border-b border-[var(--glass-border)]">
+                    <h2 class="text-xl font-bold text-white font-title" data-i18n-key="addWordTitle">Add a New Word</h2>
+                </div>
+                <div class="p-5 sm:p-6 space-y-4">
+                    <div>
+                        <label for="new-word-en" class="font-semibold block mb-2 subtle-text-color text-sm" data-i18n-key="enWord">English Word</label>
+                        <input type="text" id="new-word-en" class="w-full p-3 rounded-lg search-input focus:outline-none focus:ring-2 accent-ring" required>
+                    </div>
+                    <div>
+                        <label for="new-word-pos" class="font-semibold block mb-2 subtle-text-color text-sm" data-i18n-key="pos">Part of Speech (e.g., n, v, adj)</label>
+                        <input type="text" id="new-word-pos" class="w-full p-3 rounded-lg search-input focus:outline-none focus:ring-2 accent-ring">
+                    </div>
+                    <div>
+                        <label for="new-word-te" class="font-semibold block mb-2 subtle-text-color text-sm" data-i18n-key="teMeaning">Telugu Meaning</label>
+                        <input type="text" id="new-word-te" class="w-full p-3 rounded-lg search-input focus:outline-none focus:ring-2 accent-ring" required>
+                    </div>
+                </div>
+                <div class="flex justify-end p-4 bg-white/5 rounded-b-2xl">
+                    <button type="button" id="cancel-add-word-btn" class="button-bg-color hover:button-hover-bg mr-3 rounded-full px-5 py-2 text-sm font-semibold text-white" data-i18n-key="cancel">Cancel</button>
+                    <button type="submit" id="save-add-word-btn" class="accent-bg rounded-full px-5 py-2 text-sm font-semibold text-white" data-i18n-key="save">Save Word</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <template id="result-card-template">
+        <div class="result-card"> 
+            
+            <div class="flex justify-between items-start mb-2">
+                <div>
+                    <h3 class="word text-xl font-bold result-word font-title"></h3>
+                    <p class="ipa-eng text-base subtle-text-color font-mono"></p> 
+                </div>
+                <div class="flex space-x-1">
+                    <button class="speak-btn result-speak-btn" aria-label="Speak word">
+                        <svg class="speak-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                        <div class="spinner hidden"></div>
+                    </button>
+                    <button class="bookmark-btn" aria-label="Bookmark word"> 
+                        <svg class="icon-unbookmarked" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <svg class="icon-bookmarked" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 mb-2"> 
+                <p class="pos result-pos"></p> 
+                <p class="category text-sm subtle-text-color bg-white/10 px-2 py-0.5 rounded-full"></p> 
+            </div>
+
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="meaning text-lg"></p>
+                    <p class="roman text-base subtle-text-color"></p> 
+                    <p class="ipa-tel text-base subtle-text-color font-mono"></p> 
+                </div>
+                <button class="speak-btn result-speak-btn" aria-label="Speak meaning">
+                    <svg class="speak-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                    <div class="spinner hidden"></div>
+                </button>
+            </div>
+            
+            <div class="example-container mt-3 pt-3 border-t border-[var(--glass-border)] space-y-2" style="display: none;"> <div class="flex justify-between items-center space-x-2">
+                    <p class="eng_ex text-sm subtle-text-color flex-1"></p> <button class="speak-btn result-speak-btn speak-btn-ex-en hidden flex-shrink-0" aria-label="Speak English Example"> <svg class="speak-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                        <div class="spinner hidden"></div>
+                    </button>
+                </div>
+                
+                <div class="flex justify-between items-center space-x-2">
+                    <p class="tel_ex text-sm subtle-text-color flex-1"></p> <button class="speak-btn result-speak-btn speak-btn-ex-te hidden flex-shrink-0" aria-label="Speak Telugu Example"> <svg class="speak-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                        <div class="spinner hidden"></div>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </template>
+    <template id="history-item-template">
+        <button class="history-item-btn">
+            </button>
+    </template>
+
+
+    <script>
+        // --- I18N Strings ---
+        const i18n = { 
+            te: { 
+                appTitle: "తెలుగు - ఇంగ్లీష్ డిక్షనరీ", loading: "డిక్షనరీ డేటా లోడ్ అవుతోంది...", ready: "డిక్షనరీ సిద్ధంగా ఉంది.", title: "డిక్షనరీ", 
+                searchPrompt: "ఫలితాల కోసం శోధించండి", noResults: "ఫలితాలు ఏమీ లేవు", 
+                searchPlaceholder: "ఇంగ్లీష్, తెలుగు, లేదా రోమన్‌లో శోధించండి...", 
+                searchType: "శోధన రకం", searchContains: "ఎక్కడైనా (Matches anywhere)", searchStartsWith: "ప్రారంభంలో (Matches beginning)", 
+                settings: "సెట్టింగ్‌లు", language: "భాష", themeMode: "థీమ్ మోడ్", lightMode: "లైట్", darkMode: "డార్క్", systemMode: "సిస్టమ్", 
+                bookMode: "బుక్ మోడ్", glassmorphism: "లిక్విడ్ గ్లాస్", themeColor: "యాస రంగు", textContrast: "టెక్స్ట్ కాంట్రాస్ట్", 
+                contrastDefault: "డిఫాల్ట్", contrastHigh: "హై కాంట్రాస్ట్", fontCombination: "ఫాంట్ కాంబినేషన్", 
+                fontCombo1_title: "డిఫాల్ట్ 1", fontCombo1_desc: "ఎలిగెంట్ సెరిఫ్", fontCombo2_title: "డిఫాల్ట్ 2", fontCombo2_desc: "మోడరన్ సాన్స్", 
+                fontCustomize: "లేదా మాన్యువల్‌గా అనుకూలీకరించండి:", titleFontSelect: "టైటిల్ ఫాంట్", bodyFontSelect: "బాడీ ఫాంట్", 
+                fontSize: "ఫాంట్ పరిమాణం:", enVoice: "ఇండియన్ ఇంగ్లీష్ వాయిస్", teVoice: "తెలుగు వాయిస్", 
+                disableSound: "సౌండ్ ఎఫెక్ట్స్ నిలిపివేయండి", disableHaptics: "వైబ్రేషన్ (హెప్టిక్స్) నిలిపివేయండి", 
+                offlineVoiceError: "వాయిస్ ఫీచర్ ఆఫ్‌లైన్‌లో అందుబాటులో లేదు.", voiceError: "వాయిస్ ప్లే చేయడంలో లోపం", 
+                searchTab: "శోధన", bookmarksTab: "బుక్‌మార్క్స్", addWordBtn: "+ కొత్త పదం జోడించండి", 
+                noBookmarks: "మీరు ఏ పదాలను బుక్‌మార్క్ చేయలేదు.", addWordTitle: "కొత్త పదం జోడించండి", 
+                enWord: "ఇంగ్లీష్ పదం", pos: "పార్ట్ ఆఫ్ స్పీచ్ (ఉదా., n, v, adj)", teMeaning: "తెలుగు అర్థం", 
+                cancel: "రద్దు", save: "సేవ్ చేయండి", customWord: "మీరు జోడించిన పదం", 
+                selectLang: "భాషను ఎంచుకోండి", selectColor: "యాస రంగును ఎంచుకోండి", selectBodyFont: "బాడీ ఫాంట్‌ను ఎంచుకోండి", 
+                selectTitleFont: "టైటిల్ ఫాంట్‌ను ఎంచుకోండి", selectEnVoice: "ఇంగ్లీష్ వాయిస్‌ని ఎంచుకోండి", selectTeVoice: "తెలుగు వాయిస్‌ని ఎంచుకోండి",
+                historyTab: "చరిత్ర", noHistory: "మీకు శోధన చరిత్ర ఏమీ లేదు.", clearHistory: "చరిత్రను క్లియర్ చేయండి"
+            }, 
+            en: { 
+                appTitle: "Telugu - English Dictionary", loading: "Loading dictionary data...", ready: "Dictionary is ready.", title: "Dictionary", 
+                searchPrompt: "Search for results", noResults: "No results found", 
+                searchPlaceholder: "Search in English, Telugu, or Roman...", 
+                searchType: "Search Type", searchContains: "Contains (Matches anywhere)", searchStartsWith: "Starts With (Matches beginning)", 
+                settings: "Settings", language: "Language", themeMode: "Theme Mode", lightMode: "Light", darkMode: "Dark", systemMode: "System", 
+                bookMode: "Book Mode", glassmorphism: "Liquid Glass", themeColor: "Accent Color", textContrast: "Text Contrast", 
+                contrastDefault: "Default", contrastHigh: "High Contrast", fontCombination: "Font Combination", 
+                fontCombo1_title: "Default 1", fontCombo1_desc: "Elegant Serif", fontCombo2_title: "Default 2", fontCombo2_desc: "Modern Sans", 
+                fontCustomize: "Or Customize Manually:", titleFontSelect: "Title Font", bodyFontSelect: "Body Font", 
+                fontSize: "Font Size:", enVoice: "Indian English Voice", teVoice: "Telugu Voice", 
+                disableSound: "Disable Sound Effects", disableHaptics: "Disable Vibration (Haptics)", 
+                offlineVoiceError: "Voice feature is not available offline.", voiceError: "Error playing voice", 
+                searchTab: "Search", bookmarksTab: "Bookmarks", addWordBtn: "+ Add New Word", 
+                noBookmarks: "You have no bookmarked words.", addWordTitle: "Add a New Word", 
+                enWord: "English Word", pos: "Part of Speech (e.g., n, v, adj)", teMeaning: "Telugu Meaning", 
+                cancel: "Cancel", save: "Save Word", customWord: "Your added word", 
+                selectLang: "Select Language", selectColor: "Select Accent Color", selectBodyFont: "Select Body Font", 
+                selectTitleFont: "Select Title Font", selectEnVoice: "Select English Voice", selectTeVoice: "Select Telugu Voice",
+                historyTab: "History", noHistory: "You have no search history.", clearHistory: "Clear History"
+            } 
+        };
+        
+        // --- STATE ---
+        const SETTINGS_KEY = 'globalHubSettings'; 
+        let dictionaryData = []; let isDataLoaded = false; 
+        let searchDebounce; 
+        let ttsPlayer = null; let synths = {}; 
+        let systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // --- DEFAULTS & CONSTANTS ---
+         const FONT_OPTIONS = { body: [ { label: 'Lexend', value: 'Lexend' }, { label: 'DM Sans', value: 'DM Sans' }, { label: 'Poppins', value: 'Poppins' }, { label: 'Inter', value: 'Inter' }, { label: 'Roboto', value: 'Roboto' }, { label: 'Source Sans 3', value: 'Source Sans 3' }, { label: 'Merriweather', value: 'Merriweather' } ], title: [ { label: 'Montserrat', value: 'Montserrat' }, { label: 'DM Serif Display', value: 'DM Serif Display' }, { label: 'Outfit', value: 'Outfit' }, { label: 'Lora', value: 'Lora' }, { label: 'Playfair Display', value: 'Playfair Display' }, { label: 'Merriweather', value: 'Merriweather' } ] };
+         const COLOR_THEMES = [ { name: 'Teal', value: '20, 184, 166', hex: '#14b8a6', gradient: { light: ['#99f6e4', '#5eead4', '#2dd4bf', '#14b8a6'], dark: ['#0f766e', '#0d9488', '#14b8a6', '#2dd4bf'] } }, { name: 'Indigo', value: '79, 70, 229', hex: '#4f46e5', gradient: { light: ['#a5b4fc', '#818cf8', '#6366f1', '#4f46e5'], dark: ['#312e81', '#4338ca', '#4f46e5', '#6366f1'] } }, { name: 'Rose', value: '225, 29, 72', hex: '#e11d48', gradient: { light: ['#fecdd3', '#fda4af', '#fb7185', '#f43f5e'], dark: ['#881337', '#be123c', '#f43f5e', '#fb7185'] } }, { name: 'Amber', value: '217, 119, 6', hex: '#d97706', gradient: { light: ['#fde68a', '#fcd34d', '#fbbf24', '#f59e0b'], dark: ['#78350f', '#b45309', '#f59e0b', '#fbbf24'] } }, { name: 'Sky', value: '2, 132, 199', hex: '#0284c7', gradient: { light: ['#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9'], dark: ['#0c4a6e', '#0369a1', '#0ea5e9', '#38bdf8'] } }, { name: 'Cyan', value: '6, 182, 212', hex: '#06b6d4', gradient: { light: ['#a5f3fc', '#67e8f9', '#22d3ee', '#06b6d4'], dark: ['#155e75', '#0e7490', '#06b6d4', '#2dd4ee'] } }, { name: 'Pink', value: '219, 39, 119', hex: '#db2777', gradient: { light: ['#fbcfe8', '#f9a8d4', '#f472b6', '#ec4899'], dark: ['#831843', '#9d174d', '#db2777', '#ec4899'] } }, { name: 'Orange', value: '234, 88, 12', hex: '#ea580c', gradient: { light: ['#fed7aa', '#fdba74', '#fdba74', '#f97316'], dark: ['#7c2d12', '#9a3412', '#ea580c', '#f97316'] } }, { name: 'Purple', value: '147, 51, 234', hex: '#9333ea', gradient: { light: ['#e9d5ff', '#d8b4fe', '#c084fc', '#a855f7'], dark: ['#581c87', '#6b21a8', '#9333ea', '#a855f7'] } }, { name: 'Emerald', value: '5, 150, 105', hex: '#059669', gradient: { light: ['#a7f3d0', '#6ee7b7', '#34d399', '#10b981'], dark: ['#064e3b', '#065f46', '#059669', '#10b981'] } } ];
+        const FONT_COMBINATIONS = { 'default1': { title: 'DM Serif Display', body: 'DM Sans' }, 'default2': { title: 'Montserrat', body: 'Lexend' } };
+        const VOICE_OPTIONS = { en: [ { label: 'Sadaltager (Knowledgeable)', value: 'Sadaltager'}, { label: 'Vindemiatrix (Gentle)', value: 'Vindemiatrix' }, { label: 'Achird (Friendly)', value: 'Achird' }, { label: 'Kore (Firm)', value: 'Kore' } ], te: [ { label: 'Sulafat (Warm)', value: 'Sulafat' }, { label: 'Sadachbia (Lively)', value: 'Sadachbia' }, { label: 'Zubenelgenubi (Casual)', value: 'Zubenelgenubi' }, { label: 'Puck (Upbeat)', value: 'Puck' } ] };
+        const defaultSettings = { language: 'te', theme: 'system', colorTheme: COLOR_THEMES[0].name, contrast: 'default', bodyFont: FONT_OPTIONS.body[0].value, titleFont: FONT_OPTIONS.title[0].value, fontSize: 16, enVoice: VOICE_OPTIONS.en[0].value, teVoice: VOICE_OPTIONS.te[0].value, disableSound: false, disableVibration: false, bookmarks: [], customWords: [], searchType: 'contains', searchHistory: [] }; 
+        
+        // --- DOM Elements ---
+        let startScreen, mainCard, startMessage, searchBar, addWordBtn;
+        let multiActionBtn, searchTypeIndicator; 
+        let searchTabBtn, bookmarksTabBtn, historyTabBtn; 
+        let searchContainer, bookmarksContainer, historyContainer, resultsContainer; 
+        let bookmarksMessage, historyMessage, resultsMessage; 
+        let historyHeader, clearHistoryBtn; 
+        let settingsBtn, themeToggle, themeIconLight, themeIconDark, themeIconSystem;
+        let settingsModal, closeSettingsModalBtn, languageBtn, currentLanguage, colorBtn, currentAccentColor, colorPreview;
+        let themeLightBtn, themeDarkBtn, themeSystemBtn, contrastDefaultBtn, contrastHighBtn, fontComboBtns;
+        let bodyFontBtn, titleFontBtn, currentBodyFont, currentTitleFont, fontSizeSlider, fontSizeValue;
+        let enVoiceBtn, teVoiceBtn, currentEnVoice, currentTeVoice;
+        let toggleAudioCheckbox, toggleHapticsCheckbox;
+        let selectionModal, modalTitle, modalOptions, closeSelectionModalBtn;
+        let addWordModal, addWordModalBackdrop, addWordForm, cancelAddWordBtn;
+        let resultTemplate, historyItemTemplate; 
+        let loadingSpinner; 
+        
+        // --- Core Functions ---
+        function getSetting(key, defaultValue = null) { try { const s = localStorage.getItem(SETTINGS_KEY); if (!s) return defaultValue ?? defaultSettings[key]; const sets = JSON.parse(s); if (key === 'fontSize' && sets[key]) { const p = parseInt(sets[key]); return isNaN(p) ? (defaultValue ?? defaultSettings[key]) : p; } if ((key === 'disableSound' || key === 'disableVibration') && typeof sets[key] === 'boolean') { return sets[key]; } return (typeof sets[key] !== 'undefined' && sets[key] !== null) ? sets[key] : (defaultValue ?? defaultSettings[key]); } catch (e) { console.error(`Err load ${key}:`, e); return defaultValue ?? defaultSettings[key]; } }
+        function setSetting(key, value) { try { const s = localStorage.getItem(SETTINGS_KEY); let sets = s ? JSON.parse(s) : {}; sets[key] = value; localStorage.setItem(SETTINGS_KEY, JSON.stringify(sets)); } catch (e) { console.error(`Err save ${key}:`, e); } }
+        const mediaQueryListener = (e) => applyTheme(getSetting('theme'));
+        function applyTheme(theme) { const h = document.documentElement; systemPrefersDark.removeEventListener('change', mediaQueryListener); if (theme === 'light') h.classList.remove('dark'); else if (theme === 'dark') h.classList.add('dark'); else { if (systemPrefersDark.matches) h.classList.add('dark'); else h.classList.remove('dark'); systemPrefersDark.addEventListener('change', mediaQueryListener); } updateHeaderIcon(theme); updateThemeButtonsUI(); setSetting('theme', theme); applyAccentColor(getSetting('colorTheme')); }
+        function updateHeaderIcon(theme) { if (!themeIconLight || !themeIconDark || !themeIconSystem) return; [themeIconLight, themeIconDark, themeIconSystem].forEach(i=>i.classList.add('hidden')); if(theme === 'light') themeIconLight.classList.remove('hidden'); else if(theme === 'dark') themeIconDark.classList.remove('hidden'); else themeIconSystem.classList.remove('hidden'); }
+        function updateThemeButtonsUI() { const c = getSetting('theme'); if(themeLightBtn) themeLightBtn.classList.toggle('active', c === 'light'); if(themeDarkBtn) themeDarkBtn.classList.toggle('active', c === 'dark'); if(themeSystemBtn) themeSystemBtn.classList.toggle('active', c === 'system'); }
+        function applyAccentColor(name) { const t = COLOR_THEMES.find(t => t.name === name) || COLOR_THEMES[0]; const r = document.documentElement.style; const d = document.documentElement.classList.contains('dark'); const g = t.gradient[d ? 'dark' : 'light']; r.setProperty('--accent-color-rgb', t.value); r.setProperty('--accent-color-hex', t.hex); r.setProperty('--bg-grad-color1', g[0]); r.setProperty('--bg-grad-color2', g[1]); r.setProperty('--bg-grad-color3', g[2]); r.setProperty('--bg-grad-color4', g[3]); setSetting('colorTheme', name); updateColorButtonUI(); }
+        function applyContrast(v) { document.body.setAttribute('data-contrast', v); setSetting('contrast', v); updateContrastButtonsUI(); }
+        function updateContrastButtonsUI() { const c = getSetting('contrast'); if(contrastDefaultBtn) contrastDefaultBtn.classList.toggle('active', c === 'default'); if(contrastHighBtn) contrastHighBtn.classList.toggle('active', c === 'high'); }
+        function setBodyFont(f) { const b = (['Merriweather'].includes(f)) ? 'serif' : 'sans-serif'; document.documentElement.style.setProperty('--body-font', `'${f}', '${getSetting('language') === 'te' ? 'Noto Sans Telugu' : ''}', ${b}`); setSetting('bodyFont', f); updateFontCombinationUI(); updateFontButtonUI('body'); }
+        function setTitleFont(f) { const b = (['DM Serif Display', 'Lora', 'Playfair Display', 'Merriweather'].includes(f)) ? 'serif' : 'sans-serif'; document.documentElement.style.setProperty('--title-font', `'${f}', '${getSetting('language') === 'te' ? 'Noto Sans Telugu' : ''}', ${b}`); setSetting('titleFont', f); updateFontCombinationUI(); updateFontButtonUI('title'); }
+        function applyFontCombination(n) { const c = FONT_COMBINATIONS[n]; if (c) { setTitleFont(c.title); setBodyFont(c.body); } updateFontCombinationUI(); }
+        function updateFontCombinationUI() { const t = getSetting('titleFont'); const b = getSetting('bodyFont'); const d1 = FONT_COMBINATIONS['default1']; const d2 = FONT_COMBINATIONS['default2']; let a = null; if (t === d1.title && b === d1.body) a = 'default1'; else if (t === d2.title && b === d2.body) a = 'default2'; document.querySelectorAll('#font-combo-btns button').forEach(btn => btn.classList.toggle('active', btn.dataset.combo === a)); }
+        function updateFontSize(s) { document.body.style.fontSize = `${s}px`; setSetting('fontSize', s); if(fontSizeValue) fontSizeValue.textContent = `${s}px`; }
+        function setLanguage(l) { setSetting('language', l); updateUI(l); setTitleFont(getSetting('titleFont')); setBodyFont(getSetting('bodyFont')); }
+        
+        function updateUI(lang) { 
+            document.documentElement.lang = lang; 
+            const keys = i18n[lang]; 
+            document.querySelectorAll('[data-i18n-key]').forEach(el => { 
+                const key = el.dataset.i18nKey; 
+                if (keys[key] && !['current-language', 'current-accent-color', 'current-body-font', 'current-title-font', 'current-en-voice', 'current-te-voice', 'fontSizeValue'].includes(el.id)) { 
+                    if (el.tagName === 'OPTION') el.label = keys[key]; 
+                    else if (el.placeholder && key === 'searchPlaceholder') {
+                        el.placeholder = keys[key];
+                    }
+                    else if (!el.placeholder) {
+                        el.textContent = keys[key]; 
+                    }
+                } 
+            }); 
+            document.title = keys.appTitle; 
+            if(searchBar) searchBar.placeholder = keys.searchPlaceholder; 
+            if (startScreen && !startScreen.classList.contains('hidden')) { 
+                if (!isDataLoaded) startMessage.textContent = keys.loading; 
+                else startMessage.textContent = keys.ready; 
+            } 
+            if(resultsContainer && resultsContainer.children.length === 1 && resultsContainer.firstChild === resultsMessage) { 
+                resultsMessage.textContent = keys.searchPrompt; 
+            } 
+            if(bookmarksContainer && bookmarksContainer.children.length === 1 && bookmarksContainer.firstChild === bookmarksMessage) { 
+                bookmarksMessage.textContent = keys.noBookmarks; 
+            } 
+            if(historyContainer && historyContainer.children.length === 2 && historyContainer.lastChild === historyMessage) { 
+                historyMessage.textContent = keys.noHistory; 
+            } 
+            updateSearchTypeUI(); 
+            updateLanguageButtonUI(); 
+        } 
+        
+        function updateSettingsUI() { updateLanguageButtonUI(); updateColorButtonUI(); updateThemeButtonsUI(); updateContrastButtonsUI(); updateFontButtonUI('body'); updateFontButtonUI('title'); updateFontCombinationUI(); if(fontSizeSlider) fontSizeSlider.value = getSetting('fontSize'); if(fontSizeValue) fontSizeValue.textContent = `${getSetting('fontSize')}px`; updateVoiceButtonUI('en'); updateVoiceButtonUI('te'); updateFeedbackCheckboxesUI(); }
+        function updateLanguageButtonUI() { if(currentLanguage) currentLanguage.textContent = getSetting('language') === 'te' ? 'తెలుగు' : 'English'; }
+        function updateColorButtonUI() { const n = getSetting('colorTheme'); if (currentAccentColor) currentAccentColor.textContent = n; if (colorPreview) { const t = COLOR_THEMES.find(t => t.name === n) || COLOR_THEMES[0]; colorPreview.style.backgroundColor = t.hex; } }
+        function updateFontButtonUI(type) { const b = type === 'body' ? currentBodyFont : currentTitleFont; const k = type === 'body' ? 'bodyFont' : 'titleFont'; const n = getSetting(k); const l = (FONT_OPTIONS[type === 'body' ? 'body' : 'title'].find(f => f.value === n) || {}).label || n; if (b) { b.textContent = l; const f = (['Merriweather', 'Lora', 'Playfair Display', 'DM Serif Display'].includes(n)) ? 'serif' : 'sans-serif'; b.style.fontFamily = `'${n}', ${getSetting('language') === 'te' ? 'Noto Sans Telugu' : ''}, ${f}`; } }
+        function updateVoiceButtonUI(lang) { const b = lang === 'en' ? currentEnVoice : currentTeVoice; const k = lang === 'en' ? 'enVoice' : 'teVoice'; const v = getSetting(k); const l = (VOICE_OPTIONS[lang].find(vo => vo.value === v) || {}).label || v; if (b) b.textContent = l.split(' (')[0]; }
+        function updateFeedbackCheckboxesUI() { if (toggleAudioCheckbox) toggleAudioCheckbox.checked = getSetting('disableSound'); if (toggleHapticsCheckbox) toggleHapticsCheckbox.checked = getSetting('disableVibration'); }
+        function setupAudio() { try { if (window.Tone) { synths.click = new Tone.Synth({ oscillator: { type: "sine" }, envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.1 } }).toDestination(); synths.error = new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.2 } }).toDestination(); } else console.warn("Tone.js not loaded."); } catch (e) { console.error("Tone setup error:", e); } }
+        function playClickSound() { if (!getSetting('disableSound') && synths.click) { try { Tone.start(); synths.click.triggerAttackRelease("C5", "8n"); if (!getSetting('disableVibration') && navigator.vibrate) navigator.vibrate(50); } catch (e) { console.warn("Tone click error:", e); } } }
+        function playErrorSound() { if (!getSetting('disableSound') && synths.error) { try { Tone.start(); synths.error.triggerAttackRelease("C3", "4n"); if (!getSetting('disableVibration') && navigator.vibrate) navigator.vibrate([100, 50, 100]); } catch (e) { console.warn("Tone error error:", e); } } }
+        // --- TTS Functions ---
+        function base64ToArrayBuffer(b) { const s=window.atob(b); const l=s.length; const B=new Uint8Array(l); for(let i=0; i<l; i++) B[i]=s.charCodeAt(i); return B.buffer; }
+        function pcmToWav(p, r) { const n=1; const b=16; const d=p.length*2; const l=(n*b)/8; const B=r*l; const bf=new ArrayBuffer(44+d); const v=new DataView(bf); writeString(v,0,'RIFF'); v.setUint32(4,36+d,true); writeString(v,8,'WAVE'); writeString(v,12,'fmt '); v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,n,true); v.setUint32(24,r,true); v.setUint32(28,B,true); v.setUint16(32,l,true); v.setUint16(34,b,true); writeString(v,36,'data'); v.setUint32(40,d,true); for(let i=0; i<p.length; i++) v.setInt16(44+i*2,p[i],true); return new Blob([v],{type:'audio/wav'}); }
+        function writeString(v,o,s){ for(let i=0; i<s.length; i++) v.setUint8(o+i,s.charCodeAt(i)); }
+        async function playAudio(w) { await Tone.start(); if(ttsPlayer&&ttsPlayer.state==="started") ttsPlayer.stop(); const u=URL.createObjectURL(w); return new Promise((res,rej)=>{ ttsPlayer=new Tone.Player({url:u,autostart:true,onload:()=>{},onstop:()=>{if(ttsPlayer)ttsPlayer.dispose();ttsPlayer=null;URL.revokeObjectURL(u);res();},onerror:(e)=>{console.error("Tone error:",e);URL.revokeObjectURL(u);rej(e);}}).toDestination(); }); }
+        async function fetchWithRetry(u,o,r=3,k=1000){ try { const p=await fetch(u,o); if(!p.ok&&r>0&&(p.status===429||p.status>=500)){ await new Promise(res=>setTimeout(res,k)); return fetchWithRetry(u,o,r-1,k*2); } return p; } catch(e){ if(r>0){ await new Promise(res=>setTimeout(res,k)); return fetchWithRetry(u,o,r-1,k*2); } throw e; } }
+        async function callGeminiTTS(t, l) { const k=""; const u=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${k}`; const v=l==='en'?'enVoice':'teVoice'; const n=getSetting(v); const p=l==='en'?`Speak clear Indian English: ${t}`:`Speak Telugu clearly: ${t}`; const y={contents:[{parts:[{text:p}]}],generationConfig:{responseModalities:["AUDIO"],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:n}}}},model:"gemini-2.5-flash-preview-tts"}; const r=await fetchWithRetry(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(y)}); if(!r.ok) throw new Error(`TTS API failed: ${await r.text()}`); const s=await r.json(); const pt=s?.candidates?.[0]?.content?.parts?.[0]; const d=pt?.inlineData?.data; const m=pt?.inlineData?.mimeType; if(d&&m&&m.startsWith("audio/L16")){ const mt=m.match(/rate=(\d+)/); if(!mt) throw newE_rro_r("No sample rate."); const sr=parseInt(mt[1],10); const pD=base64ToArrayBuffer(d); const p16=new Int16Array(pD); const wB=pcmToWav(p16,sr); await playAudio(wB); } else { throw new Error("Invalid TTS API response."); } }
+        // --- CSV Parser (Corrected) ---
+        function parseCSV(t) { const l=t.replace(/\r\n/g,'\n').replace(/\r/g,'\n').trim().split('\n'); const d=[]; for(const i of l){ if(!i.trim())continue; const r=[]; let c=''; let q=false; for(let j=0; j<i.length; j++){ const h=i[j]; const n=i[j+1]; if(h==='"'){ if(q&&n==='"'){ c+='"'; j++; } else { q=!q; }} else if(h===','&&!q){ r.push(c); c=''; } else { c+=h; }} r.push(c); d.push(r); } return d; }
+        
+        // --- Dictionary Logic ---
+        
+        async function loadDictionaryData() {
+            const lang = getSetting('language');
+            try {
+                if (loadingSpinner) loadingSpinner.classList.remove('hidden');
+                if(startMessage) startMessage.textContent = i18n[lang].loading;
+                const r = await fetch('english2telugu.csv');
+                if (!r.ok) throw new Error(`CSV fetch failed: ${r.status} ${r.statusText}`);
+                const t = await r.text();
+                if (!t || t.trim().length === 0) throw new Error("CSV empty.");
+                const p = parseCSV(t);
+                console.log(`Parsed ${p.length} rows.`);
+                if (!p || p.length < 2) throw new Error(`CSV parse resulted in ${p.length} rows.`);
+                
+                dictionaryData = p.slice(1).map((rw,x) => {
+                    if (!rw || rw.length < 10) { 
+                        console.warn(`Skip row #${x+2} (needs 10 columns, has ${rw?.length}):`, rw);
+                        return null;
+                    }
+                    const e = {
+                        sn: (rw[0] || '').trim(),
+                        eng: (rw[1] || '').trim(),
+                        ipa_eng: (rw[2] || '').trim(),
+                        tel: (rw[3] || '').trim(),
+                        ipa_tel: (rw[4] || '').trim(),
+                        roman: (rw[5] || '').trim(),
+                        pos: (rw[6] || '').trim(),
+                        category: (rw[7] || '').trim(),
+                        eng_ex: (rw[8] || '').trim(),
+                   
+                        tel_ex: (rw[9] || '').trim(),
+                        isCustom: false
+                    };
+                    if (!e.sn || !e.eng || !e.tel) {
+                        console.warn(`Skip row #${x+2} missing essential data (sn, eng, or tel):`, rw);
+                        return null;
+                    }
+                    return e;
+                }).filter(e => e);
+                
+                console.log(`Filtered to ${dictionaryData.length} entries.`);
+                dictionaryData = dictionaryData.concat(getSetting('customWords', []));
+                console.log(`Total ${dictionaryData.length} entries.`);
+                if (dictionaryData.filter(e => !e.isCustom).length === 0) {
+                    throw new Error("No valid CSV entries after filtering.");
+                }
+                isDataLoaded = true;
+                console.log(`Processed dict data.`);
+                if (startMessage) startMessage.textContent = i18n[lang].ready;
+                if (loadingSpinner) loadingSpinner.classList.add('hidden');
+                setTimeout(() => {
+                    if(startScreen) startScreen.classList.add('hidden');
+                    if(mainCard) mainCard.classList.remove('hidden');
+                }, 500);
+            } catch (e) {
+                console.error("Dict load error:", e);
+                if (startMessage) startMessage.innerHTML = `<strong class="text-red-400">Error: Failed to load dictionary.</strong><br><small>${e.message}</small>`;
+                if (loadingSpinner) loadingSpinner.classList.add('hidden');
+            }
+        }
+        
+        function addSearchToHistory(term) {
+            if (!term) return;
+            let history = getSetting('searchHistory', []);
+            history = history.filter(item => item !== term);
+            history.unshift(term);
+            if (history.length > 50) history = history.slice(0, 50);
+            setSetting('searchHistory', history);
+        }
+
+        function handleSearch() { 
+            const term = searchBar.value.trim();
+            if (term) {
+                addSearchToHistory(term);
+            }
+            renderResults(searchDictionary(term)); 
+        }
+
+        function searchDictionary(t) { 
+            if (!t) return []; 
+            const s = getSetting('searchType'); 
+            const termLower = t.toLowerCase();
+            const termOriginal = t; // For Telugu search
+
+            let searchFn;
+            if (s === 'startswith') {
+                searchFn = (entry) => 
+                    entry.eng.toLowerCase().startsWith(termLower) || 
+                    entry.tel.startsWith(termOriginal) || 
+                    entry.roman.toLowerCase().startsWith(termLower);
+            } else { // 'contains'
+                searchFn = (entry) => 
+                    entry.eng.toLowerCase().includes(termLower) || 
+                    entry.tel.includes(termOriginal) || 
+                    entry.roman.toLowerCase().includes(termLower);
+            }
+            return dictionaryData.filter(searchFn).slice(0, 100);
+        }
+        
+        // ***** THIS FUNCTION HAS BEEN MODIFIED *****
+        function createResultCard(e) {
+            const c = resultTemplate.content.cloneNode(true);
+            const r = c.querySelector('.result-card');
+            r.dataset.sn = e.sn;
+
+            // Get all elements from the new template
+            const w = c.querySelector('.word');
+            const p = c.querySelector('.pos');
+            const m = c.querySelector('.meaning');
+            const ipa_eng_p = c.querySelector('.ipa-eng'); 
+            const ipa_tel_p = c.querySelector('.ipa-tel'); 
+            const roman_p = c.querySelector('.roman');     
+            const category_p = c.querySelector('.category'); 
+            
+            const ex_cont = c.querySelector('.example-container');
+            const eng_ex_p = c.querySelector('.eng_ex');
+            const tel_ex_p = c.querySelector('.tel_ex');
+            
+            // Get buttons
+            const allSpeakBtns = c.querySelectorAll('.speak-btn');
+            const speakWordBtn = allSpeakBtns[0];
+            const speakMeaningBtn = allSpeakBtns[1];
+            const speakExEnBtn = c.querySelector('.speak-btn-ex-en'); // NEW
+            const speakExTeBtn = c.querySelector('.speak-btn-ex-te'); // NEW
+            const bookmarkBtn = c.querySelector('.bookmark-btn');
+            
+            const l = getSetting('language');
+            
+            // Determine which language to show as primary
+            const searchTerm = searchBar.value.trim();
+            const teluguRegex = /[\u0C00-\u0C7F]/;
+            const isTeluguSearch = teluguRegex.test(searchTerm);
+
+            if (isTeluguSearch && e.tel.includes(searchTerm)) {
+            // Show Telugu as primary
+            w.textContent = e.tel;                             // Main word = "నీరు"
+            if(ipa_eng_p && e.ipa_tel) ipa_eng_p.textContent = e.ipa_tel; // Top IPA = Telugu IPA
+
+            m.textContent = e.eng;                             // Meaning = "water"
+            if(roman_p) roman_p.textContent = '';                // Bottom Roman = empty (no roman for English)
+            if(ipa_tel_p && e.ipa_eng) ipa_tel_p.textContent = e.ipa_eng; // Bottom IPA = English IPA
+
+            speakWordBtn.dataset.text = e.tel;
+            speakWordBtn.dataset.lang = 'te';
+            speakMeaningBtn.dataset.text = e.eng;
+            speakMeaningBtn.dataset.lang = 'en';
+
+        } else {
+            // Default: Show English as primary
+            w.textContent = e.eng;                             // Main word = "water"
+            if(ipa_eng_p && e.ipa_eng) ipa_eng_p.textContent = e.ipa_eng; // Top IPA = English IPA
+
+            m.textContent = e.tel;                             // Meaning = "నీరు"
+            if(roman_p && e.roman) roman_p.textContent = e.roman; // Bottom Roman = Telugu Roman
+            if(ipa_tel_p && e.ipa_tel) ipa_tel_p.textContent = e.ipa_tel; // Bottom IPA = Telugu IPA
+
+            speakWordBtn.dataset.text = e.eng;
+            speakWordBtn.dataset.lang = 'en';
+            speakMeaningBtn.dataset.text = e.tel;
+            speakMeaningBtn.dataset.lang = 'te';
+        }
+
+        // Populate metadata that is NOT swapped
+        p.textContent = e.isCustom ? i18n[l].customWord : e.pos;
+        if(category_p && e.category) category_p.textContent = e.category;
+
+            // --- MODIFIED EXAMPLE LOGIC ---
+            if (e.eng_ex && eng_ex_p) {
+                eng_ex_p.textContent = `e.g. ${e.eng_ex}`;
+                if (speakExEnBtn) {
+                    speakExEnBtn.dataset.text = e.eng_ex;
+                    speakExEnBtn.dataset.lang = 'en';
+                    speakExEnBtn.classList.remove('hidden'); // Show button
+                }
+            }
+            if (e.tel_ex && tel_ex_p) {
+                tel_ex_p.textContent = `ఉదా. ${e.tel_ex}`;
+                 if (speakExTeBtn) {
+                    speakExTeBtn.dataset.text = e.tel_ex;
+                    speakExTeBtn.dataset.lang = 'te';
+                    speakExTeBtn.classList.remove('hidden'); // Show button
+                }
+            }
+            
+            // Show example container if either example exists
+            if (ex_cont && (e.eng_ex || e.tel_ex)) {
+                ex_cont.style.display = 'block';
+            }
+            // --- END OF MODIFIED EXAMPLE LOGIC ---
+            
+            if (!e.category && category_p) {
+                 category_p.style.display = 'none';
+            }
+
+            if (bookmarkBtn && getSetting('bookmarks').includes(e.sn)) {
+                bookmarkBtn.classList.add('bookmarked');
+            }
+            
+            return c;
+        }
+        // ***************************************************************
+        
+        function renderResults(r) { resultsContainer.innerHTML = ''; const l = getSetting('language'); if (r.length === 0) { resultsMessage.textContent = i18n[l][searchBar.value.trim() === '' ? 'searchPrompt' : 'noResults']; resultsContainer.appendChild(resultsMessage); return; } r.forEach(e => resultsContainer.appendChild(createResultCard(e))); }
+        function renderBookmarks() { bookmarksContainer.innerHTML = ''; const b = getSetting('bookmarks'); const be = dictionaryData.filter(e => b.includes(e.sn)); const l = getSetting('language'); if (be.length === 0) { bookmarksMessage.textContent = i18n[l].noBookmarks; bookmarksContainer.appendChild(bookmarksMessage); return; } be.forEach(e => bookmarksContainer.appendChild(createResultCard(e))); }
+        
+        function renderHistory() {
+            while (historyContainer.lastChild && historyContainer.lastChild !== historyMessage) {
+                if (historyContainer.lastChild !== historyHeader) {
+                    historyContainer.removeChild(historyContainer.lastChild);
+                } else break;
+            }
+            const history = getSetting('searchHistory', []);
+            const lang = getSetting('language');
+            if (history.length === 0) {
+                historyMessage.textContent = i18n[lang].noHistory;
+                historyMessage.classList.remove('hidden');
+                historyHeader.classList.add('hidden');
+            } else {
+                historyMessage.classList.add('hidden');
+                historyHeader.classList.remove('hidden');
+                const fragment = document.createDocumentFragment();
+                history.forEach(term => {
+                    const button = historyItemTemplate.content.cloneNode(true).querySelector('button');
+                    button.textContent = term;
+                    button.dataset.term = term;
+                    fragment.appendChild(button);
+                });
+                historyContainer.appendChild(fragment);
+            }
+        }
+        
+        function clearSearchHistory() {
+            playClickSound();
+            setSetting('searchHistory', []);
+            renderHistory();
+        }
+
+        async function handleSpeakClick(b) { if (b.disabled) return; const t = b.dataset.text; const l = b.dataset.lang; if (!t) return; if (!navigator.onLine) { playErrorSound(); /* msg */ return; } await Tone.start(); playClickSound(); const s = b.querySelector('.spinner'); const i = b.querySelector('.speak-icon'); s?.classList.remove('hidden'); i?.classList.add('hidden'); b.disabled = true; if (ttsPlayer && ttsPlayer.state === "started") ttsPlayer.stop(); try { await callGeminiTTS(t, l); } catch (e) { console.error("TTS Err:", e); playErrorSound(); /* msg */ } finally { s?.classList.add('hidden'); i?.classList.remove('hidden'); b.disabled = false; } }
+        function handleBookmarkClick(b, s) { if (!s) return; playClickSound(); let bm = getSetting('bookmarks'); const x = bm.indexOf(s); if (x > -1) bm.splice(x, 1); else bm.push(s); setSetting('bookmarks', bm); b.classList.toggle('bookmarked'); if(bookmarksTabBtn.classList.contains('active')) renderBookmarks(); }
+        function handleSaveWord(ev) { ev.preventDefault(); playClickSound(); const en = document.getElementById('new-word-en').value.trim(); const ps = document.getElementById('new-word-pos').value.trim(); const tl = document.getElementById('new-word-te').value.trim(); if (!en || !tl) { playErrorSound(); return; } const nw = { eng:en, pos:ps, tel:tl, sn:'c'+Date.now(), isCustom:true, eng_ex: '', tel_ex: '', ipa_eng: '', ipa_tel: '', roman: '', category: '' }; let cw = getSetting('customWords'); cw.push(nw); setSetting('customWords', cw); dictionaryData.push(nw); closeAddWordModal(); if(bookmarksTabBtn.classList.contains('active')) renderBookmarks(); handleSearch(); }
+        // --- Modals ---
+        function openSettingsModal() { updateSettingsUI(); if(settingsModal) settingsModal.classList.remove('hidden'); }
+        function closeSettingsModal() { if(settingsModal) settingsModal.classList.add('hidden'); }
+        function openAddWordModal() { playClickSound(); if(addWordModal) addWordModal.classList.remove('hidden'); }
+        function closeAddWordModal() { playClickSound(); if(addWordForm) addWordForm.reset(); if(addWordModal) addWordModal.classList.add('hidden'); }
+        function openSelectionModal(type) { const lang = getSetting('language'); let optionsHTML = ''; const btnCls = 'w-full text-left p-3 rounded-lg selection-button'; let currentVal; if (type === 'language') { if(modalTitle) modalTitle.textContent = i18n[lang].selectLang; currentVal = getSetting('language'); optionsHTML = `<button onclick="handleSelectionChange('language','en')" class="${btnCls} ${currentVal==='en'?'active':''}">English</button><button onclick="handleSelectionChange('language','te')" class="${btnCls} ${currentVal==='te'?'active':''}">తెలుగు</button>`; } else if (type === 'bodyFont' || type === 'titleFont') { if(modalTitle) modalTitle.textContent = i18n[lang][type==='bodyFont'?'selectBodyFont':'selectTitleFont']; const opts = FONT_OPTIONS[type==='bodyFont'?'body':'title']; currentVal = getSetting(type); optionsHTML = opts.map(o => { const fb = (['Merriweather','Lora','Playfair Display','DM Serif Display'].includes(o.value))?'serif':'sans-serif'; return `<button onclick="handleSelectionChange('${type}','${o.value}')" class="${btnCls} ${currentVal===o.value?'active':''}" style="font-family:'${o.value}', ${lang==='te'?'Noto Sans Telugu':''}, ${fb};">${o.label}</button>` }).join(''); } else if (type === 'color') { if(modalTitle) modalTitle.textContent = i18n[lang].selectColor; currentVal = getSetting('colorTheme'); optionsHTML = COLOR_THEMES.map(t => `<button onclick="handleSelectionChange('color','${t.name}')" class="${btnCls} ${currentVal===t.name?'active':''} flex items-center justify-between"><span>${t.name}</span><span class="w-6 h-6 rounded-full border border-white/20" style="background-color:${t.hex}"></span></button>`).join(''); } else if (type === 'enVoice' || type === 'teVoice') { const vLang = type==='enVoice'?'en':'te'; if(modalTitle) modalTitle.textContent = i18n[lang][type==='enVoice'?'selectEnVoice':'selectTeVoice']; const opts = VOICE_OPTIONS[vLang]; currentVal = getSetting(type); optionsHTML = opts.map(o => `<button onclick="handleSelectionChange('${type}','${o.value}')" class="${btnCls} ${currentVal===o.value?'active':''}">${o.label}</button>`).join(''); } if(modalOptions) modalOptions.innerHTML = optionsHTML; if(selectionModal) selectionModal.classList.remove('hidden'); }
+        function closeSelectionModal() { if(selectionModal) selectionModal.classList.add('hidden'); if (document.activeElement && ['language-button','color-button','body-font-button','title-font-button','en-voice-button','te-voice-button'].includes(document.activeElement.id)) { openSettingsModal(); } }
+        window.handleSelectionChange = function(t, v) { playClickSound(); if (t==='language'){setLanguage(v);} else if(t==='theme'){applyTheme(v);} else if(t==='bodyFont'){setBodyFont(v);} else if(t==='titleFont'){setTitleFont(v);} else if(t==='color'){applyAccentColor(v);} else if(t==='contrast'){applyContrast(v);} else if(t==='enVoice'||t==='teVoice'){setSetting(t,v);updateVoiceButtonUI(t==='enVoice'?'en':'te');} else if(t==='toggleAudio'){const c=getSetting('disableSound');setSetting('disableSound',!c);updateFeedbackCheckboxesUI();} else if(t==='toggleHaptics'){const c=getSetting('disableVibration');setSetting('disableVibration',!c);updateFeedbackCheckboxesUI();} if(!t.startsWith('toggle')&&t!=='contrast'&&t!=='theme'){closeSelectionModal();} }
+        
+        function updateSearchTypeUI() {
+            const lang = getSetting('language');
+            const searchType = getSetting('searchType');
+            
+            if (searchTypeIndicator) {
+                const indicatorText = searchType === 'startswith' ? 'S' : 'C';
+                searchTypeIndicator.textContent = indicatorText;
+            }
+            
+            if (multiActionBtn) {
+                const currentTypeKey = searchType === 'startswith' ? 'searchStartsWith' : 'searchContains';
+                const currentTypeLabel = i18n[lang] ? i18n[lang][currentTypeKey].split(' (')[0] : (searchType === 'startswith' ? 'Starts With' : 'Contains');
+                multiActionBtn.setAttribute('aria-label', `Long press to change search type: ${currentTypeLabel}`);
+            }
+        }
+        
+        // --- Initialization ---
+        async function init() {
+            // Assign DOM Elements
+            startScreen=document.getElementById('startScreen'); mainCard=document.getElementById('mainCard'); startMessage=document.getElementById('startMessage'); loadingSpinner=document.getElementById('loading-spinner'); searchBar=document.getElementById('search-bar'); addWordBtn=document.getElementById('add-word-btn');
+            multiActionBtn = document.getElementById('multi-action-btn');
+            searchTypeIndicator = document.getElementById('search-type-indicator');
+            
+            searchTabBtn=document.getElementById('search-tab-btn'); bookmarksTabBtn=document.getElementById('bookmarks-tab-btn'); 
+            historyTabBtn=document.getElementById('history-tab-btn'); 
+            
+            searchContainer=document.getElementById('search-container'); 
+            bookmarksContainer=document.getElementById('bookmarks-container'); 
+            historyContainer=document.getElementById('history-container'); 
+            resultsContainer=document.getElementById('results-container'); 
+            
+            bookmarksMessage=document.getElementById('bookmarks-message'); 
+            historyMessage=document.getElementById('history-message'); 
+            resultsMessage=document.getElementById('results-message');
+            
+            historyHeader = document.getElementById('history-header'); 
+            clearHistoryBtn = document.getElementById('clear-history-btn'); 
+
+            settingsBtn=document.getElementById('settings-button'); themeToggle=document.getElementById('theme-toggle'); themeIconLight=document.getElementById('theme-icon-light'); themeIconDark=document.getElementById('theme-icon-dark'); themeIconSystem=document.getElementById('theme-icon-system');
+            settingsModal=document.getElementById('settings-modal'); closeSettingsModalBtn=document.getElementById('close-settings-modal'); languageBtn=document.getElementById('language-button'); currentLanguage=document.getElementById('current-language'); colorBtn=document.getElementById('color-button'); currentAccentColor=document.getElementById('current-accent-color'); colorPreview=document.getElementById('color-preview');
+            themeLightBtn=document.getElementById('theme-light'); themeDarkBtn=document.getElementById('theme-dark'); themeSystemBtn=document.getElementById('theme-system'); contrastDefaultBtn=document.getElementById('contrast-default'); contrastHighBtn=document.getElementById('contrast-high'); fontComboBtns=document.getElementById('font-combo-btns');
+            bodyFontBtn=document.getElementById('body-font-button'); titleFontBtn=document.getElementById('title-font-button'); currentBodyFont=document.getElementById('current-body-font'); currentTitleFont=document.getElementById('current-title-font'); fontSizeSlider=document.getElementById('fontSizeSlider'); fontSizeValue=document.getElementById('fontSizeValue');
+            enVoiceBtn=document.getElementById('en-voice-button'); teVoiceBtn=document.getElementById('te-voice-button'); currentEnVoice=document.getElementById('current-en-voice'); currentTeVoice=document.getElementById('current-te-voice');
+
+            toggleAudioCheckbox=document.getElementById('toggle-audio'); toggleHapticsCheckbox=document.getElementById('toggle-haptics');
+            selectionModal=document.getElementById('selection-modal'); modalTitle=document.getElementById('modal-title'); modalOptions=document.getElementById('modal-options'); closeSelectionModalBtn=document.getElementById('close-selection-modal');
+            addWordModal=document.getElementById('addWordModal'); addWordForm=document.getElementById('add-word-form'); cancelAddWordBtn=document.getElementById('cancel-add-word-btn');
+            
+            resultTemplate=document.getElementById('result-card-template');
+            historyItemTemplate = document.getElementById('history-item-template'); 
+            
+            // Load Settings & Update Initial UI
+            applyTheme(getSetting('theme')); 
+            applyAccentColor(getSetting('colorTheme'));
+            applyContrast(getSetting('contrast'));
+            setTitleFont(getSetting('titleFont'));
+            setBodyFont(getSetting('bodyFont'));
+            updateFontSize(getSetting('fontSize'));
+            updateUI(getSetting('language'));
+            updateSettingsUI(); 
+            setupAudio(); 
+            
+            // Add Event Listeners
+            if(settingsBtn) settingsBtn.addEventListener('click', openSettingsModal); 
+            if(closeSettingsModalBtn) closeSettingsModalBtn.addEventListener('click', closeSettingsModal);
+            if(themeToggle) themeToggle.addEventListener('click', () => { const c=getSetting('theme'); const n=c==='light'?'dark':c==='dark'?'system':'light'; applyTheme(n); playClickSound(); }); 
+            if(languageBtn) languageBtn.addEventListener('click', () => openSelectionModal('language'));
+            if(colorBtn) colorBtn.addEventListener('click', () => openSelectionModal('color'));
+            if(bodyFontBtn) bodyFontBtn.addEventListener('click', () => openSelectionModal('bodyFont'));
+            if(titleFontBtn) titleFontBtn.addEventListener('click', () => openSelectionModal('titleFont'));
+            if(fontSizeSlider) fontSizeSlider.addEventListener('input', (e) => updateFontSize(e.target.value));
+            if(enVoiceBtn) enVoiceBtn.addEventListener('click', () => openSelectionModal('enVoice'));
+            if(teVoiceBtn) teVoiceBtn.addEventListener('click', () => openSelectionModal('teVoice'));
+            if(closeSelectionModalBtn) closeSelectionModalBtn.addEventListener('click', closeSelectionModal);
+            if(searchBar) searchBar.addEventListener('input', () => { clearTimeout(searchDebounce); searchDebounce = setTimeout(handleSearch, 300); }); 
+            
+            
+            let longPressTimer;
+            let isLongPress = false;
+            const longPressDelay = 500; // ms
+
+            if (multiActionBtn) {
+                
+                const handleLongPress = () => {
+                    isLongPress = true;
+                    console.log("Long Press: Toggling Search Type");
+                    const c = getSetting('searchType'); 
+                    setSetting('searchType', c === 'contains' ? 'startswith' : 'contains'); 
+                    playClickSound(); 
+                    if (!getSetting('disableVibration') && navigator.vibrate) navigator.vibrate(100); 
+                    updateSearchTypeUI(); 
+                    handleSearch(); 
+                };
+
+                const startPress = (e) => {
+                    e.preventDefault();
+                    isLongPress = false;
+                    longPressTimer = setTimeout(handleLongPress, longPressDelay);
+                };
+
+                const endPress = (e) => {
+                    e.preventDefault();
+                    clearTimeout(longPressTimer);
+                    if (!isLongPress) {
+                        console.log("Single click disabled. Long press to change search type.");
+                    }
+                };
+
+                // Mouse events
+                multiActionBtn.addEventListener('mousedown', startPress);
+                multiActionBtn.addEventListener('mouseup', endPress);
+                multiActionBtn.addEventListener('mouseleave', () => {
+                    clearTimeout(longPressTimer);
+                });
+                
+                // Touch events
+                multiActionBtn.addEventListener('touchstart', startPress, { passive: false });
+                multiActionBtn.addEventListener('touchend', endPress, { passive: false });
+            }
+
+            // Tab Listeners
+            if(searchTabBtn) searchTabBtn.addEventListener('click', () => { 
+                playClickSound(); 
+                searchTabBtn.classList.add('active'); 
+                bookmarksTabBtn.classList.remove('active'); 
+                historyTabBtn.classList.remove('active'); 
+                resultsContainer.style.display='block'; 
+                bookmarksContainer.style.display='none'; 
+                historyContainer.style.display='none'; 
+                searchContainer.style.display='block'; 
+                handleSearch(); 
+            });
+            if(bookmarksTabBtn) bookmarksTabBtn.addEventListener('click', () => { 
+                playClickSound(); 
+                searchTabBtn.classList.remove('active'); 
+                bookmarksTabBtn.classList.add('active'); 
+                historyTabBtn.classList.remove('active'); 
+                resultsContainer.style.display='none'; 
+                bookmarksContainer.style.display='block'; 
+                historyContainer.style.display='none'; 
+                searchContainer.style.display='none'; 
+                renderBookmarks(); 
+            });
+            if(historyTabBtn) historyTabBtn.addEventListener('click', () => { 
+                playClickSound(); 
+                searchTabBtn.classList.remove('active'); 
+                bookmarksTabBtn.classList.remove('active'); 
+                historyTabBtn.classList.add('active'); 
+                resultsContainer.style.display='none'; 
+                bookmarksContainer.style.display='none'; 
+                historyContainer.style.display='block'; 
+                searchContainer.style.display='none'; 
+                renderHistory(); 
+            });
+
+            if(addWordBtn) addWordBtn.addEventListener('click', openAddWordModal); 
+            if(cancelAddWordBtn) cancelAddWordBtn.addEventListener('click', closeAddWordModal); 
+            if(addWordForm) addWordForm.addEventListener('submit', handleSaveWord);
+            if(clearHistoryBtn) clearHistoryBtn.addEventListener('click', clearSearchHistory); 
+            
+            // Event delegation
+            const dictionaryContainer = document.querySelector('.max-w-2xl'); 
+            if(dictionaryContainer) dictionaryContainer.addEventListener('click', (e) => { 
+                const speakBtn = e.target.closest('.speak-btn'); 
+                if (speakBtn) { 
+                    handleSpeakClick(speakBtn); 
+                    return; 
+                } 
+                
+                const bookmarkBtn = e.target.closest('.bookmark-btn'); 
+                if (bookmarkBtn) { 
+                    const card = e.target.closest('.result-card'); 
+                    if(card && card.dataset.sn) handleBookmarkClick(bookmarkBtn, card.dataset.sn); 
+                    return; 
+                }
+
+                const historyBtn = e.target.closest('.history-item-btn');
+                if (historyBtn) {
+                    const term = historyBtn.dataset.term;
+                    if (term) {
+                        playClickSound();
+                        searchBar.value = term;
+                        if(searchTabBtn) searchTabBtn.click();
+                    }
+                    return;
+                }
+            });
+            
+            // Load dictionary data last
+            await loadDictionaryData();
+        };
+        document.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+</html>

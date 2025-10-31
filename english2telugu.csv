@@ -1,0 +1,599 @@
+﻿Number,English,IPA_Eng,Telugu,IPA_Telugu,Roman,PartOfSpeech,Category,English_Example,Telugu_Example
+1,water,/ˈwɔː.tər/,నీరు,/niː.ru/,neeru,Noun,Nature,I drink water.,నేను నీరు తాగుతాను.
+2,father,/ˈfɑː.ðər/,నాన్న,/nan.na/,nanna,Noun,Family,He is my father.,అతడు నా నాన్న.
+3,mother,/ˈmʌð.ər/,అమ్మ,/am.ma/,amma,Noun,Family,She is my mother.,ఆమె నా అమ్మ.
+4,eat,/iːt/,తిను,/ti.nu/,tinu,Verb,Action,I eat rice.,నేను అన్నం తింటాను.
+5,food,/fuːd/,ఆహారం,/aa.haa.ram/,aaharam,Noun,Nature,Food is important.,ఆహారం అవసరం.
+6,house,/haʊs/,ఇల్లు,/il.lu/,illu,Noun,Place,My house is big.,నా ఇల్లు పెద్దది.
+7,school,/skuːl/,బడి,/ba.ɖi/,badi,Noun,Place,School opens at 9.,9 గంటలకు బడి తెరుస్తారు.
+8,child,/tʃaɪld/,పిల్ల,/pil.la/,pilla,Noun,People,The child is playing.,పిల్ల ఆటలు ఆడుతోంది.
+9,run,/rʌn/,పరుగెడు,/pa.ru.ge.du/,parugedu,Verb,Action,I run fast.,నేను వేగంగా పరుగెడతాను.
+10,work,/wɜːk/,పని,/pa.ni/,pani,Noun,Action,He works at a bank.,అతడు బ్యాంక్ లో పనిచేస్తాడు.
+11,teacher,/ˈtiː.tʃər/,ఉపాధ్యాయుడు,/upaadhyaa.yu.du/,upadhyayudu,Noun,Profession,My teacher is kind.,నా ఉపాధ్యాయుడు దయామయుడు.
+12,student,/ˈstjuː.dənt/,విద్యార్థి,/vidhyaarthi/,vidyarthi,Noun,Profession,The student studies well.,విద్యార్థి బాగా చదువుకుంటాడు.
+13,day,/deɪ/,రోజు,/ro.ju/,roju,Noun,Time,Today is a good day.,ఈ రోజు మంచి రోజు.
+14,night,/naɪt/,రాత్రి,/raa.thri/,rathri,Noun,Time,Night is peaceful.,రాత్రి నిశ్శబ్దంగా ఉంటుంది.
+15,write,/raɪt/,వ్రాయు,/vraa.yu/,vrayu,Verb,Action,I write a letter.,నేను ఉత్తరం వ్రాస్తాను.
+16,read,/riːd/,చదువు,/cha.du.vu/,chaduvu,Verb,Action,I read a book.,నేను పుస్తకం చదువుతాను.
+17,book,/bʊk/,పుస్తకం,/pus.takam/,pustakam,Noun,Education,This book is easy.,ఈ పుస్తకం సులభమైనది.
+18,friend,/frend/,స్నేహితుడు,/snehi.thu.du/,snehitudu,Noun,People,He is my friend.,అతడు నా స్నేహితుడు.
+19,boy,/bɔɪ/,అబ్బాయి,/ab.baayi/,abbaayi,Noun,People,The boy is running.,అబ్బాయి పరుగెడుతున్నాడు.
+20,girl,/ɡɜːl/,అమ్మాయి,/am.maayi/,ammaayi,Noun,People,The girl sings.,అమ్మాయి పాడుతుంది.
+21,come,/kʌm/,రా,/raa/,raa,Verb,Action,Please come here.,ఇక్కడ రా.
+22,go,/ɡoʊ/,వెళ్ళు,/ve.l.lu/,vellu,Verb,Action,Go to school.,బడికి వెళ్ళు.
+23,see,/siː/,చూడు,/choo.du/,choodu,Verb,Action,See that bird.,ఆ పక్షిని చూడు.
+24,hear,/hɪə/,విను,/vi.nu/,vinu,Verb,Action,Hear the music.,పాటను విను.
+25,speak,/spiːk/,మాట్లాడు,/ma.tlaa.du/,matladu,Verb,Action,Speak slowly.,నెమ్మదిగా మాట్లాడు.
+26,hot,/hɒt/,వేడి,/ve.di/,vedi,Adjective,Weather,The tea is hot.,టీ వేడి ఉంది.
+27,cold,/kəʊld/,చల్లని,/cha.la.ni/,challani,Adjective,Weather,The milk is cold.,పాలు చల్లగా ఉన్నాయి.
+28,air,/eər/,గాలి,/gaa.li/,gaali,Noun,Nature,Air is needed.,గాలి అవసరం.
+29,fire,/faɪər/,అగ్ని,/ag.ni/,agni,Noun,Nature,Fire is dangerous.,అగ్ని ప్రమాదకరం.
+30,earth,/ɜːθ/,భూమి,/bhoo.mi/,bhoomi,Noun,Nature,Earth is round.,భూమి వృత్తాకారంగా ఉంటుంది.
+31,sky,/skaɪ/,ఆకాశం,/aa.kaa.sham/,aakaasham,Noun,Nature,The sky is blue.,ఆకాశం నీలిగా ఉంది.
+32,sun,/sʌn/,సూర్యుడు,/soor.yu.du/,sooryudu,Noun,Nature,The sun is bright.,సూర్యుడు ప్రకాశవంతంగా ఉంటుంది.
+33,moon,/muːn/,చంద్రుడు,/chan.dru.du/,chandrudu,Noun,Nature,The moon is full.,చంద్రుడు నిండి ఉన్నాడు.
+34,star,/stɑːr/,నక్షత్రం,/nak.sha.tram/,nakshatram,Noun,Nature,Count the stars.,నక్షత్రాలను లెక్కించు.
+35,tree,/triː/,చెట్టు,/che.t.tu/,chettu,Noun,Nature,The tree is green.,చెట్టు పచ్చగా ఉంది.
+36,leaf,/liːf/,ఆకు,/aa.ku/,aaku,Noun,Nature,The leaf fell down.,ఆకు కిందపడింది.
+37,flower,/ˈflaʊ.ər/,పువ్వు,/puv.vu/,puvvu,Noun,Nature,The flower is red.,పువ్వు ఎరుపుగా ఉంది.
+38,fruit,/fruːt/,పండు,/pan.du/,pandu,Noun,Food,The fruit is sweet.,పండు తీయగా ఉంది.
+39,fish,/fɪʃ/,చేప,/che.pa/,chepa,Noun,Food,I eat fish.,నేను చేప తింటాను.
+40,meat,/miːt/,మాంసం,/maan.sam/,maamsam,Noun,Food,Meat is healthy.,మాంసం ఆరోగ్యానికి మంచిది.
+41,rice,/raɪs/,అన్నం,/an.nam/,annam,Noun,Food,I eat rice.,నేను అన్నం తింటాను.
+42,milk,/mɪlk/,పాలు,/paa.lu/,paalu,Noun,Food,Milk is good for health.,పాలు ఆరోగ్యానికి మంచిది.
+43,salt,/sɔːlt/,ఉప్పు,/up.pu/,uppu,Noun,Food,Add salt.,ఉప్పు వేయి.
+44,sugar,/ˈʃuːɡər/,చక్కెర,/chak.ke.ra/,chakkera,Noun,Food,Sugar is sweet.,చక్కెర తీయగా ఉంటుంది.
+45,oil,/ɔɪl/,నూనె,/noo.ne/,noone,Noun,Food,Oil is expensive.,నూనె ఖరీదైనది.
+46,bread,/bred/,రొట్టె,/ro.t.te/,rotte,Noun,Food,I like bread.,నాకు రొట్టె ఇష్టం.
+47,egg,/eɡ/,గుడ్డు,/gu.du/,guddu,Noun,Food,Boil the egg.,గుడ్డు ఉడికించు.
+48,tea,/tiː/,టీ,/tee/,tee,Noun,Food,Do you drink tea?,మీరు టీ తాగుతారా?
+49,coffee,/ˈkɒ.fi/,కాఫీ,/kaa.fi/,kaafi,Noun,Food,Coffee is hot.,కాఫీ వేడి ఉంది.
+50,vegetable,/ˈvedʒ.tə.bəl/,కూరగాయ,/koo.ra.ga.ya/,kooragaya,Noun,Food,I cook vegetables.,నేను కూరగాయలు వంటను.
+51,me,/miː/,నేను,/ne.nu/,nenu,Pronoun,People,Give me water.,నాకు నీరు ఇవ్వు.
+52,you,/juː/,నువ్వు,/nu.vvu/,nuvvu,Pronoun,People,You are smart.,నువ్వు తెలివైనవాడు.
+53,we,/wiː/,మేము,/me.mu/,memu,Pronoun,People,We are friends.,మేము స్నేహితులు.
+54,he,/hiː/,అతను,/a.ta.nu/,atanu,Pronoun,People,He is my brother.,అతను నా అన్న.
+55,she,/ʃiː/,ఆమె,/aa.me/,aame,Pronoun,People,She is my sister.,ఆమె నా అక్క.
+56,it,/ɪt/,ఇది,/i.di/,idi,Pronoun,Objects,It is new.,ఇది కొత్తది.
+57,they,/ðeɪ/,వారు,/vaa.ru/,vaaru,Pronoun,People,They are coming.,వారు వస్తున్నారు.
+58,who,/huː/,ఎవరు,/e.va.ru/,evaru,Pronoun,Question,Who is there?,ఎవరో అక్కడున్నారు?
+59,what,/wɒt/,ఏమిటి,/e.mi.ti/,emiti,Pronoun,Question,What is that?,అది ఏమిటి?
+60,which,/wɪtʃ/,ఏది,/e.di/,edi,Pronoun,Question,Which is correct?,ఏది సరైనది?
+61,when,/wen/,ఎప్పుడు,/e.pu.du/,epudu,Adverb,Question,When will you come?,నువ్వు ఎప్పుడివస్తావు?
+62,where,/weə/,ఎక్కడ,/e.ka.da/,ekkada,Adverb,Question,Where are you?,నీవెక్కడ ఉన్నావు?
+63,why,/waɪ/,ఎందుకు,/e.n.du.ku/,enduku,Adverb,Question,Why are you sad?,నువ్వు ఎందుకు బాధపడుతున్నావు?
+64,how,/haʊ/,ఎలా,/e.la/,ela,Adverb,Question,How are you?,నీవు ఎలా ఉన్నావు?
+65,this,/ðɪs/,ఇది,/i.di/,idi,Pronoun,Objects,This is my book.,ఇది నా పుస్తకం.
+66,that,/ðæt/,ఆది,/aa.di/,aadi,Pronoun,Objects,That is my house.,ఆది నా ఇల్లు.
+67,these,/ðiːz/,ఇవి,/i.vi/,ivi,Pronoun,Objects,These are apples.,ఇవి ఆపిల్స్.
+68,those,/ðəʊz/,అవి,/a.vi/,avi,Pronoun,Objects,Those are trees.,అవి చెట్లు.
+69,can,/kæn/,చెయ్యగల,/che.yya.ga.la/,cheyyagala,Verb,Ability,I can swim.,నేను ఈదగలను.
+70,cannot,/ˈkæn.ɒt/,చెయ్యలేను,/che.yya.le.nu/,cheyyalenu,Verb,Ability,I cannot sing.,నేను పాడలేను.
+71,yes,/jes/,అవును,/a.vu.nu/,avunu,Adverb,Agreement,Yes I know.,అవును నాకు తెలుసు.
+72,no,/nəʊ/,కాదు,/kaa.du/,kaadu,Adverb,Agreement,No I don't have.,కాదు నాకు లేదు.
+73,all,/ɔːl/,అన్ని,/a.nni/,anni,Adjective,Quantity,All answers are correct.,అన్ని జవాబులు సరైనవే.
+74,some,/sʌm/,కొన్ని,/ko.nni/,konni,Adjective,Quantity,Some books are new.,కొన్ని పుస్తకాలు కొత్తవి.
+75,many,/ˈmen.i/,అనేక,/a.ne.ka/,aneka,Adjective,Quantity,Many people came.,అనేక మంది వచ్చారు.
+76,one,/wʌn/,ఒకటి,/o.ka.ti/,okati,Number,Counting,There is one ball.,ఒక బంతి ఉంది.
+77,two,/tuː/,రెండు,/re.n.du/,rendu,Number,Counting,He has two pens.,అతనికి రెండు పెన్లు ఉన్నాయి.
+78,three,/θriː/,మూడు,/muː.du/,moodu,Number,Counting,Three students came.,మూడు విద్యార్థులు వచ్చారు.
+79,four,/fɔːr/,నాలుగు,/naa.lu.gu/,naalugu,Number,Counting,Four apples are here.,నాలుగు ఆపిల్స్ ఉన్నాయి.
+80,five,/faɪv/,ఐదు,/a.i.du/,aidu,Number,Counting,Five books are new.,ఐదు పుస్తకాలు కొత్తవి.
+81,ten,/ten/,పది,/pa.di/,padi,Number,Counting,Ten kids are outside.,పది పిల్లలు బయట ఉన్నారు.
+82,hundred,/ˈhʌn.drəd/,వంద,/van.da/,vanda,Number,Counting,One hundred rupees.,వంద రూపాయలు.
+83,thousand,/ˈθaʊ.zənd/,వెయ్యి,/vej.ji/,veyyi,Number,Counting,One thousand people.,వెయ్యి మంది.
+84,next,/nekst/,తరువాత,/ta.ru.pu.ri/,taruvata,Adjective,Time,Who is next?,తరువాత ఎవరు?
+85,last,/lɑːst/,చివరి,/chi.va.ri/,chivari,Adjective,Time,I am the last.,నేను చివరి వాడ్ని.
+86,first,/fɜːst/,మొదటి,/mo.dha.ti/,modati,Adjective,Order,She is the first.,ఆమె మొదటి.
+87,old,/əʊld/,పాత,/paa.ta/,paata,Adjective,Description,Old book is here.,పాత పుస్తకం ఇక్కడ ఉంది.
+88,new,/njuː/,కొత్త,/ko.t.ta/,kotta,Adjective,Description,New house is big.,కొత్త ఇల్లు పెద్దది.
+89,big,/bɪg/,పెద్ద,/ped.da/,pedda,Adjective,Description,Big tree gives shade.,పెద్ద చెట్టు నీడ ఇస్తుంది.
+90,small,/smɔːl/,చిన్న,/chin.na/,chinna,Adjective,Description,Small dog is barking.,చిన్న కుక్క భగదాడి చేస్తోంది.
+91,good,/gʊd/,మంచి,/man.chi/,manchi,Adjective,Quality,Good food tastes good.,మంచి ఆహారం రుచిగా ఉంటుంది.
+92,bad,/bæd/,చెడు,/che.du/,chedu,Adjective,Quality,Bad weather outside.,అగల పంటలు చెడిపోయాయి.
+93,beautiful,/ˈbjuː.tɪ.fəl/,అందమైన,/an.da.ma.i.naa/,andamaina,Adjective,Quality,Beautiful flower.,అందమైన పువ్వు.
+94,strong,/strɒŋ/,బలమైన,/ba.la.mai.na/,balamaina,Adjective,Quality,Strong man helps others.,బలమైన మనిషి సహాయపడతాడు.
+95,weak,/wiːk/,బలహీనమైన,/ba.la.hee.na.maina/,balaheenamaina,Adjective,Quality,Weak person needs rest.,బలహీనమైన వ్యక్తి విశ్రాంతి అవసరం.
+96,rich,/rɪtʃ/,అమीरుడు,/a.mi.ru.du/,ameerudu,Adjective,Quality,Rich man owns a house.,అమीरుడు ఇల్లు కలిగి ఉన్నాడు.
+97,poor,/pʊər/,పేదవాడు,/pe.da.va.du/,pedavadu,Adjective,Quality,Poor people need help.,పేదవారికి సహాయం అవసరం.
+98,early,/ˈɜːli/,తర్వాత,/ta.ru.pu.ta/,taruvata,Adverb,Time,Please come early.,దయచేసి త్వరగా రా.
+99,late,/leɪt/,తరువాత,/ta.ru.pu.ta/,taruvata,Adverb,Time,He came late.,అతను ఆలస్యంగా వచ్చాడు.
+100,always,/ˈɔːlwɛɪz/,ఎప్పుడూ,/e.pu.du/,eppudu,Adverb,Frequency,Always speak truth.,ఎప్పుడూ నిజం చెప్పు.
+101,never,/ˈnev.ər/,ఎప్పుడూ కాదు,/ep.pu.du kaa.du/,eppudu kaadu,Adverb,Frequency,Never tell lies.,ఎప్పుడూ అబద్ధాలు చెప్పకు.
+102,sometimes,/ˈsʌm.taɪmz/,కొన్నిసార్లు,/kon.ni.saa.rlu/,konnisaarlu,Adverb,Frequency,Sometimes I walk.,కొన్నిసార్లు నేను నడుస్తాను.
+103,today,/təˈdeɪ/,ఈరోజు,/ee.ro.ju/,eeroju,Noun,Time,Today is Monday.,ఈరోజు సోమవారం.
+104,yesterday,/ˈjes.tə.deɪ/,నిన్న,/nin.na/,ninna,Noun,Time,Yesterday was Sunday.,నిన్న ఆదివారం.
+105,tomorrow,/təˈmɒr.əʊ/,రేపు,/re.pu/,repu,Noun,Time,Tomorrow is Tuesday.,రేపు మంగళవారం.
+106,morning,/ˈmɔː.nɪŋ/,ఉదయం,/u.da.yam/,udayam,Noun,Time,Good morning.,శుభోదయం.
+107,afternoon,/ˌɑːf.təˈnuːn/,మధ్యాహ్నం,/mad.hyaa.hnam/,madhyahnam,Noun,Time,I sleep in the afternoon.,నేను మధ్యాహ్నం నిద్రపోతాను.
+108,evening,/ˈiːv.nɪŋ/,సాయంత్రం,/saa.yan.tram/,sayantram,Noun,Time,Good evening.,శుభ సాయంత్రం.
+109,week,/wiːk/,వారం,/vaa.ram/,vaaram,Noun,Time,One week has seven days.,ఒక వారంలో ఏడు రోజులు.
+110,month,/mʌnθ/,నెల,/ne.la/,nela,Noun,Time,January is the first month.,జనవరి మొదటి నెల.
+111,year,/jɪər/,సంవత్సరం,/san.vat.sa.ram/,samvatsaram,Noun,Time,Happy new year.,నూతన సంవత్సర శుభాకాంక్షలు.
+112,time,/taɪm/,సమయం,/sa.ma.yam/,samayam,Noun,Time,What is the time?,సమయం ఎంత?
+113,hour,/aʊər/,గంట,/gan.ta/,ganta,Noun,Time,One hour has 60 minutes.,ఒక గంటలో 60 నిమిషాలు.
+114,minute,/ˈmɪn.ɪt/,నిమిషం,/ni.mi.sham/,nimisham,Noun,Time,Wait one minute.,ఒక నిమిషం ఆగు.
+115,second,/ˈsek.ənd/,సెకను,/se.ka.nu/,sekanu,Noun,Time,One minute has 60 seconds.,ఒక నిమిషంలో 60 సెకన్లు.
+116,clock,/klɒk/,గడియారం,/ga.di.yaa.ram/,gadiyaram,Noun,Objects,The clock shows time.,గడియారం సమయం చూపిస్తుంది.
+117,watch,/wɒtʃ/,చేతి గడియారం,/che.ti ga.di.yaa.ram/,cheti gadiyaram,Noun,Objects,I wear a watch.,నేను గడియారం ధరిస్తాను.
+118,bell,/bel/,గంట,/gan.ta/,ganta,Noun,Objects,The bell rings.,గంట మోగుతుంది.
+119,door,/dɔːr/,తలుపు,/ta.lu.pu/,talupu,Noun,Place,Close the door.,తలుపు మూయి.
+120,window,/ˈwɪn.dəʊ/,కిటికీ,/ki.ti.kee/,kitikee,Noun,Place,Open the window.,కిటికీ తెరువు.
+121,wall,/wɔːl/,గోడ,/go.da/,goda,Noun,Place,The wall is white.,గోడ తెల్లగా ఉంది.
+122,roof,/ruːf/,పైకప్పు,/pai.kap.pu/,paikuppu,Noun,Place,The roof leaks.,పైకప్పు కారుతోంది.
+123,floor,/flɔːr/,నేల,/ne.la/,nela,Noun,Place,Clean the floor.,నేల శుభ్రం చేయి.
+124,room,/ruːm/,గది,/ga.di/,gadi,Noun,Place,My room is clean.,నా గది శుభ్రంగా ఉంది.
+125,kitchen,/ˈkɪtʃ.ɪn/,వంటగది,/van.ta.ga.di/,vantagadi,Noun,Place,I cook in the kitchen.,నేను వంటగదిలో వంట చేస్తాను.
+126,bathroom,/ˈbɑːθ.ruːm/,స్నానాల గది,/snaa.naa.la ga.di/,snaanalagadi,Noun,Place,The bathroom is clean.,స్నానాల గది శుభ్రంగా ఉంది.
+127,bed,/bed/,మంచం,/man.cham/,mancham,Noun,Furniture,I sleep on the bed.,నేను మంచం మీద నిద్రపోతాను.
+128,chair,/tʃeər/,కుర్చీ,/kur.chee/,kurchee,Noun,Furniture,Sit on the chair.,కుర్చీ మీద కూర్చో.
+129,table,/ˈteɪ.bəl/,బల్ల,/bal.la/,balla,Noun,Furniture,Keep it on the table.,దాన్ని బల్ల మీద పెట్టు.
+130,plate,/pleɪt/,పళ్ళెం,/pal.lem/,pallem,Noun,Objects,Eat in a plate.,పళ్ళెంలో తిను.
+131,cup,/kʌp/,కప్పు,/kap.pu/,kappu,Noun,Objects,Drink tea in a cup.,కప్పులో టీ తాగు.
+132,spoon,/spuːn/,చెంచా,/chen.chaa/,chenchaa,Noun,Objects,Use a spoon.,చెంచా వాడు.
+133,knife,/naɪf/,కత్తి,/kat.ti/,katti,Noun,Objects,Cut with a knife.,కత్తితో కోయి.
+134,fork,/fɔːk/,ఫోర్క్,/fork/,fork,Noun,Objects,Use a fork.,ఫోర్క్ వాడు.
+135,glass,/ɡlɑːs/,గ్లాసు,/glaa.su/,glaasu,Noun,Objects,Drink water in a glass.,గ్లాసులో నీరు తాగు.
+136,bottle,/ˈbɒt.əl/,సీసా,/see.saa/,seesaa,Noun,Objects,Fill the bottle.,సీసా నింపు.
+137,box,/bɒks/,పెట్టె,/pet.te/,pette,Noun,Objects,Open the box.,పెట్టె తెరువు.
+138,bag,/bæɡ/,సంచి,/san.chi/,sanchi,Noun,Objects,Carry the bag.,సంచి తీసుకెళ్ళు.
+139,pen,/pen/,కలం,/ka.lam/,kalam,Noun,Education,Write with a pen.,కలంతో వ్రాయి.
+140,pencil,/ˈpen.səl/,పెన్సిల్,/pen.sil/,pensil,Noun,Education,Draw with a pencil.,పెన్సిల్‌తో గీయి.
+141,paper,/ˈpeɪ.pər/,కాగితం,/kaa.gi.tam/,kaagitam,Noun,Education,Write on paper.,కాగితం మీద వ్రాయి.
+142,notebook,/ˈnəʊt.bʊk/,నోట్‌బుక్,/note.book/,notebook,Noun,Education,Bring your notebook.,నోట్‌బుక్ తీసుకురా.
+143,page,/peɪdʒ/,పేజీ,/pe.jee/,pejee,Noun,Education,Turn the page.,పేజీ తిప్పు.
+144,letter,/ˈlet.ər/,ఉత్తరం,/ut.ta.ram/,uttaram,Noun,Communication,Write a letter.,ఉత్తరం వ్రాయి.
+145,word,/wɜːd/,పదం,/pa.dam/,padam,Noun,Language,Learn new words.,కొత్త పదాలు నేర్చుకో.
+146,sentence,/ˈsen.təns/,వాక్యం,/vaa.kyam/,vaakyam,Noun,Language,Write a sentence.,వాక్యం వ్రాయి.
+147,story,/ˈstɔː.ri/,కథ,/ka.tha/,katha,Noun,Literature,Tell a story.,కథ చెప్పు.
+148,name,/neɪm/,పేరు,/pe.ru/,peru,Noun,Identity,What is your name?,నీ పేరు ఏమిటి?
+149,color,/ˈkʌl.ər/,రంగు,/ran.gu/,rangu,Noun,Description,What color is this?,ఇది ఏ రంగు?
+150,red,/red/,ఎరుపు,/e.ru.pu/,erupu,Adjective,Color,The rose is red.,గులాబీ ఎరుపు రంగు.
+151,blue,/bluː/,నీలం,/nee.lam/,neelam,Adjective,Color,The sky is blue.,ఆకాశం నీలం రంగు.
+152,green,/ɡriːn/,ఆకుపచ్చ,/aa.ku.pach.cha/,aakupachcha,Adjective,Color,The tree is green.,చెట్టు ఆకుపచ్చ రంగు.
+153,yellow,/ˈjel.əʊ/,పసుపు,/pa.su.pu/,pasupu,Adjective,Color,The banana is yellow.,అరటి పసుపు రంగు.
+154,white,/waɪt/,తెలుపు,/te.lu.pu/,telupu,Adjective,Color,Snow is white.,మంచు తెల్లగా ఉంటుంది.
+155,black,/blæk/,నలుపు,/na.lu.pu/,nalupu,Adjective,Color,Coal is black.,బొగ్గు నల్లగా ఉంటుంది.
+156,brown,/braʊn/,గోధుమ రంగు,/go.dhu.ma ran.gu/,godhuma rangu,Adjective,Color,The table is brown.,బల్ల గోధుమ రంగులో ఉంది.
+157,orange,/ˈɒr.ɪndʒ/,నారింజ రంగు,/naa.rin.ja ran.gu/,naarinja rangu,Adjective,Color,Orange is orange color.,నారింజ నారింజ రంగు.
+158,pink,/pɪŋk/,గులాబీ రంగు,/gu.laa.bee ran.gu/,gulaabee rangu,Adjective,Color,The flower is pink.,పువ్వు గులాబీ రంగు.
+159,gray,/ɡreɪ/,బూడిద రంగు,/boo.di.da ran.gu/,boodida rangu,Adjective,Color,The cloud is gray.,మేఘం బూడిద రంగు.
+160,purple,/ˈpɜː.pəl/,ఊదా రంగు,/oo.daa ran.gu/,oodaa rangu,Adjective,Color,Grapes are purple.,ద్రాక్ష ఊదా రంగు.
+161,hand,/hænd/,చేయి,/che.yi/,cheyi,Noun,Body,Wash your hands.,చేతులు కడుక్కో.
+162,foot,/fʊt/,అడుగు,/a.du.gu/,adugu,Noun,Body,Wash your feet.,కాళ్ళు కడుక్కో.
+163,eye,/aɪ/,కన్ను,/kan.nu/,kannu,Noun,Body,Close your eyes.,కళ్ళు మూసుకో.
+164,ear,/ɪər/,చెవి,/che.vi/,chevi,Noun,Body,Clean your ears.,చెవులు శుభ్రం చేసుకో.
+165,nose,/nəʊz/,ముక్కు,/muk.ku/,mukku,Noun,Body,Blow your nose.,ముక్కు ఆరబెట్టు.
+166,mouth,/maʊθ/,నోరు,/no.ru/,noru,Noun,Body,Open your mouth.,నోరు తెరువు.
+167,tooth,/tuːθ/,పంటి,/pan.ti/,panti,Noun,Body,Brush your teeth.,పళ్ళు తోముకో.
+168,tongue,/tʌŋ/,నాలుక,/naa.lu.ka/,naaluka,Noun,Body,Show your tongue.,నాలుక చూపు.
+169,head,/hed/,తల,/ta.la/,tala,Noun,Body,Wash your head.,తల కడుక్కో.
+170,hair,/heər/,జుట్టు,/jut.tu/,juttu,Noun,Body,Comb your hair.,జుట్టు దువ్వుకో.
+171,face,/feɪs/,ముఖం,/mu.kham/,mukham,Noun,Body,Wash your face.,ముఖం కడుక్కో.
+172,neck,/nek/,మెడ,/me.da/,meda,Noun,Body,Turn your neck.,మెడ తిప్పు.
+173,shoulder,/ˈʃəʊl.dər/,భుజం,/bhu.jam/,bhujam,Noun,Body,Rest on my shoulder.,నా భుజం మీద ఆనుకో.
+174,arm,/ɑːm/,చేయి,/che.yi/,cheyi,Noun,Body,Raise your arms.,చేతులు పైకెత్తు.
+175,leg,/leɡ/,కాలు,/kaa.lu/,kaalu,Noun,Body,Stretch your legs.,కాళ్ళు చాపు.
+176,knee,/niː/,మోకాలు,/mo.kaa.lu/,mokaalu,Noun,Body,Bend your knees.,మోకాళ్ళు వంచు.
+177,finger,/ˈfɪŋ.ɡər/,వేలు,/ve.lu/,velu,Noun,Body,Count on your fingers.,వేళ్ళపై లెక్క.
+178,back,/bæk/,వెనుక,/ve.nu.ka/,venuka,Noun,Body,My back hurts.,నా వెనుక భాగం నొప్పిగా ఉంది.
+179,chest,/tʃest/,ఛాతీ,/chaa.tee/,chaatee,Noun,Body,His chest is strong.,అతని ఛాతీ బలంగా ఉంది.
+180,stomach,/ˈstʌm.ək/,కడుపు,/ka.du.pu/,kadupu,Noun,Body,My stomach hurts.,నా కడుపు నొప్పిగా ఉంది.
+181,heart,/hɑːt/,గుండె,/gun.de/,gunde,Noun,Body,The heart beats.,గుండె కొట్టుకుంటుంది.
+182,blood,/blʌd/,రక్తం,/rak.tam/,raktam,Noun,Body,Donate blood.,రక్తదానం చేయి.
+183,bone,/bəʊn/,ఎముక,/e.mu.ka/,emuka,Noun,Body,Bones are strong.,ఎముకలు బలంగా ఉంటాయి.
+184,skin,/skɪn/,చర్మం,/char.mam/,charmam,Noun,Body,Take care of your skin.,చర్మాన్ని సంరక్షించు.
+185,voice,/vɔɪs/,స్వరం,/sva.ram/,svaram,Noun,Body,Your voice is sweet.,నీ స్వరం మధురంగా ఉంది.
+186,cry,/kraɪ/,ఏడ్చు,/ed.chu/,edchu,Verb,Emotion,Don't cry.,ఏడవకు.
+187,laugh,/lɑːf/,నవ్వు,/nav.vu/,navvu,Verb,Emotion,Children laugh.,పిల్లలు నవ్వుతారు.
+188,smile,/smaɪl/,నవ్వు,/nav.vu/,navvu,Verb,Emotion,She smiles.,ఆమె నవ్వుతుంది.
+189,angry,/ˈæŋ.ɡri/,కోపం,/ko.pam/,kopam,Adjective,Emotion,Don't be angry.,కోపంగా ఉండకు.
+190,sad,/sæd/,బాధ,/baa.dha/,baadha,Adjective,Emotion,Why are you sad?,నువ్వు ఎందుకు బాధపడుతున్నావు?
+191,happy,/ˈhæp.i/,సంతోషం,/san.to.sham/,santosham,Adjective,Emotion,I am happy.,నేను సంతోషంగా ఉన్నాను.
+192,love,/lʌv/,ప్రేమ,/pre.ma/,prema,Noun,Emotion,Love your parents.,తల్లిదండ్రులను ప్రేమించు.
+193,hate,/heɪt/,ద్వేషం,/dve.sham/,dvesham,Noun,Emotion,Don't hate anyone.,ఎవరినీ ద్వేషించకు.
+194,fear,/fɪər/,భయం,/bha.yam/,bhayam,Noun,Emotion,Don't fear.,భయపడకు.
+195,hope,/həʊp/,ఆశ,/aa.sha/,aasha,Noun,Emotion,Have hope.,ఆశ ఉంచుకో.
+196,dream,/driːm/,కల,/ka.la/,kala,Noun,Emotion,Follow your dreams.,నీ కలలను అనుసరించు.
+197,truth,/truːθ/,నిజం,/ni.jam/,nijam,Noun,Values,Speak the truth.,నిజం చెప్పు.
+198,lie,/laɪ/,అబద్ధం,/a.bad.dham/,abaddham,Noun,Values,Don't tell lies.,అబద్ధాలు చెప్పకు.
+199,help,/help/,సహాయం,/sa.haa.yam/,sahaayam,Noun,Action,Help others.,ఇతరులకు సహాయం చేయి.
+200,gift,/ɡɪft/,బహుమతి,/ba.hu.ma.ti/,bahumati,Noun,Objects,Give a gift.,బహుమతి ఇవ్వు.
+201,street,/striːt/,వీధి,/vee.dhi/,veedhi,Noun,Place,The street is clean.,వీధి శుభ్రంగా ఉంది.
+202,market,/ˈmɑː.kɪt/,మార్కెట్,/maar.ket/,market,Noun,Place,I buy fruits at the market.,నేను మార్కెట్లో పండ్లు కొంటాను.
+203,shop,/ʃɒp/,అంగడి,/an.ga.di/,angadi,Noun,Place,This is my shop.,ఇది నా అంగడి.
+204,bank,/bæŋk/,బ్యాంకు,/byaaŋ.ku/,byanku,Noun,Place,There is a bank nearby.,అక్కడ దగ్గర బ్యాంకు ఉంది.
+205,bus,/bʌs/,బస్సు,/bas.su/,bassu,Noun,Transport,I travel by bus.,నేను బస్సులో ప్రయాణిస్తాను.
+206,train,/treɪn/,రివోలు,/ri.vo.lu/,rivolu,Noun,Transport,The train is late.,రిక్షా ఆలస్యంగా వచ్చింది.
+207,station,/ˈsteɪ.ʃən/,స్టేషన్,/stey.shan/,steyshan,Noun,Place,Meet at the station.,స్టేషన్‌లో కలుద్దాం.
+208,airport,/ˈeəpɔːt/,విమానాశ్రయం,/vi.maa.naa.shra.yam/,vimaanashrayam,Noun,Place,The airport is busy.,విమానాశ్రయం రద్దీగా ఉంది.
+209,road,/rəʊd/,రోడ్,/rod/,road,Noun,Place,The road is wide.,రోడ్ వెడల్పుగా ఉంది.
+210,bridge,/brɪdʒ/,పులుకు,/pu.lu.ku/,puluku,Noun,Place,The bridge is strong.,పులుకు బలంగా ఉంది.
+211,river,/ˈrɪv.ər/,నది,/na.di/,nadi,Noun,Nature,The river is long.,నది పొడవిగా ఉంది.
+212,sea,/siː/,సముద్రం,/sa.mu.dram/,samudram,Noun,Nature,The sea is deep.,సముద్రం లోతుగా ఉంటుంది.
+213,lake,/leɪk/,చెరువు,/che.ru.vu/,cheruvu,Noun,Nature,The lake is beautiful.,చెరువు అందంగా ఉంది.
+214,forest,/ˈfɒr.ɪst/,అడవి,/a.da.vi/,adavi,Noun,Nature,The forest is dense.,అడవి ఘనంగా ఉంది.
+215,mountain,/ˈmaʊn.tɪn/,పర్వతం,/par.va.tam/,parvatam,Noun,Nature,The mountain is tall.,పర్వతం ఎత్తుగా ఉంది.
+216,village,/ˈvɪl.ɪdʒ/,గ్రామం,/graa.mam/,graamam,Noun,Place,My village is small.,నా గ్రామం చిన్నది.
+217,city,/ˈsɪt.i/,నగరం,/na.ga.ram/,nagaram,Noun,Place,Hyderabad is a city.,హైద‌రాబాద్‌ ఒక నగరం.
+218,capital,/ˈkæp.ɪ.təl/,రాజధాని,/ra.ja.dhaa.ni/,raajadhaani,Noun,Place,Delhi is the capital.,ఢిల్లీ రాజధాని.
+219,temple,/ˈtem.pəl/,గుడి,/gu.di/,gudi,Noun,Place,We went to the temple.,మనము గుడికి వెళ్ళాము.
+220,church,/tʃɜːrtʃ/,చర్చ్,/char.ch/,church,Noun,Place,The church is old.,చర్చ్ పాతది.
+221,mosque,/mɒsk/,మసీదు,/ma.see.du/,maseedu,Noun,Place,The mosque is large.,మసీదు పెద్దది.
+222,schoolbag,/skuːl.bæɡ/,విద్యార్థి సంచి,/vid.yar.thi san.chi/,vidyarthi sanchi,Noun,Objects,The schoolbag is light.,విద్యార్థి సంచి తేలికగా ఉంది.
+223,uniform,/ˈjuː.nɪ.fɔːrm/,యూనిఫారం,/yu.ni.faa.ram/,yunifaram,Noun,Clothing,He wears a uniform.,అతను యూనిఫారం ధరిస్తాడు.
+224,pencilbox,/ˈpen.səl.bɒks/,పెన్సిల్ బాక్స్,/pen.sil bak.su/,pencil box,Noun,Objects,This is a pencil box.,ఇది పెన్సిల్ బాక్స్.
+225,eraser,/ɪˈreɪ.zər/,రబ్బరు,/rab.baru/,rabbara,Noun,Objects,Give me an eraser.,నాకు రబ్బరు ఇవ్వు.
+226,sharpener,/ˈʃɑː.pən.ər/,శార్పెనర్,/sha.ar.pe.nar/,sharpener,Noun,Objects,Can I use your sharpener?,నేను నీ sharpener వాడొచ్చా?
+227,scale,/skeɪl/,అలాంటి/తులా,/a.la.nti/tu.laa/,tula,Noun,Objects,Use the scale.,తులా వాడు.
+228,ruler,/ˈruː.lər/,పాలకుడు/రూలర్,/paa.la.ku.du/ru.lar/,paalakudu/rular,Noun,Objects,The ruler is straight.,రూలర్ సూటిగా ఉంటుంది.
+229,desk,/desk/,డెస్క్,/desk/,desk,Noun,Furniture,The desk is clean.,డెస్క్ శుభ్రంగా ఉంది.
+230,fan,/fæn/,పంకా/ఫ్యాన్,/pan.ka/fan/,panka/fan,Noun,Objects,Switch on the fan.,ఫ్యాన్ ఆన్ చెయ్యి.
+231,light,/laɪt/,కాంతి,/kaan.ti/,kaanti,Noun,Nature,Turn on the light.,కాంతి వెలుగు చెయ్యి.
+232,bulb,/bʌlb/,బల్బు,/bal.bu/,balbu,Noun,Objects,The bulb broke.,బల్బు పగిలింది.
+233,tube,/tjuːb/,ట్యూబ్,/tube/,tube,Noun,Objects,Replace the tube.,ట్యూబ్ మార్చు.
+234,switch,/swɪtʃ/,స్విచ్,/switch/,switch,Noun,Objects,Press the switch.,స్విచ్ నొక్కు.
+235,plug,/plʌɡ/,ప్లగ్,/plug/,plug,Noun,Objects,Put the plug.,ప్లగ్ పెట్టు.
+236,socket,/ˈsɒk.ɪt/,సాకెట్,/saaket/,saaket,Noun,Objects,Insert in the socket.,సాకెట్‌లో పెట్టు.
+237,battery,/ˈbæt.ər.i/,బ్యాటరీ,/byaa.ta.ri/,byaatari,Noun,Objects,The battery is dead.,బ్యాటరీ పూర్తయింది.
+238,remote,/rɪˈməʊt/,రీమోట్,/riimot/,remote,Noun,Objects,Give the remote.,రీమోట్ ఇవ్వు.
+239,television,/ˈtel.ɪ.vɪʒ.ən/,టెలివిజన్,/te.li.vi.jan/,telivijan,Noun,Objects,Switch on the television.,టెలివిజన్ వాడు.
+240,radio,/ˈreɪ.di.əʊ/,రేడియో,/re.di.yo/,radio,Noun,Objects,Do you have a radio?,మీ వద్ద రేడియో ఉందా?
+241,phone,/fəʊn/,ఫోన్,/phone/,phone,Noun,Objects,Answer the phone.,ఫోన్ ఎత్తు.
+242,mobile,/ˈməʊ.baɪl/,మైబైల్,/mo.bail/,mobile,Noun,Objects,My mobile is new.,నా మొబైల్ కొత్తది.
+243,laptop,/ˈlæp.tɒp/,ల్యాప్‌టాప్,/laptop/,laptop,Noun,Objects,I use a laptop.,నేను ల్యాప్‌టాప్ వాడుతాను.
+244,computer,/kəmˈpjuː.tər/,కంప్యూటర్,/kam.pyu.tar/,computer,Noun,Objects,This computer is fast.,ఈ కంప్యూటర్ వేగంగా ఉంది.
+245,mouse,/maʊs/,మౌస్,/mau.su/,mousu,Noun,Objects,Click the mouse.,మౌస్ నొక్కు.
+246,keyboard,/ˈkiː.bɔːd/,కీబోర్డ్,/kee.board/,keyboard,Noun,Objects,Type with the keyboard.,కీబోర్డ్‌తో టైప్ చేయి.
+247,printer,/ˈprɪn.tər/,ప్రింటర్,/prin.tar/,printer,Noun,Objects,Give the printout.,ప్రింటౌట్ ఇవ్వు.
+248,speaker,/ˈspiː.kər/,స్పీకర్,/spee.kar/,speaker,Noun,Objects,Turn up the speaker.,స్పీకర్ ఆన్ చేయి.
+249,walk,/wɔːk/,నడుచు,/na.du.chu/,naduchu,Verb,Action,I walk every morning.,ప్రతి ఉదయం నేను నడుస్తాను.
+250,jump,/dʒʌmp/,దూకు,/doo.ku/,dooku,Verb,Action,Jump high.,ఎత్తుగా దూకు.
+251,sit,/sɪt/,కూర్చో,/koo.rcho/,koorchho,Verb,Action,Please sit down.,దయచేసి కూర్చోండి.
+252,stand,/stænd/,నిలు,/ni.lu/,nilu,Verb,Action,Stand straight.,నేరుగా నిలువు.
+253,open,/ˈəʊ.pən/,తెరువు,/te.ru.vu/,teruvu,Verb,Action,Open the box.,బాక్స్ తెరువు.
+254,close,/kləʊz/,మూయి,/moo.yi/,mooyi,Verb,Action,Close the door.,తలుపు మూయి.
+255,count,/kaʊnt/,లెక్కించు,/le.kin.chu/,lekinchu,Verb,Action,Count the apples.,ఆపిల్స్ లెక్కించు.
+256,draw,/drɔː/,గీయి,/gee.yi/,geeyyi,Verb,Action,Draw a picture.,చిత్రం గీయి.
+257,play,/pleɪ/,ఆడు,/aa.du/,aadu,Verb,Action,Play cricket.,క్రికెట్ ఆడు.
+258,stop,/stɒp/,ఆపు,/aa.pu/,aapu,Verb,Action,Stop talking.,మాట్లాడటం ఆపు.
+259,start,/stɑːt/,ప్రారంభించు,/pra.a.ram.bhin.chu/,prarambhinchu,Verb,Action,Start the game.,గేమ్ ప్రారంభించు.
+260,wait,/weɪt/,ఆగు,/aa.gu/,aagu,Verb,Action,Wait here.,ఇక్కడ ఆగు.
+261,swim,/swɪm/,ఈదు,/ee.du/,eedu,Verb,Action,Learn to swim.,ఈదడాన్ని నేర్చుకో.
+262,throw,/θroʊ/,ఎగిరేయి,/e.gi.re.yi/,egireyi,Verb,Action,Throw the ball.,బంతిని ఎగిరేయి.
+263,catch,/kætʃ/,పడుగు,/pa.du.gu/,padugu,Verb,Action,Catch the ball.,బంతిని పడుగు.
+264,carry,/ˈkæ.ri/,తీసుకెళ్ళు,/tee.su.ke.llu/,teesukellu,Verb,Action,Carry the bag.,బ్యాగ్ తీసుకెళ్ళు.
+265,clap,/klæp/,చప్పట్లు కొట్టు,/cha.p.pa.tlu ko.t.tu/,chappatlu kottu,Verb,Action,Please clap.,దయచేసి చప్పట్లు పెట్టండి.
+266,talk,/tɔːk/,మాట్లాడు,/maa.tlaa.du/,maatlaadu,Verb,Action,Talk slowly.,నెమ్మదిగా మాట్లాడు.
+267,sing,/sɪŋ/,పాడు,/paa.du/,paadu,Verb,Action,Sing a song.,ఒక పాట పడు.
+268,dance,/dæns/,నాట్యం చేయి,/naa.tyam che.yi/,naatyam cheyi,Verb,Action,Dance well.,బాగా నాట్యం చేయు.
+269,listen,/ˈlɪs.ən/,విను,/vi.nu/,vinu,Verb,Action,Listen to music.,పాట విను.
+270,show,/ʃəʊ/,చూపు,/choo.pu/,choopu,Verb,Action,Show me your book.,నీ పుస్తకం చూపు.
+271,find,/faɪnd/,కనుగొను,/ka.nu.go.nu/,kanugonu,Verb,Action,Find the answer.,సమాధానం కనుగొను.
+272,forget,/fəˈɡɛt/,మర్చిపోవు,/mar.chi.po.vu/,marchipovu,Verb,Action,Don’t forget.,మర్చిపోవద్దు.
+273,remember,/rɪˈmɛm.bər/,గుర్తు పెట్టుకో,/gur.tu pe.ttu.ko/,gurtu pettuko,Verb,Action,Remember this.,దాన్ని గుర్తుపెట్టుకో.
+274,choose,/tʃuːz/,ఎంచుకో,/en.choo.ko/,enchuko,Verb,Action,Choose one.,ఒకటి ఎంచుకో.
+275,answer,/ˈæn.sər/,సమాధానం,/sa.maa.dhaa.nam/,samaadhanam,Noun,Communication,Give an answer.,సమాధానం చెప్పు.
+276,question,/ˈkwes.tʃən/,ప్రశ్న,/pra.shna/,prashna,Noun,Communication,Ask a question.,ప్రశ్న అడుగు.
+277,build,/bɪld/,నిర్మించు,/nir.min.chu/,nirmimchu,Verb,Action,Build a house.,ఇల్లు నిర్మించు.
+278,break,/breɪk/,విరగడం,/vi.ra.ga.daṁ/,viragadam,Verb,Action,Don’t break it.,దాన్ని విరగకండి.
+279,buy,/baɪ/,కొను,/ko.nu/,konu,Verb,Action,Buy vegetables.,కూరగాయలు కొనండి.
+280,sell,/sel/,అమ్ము,/am.mu/,ammu,Verb,Action,Sell fruits.,పండ్లు అమ్ము.
+281,send,/send/,పంపు,/pam.pu/,pampu,Verb,Action,Send money.,డబ్బు పంపు.
+282,bring,/brɪŋ/,తేవు,/te.vu/,tevu,Verb,Action,Bring your bag.,నీ సంచి తేవు.
+283,take,/teɪk/,తీసుకో,/tee.su.ko/,teesuko,Verb,Action,Take your seat.,నీ సీటు తీసుకో.
+284,teach,/tiːtʃ/,బోధించు,/bo.dhin.chu/,bodhinchu,Verb,Action,Teach English.,ఇంగ్లీష్ బోధించు.
+285,learn,/lɜːrn/, నేర్చుకో,/ne.rchu.ko/,nerchuko,Verb,Action,Learn Telugu.,తెలుగు నేర్చుకో.
+286,study,/ˈstʌd.i/,ఒక అధ్యయనం చేయు,/oka adhyayanam che.yu/,adhyayanam cheyu,Verb,Action,Study well.,బాగా చదువు.
+287,make,/meɪk/,చేయు,/che.yu/,cheyu,Verb,Action,Make a list.,ఒక జాబితా తయారుచేయు.
+288,paint,/peɪnt/,రంగవేలు,/ran.ga.ve.lu/,rangavelu,Verb,Action,Paint the wall.,గోడను రంగవేలు.
+289,cook,/kʊk/,వండు,/va.n.du/,vandu,Verb,Action,Cook rice.,అన్నం వండి.
+290,clean,/kliːn/,శుభ్రపరచు,/shu.bhra.pa.ra.chu/,shubhraparachu,Verb,Action,Clean the house.,ఇల్లు శుభ్రపరచు.
+291,ask,/æsk/,అడుగు,/a.du.gu/,adugu,Verb,Action,Ask a question.,ఒక ప్రశ్న అడుగు.
+292,give,/ɡɪv/,ఇవ్వు,/iv.vu/,ivvu,Verb,Action,Give me a pen.,నాకు కలం ఇవ్వు.
+293,keep,/kiːp/,వుంచు,/vun.chu/,vunchu,Verb,Action,Keep it safe.,దాన్ని సురక్షితంగా వుంచు.
+294,leave,/liːv/,వదిలివేయు,/va.di.li.ve.yu/,vadiliveyu,Verb,Action,Leave the room.,గదిని వదిలివేయు.
+295,arrive,/əˈraɪv/, చేరు,/che.ru/,cheru,Verb,Action,Arrive early.,త్వరగా చేరుకో.
+296,turn,/tɜːn/,తిప్పు,/ti.ppu/,tippu,Verb,Action,Turn the page.,పేజీ తిప్పు.
+297,mix,/mɪks/,కలపు,/ka.la.pu/,kalapu,Verb,Action,Mix the flour.,పిండి కలిపించు.
+298,join,/dʒɔɪn/,చేరు,/che.ru/,cheru,Verb,Action,Join us.,మా దగ్గర చేరు.
+299,fix,/fɪks/,చేయు,/che.yu/,cheyu,Verb,Action,Fix this table.,ఈ బల్లను సరిచేయండి.
+300,lock,/lɒk/,అగుపాటు పెట్టు,/agu.paa.tu pe.t.tu/,agupatu pettu,Verb,Action,Lock the door.,తలుపు అగుపాటు పెట్టు.
+301,unlock,/ˌʌnˈlɒk/, తలుపు తీసి పెట్టు,/ta.lu.pu tee.si pe.t.tu/,talupu teesi pettu,Verb,Action,Unlock the door.,తలుపు తీసిపెట్టు.
+302,search,/sɜːrtʃ/,శోధించు,/sho.dhin.chu/,shodhinchu,Verb,Action,Search for the book.,పుస్తకం కోసం శోధించు.
+303,lose,/luːz/,కోల్పోవు,/kol.po.vu/,kolpovu,Verb,Action,Don’t lose hope.,ఆశ కోల్పోవద్దు.
+304,win,/wɪn/,గెలుచుకో,/ge.lu.chu.ko/,geluchuko,Verb,Action,Win the game.,గేమ్ గెలుచుకో.
+305,fail,/feɪl/,విజయం పొందలేకపోయింది,/vi.ja.yam pon.da.le.ka.po.yi.di/,vijayam pondalekapoyindi,Verb,Action,He failed the test.,అతను పరీక్షలో విజయము పొందలేదు.
+306,pass,/pɑːs/,పాస్ అయ్యింది,/paas a.yi.yin.di/,paas ayyindi,Verb,Action,She passed the exam.,ఆమె పరీక్షలో పాస్ అయింది.
+307,receive,/rɪˈsiːv/,పొందు,/pon.du/,pondu,Verb,Action,Receive the gift.,బహుమతి పొందు.
+308,hold,/həʊld/,పట్టుకో,/pa.t.tu.ko/,pattuko,Verb,Action,Hold the book.,పుస్తకం పట్టుకో.
+309,drop,/drɒp/,వదలటం,/va.da.la.ṭam/,vadalatam,Verb,Action,Drop the pen.,కలం వదలెయ్యి.
+310,pick,/pɪk/,ఎత్తు,/et.tu/,ettu,Verb,Action,Pick up your pencil.,నీ పెన్సిల్ ఎత్తు.
+311,classroom,/ˈklɑːs.ruːm/,తరగతి గది,/tara.ga.ti ga.di/,taragati gadi,Noun,Place,The classroom is big.,తరగతిగది పెద్దది.
+312,lesson,/ˈles.ən/,పాఠం,/paa.tham/,paatham,Noun,Education,Read the lesson.,పాఠం చదువు.
+313,homework,/ˈhəʊm.wɜːk/,హోమ్‌వర్క్,/hom.vark/,homework,Noun,Education,Do your homework.,నీ హోమ్‌వర్క్ చేయు.
+314,blackboard,/ˈblæk.bɔːrd/,బ్లాక్‌బోర్డ్,/blaak.board/,blackboard,Noun,Education,Write on the blackboard.,బ్లాక్‌బోర్డ్‌పై వ్రాయు.
+315,chalk,/tʃɔːk/,చాక్,/chaak/,chalk,Noun,Education,Use white chalk.,వైట్ చాక్ వాడు.
+316,fruits,/fruːts/,పండ్లు,/pan.dlu/,pandlu,Noun,Food,Fruits are sweet.,పండ్లు తీయగా ఉంటాయి.
+317,cake,/keɪk/,కేకు,/ke.ku/,keku,Noun,Food,The cake is soft.,కేకు మృదువుగా ఉంది.
+318,ice,/aɪs/,ఐస్,/ais/,ais,Noun,Food,Ice is cold.,ఐస్ చల్లగా ఉంటుంది.
+319,juice,/dʒuːs/,రసం,/ra.sam/,rasam,Noun,Food,Juice is fresh.,రసం తాజా.
+320,breakfast,/ˈbrek.fəst/,ప్రాత:కాల భోజనం,/praatha kaala bhojanam/,prakabhhojanam,Noun,Food,Breakfast is important.,ప్రాత:కాల భోజనం అవసరం.
+321,lunch,/lʌntʃ/,మధ్యాహ్న భోజనం,/madhyaahna bhojanam/,madhyabhojanam,Noun,Food,Lunch is at 1pm.,మధ్యాహ్న భోజనం ఒకటిగంటకు.
+322,dinner,/ˈdɪn.ər/,రాత్రి భోజనం,/raatri bhojanam/,ratribhojanam,Noun,Food,Dinner is at night.,రాత్రి భోజనం రాత్రి సమయంలో.
+323,call,/kɔːl/,కిలకిలాడటం,/ki.la.ki.la.a.dam/,kilakiladadam,Verb,Action,Call me later.,నన్ను సేపటి తరువాత కాల్ చేయి.
+324,car,/kɑːr/,కారు,/kaa.ru/,kaaru,Noun,Transport,I drive a car.,నేను కారు నడుపుతున్నాను.
+325,cause,/kɔːz/,కారణం,/kaa.ra.nam/,kaarana,mNoun,Reason,What is the cause?,కారణం ఏమిటి?
+326,change,/tʃeɪndʒ/,మార్చు,/maar.cu/,maarcu,Verb,Action,Change your clothes.,మీ దుస్తులను మార్చు.
+327,check,/tʃek/,తద్వారా చూసుకో,/tad.vaa.ra choo.su.ko/,tadvarachusuko,Verb,Action,Check the answer.,జవాబును చూసుకో.
+328,class,/klɑːs/, తరగతి,/ta.ra.ga.ti/,taragati,Noun,Education,Attend the class.,తరగతికి హాజరు కావాలి.
+329,copy,/ˈkɒpi/,నకలు తీసుకో,/na.ka.lu tee.su.ko/,nakalu teesuko,Verb,Action,Copy the text.,పాఠ్యాన్ని నకలు తీసుకో.
+330,cost,/kɒst/,ధర,/dha.ra/,dhara,Noun,Money,What is the cost?,ధర ఎంత?
+331,country,/ˈkʌntri/,దేశం,/de.sa.m/,desam,Noun,Place,India is a country.,భారత దేశం.
+332,cover,/ˈkʌvə/,కప్పు,/kap.pu/,kappu,Verb,Action,Cover the pot.,పాన్ కప్పు పెట్టు.
+333,cut,/kʌt/,కట్ చేయి,/kat che.yi/,kat cheyi,Verb,Action,Cut the paper.,కాగితం కట్ చేయి.
+334,dead,/ded/,చావు,/chaa.vu/,chaavu,Adjective,Condition,The plant is dead.,గడ్డి చనిపోయింది.
+335,dear,/dɪər/,ప్రియమైన,/pri.ya.mi.na/,priyamina,Adjective,Quality,Dear friend.,ప్రియమైన స్నేహితుడు.
+336,decide,/dɪˈsaɪd/,నిర్ణయించు,/ni.rn.yai.ncu/,nirnayinchhu,Verb,Action,Decide soon.,త్వరగా నిర్ణయించు.
+337,describe,/dɪˈskraɪb/,వర్ణించు,/var.nin.cu/,varninchu,Verb,Action,Describe the scene.,సన్నివేశం వివరించు.
+338,design,/dɪˈzaɪn/,డిజైన్ చేయి,/di.za.in che.yi/,design cheyi,Verb,Action,Design a house.,ఇల్లు డిజైన్ చేయి.
+339,desire,/dɪˈzaɪər/,ఆసక్తి,/aa.sa.krti/,aasakti,Noun,Feeling,She has desire.,ఆమెకి ఆసక్తి ఉంది.
+340,destroy,/dɪˈstrɔɪ/,నాశనం చేయి,/naa.sha.nam che.yi/,naashanam cheyi,Verb,Action,Destroy the old house.,ఓ పాత ఇల్లు ధ్వంసం చేయి.
+341,develop,/dɪˈvel.əp/,అభివృద్ధి చెందు,/ab.hi.vr.ddhi chen.du/,abhivruddhi chendu,Verb,Action,Develop skills.,నైపుణ్యాలను అభివృద్ధి చేయి.
+342,difficult,/ˈdɪf.ɪ.kəlt/,కష్టం,/kaṣ.taṁ/,kashtam,Adjective,Quality,This is difficult.,ఇది కష్టం.
+343,dirty,/ˈdɜː.ti/,గందరగోళం,/gan.da.ra.go.la/,gandaragola,Adjective,Quality,The floor is dirty.,నేల గందరగోళంగా ఉంది.
+344,discover,/dɪˈskʌv.ər/,నిర్వచించు,/nir.va.chi.ncu/,nirvachinchu,Verb,Action,Discover new things.,కొత్త విషయాలు కనుగొను.
+345,discuss,/dɪˈskʌs/,చర్చించు,/char.cin.cu/,charcinchu,Verb,Action,Discuss the topic.,విషయంపై చర్చించు.
+346,divide,/dɪˈvaɪd/,విభజించు,/vi.bha.jin.cu/,vibhajinchu,Verb,Action,Divide into parts.,భాగాలుగా విడగొట్టు.
+347,do,/duː/,చేయి,/che.yi/,cheyi,Verb,Action,Do your work.,మీ పని చేయండి.
+348,drink,/drɪŋk/,తాగు,/taa.gu/,taagu,Verb,Action,Drink water.,నీరు తాగు.
+349,dress,/drɛs/,డ్రెస్,/dres/,dress,Noun,Clothing,She wore a red dress.,ఆమె ఎరుపు డ్రెస్ ధరిస్తుంది.
+350,drive,/draɪv/,డ్రైవ్ చేయు,/draiv che.yu/,drive cheyu,Verb,Action,He drives a car.,అతను కారు నడుపుతాడు.
+351,duck,/dʌk/,बतख,/batakha/,batakha,Noun,Animal,A duck is in the pond.,కొడుగు నీటిలో ఉంది.
+352,dust,/dʌst/,ధూళి,/dhoo.li/,dhooli,Noun,Nature,The dust is everywhere.,ధూళి ప్రతి చోటుంది.
+353,end,/ɛnd/,ముగింపు,/mu.gim.pu/,mugimpu,Noun,Time,The story ends here.,కథ ఇక్కడ ముగుస్తుంది.
+354,fair,/fɛər/,సమ / సులభంగా,/sa.ma/,sama,Adjective,Quality,A fair chance.,సమ అవకాశం.
+355,fall,/fɔːl/,పడి పోవు,/pa.di po.vu/,padi povu,Verb,Action,Leaves fall in autumn.,ఆకులు శరదృతువులో పడతాయి.
+356,far,/fɑːr/,దూరమై ఉన్న,/doo.ra.mi un.na/,durami unna,Adverb,Place,The school is far.,బడి దూరంలో ఉంది.
+357,farm,/fɑːrm/,పంట స్థలం,/pan.ta sthala/,panta sthala,Noun,Place,They work on a farm.,ఆమెలు పంటలో పనిచేస్తారు.
+358,fast,/fæst/,వేగంగా,/ve.ga.nga/,veganga,Adverb,Speed,Run fast.,వేగంగా పరిగెత్తు.
+359,feel,/fiːl/,అనుభవించు,/a.nu.bha.vin.cu/,anubhavincu,Verb,Sensation,I feel happy.,నేను సంతోషంగా అనిపిస్తుంది.
+360,flat,/flæt/,ఫ్లాట్,/flaat/,flat,Adjective,Building,They live in a flat.,వారు ఫ్లాట్‌లో ఉంటారు.
+361,fly,/flaɪ/,పిట్ట,/pit.ta/,pitta,Noun,Animal,A fly is annoying.,పిట్ట బాధగా ఉంటుంది.
+362,for,/fɔːr/,కొరకు,/ko.ra.ku/,koraku,Preposition,Function,This gift is for you.,ఈ బహుమతి మీకు.
+363,from,/frʌm/,నుండి,/nu.n.di/,nundi,Preposition,Direction,I came from home.,నేను ఇంటి నుండి వచ్చాను.
+364,full,/fʊl/,పూర్తిగా,/puu.ri.ga/,puurtiga,Adjective,Quantity,The glass is full.,కప్పు నిండిపోయింది.
+365,fun,/fʌn/,ఆనందం,/aa.nan.dam/,aanandam,Noun,Emotion,We had fun.,మా ఆనందంగా ఉంది.
+366,future,/ˈfjuː.tʃər/,భవిష్యత్తు,/bha.vi.ṣyat.tu/,bhavishyattu,Noun,Time,The future is bright.,భవిష్యత్తు ప్రకాశవంతంగా ఉంది.
+367,garden,/ˈɡɑːr.dən/,తోట,/to.ta/,tota,Noun,Place,The garden is beautiful.,తోట అందంగా ఉంది.
+368,get,/ɡɛt/,పొందు,/pon.du/,pondu,Verb,Action,I get many gifts.,నేను ఎన్నో బహుమతులు పొందాను.
+369,government,/ˈɡʌv.ərn.mənt/,ప్రభుత్వం,/pra.bhu.tva.m/,prabhutvam,Noun,Organization,The government is responsible.,ప్రభుత్వం బాధ‌ప‌డుతుంది.
+370,grass,/ɡræs/,పుల్లుకూర,/pul.lu.ku.ra/,pullukurra,Noun,Nature,The grass is green.,పుల్లుకూర పచ్చగా ఉంది.
+371,ground,/ɡraʊnd/,భూమి,/bhoo.mi/,bhoomi,Noun,Nature,The ground is soft.,భూమి మృదువుగా ఉంది.
+372,group,/ɡruːp/,గుంపు,/gun.pu/,gumpu,Noun,People,We are a group.,మేము ఒక గుంపు.
+373,grow,/ɡroʊ/,పెరిగేది,/pe.ri.ge.di/,perigedi,Verb,Action,The plant grows fast.,ఆ మొక్క వేగంగా పెరుగుతుంది.
+374,half,/hæf/,అర్ధం,/ar.dham/,ardham,Noun,Quantity,Half of the cake is gone.,కేక్ అర్ధం తిన్నారు.
+375,hard,/hɑːrd/,కష్టమైన,/kas.ta.mi.na/,kashtamina,Adjective,Quality,Hard work pays off.,కష్టపడి పనిచేయడం ఫలిస్తుంది.
+376,has,/hæz/,ధరించు,/dha.ri.ncu/,dharinchu,Verb,Auxiliary,He has a bike.,అతనికి బైక్ ఉంది.
+377,hat,/hæt/,టోపీ,/to.pi/,topi,Noun,Clothing,He wears a hat.,అతను టోపీ పెట్టుకున్నాడు.
+378,have,/hæv/,ఉంది,/un.di/,undi,Verb,Auxiliary,I have a pen.,నాకు పెన్ ఉంది.
+379,hill,/hɪl/,గొర్రె,/gor.re/,gorre,Noun,Geography,The hill is tall.,గొర్రె ఎత్తుగా ఉంది.
+380,home,/hoʊm/,ఇల్లు,/il.lu/,illu,Noun,Place,I am going home.,నేను ఇంటికి వెళ్తున్నాను.
+381,honey,/ˈhʌn.i/,తేనె,/te.ne/,tene,Noun,Food,Honey is sweet.,తేనె తీయటి.
+382,hospital,/ˈhɒs.pɪ.təl/,ఆస్పత్రి,/aas.pa.ti/,aaspati,Noun,Place,He is in hospital.,అతను ఆస్పత్రిలో ఉన్నాడు.
+383,idea,/aɪˈdɪə/,ఆలోచన,/aa.loo.cna/,alochana,Noun,Thoughts,That's a good idea.,అది మంచి ఆలోచన.
+384,if,/ɪf/,అనే, /a.ne/,ane,Conjunction,Condition,If it rains, stay inside.
+385,ill,/ɪl/,అస్వస్థత,/as.was.tha/,asvastha,Adjective,Health,I am ill.,నేను అనారోగ్యం.
+386,in,/ɪn/,లో,/lo/,lo,Preposition,Location,She is in school.,ఆమె బడిలో ఉంది.
+387,inside,/ɪnˈsaɪd/,అందులో,/an.du.lu/,andulu,Adverb,Location,Come inside.,లోపల రావు.
+388,introduce,/ˌɪn.trəˈdjuːs/,పరిచయం చేయి,/pa.ri.cayaṁ che.yi/,parichayam cheyi,Verb,Action,Introduce yourself.,మీరు పరిచయం చేసుకోండి.
+389,iron,/ˈaɪ.ən/, ఇనుము,/i.nu.mu/,inumu,Noun,Material,Iron is strong.,ఇనుము బలంగా ఉంటుంది.
+390,job,/dʒɒb/,ఉద్యోగం,/ud.jo.gaṁ/,udyogam,Noun,Work,I have a job.,నా దగ్గర ఉద్యోగం ఉంది.
+391,kill,/kɪl/,చంపు,/champu/,cham-pu,Verb,Action,Kill the mosquito.,ముంగిటను చంపిడి.
+392,kind,/kaɪnd/,దయగల,/da.ya.ɡa.la/,dayagala,Adjective,Quality,She is kind.,ఆమె దయగలది.
+393,king,/kɪŋ/,రాజు,/raa.ju/,raaju,Noun,Title,The king is powerful.,రాజు బలవంతుడు.
+394,know,/noʊ/,తెలిసి ఉండటం,/te.li.si un.da.ṭaṁ/,telisi undatam,Verb,Action,I know the answer.,నాకు జవాబు తెలుసు.
+395,language,/ˈlæŋɡwɪdʒ/,భాష,/bhaa.ṣa/,bhaasha,Noun,Culture,English is a language.,ఇంగ్లీష్ ఒక భాష.
+396,large,/lɑːrdʒ/,పెద్ద,/ped.da/,pedda,Adjective,Size,The house is large.,ఇల్లు పెద్దది.
+397,law,/lɔː/,చట్టం,/chat.taṁ/,chattam,Noun,Government,Follow the law.,చట్టాన్ని పాటించు.
+398,lay,/leɪ/,పెట్టడం,/pet.ta.daṁ/,pettadam,Verb,Action,Lay the book on table.,పుస్తకాన్ని బల్లపై పెట్టు.
+399,lead,/liːd/,నాయకత్వం,/naa.ya.ka.tvaṁ/,naayakatvam,Verb,Action,Lead the team.,సంఘాన్ని నడిపించు.
+400,lend,/lɛnd/,వివరించు / ఇవ్వండి,/vi.va.ri.ncu/,vivarinchu,Verb,Action,Lend me your book.,నాకు పుస్తకం అప్పు ఇవ్వు.
+401,let,/lɛt/,అనుమతించు,/a.nu.ma.tin.cu/,anumatinchu,Verb,Action,Let him in.,అతనిని అంగీకరించు.
+402,library,/ˈlaɪbrɛri/,గ్రంథాలయం,/gran.thaa.la.yam/,grantha-alayam,Noun,Place,I go to the library.,నేను గ్రంథాలయానికి వెళ్తాను.
+403,life,/laɪf/,జీవితం,/jee.vi.tam/,jeevitam,Noun,Concept,Life is beautiful.,జీవితం అందంగా ఉంది.
+404,like,/laɪk/,ఇష్టం/నచ్చడం,/iṣṭam nach.cha.daṁ/,ishtam nachchadam,Verb,Action,I like mangoes.,నాకు మామిడి ఇష్టం.
+405,live,/lɪv/, నివసించు,/ni.va.sin.cu/,nivasinchu,Verb,Action,I live in city.,నేను నగరంలో నివసిస్తున్నాను.
+406,long,/lɒŋ/,పొడవయిన,/po.da.va.yi.na/,podavayina,Adjective,Size,He has a long hair.,అతనికి పొడవైన జుట్టు ఉంది.
+407,look,/lʊk/,చూడు,/choo.du/,choodu,Verb,Action,Look at me.,నన్ను చూడండి.
+408,price,/praɪs/,ధర,/dha.ra/,dhara,Noun,Money,Ask the price.,ధర అడుగు.
+409,money,/ˈmʌn.i/,డబ్బు,/dab.bu/,dabbu,Noun,Money,Save money.,డబ్బు పొదుపు చేయు.
+410,account,/əˈkaʊnt/,ఖాతా,/khaa.ta/,khaata,Noun,Money,Open an account.,ఖాతా తెరువు.
+411,number,/ˈnʌm.bər/,సంఖ్య,/san.khya/,sankhya,Noun,Counting,Give your number.,నీ సంఖ్య చెప్పు.
+412,address,/əˈdres/,చిరునామా,/chi.ru.naa.maa/,chirunaamaa,Noun,Identity,Note down the address.,చిరునామా వ్రట్టు.
+413,form,/fɔːm/,ఫారం,/faram/,faaram,Noun,Form,Fill the form.,ఫారం నింపు.
+414,sign,/saɪn/,సంతకం,/san.ta.kam/,santakam,Verb,Action,Sign here.,ఇక్కడ సంతకం చేయు.
+415,document,/ˈdɒk.jʊ.mənt/,పత్రం,/pa.tra.m/,patram,Noun,Object,Submit the document.,పత్రం సమర్పించు.
+416,photo,/ˈfəʊ.təʊ/,ఫోటో,/pho.to/,photo,Noun,Object,Stick your photo.,నీ ఫోటో అతికించు.
+417,passport,/ˈpɑːs.pɔːt/,పాస్‌పోర్ట్,/paas.poort/,passport,Noun,Travel,Collect your passport.,నీ పాస్‌పోర్ట్ తీసుకో.
+418,ticket,/ˈtɪk.ɪt/,టిక్కెట్టు,/tik.ke.tu/,ticket,Noun,Travel,Buy a ticket.,టిక్కెట్టు కొనండి.
+419,journey,/ˈdʒɜː.ni/,ప్రయాణం,/pra.yaa.nam/,prayaanam,Noun,Travel,Safe journey!,ప్రయాణం సురక్షితం!
+420,travel,/ˈtræv.əl/,ప్రయాణించు,/pra.yaa.nin.chu/,prayaaninchu,Verb,Action,Travel with care.,జాగ్రత్తగా ప్రయాణించు.
+421,vehicle,/ˈviː.ɪ.kəl/,వాహనం,/vaa.ha.nam/,vaahanam,Noun,Transport,Park the vehicle.,వాహనం పార్క్ చెయ్యి.
+422,auto,/ˈɔː.təʊ/,ఆటో,/aa.to/,auto,Noun,Transport,Take an auto.,ఆటో తీసుకో.
+423,taxi,/ˈtæk.si/,టాక్సీ,/taa.ksee/,taaksi,Noun,Transport,Call a taxi.,టాక్సీ పిలువండి.
+424,bike,/baɪk/,బైక్,/baik/,baik,Noun,Transport,He rides a bike.,అతను బైక్ నడుపుతాడు.
+425,cycle,/ˈsaɪ.kəl/,సైకిల్,/sai.kil/,saikil,Noun,Transport,I have a cycle.,నాకు సైకిల్ ఉంది.
+426,truck,/trʌk/,ట్రక్,/trak/,trak,Noun,Transport,Truck is loaded.,ట్రక్ లోడ్ చేయబడింది.
+427,flight,/flaɪt/,విమానయానం,/vi.maa.na.yaa.nam/,vimaanayaanam,Noun,Travel,Board the flight.,విమానంలో ఎక్కు.
+428,platform,/ˈplæt.fɔːm/,ప్లాట్‌ఫాం,/plat.fam/,platform,Noun,Place,Wait on the platform.,ప్లాట్‌ఫాంపై వేచి ఉండు.
+429,gate,/ɡeɪt/,గేటు,/ge.tu/,getu,Noun,Place,Open the gate.,గేటు తెరువు.
+430,signal,/ˈsɪɡ.nəl/,సిగ్నల్,/sig.nal/,signal,Noun,Transport,Watch the signal.,సిగ్నల్‌ను చూడండి.
+431,traffic,/ˈtræf.ɪk/,ట్రాఫిక్,/traa.fik/,traffic,Noun,Transport,Heavy traffic today.,ఇవాళ్టి ట్రాఫిక్ ఎక్కువ.
+432,left,/left/,ఎడమ,/e.da.ma/,edama,Adjective,Position,Left hand.,ఎడమ చేయి.
+433,right,/raɪt/,కుడి,/ku.di/,kudi,Adjective,Position,Right side.,కుడి వైపు.
+434,move,/muːv/,కదిలించు,/ka.di.lin.chu/,kadilinchhu,Verb,Action,Move forward.,ముందుకు కదిలించు.
+435,slow,/sləʊ/,నెమ్మదిగా,/nem.ma.di.ga/,nemmadiga,Adverb,Speed,Walk slow.,నెమ్మదిగా నడుచు.
+436,reach,/riːtʃ/,చేరు,/che.ru/,cheru,Verb,Action,Reach school on time.,పాఠశాలకు సమయానికి చేరు.
+437,depart,/dɪˈpɑːt/,పెళ్లిపోవడం,/pel.li.po.va.dam/,pellipovadam,Verb,Action,Depart at 6 pm.,ఆరు గంటలకు రవాణా చేయు.
+438,return,/rɪˈtɜːn/,తిరుగు,/ti.ru.gu/,tirugu,Verb,Action,Return home.,ఇంటికి తిరుగు వెళ్ళు.
+439,visit,/ˈvɪz.ɪt/,సందర్శించు,/san.dar.sin.chu/,sandarshinchhu,Verb,Action,Visit your friends.,నీ స్నేహితులను సందర్శించు.
+440,invite,/ɪnˈvaɪt/,ఆహ్వానించు,/aa.hvaa.nin.chu/,aahvaaninchu,Verb,Action,Invite me.,నన్ను ఆహ్వానించు.
+441,accept,/əkˈsept/,అంగీకరించు,/an.gi.ka.rin.chu/,angeekarinchu,Verb,Action,Accept the offer.,ఆఫర్ అంగీకరించు.
+442,refuse,/rɪˈfjuːz/,నిరాకరించు,/ni.raa.ka.rin.chu/,niraakarinchhu,Verb,Action,Refuse politely.,శిష్టంగా నిరాకరించు.
+443,agree,/əˈɡriː/,ఒప్పుకో,/op.pu.ko/,oppuko,Verb,Action,I agree with you.,నేను నీతో ఒప్పుకుంటున్నాను.
+444,disagree,/ˌdɪs.əˈɡriː/,ఒప్పుకోను,/op.pu.ko.nu/,oppukonu,Verb,Action,I disagree.,నేను ఒప్పుకోను.
+445,permit,/ˈpɜː.mɪt/,నుమతించు,/nu.ma.tin.chu/,numatinchu,Verb,Action,Permit required.,నుమతి అవసరం.
+446,forbid,/fəˈbɪd/,ఇద్దుకు నిరోధించు,/id.du.ku ni.ro.dhin.chu/,iddhuku nirodhinchu,Verb,Action,Entry is forbidden.,ప్రవేశం తగ్గించబడింది.
+447,prefer,/prɪˈfɜːr/,ఇష్టం ఉండడం,/is.tam un.da.dam/,ishtam undadam,Verb,Feeling,I prefer tea.,నాకు టీ ఇష్టంగా ఉంటుంది.
+448,need,/niːd/,అవసరం,/ava.sa.ram/,avasaram,Noun,Feeling,I need help.,నాకు సహాయం అవసరం.
+449,want,/wɒnt/,కావాలి,/kaa.vaa.li/,kaavaali,Verb,Feeling,I want water.,నాకు నీరు కావాలి.
+450,trust,/trʌst/,నమ్మకం,/nam.ma.kam/,nammakam,Noun,Feeling,I trust you.,నేను నిన్ను నమ్ముతున్నాను.
+451,believe,/bɪˈliːv/,విశ్వసించు,/vi.shva.sin.chu/,vishvasinchu,Verb,Feeling,Believe in yourself.,నీపై నీవు విశ్వసించు.
+452,doubt,/daʊt/,అనుమానం,/a.nu.maa.nam/,anumaanam,Noun,Feeling,Clear your doubt.,అనుమానం తొలగించు.
+453,think,/θɪŋk/,ఆలోచించు,/aa.loo.chin.chu/,alochinchhu,Verb,Feeling,Think before you speak.,మాట్లాడే ముందు ఆలోచించు.
+454,guess,/ɡes/,ఊహించు,/oo.hin.chu/,oohinchu,Verb,Action,Guess the answer.,సమాధానం ఊహించు.
+455,explain,/ɪkˈspleɪn/,వివరించు,/vi.va.rin.chu/,vivarinchu,Verb,Action,Explain the lesson.,పాఠం వివరించు.
+456,reason,/ˈriː.zən/,కారణం,/kaa.ra.nam/,kaaranam,Noun,Feeling,What is the reason?,కారణం ఏమిటి?
+457,result,/rɪˈzʌlt/,ఫలితం,/pha.li.tam/,phalitam,Noun,Feeling,Show the result.,ఫలితాన్ని చూపు.
+458,success,/səkˈses/,విజయం,/vi.ja.yam/,vijayam,Noun,Feeling,Success is sweet.,విజయం తియ్యగా ఉంటుంది.
+459,failure,/ˈfeɪ.ljər/,పరాజయం,/pa.raa.ja.yam/,paraajayam,Noun,Feeling,Learn from failure.,పరాజయం నుండి నేర్చుకో.
+460,display,/dɪˈspleɪ/,ప్రదర్శించు,/pra.dar.sin.chu/,pradarshinchhu,Verb,Action,Display your results.,నీ ఫలితాలు ప్రదర్శించు.
+461,colour,/ˈkʌl.ər/,రంగు వాడు,/raŋ.gu vaa.du/,rangu vaadu,Verb,Action,Colour the flower.,పువ్వు రంగు వాడు.
+462,mark,/mɑːk/,గుర్తు పెట్టు,/gur.tu pe.t.tu/,gurtu pettu,Verb,Action,Mark the answer.,సమాధానాన్ని గుర్తుపెట్టు.
+463,underline,/ˌʌn.dəˈlaɪn/,అండర్‌లైన్ పెట్టు,/andar lain pe.t.tu/,underline pettu,Verb,Action,Underline the word.,పదానికి అండర్‌లైన్ పెట్టు.
+464,highlight,/ˈhaɪ.laɪt/,మెరుగు చేయి,/me.ru.gu che.yi/,merugu cheyi,Verb,Action,Highlight the sentence.,వాక్యంలో మెరుగు చేయి.
+465,understand,/ˌʌn.dəˈstænd/,అర్థం చేసుకో,/ar.dham che.su.ko/,ardham chesuko,Verb,Action,Understand the point.,పాయింట్ అర్థం చేసుకో.
+466,repeat,/rɪˈpiːt/,పునరావృతం చేయి,/pu.na.raa.vru.tam che.yi/,punaravrutham cheyi,Verb,Action,Repeat the word.,పదాన్ని పునరావృతం చేయండి.
+467,correct,/kəˈrekt/,సరిగ్గా,/sa.ri.gga/,sarigga,Adjective,Quality,Give the correct answer.,సరైన సమాధానం ఇవ్వండి.
+468,wrong,/rɒŋ/,తప్పుగా,/tap.pu.ga/,tappuga,Adjective,Quality,That is wrong.,అది తప్పు.
+469,try,/traɪ/,ప్రయత్నించు,/pra.yat.nin.chu/,prayatninchu,Verb,Action,Try again.,మళ్లీ ప్రయత్నించు.
+470,practice,/ˈpræk.tɪs/,అభ్యాసం చేయి,/ab.hyaa.sam che.yi/,abhyaasam cheyi,Verb,Action,Practice daily.,ప్రతి రోజు అభ్యాసం చేయి.
+471,review,/rɪˈvjuː/,పున: పరిశీలించు,/pu.na: pa.ri.shee.lin.chu/,punah parisheelinchu,Verb,Action,Review your notes.,నోట్స్ ను పరిశీలించు.
+472,examine,/ɪɡˈzæm.ɪn/,పరీక్షించు,/pari.ksha.in.chu/,parikshainchu,Verb,Action,Examine the answer.,సమాధానాన్ని పరీక్షించు.
+473,test,/test/,పరీక్ష,/pari.ksha/,pariksha,Noun,Education,Take the test.,పరీక్ష రాయు.
+474,score,/skɔːr/,పొందు (మార్కులు),/pon.du (mar.ku.lu)/,pondu (markulu),Verb,Action,Score good marks.,మంచి మార్కులు పొందు.
+475,grade,/ɡreɪd/,గ్రేడ్,/greyed/,grade,Noun,Education,She got grade A.,ఆమె గ్రేడ్ A తీసుకుంది.
+476,rank,/ræŋk/,రణ్‌క్,/rank/,rank,Noun,Education,He got first rank.,అతనికి మొదటి ర్యాంక్ వచ్చింది.
+477,certificate,/sərˈtɪf.ɪ.kət/,సర్టిఫికేట్,/sa.rti.fi.ket/,certificate,Noun,Document,Get the certificate.,సర్టిఫికేట్ తీసుకో.
+478,degree,/ˈdiː.ɡriː/,డిగ్రీ,/degree/,degree,Noun,Education,He finished degree.,అతను డిగ్రీ పూర్తిచేసాడు.
+479,college,/ˈkɒl.ɪdʒ/,కళాశాల,/ka.laa.sha.la/,kalaashala,Noun,Place,He studies in college.,అతను కళాశాలలో చదువుతున్నాడు.
+480,university,/ˌjuː.nɪˈvɜː.sə.ti/,విశ్వవిద్యాలయం,/vish.va.vid.yaa.la.yam/,vishwavidyalayam,Noun,Place,The university is big.,విశ్వవిద్యాలయం పెద్దది.
+481,period,/ˈpɪə.ri.əd/,పిరియడ్,/period/,period,Noun,Time,Next period is Science.,తదుపరి పిరియడ్ సైన్స్.
+482,subject,/ˈsʌb.dʒɪkt/,విషయం,/vi.sha.yam/,vishayam,Noun,Education,Math is my favourite subject.,గణితం నా ఇష్టమైన విషయం.
+483,chapter,/ˈtʃæp.tər/,అధ్యాయం,/adh.yaa.yam/,adhyayam,Noun,Education,Read the chapter.,ఆధ్యాయం చదువు.
+484,point,/pɔɪnt/,పాయింట్,/painṭ/,point,Noun,Education,Mark the main point.,ప్రధాన పాయింట్ కి గుర్తు పెట్టు.
+485,topic,/ˈtɒp.ɪk/,విషయము,/vi.shayamu/,vishayamu,Noun,Education,Select the topic.,విషయాన్ని ఎంచుకో.
+486,spelling,/ˈspel.ɪŋ/,స్పెల్లింగ్,/spelling/,spelling,Noun,Language,Check the spelling.,స్పెల్లింగ్ చూడండి.
+487,meaning,/ˈmiː.nɪŋ/,అర్థం,/ar.dham/,ardham,Noun,Language,Know the meaning.,అర్థాన్ని తెలుసుకో.
+488,definition,/ˌdef.ɪˈnɪʃ.ən/,నిర్వచనం,/nir.va.cha.nam/,nirvachanam,Noun,Language,Read the definition.,నిర్వచనం చదువు.
+489,example,/ɪɡˈzæm.pəl/,ఉదాహరణ,/uda.a.ha.ra.na/,udahaarana,Noun,Language,Give an example.,ఉదాహరణ ఇవ్వండి.
+490,questionnaire,/ˌkwes.tʃəˈneər/,ప్రశ్నావళి,/prash.naa.va.li/,prashnavali,Noun,Language,Fill the questionnaire.,ప్రశ్నావళి నింపు.
+491,paragraph,/ˈpær.ə.ɡrɑːf/,ప్యారాగ్రాఫ్,/pyaraagraaf/,paragraph,Noun,Language,Write a paragraph.,ఒక ప్యారాగ్రాఫ్ వ్రాయి.
+492,essay,/ˈes.eɪ/,ప్రಬಂಧం,/prabandham/,prabandham,Noun,Language,Write an essay.,ప్రબંધం వ్రాయి.
+493,poem,/ˈpəʊ.ɪm/,కవిత,/ka.vi.tha/,kavitha,Noun,Literature,Write a poem.,ఒక కవిత వ్రాయి.
+494,song,/sɒŋ/,పాట,/paa.ta/,paata,Noun,Music,Sing a song.,ఒక పాట పాడు.
+495,poet,/ˈpəʊ.ɪt/,కవి,/ka.vi/,kavi,Noun,People,He is a poet.,అతను కవి.
+496,author,/ˈɔː.θər/,రచయిత,/ra.cha.ya.thaa/,rachayitha,Noun,People,She is the author.,ఆమె రచయిత.
+497,writer,/ˈraɪ.tər/,రచయిత,/ra.cha.ya.thaa/,rachayitha,Noun,People,He is a writer.,అతను రచయిత.
+498,magazine,/ˈmæɡ.ə.ziːn/,మాగజైన్,/maaga.zain/,maga-zain,Noun,Thing,Read a magazine.,మాగజైన్ చదువు.
+499,newspaper,/ˈnjuːzˌpeɪ.pər/,పత్రిక,/patrika/,patrika,Noun,Thing,Read the newspaper.,పత్రిక చదువు.
+500,erase,/ɪˈreɪz/,తుడిపెట్టు,/tu.di.pe.tu/,tudipettu,Verb,Action,Erase the board., బోర్డు తుడిపెట్టు.
+501,wash,/wɒʃ/,కడుగు,/ka.du.gu/,kadugu,Verb,Action,Wash your face., ముఖం కడుగు.
+502,spread,/spred/,పరిచు,/pa.ri.chu/,parichu,Verb,Action,Spread the mat., చాప పరచు.
+503,fold,/fəʊld/,మడుచు,/ma.du.chu/,maduchu,Verb,Action,Fold your clothes., దుస్తులు మడుచు.
+504,rest,/rest/,విశ్రమించు,/vi.shra.min.chu/,vishraminchu,Verb,Action,Take rest., విశ్రాంతి తీసుకో.
+505,sleep,/sliːp/,నిద్రపో,/ni.dra.po/,nidrapo,Verb,Action,Sleep early., jaldi nidrapo.
+506,wake,/weɪk/,లేచి ఉండు,/le.chi u.n.du/,lechi undu,Verb,Action,Wake up., లేచి ఉండు.
+507,get up,/ɡɛt ʌp/,ఎలాంటివాడు లేచిపోవడం,/la-chi-po-va-dam/,lechipovadam,Verb,Action,Get up now., ippudu lechi undu.
+508,stand up,/stænd ʌp/,నిలబడు,/ni.la.ba.du/,nilabadu,Verb,Action,Stand up quickly., jaldi nilabadu.
+509,sit down,/sɪt daʊn/,కూర్చోండి,/kuu.rcho.n.di/,koorchondi,Verb,Action,Sit down now., ippudu koorchondi.
+510,come in,/kʌm ɪn/,లోపల రా,/lo.pa.la raa/,lopala raa,Verb,Action,Come in please., దయచేసి లోపల రా.
+511,go out,/ɡəʊ aʊt/,బయటకు వెళ్ళు,/ba.ya.ta.ku vel.lu/,bayataku vellu,Verb,Action,Go out now., ippudu bayataku vellu.
+512,pick up,/pɪk ʌp/,ఎత్తుకో,/et.tu.ko/,ethuko,Verb,Action,Pick up the pen., పెన్ ఎత్తుకో.
+513,put,/pʊt/,పెట్టు,/pe.tu/,petu,Verb,Action,Put the key here., తాళం చెవి ఇక్కడ పెట్టు.
+514,remove,/rɪˈmuːv/,తీసివేయి,/tee.si.ve.yi/,teesiveyi,Verb,Action,Remove the cover., కవర్ను తీసివేయి.
+515,repair,/rɪˈpeə/,సరిచేయి,/sa.ri.che.yi/,saricheyi,Verb,Action,Repair the fan., ఫ్యాన్ సరిచేయి.
+516,plant,/plɑːnt/,ನాటడం/పెరిగే మొక్కను నాటడం,/naa.ta.da.m/,natadam,Verb,Action,Plant a tree., ఒక మొక్క నాటు.
+517,trim,/trɪm/,చేక్కు/చేస్తారు,/chek.ku/ches.taru/,chekku/chestaru,Verb,Action,Trim the hair., జుట్టు ట్రిమ్ చేయి.
+518,tie,/taɪ/,కట్టు,/ka.tu/,kattu,Verb,Action,Tie your shoe., షూ కట్టు.
+519,untie,/ʌnˈtaɪ/,అరికట్టు తీసేయి,/a.ri.ka.tu thee.se.yi/,arikattu theeseyi,Verb,Action,Untie the rope., కొడుకు చేపను తీసేయి.
+520,fill,/fɪl/,నింపు,/nim.pu/,nimpu,Verb,Action,Fill the glass., గ్లాస్ నింపు.
+521,empty,/ˈemp.ti/,ఖాళీ చేయి,/khaa.li che.yi/,khaali cheyi,Verb,Action,Empty the bag., సంచి ఖాళీ చేయి.
+522,uncover,/ʌnˈkʌv.ər/,పొర తీసేయి,/po.ra thee.se.yi/,pora theeseyi,Verb,Action,Uncover the dish., ప్లేట్ పొర తీసేయి.
+523,pack,/pæk/,ప్యాక్ చేయి,/pyak che.yi/,pyak cheyi,Verb,Action,Pack the books., పుస్తకాలను ప్యాక్ చేయి.
+524,unpack,/ʌnˈpæk/,విడిప్యాక్ చేయి,/vi.di.pak che.yi/,vidipak cheyi,Verb,Action,Unpack the bag., సంచిని విడిప్యాక్ చేయి.
+525,finish,/ˈfɪn.ɪʃ/,ముగించు,/mu.gin.chu/,muginchu,Verb,Action,Finish your work.,పని ముగించు.
+526,memorize,/ˈmem.ə.raɪz/,గుర్తుపెట్టుకో,/gur.tu pe.t.tu.ko/,gurtu pettuko,Verb,Action,Memorize the poem.,కవితను గుర్తుపెట్టుకో.
+527,edit,/ˈed.ɪt/,సరిదిద్దు,/sa.ri.did.du/,sarididdu,Verb,Action,Edit the paragraph.,ప్యారాగ్రాఫ్ సరిదిద్దు.
+528,delete,/dɪˈliːt/,తొలగించు,/to.la.gin.chu/,tolaginchu,Verb,Action,Delete the word.,పదాన్ని తొలగించు.
+529,tick,/tɪk/,టిక్కు పెట్టు,/tik.ku pe.t.tu/,tikku pettu,Verb,Action,Tick the right box.,సరైన పెట్టెకు టిక్కు పెట్టు.
+530,cross,/krɒs/,క్రాస్ పెట్టు,/kraas pe.t.tu/,kraas pettu,Verb,Action,Cross the wrong answer.,తప్పు సమాధానానికి క్రాస్ పెట్టు.
+531,match,/mætʃ/,పోని జత చేయి,/po.ni ja.ta che.yi/,poni jata cheyi,Verb,Action,Match the columns.,జత చేయి.
+532,paste,/peɪst/,అతికించు,/a.ti.kin.chu/,atikinchu,Verb,Action,Paste the photo.,ఫొటో అతికించు.
+533,team,/tiːm/,కొద్ది మంది జట్టు,/ko.ddi man.di ja.t.tu/,koddi mandi jattu,Noun,People,Our team is strong.,మన జట్టు బలంగా ఉంది.
+534,pair,/peər/,జంట,/jan.ta/,janta,Noun,People,Pair them up.,వారిని జంటగా పెట్టు.
+535,share,/ʃeər/,పంచుకో,/pan.cho.ko/,panchuko,Verb,Action,Share your answers.,నీ సమాధానాలు పంచుకో.
+536,tell,/tel/,చెప్తూ నారు,/chep.tu naa.ru/,cheptunaaru,Verb,Communication,Tell your friend.,నీ స్నేహితుడికి చెప్పు.
+537,say,/seɪ/,చెప్పు,/che.pu/,cheppu,Verb,Communication,Say it again.,మళ్ళీ చెప్పు.
+538,spell,/spel/,స్పెల్లింగ్ని చెప్పు,/spelling cheppu/,spelling cheppu,Verb,Language,Spell the word.,పదాన్ని స్పెల్ చెప్తూ.
+539,pronounce,/prəˈnaʊns/,ఉచ్చరించు,/uch.cha.rin.chu/,uchcharinchu,Verb,Language,Pronounce it correctly.,సరైన ఉచ్చారణ చెప్పు.
+540,mean,/miːn/,అర్థం చెప్పు,/ar.dham che.pu/,ardham cheppu,Verb,Language,What does it mean?,దానికి అర్థం ఏమిటి?
+541,translate,/trænzˈleɪt/,అనువదించు,/anu.va.din.chu/,anuvadinchu,Verb,Language,Translate this sentence.,ఈ వాక్యాన్ని అనువదించు.
+542,define,/dɪˈfaɪn/,నిర్వచించు,/nir.va.chin.chu/,nirvachinchu,Verb,Language,Define the term.,ఈ పదాన్ని నిర్వచించు.
+543,revise,/rɪˈvaɪz/,మళ్ళీ నొక్కం పెట్టుకో,/malli nokkam pettuko/,malli nokkam pettuko,Verb,Education,Revise before the exam.,పరీక్షకు ముందు మళ్ళీ చదువు.
+544,remind,/rɪˈmaɪnd/,జ్ఞాపకం చేయి,/jnaapakam cheyi/,jnaapakam cheyi,Verb,Memory,Remind me at 5.,ఐదు గంటలకు జ్ఞాపకం చేయి.
+545,exercise,/ˈek.sə.saɪz/,అభ్యాసము,/ab.hyaa.sa.mu/,abhyasam,Noun,Education,Do the exercise.,అభ్యాసము చేయి.
+546,problem,/ˈprɒb.ləm/,సమస్య,/sa.mas.ya/,samasya,Noun,Education,Solve the problem.,సమస్య పరిష్కరించు.
+547,solution,/səˈluː.ʃən/,పరిష్కారం,/pari.shkaa.ram/,parishkaaram,Noun,Education,Find the solution.,పరిష్కారం కనుగొను.
+548,project,/ˈprɒdʒ.ekt/,ప్రాజెక్ట్,/pra.je.ku.t/,praject,Noun,Education,Prepare the project.,ప్రాజెక్ట్ తయారు చేయి.
+549,assignment,/əˈsaɪn.mənt/,అప్పగింపు,/ap.pa.gin.pu/,appaginpu,Noun,Education,Complete the assignment.,అప్పగింపు పూర్తి చేయు.
+550,activity,/ækˈtɪv.ə.ti/,కార్యకలాపము,/kaa.rya.kalaa.pa.mu/,kaaryakalaapamu,Noun,Education,Do the activity.,కార్యకలాపం చేయి.
+551,task,/tɑːsk/,పంచงานం,/pan.cha.naa.nam/,panchaanam,Noun,Education,Do the task.,పని పూర్తి చేయి.
+552,exam,/ɪɡˈzæm/,పరీక్ష,/pa.rik.sha/,pariksha,Noun,Education,Prepare for exam.,పరీక్షకు తయారు చెయ్యి.
+553,percentage,/pəˈsen.teɪdʒ/,శాతం,/sha.tha.m/,shatham,Noun,Education,What is your percentage?,నీ శాతం ఎంత?
+554,improve,/ɪmˈpruːv/,మెరుగుపరచు,/me.ru.gu pa.ra.chu/,merugu parachu,Verb,Education,Improve your handwriting.,నీ హస్తప్రతిని మెరుగుపరచు.
+555,recall,/rɪˈkɔːl/,జ్ఞాపకం తెచ్చు,/jnaa.pa.kam techu/,jnaapakam techu,Verb,Education,Recall what you studied.,నీవు ఏం చదివావో గుర్తుకు తెచ్చు.
+556,application,/ˌæp.lɪˈkeɪ.ʃən/,దరఖాస్తు,/da.ra.khaa.stu/,darakhaastu,Noun,Education,Submit the application.,దరఖాస్తు సమర్పించు.
+557,list,/lɪst/,జాబితా,/jaa.bi.taa/,jaabitaa,Noun,Objects,Prepare the list.,జాబితా తయారుచేయి.
+558,chart,/tʃɑːrt/,చార్ట్/పత్రం,/chart/patram/,chart/patram,Noun,Objects,Draw a chart.,ఒక చార్ట్ గీయి.
+559,diagram,/ˈdaɪ.ə.ɡræm/,రేఖాచిత్రం,/rekhaa.chitram/,rekhaachitram,Noun,Objects,Draw a diagram.,రేఖాచిత్రం గీయి.
+560,model,/ˈmɒd.əl/,మోడల్,/model/,model,Noun,Objects,Build a model.,ఒక మోడల్ తయారుచేయి.
+561,object,/ˈɒb.dʒɪkt/,వస్తువు,/vas.tu.vu/,vastuvu,Noun,Objects,Describe the object.,వస్తువును వర్ణించు.
+562,shape,/ʃeɪp/,రూపము,/roo.pa.mu/,roopamu,Noun,Objects,Draw the shape.,రూపము గీయి.
+563,picture,/ˈpɪk.tʃər/,చిత్రం,/chi.tram/,chitram,Noun,Objects,Show the picture.,చిత్రాన్ని చూపు.
+564,summary,/ˈsʌm.ər.i/,సారాంశం,/saa.raam.sham/,saaramsham,Noun,Language,Give a summary.,సారాంశం ఇవ్వు.
+565,details,/ˈdiː.teɪlz/,వివరాలు,/vi.va.ralu/,vivaralu,Noun,Information,Check the details.,వివరాలు చూడండి.
+566,information,/ˌɪn.fəˈmeɪ.ʃən/,సమాచారం,/sa.maa.cha.ram/,samaachaaram,Noun,Information,Get the information.,సమాచారం పొందు.
+567,fact,/fækt/,నిజం,/ni.jam/,nijam,Noun,Information,It is a fact.,ఒక నిజం.
+568,news,/njuːz/,వార్త,/vaar.ta/,vaarta,Noun,Media,Watch the news.,వార్త చూడండి.
+569,report,/rɪˈpɔːt/,వివరణ,/vi.va.ra.na/,vivarana,Noun,Communication,Write a report.,వివరణ వ్రాయండి.
+570,message,/ˈmes.ɪdʒ/,సందేశం,/san.de.sha.m/,sandeshum,Noun,Communication,Send a message.,సందేశం పంపండి.
+571,notice,/ˈnəʊ.tɪs/,నోటీసు,/no.ti.su/,notisu,Noun,Information,Read the notice.,నోటీసు చదువు.
+572,announcement,/əˈnaʊns.mənt/,ప్రకటన,/pra.ka.ta.na/,prakatana,Noun,Public,Make an announcement.,ప్రకటన చేయండి.
+573,statement,/ˈsteɪt.mənt/,ప్రకటన,/pra.ka.ta.na/,prakatana,Noun,Information,Write a statement.,ప్రకటన వ్రాయండి.
+574,query,/ˈkwɪə.ri/,సందేహం,/san.de.ha.m/,sandeham,Noun,Education,Clear your query.,సందేహం క్లియర్ చేయి.
+575,request,/rɪˈkwest/,అభ్యర్థన,/ab.hyar.da.na/,abhyardhana,Noun,Communication,Request for leave.,రాజీనామా అభ్యర్థించు.
+576,reply,/rɪˈplaɪ/,ప్రత్యుత్తరం,/pra.tyut.ta.ram/,pratyuttaram,Noun,Communication,Send a reply.,ప్రత్యుత్తరం పంపు.
+577,conversation,/ˌkɒn.vəˈseɪ.ʃən/,సంవాదం,/sam.vaa.dam/,samvadam,Noun,Communication,Have a conversation.,సంవాదం జరుపుకో.
+578,debate,/dɪˈbeɪt/,వివాదం,/vi.vaa.dam/,vivaadam,Noun,Communication,Join the debate.,వివాదంలో పాల్గొను.
+579,dispute,/dɪˈspjuːt/,వివాదం,/vi.vaa.dam/,vivaadam,Noun,Dispute,Settle the dispute.,వివాదాన్ని పరిష్కరించు.
+580,argue,/ˈɑːɡ.juː/,తర్కించు,/tar.kin.chu/,tarkinchhu,Verb,Dispute,Don’t argue.,తర్కించకూడదు.
+581,conclusion,/kənˈkluː.ʒən/,ముగింపు,/mu.gim.pu/,mugimpu,Noun,Language,Give the conclusion.,ముగింపుని చెప్పు.
+582,opinion,/əˈpɪn.jən/,అభిప్రాయం,/ab.hi.praa.yam/,abhipraayam,Noun,Expression,Share your opinion.,నీ అభిప్రాయాన్ని పంచుకో.
+583,view,/vjuː/,దృక్కోణం,/dru.kko.nam/,drukkoNam,Noun,Opinion,Express your view.,నీ దృక్కోణాన్ని చెప్పు.
+584,thought,/θɔːt/,ఆలోచన,/aa.loo.cha.na/,alochana,Noun,Mind,Express your thought.,నీ ఆలోచన తెలియజెయ్యి.
+585,advice,/ədˈvaɪs/,సలహా,/sa.la.haa/,salaha,Noun,Advice,Ask for advice.,సలహా అడుగు.
+586,suggestion,/səˈdʒes.tʃən/,సూచన,/soo.cha.na/,soochana,Noun,Advice,Give a suggestion.,సూచన ఇవ్వు.
+587,guidance,/ˈɡaɪ.dəns/,మార్గనిర్దేశం,/maar.ga.nir.de.sha.m/,maarganirdesham,Noun,Advice,Seek guidance.,మార్గనిర్దేశాన్ని కోరండి.
+588,instruction,/ɪnˈstrʌk.ʃən/,సూచనలు,/soo.cha.na.lu/,soochanalu,Noun,Advice,Follow the instructions.,సూచనలు పాటించు.
+589,command,/kəˈmɑːnd/,ఆదేశం,/aa.de.sam/,aadesam,Noun,Action,Give a command.,ఆదేశం ఇవ్వు.
+590,order,/ˈɔː.dər/,ఆదేశం,/aa.de.sam/,aadesam,Noun,Action,Place an order.,ఆదేశం ఇవ్వండి.
+591,permission,/pəˈmɪʃ.ən/,నుమతి,/nu.ma.ti/,numati,Noun,Approval,Take permission.,నుమతి తీసుకో.
+592,approval,/əˈpruː.vəl/,అనుమతి,/anu.ma.ti/,anumati,Noun,Approval,Give your approval.,అనుమతి ఇవ్వండి.
+593,consent,/kənˈsent/,ఒప్పందం,/op.pan.da.m/,oppandam,Noun,Approval,Give your consent.,ఒప్పందం ఇవ్వు.
+594,agreement,/əˈɡriː.mənt/,ఒప్పందం,/op.pan.da.m/,oppandam,Noun,Approval,Reach agreement.,ఒప్పందానికి రాను.
+595,discussion,/dɪˈskʌʃ.ən/,చర్చ,/char.cha/,charcha,Noun,Communication,Have a discussion.,చర్చ జరుపుకో.
+596,argument,/ˈɑːɡ.jə.mənt/,తర్కం,/tar.kam/,tarkam,Noun,Communication,Avoid arguments.,తర్కం నివారించు.
+597,register,/ˈredʒ.ɪ.stər/,పంజీకరణ,/pan.jii.ka.ra.nam/,panjeekaranam,Noun,Document,Register your details.,వివరాలను పంజీకరణ చేయు.
+,,,,,,,,,
