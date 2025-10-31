@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="te"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -575,7 +575,7 @@
         const SETTINGS_KEY = 'globalHubSettings'; 
         let dictionaryData = []; let isDataLoaded = false; 
         let searchDebounce; 
-        let ttsPlayer = null; let synths = {}; 
+        let ttsPlayer = null; let synths = {}; // ttsPlayer is no longer used by us, but kept for compatibility if other code uses it
         let systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
         
         // --- DEFAULTS & CONSTANTS ---
@@ -663,13 +663,69 @@
         function setupAudio() { try { if (window.Tone) { synths.click = new Tone.Synth({ oscillator: { type: "sine" }, envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.1 } }).toDestination(); synths.error = new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.2 } }).toDestination(); } else console.warn("Tone.js not loaded."); } catch (e) { console.error("Tone setup error:", e); } }
         function playClickSound() { if (!getSetting('disableSound') && synths.click) { try { Tone.start(); synths.click.triggerAttackRelease("C5", "8n"); if (!getSetting('disableVibration') && navigator.vibrate) navigator.vibrate(50); } catch (e) { console.warn("Tone click error:", e); } } }
         function playErrorSound() { if (!getSetting('disableSound') && synths.error) { try { Tone.start(); synths.error.triggerAttackRelease("C3", "4n"); if (!getSetting('disableVibration') && navigator.vibrate) navigator.vibrate([100, 50, 100]); } catch (e) { console.warn("Tone error error:", e); } } }
-        // --- TTS Functions ---
-        function base64ToArrayBuffer(b) { const s=window.atob(b); const l=s.length; const B=new Uint8Array(l); for(let i=0; i<l; i++) B[i]=s.charCodeAt(i); return B.buffer; }
-        function pcmToWav(p, r) { const n=1; const b=16; const d=p.length*2; const l=(n*b)/8; const B=r*l; const bf=new ArrayBuffer(44+d); const v=new DataView(bf); writeString(v,0,'RIFF'); v.setUint32(4,36+d,true); writeString(v,8,'WAVE'); writeString(v,12,'fmt '); v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,n,true); v.setUint32(24,r,true); v.setUint32(28,B,true); v.setUint16(32,l,true); v.setUint16(34,b,true); writeString(v,36,'data'); v.setUint32(40,d,true); for(let i=0; i<p.length; i++) v.setInt16(44+i*2,p[i],true); return new Blob([v],{type:'audio/wav'}); }
-        function writeString(v,o,s){ for(let i=0; i<s.length; i++) v.setUint8(o+i,s.charCodeAt(i)); }
-        async function playAudio(w) { await Tone.start(); if(ttsPlayer&&ttsPlayer.state==="started") ttsPlayer.stop(); const u=URL.createObjectURL(w); return new Promise((res,rej)=>{ ttsPlayer=new Tone.Player({url:u,autostart:true,onload:()=>{},onstop:()=>{if(ttsPlayer)ttsPlayer.dispose();ttsPlayer=null;URL.revokeObjectURL(u);res();},onerror:(e)=>{console.error("Tone error:",e);URL.revokeObjectURL(u);rej(e);}}).toDestination(); }); }
-        async function fetchWithRetry(u,o,r=3,k=1000){ try { const p=await fetch(u,o); if(!p.ok&&r>0&&(p.status===429||p.status>=500)){ await new Promise(res=>setTimeout(res,k)); return fetchWithRetry(u,o,r-1,k*2); } return p; } catch(e){ if(r>0){ await new Promise(res=>setTimeout(res,k)); return fetchWithRetry(u,o,r-1,k*2); } throw e; } }
-        async function callGeminiTTS(t, l) { const k=""; const u=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${k}`; const v=l==='en'?'enVoice':'teVoice'; const n=getSetting(v); const p=l==='en'?`Speak clear Indian English: ${t}`:`Speak Telugu clearly: ${t}`; const y={contents:[{parts:[{text:p}]}],generationConfig:{responseModalities:["AUDIO"],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:n}}}},model:"gemini-2.5-flash-preview-tts"}; const r=await fetchWithRetry(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(y)}); if(!r.ok) throw new Error(`TTS API failed: ${await r.text()}`); const s=await r.json(); const pt=s?.candidates?.[0]?.content?.parts?.[0]; const d=pt?.inlineData?.data; const m=pt?.inlineData?.mimeType; if(d&&m&&m.startsWith("audio/L16")){ const mt=m.match(/rate=(\d+)/); if(!mt) throw newE_rro_r("No sample rate."); const sr=parseInt(mt[1],10); const pD=base64ToArrayBuffer(d); const p16=new Int16Array(pD); const wB=pcmToWav(p16,sr); await playAudio(wB); } else { throw new Error("Invalid TTS API response."); } }
+        
+        // --- OFFLINE TTS FUNCTIONS ---
+        // Store voices when they are loaded
+        let availableVoices = [];
+        function populateVoiceList() {
+            if(typeof speechSynthesis === 'undefined') {
+                return;
+            }
+            availableVoices = speechSynthesis.getVoices();
+            console.log(`Found ${availableVoices.length} voices.`);
+        }
+        
+        // This is triggered when voices are loaded
+        if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = populateVoiceList;
+        }
+        populateVoiceList(); // Initial call
+
+        function speakLocally(text, lang) {
+            if (typeof speechSynthesis === 'undefined' || !text) {
+                console.error('Speech synthesis not supported or no text.');
+                playErrorSound();
+                return;
+            }
+
+            // Stop any speaking already in progress
+            if(speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            // --- Voice Selection ---
+            let voice = null;
+            if (lang === 'en') {
+                // Try to find an Indian English voice first
+                voice = availableVoices.find(v => v.lang === 'en-IN');
+                // If not found, find any 'en' voice
+                if (!voice) {
+                    voice = availableVoices.find(v => v.lang.startsWith('en-'));
+                }
+            } else if (lang === 'te') {
+                // Find a Telugu voice
+                voice = availableVoices.find(v => v.lang === 'te-IN');
+            }
+            
+            if (voice) {
+                utterance.voice = voice;
+                console.log(`Using voice: ${voice.name} (${voice.lang})`);
+            } else {
+                // Fallback to device default for that language
+                utterance.lang = (lang === 'te') ? 'te-IN' : 'en-IN';
+                console.warn(`No specific voice found for ${lang}. Using default.`);
+            }
+
+            utterance.onerror = (event) => {
+                console.error('SpeechSynthesisUtterance.onerror', event);
+                playErrorSound();
+            };
+            
+            speechSynthesis.speak(utterance);
+        }
+        
         // --- CSV Parser (Corrected) ---
         function parseCSV(t) { const l=t.replace(/\r\n/g,'\n').replace(/\r/g,'\n').trim().split('\n'); const d=[]; for(const i of l){ if(!i.trim())continue; const r=[]; let c=''; let q=false; for(let j=0; j<i.length; j++){ const h=i[j]; const n=i[j+1]; if(h==='"'){ if(q&&n==='"'){ c+='"'; j++; } else { q=!q; }} else if(h===','&&!q){ r.push(c); c=''; } else { c+=h; }} r.push(c); d.push(r); } return d; }
         
@@ -911,7 +967,38 @@
             renderHistory();
         }
 
-        async function handleSpeakClick(b) { if (b.disabled) return; const t = b.dataset.text; const l = b.dataset.lang; if (!t) return; if (!navigator.onLine) { playErrorSound(); /* msg */ return; } await Tone.start(); playClickSound(); const s = b.querySelector('.spinner'); const i = b.querySelector('.speak-icon'); s?.classList.remove('hidden'); i?.classList.add('hidden'); b.disabled = true; if (ttsPlayer && ttsPlayer.state === "started") ttsPlayer.stop(); try { await callGeminiTTS(t, l); } catch (e) { console.error("TTS Err:", e); playErrorSound(); /* msg */ } finally { s?.classList.add('hidden'); i?.classList.remove('hidden'); b.disabled = false; } }
+        async function handleSpeakClick(b) { 
+            if (b.disabled) return; 
+            const t = b.dataset.text; 
+            const l = b.dataset.lang; 
+            if (!t) return; 
+            
+            // No more online check
+            await Tone.start(); 
+            playClickSound(); 
+            
+            const s = b.querySelector('.spinner'); 
+            const i = b.querySelector('.speak-icon'); 
+            s?.classList.remove('hidden'); 
+            i?.classList.add('hidden'); 
+            b.disabled = true; 
+            
+            // No more ttsPlayer check
+            
+            try { 
+                speakLocally(t, l); // Use local browser TTS
+            } catch (e) { 
+                console.error("TTS Err:", e); 
+                playErrorSound(); 
+            } finally { 
+                // Re-enable button after a short delay
+                setTimeout(() => {
+                    s?.classList.add('hidden');
+                    i?.classList.remove('hidden');
+                    b.disabled = false;
+                }, 1000); // Re-enable after 1 second
+            } 
+        }
         function handleBookmarkClick(b, s) { if (!s) return; playClickSound(); let bm = getSetting('bookmarks'); const x = bm.indexOf(s); if (x > -1) bm.splice(x, 1); else bm.push(s); setSetting('bookmarks', bm); b.classList.toggle('bookmarked'); if(bookmarksTabBtn.classList.contains('active')) renderBookmarks(); }
         function handleSaveWord(ev) { ev.preventDefault(); playClickSound(); const en = document.getElementById('new-word-en').value.trim(); const ps = document.getElementById('new-word-pos').value.trim(); const tl = document.getElementById('new-word-te').value.trim(); if (!en || !tl) { playErrorSound(); return; } const nw = { eng:en, pos:ps, tel:tl, sn:'c'+Date.now(), isCustom:true, eng_ex: '', tel_ex: '', ipa_eng: '', ipa_tel: '', roman: '', category: '' }; let cw = getSetting('customWords'); cw.push(nw); setSetting('customWords', cw); dictionaryData.push(nw); closeAddWordModal(); if(bookmarksTabBtn.classList.contains('active')) renderBookmarks(); handleSearch(); }
         // --- Modals ---
