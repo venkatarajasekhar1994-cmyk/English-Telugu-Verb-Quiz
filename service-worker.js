@@ -11,7 +11,7 @@
 //
 // ఇది పాత కాష్ (cache) ను తొలగించి, కొత్త ఫైల్స్‌ను డౌన్‌లోడ్ చేయమని బ్రౌజర్‌కు చెబుతుంది.
 // ---
-const CACHE_NAME = 'app-cache-v2'; // <-- UPDATED TO v2
+const CACHE_NAME = 'app-cache-v3'; // <-- UPDATED TO v3
 
 // ---
 // (2) కాష్ చేయవలసిన అన్ని ఫైల్స్ జాబితా
@@ -135,4 +135,5 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
 

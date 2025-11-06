@@ -1,200 +1,943 @@
-﻿Base Form,Telugu,3rd Person Singular,Telugu ( he she it),-ing Form,Telugu4,Past Simple,Telugu2,Past Participle,Telugu3
-be,అవ్వడం/ఉండడం,is/are,ఉన్నాడు/ఉంది,being,అవుతూ/ఉండుతూ,was/were,అయ్యాడు/ఉండాడు,been,అయ్యిన/ఉన్న
-have,కలిగి ఉండడం,has,కలిగి ఉన్నాడు,having,కలిగి ఉండటం,had,కలిగిన,had,కలిగిన
-do,చేయడం,does,చేస్తాడు,doing,చేస్తూ,did,చేశాడు,done,చేసినది
-go,వెళ్లడం,goes,వెళ్తాడు,going,వెళుతూ,went,వెళ్లాడు,gone,వెళ్లిన
-get,పొందడం,gets,పొందుతాడు,getting,పొందుతూ,got,పొందాడు,got/gotten,పొందిన
-make,తయారు చేయడం,makes,తయారుచేస్తాడు,making,తయారు చేస్తూ,made,తయారు చేశాడు,made,తయారు చేసిన
-take,తీసుకోవడం,takes,తీసుకుంటాడు,taking,తీసుకుంటూ,took,తీసుకున్నాడు,taken,తీసుకున్న
-see,చూడడం,sees,చూస్తాడు,seeing,చూస్తూ,saw,చూసాడు,seen,చూసిన
-come,రావడం,comes,వస్తాడు,coming,వస్తూ,came,వచ్చాడు,come,వచ్చిన
-know,తెలుసుకోవడం,knows,తెలుసుకుంటాడు,knowing,తెలుసుకుంటూ,knew,తెలుసుకున్నాడు,known,తెలుసుకున్న
-think,ఆలోచించడం,thinks,ఆలోచిస్తాడు,thinking,ఆలోచిస్తూ,thought,ఆలోచించాడు,thought,ఆలోచించిన
-look,చూడడం,looks,చూస్తాడు,looking,చూస్తూ,looked,చూసాడు,looked,చూసిన
-want,కావాలనుకోవడం,wants,కావాలనుకుంటాడు,wanting,కావాలనుకుంటూ,wanted,కావాలనుకున్నాడు,wanted,కావాలనుకున్న
-give,ఇవ్వడం,gives,ఇస్తాడు,giving,ఇస్తూ,gave,ఇచ్చాడు,given,ఇచ్చిన
-use,వాడడం,uses,వాడుతాడు,using,వాడుతూ,used,వాడాడు,used,వాడిన
-find,కనుగొనడం,finds,కనుగొంటాడు,finding,కనుగొంటూ,found,కనుగొన్నాడు,found,కనుగొన్న
-tell,చెప్పడం,tells,చెప్తాడు,telling,చెప్తూ,told,చెప్పాడు,told,చెప్పిన
-ask,అడగడం,asks,అడుగుతాడు,asking,అడుగుతూ,asked,అడిగాడు,asked,అడిగిన
-work,పని చేయడం,works,పని చేస్తాడు,working,పని చేస్తూ,worked,పని చేశాడు,worked,పని చేసిన
-seem,కనిపించడం,seems,కనిపిస్తాడు,seeming,కనిపిస్తూ,seemed,కనిపించాడు,seemed,కనిపించిన
-feel,అనుభూతి చెందడం,feels,అనుభూతి చెందుతాడు,feeling,అనుభూతి చెందుతూ,felt,అనుభూతి చెందాడు,felt,అనుభూతి చెందిన
-try,ప్రయత్నించడం,tries,ప్రయత్నిస్తాడు,trying,ప్రయత్నిస్తూ,tried,ప్రయత్నించాడు,tried,ప్రయత్నించిన
-leave,వదిలివేయడం,leaves,వదిలివేస్తాడు,leaving,వదిలివేస్తూ,left,వదిలివేశాడు,left,వదిలివేసిన
-call,పిలవడం,calls,పిలుస్తాడు,calling,పిలుస్తూ,called,పిలిచాడు,called,పిలిచిన
-run,పరుగెత్తడం,runs,పరుగెత్తుతాడు,running,పరుగెత్తుతూ,ran,పరుగెత్తాడు,run,పరుగెత్తిన
-move,కదలడం,moves,కదులుతాడు,moving,కదులుతూ,moved,కదిలాడు,moved,కదిలిన
-play,ఆడడం,plays,ఆడతాడు,playing,ఆడుతూ,played,ఆడిన,,
-put,ఉంచడం,puts,ఉంచుతాడు,putting,ఉంచుతూ,put,ఉంచాడు,put,ఉంచిన
-hold,పట్టుకోవడం,holds,పట్టుకుంటాడు,holding,పట్టుకుంటూ,held,పట్టుకున్నాడు,held,పట్టుకున్న
-bring,తీసుకురావడం,brings,తీసుకువస్తాడు,bringing,తీసుకువస్తూ,brought,తీసుకువచ్చాడు,brought,తీసుకువచ్చిన
-happen,జరగడం,happens,జరుగుతుంది,happening,జరుగుతూ,happened,జరిగింది,happened,జరిగిన
-write,రాయడం,writes,రాస్తాడు,writing,రాస్తూ,wrote,రాశాడు,written,రాసిన
-provide,అందించడం,provides,అందిస్తాడు,providing,అందిస్తూ,provided,అందించాడు,provided,అందించిన
-sit,కూర్చోవడం,sits,కూర్చుంటాడు,sitting,కూర్చుంటూ,sat,కూర్చున్నాడు,sat,కూర్చున్న
-stand,నిలబడడం,stands,నిలబడతాడు,standing,నిలబడుతూ,stood,నిలబడ్డాడు,stood,నిలబడిన
-lose,కోల్పోవడం,loses,కోల్పోతాడు,losing,కోల్పోతూ,lost,కోల్పోయాడు,lost,కోల్పోయిన
-pay,చెల్లించడం,pays,చెల్లిస్తాడు,paying,చెల్లిస్తూ,paid,చెల్లించాడు,paid,చెల్లించిన
-meet,కలవడం,meets,కలుస్తాడు,meeting,కలుస్తూ,met,కలిసాడు,met,కలిసిన
-include,చేర్చడం,includes,చేర్చుతాడు,including,చేర్చుతూ,included,చేర్చాడు,included,చేర్చిన
-set,నిర్ణయించడం,sets,నిర్ణయిస్తాడు,setting,నిర్ణయిస్తూ,set,నిర్ణయించాడు,set,నిర్ణయించిన
-learn,నేర్చుకోవడం,learns,నేర్చుకుంటాడు,learning,నేర్చుకుంటూ,learned/learnt,నేర్చుకున్నాడు,learned/learnt,నేర్చుకున్న
-change,మార్చడం,changes,మార్చేస్తాడు,changing,మార్చేస్తూ,changed,మార్చాడు,changed,మార్చిన
-check,తనిఖీ చేయడం,checks,తనిఖీ చేస్తాడు,checking,తనిఖీ చేస్తూ,checked,తనిఖీ చేశాడు,checked,తనిఖీ చేసిన
-clap,చప్పట్లు కొట్టడం,claps,చప్పట్లు కొడతాడు,clapping,చప్పట్లు కొడుతూ,clapped,చప్పట్లు కొట్టాడు,clapped,చప్పట్లు కొట్టిన
-count,లెక్కించడం,counts,లెక్కేస్తాడు,counting,లెక్కిస్తూ,counted,లెక్కించాడు,counted,లెక్కించిన
-cover,కప్పివేయడం,covers,కప్పివేస్తాడు,covering,కప్పివేస్తూ,covered,కప్పివేశాడు,covered,కప్పివేసిన
-cross,దాటడం,crosses,దాటుతాడు,crossing,దాటుతూ,crossed,దాటాడు,crossed,దాటిన
-dance,నృత్యం చేయడం,dances,నృత్యం చేస్తాడు,dancing,నృత్యం చేస్తూ,danced,నృత్యం చేశాడు,danced,నృత్యం చేసిన
-drop,వదలడం,drops,వదులుతాడు,dropping,వదులుతూ,dropped,వదిలాడు,dropped,వదిలిన
-enter,ప్రవేశించడం,enters,ప్రవేశిస్తాడు,entering,ప్రవేశిస్తూ,entered,ప్రవేశించాడు,entered,ప్రవేశించిన
-finish,ముగించడం,finishes,ముగిస్తాడు,finishing,ముగిస్తూ,finished,ముగించాడు,finished,ముగిించిన
-fix,సరిదిద్దడం,fixes,సరి చేస్తాడు,fixing,సరి చేస్తూ,fixed,సరిచేశాడు,fixed,సరిచేసిన
-read,చదవడం,reads,చదువుతాడు,reading,చదువుతూ,read,చదివాడు,read,చదివిన
-sleep,నిద్రపోవడం,sleeps,నిద్రపోతాడు,sleeping,నిద్రపోతూ,slept,నిద్రపోయాడు,slept,నిద్రపోయిన
-speak,మాట్లాడడం,speaks,మాట్లాడతాడు,speaking,మాట్లాడుతూ,spoke,మాట్లాడాడు,spoken,మాట్లాడిన
-eat,తినడం,eats,తింటాడు,eating,తింటూ,ate,తిన్నాడు,eaten,తిన్న
-drink,తాగడం,drinks,తాగుతాడు,drinking,తాగుతూ,drank,తాగాడు,drunk,తాగిన
-buy,కొనడం,buys,కొంటాడు,buying,కొంటూ,bought,కొన్నాడు,bought,కొన్న
-sell,అమ్మడం,sells,అమ్ముతాడు,selling,అమ్ముతూ,sold,అమ్మాడు,sold,అమ్మిన
-teach,బోధించడం,teaches,బోధిస్తాడు,teaching,బోధిస్తూ,taught,బోధించాడు,taught,బోధించిన
-win,గెలవడం,wins,గెలుస్తాడు,winning,గెలుస్తూ,won,గెలిచాడు,won,గెలిచిన
-cut,కోయడం,cuts,కోస్తాడు,cutting,కోస్తూ,cut,కోశాడు,cut,కోసిన
-become,అవ్వడం,becomes,అవుతాడు,becoming,అవుతూ,became,అయ్యాడు,become,అయ్యిన
-begin,ప్రారంభించడం,begins,ప్రారంభిస్తాడు,beginning,ప్రారంభిస్తూ,began,ప్రారంభించాడు,begun,ప్రారంభించిన
-show,చూపించడం,shows,చూపిస్తాడు,showing,చూపిస్తూ,showed,చూపించాడు,shown/showed,చూపించిన
-hear,వినడం,hears,వింటాడు,hearing,వింటూ,heard,విన్నాడు,heard,విన్న
-understand,అర్థం చేసుకోవడం,understands,అర్థం చేసుకుంటాడు,understanding,అర్థం చేసుకుంటూ,understood,అర్థం చేసుకున్నాడు,understood,అర్థం చేసుకున్న
-build,నిర్మించడం,builds,నిర్మిస్తాడు,building,నిర్మిస్తూ,built,నిర్మించాడు,built,నిర్మించిన
-fall,పడిపోవడం,falls,పadiపోతాడు,falling,పడిపోతూ,fell,పడిపోయాడు,fallen,పడిపోయిన
-send,పంపడం,sends,పంపుతాడు,sending,పంపుతూ,sent,పంపాడు,sent,పంపిన
-decide,నిర్ణయించడం,decides,నిర్ణయిస్తాడు,deciding,నిర్ణయిస్తూ,decided,నిర్ణయించాడు,decided,నిర్ణయించిన
-return,తిరిగి రావడం,returns,తిరిగి వస్తాడు,returning,తిరిగి వస్తూ,returned,తిరిగి వచ్చాడు,returned,తిరిగి వచ్చిన
-create,సృష్టించడం,creates,సృష్టిస్తాడు,creating,సృష్టిస్తూ,created,సృష్టించాడు,created,సృష్టించిన
-believe,నమ్మడం,believes,నమ్ముతాడు,believing,నమ్ముతూ,believed,నమ్మాడు,believed,నమ్మిన
-receive,స్వీకరించడం,receives,స్వీకరిస్తాడు,receiving,స్వీకరిస్తూ,received,స్వీకరించాడు,received,స్వీకరించిన
-wait,వేచి ఉండడం,waits,వేచి ఉంటాడు,waiting,వేచి ఉంటూ,waited,వేచి ఉన్నాడు,waited,వేచి ఉన్న
-die,చనిపోవడం,dies,చనిపోతాడు,dying,చనిపోతూ,died,చనిపోయాడు,died,చనిపోయిన
-kill,చంపడం,kills,చంపుతాడు,killing,చంపుతూ,killed,చంపాడు,killed,చంపిన
-stay,ఉండడం,stays,ఉంటాడు,staying,ఉంటూ,stayed,ఉన్నాడు,stayed,ఉన్న
-remember,గుర్తుంచుకోవడం,remembers,గుర్తుంచుకుంటాడు,remembering,గుర్తుంచుకుంటూ,remembered,గుర్తుంచుకున్నాడు,remembered,గుర్తుంచుకున్న
-stop,ఆపడం,stops,ఆపుతాడు,stopping,ఆపుతూ,stopped,ఆపాడు,stopped,ఆపిన
-raise,పెంచడం,raises,పెంచుతాడు,raising,పెంచుతూ,raised,పెంచాడు,raised,పెంచిన
-pass,దాటడం,passes,దాటుతాడు,passing,దాటుతూ,passed,దాటాడు,passed,దాటిన
-require,అవసరం,requires,అవసరమవుతుంది,requiring,అవసరమవుతూ,required,అవసరమయింది,required,అవసరమైన
-report,నివేదించడం,reports,నివేదిస్తాడు,reporting,నివేదిస్తూ,reported,నివేదించాడు,reported,నివేదించిన
-push,నెట్టడం,pushes,నెట్టుతాడు,pushing,నెట్టుతూ,pushed,నెట్టాడు,pushed,నెట్టిన
-pull,లాగడం,pulls,లాగుతాడు,pulling,లాగుతూ,pulled,లాగాడు,pulled,లాగిన
-offer,అందించడం,offers,అందిస్తాడు,offering,అందిస్తూ,offered,అందించాడు,offered,అందించిన
-open,తెరవడం,opens,తెరుస్తాడు,opening,తెరుస్తూ,opened,తెరిచాడు,opened,తెరిచిన
-close,మూయడం,closes,మూస్తాడు,closing,మూస్తూ,closed,మూశాడు,closed,మూసిన
-grow,పెరగడం,grows,పెరుగుతాడు,growing,పెరుగుతూ,grew,పెరిగాడు,grown,పెరిగిన
-expect,ఆశించడం,expects,ఆశిస్తాడు,expecting,ఆశిస్తూ,expected,ఆశించాడు,expected,ఆశించిన
-introduce,పరిచయం చేయడం,introduces,పరిచయం చేస్తాడు,introducing,పరిచయం చేస్తూ,introduced,పరిచయం చేశాడు,introduced,పరిచయం చేసిన
-spend,ఖర్చు చేయడం,spends,ఖర్చు చేస్తాడు,spending,ఖర్చు చేస్తూ,spent,ఖర్చు చేశాడు,spent,ఖర్చు చేసిన
-agree,అంగీకరించడం,agrees,అంగీకరిస్తాడు,agreeing,అంగీకరిస్తూ,agreed,అంగీకరించాడు,agreed,అంగీకరించిన
-imagine,ఊహించడం,imagines,ఊహిస్తాడు,imagining,ఊహిస్తూ,imagined,ఊహించాడు,imagined,ఊహించిన
-enjoy,ఆనందించడం,enjoys,ఆనందిస్తాడు,enjoying,ఆనందిస్తూ,enjoyed,ఆనందించాడు,enjoyed,ఆనందించిన
-worry,ఆందోళన చెందడం,worries,ఆందోళన చెందుతాడు,worrying,ఆందోళన చెందుతూ,worried,ఆందోళన చెందాడు,worried,ఆందోళన చెందిన
-draw,గీయడం,draws,గీస్తాడు,drawing,గీస్తూ,drew,గీశాడు,drawn,గీసిన
-drive,నడపడం,drives,నడుపుతాడు,driving,నడుపుతూ,drove,నడిపాడు,driven,నడిపిన
-fly,ఎగరడం,flies,ఎగురుతాడు,flying,ఎగురుతూ,flew,ఎగిరాడు,flown,ఎగిరిన
-sing,పాడడం,sings,పాడుతాడు,singing,పాడుతూ,sang,పాడాడు,sung,పాడిన
-swim,ఈదడం,swims,ఈదుతాడు,swimming,ఈదుతూ,swam,ఈదాను,swum,ఈదిన
-tear,చింపడం,tears,చింపుతాడు,tearing,చింపుతూ,tore,చింపాడు,torn,చింపిన
-wear,ధరించడం,wears,ధరిస్తాడు,wearing,ధరిస్తూ,wore,ధరించాడు,worn,ధరించిన
-hide,దాచడం,hides,దాస్తాడు,hiding,దాస్తూ,hid,దాచాడు,hidden,దాచిన
-ride,స్వారీ చేయడం,rides,స్వారీ చేస్తాడు,riding,స్వారీ చేస్తూ,rode,స్వారీ చేశాడు,ridden,స్వారీ చేసిన
-bite,కొరకడం,bites,కొరుకుతాడు,biting,కొరుకుతూ,bit,కొరికాడు,bitten,కొరికిన
-break,విరగడం,breaks,విరుస్తాడు,breaking,విరుస్తూ,broke,విరిచాడు,broken,విరిగిన
-choose,ఎంచుకోవడం,chooses,ఎంచుకుంటాడు,choosing,ఎంచుకుంటూ,chose,ఎంచుకున్నాడు,chosen,ఎంచుకున్న
-forget,మర్చిపోవడం,forgets,మర్చిపోతాడు,forgetting,మర్చిపోతూ,forgot,మర్చిపోయాడు,forgotten,మర్చిపోయిన
-freeze,గడ్డకట్టడం,freezes,గడ్డకడతాడు,freezing,గడ్డకడుతూ,froze,గడ్డకట్టాడు,frozen,గడ్డకట్టిన
-steal,దొంగిలించడం,steals,దొంగిలిస్తాడు,stealing,దొంగిలిస్తూ,stole,దొంగిలించాడు,stolen,దొంగిలించిన
-wake,మేల్కొనడం,wakes,మేల్కొంటాడు,waking,మేల్కొంటూ,woke,మేల్కొన్నాడు,woken,మేల్కొన్న
-shut,మూసివేయడం,shuts,మూసివేస్తాడు,shutting,మూసివేస్తూ,shut,మూసివేశాడు,shut,మూసివేసిన
-hit,కొట్టడం,hits,కొడతాడు,hitting,కొడుతూ,hit,కొట్టాడు,hit,కొట్టిన
-let,అనుమతించడం,lets,అనుమతిస్తాడు,letting,అనుమతిస్తూ,let,అనుమతించాడు,let,అనుమతించిన
-cost,ఖర్చు అవ్వడం,costs,ఖర్చు అవుతుంది,costing,ఖర్చు అవుతూ,cost,ఖర్చు అయింది,cost,ఖర్చు అయిన
-spread,వ్యాపించడం,spreads,వ్యాపిస్తుంది,spreading,వ్యాపిస్తూ,spread,వ్యాపించింది,spread,వ్యాపించిన
-fight,పోరాడడం,fights,పోరాడతాడు,fighting,పోరాడుతూ,fought,పోరాడాడు,fought,పోరాడిన
-shoot,షూట్ చేయడం,shoots,షూట్ చేస్తాడు,shooting,షూట్ చేస్తూ,shot,షూట్ చేశాడు,shot,షూట్ చేసిన
-keep,ఉంచుకోవడం,keeps,ఉంచుకుంటాడు,keeping,ఉంచుకుంటూ,kept,ఉంచుకున్నాడు,kept,ఉంచుకున్న
-sleep,నిద్రపోవడం,sleeps,నిద్రపోతాడు,sleeping,నిద్రపోతూ,slept,నిద్రపోయాడు,slept,నిద్రపోయిన
-deal,వ్యవహరించడం,deals,వ్యవహరిస్తాడు,dealing,వ్యవహరిస్తూ,dealt,వ్యవహరించాడు,dealt,వ్యవహరించిన
-mean,అర్థం,means,అర్థం అవుతుంది,meaning,అర్థం అవుతూ,meant,అర్థం అయింది,meant,అర్థం అయిన
-catch,పట్టుకోవడం,catches,పట్టుకుంటాడు,catching,పట్టుకుంటూ,caught,పట్టుకున్నాడు,caught,పట్టుకున్న
-lend,అప్పు ఇవ్వడం,lends,అప్పు ఇస్తాడు,lending,అప్పు ఇస్తూ,lent,అప్పు ఇచ్చాడు,lent,అప్పు ఇచ్చిన
-smell,వాసన చూడడం,smells,వాసన చూస్తాడు,smelling,వాసన చూస్తూ,smelled/smelt,వాసన చూశాడు,smelled/smelt,వాసన చూసిన
-blow,ఊదడం,blows,ఊదుతాడు,blowing,ఊదుతూ,blew,ఊదాడు,blown,ఊదిన
-throw,విసిరేయడం,throws,విసిరేస్తాడు,throwing,విసిరేస్తూ,threw,విసిరేశాడు,thrown,విసిరేసిన
-bend,వంగడం,bends,వంగుతాడు,bending,వంగుతూ,bent,వంగాడు,bent,వంగిన
-hang,వేలాడదీయడం,hangs,వేలాడదీస్తాడు,hanging,వేలాడదీస్తూ,hung,వేలాడదీశాడు,hung,వేలాడదీసిన
-rise,లేవడం,rises,లేస్తాడు,rising,లేస్తూ,rose,లేచాడు,risen,లేచిన
-forgive,క్షమించడం,forgives,క్షమిస్తాడు,forgiving,క్షమిస్తూ,forgave,క్షమించాడు,forgiven,క్షమించిన
-shake,కదిలించడం,shakes,కదిలిస్తాడు,shaking,కదిలిస్తూ,shook,కదిలించాడు,shaken,కదిలించిన
-say,చెప్పడం,says,చెప్తాడు,saying,చెప్తూ,said,చెప్పాడు,said,చెప్పిన
-lead,నడిపించడం,leads,నడిపిస్తాడు,leading,నడిపిస్తూ,led,నడిపించాడు,led,నడిపించిన
-hurt,బాధపెట్టడం,hurts,బాధపెడతాడు,hurting,బాధపెడుతూ,hurt,బాధపెట్టాడు,hurt,బాధపెట్టిన
-quit,మానేయడం,quits,మానేస్తాడు,quitting,మానేస్తూ,quit,మానేశాడు,quit,మానేసిన
-light,వెలిగించడం,lights,వెలిగిస్తాడు,lighting,వెలిగిస్తూ,lit/lighted,వెలిగించాడు,lit/lighted,వెలిగించిన
-spell,అక్షరాలు పలకడం,spells,అక్షరాలు పలుకుతాడు,spelling,అక్షరాలు పలుకుతూ,spelled/spelt,అక్షరాలు పలికాడు,spelled/spelt,అక్షరాలు పలికిన
-burn,కాల్చడం,burns,కాలుస్తాడు,burning,కాలుస్తూ,burned/burnt,కాల్చాడు,burned/burnt,కాల్చిన
-dream,కల కనడం,dreams,కల కంటాడు,dreaming,కల కంటూ,dreamed/dreamt,కల కన్నాడు,dreamed/dreamt,కల కన్న
-dig,త్రవ్వడం,digs,త్రవ్వుతాడు,digging,త్రవ్వుతూ,dug,త్రవ్వాడు,dug,త్రవ్విన
-cast,విసిరేయడం,casts,విసిరేస్తాడు,casting,విసిరేస్తూ,cast,విసిరేశాడు,cast,విసిరేసిన
-fit,సరిపోవడం,fits,సరిపోతుంది,fitting,సరిపోతూ,fit/fitted,సరిపోయింది,fit/fitted,సరిపోయిన
-kneel,మోకరిల్లడం,kneels,మోకరిల్లుతాడు,kneeling,మోకరిల్లుతూ,knelt/kneeled,మోకరిల్లాడు,knelt/kneeled,మోకరిల్లిన
-bet,పందెం కాయడం,bets,పందెం కాస్తాడు,betting,పందెం కాస్తూ,bet,పందెం కాశాడు,bet,పందెం కాసిన
-slap,చరుచుకోవడం,slaps,చరుచుకుంటాడు,slapping,చరుచుకుంటూ,slapped,చరుచుకున్నాడు,slapped,చరుచుకున్న
-stab,పొడవడం,stabs,పొడుస్తాడు,stabbing,పొడుస్తూ,stabbed,పొడిచాడు,stabbed,పొడిచిన
-allow,అనుమతించడం,allows,అనుమతిస్తాడు,allowing,అనుమతిస్తూ,allowed,అనుమతించాడు,allowed,అనుమతించిన
-add,జోడించడం,adds,జోడిస్తాడు,adding,జోడిస్తూ,added,జోడించాడు,added,జోడించిన
-agree,అంగీకరించడం,agrees,అంగీకరిస్తాడు,agreeing,అంగీకరిస్తూ,agreed,అంగీకరించాడు,agreed,అంగీకరించిన
-explain,వివరించడం,explains,వివరిస్తాడు,explaining,వివరిస్తూ,explained,వివరించాడు,explained,వివరించిన
-follow,అనుసరించడం,follows,అనుసరిస్తాడు,following,అనుసరిస్తూ,followed,అనుసరించాడు,followed,అనుసరించిన
-mention,పేర్కొనడం,mentions,పేర్కొంటాడు,mentioning,పేర్కొంటూ,mentioned,పేర్కొన్నాడు,mentioned,పేర్కొన్న
-notice,గమనించడం,notices,గమనిస్తాడు,noticing,గమనిస్తూ,noticed,గమనించాడు,noticed,గమనించిన
-prevent,నిరోధించడం,prevents,నిరోధిస్తాడు,preventing,నిరోధిస్తూ,prevented,నిరోధించాడు,prevented,నిరోధించిన
-refuse,తిరస్కరించడం,refuses,తిరస్కరిస్తాడు,refusing,తిరస్కరిస్తూ,refused,తిరస్కరించాడు,refused,తిరస్కరించిన
-solve,పరిష్కరించడం,solves,పరిష్కరిస్తాడు,solving,పరిష్కరిస్తూ,solved,పరిష్కరించాడు,solved,పరిష్కరించిన
-suggest,సూచించడం,suggests,సూచిస్తాడు,suggesting,సూచిస్తూ,suggested,సూచించాడు,suggested,సూచించిన
-support,మద్దతు ఇవ్వడం,supports,మద్దతు ఇస్తాడు,supporting,మద్దతు ఇస్తూ,supported,మద్దతు ఇచ్చాడు,supported,మద్దతు ఇచ్చిన
-touch,తాకడం,touches,తాకుతాడు,touching,తాకుతూ,touched,తాకాడు,touched,తాకిన
-visit,సందర్శించడం,visits,సందర్శిస్తాడు,visiting,సందర్శస్తూ,visited,సందర్శించాడు,visited,సందర్శించిన
-walk,నడవడం,walks,నడుస్తాడు,walking,నడుస్తూ,walked,నడిచాడు,walked,నడిచిన
-wash,కడగడం,washes,కడుగుతాడు,washing,కడుగుతూ,washed,కడిగాడు,washed,కడిగిన
-suffer,బాధపడడం,suffers,బాధపడతాడు,suffering,బాధపడుతూ,suffered,బాధపడ్డాడు,suffered,బాధపడిన
-surprise,ఆశ్చర్యపరచడం,surprises,ఆశ్చర్యపరుస్తాడు,surprising,ఆశ్చర్యపరుస్తూ,surprised,ఆశ్చర్యపరిచాడు,surprised,ఆశ్చర్యపరిచిన
-thank,ధన్యవాదాలు చెప్పడం,thanks,ధన్యవాదాలు చెప్తాడు,thanking,ధన్యవాదాలు చెప్తూ,thanked,ధన్యవాదాలు చెప్పాడు,thanked,ధన్యవాదాలు చెప్పిన
-threaten,బెదిరించడం,threatens,బెదిరిస్తాడు,threatening,బెదిరిస్తూ,threatened,బెదిరించాడు,threatened,బెదిరించిన
-treat,వ్యవహరించడం,treats,వ్యవహరిస్తాడు,treating,వ్యవహరిస్తూ,treated,వ్యవహరించాడు,treated,వ్యవహరించిన
-value,విలువ ఇవ్వడం,values,విలువ ఇస్తాడు,valuing,విలువ ఇస్తూ,valued,విలువ ఇచ్చాడు,valued,విలువ ఇచ్చిన
-warn,హెచ్చరించడం,warns,హెచ్చరిస్తాడు,warning,హెచ్చరిస్తూ,warned,హెచ్చరించాడు,warned,హెచ్చరించిన
-waste,వృధా చేయడం,wastes,వృధా చేస్తాడు,wasting,వృధా చేస్తూ,wasted,వృధా చేశాడు,wasted,వృధా చేసిన
-welcome,స్వాగతం పలకడం,welcomes,స్వాగతం పలుకుతాడు,welcoming,స్వాగతం పలుకుతూ,welcomed,స్వాగతం పలికాడు,welcomed,స్వాగతం పలికిన
-wish,కోరుకోవడం,wishes,కోరుకుంటాడు,wishing,కోరుకుంటూ,wished,కోరుకున్నాడు,wished,కోరుకున్న
-wonder,ఆశ్చర్యపోవడం,wonders,ఆశ్చర్యపోతాడు,wondering,ఆశ్చర్యపోతూ,wondered,ఆశ్చర్యపోయాడు,wondered,ఆశ్చర్యపోయిన
-save,సేవ్ చేయడం,saves,సేవ్ చేస్తాడు,saving,సేవ్ చేస్తూ,saved,సేవ్ చేశాడు,saved,సేవ్ చేసిన
-smoke,పొగ తాగడం,smokes,పొగ తాగుతాడు,smoking,పొగ తాగుతూ,smoked,పొగ తాగాడు,smoked,పొగ తాగిన
-start,ప్రారంభించడం,starts,ప్రారంభిస్తాడు,starting,ప్రారంభిస్తూ,started,ప్రారంభించాడు,started,ప్రారంభించిన
-study,చదువుకోవడం,studies,చదువుకుంటాడు,studying,చదువుకుంటూ,studied,చదువుకున్నాడు,studied,చదువుకున్న
-talk,మాట్లాడడం,talks,మాట్లాడతాడు,talking,మాట్లాడుతూ,talked,మాట్లాడాడు,talked,మాట్లాడిన
-taste,రుచి చూడడం,tastes,రుచి చూస్తాడు,tasting,రుచి చూస్తూ,tasted,రుచి చూశాడు,tasted,రుచి చూసిన
-tease,ఏడిపించడం,teases,ఏడిపిస్తాడు,teasing,ఏడిపిస్తూ,teased,ఏడిపించాడు,teased,ఏడిపించిన
-scream,అరవడం,screams,అరుస్తాడు,screaming,అరుస్తూ,screamed,అరిచాడు,screamed,అరిచిన
-search,వెతకడం,searches,వెతుకుతాడు,searching,వెతుకుతూ,searched,వెతికాడు,searched,వెతికిన
-separate,విడదీయడం,separates,విడదీస్తాడు,separating,విడదీస్తూ,separated,విడదీశాడు,separated,విడదీసిన
-share,పంచుకోవడం,shares,పంచుకుంటాడు,sharing,పంచుకుంటూ,shared,పంచుకున్నాడు,shared,పంచుకున్న
-shout,అరవడం,shouts,అరుస్తాడు,shouting,అరుస్తూ,shouted,అరిచాడు,shouted,అరిచిన
-sign,సంతకం చేయడం,signs,సంతకం చేస్తాడు,signing,సంతకం చేస్తూ,signed,సంతకం చేశాడు,signed,సంతకం చేసిన
-skip,దాటవేయడం,skips,దాటవేస్తాడు,skipping,దాటవేస్తూ,skipped,దాటవేశాడు,skipped,దాటవేసిన
-slip,జారిపోవడం,slips,జారిపోతాడు,slipping,జారిపోతూ,slipped,జారిపోయాడు,slipping,జారిపోయిన
-slow,నెమ్మదిగా చేయడం,slows,నెమ్మదిగా చేస్తాడు,slowing,నెమ్మదిగా చేస్తూ,slowed,నెమ్మదిగా చేశాడు,slowed,నెమ్మదిగా చేసిన
-smile,నవ్వడం,smiles,నవ్వుతాడు,smiling,నవ్వుతూ,smiled,నవ్వాడు,smiled,నవ్విన
-sound,వినిపించడం,sounds,వినిపిస్తుంది,sounding,వినిపిస్తూ,sounded,వినిపించింది,sounded,వినిపించిన
-starve,ఆకలితో ఉండడం,starves,ఆకలితో ఉంటాడు,starving,ఆకలితో ఉంటూ,starved,ఆకలితో ఉన్నాడు,starved,ఆకలితో ఉన్న
-store,నిల్వ చేయడం,stores,నిల్వ చేస్తాడు,storing,నిల్వ చేస్తూ,stored,నిల్వ చేశాడు,stored,నిల్వ చేసిన
-stretch,సాగుట,striches,సాగుతాడు,stretching,సాగుతూ,stretched,సాగాడు,stretched,సాగుట
-strip,తొలగించడం,strips,తొలగిస్తాడు,stripping,తొలగిస్తూ,stripped,తొలగించాడు,stripped,తొలగించిన
+﻿Base Form (V1),Telugu Meaning (V1),3rd Person Singular (he/she/it)  (V5),Telugu meaning ( he she it) (V5),-ing Form (Present Participle) (V4),Telugu meaning (V4),Past Simple (V2),Telugu meaning (V2),Past Participle (V3),Telugu meaning (V3)
+abash,పరువు తీయడం,abashes,సిగ్గుపడేలా చేస్తాడు/చేస్తుంది,abashing,సిగ్గుపడేలా చేస్తూ,abashed,సిగ్గుపడ్డాడు,abashed,సిగ్గుపడి
+abate,తగ్గించుట,abates,తగ్గిస్తాడు/తగ్గిస్తుంది,abating,తగ్గిస్తూ,abated,తగ్గింది,abated,తగ్గిపోయి
+abide,"కట్టుబడు, బధ్ధమైయుండు",abides,నివసిస్తాడు/నివసిస్తుంది,abiding,నివసిస్తూ,abode,నివసించాడు,abode,నివసించి
+absorb,"పీల్చు, శోషించు",absorbs,శోషిస్తాడు/శోషిస్తుంది,absorbing,శోషిస్తూ,absorbed,శోషించబడింది,absorbed,శోషించబడి
+accept,అంగీకరించడం,accepts,అంగీకరిస్తాడు/అంగీకరిస్తుంది,accepting,అంగీకరిస్తూ,accepted,అంగీకరించాడు,accepted,అంగీకరించబడిన
+accompany,తోడు,accompanies,తోడుగా వెళ్తాడు/వెళ్తుంది,accompanying,తోడుగా వెళ్తూ,accompanied,తోడుగా వెళ్ళాడు,accompanied,తోడుగా వెళ్లి
+ache,"నొప్పి, బాధ",aches,నొప్పి పెడుతుంది,aching,నొప్పి పెడుతూ,ached,నొప్పి పెట్టింది,ached,నొప్పి పెట్టి
+achieve,సాధించు,achieves,సాధిస్తాడు/సాధిస్తుంది,achieving,సాధిస్తూ,achieved,సాధించాడు,achieved,సాధించిన
+acquire,సంపాదించు,acquires,సంపాదిస్తాడు/సంపాదిస్తుంది,acquiring,సంపాదిస్తూ,acquired,సంపాదించాడు,acquired,సంపాదించిన
+act,నటించు,acts,నటిస్తాడు/నటిస్తుంది,acting,నటిస్తూ,acted,నటించాడు,acted,నటించి
+add,"చేర్చు, కూర్చు, జోడించు",adds,జోడిస్తాడు/జోడిస్తుంది,adding,జోడిస్తూ,added,జోడించాడు,added,జోడించబడి
+address,సంబోధించు,addresses,సంబోధిస్తాడు/సంబోధిస్తుంది,addressing,సంబోధిస్తూ,addressed,సంబోధించాడు,addressed,సంబోధించి
+adjust,సర్దుబాటు,adjusts,సర్దుబాటు చేస్తాడు/చేస్తుంది,adjusting,సర్దుబాటు చేస్తూ,adjusted,సర్దుబాటు చేశాడు,adjusted,సర్దుబాటు చేయబడి
+admire,"ప్రశంసించు, మెచ్చుకొను",admires,అభినందిస్తాడు/అభినందిస్తుంది,admiring,అభినందిస్తూ,admired,అభినందించాడు,admired,అభినందించబడి
+admit,ఒప్పుకొను/అనుమతించు,admits,ఒప్పుకుంటాడు/ఒప్పుకుంటుంది,admitting,ఒప్పుకుంటూ,admitted,ఒప్పుకున్నాడు,admitted,ఒప్పుకొని
+advise,సలహా,advises,సలహా ఇస్తాడు/ఇస్తుంది,advising,సలహా ఇస్తూ,advised,సలహా ఇచ్చాడు,advised,సలహా ఇవ్వబడి
+afford,"భరించు,స్థోమత,",affords,భరించగలడు/భరించగలదు,affording,భరించగలుగుతూ,afforded,భరించగలిగాడు,afforded,భరించగలిగి
+agree,"ఒప్పుకొను, సమ్మతించు, అంగీకరించు",agrees,ఒప్పుకుంటాడు/ఒప్పుకుంటుంది,agreeing,ఒప్పుకుంటూ,agreed,ఒప్పుకున్నాడు,agreed,ఒప్పుకొని
+alight,"వెలుగుతూ, దిగు",alights,దిగుతాడు/దిగుతుంది,alighting,దిగుతూ,alit,దిగాడు,alit,దిగి
+allow,అనుమతించు,allows,అనుమతిస్తాడు/అనుమతిస్తుంది,allowing,అనుమతిస్తూ,allowed,అనుమతించాడు,allowed,అనుమతించబడి
+animate,"ప్రాణియైన, చేతనమైన",animates,ప్రాణం పోస్తాడు/పోస్తుంది,animating,ప్రాణం పోస్తూ,animated,ప్రాణం పోసాడు,animated,ప్రాణం పోయబడి
+announce,"ప్రకటించు, చాటించు",announces,ప్రకటిస్తాడు/ప్రకటిస్తుంది,announcing,ప్రకటిస్తూ,announced,ప్రకటించాడు,announced,ప్రకటించబడి
+answer,సమాధానం,answers,సమాధానం చెప్తాడు/చెప్తుంది,answering,సమాధానం చెప్తూ,answered,సమాధానం చెప్పాడు,answered,సమాధానం చెప్పబడి
+apologize,క్షమాపణలు,apologizes,క్షమాపణ చెప్తాడు/చెప్తుంది,apologizing,క్షమాపణ చెప్తూ,apologized,క్షమాపణ చెప్పాడు,apologized,క్షమాపణ చెప్పి
+appear,"కనిపించు, హాజరవ్వు",appears,కనిపిస్తాడు/కనిపిస్తుంది,appearing,కనిపిస్తూ,appeared,కనిపించాడు,appeared,కనిపించి
+applaud,"స్తుతించు, పొగుడు",applauds,చప్పట్లు కొడతాడు/కొడుతుంది,applauding,చప్పట్లు కొడుతూ,applauded,చప్పట్లు కొట్టాడు,applauded,చప్పట్లు కొట్టబడి
+apply,దరఖాస్తు చేయటం,applies,దరఖాస్తు చేస్తాడు/చేస్తుంది,applying,దరఖాస్తు చేస్తూ,applied,దరఖాస్తు చేశాడు,applied,దరఖాస్తు చేయబడి
+approach,"విధానం, సమీపించు",approaches,సమీపిస్తాడు/సమీపిస్తుంది,approaching,సమీపిస్తూ,approached,సమీపించాడు,approached,సమీపించి
+approve,"ఆమోదించు, అంగీకరించు",approves,ఆమోదిస్తాడు/ఆమోదిస్తుంది,approving,ఆమోదిస్తూ,approved,ఆమోదించాడు,approved,ఆమోదించబడి
+argue,వాదించు,argues,వాదిస్తాడు/వాదిస్తుంది,arguing,వాదిస్తూ,argued,వాదించాడు,argued,వాదించి
+arise,"లేచు, తలెత్తు",arises,ఉదయిస్తాడు/ఉదయిస్తుంది,arising,ఉదయిస్తూ,arose,ఉదయించింది,arisen,ఉదయించి
+arrange,ఏర్పాటుచెయ్యి,arranges,ఏర్పాటు చేస్తాడు/చేస్తుంది,arranging,ఏర్పాటు చేస్తూ,arranged,ఏర్పాటు చేశాడు,arranged,ఏర్పాటు చేయబడి
+arrest,"నిర్భందించు, అరెస్టు",arrests,అరెస్టు చేస్తాడు/చేస్తుంది,arresting,అరెస్టు చేస్తూ,arrested,అరెస్టు చేశాడు,arrested,అరెస్టు చేయబడి
+ask,అడుగు,asks,అడుగుతాడు/అడుగుతుంది,asking,అడుగుతూ,asked,అడిగాడు,asked,అడగబడి
+assert,"నొక్కి చెప్పు, చెప్పు",asserts,నొక్కి చెప్తాడు/చెప్తుంది,asserting,నొక్కి చెప్తూ,asserted,నొక్కి చెప్పాడు,asserted,నొక్కి చెప్పబడి
+assort,వర్గీకరించు,assorts,వర్గీకరిస్తాడు/వర్గీకరిస్తుంది,assorting,వర్గీకరిస్తూ,assorted,వర్గీకరించాడు,assorted,వర్గీకరించబడి
+astonish,"ఆశ్చర్యపడు, నిర్ఘాంతపోవు",astonishes,ఆశ్చర్యపరుస్తాడు/ఆశ్చర్యపరుస్తుంది,astonishing,ఆశ్చర్యపరుస్తూ,astonished,ఆశ్చర్యపోయాడు,astonished,ఆశ్చర్యపోయి
+attack,దాడి చెయ్యు,attacks,దాడి చేస్తాడు/చేస్తుంది,attacking,దాడి చేస్తూ,attacked,దాడి చేశాడు,attacked,దాడి చేయబడి
+attend,హాజరు అవ్వు,attends,హాజరవుతాడు/హాజరవుతుంది,attending,హాజరవుతూ,attended,హాజరయ్యాడు,attended,హాజరయ్యి
+attract,ఆకర్షించు,attracts,ఆకర్షిస్తాడు/ఆకర్షిస్తుంది,attracting,ఆకర్షిస్తూ,attracted,ఆకర్షించాడు,attracted,ఆకర్షించబడి
+audit,లెక్కలు తనిఖీ చెయ్యి,audits,ఆడిట్ చేస్తాడు/చేస్తుంది,auditing,ఆడిట్ చేస్తూ,audited,ఆడిట్ చేశాడు,audited,ఆడిట్ చేయబడి
+avoid,తప్పించుకొను,avoids,తప్పిస్తాడు/తప్పిస్తుంది,avoiding,తప్పిస్తూ,avoided,తప్పించుకున్నాడు,avoided,తప్పించబడి
+awake,మేలుకొని,awakes,మేల్కొంటాడు/మేల్కొంటుంది,awaking,మేల్కొంటూ,awoke,మేల్కొన్నాడు,awoken,మేల్కొని
+bang,"బాదు, కొట్టు, మోగించు",bangs,గట్టిగా కొడతాడు/కొడుతుంది,banging,గట్టిగా కొడుతూ,banged,గట్టిగా కొట్టాడు,banged,గట్టిగా కొట్టబడి
+banish,"బహిష్కరించు, వెళ్ళగొట్టు",banishes,బహిష్కరిస్తాడు/బహిష్కరిస్తుంది,banishing,బహిష్కరిస్తూ,banished,బహిష్కరించాడు,banished,బహిష్కరించబడి
+bash,చిట్లగొట్టు,bashes,దెబ్బ కొడతాడు/కొడుతుంది,bashing,దెబ్బ కొడుతూ,bashed,దెబ్బ కొట్టాడు,bashed,దెబ్బ కొట్టబడి
+bat,"గబ్బిలము, బ్యాటింగ్ చేయు",bats,బ్యాటింగ్ చేస్తాడు/చేస్తుంది,batting,బ్యాటింగ్ చేస్తూ,batted,బ్యాటింగ్ చేశాడు,batted,బ్యాటింగ్ చేసి
+bear,భరించు,bears,భరిస్తాడు/భరిస్తుంది,bearing,భరిస్తూ,bore,భరించాడు,born,పుట్టి
+beat,కొట్టు,beats,కొడతాడు/కొడుతుంది,beating,కొడుతూ,beat,కొట్టాడు,beaten,కొట్టబడి
+beautify,"అందమైన, చక్కని",beautifies,అందంగా తీర్చిదిద్దుతాడు/తీర్చిదిద్దుతుంది,beautifying,అందంగా తీర్చిదిద్దుతూ,beautified,అందంగా తీర్చిదిద్దారు,beautified,అందంగా తీర్చిదిద్దబడి
+become,అవ్వు,becomes,అవుతాడు/అవుతుంది,becoming,అవుతూ,became,అయ్యాడు,become,అయి
+befall,జరుగు,befalls,సంభవిస్తుంది,befalling,సంభవిస్తూ,befell,సంభవించింది,befallen,సంభవించి
+beg,"యాచించు, వేడుకోను, ప్రార్థించు",begs,వేడుకుంటాడు/వేడుకుంటుంది,begging,వేడుకుంటూ,begged,వేడుకున్నాడు,begged,వేడుకొని
+begin,ప్రారంభం,begins,ప్రారంభిస్తాడు/ప్రారంభిస్తుంది,beginning,ప్రారంభిస్తూ,began,ప్రారంభించాడు,begun,ప్రారంభించబడి
+behave,"ప్రవర్తించు, నడచుకోను",behaves,ప్రవర్తిస్తాడు/ప్రవర్తిస్తుంది,behaving,ప్రవర్తిస్తూ,behaved,ప్రవర్తించాడు,behaved,ప్రవర్తించి
+behold,"తెలుసుకొను, చూడు",beholds,చూస్తాడు/చూస్తుంది,beholding,చూస్తూ,beheld,చూశాడు,beheld,చూడబడి
+believe,"నమ్ము, విశ్వసించు",believes,నమ్ముతాడు/నమ్ముతుంది,believing,నమ్ముతూ,believed,నమ్మాడు,believed,నమ్మబడి
+belong,"చెందు, సంబంధించు",belongs,చెందుతుంది,belonging,చెందుతూ,belonged,చెందినది,belonged,చెంది
+bend,"వంచు, వంగు",bends,వంచుతాడు/వంచుతుంది,bending,వంచుతూ,bent,వంగిపోయాడు,bent,వంగిపోయి
+bereave,"కోల్పోవు, నష్టపరచు",bereaves,కోల్పోయేలా చేస్తాడు/చేస్తుంది,bereaving,కోల్పోయేలా చేస్తూ,bereft,కోల్పోయిన,bereft,కోల్పోయి
+beseech,"బతిమాలుకొనుచున్నాను, మనస్ఫూర్తిగా కోరు",beseeches,వేడుకుంటాడు/వేడుకుంటుంది,beseeching,వేడుకుంటూ,besought,వేడుకున్నాడు,besought,వేడుకొని
+bet,"పందెంవెయ్యి, పందెం",bets,పందెం వేస్తాడు/వేస్తుంది,betting,పందెం వేస్తూ,bet,పందెం వేశాడు,bet,పందెం వేయబడి
+betray,"ద్రోహం చెయ్యి, మోసంచెయ్యి",betrays,మోసం చేస్తాడు/చేస్తుంది,betraying,మోసం చేస్తూ,betrayed,మోసం చేశాడు,betrayed,మోసం చేయబడి
+bid,"వేలంలోపాడు, పంపు",bids,వేలం పాడతాడు/పాడుతుంది,bidding,వేలం పాడుతూ,bid,వేలం పాడాడు,bid,వేలం పాడబడి
+bind,కట్టుబడి ఉండుట,binds,కట్టుతాడు/కట్టుతుంది,binding,కట్టుతూ,bound,కట్టుబడి ఉన్నాడు,bound,కట్టుబడి
+bite,"కాటు, కొరుకు, కరుvuట",bites,కరుస్తాడు/కరుస్తుంది,biting,కరుస్తూ,bit,కరిచాడు,bitten,కరవబడి
+bleed,"రక్తంకారు, రక్తస్రావం",bleeds,రక్తం కారుతుంది,bleeding,రక్తం కారుతూ,bled,రక్తం కారింది,bled,రక్తం కారి
+bless,"దీవించు, ఆశీర్వదించు",blesses,దీవిస్తాడు/దీవిస్తుంది,blessing,దీవిస్తూ,blessed,దీవించాడు,blessed,దీవించబడి
+blossom,"పూయు, వికసించు",blossoms,వికసిస్తుంది,blossoming,వికసిస్తూ,blossomed,వికసించింది,blossomed,వికసించి
+blow,"వీచు, విసరు",blows,ఊదుతాడు/ఊదుతుంది,blowing,ఊదుతూ,blew,ఊదాడు,blown,ఊదబడి
+blur,"అస్పష్టత, కళంకం",blurs,మసకబారుస్తుంది,blurring,మసకబారుస్తూ,blurred,మసకబారింది,blurred,మసకబారి
+blush,సిగ్గు,blushes,సిగ్గుపడతాడు/సిగ్గుపడుతుంది,blushing,సిగ్గుపడుతూ,blushed,సిగ్గుపడ్డాడు,blushed,సిగ్గుపడి
+board,"బోర్డు, వసతి, ఎక్కు",boards,ఎక్కుతాడు/ఎక్కుతుంది,boarding,ఎక్కుతూ,boarded,ఎక్కాడు,boarded,ఎక్కి
+boast,ప్రగల్భాలు,boasts,గొప్పలు చెప్తాడు/చెప్తుంది,boasting,గొప్పలు చెప్తూ,boasted, గొప్పలు చెప్పాడు,boasted,గొప్పలు చెప్పి
+boil,"మరుగు, కాచు, పొంగు",boils,ఉడికిస్తాడు/ఉడికిస్తుంది,boiling,ఉడికిస్తూ,boiled,ఉడికింది,boiled,ఉడికించబడి
+bow,"విల్లు, వంచిన",bows,నమస్కరిస్తాడు/నమస్కరిస్తుంది,bowing,నమస్కరిస్తూ,bowed,నమస్కరించాడు,bowed,నమస్కరించి
+break,పగలగొట్టు,breaks,పగలగొడతాడు/పగలగొడుతుంది,breaking,పగలగొడుతూ,broke,పగలగొట్టాడు,broken,పగలగొట్టబడి
+breathe,ఊపిరి తీసుకొను,breathes,శ్వాస పీల్చుకుంటాడు/పీల్చుకుంటుంది,breathing,శ్వాస పీల్చుకుంటూ,breathed,శ్వాస పీల్చుకున్నాడు,breathed,శ్వాస పీల్చుకొని
+breed,జాతిని,breeds,పెంపకం చేస్తాడు/చేస్తుంది,breeding,పెంపకం చేస్తూ,bred,పెంపకం చేశాడు,bred,పెంపకం చేయబడి
+bring,దూరం ప్రదేశంనుండి దగ్గరకు తీసుకొనివచ్చు,brings,తెస్తాడు/తెస్తుంది,bringing,తెస్తూ,brought,తెచ్చాడు,brought,తేబడి
+broadcast,ప్రసారం చేయు,broadcasts,ప్రసారం చేస్తాడు/చేస్తుంది,broadcasting,ప్రసారం చేస్తూ,broadcast,ప్రసారం చేశాడు,broadcast,ప్రసారం చేయబడి
+brush,బ్రష్షు చేయు,brushes,బ్రష్ చేస్తాడు/చేస్తుంది,brushing,బ్రష్ చేస్తూ,brushed,బ్రష్ చేశాడు,brushed,బ్రష్ చేయబడి
+build,నిర్మించు,builds,నిర్మిస్తాడు/నిర్మిస్తుంది,building,నిర్మిస్తూ,built,నిర్మించాడు,built,నిర్మించబడి
+burn,"కాలిన గాయము, కాలుట",burns,కాల్చుతాడు/కాల్చుతుంది,burning,కాల్చుతూ,burnt,కాలిపోయింది,burnt,కాలిపోయి
+burst,ప్రేలుట,bursts,పేలుస్తాడు/పేలుస్తుంది,bursting,పేలుస్తూ,burst,పేలింది,burst,పేలి
+bury,"మట్టిలో కప్పిపెట్టు, దాయు",buries,పూడ్చిపెడతాడు/పూడ్చిపెడుతుంది,burying,పూడ్చిపెడుతూ,buried,పూడ్చిపెట్టాడు,buried,పూడ్చిపెట్టబడి
+buy,కొనుగోలు,buys,కొంటాడు/కొంటుంది,buying,కొంటూ,bought,కొన్నాడు,bought,కొనబడి
+buzz,శబ్దం చేయుట,buzzes,సందడి చేస్తుంది,buzzing,సందడి చేస్తూ,buzzed,సందడి చేసింది,buzzed,సందడి చేసి
+calculate,లెక్కించు,calculates,లెక్కిస్తాడు/లెక్కిస్తుంది,calculating,లెక్కిస్తూ,calculated,లెక్కించాడు,calculated,లెక్కించబడి
+call,పిలవడం,calls,పిలుస్తాడు/పిలుస్తుంది,calling,పిలుస్తూ,called,పిలిచాడు,called,పిలవబడి
+canvass,ప్రచారం,canvasses,ప్రచారం చేస్తాడు/చేస్తుంది,canvassing,ప్రచారం చేస్తూ,canvassed,ప్రచారం చేశాడు,canvassed,ప్రచారం చేయబడి
+capture,బంధించు,captures,పట్టుకుంటాడు/పట్టుకుంటుంది,capturing,పట్టుకుంటూ,captured,పట్టుకున్నాడు,captured,పట్టుకోబడి
+caress,మెల్లగా ఆప్యాయంతో నిమురు,caresses,నిమురుతాడు/నిమురుతుంది,caressing,నిమురుతూ,caressed,నిమిరాడు,caressed,నిమరబడి
+carry,తరలించు,carries,మోస్తాడు/మోస్తుంది,carrying,మోస్తూ,carried,మోశాడు,carried,మోయబడి
+carve,ఆకారాలు చెక్కు,carves,చెక్కుతాడు/చెక్కుతుంది,carving,చెక్కుతూ,carved,చెక్కాడు,carved,చెక్కబడి
+cash,"ఉపయోగించు కొనుట, డబ్బు చేసుకొనుట",cashes,నగదుగా మారుస్తాడు/మారుస్తుంది,cashing,నగదుగా మారుస్తూ,cashed,నగదుగా మార్చాడు,cashed,నగదుగా మార్చబడి
+cast,పాత్రలు పోషించేవారు,casts,వేస్తాడు/వేస్తుంది,casting,వేస్తూ,cast,వేశాడు,cast,వేయబడి
+catch,పట్టుకొను,catches,పట్టుకుంటాడు/పట్టుకుంటుంది,catching,పట్టుకుంటూ,caught,పట్టుకున్నాడు,caught,పట్టుకోబడి
+cause,కారణమవు,causes,కారణమవుతాడు/కారణమవుతుంది,causing,కారణమవుతూ,caused,కారణమయ్యాడు,caused,కారణమై
+cease,"ఆపు, నిలుపు",ceases,ఆపుతాడు/ఆపుతుంది,ceasing,ఆపుతూ,ceased,ఆగిపోయింది,ceased,ఆగిపోయి
+celebrate,సంబరాలు చేసుకొను,celebrates,జరుపుకుంటాడు/జరుపుకుంటుంది,celebrating,జరుపుకుంటూ,celebrated,జరుపుకున్నాడు,celebrated,జరుపుకోబడి
+challenge,సవాలు,challenges,సవాలు చేస్తాడు/చేస్తుంది,challenging,సవాలు చేస్తూ,challenged,సవాలు చేశాడు,challenged,సవాలు చేయబడి
+change,మార్పు,changes,మారుస్తాడు/మారుస్తుంది,changing,మారుస్తూ,changed,మారాడు,changed,మారబడి
+charge,శక్తిని నింపు,charges,ఆరోపిస్తాడు/ఆరోపిస్తుంది,charging,ఆరోపిస్తూ,charged,ఆరోపించాడు,charged,ఆరోపించబడి
+chase,వెంబడించు,chases,వెంబడిస్తాడు/వెంబడిస్తుంది,chasing,వెంబడిస్తూ,chased,వెంబడించాడు,chased,వెంబడించబడి
+chat,కబుర్లు చెప్పు,chats,కబుర్లు చెప్తాడు/చెప్తుంది,chatting,కబుర్లు చెప్తూ,chatted,కబుర్లు చెప్పాడు,chatted,కబుర్లు చెప్పి
+check,తనిఖీ,checks,తనిఖీ చేస్తాడు/చేస్తుంది,checking,తనిఖీ చేస్తూ,checked,తనిఖీ చేశాడు,checked,తనిఖీ చేయబడి
+cheer,ఉత్సాహంగా నినాదాలు చేయడం,cheers,ఉత్సాహపరుస్తాడు/ఉత్సాహపరుస్తుంది,cheering,ఉత్సాహపరుస్తూ,cheered,ఉత్సాహపరిచాడు,cheered,ఉత్సాహపరచబడి
+chew,నమలటం,chews,నములుతాడు/నములుతుంది,chewing,నములుతూ,chewed,నమిలాడు,chewed,నమలబడి
+choke,"అతి కష్టంపై అణచిపెట్టు, ఊపిరాడకుండా చేయు",chokes,ఊపిరాడకుండా చేస్తాడు/చేస్తుంది,choking,ఊపిరాడకుండా చేస్తూ,choked,ఊపిరాడలేదు,choked,ఊపిరాడక
+choose,"ఎంచుకొను, ఎన్నుకొను",chooses,ఎంచుకుంటాడు/ఎంచుకుంటుంది,choosing,ఎంచుకుంటూ,chose,ఎంచుకున్నాడు,chosen,ఎంచుకోబడి
+classify,వర్గాలుగా విభజించు,classifies,వర్గీకరిస్తాడు/వర్గీకరిస్తుంది,classifying,వర్గీకరిస్తూ,classified,వర్గీకరించాడు,classified,వర్గీకరించబడి
+clean,శుభ్రమైన,cleans,శుభ్రం చేస్తాడు/చేస్తుంది,cleaning,శుభ్రం చేస్తూ,cleaned,శుభ్రం చేశాడు,cleaned,శుభ్రం చేయబడి
+cleave,"రెండు చీలికలుగా చేయు, గాలిలో బాట వేసుకుని పోవు",cleaves,చీల్చుతాడు/చీల్చుతుంది,cleaving,చీల్చుతూ,clove/cleft,చీల్చాడు,cloven/cleft,చీల్చబడి
+click,క్లిక్ మనే శబ్ధం,clicks,క్లిక్ చేస్తాడు/చేస్తుంది,clicking,క్లిక్ చేస్తూ,clicked,క్లిక్ చేశాడు,clicked,క్లిక్ చేయబడి
+climb,కాళ్లు చేతులతో పైకి ఎక్కు,climbs,ఎక్కుతాడు/ఎక్కుతుంది,climbing,ఎక్కుతూ,climbed,ఎక్కాడు,climbed,ఎక్కబడి
+cling,"వ్రేలాడటం, వ్రేలాడటం ద్వారా అంటిపెట్టుకుని యుండు",clings,అతుక్కుంటాడు/అతుక్కుంటుంది,clinging,అతుక్కుంటూ,clung,అతుక్కున్నాడు,clung,అతుక్కుని
+close,"దగ్గరగా, సమీపంలో, మూసి వేయుట",closes,మూసివేస్తాడు/మూసివేస్తుంది,closing,మూసివేస్తూ,closed,మూసివేశాడు,closed,మూసివేయబడి
+clothe,దుస్తులు ధరింపజేయు,clothes,బట్టలు వేస్తాడు/వేస్తుంది,clothing,బట్టలు వేస్తూ,clad,ధరించాడు,clad,ధరించి
+clutch,"పంజా విసురు, గట్టి పట్టు",clutches,గట్టిగా పట్టుకుంటాడు/పట్టుకుంటుంది,clutching,గట్టిగా పట్టుకుంటూ,clutched,గట్టిగా పట్టుకున్నాడు,clutched,గట్టిగా పట్టుకొని
+collapse,ముక్కలై పోవడం,collapses,కూలిపోతాడు/కూలిపోతుంది,collapsing,కూలిపోతూ,collapsed,కూలిపోయాడు,collapsed,కూలిపోయి
+collect,వసూలు చేయు,collects,సేకరిస్తాడు/సేకరిస్తుంది,collecting,సేకరిస్తూ,collected,సేకరించాడు,collected,సేకరించబడి
+colour,రంగు వేయుట,colours,రంగు వేస్తాడు/వేస్తుంది,colouring,రంగు వేస్తూ,coloured,రంగు వేశాడు,coloured,రంగు వేయబడి
+come,"వచ్చు, పొందు",comes,వస్తాడు/వస్తుంది,coming,వస్తూ,came,వచ్చాడు,come,వచ్చి
+comment,"వ్యాఖ్య, అభిప్రాయం",comments,వ్యాఖ్యానిస్తాడు/వ్యాఖ్యానిస్తుంది,commenting,వ్యాఖ్యానిస్తూ,commented,వ్యాఖ్యానించాడు,commented,వ్యాఖ్యానించబడి
+compare,పోల్చి చూసుకొను,compares,పోలుస్తాడు/పోలుస్తుంది,comparing,పోలుస్తూ,compared,పోల్చాడు,compared,పోల్చబడి
+compel,"ఆదేశించు, బలవంతపెట్టు",compels,బలవంతం చేస్తాడు/చేస్తుంది,compelling,బలవంతం చేస్తూ,compelled,బలవంతం చేశాడు,compelled,బలవంతం చేయబడి
+compete,పోటీపడు,competes,పోటీ పడతాడు/పడుతుంది,competing,పోటీ పడుతూ,competed,పోటీ పడ్డాడు,competed,పోటీ పడి
+complain,ఫిర్యాదు చేయు,complains,ఫిర్యాదు చేస్తాడు/చేస్తుంది,complaining,ఫిర్యాదు చేస్తూ,complained,ఫిర్యాదు చేశాడు,complained,ఫిర్యాదు చేయబడి
+complete,పూర్తి చేయబడు,completes,పూర్తి చేస్తాడు/చేస్తుంది,completing,పూర్తి చేస్తూ,completed,పూర్తి చేశాడు,completed,పూర్తి చేయబడి
+conclude,"ముగించు, పూర్తి చేయు",concludes,ముగిస్తాడు/ముగిస్తుంది,concluding,ముగిస్తూ,concluded,ముగించాడు,concluded,ముగించబడి
+conduct,నిర్వహించడం,conducts,నిర్వహిస్తాడు/నిర్వహిస్తుంది,conducting,నిర్వహిస్తూ,conducted,నిర్వహించాడు,conducted,నిర్వహించబడి
+confess,"నేరం ఒప్పుకొను, చేసిన పాపాలను అంగీకరించు",confesses,ఒప్పుకుంటాడు/ఒప్పుకుంటుంది,confessing,ఒప్పుకుంటూ,confessed,ఒప్పుకున్నాడు,confessed,ఒప్పుకొని
+confine,హద్దులలో ఉంచు,confines,పరిమితం చేస్తాడు/చేస్తుంది,confining,పరిమితం చేస్తూ,confined,పరిమితం చేశాడు,confined,పరిమితం చేయబడి
+confiscate,జప్తు,confiscates,స్వాధీనం చేసుకుంటాడు/చేసుకుంటుంది,confiscating,స్వాధీనం చేసుకుంటూ,confiscated,స్వాధీనం చేసుకున్నాడు,confiscated,స్వాధీనం చేసుకోబడి
+confuse,ఒకదానికొకటి అని పొరబడు,confuses,గందరగోళపరుస్తాడు/గందరగోళపరుస్తుంది,confusing,గందరగోళపరుస్తూ,confused,గందరగోళానికి గురయ్యాడు,confused,గందరగోళానికి గురై
+congratulate,అభినందించు,congratulates,అభినందిస్తాడు/అభినందిస్తుంది,congratulating,అభినందిస్తూ,congratulated,అభినందించాడు,congratulated,అభినందించబడి
+connect,ఒకదానితో మరొకటి కలుపు,connects,అనుసంధానిస్తాడు/అనుసంధానిస్తుంది,connecting,అనుసంధానిస్తూ,connected,అనుసంధానించాడు,connected,అనుసంధానించబడి
+connote,ప్రత్యేకమైన అర్థం తెలుపు,connotes,సూచిస్తాడు/సూచిస్తుంది,connoting,సూచిస్తూ,connoted,సూచించాడు,connoted,సూచించబడి
+conquer,"విజయం సాధించు, ఆధీనంలోకి తెచ్చుకును",conquers,జయిస్తాడు/జయిస్తుంది,conquering,జయిస్తూ,conquered,జయించాడు,conquered,జయించబడి
+consecrate,పవిత్రం చేయు,consecrates,ప్రతిష్టిస్తాడు/ప్రతిష్టిస్తుంది,consecrating,ప్రతిష్టిస్తూ,consecrated,ప్రతిష్టించాడు,consecrated,ప్రతిష్టించబడి
+consent,ఇచ్ఛాపూర్వక ఆమోదం,consents,అంగీకరిస్తాడు/అంగీకరిస్తుంది,consenting,అంగీకరిస్తూ,consented,అంగీకరించాడు,consented,అంగీకరించబడి
+conserve,సంరక్షించు,conserves,సంరక్షిస్తాడు/సంరక్షిస్తుంది,conserving,సంరక్షిస్తూ,conserved,సంరక్షించాడు,conserved,సంరక్షించబడి
+consider,లెక్కలోకి తీసుకొను,considers,పరిగణిస్తాడు/పరిగణిస్తుంది,considering,పరిగణిస్తూ,considered,పరిగణించాడు,considered,పరిగణించబడి
+consign,కేటాయించు,consigns,అప్పగిస్తాడు/అప్పగిస్తుంది,consigning,అప్పగిస్తూ,consigned,అప్పగించాడు,consigned,అప్పగించబడి
+consist,కలిగియుండు,consists,కలిగి ఉంటుంది,consisting,కలిగి ఉంటూ,consisted,కలిగి ఉంది,consisted,కలిగి ఉండి
+console,ఓదార్చారు,consoles,ఓదార్చుతాడు/ఓదార్చుతుంది,consoling,ఓదార్చుతూ,consoled,ఓదార్చాడు,consoled,ఓదార్చబడి
+consort,"భార్య, భర్త",consorts,సహవాసం చేస్తాడు/చేస్తుంది,consorting,సహవాసం చేస్తూ,consorted,సహవాసం చేశాడు,consorted,సహవాసం చేసి
+conspire,కుట్ర చేయు,conspires,కుట్ర పన్నుతాడు/పన్నుతుంది,conspiring,కుట్ర పన్నుతూ,conspired,కుట్ర పన్నాడు,conspired,కుట్ర పన్నబడి
+constitute,సమానంగా ఉండు,constitutes,ఏర్పరుస్తాడు/ఏర్పరుస్తుంది,constituting,ఏర్పరుస్తూ,constituted,ఏర్పరిచాడు,constituted,ఏర్పరచబడి
+constrain,బలవంతం చేయు,constrains,నిర్బంధిస్తాడు/నిర్బంధిస్తుంది,constraining,నిర్బంధిస్తూ,constrained,నిర్బంధించాడు,constrained,నిర్బంధించబడి
+construct,నిర్మించు,constructs,నిర్మిస్తాడు/నిర్మిస్తుంది,constructing,నిర్మిస్తూ,constructed,నిర్మించాడు,constructed,నిర్మించబడి
+construe,ప్రత్యేకార్థమును వివరించు,construes,అర్థం చేసుకుంటాడు/చేసుకుంటుంది,construing,అర్థం చేసుకుంటూ,construed,అర్థం చేసుకున్నాడు,construed,అర్థం చేసుకోబడి
+consult,సంప్రదించు,consults,సంప్రదిస్తాడు/సంప్రదిస్తుంది,consulting,సంప్రదిస్తూ,consulted,సంప్రదించాడు,consulted,సంప్రదించబడి
+contain,కలిగి,contains,కలిగి ఉంటుంది,containing,కలిగి ఉంటూ,contained,కలిగి ఉంది,contained,కలిగి ఉండి
+contend,పోటీ పడు,contends,పోటీ పడతాడు/పడుతుంది,contending,పోటీ పడుతూ,contended,పోటీ పడ్డాడు,contended,పోటీ పడి
+contest,పోటీ,contests,పోటీ చేస్తాడు/చేస్తుంది,contesting,పోటీ చేస్తూ,contested,పోటీ చేశాడు,contested,పోటీ చేయబడి
+continue,కొనసాగించు,continues,కొనసాగిస్తాడు/కొనసాగిస్తుంది,continuing,కొనసాగిస్తూ,continued,కొనసాగించాడు,continued,కొనసాగించబడి
+contract,ఒప్పందం,contracts,ఒప్పందం కుదుర్చుకుంటాడు/కుదుర్చుకుంటుంది,contracting,ఒప్పందం కుదుర్చుకుంటూ,contracted,ఒప్పందం కుదుర్చుకున్నాడు,contracted,ఒప్పందం కుదుర్చుకోబడి
+contradict,వ్యతిరేకించు,contradicts,వ్యతిరేకిస్తాడు/వ్యతిరేకిస్తుంది,contradicting,వ్యతిరేకిస్తూ,contradicted,వ్యతిరేకించాడు,contradicted,వ్యతిరేకించబడి
+contrast,విరుద్ధంగా,contrasts,పోల్చి చూస్తాడు/చూస్తుంది,contrasting,పోల్చి చూస్తూ,contrasted,పోల్చి చూశాడు,contrasted,పోల్చి చూడబడి
+contribute,దోహదం,contributes,సహకరిస్తాడు/సహకరిస్తుంది,contributing,సహకరిస్తూ,contributed,సహకరించాడు,contributed,సహకరించబడి
+contrive,నైపుణ్యంగా ప్రణాళిక వేయు,contrives,పన్నాగం పన్నుతాడు/పన్నుతుంది,contriving,పన్నాగం పన్నుతూ,contrived,పన్నాగం పన్నాడు,contrived,పన్నాగం పన్నబడి
+control,నియంత్రణ,controls,నియంత్రిస్తాడు/నియంత్రిస్తుంది,controlling,నియంత్రిస్తూ,controlled,నియంత్రించాడు,controlled,నియంత్రించబడి
+convene,సమావేశ పరచు,convenes,సమావేశపరుస్తాడు/సమావేశపరుస్తుంది,convening,సమావేశపరుస్తూ,convened,సమావేశపరిచాడు,convened,సమావేశపరచబడి
+converge,ఒక చోట చేర్చుకొను,converges,కేంద్రీకృతమవుతుంది,converging,కేంద్రీకృతమవుతూ,converged,కేంద్రీకృతమైంది,converged,కేంద్రీకృతమై
+converse,అభిప్రాయాలు తెలుసుకునేలా చర్చించడం,converses,సంభాషిస్తాడు/సంభాషిస్తుంది,conversing,సంభాషిస్తూ,conversed,సంభాషించాడు,conversed,సంభాషించి
+convert,మార్చు,converts,మారుస్తాడు/మారుస్తుంది,converting,మారుస్తూ,converted,మార్చాడు,converted,మార్చబడి
+convey,తెలియచేసిన,conveys,తెలియజేస్తాడు/తెలియజేస్తుంది,conveying,తెలియజేస్తూ,conveyed,తెలియజేశాడు,conveyed,తెలియజేయబడి
+convict,అపరాధి,convicts,దోషిగా నిర్ధారిస్తాడు/నిర్ధారిస్తుంది,convicting,దోషిగా నిర్ధారిస్తూ,convicted,దోషిగా నిర్ధారించాడు,convicted,దోషిగా నిర్ధారించబడి
+convince,ఒప్పించు,convinces,నమ్మిస్తాడు/నమ్మిస్తుంది,convincing,నమ్మిస్తూ,convinced,నమ్మించాడు,convinced,నమ్మించబడి
+cook,వంటచేయు,cooks,వండుతాడు/వండుతుంది,cooking,వండుతూ,cooked,వండాడు,cooked,వండబడి
+cool,చల్లని,cools,చల్లబరుస్తాడు/చల్లబరుస్తుంది,cooling,చల్లబరుస్తూ,cooled,చల్లబడింది,cooled,చల్లబడి
+co-operate,పరస్పరం సహకరించుకొను,co-operates,సహకరిస్తాడు/సహకరిస్తుంది,co-operating,సహకరిస్తూ,co-operated,సహకరించాడు,co-operated,సహకరించబడి
+cope,"సమర్థంగా ఎదుర్కొను, సహకరించుకొను",copes,నిర్వహించగలడు/నిర్వహించగలదు,coping,నిర్వహించగలుగుతూ,coped,నిర్వహించగలిగాడు,cope,నిర్వహించగలిగి
+copy,నకలు,copies,కాపీ చేస్తాడు/చేస్తుంది,copying,కాపీ చేస్తూ,copied,కాపీ చేశాడు,copied,కాపీ చేయబడి
+correct,సరైన,corrects,సరిచేస్తాడు/సరిచేస్తుంది,correcting,సరిచేస్తూ,corrected,సరిచేశాడు,corrected,సరిచేయబడి
+correspond,ఒకదానికొకటి సరిపడు,corresponds,ఉత్తరప్రత్యుత్తరాలు జరుపుతాడు/జరుపుతుంది,corresponding,ఉత్తరప్రత్యుత్తరాలు జరుపుతూ,corresponded,ఉత్తరప్రత్యుత్తరాలు జరిపాడు,corresponded,ఉత్తరప్రత్యుత్తరాలు జరపబడి
+corrode,రసాయనిక చర్య ద్వారా శిథిలం చేయు,corrodes,తుప్పు పట్టిస్తుంది,corroding,తుప్పు పట్టిస్తూ,corroded,తుప్పు పట్టింది,corroded,తుప్పు పట్టి
+corrupt,అవినీతి,corrupts,అవినీతికి పాల్పడతాడు/పాల్పడుతుంది,corrupting,అవినీతికి పాల్పడుతూ,corrupted,అవినీతికి పాల్పడ్డాడు,corrupted,అవినీతికి పాల్పడి
+cost,ధర,costs,ఖరీదు అవుతుంది,costing,ఖరీదు అవుతూ,cost,ఖరీదు అయ్యింది,cost,ఖరీదు అయి
+cough,దగ్గు,coughs,దగ్గుతాడు/దగ్గుతుంది,coughing,దగ్గుతూ,coughed,దగ్గాడు,coughed,దగ్గి
+counsel,న్యాయసలహాదారు,counsels,సలహా ఇస్తాడు/ఇస్తుంది,counselling,సలహా ఇస్తూ,counselled,సలహా ఇచ్చాడు,counselled,సలహా ఇవ్వబడి
+count,లెక్కించు,counts,లెక్కిస్తాడు/లెక్కిస్తుంది,counting,లెక్కిస్తూ,counted,లెక్కించాడు,counted,లెక్కించబడి
+course,విద్యా కోర్సులు,courses,ప్రవహిస్తుంది,coursing,ప్రవహిస్తూ,coursed,ప్రవహించింది,coursed,ప్రవహించి
+cover,పైన కప్పేది,covers,కప్పుతాడు/కప్పుతుంది,covering,కప్పుతూ,covered,కప్పాడు,covered,కప్పబడి
+cower,భయంచేత వంగిపోవు,cowers,భయంతో వణుకుతాడు/వణుకుతుంది,cowering,భయంతో వణుకుతూ,cowered,భయంతో వణికిపోయాడు,cowered,భయంతో వణికి
+crack,"చీలిక,",cracks,పగులగొడతాడు/పగులగొడుతుంది,cracking,పగులగొడుతూ,cracked,పగిలింది,cracked,పగిలి
+crackle,పగులు,crackles,చిటపటలాడుతుంది,crackling,చిటపటలాడుతూ,crackled,చిటపటలాడింది,crackled,చిటపటలాడి
+crash,కుప్పకూలు,crashes,ఢీకొంటాడు/ఢీకొంటుంది,crashing,ఢీకొంటూ,crashed,ఢీకొట్టింది,crashed,ఢీకొని
+crave,కావాలనికోరు,craves,ఆరాటపడతాడు/ఆరాటపడుతుంది,craving,ఆరాటపడుతూ,craved,ఆరాటపడ్డాడు,craved,ఆరాటపడి
+create,సృష్టించు,creates,సృష్టిస్తాడు/సృష్టిస్తుంది,creating,సృష్టిస్తూ,created,సృష్టించాడు,created,సృష్టించబడి
+creep,ప్రాకు,creeps,ప్రాకుతాడు/ప్రాకుతుంది,creeping,ప్రాకుతూ,crept,ప్రాకుతూ వెళ్ళాడు,crept,ప్రాకుతూ వెళ్లి
+cross,అడ్డంగా దాటిపోవు,crosses,దాటుతాడు/దాటుతుంది,crossing,దాటుతూ,crossed,దాటాడు,crossed,దాటబడి
+crowd,జన సమూహం,crowds,రద్దీ చేస్తాడు/చేస్తుంది,crowding,రద్దీ చేస్తూ,crowded,రద్దీగా ఉంది,crowded,రద్దీగా ఉండి
+crush,నలిపివేయు,crushes,నలిపివేస్తాడు/నలిపివేస్తుంది,crushing,నలిపివేస్తూ,crushed,నలిగిపోయింది,crushed,నలిగిపోయి
+cry,ఏడ్చు,cries,ఏడుస్తాడు/ఏడుస్తుంది,crying,ఏడుస్తూ,cried,ఏడ్చాడు,cried,ఏడ్చి
+curb,అదుపులో పెట్టు,curbs,అరికడతాడు/అరికడుతుంది,curbing,అరికడుతూ,curbed,అరికట్టాడు,curbed,అరికట్టబడి
+cure,నయం చేయు,cures,నయం చేస్తాడు/చేస్తుంది,curing,నయం చేస్తూ,cured,నయం చేశాడు,cured,నయం చేయబడి
+curve,వక్ర రేఖ,curves,వంకరగా తిరుగుతాడు/తిరుగుతుంది,curving,వంకరగా తిరుగుతూ,curved,వంగింది,curved,వంగి
+cut,కత్తిరించు,cuts,కోస్తాడు/కోస్తుంది,cutting,కోస్తూ,cut,కోశాడు,cut,కోయబడి
+cycle,చక్రం,cycles,సైకిల్ తొక్కుతాడు/తొక్కుతుంది,cycling,సైకిల్ తొక్కుతూ,cycled,సైకిల్ తొక్కాడు,cycled,సైకిల్ తొక్కబడి
+damage,నష్టం జరగటం,damages,నష్టపరుస్తాడు/నష్టపరుస్తుంది,damaging,నష్టపరుస్తూ,damaged,నష్టపరిచాడు,damaged,నష్టపరచబడి
+damp,నీటి ఆవిరితో కూడిన,damps,తేమగా చేస్తాడు/చేస్తుంది,damping,తేమగా చేస్తూ,damped,తేమగా చేశాడు,damped,తేమగా చేయబడి
+dance,నృత్యం,dances,నాట్యం చేస్తాడు/చేస్తుంది,dancing,నాట్యం చేస్తూ,danced,నాట్యం చేశాడు,danced,నాట్యం చేయబడి
+dare,ధైర్యం కలిగిఉండుట,dares,ధైర్యం చేస్తాడు/చేస్తుంది,daring,ధైర్యం చేస్తూ,dared,ధైర్యం చేశాడు,dared,ధైర్యం చేయబడి
+dash,బలంగా విసిరివేయు,dashes,వేగంగా వెళ్తాడు/వెళ్తుంది,dashing,వేగంగా వెళ్తూ,dashed,వేగంగా వెళ్ళాడు,dashed,వేగంగా వెళ్లి
+dazzle,సమ్మోహనం,dazzles,కళ్లు చెదిరేలా చేస్తాడు/చేస్తుంది,dazzling,కళ్లు చెదిరేలా చేస్తూ,dazzled,కళ్లు చెదిరిపోయాయి,dazzled,కళ్లు చెదిరి
+deal,ఒప్పందం,deals,వ్యవహరిస్తాడు/వ్యవహరిస్తుంది,dealing,వ్యవహరిస్తూ,dealt,వ్యవహరించాడు,dealt,వ్యవహరించబడి
+decay,పాడవటం,decays,క్షీణిస్తుంది,decaying,క్షీణిస్తూ,decayed,క్షీణించింది,decayed,క్షీణించి
+decide,"నిర్ణయించు, తీర్మానించు",decides,నిర్ణయించుకుంటాడు/నిర్ణయించుకుంటుంది,deciding,నిర్ణయించుకుంటూ,decided,నిర్ణయించుకున్నాడు,decided,నిర్ణయించబడి
+declare,"చాటించు, తెలియజేయు",declares,ప్రకటిస్తాడు/ప్రకటిస్తుంది,declaring,ప్రకటిస్తూ,declared,ప్రకటించాడు,declared,ప్రకటించబడి
+decorate,అలంకరించు,decorates,అలంకరిస్తాడు/అలంకరిస్తుంది,decorating,అలంకరిస్తూ,decorated,అలంకరించాడు,decorated,అలంకరించబడి
+decrease,క్షీణించు,decreases,తగ్గిస్తాడు/తగ్గిస్తుంది,decreasing,తగ్గిస్తూ,decreased,తగ్గింది,decreased,తగ్గి
+dedicate,అంకితం చేయు,dedicates,అంకితం చేస్తాడు/చేస్తుంది,dedicating,అంకితం చేస్తూ,dedicated,అంకితం చేశాడు,dedicated,అంకితం చేయబడి
+delay,"ఆలస్యం చేయు, వాయుదా వేయు",delays,ఆలస్యం చేస్తాడు/చేస్తుంది,delaying,ఆలస్యం చేస్తూ,delayed,ఆలస్యం చేశాడు,delayed,ఆలస్యం చేయబడి
+delete,తొలగించు,deletes,తొలగిస్తాడు/తొలగిస్తుంది,deleting,తొలగిస్తూ,deleted,తొలగించాడు,deleted,తొలగించబడి
+deny,నిరాకరించు,denies,నిరాకరిస్తాడు/నిరాకరిస్తుంది,denying,నిరాకరిస్తూ,denied,నిరాకరించాడు,denied,నిరాకరించబడి
+depend,ఆధారపడియుండు,depends,ఆధారపడతాడు/ఆధారపడుతుంది,depending,ఆధారపడుతూ,depended,ఆధారపడ్డాడు,depended,ఆధారపడి
+deprive,వంచించు,deprives,కోల్పోయేలా చేస్తాడు/చేస్తుంది,depriving,కోల్పోయేలా చేస్తూ,deprived,కోల్పోయాడు,deprived,కోల్పోయి
+derive,"పొందు, ఉత్పన్నం చేయు",derives,ఉత్పన్నమవుతుంది,deriving,ఉత్పన్నమవుతూ,derived,ఉత్పన్నమైంది,derived,ఉత్పన్నమై
+describe,వర్ణించుట,describes,వర్ణిస్తాడు/వర్ణిస్తుంది,describing,వర్ణిస్తూ,described,వర్ణించాడు,described,వర్ణించబడి
+desire,కోరుకొను,desires,కోరుకుంటాడు/కోరుకుంటుంది,desiring,కోరుకుంటూ,desired,కోరుకున్నాడు,desired,కోరబడి
+destroy,నాశనము చేయు,destroys,నాశనం చేస్తాడు/చేస్తుంది,destroying,నాశనం చేస్తూ,destroyed,నాశనం చేశాడు,destroyed,నాశనం చేయబడి
+detach,వేరుచేయు,detaches,వేరు చేస్తాడు/చేస్తుంది,detaching,వేరు చేస్తూ,detached,వేరు చేశాడు,detached,వేరు చేయబడి
+detect,వాస్తవాలను కనిపెట్టు,detects,గుర్తిస్తాడు/గుర్తిస్తుంది,detecting,గుర్తిస్తూ,detected,గుర్తించాడు,detected,గుర్తించబడి
+determine,కచ్చితంగా తెలుసుకొను,determines,నిర్ణయిస్తాడు/నిర్ణయిస్తుంది,determining,నిర్ణయిస్తూ,determined,నిర్ణయించుకున్నాడు,determined,నిర్ణయించబడి
+develop,అభివృద్ధిచేయు,develops,అభివృద్ధి చేస్తాడు/చేస్తుంది,developing,అభివృద్ధి చేస్తూ,developed,అభివృద్ధి చెందాడు,developed,అభివృద్ధి చెంది
+die,చనిపోవటం,dies,చనిపోతాడు/చనిపోతుంది,dying,చనిపోతూ,died,చనిపోయాడు,died,చనిపోయి
+differ,వేరే విధంగా ఉండు,differs,విభేదిస్తాడు/విభేదిస్తుంది,differing,విభేదిస్తూ,differed,విభేదించాడు,differed,విభేదించి
+dig,తవ్వుట,digs,త్రవ్వుతాడు/త్రవ్వుతుంది,digging,త్రవ్వుతూ,dug,త్రవ్వాడు,dug,త్రవ్వబడి
+digest,జీర్ణించు,digests,జీర్ణం చేసుకుంటాడు/చేసుకుంటుంది,digesting,జీర్ణం చేసుకుంటూ,digested,జీర్ణమైంది,digested,జీర్ణమై
+dim,ప్రకాశంలేని,dims,మసకబారుస్తాడు/మసకబారుస్తుంది,dimming,మసకబారుస్తూ,dimmed,మసకబారింది,dimmed,మసకబారి
+diminish,తక్కువజేయు,diminishes,తగ్గిస్తాడు/తగ్గిస్తుంది,diminishing,తగ్గిస్తూ,diminished,తగ్గిపోయింది,diminished,తగ్గిపోయి
+dine,భోజనం చేయు,dines,భోజనం చేస్తాడు/చేస్తుంది,dining,భోజనం చేస్తూ,dined,భోజనం చేశాడు,dined,భోజనం చేసి
+dip,నీటిలో ముంచి పైకి ఎత్తు,dips,ముంచుతాడు/ముంచుతుంది,dipping,ముంచుతూ,dipped,ముంచాడు,dipped,ముంచబడి
+direct,నిర్దేశించు,directs,దర్శకత్వం వహిస్తాడు/వహిస్తుంది,directing,దర్శకత్వం వహిస్తూ,directed,దర్శకత్వం వహించాడు,directed,దర్శకత్వం వహించబడి
+disappear,అదృశ్యమవడం,disappears,అదృశ్యమవుతాడు/అదృశ్యమవుతుంది,disappearing,అదృశ్యమవుతూ,disappeared,అదృశ్యమయ్యాడు,disappeared,అదృశ్యమై
+discover,కనుగొనుట,discovers,కనుగొంటాడు/కనుగొంటుంది,discovering,కనుగొంటూ,discovered,కనుగొన్నాడు,discovered,కనుగొనబడి
+discuss,వివిధ ధృక్కోణాల నుంచి పరిశీలించు,discusses,చర్చిస్తాడు/చర్చీస్తుంది,discussing,చర్చిస్తూ,discussed,చర్చించాడు,discussed,చర్చించబడి
+disobey,నిరాకరించు,disobeys,అవిధేయత చూపుతాడు/చూపుతుంది,disobeying,అవిధేయత చూపుతూ,disobeyed,అవిధేయత చూపాడు,disobeyed,అవిధేయత చూపబడి
+display,ప్రదర్శించు,displays,ప్రదర్శిస్తాడు/ప్రదర్శిస్తుంది,displaying,ప్రదర్శిస్తూ,displayed,ప్రదర్శించాడు,displayed,ప్రదర్శించబడి
+dispose,పారవేయాలని,disposes,పారవేస్తాడు/పారవేస్తుంది,disposing,పారవేస్తూ,disposed,పారవేశాడు,disposed,పారవేయబడి
+distribute,పంపిణీ,distributes,పంపిణీ చేస్తాడు/చేస్తుంది,distributing,పంపిణీ చేస్తూ,distributed,పంపిణీ చేశాడు,distributed,పంపిణీ చేయబడి
+disturb,భగ్నపరచు,disturbs,అంతరాయం కలిగిస్తాడు/కలిగిస్తుంది,disturbing,అంతరాయం కలిగిస్తూ,disturbed,అంతరాయం కలిగించాడు,disturbed,అంతరాయం కలిగించబడి
+disuse,ఉపయోగంలో లేని స్థితి,disuses,వాడకం మానేస్తాడు/మానేస్తుంది,disusing,వాడకం మానేస్తూ,disused,వాడకం మానేశాడు,disused,వాడకం మానేయబడి
+dive,దూకు,dives,మునుగుతాడు/మునుగుతుంది,diving,మునుగుతూ,dived,మునిగాడు,dived,మునిగి
+divide,విభజన,divides,విభజిస్తాడు/విభజిస్తుంది,dividing,విభజిస్తూ,divided,విభజించాడు,divided,విభజించబడి
+do,చేయు,does,చేస్తాడు/చేస్తుంది,doing,చేస్తూ,did,చేశాడు,done,చేయబడి
+donate,దానం,donates,దానం చేస్తాడు/చేస్తుంది,donating,దానం చేస్తూ,donated,దానం చేశాడు,donated,దానం చేయబడి
+download,డౌన్లోడ్ చేయు,downloads,డౌన్‌లోడ్ చేస్తాడు/చేస్తుంది,downloading,డౌన్‌లోడ్ చేస్తూ,downloaded,డౌన్‌లోడ్ చేశాడు,downloaded,డౌన్‌లోడ్ చేయబడి
+drag,లాగు,drags,లాగుతాడు/లాగుతుంది,dragging,లాగుతూ,dragged,లాగాడు,dragged,లాగబడి
+draw,"వేయు, ఆకర్షించు",draws,గీస్తాడు/గీస్తుంది,drawing,గీస్తూ,drew,గీశాడు,drawn,గీయబడి
+dream,కలగను,dreams,కల కంటాడు/కంటుంది,dreaming,కల కంటూ,dreamt,కల కన్నాడు,dreamt,కల కనబడి
+dress,తొడుగు,dresses,బట్టలు ధరిస్తాడు/ధరిస్తుంది,dressing,బట్టలు ధరిస్తూ,dressed,బట్టలు ధరించాడు,dressed,బట్టలు ధరించి
+drill,బెజ్జం వెయ్యి,drills,రంధ్రం చేస్తాడు/చేస్తుంది,drilling,రంధ్రం చేస్తూ,drilled,రంధ్రం చేశాడు,drilled,రంధ్రం చేయబడి
+drink,తాగు,drinks,తాగుతాడు/తాగుతుంది,drinking,తాగుతూ,drank,తాగాడు,drunk,తాగబడి
+drive,"నడుపు, తోలు",drives,నడుపుతాడు/నడుపుతుంది,driving,నడుపుతూ,drove,నడిపాడు,driven,నడపబడి
+drop,జారవిడుచుట,drops,కింద పడేస్తాడు/పడేస్తుంది,dropping,కింద పడేస్తూ,dropped,కింద పడేశాడు,dropped,కింద పడవేయబడి
+dry,ఆరబెట్టుట,dries,ఆరబెడతాడు/ఆరబెడుతుంది,drying,ఆరబెడుతూ,dried,ఎండిపోయింది,dried,ఎండిపోయి
+dump,పోగుగా పడవేయు,dumps,పారవేస్తాడు/పారవేస్తుంది,dumping,పారవేస్తూ,dumped,పారవేశాడు,dumped,పారవేయబడి
+dwell,నివసించు,dwells,నివసిస్తాడు/నివసిస్తుంది,dwelling,నివసిస్తూ,dwelt,నివసించాడు,dwelt,నివసించి
+dye,రంగువేయు,dyes,రంగు వేస్తాడు/వేస్తుంది,dyeing,రంగు వేస్తూ,dyed,రంగు వేశాడు,dyed,రంగు వేయబడి
+earn,సంపాదించు,earns,సంపాదిస్తాడు/సంపాదిస్తుంది,earning,సంపాదిస్తూ,earned,సంపాదించాడు,earned,సంపాదించబడి
+eat,తిను,eats,తింటాడు/తింటుంది,eating,తింటూ,ate,తిన్నాడు,eaten,తినబడి
+educate,"తెలుసుకొను, చదువుకొను",educates,చదువు చెప్తాడు/చెప్తుంది,educating,చదువు చెప్తూ,educated,చదువు చెప్పాడు,educated,చదువు చెప్పబడి
+empower,అధికారం,empowers,అధికారం ఇస్తాడు/ఇస్తుంది,empowering,అధికారం ఇస్తూ,empowered,అధికారం ఇచ్చాడు,empowered,అధికారం ఇవ్వబడి
+empty,ఏమీ లేకుండా చేయి,empties,ఖాళీ చేస్తాడు/చేస్తుంది,emptying,ఖాళీ చేస్తూ,emptied,ఖాళీ చేశాడు,emptied,ఖాళీ చేయబడి
+encircle,చుట్టుముట్టు,encircles,చుట్టుముడతాడు/చుట్టుముడుతుంది,encircling,చుట్టుముడుతూ,encircled,చుట్టుముట్టాడు,encircled,చుట్టుముట్టబడి
+encourage,ప్రోత్సహించు,encourages,ప్రోత్సహిస్తాడు/ప్రోత్సహిస్తుంది,encouraging,ప్రోత్సహిస్తూ,encouraged,ప్రోత్సహించాడు,encouraged,ప్రోత్సహించబడి
+encroach,ఆక్రమించు,encroaches,ఆక్రమిస్తాడు/ఆక్రమిస్తుంది,encroaching,ఆక్రమిస్తూ,encroached,ఆక్రమించాడు,encroached,ఆక్రమించబడి
+endanger,అపాయం లోనికి వెళ్ళు,endangers,ప్రమాదంలో పడేస్తాడు/పడేస్తుంది,entangling,చిక్కుల్లో పడేస్తూ,endangered,ప్రమాదంలో పడేశాడు,endangered,ప్రమాదంలో పడవేయబడి
+endorse,ఆమోదించు,endorses,ఆమోదిస్తాడు/ఆమోదిస్తుంది,endorsing,ఆమోదిస్తూ,endorsed,ఆమోదించాడు,endorsed,ఆమోదించబడి
+endure,ఓర్చుకో,endures,సహిస్తాడు/సహిస్తుంది,enduring,సహిస్తూ,endured,సహించాడు,endured,సహించబడి
+engrave,మలచు,engraves,చెక్కుతాడు/చెక్కుతుంది,engraving,చెక్కుతూ,engraved,చెక్కబడింది,engraved,చెక్కబడి
+enjoy,ఆనందించు,enjoys,ఆనందిస్తాడు/ఆనందిస్తుంది,enjoying,ఆనందిస్తూ,enjoyed,ఆనందించాడు,enjoyed,ఆనందించబడి
+enlarge,పెద్దది చేయు,enlarges,పెద్దది చేస్తాడు/చేస్తుంది,enlarging,పెద్దది చేస్తూ,enlarged,పెద్దది చేశాడు,enlarged,పెద్దది చేయబడి
+enlighten,జ్ఞానం కలిగించు,enlightens,జ్ఞానోదయం కలిగిస్తాడు/కలిగిస్తుంది,enlightening,జ్ఞానోదయం కలిగిస్తూ,enlightened,జ్ఞానోదయం కలిగించాడు,enlightened,జ్ఞానోదయం కలిగి
+enter,ప్రవేశించు,enters,ప్రవేశిస్తాడు/ప్రవేశిస్తుంది,entering,ప్రవేశిస్తూ,entered,ప్రవేశించాడు,entered,ప్రవేశించి
+envy,"అసూయ, కడుపుమంట",envies,అసూయపడతాడు/అసూయపడుతుంది,envying,అసూయపడుతూ,envied,అసూయపడ్డాడు,envied,అసూయపడబడి
+erase,తుడుచు,erases,తుడిచివేస్తాడు/తుడిచివేస్తుంది,erasing,తుడిచివేస్తూ,erased,తుడిచివేశాడు,erased,తుడిచివేయబడి
+escape,తప్పించుకొని,escapes,తప్పించుకుంటాడు/తప్పించుకుంటుంది,escaping,తప్పించుకుంటూ,escaped,తప్పించుకున్నాడు,escaped,తప్పించుకొని
+evaporate,ఆవిరవ్వు,evaporates,ఆవిరవుతుంది,evaporating,ఆవిరవుతూ,evaporated,ఆవిరైపోయింది,evaporated,ఆవిరైపోయి
+exchange,"వినిమయం, బదులుగా ఇవ్వు",exchanges,మార్చుకుంటాడు/మార్చుకుంటుంది,exchanging,మార్చుకుంటూ,exchanged,మార్చుకున్నాడు,exchanged,మార్చుకోబడి
+exclaim,ఆశ్చర్యపడు,exclaims,ఆశ్చర్యపోతాడు/ఆశ్చర్యపోతుంది,exclaiming,ఆశ్చర్యపోతూ,exclaimed,ఆశ్చర్యపోయాడు,exclaimed,ఆశ్చర్యపోయి
+exclude,మినహాయించు,excludes,మినహాయిస్తాడు/మినహాయిస్తుంది,excluding,మినహాయిస్తూ,excluded,మినహాయించాడు,excluded,మినహాయించబడి
+exist,"జీవించు, ఉండు",exists,ఉనికిలో ఉంటుంది,existing,ఉనికిలో ఉంటూ,existed,ఉనికిలో ఉంది,existed,ఉనికిలో ఉండి
+expand,విస్తరించు,expands,విస్తరిస్తాడు/విస్తరిస్తుంది,expanding,విస్తరిస్తూ,expanded,విస్తరించాడు,expanded,విస్తరించబడి
+expect,ఆశించు,expects,ఆశిస్తాడు/ఆశిస్తుంది,expecting,ఆశిస్తూ,expected,ఆశించాడు,expected,ఆశించబడి
+explain,వివరించు,explains,వివరిస్తాడు/వివరిస్తుంది,explaining,వివరిస్తూ,explained,వివరించాడు,explained,వివరించబడి
+explore,"శోధించు, వెదుకు",explores,అన్వేషిస్తాడు/అన్వేషిస్తుంది,exploring,అన్వేషిస్తూ,explored,అన్వేషించాడు,explored,అన్వేషించబడి
+express,వ్యక్తపరచు,expresses,వ్యక్తం చేస్తాడు/చేస్తుంది,expressing,వ్యక్తం చేస్తూ,expressed,వ్యక్తం చేశాడు,expressed,వ్యక్తం చేయబడి
+extend,పొడిగించు,extends,పొడిగిస్తాడు/పొడిగిస్తుంది,extending,పొడిగిస్తూ,extended,పొడిగించాడు,extended,పొడిగించబడి
+eye,కనిపెట్టుట,eyes,చూస్తాడు/చూస్తుంది,eyeing,చూస్తూ,eyed,చూశాడు,eyed,చూడబడి
+face,ఎదుర్కొను,faces,ఎదుర్కొంటాడు/ఎదుర్కొంటుంది,facing,ఎదుర్కొంటూ,faced,ఎదుర్కొన్నాడు,faced,ఎదుర్కోబడి
+fail,"తప్పుట, ఓడు",fails,విఫలమవుతాడు/విఫలమవుతుంది,failing,విఫలమవుతూ,failed,విఫలమయ్యాడు,failed,విఫలమై
+faint,మూర్ఛపోవుట,faints,కళ్ళు తిరిగి పడిపోతాడు/పడిపోతుంది,fainting,కళ్ళు తిరిగి పడిపోతూ,fainted,కళ్ళు తిరిగి పడిపోయాడు,fainted,కళ్ళు తిరిగి పడిపోయి
+fall,పడుట,falls,పడిపోతాడు/పడిపోతుంది,falling,పడిపోతూ,fell,పడిపోయాడు,fallen,పడిపోయి
+fan,విసురుట,fans,గాలి విసురుతాడు/విసురుతుంది,fanning,గాలి విసురుతూ,fanned,గాలి విసిరాడు,fanned,గాలి విసరబడి
+fancy,"ఆశించుట, తలచుట",fancies,ఊహిస్తాడు/ఊహిస్తుంది,fancying,ఊహిస్తూ,fancied,ఊహించాడు,fancied,ఊహించబడి
+favour,ఆదరించుట,favours,అనుకూలిస్తాడు/అనుకూలిస్తుంది,favouring,అనుకూలిస్తూ,favoured,అనుకూలించాడు,favoured,అనుకూలించబడి
+feed,తినిపించు,feeds,తినిపిస్తాడు/తినిపిస్తుంది,feeding,తినిపిస్తూ,fed,తినిపించాడు,fed,తినిపించబడి
+feel,"అనుభవించు, స్పర్శించుట",feels,అనిపిస్తుంది,feeling,అనిపిస్తూ,felt,అనిపించింది,felt,అనిపించి
+ferry,పుట్టి,ferries,దాటిస్తాడు/దాటిస్తుంది,ferrying,దాటిస్తూ,ferried,దాటించాడు,ferried,దాటించబడి
+fetch,"తీసుకొని వచ్చు, పోయి తేచ్చు",fetches,తీసుకువస్తాడు/తీసుకువస్తుంది,fetching,తీసుకువస్తూ,fetched,తీసుకువచ్చాడు,fetched,తీసుకురాబడి
+fight,"యుద్ధముచేసుట, యుద్ధముచేసుట",fights,పోరాడుతాడు/పోరాడుతుంది,fighting,పోరాడుతూ,fought,పోరాడాడు,fought,పోరాడబడి
+fill,నింపు,fills,నింపుతాడు/నింపుతుంది,filling,నింపుతూ,filled,నింపాడు,filled,నింపబడి
+find,కనుగొను,finds,కనుగొంటాడు/కనుగొంటుంది,finding,కనుగొంటూ,found,కనుగొన్నాడు,found,కనుగొనబడి
+finish,"సమాప్తి చేయు, ముగించు",finishes,పూర్తి చేస్తాడు/చేస్తుంది,finishing,పూర్తి చేస్తూ,finished,పూర్తి చేశాడు,finished,పూర్తి చేయబడి
+fit,"అమర్చుట, కుదుర్చుట",fits,సరిపోతుంది,fitting,సరిపోతూ,fit/fitted,సరిపోయింది,fit/fitted,సరిపోయి
+fix,మరమ్మత్తు చేయు,fixes,సరిచేస్తాడు/సరిచేస్తుంది,fixing,సరిచేస్తూ,fixed,సరిచేశాడు,fixed,సరిచేయబడి
+flap,దళము,flaps,రెక్కలు ఆడిస్తాడు/ఆడిస్తుంది,flapping,రెక్కలు ఆడిస్తూ,flapped,రెక్కలు ఆరించాడు,flapped,రెక్కలు ఆరించబడి
+flash,"తళుక్కుమనుట, మెరుపు",flashes,మెరుస్తాడు/మెరుస్తుంది,flashing,మెరుస్తూ,flashed,మెరిసింది,flashed,మెరిసి
+flee,పారిపోవు,flees,పారిపోతాడు/పారిపోతుంది,fleeing,పారిపోతూ,fled,పారిపోయాడు,fled,పారిపోయి
+fling,విసిరివేయు,flings,విసురుతాడు/విసురుతుంది,flinging,విసురుతూ,flung,విసిరాడు,flung,విసరబడి
+float,తేలుచు పోవు,floats,తేలుతాడు/తేలుతుంది,floating,తేలుతూ,floated,తేలింది,floated,తేలి
+flop,"ఆడించు, ఱెక్కలు కొట్టుకొను",flops,విఫలమవుతాడు/విఫలమవుతుంది,flopping,విఫలమవుతూ,flopped,విఫలమైంది,flopped,విఫలమై
+fly,ఎగురు,flies,ఎగురుతాడు/ఎగురుతుంది,flying,ఎగురుతూ,flew,ఎగిరింది,flown,ఎగిరి
+fold,మడత,folds,మడతపెడతాడు/మడతపెడుతుంది,folding,మడతపెడుతూ,folded,మడతపెట్టాడు,folded,మడతపెట్టబడి
+follow,వెంబడించు,follows,అనుసరిస్తాడు/అనుసరిస్తుంది,following,అనుసరిస్తూ,followed,అనుసరించాడు,followed,అనుసరించబడి
+forbid,"హద్దులలోపెట్టు, నిషేధించు",forbids,నిషేధిస్తాడు/నిషేధిస్తుంది,forbidding,నిషేధిస్తూ,forbade,నిషేధించాడు,forbidden,నిషేధించబడి
+force,బలము,forces,బలవంతం చేస్తాడు/చేస్తుంది,forcing,బలవంతం చేస్తూ,forced,బలవంతం చేశాడు,forced,బలవంతం చేయబడి
+forecast,ముందు జాగ్రత్త,forecasts,అంచనా వేస్తాడు/వేస్తుంది,forecasting,అంచనా వేస్తూ,forecast,అంచనా వేశాడు,forecast,అంచనా వేయబడి
+foretell,భవిష్యత్తును చెప్పు,foretells,ముందే చెప్తాడు/చెప్తుంది,foretelling,ముందే చెప్తూ,foretold,ముందే చెప్పాడు,foretold,ముందే చెప్పబడి
+forget,మర్చిపోవుట,forgets,మర్చిపోతాడు/మర్చిపోతుంది,forgetting,మర్చిపోతూ,forgot,మర్చిపోయాడు,forgotten,మర్చిపోబడి
+forgive,క్షమించుట,forgives,క్షమిస్తాడు/క్షమిస్తుంది,forgiving,క్షమిస్తూ,forgave,క్షమించాడు,forgiven,క్షమించబడి
+form,"క్రమపరుచుట, యేర్పడుట",forms,ఏర్పరుస్తాడు/ఏర్పరుస్తుంది,forming,ఏర్పరుస్తూ,formed,ఏర్పడింది,formed,ఏర్పడి
+forsake,త్యజించు,forsakes,వదిలిపెడతాడు/వదిలిపెడుతుంది,forsaking,వదిలిపెడుతూ,forsook,వదిలిపెట్టాడు,forsaken,వదిలిపెట్టబడి
+found,"నిర్మించుట, స్థాపించుట",founds,స్థాపిస్తాడు/స్థాపిస్తుంది,founding,స్థాపిస్తూ,founded,స్థాపించాడు,founded,స్థాపించబడి
+frame,"ఏర్పరుచు, సృష్టించు",frames,నిర్మిస్తాడు/నిర్మిస్తుంది,framing,నిర్మిస్తూ,framed,నిర్మించాడు,framed,నిర్మించబడి
+free,"వదులు, విడిపించుట",frees,విడుదల చేస్తాడు/చేస్తుంది,freeing,విడుదల చేస్తూ,freed,విడుదల చేశాడు,freed,విడుదల చేయబడి
+freeze,గడ్డకట్టు,freezes,గడ్డకట్టిస్తాడు/గడ్డకట్టిస్తుంది,freezing,గడ్డకట్టిస్తూ,froze,గడ్డకట్టింది,frozen,గడ్డకట్టి
+frighten,"భయపెట్టుట, బెదిరించుట",frightens,భయపెడతాడు/భయపెడుతుంది,frightening,భయపెడుతూ,frightened,భయపెట్టాడు,frightened,భయపెట్టబడి
+fry,వేపు,fries,వేయించుతాడు/వేయించుతుంది,frying,వేయించుతూ,fried,వేయించాడు,fried,వేయించబడి
+fulfil,నెరవేర్చుట,fulfils,నెరవేరుస్తాడు/నెరవేరుస్తుంది,fulfilling,నెరవేరుస్తూ,fulfilled,నెరవేర్చాడు,fulfilled,నెరవేర్చబడి
+gag,నోటిలో కుక్కే బట్టముక్క,gags,నోరు మూస్తాడు/మూస్తుంది,gagging,నోరు మూస్తూ,gagged,నోరు మూశాడు,gagged,నోరు మూయబడి
+gain,పెరుగుట,gains,పొందుతాడు/పొందుతుంది,gaining,పొందుతూ,gained,పొందాడు,gained,పొందబడి
+gainsay,తిరస్కరించు,gainsays,వ్యతిరేకిస్తాడు/వ్యతిరేకిస్తుంది,gainsaying,వ్యతిరేకిస్తూ,gainsaid,వ్యతిరేకించాడు,gainsaid,వ్యతిరేకించబడి
+gash,గీచుట,gashes,గాయం చేస్తాడు/చేస్తుంది,gashing,గాయం చేస్తూ,gashed,గాయం చేశాడు,gashed,గాయం చేయబడి
+gaze,తదేకంగాచూచు,gazes,చూస్తూ ఉండిపోతాడు/ఉండిపోతుంది,gazing,చూస్తూ ఉండిపోతూ,gazed,చూస్తూ ఉండిపోయాడు,gazed,చూస్తూ ఉండిపోయి
+get,లభించిన,gets,పొందుతాడు/పొందుతుంది,getting,పొందుతూ,got,పొందాడు,got,పొందబడి
+give,ఇవ్వు,gives,ఇస్తాడు/ఇస్తుంది,giving,ఇస్తూ,gave,ఇచ్చాడు,given,ఇవ్వబడి
+glance,క్షణకాలపు చూపు,glances,చూపు విసురుతాడు/విసురుతుంది,glancing,చూపు విసురుతూ,glanced,చూపు విసిరాడు,glanced,చూపు విసరబడి
+glitter,"మెరుస్తున్న, తళతళలాడుట",glitters,మెరుస్తుంది,glittering,మెరుస్తూ,glittered,మెరిసింది,glittered,మెరిసి
+glow,ప్రకాశించుట,glows,ప్రకాశిస్తుంది,glowing,ప్రకాశిస్తూ,glowed,ప్రకాశించింది,glowed,ప్రకాశించి
+go,వెళ్ళు,goes,వెళ్తాడు/వెళ్తుంది,going,వెళ్తూ,went,వెళ్ళాడు,gone,వెళ్లి
+Google,వెతుకు,googles,గూగుల్ చేస్తాడు/చేస్తుంది,googling,గూగుల్ చేస్తూ,googled,గూగుల్ చేశాడు,googled,గూగుల్ చేయబడి
+govern,పరిపాలించు,governs,పాలిస్తాడు/పాలిస్తుంది,governing,పాలిస్తూ,governed,పాలించాడు,governed,పాలించబడి
+grab,"అపహరించు, అందుకోవడం",grabs,పట్టుకుంటాడు/పట్టుకుంటుంది,grabbing,పట్టుకుంటూ,grabbed,పట్టుకున్నాడు,grabbed,పట్టుకోబడి
+grade,శ్రేణి,grades,గ్రేడ్ ఇస్తాడు/ఇస్తుంది,grading,గ్రేడ్ ఇస్తూ,graded,గ్రేడ్ ఇచ్చాడు,graded,గ్రేడ్ ఇవ్వబడి
+grant,అడిగినది ఇచ్చు,grants,మంజూరు చేస్తాడు/చేస్తుంది,granting,మంజూరు చేస్తూ,granted,మంజూరు చేశాడు,granted,మంజూరు చేయబడి
+greet,మర్యాద పూర్వకంగా పలకరించు,greets,అభినందిస్తాడు/అభినందిస్తుంది,greeting,అభినందిస్తూ,greeted,అభినందించాడు,greeted,అభినందించబడి
+grind,రుబ్బు,grinds,నూరుతాడు/నూరుతుంది,grinding,నూరుతూ,ground,నలిగాడు,ground,నలగబడి
+grip,పట్టు,grips,పట్టుకుంటాడు/పట్టుకుంటుంది,gripping,పట్టుకుంటూ,gripped,పట్టుకున్నాడు,gripped,పట్టుకోబడి
+grow,పెరుగు,grows,పెరుగుతాడు/పెరుగుతుంది,growing,పెరుగుతూ,grew,పెరిగాడు,grown,పెరిగి
+guard,కాపలాకాయు,guards,కాపలా కాస్తాడు/కాస్తుంది,guarding,కాపలా కాస్తూ,guarded,కాపలా కాశాడు,guarded,కాపలా కాయబడి
+guess,అనుకొను,guesses,ఊహిస్తాడు/ఊహిస్తుంది,guessing,ఊహిస్తూ,guessed,ఊహించాడు,guessed,ఊహించబడి
+guide,దారిచూపు,guides,మార్గనిర్దేశం చేస్తాడు/చేస్తుంది,guiding,మార్గనిర్దేశం చేస్తూ,guided,మార్గనిర్దేశం చేశాడు,guided,మార్గనిర్దేశం చేయబడి
+handle,నిర్వహించు,handles,నిర్వహిస్తాడు/నిర్వహిస్తుంది,handling,నిర్వహిస్తూ,handled,నిర్వహించాడు,handled,నిర్వహించబడి
+hang,వేలదీచుట,hangs,వేలాడదీస్తాడు/వేలాడదీస్తుంది,hanging,వేలాడదీస్తూ,hung,వేలాడదీశాడు,hung,వేలాడదీయబడి
+happen,సంభవించుట,happens,జరుగుతుంది,happening,జరుగుతూ,happened,జరిగింది,happened,జరిగి
+harm,హాని,harms,హాని చేస్తాడు/చేస్తుంది,harming,హాని చేస్తూ,harmed,హాని చేశాడు,harmed,హాని చేయబడి
+hatch,పొదుగుడు,hatches,పొదుగుతాడు/పొదుగుతుంది,hatching,పొదుగుతూ,hatched,పొదిగింది,hatched,పొదగబడి
+hate,ద్వేషించు,hates,ద్వేషిస్తాడు/ద్వేషిస్తుంది,hating,ద్వేషిస్తూ,hated,ద్వేషించాడు,hated,ద్వేషించబడి
+have,కలిగివుండుట,has,కలిగి ఉంటాడు/ఉంటుంది,having,కలిగి ఉంటూ,had,కలిగి ఉన్నాడు,had,కలిగి ఉండి
+heal,మానుట,heals,నయం చేస్తాడు/చేస్తుంది,healing,నయం చేస్తూ,healed,నయమైంది,healed,నయమై
+hear,"విను, ఆలకించు",hears,వింటాడు/వింటుంది,hearing,వింటూ,heard,వినబడింది,heard,వినబడి
+heave,లాగు,heaves,ఎత్తుతాడు/ఎత్తుతుంది,heaving,ఎత్తుతూ,hove,వేగంగా కదిలాడు,hove,వేగంగా కదిలి
+help,సాయము చేయు,helps,సహాయం చేస్తాడు/చేస్తుంది,helping,సహాయం చేస్తూ,helped,సహాయం చేశాడు,helped,సహాయం చేయబడి
+hew,నరికివేయు,hews,నరుకుతాడు/నరుకుతుంది,hewing,నరుకుతూ,hewed,నరికాడు,hewn,నరకబడి
+hide,దాచు,hides,దాచుకుంటాడు/దాచుకుంటుంది,hiding,దాచుకుంటూ,hid,దాక్కున్నాడు,hidden,దాచబడి
+hinder,ఆటంకపరచు,hinders,ఆటంకపరుస్తాడు/ఆటంకపరుస్తుంది,hindering,ఆటంకపరుస్తూ,hindered,ఆటంకపరిచాడు,hindered,ఆటంకపరచబడి
+hiss,బుసకొట్టుట,hisses,బుస కొడుతుంది,hissing,బుస కొడుతూ,hissed,బుస కొట్టింది,hissed,బుస కొట్టబడి
+hit,కొట్టు,hits,కొడతాడు/కొడుతుంది,hitting,కొడుతూ,hit,కొట్టాడు,hit,కొట్టబడి
+hoax,మోసగించు,hoaxes,మోసం చేస్తాడు/చేస్తుంది,hoaxing,మోసం చేస్తూ,hoaxed,మోసం చేశాడు,hoaxed,మోసం చేయబడి
+hold,పట్టుకొను,holds,పట్టుకుంటాడు/పట్టుకుంటుంది,holding,పట్టుకుంటూ,held,పట్టుకున్నాడు,held,పట్టుకోబడి
+hop,కుంటుచూ దాటు,hops,గెంతుతాడు/గెంతుతుంది,hopping,గెంతుతూ,hopped,గెంతాడు,hopped,గెంతబడి
+hope,కోరుట,hopes,ఆశిస్తాడు/ఆశిస్తుంది,hoping,ఆశిస్తూ,hoped,ఆశించాడు,hoped,ఆశించబడి
+horrify,భయపరుచు,horrifies,భయపెడతాడు/భయపెడుతుంది,horrifying,భయపెడుతూ,horrified,భయపడ్డాడు,horrified,భయపడి
+hug,కౌగింలించుకొను,hugs,ఆలింగనం చేసుకుంటాడు/చేసుకుంటుంది,hugging,ఆలింగనం చేసుకుంటూ,hugged,ఆలింగనం చేసుకున్నాడు,hugged,ఆలింగనం చేసుకోబడి
+hum,ఝుంకార శబ్ధము,hums,సందడి చేస్తాడు/చేస్తుంది,humming,సందడి చేస్తూ,hummed,సందడి చేశాడు,hummed,సందడి చేయబడి
+humiliate,అవమానపరచు,humiliates,అవమానిస్తాడు/అవమానిస్తుంది,humiliating,అవమానిస్తూ,humiliated,అవమానించాడు,humiliated,అవమానించబడి
+hunt,వేటాడు,hunts,వేటాడుతాడు/వేటాడుతుంది,hunting,వేటాడుతూ,hunted,వేటాడాడు,hunted,వేటాడబడి
+hurl,చుట్టివేయు,hurls,విసురుతాడు/విసురుతుంది,hurling,విసురుతూ,hurled,విసిరాడు,hurled,విసరబడి
+hurry,త్వరితపరచు,hurries,త్వరపడతాడు/త్వరపడుతుంది,hurrying,త్వరపడుతూ,hurried,త్వరపడ్డాడు,hurried,త్వరపడి
+hurt,బాధించుట,hurts,గాయపరుస్తాడు/గాయపరుస్తుంది,hurting,గాయపరుస్తూ,hurt,గాయపడ్డాడు,hurt,గాయపడి
+hush,నిశబ్ధముగా ఉండు,hushes,నిశ్శబ్దం చేస్తాడు/చేస్తుంది,hushing,నిశ్శబ్దం చేస్తూ,hushed,నిశ్శబ్దం చేశాడు,hushed,నిశ్శబ్దం చేయబడి
+hustle,బలంతో త్రొక్కు,hustles,తోసుకువెళ్తాడు/తోసుకువెళ్తుంది,hustling,తోసుకువెళ్తూ,hustled,తోసుకువెళ్ళాడు,hustled,తోసుకువెళ్లి
+hypnotize,వశీకరించు కొనుట,hypnotizes,వశీకరణం చేస్తాడు/చేస్తుంది,hypnotizing,వశీకరణం చేస్తూ,hypnotized,వశీకరణం చేశాడు,hypnotized,వశీకరణం చేయబడి
+idealize,ఆదర్శమైన,idealizes,ఆదర్శీకరిస్తాడు/ఆదర్శీకరిస్తుంది,idealizing,ఆదర్శీకరిస్తూ,idealized,ఆదర్శీకరించాడు,idealized,ఆదర్శీకరించబడి
+identify,గుర్తించు,identifies,గుర్తిస్తాడు/గుర్తిస్తుంది,identifying,గుర్తిస్తూ,identified,గుర్తించాడు,identified,గుర్తించబడి
+idolize,దైవసమానంగా ఎంచి పూజించు,idolizes,ఆరాధిస్తాడు/ఆరాధిస్తుంది,idolizing,ఆరాధిస్తూ,idolized,ఆరాధించాడు,idolized,ఆరాధించబడి
+ignite,రగిలించు,ignites,మండుస్తాడు/మండుస్తుంది,igniting,మండుస్తూ,ignited,మండుకుంది,ignited,మండించబడి
+ignore,నిర్లక్షంచేయు,ignores,పట్టించుకోడు/పట్టించుకోదు,ignoring,పట్టించుకోకుండా,ignored,పట్టించుకోలేదు,ignored,పట్టించుకోబడక
+ill-treat,సరిగ్గా పట్టించుకోకపోవటం,ill-treats,దుర్మార్గంగా ప్రవర్తిస్తాడు/ప్రవర్తిస్తుంది,ill-treating,దుర్మార్గంగా ప్రవర్తిస్తూ,ill-treated,దుర్మార్గంగా ప్రవర్తించాడు,ill-treated,దుర్మార్గంగా ప్రవర్తించబడి
+illuminate,కాంతిని ప్రసరింపజేయు,illuminates,ప్రకాశింపజేస్తాడు/ప్రకాశింపజేస్తుంది,illuminating,ప్రకాశింపజేస్తూ,illuminated,ప్రకాశింపజేశాడు,illuminated,ప్రకాశింపజేయబడి
+illumine,ఆధ్యాత్మిక వికాసం కలిగించు,illumines,వెలిగిస్తాడు/వెలిగిస్తుంది,illumining,వెలిగిస్తూ,illumined,వెలిగించాడు,illumined,వెలిగించబడి
+illustrate,చిత్రించుట,illustrates,వివరిస్తాడు/వివరిస్తుంది,illustrating,వివరిస్తూ,illustrated,వివరించాడు,illustrated,వివరించబడి
+imagine,"అనుకొనుట, ఊహించు",imagines,ఊహిస్తాడు/ఊహిస్తుంది,imagining,ఊహిస్తూ,imagined,ఊహించాడు,imagined,ఊహించబడి
+imbibe,గ్రహించుకొనుట,imbibes,గ్రహిస్తాడు/గ్రహిస్తుంది,imbibing,గ్రహిస్తూ,imbibed,గ్రహించాడు,imbibed,గ్రహించబడి
+imitate,అనుసరించుట,imitates,అనుకరిస్తాడు/అనుకరిస్తుంది,imitating,అనుకరిస్తూ,imitated,అనుకరించాడు,imitated,అనుకరించబడి
+immerse,పూర్తిగా మునుగునట్లు ద్రవములో ముంచు,immerses,ముంచుతాడు/ముంచుతుంది,immersing,ముంచుతూ,immersed,మునిగిపోయాడు,immersed,మునిగిపోయి
+immolate,బలిఇచ్చు,immolates,బలిదానం చేస్తాడు/చేస్తుంది,immolating,బలిదానం చేస్తూ,immolated,బలిదానం చేశాడు,immolated,బలిదానం చేయబడి
+immure,బంధించి ఉంచు,immures,ఖైదు చేస్తాడు/చేస్తుంది,immuring,ఖైదు చేస్తూ,immured,ఖైదు చేశాడు,immured,ఖైదు చేయబడి
+impair,పాడు చేయు,impairs,బలహీనపరుస్తాడు/బలహీనపరుస్తుంది,impairing,బలహీనపరుస్తూ,impaired, బలహీనపరిచాడు,impaired,బలహీనపరచబడి
+impart,అందించు,imparts,అందిస్తాడు/అందిస్తుంది,imparting,అందిస్తూ,imparted,అందించాడు,imparted,అందించబడి
+impeach,నేరమారోపించు,impeaches,అభిశంసిస్తాడు/అభిశంసిస్తుంది,impeaching,అభిశంసిస్తూ,impeached,అభిశంసించాడు,impeached,అభిశంసించబడి
+impede,అవరోదం కలిగించు,impedes,ఆటంకపరుస్తాడు/ఆటంకపరుస్తుంది,impeding,ఆటంకపరుస్తూ,impeded,ఆటంకపరిచాడు,impeded,ఆటంకపరచబడి
+impel,చలనం కలిగించు,impels,ప్రేరేపిస్తాడు/ప్రేరేపిస్తుంది,impelling,ప్రేరేపిస్తూ,impelled,ప్రేరేపించాడు,impelled,ప్రేరేపించబడి
+impend,భయం కలిగించుచున్న,impends,ఆసన్నమవుతుంది,impending,ఆసన్నమవుతూ,impended,ఆసన్నమైంది,impended,ఆసన్నమై
+impinge,హద్దుమీరి ప్రవర్తించు,impinges,ప్రభావం చూపుతుంది,impinging,ప్రభావం చూపుతూ,impinged,ప్రభావం చూపింది,impinged,ప్రభావం చూపి
+implant,అంటుకట్టు,implants,నాటుతాడు/నాటుతుంది,implanting,నాటుతూ,implanted,నాటాడు,implanted,నాటబడి
+implicate,చిక్కు పడునట్లు చేయు,implicates,ఇరికిస్తాడు/ఇరికిస్తుంది,implicating,ఇరికిస్తూ,implicated,ఇరికించాడు,implicated,ఇరికించబడి
+implode,లోపలనే పగిలిపోవు,implodes,పేలిపోతుంది,imploding,పేలిపోతూ,imploded,పేలిపోయింది,imploded,పేలిపోయి
+implore,దీనంగా అర్ధించు,implores,వేడుకుంటాడు/వేడుకుంటుంది,imploring,వేడుకుంటూ,implored,వేడుకున్నాడు,implored,వేడుకోబడి
+imply,ముఖ్యమైన బాగంగా గుర్తించు,implies,సూచిస్తాడు/సూచిస్తుంది,implying,సూచిస్తూ,implied,సూచించాడు,implied,సూచించబడి
+import,దిగుమతి,imports,దిగుమతి చేసుకుంటాడు/చేసుకుంటుంది,importing,దిగుమతి చేసుకుంటూ,imported,దిగుమతి చేసుకున్నాడు,imported,దిగుమతి చేసుకోబడి
+impose,విధించే,imposes,విధిస్తాడు/విధిస్తుంది,imposing,విధిస్తూ,imposed,విధించాడు,imposed,విధించబడి
+impress,ప్రభావితము చేయుట,impresses,ప్రభావితం చేస్తాడు/చేస్తుంది,impressing,ప్రభావితం చేస్తూ,impressed,ప్రభావితం చేశాడు,impressed,ప్రభావితం చేయబడి
+imprint,దృఢమైన ముద్రవేయు,imprints,ముద్ర వేస్తాడు/వేస్తుంది,imprinting,ముద్ర వేస్తూ,imprinted,ముద్ర వేశాడు,imprinted,ముద్ర వేయబడి
+imprison,అదుపులో ఉంచుకొను,imprisons,జైలులో పెడతాడు/పెడుతుంది,imprisoning,జైలులో పెడుతూ,imprisoned,జైలులో పెట్టాడు,imprisoned,జైలులో పెట్టబడి
+improve,అభివృద్ధిచేసుట,improves,మెరుగుపరుస్తాడు/మెరుగుపరుస్తుంది,improving,మెరుగుపరుస్తూ,improved,మెరుగుపడింది,improved,మెరుగుపరచబడి
+inaugurate,ప్రారంభించు,inaugurates,ప్రారంభిస్తాడు/ప్రారంభిస్తుంది,inaugurating,ప్రారంభిస్తూ,inaugurated,ప్రారంభించాడు,inaugurated,ప్రారంభించబడి
+incise,కోతపెట్టు,incises,కోస్తాడు/కోస్తుంది,incising,కోస్తూ,incised,కోశాడు,incised,కోయబడి
+include,కలుపుట,includes,కలిగి ఉంటుంది,including,కలుపుతూ,included,కలిపి ఉన్నది,included,కలిపి
+increase,పెంచు,increases,పెంచుతాడు/పెంచుతుంది,increasing,పెంచుతూ,increased,పెరిగింది,increased,పెరిగి
+inculcate,నేర్పుట,inculcates,నొక్కి చెప్తాడు/చెప్తుంది,inculcating,నొక్కి చెప్తూ,inculcated,నొక్కి చెప్పాడు,inculcated,నొక్కి చెప్పబడి
+indent,వొడంబడికచేసుట,indents,ఇండెంట్ చేస్తాడు/చేస్తుంది,indenting,ఇండెంట్ చేస్తూ,indented,ఇండెంట్ చేశాడు,indented,ఇండెంట్ చేయబడి
+indicate,సూచించు,indicates,సూచిస్తాడు/సూచిస్తుంది,indicating,సూచిస్తూ,indicated,సూచించాడు,indicated,సూచించబడి
+induce,ప్రేరేపించు,induces,ప్రేరేపిస్తాడు/ప్రేరేపిస్తుంది,inducing,ప్రేరేపిస్తూ,induced,ప్రేరేపించాడు,induced,ప్రేరేపించబడి
+indulge,కోరికలను పూర్తిగా మన్నించు,indulges,మునిగిపోతాడు/మునిగిపోతుంది,indulging,మునిగిపోతూ,indulged,మునిగిపోయాడు,indulged,మునిగిపోయి
+infect,సోకించుట,infects,సోకుతుంది,infecting,సోకుతూ,infected,సోకింది,infected,సోకి
+infest,ముసురుకొను,infests,ముట్టడిస్తుంది,infesting,ముట్టడిస్తూ,infested,ముట్టడించింది,infested,ముట్టడించబడి
+inflame,మండునట్లుగా చేయు,inflames,మండుతుంది,inflaming,మండుతూ,inflamed,మండింది,inflamed,మండి
+inflate,ఉబ్బునట్లు చేయు,inflates,ఉబ్బుతుంది,inflating,ఉబ్బుతూ,inflated,ఉబ్బింది,inflated,ఉబ్బి
+inflect,వంకరగా చేయు,inflects,వంగుతుంది,inflecting,వంగుతూ,inflected,వంగింది,inflected,వంగి
+inform,తెలియజేయు,informs,తెలియజేస్తాడు/తెలియజేస్తుంది,informing,తెలియజేస్తూ,informed,తెలియజేశాడు,informed,తెలియజేయబడి
+infringe,ఉల్లంఘించు,infringes,ఉల్లంఘిస్తాడు/ఉల్లంఘిస్తుంది,infringing,ఉల్లంఘిస్తూ,infringed,ఉల్లంఘించాడు,infringed,ఉల్లంఘించబడి
+infuse,నానవేసుట,infuses,నింపుతాడు/నింపుతుంది,infusing,నింపుతూ,infused,నింపాడు,infused,నింపబడి
+ingest,కడుపులోకి తీసుకొను,ingests,జీర్ణించుకుంటాడు/జీర్ణించుకుంటుంది,ingesting,జీర్ణించుకుంటూ,ingested,జీర్ణించుకున్నాడు,ingested,జీర్ణించుకోబడి
+inhabit,నివాసంగా చేసికొని ఉండు,inhabits,నివసిస్తాడు/నివసిస్తుంది,inhabiting,నివసిస్తూ,inhabited,నివసించాడు,inhabited,నివసించబడి
+inhale,గాలిని లోనికి పీల్చు,inhales,పీల్చుతాడు/పీల్చుతుంది,inhaling,పీల్చుతూ,inhaled,పీల్చాడు,inhaled,పీల్చబడి
+inherit,వారసత్వంగా పొందు,inherits,వారసత్వంగా పొందుతాడు/పొందుతుంది,inheriting,వారసత్వంగా పొందుతూ,inherited,వారసత్వంగా పొందాడు,inherited,వారసత్వంగా పొందబడి
+initiate,మొదలుపెట్టడం,initiates,ప్రారంభిస్తాడు/ప్రారంభిస్తుంది,initiating,ప్రారంభిస్తూ,initiated,ప్రారంభించాడు,initiated,ప్రారంభించబడి
+inject,బలవంతంగా పంపించు,injects,ఇంజెక్ట్ చేస్తాడు/చేస్తుంది,injecting,ఇంజెక్ట్ చేస్తూ,injected,ఇంజెక్ట్ చేశాడు,injected,ఇంజెక్ట్ చేయబడి
+injure,గాయపడు,injures,గాయపరుస్తాడు/గాయపరుస్తుంది,injuring,గాయపరుస్తూ,injured,గాయపడ్డాడు,injured,గాయపడి
+inlay,పొదుగు,inlays,పొదుగుతాడు/పొదుగుతుంది,inlaying,పొదుగుతూ,inlaid,పొదిగాడు,inlaid,పొదగబడి
+innovate,ఆవిష్కరణ,innovates,కొత్తగా కనుగొంటాడు/కనుగొంటుంది,innovating,కొత్తగా కనుగొంటూ,innovated,కొత్తగా కనుగొన్నాడు,innovated,కొత్తగా కనుగొనబడి
+input,"పెట్టుబడిగా పెట్టినవి, యంత్రానికి అందించే శక్తి",inputs,ఇన్‌పుట్ ఇస్తాడు/ఇస్తుంది,inputting,ఇన్‌పుట్ ఇస్తూ,input,ఇన్‌పుట్ ఇచ్చాడు,input,ఇన్‌పుట్ ఇవ్వబడి
+inquire,విచారించు,inquires,విచారిస్తాడు/విచారిస్తుంది,inquiring,విచారిస్తూ,inquired,విచారించాడు,inquired,విచారించబడి
+inscribe,అంకితం చేయు,inscribes,చెక్కుతాడు/చెక్కుతుంది,inscribing,చెక్కుతూ,inscribed,చెక్కబడింది,inscribed,చెక్కబడి
+insert,లోపల అమర్చు,inserts,చొప్పిస్తాడు/చొప్పిస్తుంది,inserting,చొప్పిస్తూ,inserted,చొప్పించాడు,inserted,చొప్పించబడి
+inspect,జాగ్రత్తగా పరిశీలించు,inspects,తనిఖీ చేస్తాడు/చేస్తుంది,inspecting,తనిఖీ చేస్తూ,inspected,తనిఖీ చేశాడు,inspected,తనిఖీ చేయబడి
+inspire,ఆసక్తిని ప్రేరేపించు,inspires,ప్రేరణ కలిగిస్తాడు/కలిగిస్తుంది,inspiring,ప్రేరణ కలిగిస్తూ,inspired,ప్రేరణ పొందాడు,inspired,ప్రేరణ పొంది
+install,ఏర్పాటు చేయు,installs,ఇన్‌స్టాల్ చేస్తాడు/చేస్తుంది,installing,ఇన్‌స్టాల్ చేస్తూ,installed,ఇన్‌స్టాల్ చేశాడు,installed,ఇన్‌స్టాల్ చేయబడి
+insult,దూషణ చేయు,insults,అవమానిస్తాడు/అవమానిస్తుంది,insulting,అవమానిస్తూ,insulted,అవమానించాడు,insulted,అవమానించబడి
+insure,భీమాచేయు,insures,భీమా చేస్తాడు/చేస్తుంది,insuring,భీమా చేస్తూ,insured,భీమా చేశాడు,insured,భీమా చేయబడి
+integrate,ఒకచోట చేర్చు,integrates,ఏకీకృతం చేస్తాడు/చేస్తుంది,integrating,ఏకీకృతం చేస్తూ,integrated,ఏకీకృతం చేశాడు,integrated,ఏకీకృతం చేయబడి
+introduce,"ప్రవేశపెట్టు, పరిచయం చేయు,",introduces,పరిచయం చేస్తాడు/చేస్తుంది,introducing,పరిచయం చేస్తూ,introduced,పరిచయం చేశాడు,introduced,పరిచయం చేయబడి
+invent,కనిపెట్టు,invents,కనుగొంటాడు/కనుగొంటుంది,inventing,కనుగొంటూ,invented,కనుగొన్నాడు,invented,కనుగొనబడి
+invite,ఆహ్వానించు,invites,ఆహ్వానిస్తాడు/ఆహ్వానిస్తుంది,inviting,ఆహ్వానిస్తూ,invited,ఆహ్వానించాడు,invited,ఆహ్వానించబడి
+join,"కలుపు, చేర్చు",joins,చేరుతాడు/చేరుతుంది,joining,చేరుతూ,joined,చేరాడు,joined,చేరి
+jump,ఎగిరి దుముకు,jumps,దూకుతాడు/దూకుతుంది,jumping,దూకుతూ,jumped,దూకాడు,jumped,దూకి
+justify,న్యాయంచేయటానికి,justifies,సమర్థిస్తాడు/సమర్థిస్తుంది,justifying,సమర్థిస్తూ,justified,సమర్థించుకున్నాడు,justified,సమర్థించబడి
+keep,ఉంచు,keeps,ఉంచుతాడు/ఉంచుతుంది,keeping,ఉంచుతూ,kept,ఉంచాడు,kept,ఉంచబడి
+kick,తన్ను,kicks,తన్నుతాడు/తన్నుతుంది,kicking,తన్నుతూ,kicked,తన్నాడు,kicked,తన్నబడి
+kill,చంపివేయు,kills,చంపుతాడు/చంపుతుంది,killing,చంపుతూ,killed,చంపాడు,killed,చంపబడి
+kiss,ముద్దు పెట్టుకొను,kisses,ముద్దు పెట్టుకుంటాడు/పెట్టుకుంటుంది,kissing,ముద్దు పెట్టుకుంటూ,kissed,ముద్దు పెట్టుకున్నాడు,kissed,ముద్దు పెట్టబడి
+kneel,మోకరించుట,kneels,మోకరిల్లుతాడు/మోకరిల్లుతుంది,kneeling,మోకరిల్లుతూ,knelt,మోకరిల్లాడు,knelt,మోకరిల్లి
+knit,"అల్లుట, ముడివేయుట",knits,అల్లుతాడు/అల్లుతుంది,knitting,అల్లుతూ,knit,అల్లాడు,knit,అల్లబడి
+knock,"కొట్టు, తట్టు",knocks,తడతాడు/తడుతుంది,knocking,తడుతూ,knocked,తట్టాడు,knocked,తట్టబడి
+know,తెలిసికొను,knows,తెలుసుకుంటాడు/తెలుసుకుంటుంది,knowing,తెలుసుకుంటూ,knew,తెలుసు,known,తెలిసి
+land,దించుట,lands,దిగుతాడు/దిగుతుంది,landing,దిగుతూ,landed,దిగాడు,landed,దిగి
+last,జరుగుట,lasts,నిలుస్తుంది,lasting,నిలుస్తూ,lasted,నిలిచింది,lasted,నిలిచి
+latch,గడియ వేయు,latches,గడియ పెడతాడు/పెడుతుంది,latching,గడియ పెడుతూ,latched,గడియ పెట్టాడు,latched,గడియ పెట్టబడి
+laugh,నవ్వుట,laughs,నవ్వుతాడు/నవ్వుతుంది,laughing,నవ్వుతూ,laughed,నవ్వాడు,laughed,నవ్వబడి
+lay,"ఉంచు, పెట్టు",lays,వేస్తాడు/వేస్తుంది,laying,వేస్తూ,laid,వేశాడు,laid,వేయబడి
+lead,"తీసుకపోవుట, పెత్తనము",leads,నాయకత్వం వహిస్తాడు/వహిస్తుంది,leading,నాయకత్వం వహిస్తూ,led,నాయకత్వం వహించాడు,led,నాయకత్వం వహించబడి
+leak,కాఱుట,leaks,లీక్ అవుతుంది,leaking,లీక్ అవుతూ,leaked,లీక్ అయింది,leaked,లీక్ అయి
+lean,ఆనుకొను,leans,ఆధారపడతాడు/ఆధారపడుతుంది,leaning,ఆధారపడుతూ,leant,ఆధారపడ్డాడు,leant,ఆధారపడి
+leap,"దుముకు, గంతు వేయు",leaps,దూకుతాడు/దూకుతుంది,leaping,దూకుతూ,leapt,దూకాడు,leapt,దూకి
+learn,"అభ్యసించు, నేర్చుకొను",learns,నేర్చుకుంటాడు/నేర్చుకుంటుంది,learning,నేర్చుకుంటూ,learnt,నేర్చుకున్నాడు,learnt,నేర్చుకోబడి
+leave,విడిచిపెట్టుట,leaves,వదిలిపెడతాడు/వదిలిపెడుతుంది,leaving,వదిలిపెడుతూ,left,వదిలిపెట్టాడు,left,వదిలిపెట్టబడి
+leer,ఓరచూపుచూచుట,leers,దుర్మార్గంగా చూస్తాడు/చూస్తుంది,leering,దుర్మార్గంగా చూస్తూ,leered,దుర్మార్గంగా చూశాడు,leered,దుర్మార్గంగా చూడబడి
+lend,అప్పుయిచ్చుట,lends,అప్పు ఇస్తాడు/ఇస్తుంది,lending,అప్పు ఇస్తూ,lent,అప్పు ఇచ్చాడు,lent,అప్పు ఇవ్వబడి
+let,అనుమతి ఇచ్చు,lets,అనుమతిస్తాడు/అనుమతిస్తుంది,letting,అనుమతిస్తూ,let,అనుమతించాడు,let,అనుమతించబడి
+lick,నాకి తిను,licks,నాకుతాడు/నాకుతుంది,licking,నాకుతూ,licked,నాకాడు,licked,నాకబడి
+lie,పడుకొనుట,lies,పడుకుంటాడు/పడుకుంటుంది,lying,పడుకుంటూ,lay,పడుకున్నాడు,lain,పడుకొని
+lie,అబద్దము,lies,అబద్ధం చెప్తాడు/చెప్తుంది,lying,అబద్ధం చెప్తూ,lied,అబద్ధం చెప్పాడు,lied,అబద్ధం చెప్పబడి
+lift,పైకెత్తు,lifts,ఎత్తుతాడు/ఎత్తుతుంది,lifting,ఎత్తుతూ,lifted,ఎత్తాడు,lifted,ఎత్తబడి
+light,వెలిగించుట,lights,వెలిగిస్తాడు/వెలిగిస్తుంది,lighting,వెలిగిస్తూ,lit,వెలిగించాడు,lit,వెలిగించబడి
+like,ఇష్టపడుట,likes,ఇష్టపడతాడు/ఇష్టపడుతుంది,liking,ఇష్టపడుతూ,liked,ఇష్టపడ్డాడు,liked,ఇష్టపడబడి
+limp,కుంటుట,limps,కుంటినడక నడుస్తాడు/నడుస్తుంది,limping,కుంటినడక నడుస్తూ,limped,కుంటినడక నడిచాడు,limped,కుంటినడక నడిచి
+listen,వినండి,listens,వింటాడు/వింటుంది,listening,వింటూ,listened,విన్నాడు,listened,వినబడి
+live,"జీవించు, బ్రతుకు",lives,జీవిస్తాడు/జీవిస్తుంది,living,జీవిస్తూ,lived,జీవించాడు,lived,జీవించి
+look,చూచు,looks,చూస్తాడు/చూస్తుంది,looking,చూస్తూ,looked,చూశాడు,looked,చూడబడి
+lose,పోగొట్టుకొను,loses,కోల్పోతాడు/కోల్పోతుంది,losing,కోల్పోతూ,lost,కోల్పోయాడు,lost,కోల్పోయి
+love,ప్రేమించు,loves,ప్రేమిస్తాడు/ప్రేమిస్తుంది,loving,ప్రేమిస్తూ,loved,ప్రేమించాడు,loved,ప్రేమించబడి
+magnify,పెంచు,magnifies,పెద్దది చేస్తాడు/చేస్తుంది,magnifying,పెద్దది చేస్తూ,magnified,పెద్దది చేశాడు,magnified,పెద్దది చేయబడి
+maintain,పోషించు,maintains,నిర్వహిస్తాడు/నిర్వహిస్తుంది,maintaining,నిర్వహిస్తూ,maintained,నిర్వహించాడు,maintained,నిర్వహించబడి
+make,తయారుచేయు,makes,తయారు చేస్తాడు/చేస్తుంది,making,తయారు చేస్తూ,made,తయారు చేశాడు,made,తయారు చేయబడి
+manage,"నడిపించుట, నడుపు",manages,నిర్వహిస్తాడు/నిర్వహిస్తుంది,managing,నిర్వహిస్తూ,managed,నిర్వహించాడు,managed,నిర్వహించబడి
+march,నడుచుట,marches,కవాతు చేస్తాడు/చేస్తుంది,marching,కవాతు చేస్తూ,marched,కవాతు చేశాడు,marched,కవాతు చేయబడి
+mark,వేసుట,marks,గుర్తు పెడతాడు/పెడుతుంది,marking,గుర్తు పెడుతూ,marked,గుర్తు పెట్టాడు,marked,గుర్తు పెట్టబడి
+marry,వివాహం,marries,పెళ్లి చేసుకుంటాడు/చేసుకుంటుంది,marrying,పెళ్లి చేసుకుంటూ,married,పెళ్లి చేసుకున్నాడు,married,పెళ్లి చేసుకోబడి
+mash,మిశ్రమముచేసుట,mashes,చిదుముతాడు/చిదుముతుంది,mashing,చిదుముతూ,mashed,చిదిమాడు,mashed,చిదమబడి
+match,తగినట్లు,matches,సరిపోలుస్తాడు/సరిపోలుస్తుంది,matching,సరిపోలుస్తూ,matched,సరిపోలింది,matched,సరిపోలి
+mean,"భావించుకొనుట, అర్థమౌట",means,అర్థం,meaning,అర్థం ఇస్తూ,meant,అర్థం,meant,అర్థం అయి
+measure,కొలుచుట,measures,కొలుస్తాడు/కొలుస్తుంది,measuring,కొలుస్తూ,measured,కొలిచాడు,measured,కొలవబడి
+meet,కలుసుకొను,meets,కలుస్తాడు/కలుస్తుంది,meeting,కలుస్తూ,met,కలిశాడు,met,కలవబడి
+melt,కరిగించుట,melts,కరిగిస్తాడు/కరిగిస్తుంది,melting,కరిగిస్తూ,melted,కరిగింది,melted,కరిగి
+merge,"విలీనం చేయు, కలుపు",merges,విలీనం చేస్తాడు/చేస్తుంది,merging,విలీనం చేస్తూ,merged,విలీనం అయింది,merged,విలీనం అయి
+mew,కూయుట,mews,మ్యావ్ అంటుంది,mewing,మ్యావ్ అంటూ,mewed,మ్యావ్ అంది,mewed,మ్యావ్ అని
+migrate,వలసపోవు,migrates,వలస వెళ్తాడు/వెళ్తుంది,migrating,వలస వెళ్తూ,migrated,వలస వెళ్ళాడు,migrated,వలస వెళ్లి
+mind,"లక్ష్యపెట్టుట, వినుట",minds,పట్టించుకుంటాడు/పట్టించుకుంటుంది,minding,పట్టించుకుంటూ,minded,పట్టించుకున్నాడు,minded,పట్టించుకోబడి
+mislead,తప్పుదారి పట్టించు,misleads,తప్పుదోవ పట్టిస్తాడు/పట్టిస్తుంది,misleading,తప్పుదోవ పట్టిస్తూ,misled,తప్పుదోవ పట్టించాడు,misled,తప్పుదోవ పట్టించబడి
+miss,విఫలమవు,misses,కోల్పోతాడు/కోల్పోతుంది,missing,కోల్పోతూ,missed,కోల్పోయాడు,missed,కోల్పోబడి
+mistake,పొరపాటు,mistakes,పొరపాటు చేస్తాడు/చేస్తుంది,mistaking,పొరపాటు చేస్తూ,mistook,పొరబడ్డాడు,mistaken,పొరపాటుపడి
+misuse,దుర్వినియోగం,misuses,దుర్వినియోగం చేస్తాడు/చేస్తుంది,misusing,దుర్వినియోగం చేస్తూ,misused,దుర్వినియోగం చేశాడు,misused,దుర్వినియోగం చేయబడి
+mix,కలుపు,mixes,కలుపుతాడు/కలుపుతుంది,mixing,కలుపుతూ,mixed,కలిపాడు,mixed,కలపబడి
+moan,బాధతో మూలుగు,moans,మూలుగుతాడు/మూలుగుతుంది,moaning,మూలుగుతూ,moaned,మూలిగాడు,moaned,మూలగబడి
+modify,సవరించండి,modifies,సవరిస్తాడు/సవరిస్తుంది,modifying,సవరిస్తూ,modified,సవరించాడు,modified,సవరించబడి
+moo,అరచు,moos,అంబరా అంటుంది,mooing,అంబరా అంటూ,mooed,అంబరా అన్నది,mooed,అంబరా అని
+motivate,ప్రోత్సహించు,motivates,ప్రేరేపిస్తాడు/ప్రేరేపిస్తుంది,motivating,ప్రేరేపిస్తూ,motivated,ప్రేరేపించాడు,motivated,ప్రేరేపించబడి
+mould,అచ్చువేయుట,moulds,రూపొందిస్తాడు/రూపొందిస్తుంది,moulding,రూపొందిస్తూ,moulded,రూపొందించాడు,moulded,రూపొందించబడి
+move,కదలిక,moves,కదులుతాడు/కదులుతుంది,moving,కదులుతూ,moved,కదిలాడు,moved,కదలబడి
+multiply,గుణించు,multiplies,గుణిస్తాడు/గుణిస్తుంది,multiplying,గుణిస్తూ,multiplied,గుణించాడు,multiplied,గుణించబడి
+murmur,"గొణుగుట, సణుగుట",murmurs,గొణుగుతాడు/గొణుగుతుంది,murmuring,గొణుగుతూ,murmured,గొణిగాడు,murmured,గొణగబడి
+nail,మేకులు కొట్టడం,nails,మేకు కొడతాడు/కొడుతుంది,nailing,మేకు కొడుతూ,nailed,మేకు కొట్టాడు,nailed,మేకు కొట్టబడి
+nap,స్వల్పనిద్ర,naps,కునుకు తీస్తాడు/తీస్తుంది,napping,కునుకు తీస్తూ,napped,కునుకు తీశాడు,napped,కునుకు తీయబడి
+need,అవసరము,needs,అవసరమవుతుంది,needing,అవసరమవుతూ,needed,అవసరమైంది,needed,అవసరమై
+neglect,అశ్రద్దచేయుట,neglects,నిర్లక్ష్యం చేస్తాడు/చేస్తుంది,neglecting,నిర్లక్ష్యం చేస్తూ,neglected,నిర్లక్ష్యం చేశాడు,neglected,నిర్లక్ష్యం చేయబడి
+nip,"కరుచుట, కొరుకుట, గిల్లుట, తుంచుట",nips,గిల్లుతాడు/గిల్లుతుంది,nipping,గిల్లుతూ,nipped,గిల్లాడు,nipped,గిల్లబడి
+nod,తల ఊపుట,nods,తల ఊపుతాడు/ఊపుతుంది,nodding,తల ఊపుతూ,nodded,తల ఊపాడు,nodded,తల ఊపబడి
+note,గుర్తు చేయుట,notes,గమనిస్తాడు/గమనిస్తుంది,noting,గమనిస్తూ,noted,గమనించాడు,noted,గమనించబడి
+notice,సమాచారము,notices,గమనిస్తాడు/గమనిస్తుంది,noticing,గమనిస్తూ,noticed,గమనించాడు,noticed,గమనించబడి
+notify,ప్రకటన చేయుట,notifies,తెలియజేస్తాడు/తెలియజేస్తుంది,notifying,తెలియజేస్తూ,notified,తెలియజేశాడు,notified,తెలియజేయబడి
+nourish,పెంచుట,nourishes,పోషిస్తాడు/పోషిస్తుంది,nourishing,పోషిస్తూ,nourished,పోషించాడు,nourished,పోషించబడి
+nurse,"చనుబాలిచ్చుట, పెంచుట, పోషించుట, సాకుట",nurses,సేవ చేస్తాడు/చేస్తుంది,nursing,సేవ చేస్తూ,nursed,సేవ చేశాడు,nursed,సేవ చేయబడి
+obey,ఆజ్ఞ పాటించు,obeys,విధేయత చూపుతాడు/చూపుతుంది,obeying,విధేయత చూపుతూ,obeyed,విధేయత చూపాడు,obeyed,విధేయత చూపబడి
+oblige,"నిర్బంధించుట, ఉపకారము చేయు",obliges,కృతజ్ఞత చూపుతాడు/చూపుతుంది,obliging,కృతజ్ఞత చూపుతూ,obliged,కృతజ్ఞత చూపాడు,obliged,కృతజ్ఞత చూపబడి
+observe,గమనించు,observes,గమనిస్తాడు/గమనిస్తుంది,observing,గమనిస్తూ,observed,గమనించాడు,observed,గమనించబడి
+obstruct,అడ్డగించు,obstructs,ఆటంకపరుస్తాడు/ఆటంకపరుస్తుంది,obstructing,ఆటంకపరుస్తూ,obstructed,ఆటంకపరిచాడు,obstructed,ఆటంకపరచబడి
+obtain,"సంపాదించు, పొందు",obtains,పొందుతాడు/పొందుతుంది,obtaining,పొందుతూ,obtained,పొందాడు,obtained,పొందబడి
+occupy,ఆక్రమించు,occupies,ఆక్రమిస్తాడు/ఆక్రమిస్తుంది,occupying,ఆక్రమిస్తూ,occupied,ఆక్రమించాడు,occupied,ఆక్రమించబడి
+occur,సంభవించు,occurs,జరుగుతుంది,occurring,జరుగుతూ,occurred,జరిగింది,occurred,జరిగి
+offer,"ఇవ్వటం, అర్పించడం",offers,అందిస్తాడు/అందిస్తుంది,offering,అందిస్తూ,offered,అందించాడు,offered,అందించబడి
+offset,లోపమును సరిచేయు,offsets,సరిచేస్తాడు/సరిచేస్తుంది,offsetting,సరిచేస్తూ,offset,సరిచేశాడు,offset,సరిచేయబడి
+omit,"వదిలివేయు,",omits,వదిలిపెడతాడు/వదిలిపెడుతుంది,omitting,వదిలిపెడుతూ,omitted,వదిలిపెట్టాడు,omitted,వదిలిపెట్టబడి
+ooze,"స్రవించుట, కారుట",oozes,కారుతుంది,oozing,కారుతూ,oozed,కారింది,oozed,కారి
+open,"తెరుచుట, ఆరంభించుట",opens,తెరుస్తాడు/తెరుస్తుంది,opening,తెరుస్తూ,opened,తెరిచాడు,opened,తెరవబడి
+operate,నడిపించుట,operates,నిర్వహిస్తాడు/నిర్వహిస్తుంది,operating,నిర్వహిస్తూ,operated,నిర్వహించాడు,operated,నిర్వహించబడి
+opine,వెల్లడించు,opines,అభిప్రాయపడతాడు/అభిప్రాయపడుతుంది,opining,అభిప్రాయపడుతూ,opined,అభిప్రాయపడ్డాడు,opined,అభిప్రాయపడబడి
+oppress,"పీడించు, హింసించు",oppresses,అణచివేస్తాడు/అణచివేస్తుంది,oppressing,అణచివేస్తూ,oppressed,అణచివేశాడు,oppressed,అణచివేయబడి
+opt,"సరిఅయిన, ఎంపిక",opts,ఎంచుకుంటాడు/ఎంచుకుంటుంది,opting,ఎంచుకుంటూ,opted,ఎంచుకున్నాడు,opted,ఎంచుకోబడి
+optimize,అనుకూల పరచడం,optimizes,ఆప్టిమైజ్ చేస్తాడు/చేస్తుంది,optimizing,ఆప్టిమైజ్ చేస్తూ,optimized,ఆప్టిమైజ్ చేశాడు,optimized,ఆప్టిమైజ్ చేయబడి
+order,"ఆజ్ఞాపించడం, ఆదేశం ఇవ్వటం",orders,ఆదేశిస్తాడు/ఆదేశిస్తుంది,ordering,ఆదేశిస్తూ,ordered,ఆదేశించాడు,ordered,ఆదేశించబడి
+organize,"ఏర్పాటు చేయు, కుదుర్చు",organizes,నిర్వహిస్తాడు/నిర్వహిస్తుంది,organizing,నిర్వహిస్తూ,organized,నిర్వహించాడు,organized,నిర్వహించబడి
+originate,"ఉత్పత్తి చేయు, ఆరంభమౌట",originates,ప్రారంభమవుతుంది,originating,ప్రారంభమవుతూ,originated,ప్రారంభమైంది,originated,ప్రారంభమై
+output,బయటకి,outputs,అవుట్‌పుట్ ఇస్తాడు/ఇస్తుంది,outputting,అవుట్‌పుట్ ఇస్తూ,output,అవుట్‌పుట్ ఇచ్చాడు,output,అవుట్‌పుట్ ఇవ్వబడి
+overflow,పొంగి పొర్లు,overflows,పొంగిపొర్లుతుంది,overflowing,పొంగిపొర్లుతూ,overflowed,పొంగిపొర్లింది,overflowed,పొంగిపొర్లి
+overtake,దాటి పోవు,overtakes,అధిగమిస్తాడు/అధిగమిస్తుంది,overtaking,అధిగమిస్తూ,overtook,అధిగమించాడు,overtaken,అధిగమించబడి
+owe,రుణపడియుండు,owes,రుణపడి ఉంటాడు/ఉంటుంది,owing,రుణపడి ఉంటూ,owed,రుణపడి ఉన్నాడు,owed,రుణపడి ఉండి
+own,సొంతమైన,owns,సొంతం చేసుకుంటాడు/చేసుకుంటుంది,owning,సొంతం చేసుకుంటూ,owned,సొంతం చేసుకున్నాడు,owned,సొంతం చేసుకోబడి
+pacify,సముదాయించుట,pacifies,శాంతింపజేస్తాడు/శాంతింపజేస్తుంది,pacifying,శాంతింపజేస్తూ,pacified,శాంతింపజేశాడు,pacified,శాంతింపజేయబడి
+paint,చిత్రాన్ని వేయు,paints,రంగు వేస్తాడు/వేస్తుంది,painting,రంగు వేస్తూ,painted,రంగు వేశాడు,painted,రంగు వేయబడి
+pardon,క్షమాపణ,pardons,క్షమిస్తాడు/క్షమిస్తుంది,pardoning,క్షమిస్తూ,pardoned,క్షమించాడు,pardoned,క్షమించబడి
+part,"ఎడబాయుట, విభజించుట",parts,విడిపోతాడు/విడిపోతుంది,parting,విడిపోతూ,parted,విడిపోయాడు,parted,విడిపోయి
+partake,పంచుకునే,partakes,పాల్గొంటాడు/పాల్గొంటుంది,partaking,పాల్గొంటూ,partook,పాల్గొన్నాడు,partaken,పాల్గొనబడి
+participate,పాల్గొను,participates,పాల్గొంటాడు/పాల్గొంటుంది,participating,పాల్గొంటూ,participated,పాల్గొన్నాడు,participated,పాల్గొనబడి
+pass,దాటుట,passes,దాటుతాడు/దాటుతుంది,passing,దాటుతూ,passed,దాటింది,passed,దాటబడి
+paste,అతికించు,pastes,అతికిస్తాడు/అతికిస్తుంది,pasting,అతికిస్తూ,pasted,అతికించాడు,pasted,అతికించబడి
+pat,తట్టుట,pats,తడతాడు/తడుతుంది,patting,తడుతూ,patted,తట్టాడు,patted,తట్టబడి
+patch,చిరుగును కప్పివేయుట,patches,అతుకు వేస్తాడు/వేస్తుంది,patching,అతుకు వేస్తూ,patched,అతుకు వేశాడు,patched,అతుకు వేయబడి
+pause,తాత్కాలిక విరామము,pauses,ఆగుతాడు/ఆగుతుంది,pausing,ఆగుతూ,paused,ఆగాడు,paused,ఆగి
+pay,చెల్లించు,pays,చెల్లిస్తాడు/చెల్లిస్తుంది,paying,చెల్లిస్తూ,paid,చెల్లించాడు,paid,చెల్లించబడి
+peep,కన్నం లో నుంచి చూడటం,peeps,తొంగి చూస్తాడు/చూస్తుంది,peeping,తొంగి చూస్తూ,peeped,తొంగి చూశాడు,peeped,తొంగి చూడబడి
+perish,"చెడిపోవుట, నశించుట",perishes,నశించిపోతాడు/నశించిపోతుంది,perishing,నశించిపోతూ,perished,నశించిపోయాడు,perished,నశించిపోయి
+permit,అనుమతి,permits,అనుమతిస్తాడు/అనుమతిస్తుంది,permitting,అనుమతిస్తూ,permitted,అనుమతించాడు,permitted,అనుమతించబడి
+persuade,ఇష్టపడునట్లు చేయు,persuades,ఒప్పిస్తాడు/ఒప్పిస్తుంది,persuading,ఒప్పిస్తూ,persuaded,ఒప్పించాడు,persuaded,ఒప్పించబడి
+phone,టెలిఫోను చేయు,phones,ఫోన్ చేస్తాడు/చేస్తుంది,phoning,ఫోన్ చేస్తూ,phoned,ఫోన్ చేశాడు,phoned,ఫోన్ చేయబడి
+place,"పెట్టుట, వుంచుట",places,ఉంచుతాడు/ఉంచుతుంది,placing,ఉంచుతూ,placed,ఉంచాడు,placed,ఉంచబడి
+plan,పథకం వేయుట,plans,ప్రణాళిక వేస్తాడు/వేస్తుంది,planning,ప్రణాళిక వేస్తూ,planned,ప్రణాళిక వేశాడు,planned,ప్రణాళిక వేయబడి
+play,ఆడుట,plays,ఆడుతాడు/ఆడుతుంది,playing,ఆడుతూ,played,ఆడాడు,played,ఆడబడి
+plead,వాదించు,pleads,వేడుకుంటాడు/వేడుకుంటుంది,pleading,వేడుకుంటూ,pled,వేడుకున్నాడు,pled,వేడుకోబడి
+please,"మర్యాదగా, అభ్యర్థన",pleases,సంతోషపరుస్తాడు/సంతోషపరుస్తుంది,pleasing,సంతోషపరుస్తూ,pleased,సంతోషించాడు,pleased,సంతోషించబడి
+pluck,"కోయు, త్రుంచు",plucks,కోస్తాడు/కోస్తుంది,plucking,కోస్తూ,plucked,కోశాడు,plucked,కోయబడి
+ply,కొనసాగించు,plies,నడుపుతాడు/నడుపుతుంది,plying,నడుపుతూ,plied,నడిపాడు,plied,నడపబడి
+point,చూపుట,points,సూచిస్తాడు/సూచిస్తుంది,pointing,సూచిస్తూ,pointed,సూచించాడు,pointed,సూచించబడి
+polish,మెరుగుపరచు,polishes,మెరుగు పెడతాడు/పెడుతుంది,polishing,మెరుగు పెడుతూ,polished,మెరుగు పెట్టాడు,polished,మెరుగు పెట్టబడి
+pollute,"పాడుచేయు, కలుషితం చేయు",pollutes,కలుషితం చేస్తాడు/చేస్తుంది,polluting,కలుషితం చేస్తూ,polluted,కలుషితం చేశాడు,polluted,కలుషితం చేయబడి
+ponder,ధీర్ఘంగా ఆలోచించు,ponders,ఆలోచిస్తాడు/ఆలోచిస్తుంది,pondering,ఆలోచిస్తూ,pondered,ఆలోచించాడు,pondered,ఆలోచించబడి
+pour,పోయుట,pours,పోస్తాడు/పోస్తుంది,pouring,పోస్తూ,poured,పోశాడు,poured,పోయబడి
+pout,"అలక, పెదవి విరుపు",pouts,మూతి ముడుచుకుంటాడు/ముడుచుకుంటుంది,pouting,మూతి ముడుచుకుంటూ,pouted,మూతి ముడుచుకున్నాడు,pouted,మూతి ముడుచుకొని
+practise,సాధన చేయు,practises,సాధన చేస్తాడు/చేస్తుంది,practising,సాధన చేస్తూ,practised,సాధన చేశాడు,practised,సాధన చేయబడి
+praise,"ప్రశంసించు, స్తుతించుట",praises,పొగుడుతాడు/పొగుడుతుంది,praising,పొగుడుతూ,praised,పొగిడాడు,praised,పొగడబడి
+pray,"ప్రార్థించుట, వేడుకొనుట",prays,ప్రార్థిస్తాడు/ప్రార్థిస్తుంది,praying,ప్రార్థిస్తూ,prayed,ప్రార్థించాడు,prayed,ప్రార్థించబడి
+preach,"భోధించు, వుపదేశించుట",preaches,బోధిస్తాడు/బోధిస్తుంది,preaching,బోధిస్తూ,preached,బోధించాడు,preached,బోధించబడి
+prefer,"ఎక్కువగా ఇష్టపడు,",prefers,ప్రాధాన్యత ఇస్తాడు/ఇస్తుంది,preferring,ప్రాధాన్యత ఇస్తూ,preferred,ప్రాధాన్యత ఇచ్చాడు,preferred,ప్రాధాన్యత ఇవ్వబడి
+prepare,"సిద్ధమౌట, సిధ్ధపరచు",prepares,తయారు చేస్తాడు/చేస్తుంది,preparing,తయారు చేస్తూ,prepared,తయారు చేశాడు,prepared,తయారు చేయబడి
+prescribe,విధించుట,prescribes,సూచిస్తాడు/సూచిస్తుంది,prescribing,సూచిస్తూ,prescribed,సూచించాడు,prescribed,సూచించబడి
+present,హాజరగు,presents,సమర్పిస్తాడు/సమర్పిస్తుంది,presenting,సమర్పిస్తూ,presented,సమర్పించాడు,presented,సమర్పించబడి
+preserve,నిల్వ చేయు,preserves,సంరక్షిస్తాడు/సంరక్షిస్తుంది,preserving,సంరక్షిస్తూ,preserved,సంరక్షించాడు,preserved,సంరక్షించబడి
+preside,"అధ్యక్షత, అదుపు చేయు",presides,అధ్యక్షత వహిస్తాడు/వహిస్తుంది,presiding,అధ్యక్షత వహిస్తూ,presided,అధ్యక్షత వహించాడు,presided,అధ్యక్షత వహించబడి
+press,"ఒత్తిడి చేయు, నలిపివేయు",presses,నొక్కుతాడు/నొక్కుతుంది,pressing,నొక్కుతూ,pressed,నొక్కాడు,pressed,నొక్కబడి
+pretend,నటించు,pretends,నటిస్తాడు/నటిస్తుంది,pretending,నటిస్తూ,pretended,నటించాడు,pretended,నటించబడి
+prevent,నిరోధించు,prevents,నిరోధిస్తాడు/నిరోధిస్తుంది,preventing,నిరోధిస్తూ,prevented,నిరోధించాడు,prevented,నిరోధించబడి
+print,ముద్రించు,prints,ముద్రిస్తాడు/ముద్రిస్తుంది,printing,ముద్రిస్తూ,printed,ముద్రించాడు,printed,ముద్రించబడి
+proceed,"కొనసాగు, ముందుకు పోవు",proceeds,ముందుకు సాగుతాడు/సాగుతుంది,proceeding,ముందుకు సాగుతూ,proceeded,ముందుకు సాగాడు,proceeded,ముందుకు సాగి
+produce,ఉత్పత్తిచేయు,produces,ఉత్పత్తి చేస్తాడు/చేస్తుంది,producing,ఉత్పత్తి చేస్తూ,produced,ఉత్పత్తి చేశాడు,produced,ఉత్పత్తి చేయబడి
+progress,"పెరుగుట, పురోగతి",progresses,పురోగమిస్తాడు/పురోగమిస్తుంది,progressing,పురోగమిస్తూ,progressed,పురోగమించాడు,progressed,పురోగమించి
+prohibit,నిషేదించుట,prohibits,నిషేధిస్తాడు/నిషేధిస్తుంది,prohibiting,నిషేధిస్తూ,prohibited,నిషేధించాడు,prohibited,నిషేధించబడి
+promise,వాగ్దానం చేయు,promises,వాగ్దానం చేస్తాడు/చేస్తుంది,promising,వాగ్దానం చేస్తూ,promised,వాగ్దానం చేశాడు,promised,వాగ్దానం చేయబడి
+propose,ప్రతిపాదన చేయు,proposes,ప్రతిపాదిస్తాడు/ప్రతిపాదిస్తుంది,proposing,ప్రతిపాదిస్తూ,proposed,ప్రతిపాదించాడు,proposed,ప్రతిపాదించబడి
+prosecute,శిక్షించడానికి,prosecutes,విచారణ జరుపుతాడు/జరుపుతుంది,prosecuting,విచారణ జరుపుతూ,prosecuted,విచారణ జరిపాడు,prosecuted,విచారణ జరపబడి
+protect,"రక్షణ కల్పించు, భద్రంగా వుంచు",protects,రక్షిస్తాడు/రక్షిస్తుంది,protecting,రక్షిస్తూ,protected,రక్షించాడు,protected,రక్షించబడి
+prove,"నిరూపించు, రుజువు చేయు",proves,నిరూపిస్తాడు/నిరూపిస్తుంది,proving,నిరూపిస్తూ,proved,నిరూపించాడు,proved,నిరూపించబడి
+provide,"సరఫరా చేయు, అందించు",provides,అందిస్తాడు/అందిస్తుంది,providing,అందిస్తూ,provided,అందించాడు,provided,అందించబడి
+pull,లాగు,pulls,లాగుతాడు/లాగుతుంది,pulling,లాగుతూ,pulled,లాగాడు,pulled,లాగబడి
+punish,"శిక్షించు, దండించు",punishes,శిక్షిస్తాడు/శిక్షిస్తుంది,punishing,శిక్షిస్తూ,punished,శిక్షించాడు,punished,శిక్షించబడి
+purify,శుద్ధి చేయు,purifies,శుద్ధి చేస్తాడు/చేస్తుంది,purifying,శుద్ధి చేస్తూ,purified,శుద్ధి చేశాడు,purified,శుద్ధి చేయబడి
+push,"త్రోయు, ముందుకు నెట్టు",pushes,నెడతాడు/నెడుతుంది,pushing,నెడుతూ,pushed,నెట్టాడు,pushed,నెట్టబడి
+put,"పెట్టుట, వుంచుట",puts,పెడతాడు/పెడుతుంది,putting,పెడుతూ,put,పెట్టాడు,put,పెట్టబడి
+qualify,అర్హత,qualifies,అర్హత సాధిస్తాడు/సాధిస్తుంది,qualifying,అర్హత సాధిస్తూ,qualified,అర్హత సాధించాడు,qualified,అర్హత సాధించి
+quarrel,"వివాదపడు, తగాదా",quarrels,గొడవ పడతాడు/పడుతుంది,quarrelling,గొడవ పడుతూ,quarrelled,గొడవ పడ్డాడు,quarrelled,గొడవ పడి
+question,"అడుగుట, విచారించుట",questions,ప్రశ్నిస్తాడు/ప్రశ్నిస్తుంది,questioning,ప్రశ్నిస్తూ,questioned,ప్రశ్నించాడు,questioned,ప్రశ్నించబడి
+quit,"వదలిపెట్టు, వదలించుకొను",quits,వదిలేస్తాడు/వదిలేస్తుంది,quitting,వదిలేస్తూ,quit,వదిలేశాడు,quit,వదిలేయబడి
+race,పరుగు పోటీ,races,పందెం వేస్తాడు/వేస్తుంది,racing,పందెం వేస్తూ,raced,పందెం వేశాడు,raced,పందెం వేయబడి
+rain,వర్షించుట,rains,వర్షం కురుస్తుంది,raining,వర్షం కురుస్తూ,rained,వర్షం పడింది,rained,వర్షం పడి
+rattle,"గలగల మాట్లాడు, టకటక శబ్దము చేయు",rattles,గరగరలాడుతుంది,rattling,గరగరలాడుతూ,rattled,గరగరలాడింది,rattled,గరగరలాడి
+reach,"చేరుకొను, సమీపించు",reaches,చేరుకుంటాడు/చేరుకుంటుంది,reaching,చేరుకుంటూ,reached,చేరుకున్నాడు,reached,చేరుకోబడి
+read,"చదువు, అర్థం చేసుకును",reads,చదువుతాడు/చదువుతుంది,reading,చదువుతూ,read,చదివాడు,read,చదవబడి
+realize,"తెలుసుకోవటం, అవగాహన చేసుకొను",realizes,గుర్తిస్తాడు/గుర్తిస్తుంది,realizing,గుర్తిస్తూ,realized,గుర్తించాడు,realized,గుర్తించబడి
+rebuild,పునర్నిర్మాణం చేయు,rebuilds,పునర్నిర్మిస్తాడు/పునర్నిర్మిస్తుంది,rebuilding,పునర్నిర్మిస్తూ,rebuilt,పునర్నిర్మించాడు,rebuilt,పునర్నిర్మించబడి
+recall,"ఉపసంహరణ, మళ్ళించుట",recalls,గుర్తు చేసుకుంటాడు/చేసుకుంటుంది,recalling,గుర్తు చేసుకుంటూ,recalled,గుర్తు చేసుకున్నాడు,recalled,గుర్తు చేసుకోబడి
+recast,"క్రొత్త రూపం తెచ్చు, మెరుగు పరుచు",recasts,తిరిగి వేస్తాడు/వేస్తుంది,recasting,తిరిగి వేస్తూ,recast,తిరిగి వేశాడు,recast,తిరిగి వేయబడి
+receive,"స్వీకరించు, తీసుకొను",receives,అందుకుంటాడు/అందుకుంటుంది,receiving,అందుకుంటూ,received,అందుకున్నాడు,received,అందుకోబడి
+recite,"స్మరించు, ఉచ్చరించు",recites,పఠిస్తాడు/పఠిస్తుంది,reciting,పఠిస్తూ,recited,పఠించాడు,recited,పఠించబడి
+recognize,గుర్తించు,recognizes,గుర్తిస్తాడు/గుర్తిస్తుంది,recognizing,గుర్తిస్తూ,recognized,గుర్తించాడు,recognized,గుర్తించబడి
+recollect,"గుర్తు చేసుకొను, జ్ణప్తికి తెచ్చుకొను",recollects,జ్ఞాపకం చేసుకుంటాడు/చేసుకుంటుంది,recollecting,జ్ఞాపకం చేసుకుంటూ,recollected,జ్ఞాపకం చేసుకున్నాడు,recollected,జ్ఞాపకం చేసుకోబడి
+recur,"మరలమరల వచ్చు, తిరిగి సంభనించు",recurs,పునరావృతమవుతుంది,recurring,పునరావృతమవుతూ,recurred,పునరావృతమైంది,recurred,పునరావృతమై
+redo,మరలా చేయు,redoes,తిరిగి చేస్తాడు/చేస్తుంది,redoing,తిరిగి చేస్తూ,redid,తిరిగి చేశాడు,redone,తిరిగి చేయబడి
+reduce,తగ్గించు,reduces,తగ్గిస్తాడు/తగ్గిస్తుంది,reducing,తగ్గిస్తూ,reduced,తగ్గించాడు,reduced,తగ్గించబడి
+refer,పరిగణలోకి తెచ్చు,refers,సూచిస్తాడు/సూచిస్తుంది,referring,సూచిస్తూ,referred,సూచించాడు,referred,సూచించబడి
+reflect,ప్రతిబింబింపజేయు,reflects,ప్రతిబింబిస్తుంది,reflecting,ప్రతిబింబిస్తూ,reflected,ప్రతిబింబించింది,reflected,ప్రతిబింబించి
+refuse,"కాదనుట, తిరస్కరించుట",refuses,నిరాకరిస్తాడు/నిరాకరిస్తుంది,refusing,నిరాకరిస్తూ,refused,నిరాకరించాడు,refused,నిరాకరించబడి
+regard,సంబంధించి,regards,పరిగణిస్తాడు/పరిగణిస్తుంది,regarding,పరిగణిస్తూ,regarded,పరిగణించాడు,regarded,పరిగణించబడి
+regret,నిరాశ,regrets,పశ్చాత్తాపపడతాడు/పశ్చాత్తాపపడుతుంది,regretting,పశ్చాత్తాపపడుతూ,regretted,పశ్చాత్తాపపడ్డాడు,regretted,పశ్చాత్తాపపడి
+relate,సంబంధించినది,relates,సంబంధం కలిగి ఉంటాడు/ఉంటుంది,relating,సంబంధం కలిగి ఉంటూ,related,సంబంధం ఉంది,related,సంబంధం ఉండి
+relax,విశ్రాంతి తీసుకొను,relaxes,విశ్రాంతి తీసుకుంటాడు/తీసుకుంటుంది,relaxing,విశ్రాంతి తీసుకుంటూ,relaxed,విశ్రాంతి తీసుకున్నాడు,relaxed,విశ్రాంతి తీసుకొని
+rely,ఆధారపడిన,relies,ఆధారపడతాడు/ఆధారపడుతుంది,relying,ఆధారపడుతూ,relied,ఆధారపడ్డాడు,relied,ఆధారపడి
+remain,మిగులు,remains,మిగిలిపోతాడు/మిగిలిపోతుంది,remaining,మిగిలిపోతూ,remained,మిగిలిపోయాడు,remained,మిగిలిపోయి
+remake,"మరల చేయు, మరలా తయారు చేయు",remakes,తిరిగి తయారు చేస్తాడు/చేస్తుంది,remaking,తిరిగి తయారు చేస్తూ,remade,తిరిగి తయారు చేశాడు,remade,తిరిగి తయారు చేయబడి
+remove,తొలగించు,removes,తొలగిస్తాడు/తొలగిస్తుంది,removing,తొలగిస్తూ,removed,తొలగించాడు,removed,తొలగించబడి
+rend,చించుట,rends,చీల్చుతాడు/చీల్చుతుంది,rending,చీల్చుతూ,rent,అద్దెకు ఇచ్చాడు,rent,అద్దెకు ఇవ్వబడి
+renew,పునరుద్ధరణ,renews,పునరుద్ధరిస్తాడు/పునరుద్ధరిస్తుంది,renewing,పునరుద్ధరిస్తూ,renewed,పునరుద్ధరించాడు,renewed,పునరుద్ధరించబడి
+renounce,"త్యజించు, సన్యసించు",renounces,త్యజిస్తాడు/త్యజిస్తుంది,renouncing,త్యజిస్తూ,renounced,త్యజించాడు,renounced,త్యజించబడి
+repair,బాగు చేయు,repairs,మరమ్మత్తు చేస్తాడు/చేస్తుంది,repairing,మరమ్మత్తు చేస్తూ,repaired,మరమ్మత్తు చేశాడు,repaired,మరమ్మత్తు చేయబడి
+repeat,తిరిగి చెప్పు,repeats,పునరావృతం చేస్తాడు/చేస్తుంది,repeating,పునరావృతం చేస్తూ,repeated,పునరావృతం చేశాడు,repeated,పునరావృతం చేయబడి
+replace,స్థాన పూర్తి,replaces,భర్తీ చేస్తాడు/చేస్తుంది,replacing,భర్తీ చేస్తూ,replaced,భర్తీ చేశాడు,replaced,భర్తీ చేయబడి
+reply,జవాబు చెప్పు,replies,సమాధానం చెప్తాడు/చెప్తుంది,replying,సమాధానం చెప్తూ,replied,సమాధానం చెప్పాడు,replied,సమాధానం చెప్పబడి
+report,నివేదిక,reports,నివేదిస్తాడు/నివేదిస్తుంది,reporting,నివేదిస్తూ,reported,నివేదించాడు,reported,నివేదించబడి
+request,"మర్యాదగా అడుగు, మర్యాదతో కూడిన కోరిక",requests,అభ్యర్థిస్తాడు/అభ్యర్థిస్తుంది,requesting,అభ్యర్థిస్తూ,requested,అభ్యర్థించాడు,requested,అభ్యర్థించబడి
+resell,అమ్ముకోవటానికి,resells,తిరిగి అమ్ముతాడు/అమ్ముతుంది,reselling,తిరిగి అమ్ముతూ,resold,తిరిగి అమ్మాడు,resold,తిరిగి అమ్మబడి
+resemble,తలపించే,resembles,పోలి ఉంటాడు/ఉంటుంది,resembling,పోలి ఉంటూ,resembled,పోలి ఉంది,resembled,పోలి ఉండి
+reset,తిరిగి అమర్చు,resets,రీసెట్ చేస్తాడు/చేస్తుంది,resetting,రీసెట్ చేస్తూ,reset,రీసెట్ చేశాడు,reset,రీసెట్ చేయబడి
+resist,అడ్డుకోవటానికి,resists,ఎదుర్కొంటాడు/ఎదుర్కొంటుంది,resisting,ఎదుర్కొంటూ,resisted,ఎదుర్కొన్నాడు,resisted,ఎదుర్కోబడి
+resolve,పరిష్కరించుకొను,resolves,పరిష్కరిస్తాడు/పరిష్కరిస్తుంది,resolving,పరిష్కరిస్తూ,resolved,పరిష్కరించాడు,resolved,పరిష్కరించబడి
+respect,మంచిగౌరవము,respects,గౌరవిస్తాడు/గౌరవిస్తుంది,respecting,గౌరవిస్తూ,respected,గౌరవించాడు,respected,గౌరవించబడి
+rest,విశ్రాంతి,rests,విశ్రాంతి తీసుకుంటాడు/తీసుకుంటుంది,resting,విశ్రాంతి తీసుకుంటూ,rested,విశ్రాంతి తీసుకున్నాడు,rested,విశ్రాంతి తీసుకొని
+restrain,హద్దులో నుంచు,restrains,నిగ్రహించుకుంటాడు/నిగ్రహించుకుంటుంది,restraining,నిగ్రహించుకుంటూ,restrained,నిగ్రహించుకున్నాడు,restrained,నిగ్రహించుకోబడి
+retain,తీసుకొని వుంచు,retains,నిలుపుకుంటాడు/నిలుపుకుంటుంది,retaining,నిలుపుకుంటూ,retained,నిలుపుకున్నాడు,retained,నిలుపుకోబడి
+retch,వాంతి వచ్చునట్లు చేయుట,retches,వాంతి చేసుకుంటాడు/చేసుకుంటుంది,retching,వాంతి చేసుకుంటూ,retched,వాంతి చేసుకున్నాడు,retched,వాంతి చేసుకోబడి
+retire,పదవీ విరమణ,retires,పదవీ విరమణ చేస్తాడు/చేస్తుంది,retiring,పదవీ విరమణ చేస్తూ,retired,పదవీ విరమణ చేశాడు,retired,పదవీ విరమణ చేసి
+return,తిరిగి వచ్చు,returns,తిరిగి వస్తాడు/వస్తుంది,returning,తిరిగి వస్తూ,returned,తిరిగి వచ్చాడు,returned,తిరిగి వచ్చి
+reuse,పునర్వినియోగం,reuses,తిరిగి ఉపయోగిస్తాడు/ఉపయోగిస్తుంది,reusing,తిరిగి ఉపయోగిస్తూ,reused,తిరిగి ఉపయోగించాడు,reused,తిరిగి ఉపయోగించబడి
+review,పునరాలోచన చేయు,reviews,సమీక్షిస్తాడు/సమీక్షిస్తుంది,reviewing,సమీక్షిస్తూ,reviewed,సమీక్షించాడు,reviewed,సమీక్షించబడి
+rewind,"గుర్తు తెచ్చుకొని, మరలా చూచుట",rewinds,రివైండ్ చేస్తాడు/చేస్తుంది,rewinding,రివైండ్ చేస్తూ,rewound,రివైండ్ చేశాడు,rewound,రివైండ్ చేయబడి
+rid,వదులుకొను,rids,వదిలించుకుంటాడు/వదిలించుకుంటుంది,ridding,వదిలించుకుంటూ,rid,వదిలించుకున్నాడు,rid,వదిలించుకోబడి
+ride,"స్వారీ చేయు, పైనుండి నడుపు",rides,సవారీ చేస్తాడు/చేస్తుంది,riding,సవారీ చేస్తూ,rode,సవారీ చేశాడు,ridden,సవారీ చేయబడి
+ring,మోగుట,rings,మోగిస్తాడు/మోగిస్తుంది,ringing,మోగిస్తూ,rang,మోగింది,rung,మోగించబడి
+rise,"పైకిలేచు, ముందుకు ఎదుగు",rises,లేస్తాడు/లేస్తుంది,rising,లేస్తూ,rose,లేచాడు,risen,లేచి
+roar,గర్జించు,roars,గర్జిస్తాడు/గర్జిస్తుంది,roaring,గర్జిస్తూ,roared,గర్జించాడు,roared,గర్జించి
+rob,"దోచుకొను, కొల్లగొట్టు",robs,దోచుకుంటాడు/దోచుకుంటుంది,robbing,దోచుకుంటూ,robbed,దోచుకున్నాడు,robbed,దోచుకోబడి
+roll,"చుట్టుకొను, దొర్లిపోవు",rolls,దొర్లుతాడు/దొర్లుతుంది,rolling,దొర్లుతూ,rolled,దొర్లింది,rolled,దొర్లి
+rot,"శక్తిని కోల్పోవు, మానసికంగా బలహీనపడు",rots,కుళ్ళిపోతాడు/కుళ్ళిపోతుంది,rotting,కుళ్ళిపోతూ,rotted,కుళ్ళిపోయింది,rotted,కుళ్ళిపోయి
+rub,"రుద్దు, తుడిచివేయు",rubs,రుద్దుతాడు/రుద్దుతుంది,rubbing,రుద్దుతూ,rubbed,రుద్దాడు,rubbed,రుద్దబడి
+rule,పాలన చేయు,rules,పాలిస్తాడు/పాలిస్తుంది,ruling,పాలిస్తూ,ruled,పాలించాడు,ruled,పాలించబడి
+run,పరుగెత్తు,runs,పరిగెడతాడు/పరిగెడుతుంది,running,పరిగెడుతూ,ran,పరిగెత్తాడు,run,పరిగెత్తి
+rush,"చొరబడుట, చొచ్చుట",rushes,దూసుకువెళ్తాడు/దూసుకువెళ్తుంది,rushing,దూసుకువెళ్తూ,rushed,దూసుకువెళ్ళాడు,rushed,దూసుకువెళ్లి
+sabotage,ధ్వంసం చేయు,sabotages,విధ్వంసం చేస్తాడు/చేస్తుంది,sabotaging,విధ్వంసం చేస్తూ,sabotaged,విధ్వంసం చేశాడు,sabotaged,విధ్వంసం చేయబడి
+sack,దోచుకొనుట,sacks,తొలగిస్తాడు/తొలగిస్తుంది,sacking,తొలగిస్తూ,sacked,తొలగించాడు,sacked,తొలగించబడి
+sacrifice,"సమర్పించబడిన, త్యాగం చేయబడ్డ",sacrifices,త్యాగం చేస్తాడు/చేస్తుంది,sacrificing,త్యాగం చేస్తూ,sacrificed,త్యాగం చేశాడు,sacrificed,త్యాగం చేయబడి
+sag,బలహీనమగు,sags,కుంగిపోతుంది,sagging,కుంగిపోతూ,sagged,కుంగిపోయింది,sagged,కుంగిపోయి
+sail,ఓడను నడిపే తెర,sails,ప్రయాణిస్తాడు/ప్రయాణిస్తుంది,sailing,ప్రయాణిస్తూ,sailed,ప్రయాణించాడు,sailed,ప్రయాణించబడి
+sally,దాడి చేయు,sallies,బయలుదేరుతాడు/బయలుదేరుతుంది,sallying,బయలుదేరుతూ,sallied,బయలుదేరాడు,sallied,బయలుదేరి
+salute,గౌరవించుట,salutes,వందనం చేస్తాడు/చేస్తుంది,saluting,వందనం చేస్తూ,saluted,వందనం చేశాడు,saluted,వందనం చేయబడి
+salvage,"కాపాడు, రక్షించు",salvages,కాపాడుతాడు/కాపాడుతుంది,salvaging,కాపాడుతూ,salvaged,కాపాడాడు,salvaged,కాపాడబడి
+salve,ప్రశాంశత కలిగించు,salves,ఉపశమనం కలిగిస్తాడు/కలిగిస్తుంది,salving,ఉపశమనం కలిగిస్తూ,salved,ఉపశమనం కలిగించాడు,salved,ఉపశమనం కలిగించబడి
+sample,"ఉదాహరించి, ఉదాహరణతో",samples,నమూనా తీసుకుంటాడు/తీసుకుంటుంది,sampling,నమూనా తీసుకుంటూ,sampled,నమూనా తీసుకున్నాడు,sampled,నమూనా తీసుకోబడి
+sanctify,"పవిత్రీకరించు, అంకితము చేయు",sanctifies,పవిత్రం చేస్తాడు/చేస్తుంది,sanctifying,పవిత్రం చేస్తూ,sanctified,పవిత్రం చేశాడు,sanctified,పవిత్రం చేయబడి
+sanction,"అనుమతి, ఆమోదం",sanctions,మంజూరు చేస్తాడు/చేస్తుంది,sanctioning,మంజూరు చేస్తూ,sanctioned,మంజూరు చేశాడు,sanctioned,మంజూరు చేయబడి
+sash,"దట్టి, నడికట్టు",sashes,కట్టు కడతాడు/కడుతుంది,sashing,కట్టు కడుతూ,sashed,కట్టు కట్టాడు,sashed,కట్టు కట్టబడి
+sate,తృప్తిచేసుట,sates,తృప్తి పరుస్తాడు/పరుస్తుంది,sating,తృప్తి పరుస్తూ,sated,తృప్తి చెందాడు,sated,తృప్తి చెంది
+satiate,"తనివిదీర్చుట, తృప్తిచేసుట, తనివితీరా",satiates,తృప్తి పరుస్తాడు/పరుస్తుంది,satiating,తృప్తి పరుస్తూ,satiated,తృప్తి చెందాడు,satiated,తృప్తి చెంది
+satirise,విమర్శించు,satirises,వ్యంగ్యంగా విమర్శిస్తాడు/విమర్శిస్తుంది,satirising,వ్యంగ్యంగా విమర్శిస్తూ,satirised,వ్యంగ్యంగా విమర్శించాడు,satirised,వ్యంగ్యంగా విమర్శించబడి
+satisfy,సంతృప్తి యిచ్చు,satisfies,సంతృప్తి పరుస్తాడు/పరుస్తుంది,satisfying,సంతృప్తి పరుస్తూ,satisfied,సంతృప్తి చెందాడు,satisfied,సంతృప్తి చెంది
+saturate,"పూర్తిగా నింపు, పూర్తిగా నానబెట్టు",saturates,నింపుతాడు/నింపుతుంది,saturating,నింపుతూ,saturated,నింపబడింది,saturated,నింపబడి
+saunter,"అల్లాడుట, తిరుగుట, విహరించుట",saunters,సహజంగా నడుస్తాడు/నడుస్తుంది,sauntering,సహజంగా నడుస్తూ,sauntered,సహజంగా నడిచాడు,sauntered,సహజంగా నడిచి
+save,"కాపాడు, రక్షించుట",saves,రక్షిస్తాడు/రక్షిస్తుంది,saving,రక్షిస్తూ,saved,రక్షించాడు,saved,రక్షించబడి
+saw,కోయుట,saws,కోస్తాడు/కోస్తుంది,sawing,కోస్తూ,sawed,కోశాడు,sawn,కోయబడి
+say,"చెప్పు, మాట్లాడు",says,చెప్తాడు/చెప్తుంది,saying,చెప్తూ,said,చెప్పాడు,said,చెప్పబడి
+scab,పొక్కుట,scabs,పొక్కు కడుతుంది,scabbing,పొక్కు కడుతూ,scabbed,పొక్కు కట్టింది,scabbed,పొక్కు కట్టి
+scald,కమిలిపోవుట,scalds,కాల్చుతాడు/కాల్చుతుంది,scalding,కాల్చుతూ,scalded,కాల్చింది,scalded,కాల్చబడి
+scale,కొలుచుట,scales,కొలుస్తాడు/కొలుస్తుంది,scaling,కొలుస్తూ,scaled,కొలిచాడు,scaled,కొలవబడి
+scam,"అవినీతిచేయు, వంచనచేయు",scams,మోసం చేస్తాడు/చేస్తుంది,scamming,మోసం చేస్తూ,scammed,మోసం చేశాడు,scammed,మోసం చేయబడి
+scan,అన్వేషించు,scans,స్కాన్ చేస్తాడు/చేస్తుంది,scanning,స్కాన్ చేస్తూ,scanned,స్కాన్ చేశాడు,scanned,స్కాన్ చేయబడి
+scant,"కురచైన, మితమైన",scants,తగ్గిస్తాడు/తగ్గిస్తుంది,scanting,తగ్గిస్తూ,scanted,తగ్గించాడు,scanted,తగ్గించబడి
+scar,"గాట్లు, మచ్చలు",scars,మచ్చ పరుస్తాడు/పరుస్తుంది,scarring,మచ్చ పరుస్తూ,scarred,మచ్చపడింది,scarred,మచ్చపడి
+scare,"భయ పెట్టు, భీతి గొల్పు",scares,భయపెడతాడు/భయపెడుతుంది,scaring,భయపెడుతూ,scared,భయపడ్డాడు,scared,భయపడి
+scarify,భయంగొలుసునది,scarifies,గాయం చేస్తాడు/చేస్తుంది,scarifying,గాయం చేస్తూ,scarified,గాయం చేశాడు,scarified,గాయం చేయబడి
+scarp,గొడవపడు,scarps,వాలుగా చేస్తాడు/చేస్తుంది,scarping,వాలుగా చేస్తూ,scarped,వాలుగా చేశాడు,scarped,వాలుగా చేయబడి
+scat,"లేచిపోయిన, వేగంగా వెడలు",scats,చెల్లాచెదురుగా వెళ్తాడు/వెళ్తుంది,scatting,చెల్లాచెదురుగా వెళ్తూ,scatted,చెల్లాచెదురుగా,scatted,చెల్లాచెదురుగా వెళ్లి
+scatter,అటు ఇటు పడవేయు,scatters,చెల్లాచెదురు చేస్తాడు/చేస్తుంది,scattering,చెల్లాచెదురు చేస్తూ,scattered,చెల్లాచెదురైంది,scattered,చెల్లాచెదురై
+scold,"చీవాట్లు పెట్టు, కోపంతో నిందించు",scolds,తిడతాడు/తిడుతుంది,scolding,తిడుతూ,scolded,తిట్టాడు,scolded,తిట్టబడి
+scorch,ఎండింపజేయు,scorches,కాల్చివేస్తాడు/కాల్చివేస్తుంది,scorching,కాల్చివేస్తూ,scorched,కాల్చివేసింది,scorched,కాల్చివేయబడి
+scowl,కోపం ప్రదర్శించు,scowls,కోపంగా చూస్తాడు/చూస్తుంది,scowling,కోపంగా చూస్తూ,scowled,కోపంగా చూశాడు,scowled,కోపంగా చూసి
+scrawl,అవసరపడి వ్రాయు,scrawls,గీస్తాడు/గీస్తుంది,scrawling,గీస్తూ,scrawled,గీశాడు,scrawled,గీయబడి
+scream,"బిగ్గరగా నవ్వు, గట్టిగా ఏడ్చు",screams,అరుస్తాడు/అరుస్తుంది,screaming,అరుస్తూ,screamed,అరిచాడు,screamed,అరవబడి
+screw,"మరతిప్పుట, బిగించు",screws,స్క్రూ బిగిస్తాడు/బిగిస్తుంది,screwing,స్క్రూ బిగిస్తూ,screwed,స్క్రూ బిగించాడు,screwed,స్క్రూ బిగించబడి
+scrub,"తోముట, రాచుట",scrubs,రుద్దుతాడు/రుద్దుతుంది,scrubbing,రుద్దుతూ,scrubbed,రుద్దాడు,scrubbed,రుద్దబడి
+search,"పరిశోధించుట, వెతుకు, వెతుకుట",searches,వెతుకుతాడు/వెతుకుతుంది,searching,వెతుకుతూ,searched,వెతికాడు,searched,వెతకబడి
+seat,"కూర్చుండపెట్టుట, కూర్చోబెట్టు",seats,కూర్చోబెడతాడు/కూర్చోబెడుతుంది,seating,కూర్చోబెడుతూ,seated,కూర్చున్నాడు,seated,కూర్చోబెట్టబడి
+secure,"జాగ్రత్తచేసుట, భద్రపరుచుట",secures,భద్రపరుస్తాడు/భద్రపరుస్తుంది,securing,భద్రపరుస్తూ,secured,భద్రపరిచాడు,secured,భద్రపరచబడి
+see,"చూచు, మనసుతో తెలుసుకొను",sees,చూస్తాడు/చూస్తుంది,seeing,చూస్తూ,saw,చూశాడు,seen,చూడబడి
+seek,"వెతకు, అన్వేషించు",seeks,కోరుతాడు/కోరుతుంది,seeking,కోరుతూ,sought,కోరాడు,sought,కోరబడి
+seem,"అన్నట్లుగా వుండు, కనిపించు",seems,అనిపిస్తుంది,seeming,అనిపిస్తూ,seemed,అనిపించింది,seemed,అనిపించి
+seize,స్వాధీనం,seizes,పట్టుకుంటాడు/పట్టుకుంటుంది,seizing,పట్టుకుంటూ,seized,పట్టుకున్నాడు,seized,పట్టుకోబడి
+select,"ఎంచుకొను, ఎన్నుకొను",selects,ఎంచుకుంటాడు/ఎంచుకుంటుంది,selecting,ఎంచుకుంటూ,selected,ఎంచుకున్నాడు,selected,ఎంచుకోబడి
+sell,"విక్రయించు, అమ్ము",sells,అమ్ముతాడు/అమ్ముతుంది,selling,అమ్ముతూ,sold,అమ్మాడు,sold,అమ్మబడి
+send,"పంపించు, తీసుకొనిపోవు",sends,పంపుతాడు/పంపుతుంది,sending,పంపుతూ,sent,పంపాడు,sent,పంపబడి
+sentence,"తీర్పుచెప్పుట, విధించు",sentences,శిక్ష విధిస్తాడు/విధిస్తుంది,sentencing,శిక్ష విధిస్తూ,sentenced,శిక్ష విధించాడు,sentenced,శిక్ష విధించబడి
+separate,విడిగా వుంచు,separates,వేరు చేస్తాడు/చేస్తుంది,separating,వేరు చేస్తూ,separated,విడిపోయాడు,separated,విడిపోయి
+set,సరైన స్థితిలో వుంచు,sets,ఏర్పాటు చేస్తాడు/చేస్తుంది,setting,ఏర్పాటు చేస్తూ,set,ఏర్పాటు చేశాడు,set,ఏర్పాటు చేయబడి
+sever,"తెంచుట, వించుట, విడదీయుట",severs,కోసివేస్తాడు/కోసివేస్తుంది,severing,కోసివేస్తూ,severed,కోసివేశాడు,severed,కోసివేయబడి
+sew,దారంతో కుట్టివేయు,sews,కుడతాడు/కుడుతుంది,sewing,కుడుతూ,sewed,కుట్టాడు,sewn,కుట్టబడి
+shake,కదలడము,shakes,ఊపుతాడు/ఊపుతుంది,shaking,ఊపుతూ,shook,ఊపాడు,shaken,ఊపబడి
+shape,ఆకారము,shapes,రూపొందిస్తాడు/రూపొందిస్తుంది,shaping,రూపొందిస్తూ,shaped,రూపొందించాడు,shaped,రూపొందించబడి
+share,పంచుకొను,shares,పంచుకుంటాడు/పంచుకుంటుంది,sharing,పంచుకుంటూ,shared,పంచుకున్నాడు,shared,పంచుకోబడి
+shatter,పగలకొట్టుట,shatters,ముక్కలు చేస్తాడు/చేస్తుంది,shattering,ముక్కలు చేస్తూ,shattered,ముక్కలైంది,shattered,ముక్కలై
+shave,క్షౌరముచేసుట,shaves,క్షవరం చేస్తాడు/చేస్తుంది,shaving,క్షవరం చేస్తూ,shove,నెట్టాడు,shaven,క్షవరం చేయబడి
+shear,బొచ్చులేకుండా కత్తిరించుట,shears,కత్తిరిస్తాడు/కత్తిరిస్తుంది,shearing,కత్తిరిస్తూ,shore,ఒడ్డుకు చేర్చాడు,shorn,కత్తిరించబడి
+shed,"కార్చుట, రాల్చుట",sheds,కారుస్తాడు/కారుస్తుంది,shedding,కారుస్తూ,shed,కార్చింది,shed,కార్చబడి
+shine,"ప్రకాశించు, మెరయు",shines,ప్రకాశిస్తాడు/ప్రకాశిస్తుంది,shining,ప్రకాశిస్తూ,shone,ప్రకాశించింది,shone,ప్రకాశించి
+shirk,భయపడు,shirks,తప్పించుకుంటాడు/తప్పించుకుంటుంది,shirking,తప్పించుకుంటూ,shirked,తప్పించుకున్నాడు,shirked,తప్పించుకోబడి
+shiver,వణుకు,shivers,వణుకుతాడు/వణుకుతుంది,shivering,వణుకుతూ,shivered,వణికిపోయాడు,shivered,వణికి
+shock,"ఆకస్మికంగా, తీవ్రంగా కలిగిన కుదువు",shocks,ఆశ్చర్యపరుస్తాడు/ఆశ్చర్యపరుస్తుంది,shocking,ఆశ్చర్యపరుస్తూ,shocked,ఆశ్చర్యపోయాడు,shocked,ఆశ్చర్యపోయి
+shoot,"కాల్చు, సినిమా తీయు",shoots,కాల్చుతాడు/కాల్చుతుంది,shooting,కాల్చుతూ,shot,కాల్చాడు,shot,కాల్చబడి
+shorten,తగ్గు,shortens,పొట్టిగా చేస్తాడు/చేస్తుంది,shortening,పొట్టిగా చేస్తూ,shortened,పొట్టిగా చేశాడు,shortened,పొట్టిగా చేయబడి
+shout,"బిగ్గరగా అరచు, బిగ్గరగా అరచు",shouts,అరుస్తాడు/అరుస్తుంది,shouting,అరుస్తూ,shouted,అరిచాడు,shouted,అరవబడి
+show,"కనపడుట, కనపరుచుట, చూపించు, చూపుట, తెలియచేసుట",shows,చూపిస్తాడు/చూపిస్తుంది,showing,చూపిస్తూ,showed,చూపించాడు,shown,చూపించబడి
+shrink,"కుంచించుకొనిపోవు, ముడుచుకొను",shrinks,కుదించుకుపోతాడు/కుదించుకుపోతుంది,shrinking,కుదించుకుపోతూ,shrank,కుదించుకుపోయింది,shrunk,కుదించుకుపోయి
+shut,"మూయు, వేసుట",shuts,మూసివేస్తాడు/మూసివేస్తుంది,shutting,మూసివేస్తూ,shut,మూసివేశాడు,shut,మూసివేయబడి
+sight,"చూచుట, చూడుట",sights,చూస్తాడు/చూస్తుంది,sighting,చూస్తూ,sighted,చూశాడు,sighted,చూడబడి
+signal,సైగ చేయు,signals,సంకేతం ఇస్తాడు/ఇస్తుంది,signalling,సంకేతం ఇస్తూ,signalled,సంకేతం ఇచ్చాడు,signalled,సంకేతం ఇవ్వబడి
+signify,గుర్తింపు కలిగిన,signifies,సూచిస్తుంది,signifying,సూచిస్తూ,signified,సూచించింది,signified,సూచించబడి
+sing,గానం చేయు,sings,పాడుతాడు/పాడుతుంది,singing,పాడుతూ,sang,పాడాడు,sung,పాడబడి
+sink,"ముంచివేసుట, ముంచుట",sinks,మునుగుతాడు/మునుగుతుంది,sinking,మునుగుతూ,sank,మునిగిపోయింది,sunk,మునిగిపోయి
+sip,కొంచెం కొంచెం తాగు,sips,చప్పరిస్తాడు/చప్పరిస్తుంది,sipping,చప్పరిస్తూ,sipped,చప్పరించాడు,sipped,చప్పరించబడి
+sit,కూర్చొను,sits,కూర్చుంటాడు/కూర్చుంటుంది,sitting,కూర్చుంటూ,sat,కూర్చున్నాడు,sat,కూర్చొని
+ski,ఆకాశంలో నుంచి దూకు,skis,స్కైయింగ్ చేస్తాడు/చేస్తుంది,skiing,స్కైయింగ్ చేస్తూ,skied,స్కైయింగ్ చేశాడు,skied,స్కైయింగ్ చేయబడి
+skid,జారుట,skids,జారిపడతాడు/జారిపడుతుంది,skidding,జారిపడుతూ,skidded,జారిపడ్డాడు,skidded,జారిపడి
+slam,నేలకి కొట్టటం,slams,గట్టిగా కొడతాడు/కొడుతుంది,slamming,గట్టిగా కొడుతూ,slammed,గట్టిగా కొట్టాడు,slammed,గట్టిగా కొట్టబడి
+slay,వధించు,slays,చంపుతాడు/చంపుతుంది,slaying,చంపుతూ,slew,చంపాడు,slain,చంపబడి
+sleep,నిద్రపోవు,sleeps,నిద్రపోతాడు/నిద్రపోతుంది,sleeping,నిద్రపోతూ,slept,నిద్రపోయాడు,slept,నిద్రపోయి
+slide,నున్నని ప్రదేశముపై జారు,slides,జారుతాడు/జారుతుంది,sliding,జారుతూ,slid,జారాడు,slid/slide,జారి
+slip,జారుట,slips,జారిపడతాడు/జారిపడుతుంది,slipping,జారిపడుతూ,slipped,జారిపడ్డాడు,slipped,జారిపడి
+slit,"చీలిక, కోత",slits,చీల్చుతాడు/చీల్చుతుంది,slitting,చీల్చుతూ,slit,చీల్చాడు,slit,చీల్చబడి
+smash,"ముక్కలు చేయు, నాశనం చేయు",smashes,పగులగొడతాడు/పగులగొడుతుంది,smashing,పగులగొడుతూ,smashed,పగులగొట్టాడు,smashed,పగులగొట్టబడి
+smell,వాసన చూచు,smells,వాసన చూస్తాడు/చూస్తుంది,smelling,వాసన చూస్తూ,smelt,వాసన చూశాడు,smelt,వాసన చూడబడి
+smile,నవ్వు,smiles,నవ్వుతాడు/నవ్వుతుంది,smiling,నవ్వుతూ,smiled,నవ్వాడు,smiled,నవ్వబడి
+smooth,నునుపైన,smoothes,నునుపుగా చేస్తాడు/చేస్తుంది,smoothing,నునుపుగా చేస్తూ,smoothed,నునుపుగా చేశాడు,smoothed,నునుపుగా చేయబడి
+snap,చిటపట శబ్దం చేయు,snaps,విరుస్తాడు/విరుస్తుంది,snapping,విరుస్తూ,snapped,విరిచాడు,snapped,విరిచి
+snatch,"పెరుక్కొనుట, బలత్కారంగా ఎత్తుకొనిపోవు",snatches,లాక్కుంటాడు/లాక్కుంటుంది,snatching,లాక్కుంటూ,snatched,లాక్కున్నాడు,snatched,లాక్కోబడి
+sneak,"నక్కుట, జారుకొను",sneaks,దొంగచాటుగా వెళ్తాడు/వెళ్తుంది,sneaking,దొంగచాటుగా వెళ్తూ,sneaked,దొంగచాటుగా వెళ్ళాడు,sneaked,దొంగచాటుగా వెళ్లి
+sneeze,తుమ్ముట,sneezes,తుమ్ముతాడు/తుమ్ముతుంది,sneezing,తుమ్ముతూ,sneezed,తుమ్మాడు,sneezed,తుమ్మబడి
+sob,ఏడుస్తూ,sobs,వెక్కి వెక్కి ఏడుస్తాడు/ఏడుస్తుంది,sobbing,వెక్కి వెక్కి ఏడుస్తూ,sobbed,వెక్కి వెక్కి ఏడ్చాడు,sobbed,వెక్కి వెక్కి ఏడ్చి
+solicit,ప్రార్ధించుట బతిమాలుకొనుట వేడుకొనుట,solicits,కోరుతాడు/కోరుతుంది,soliciting,కోరుతూ,solicited,కోరాడు,solicited,కోరబడి
+solve,పరిష్కరించుట,solves,పరిష్కరిస్తాడు/పరిష్కరిస్తుంది,solving,పరిష్కరిస్తూ,solved,పరిష్కరించాడు,solved,పరిష్కరించబడి
+soothe,ఓదార్చుట,soothes,ఓదార్చుతాడు/ఓదార్చుతుంది,soothing,ఓదార్చుతూ,soothed,ఓదార్చాడు,soothed,ఓదార్చబడి
+sort,విభజించుట,sorts,వర్గీకరిస్తాడు/వర్గీకరిస్తుంది,sorting,వర్గీకరిస్తూ,sorted,వర్గీకరించాడు,sorted,వర్గీకరించబడి
+sparkle,మెరయు,sparkles,మెరుస్తుంది,sparkling,మెరుస్తూ,sparkled,మెరిసింది,sparkled,మెరిసి
+speak,మాట్లాడు ఉపన్యసించు,speaks,మాట్లాడుతాడు/మాట్లాడుతుంది,speaking,మాట్లాడుతూ,spoke,మాట్లాడాడు,spoken,మాట్లాడబడి
+spell,పదంలోని అక్షరములను చెప్పు,spells,అక్షరక్రమం చెప్తాడు/చెప్తుంది,spelling,అక్షరక్రమం చెప్తూ,spelt,అక్షరక్రమం చెప్పాడు,spelt,అక్షరక్రమం చెప్పబడి
+spend,"ఖర్చు చేయు, గడుపు",spends,ఖర్చు చేస్తాడు/చేస్తుంది,spending,ఖర్చు చేస్తూ,spent,ఖర్చు చేశాడు,spent,ఖర్చు చేయబడి
+spill,"చల్లు, తొణుకు",spills,ఒలికిస్తాడు/ఒలికిస్తుంది,spilling,ఒలికిస్తూ,spilt,ఒలికింది,spilt,ఒలికి
+spin,తిరుగుట,spins,తిప్పుతాడు/తిప్పుతుంది,spinning,తిప్పుతూ,span/spun,తిప్పాడు,spun,తిప్పబడి
+spit,ఉమ్మివేసుట,spits,ఉమ్ముతాడు/ఉమ్ముతుంది,spitting,ఉమ్ముతూ,spat/spit,ఉమ్మాడు,spat/spit,ఉమ్మబడి
+split,విడగొట్టు,splits,చీల్చుతాడు/చీల్చుతుంది,splitting,చీల్చుతూ,split,చీల్చాడు,split,చీల్చబడి
+spoil,నాశనం చేయు,spoils,పాడు చేస్తాడు/చేస్తుంది,spoiling,పాడు చేస్తూ,spoilt,పాడు చేశాడు,spoilt,పాడు చేయబడి
+spray,పిచికారీ చేయు,sprays,స్ప్రే చేస్తాడు/చేస్తుంది,spraying,స్ప్రే చేస్తూ,sprayed,స్ప్రే చేశాడు,sprayed,స్ప్రే చేయబడి
+spread,"విస్తరించు, పూర్తిగా కప్పు",spreads,వ్యాపింపజేస్తాడు/వ్యాపింపజేస్తుంది,spreading,వ్యాపింపజేస్తూ,spread,వ్యాపించింది,spread,వ్యాపించి
+spring,ఎగిరిపడు,springs,దూకుతాడు/దూకుతుంది,springing,దూకుతూ,sprang,దూకాడు,sprung,దూకి
+sprout,మొలకెత్తు,sprouts,మొలకెత్తుతుంది,sprouting,మొలకెత్తుతూ,sprouted,మొలకెత్తింది,sprouted,మొలకెత్తి
+squeeze,పిండి వేయు,squeezes,పిండుతాడు/పిండుతుంది,squeezing,పిండుతూ,squeezed,పిండాడు,squeezed,పిండబడి
+stand,నిలబడు,stands,నిలబడతాడు/నిలబడుతుంది,standing,నిలబడుతూ,stood,నిలబడ్డాడు,stood,నిలబడి
+stare,తదేకంగా చూడు,stares,చూస్తూ ఉండిపోతాడు/ఉండిపోతుంది,staring,చూస్తూ ఉండిపోతూ,stared,చూస్తూ ఉండిపోయాడు,stared,చూస్తూ ఉండిపోయి
+start,"ప్రారంభించు, బయలుదేరు",starts,ప్రారంభిస్తాడు/ప్రారంభిస్తుంది,starting,ప్రారంభిస్తూ,started,ప్రారంభించాడు,started,ప్రారంభించబడి
+state,చెప్పుట,states,తెలుపుతాడు/తెలుపుతుంది,stating,తెలుపుతూ,stated,తెలిపాడు,stated,తెలిపబడి
+stay,"ఉండు, నిలుచుట",stays,ఉంటాడు/ఉంటుంది,staying,ఉంటూ,stayed,ఉన్నాడు,stayed,ఉండి
+steal,దొంగలించు,steals,దొంగిలిస్తాడు/దొంగిలిస్తుంది,stealing,దొంగిలిస్తూ,stole,దొంగిలించాడు,stolen,దొంగిలించబడి
+steep,పైకి పెరిగిన,steeps,నానబెడతాడు/నానబెడుతుంది,steeping,నానబెడుతూ,steeped,నానబెట్టాడు,steeped,నానబెట్టబడి
+stem,ఎదిరించుట ఎదురాడుట విరోధించుట,stems,ఆపుతాడు/ఆపుతుంది,stemming,ఆపుతూ,stemmed,ఆపాడు,stemmed,ఆపబడి
+step,అడుగుపెట్టుట తొక్కుట,steps,అడుగు వేస్తాడు/వేస్తుంది,stepping,అడుగు వేస్తూ,stepped,అడుగు వేశాడు,stepped,అడుగు వేయబడి
+sterilize,మరిగించి క్రిములను చంపు,sterilizes,క్రిమిరహితం చేస్తాడు/చేస్తుంది,sterilizing,క్రిమిరహితం చేస్తూ,sterilized,క్రిమిరహితం చేశాడు,sterilized,క్రిమిరహితం చేయబడి
+stick,అంటించుట అతికించుట,sticks,అతుక్కుంటాడు/అతుక్కుంటుంది,sticking,అతుక్కుంటూ,stuck,అతుక్కున్నాడు,stuck,అతుక్కుని
+stimulate,పురికొల్పుట రేచుట,stimulates,ప్రేరేపిస్తాడు/ప్రేరేపిస్తుంది,stimulating,ప్రేరేపిస్తూ,stimulated,ప్రేరేపించాడు,stimulated,ప్రేరేపించబడి
+sting,కరుచుట కొరుకుట,stings,కుడుతుంది,stinging,కుడుతూ,stung,కుట్టింది,stung,కుట్టబడి
+stir,కలియపెట్టుట కలుపుట కుళ్లగించుట,stirs,కదిలిస్తాడు/కదిలిస్తుంది,stirring,కదిలిస్తూ,stirred,కదిలించాడు,stirred,కదిలించబడి
+stitch,కుట్టుట,stitches,కుడతాడు/కుడుతుంది,stitching,కుడుతూ,stitched,కుట్టాడు,stitched,కుట్టబడి
+stop,"అడ్డగించుట, ఆగు, ఆపు",stops,ఆపుతాడు/ఆపుతుంది,stopping,ఆపుతూ,stopped,ఆగాడు,stopped,ఆపబడి
+store,"కూడబెట్టుట, చేర్చిపెట్టుట",stores,నిల్వ చేస్తాడు/చేస్తుంది,storing,నిల్వ చేస్తూ,stored,నిల్వ చేశాడు,stored,నిల్వ చేయబడి
+strain,అధికంగా శ్రమపడు,strains,ఒత్తిడి చేస్తాడు/చేస్తుంది,straining,ఒత్తిడి చేస్తూ,strained,ఒత్తిడి చేశాడు,strained,ఒత్తిడి చేయబడి
+stray,అటు ఇటు తిరుగు,strays,తప్పిపోతాడు/తప్పిపోతుంది,straying,తప్పిపోతూ,strayed,తప్పిపోయాడు,strayed,తప్పిపోయి
+stress,ఒత్తిడి చేయు,stresses,ఒత్తిడికి గురిచేస్తాడు/గురిచేస్తుంది,stressing,ఒత్తిడికి గురిచేస్తూ,stressed,ఒత్తిడికి గురయ్యాడు,stressed,ఒత్తిడికి గురై
+stretch,"చాచు, విస్తరించు",stretches,సాగుతాడు/సాగుతుంది,stretching,సాగుతూ,stretched,సాగాడు,stretched,సాగబడి
+stride,పెద్ద అడుగులు వేస్తూ నడచు,strides,వేగంగా నడుస్తాడు/నడుస్తుంది,striding,వేగంగా నడుస్తూ,strode,వేగంగా నడిచాడు,stridden,వేగంగా నడవబడి
+strike,కొట్టుట,strikes,కొడతాడు/కొడుతుంది,striking,కొడుతూ,struck,కొట్టాడు,struck/stricken,కొట్టబడి
+string,కుట్టు,strings,కడతాడు/కడుతుంది,stringing,కడుతూ,strung,కట్టాడు,strung,కట్టబడి
+strive,ప్రయత్నము చేయు,strives,ప్రయత్నిస్తాడు/ప్రయత్నిస్తుంది,striving,ప్రయత్నిస్తూ,strove,ప్రయత్నించాడు,striven,ప్రయత్నించబడి
+study,పరిశీలన,studies,చదువుతాడు/చదువుతుంది,studying,చదువుతూ,studied,చదువుకున్నాడు,studied,చదువుకోబడి
+submit,అప్పగించు,submits,సమర్పిస్తాడు/సమర్పిస్తుంది,submitting,సమర్పిస్తూ,submitted,సమర్పించాడు,submitted,సమర్పించబడి
+subscribe,ధృవీకరించు,subscribes,సభ్యత్వం పొందుతాడు/పొందుతుంది,subscribing,సభ్యత్వం పొందుతూ,subscribed,సభ్యత్వం పొందాడు,subscribed,సభ్యత్వం పొందబడి
+subtract,తీసివేత,subtracts,తీసివేస్తాడు/తీసివేస్తుంది,subtracting,తీసివేస్తూ,subtracted,తీసివేశాడు,subtracted,తీసివేయబడి
+succeed,సాధించు,succeeds,విజయం సాధిస్తాడు/సాధిస్తుంది,succeeding,విజయం సాధిస్తూ,succeeded,విజయం సాధించాడు,succeeded,విజయం సాధించి
+suck,పీల్చుకొను,sucks,పీలుస్తాడు/పీలుస్తుంది,sucking,పీలుస్తూ,sucked,పీల్చాడు,sucked,పీల్చబడి
+suffer,బాధ,suffers,బాధపడతాడు/బాధపడుతుంది,suffering,బాధపడుతూ,suffered,బాధపడ్డాడు,suffered,బాధపడి
+suggest,"సూచించు, సలహా చెప్పు",suggests,సూచిస్తాడు/సూచిస్తుంది,suggesting,సూచిస్తూ,suggested,సూచించాడు,suggested,సూచించబడి
+summon,ఆజ్ఞాపించు,summons,పిలిపిస్తాడు/పిలిపిస్తుంది,summoning,పిలిపిస్తూ,summoned,పిలిపించాడు,summoned,పిలిపించబడి
+supply,సరఫరా చేయు,supplies,సరఫరా చేస్తాడు/చేస్తుంది,supplying,సరఫరా చేస్తూ,supplied,సరఫరా చేశాడు,supplied,సరఫరా చేయబడి
+support,సహాయము,supports,మద్దతు ఇస్తాడు/ఇస్తుంది,supporting,మద్దతు ఇస్తూ,supported,మద్దతు ఇచ్చాడు,supported,మద్దతు ఇవ్వబడి
+suppose,సాధ్యమేనని భావించు,supposes,అనుకుంటాడు/అనుకుంటుంది,supposing,అనుకుంటూ,supposed,అనుకున్నాడు,supposed,అనుకోబడి
+surge,"పైకిలేచు, ఉప్పొంగు",surges,పెరుగుతుంది,surging,పెరుగుతూ,surged,పెరిగింది,surged,పెరిగి
+surmise,"అనుమానించు,అనుమానించు",surmises,ఊహిస్తాడు/ఊహిస్తుంది,surmising,ఊహిస్తూ,surmised,ఊహించాడు,surmised,ఊహించబడి
+surpass,అందకుండా పోవు,surpasses,అధిగమిస్తాడు/అధిగమిస్తుంది,surpassing,అధిగమిస్తూ,surpassed,అధిగమించాడు,surpassed,అధిగమించబడి
+surround,చుట్టు వ్యాపించు,surrounds,చుట్టుముడతాడు/చుట్టుముడుతుంది,surrounding,చుట్టుముడుతూ,surrounded,చుట్టుముట్టాడు,surrounded,చుట్టుముట్టబడి
+survey,సర్వే,surveys,సర్వే చేస్తాడు/చేస్తుంది,surveying,సర్వే చేస్తూ,surveyed,సర్వే చేశాడు,surveyed,సర్వే చేయబడి
+survive,జీవించు,survives,బతుకుతాడు/బతుకుతుంది,surviving,బతుకుతూ,survived,బతికాడు,survived,బతికి
+swallow,మ్రింగు,swallows,మింగుతాడు/మింగుతుంది,swallowing,మింగుతూ,swallowed,మింగాడు,swallowed,మింగబడి
+sway,ఇటు అటు ఊగులాడు,sways,ఊగుతాడు/ఊగుతుంది,swaying,ఊగుతూ,swayed,ఊగాడు,swayed,ఊగి
+swear,ప్రమాణము చేయు,swears,ఒట్టు వేస్తాడు/వేస్తుంది,swearing,ఒట్టు వేస్తూ,swore,ఒట్టు వేశాడు,sworn,ఒట్టు వేయబడి
+sweat,చెమట,sweats,చెమట పడుతుంది,sweating,చెమట పడుతూ,sweat,చెమట పట్టింది,sweat,చెమట పట్టి
+sweep,"తుడుచు, ఊడ్చు",sweeps,ఊడుస్తాడు/ఊడుస్తుంది,sweeping,ఊడుస్తూ,swept,ఊడ్చాడు,swept,ఊడ్చబడి
+swell,"ఉబ్బు, వాచు",swells,వాపు వస్తుంది,swelling,వాస్తూ,swelled,వాచింది,swollen,వాచి
+swim,ఈత గొట్టు,swims,ఈదుతాడు/ఈదుతుంది,swimming,ఈదుతూ,swam,ఈదాడు,swum,ఈదబడి
+swing,"ఊగుట, వ్రేలాడు",swings,ఊపుతాడు/ఊపుతుంది,swinging,ఊపుతూ,swung,ఊపాడు,swung,ఊపబడి
+take,తీసుకొనుట,takes,తీసుకుంటాడు/తీసుకుంటుంది,taking,తీసుకుంటూ,took,తీసుకున్నాడు,taken,తీసుకోబడి
+talk,మాట్లాడటం,talks,మాట్లాడుతాడు/మాట్లాడుతుంది,talking,మాట్లాడుతూ,talked,మాట్లాడాడు,talked,మాట్లాడబడి
+tap,తట్టుట,taps,తడతాడు/తడుతుంది,tapping,తడుతూ,tapped,తట్టాడు,tapped,తట్టబడి
+taste,రుచి చూడు,tastes,రుచి చూస్తాడు/చూస్తుంది,tasting,రుచి చూస్తూ,tasted,రుచి చూశాడు,tasted,రుచి చూడబడి
+tax,శిస్తు లేని,taxes,పన్ను విధిస్తాడు/విధిస్తుంది,taxing,పన్ను విధిస్తూ,taxed,పన్ను విధించాడు,taxed,పన్ను విధించబడి
+teach,పాఠాలు నేర్పు విద్య బోధించు,teaches,బోధిస్తాడు/బోధిస్తుంది,teaching,బోధిస్తూ,taught,బోధించాడు,taught,బోధించబడి
+tear,"చించు, కన్నీరు కార్చు",tears,చింపుతాడు/చింపుతుంది,tearing,చింపుతూ,tore,చించివేశాడు,torn,చింపబడి
+tell,"చెప్పు, అనుట, చెప్పు, చెప్పుట",tells,చెప్తాడు/చెప్తుంది,telling,చెప్తూ,told,చెప్పాడు,told,చెప్పబడి
+tempt,"ఆశపెట్టు, నియంత్రణ లేని",tempts,ప్రలోభపెడతాడు/ప్రలోభపెడుతుంది,tempting,ప్రలోభపెడుతూ,tempted,ప్రలోభపెట్టాడు,tempted,ప్రలోభపెట్టబడి
+tend,"కాచుట, కాపాడుట",tends,పర్యవేక్షిస్తాడు/పర్యవేక్షిస్తుంది,tending,పర్యవేక్షిస్తూ,tended,పర్యవేక్షించాడు,tended,పర్యవేక్షించబడి
+terminate,రద్దు చేయు,terminates,ముగిస్తాడు/ముగిస్తుంది,terminating,ముగిస్తూ,terminated,ముగించాడు,terminated,ముగించబడి
+terrify,భయపెట్టుట,terrifies,భయపెడతాడు/భయపెడుతుంది,terrifying,భయపెడుతూ,terrified,భయపడ్డాడు,terrified,భయపడి
+test,"శోధించుట, పరీక్షించు",tests,పరీక్షిస్తాడు/పరీక్షిస్తుంది,testing,పరీక్షిస్తూ,tested,పరీక్షించాడు,tested,పరీక్షించబడి
+thank,కృతజ్ఞత తెలుపు,thanks,ధన్యవాదాలు చెప్తాడు/చెప్తుంది,thanking,ధన్యవాదాలు చెప్తూ,thanked,ధన్యవాదాలు తెలిపాడు,thanked,ధన్యవాదాలు తెలపబడి
+think,ఆలోచించు,thinks,ఆలోచిస్తాడు/ఆలోచిస్తుంది,thinking,ఆలోచిస్తూ,thought,ఆలోచించాడు,thought,ఆలోచించబడి
+thrive,వృద్ధి పొందు,thrives,వృద్ధి చెందుతాడు/చెందుతుంది,thriving,వృద్ధి చెందుతూ,throve,వృద్ధి చెందాడు,thriven,వృద్ధి చెంది
+throw,విసరు,throws,విసురుతాడు/విసురుతుంది,throwing,విసురుతూ,threw,విసిరాడు,thrown,విసరబడి
+thrust,"గెంటుట, తాకుట, తోసుట",thrusts,తోస్తాడు/తోస్తుంది,thrusting,తోస్తూ,thrust,తోశాడు,thrust,తోయబడి
+thump,కొట్టుట,thumps,గట్టిగా కొడతాడు/కొడుతుంది,thumping,గట్టిగా కొడుతూ,thumped,గట్టిగా కొట్టాడు,thumped,గట్టిగా కొట్టబడి
+tie,ముడి,ties,కడతాడు/కడుతుంది,tying,కడుతూ,tied,కట్టాడు,tied,కట్టబడి
+tire,విసుగు,tires,అలసిపోతాడు/అలసిపోతుంది,tiring,అలసిపోతూ,tired,అలసిపోయాడు,tired,అలసిపోయి
+toss,పైకి ఎగరవేయు,tosses,ఎగరేస్తాడు/ఎగరేస్తుంది,tossing,ఎగరేస్తూ,tossed,ఎగరేశాడు,tossed,ఎగరవేయబడి
+touch,తాకు,touches,తాకుతాడు/తాకుతుంది,touching,తాకుతూ,touched,తాకాడు,touched,తాకబడి
+train,శిక్షణనిచ్చు,trains,శిక్షణ ఇస్తాడు/ఇస్తుంది,training,శిక్షణ ఇస్తూ,trained,శిక్షణ ఇచ్చాడు,trained,శిక్షణ ఇవ్వబడి
+trample,కాలితో తొక్కు,tramples,తొక్కుతాడు/తొక్కుతుంది,trampling,తొక్కుతూ,trampled,తొక్కాడు,trampled,తొక్కబడి
+transfer,మరియొక చోటికి మార్చు,transfers,బదిలీ చేస్తాడు/చేస్తుంది,transferring,బదిలీ చేస్తూ,transferred,బదిలీ చేశాడు,transferred,బదిలీ చేయబడి
+transform,"ఆకారం మార్చు, మరు రూపము చేయు",transforms,రూపాంతరం చెందుతాడు/చెందుతుంది,transforming,రూపాంతరం చెందుతూ,transformed,రూపాంతరం చెందాడు,transformed,రూపాంతరం చెంది
+translate,తర్జుమా చేయు,translates,అనువదిస్తాడు/అనువదిస్తుంది,translating,అనువదిస్తూ,translated,అనువదించాడు,translated,అనువదించబడి
+trap,ఉచ్చుపన్ను,traps,చిక్కుకుంటాడు/చిక్కుకుంటుంది,trapping,చిక్కుకుంటూ,trapped,చిక్కుకున్నాడు,trapped,చిక్కుకొని
+travel,ప్రయాణించు,travels,ప్రయాణిస్తాడు/ప్రయాణిస్తుంది,travelling,ప్రయాణిస్తూ,travelled,ప్రయాణించాడు,travelled,ప్రయాణించబడి
+tread,"తొక్కుట, నడుచుట",treads,నడుస్తాడు/నడుస్తుంది,treading,నడుస్తూ,trod,నడిచాడు,trodden,నడవబడి
+treat,వ్యవహరించిన,treats,చికిత్స చేస్తాడు/చేస్తుంది,treating,చికిత్స చేస్తూ,treated,చికిత్స చేశాడు,treated,చికిత్స చేయబడి
+tremble,"వణుకు, భయపడు",trembles,వణుకుతాడు/వణుకుతుంది,trembling,వణుకుతూ,trembled,వణికిపోయాడు,trembled,వణికి
+triumph,గొప్ప విజయము,triumphs,విజయం సాధిస్తాడు/సాధిస్తుంది,triumphing,విజయం సాధిస్తూ,triumphed,విజయం సాధించాడు,triumphed,విజయం సాధించి
+trust,"నమ్ముట, విశ్వసించుట",trusts,నమ్ముతాడు/నమ్ముతుంది,trusting,నమ్ముతూ,trusted,నమ్మాడు,trusted,నమ్మబడి
+try,యత్నము చేయు,tries,ప్రయత్నిస్తాడు/ప్రయత్నిస్తుంది,trying,ప్రయత్నిస్తూ,tried,ప్రయత్నించాడు,tried,ప్రయత్నించబడి
+turn,తిరుగు,turns,తిరుగుతాడు/తిరుగుతుంది,turning,తిరుగుతూ,turned,తిరిగాడు,turned,తిరగబడి
+type,టైపు చేయు,types,టైప్ చేస్తాడు/చేస్తుంది,typing,టైప్ చేస్తూ,typed,టైప్ చేశాడు,typed,టైప్ చేయబడి
+understand,అర్దం చేసుకొను,understands,అర్థం చేసుకుంటాడు/చేసుకుంటుంది,understanding,అర్థం చేసుకుంటూ,understood,అర్థం చేసుకున్నాడు,understood,అర్థం చేసుకోబడి
+undo,దిద్దుబాటు రద్దుచెయ్యి,undoes,విప్పుతాడు/విప్పుతుంది,undoing,విప్పుతూ,undid,విప్పాడు,undone,విప్పబడి
+uproot,వేరుతో పెకిలించి పారవేయు,uproots,పెకిలిస్తాడు/పెకిలిస్తుంది,uprooting,పెకిలిస్తూ,uprooted,పెకిలించాడు,uprooted,పెకిలించబడి
+upset,కలత,upsets,విచారపడతాడు/విచారపడుతుంది,upsetting,విచారపడుతూ,upset,విచారపడ్డాడు,upset,విచారపడి
+urge,తపన,urges,ఒత్తిడి చేస్తాడు/చేస్తుంది,urging,ఒత్తిడి చేస్తూ,urged,ఒత్తిడి చేశాడు,urged,ఒత్తిడి చేయబడి
+use,ఉపయోగించుట,uses,ఉపయోగిస్తాడు/ఉపయోగిస్తుంది,using,ఉపయోగిస్తూ,used,ఉపయోగించాడు,used,ఉపయోగించబడి
+utter,"ఉచ్చరించుట, చెప్పుట, పలుకుట",utters,ఉచ్ఛరిస్తాడు/ఉచ్ఛరిస్తుంది,uttering,ఉచ్ఛరిస్తూ,uttered,ఉచ్ఛరించాడు,uttered,ఉచ్ఛరించబడి
+value,విలువ,values,విలువ ఇస్తాడు/ఇస్తుంది,valuing,విలువ ఇస్తూ,valued,విలువ కట్టాడు,valued,విలువ కట్టబడి
+vanish,"అంతర్ధానమైనపోవుట, అదృశ్యమైపోవు",vanishes,అదృశ్యమవుతాడు/అదృశ్యమవుతుంది,vanishing,అదృశ్యమవుతూ,vanished,అదృశ్యమయ్యాడు,vanished,అదృశ్యమై
+vary,మారుతూ,varies,మారుతాడు/మారుతుంది,varying,మారుతూ,varied,భిన్నంగా ఉంది,varied,భిన్నంగా ఉండి
+verify,"నిజపరచుట, పరీక్షించు",verifies,ధృవీకరిస్తాడు/ధృవీకరిస్తుంది,verifying,ధృవీకరిస్తూ,verified,ధృవీకరించాడు,verified,ధృవీకరించబడి
+vex,"బాధించుటగ, వేధించుట",vexes,విసుగు చెందుతాడు/చెందుతుంది,vexing,విసుగు చెందుతూ,vexed,విసుగు చెందాడు,vexed,విసుగు చెంది
+vie,తిరస్కరించుట,vies,పోటీ పడతాడు/పడుతుంది,vying,పోటీ పడుతూ,vied,పోటీ పడ్డాడు,vied,పోటీ పడి
+view,చూపు,views,చూస్తాడు/చూస్తుంది,viewing,చూస్తూ,viewed,చూశాడు,viewed,చూడబడి
+violate,ఉల్లంఘించే,violates,ఉల్లంఘిస్తాడు/ఉల్లంఘిస్తుంది,violating,ఉల్లంఘిస్తూ,violated,ఉల్లంఘించాడు,violated,ఉల్లంఘించబడి
+vomit,వాంతి,vomits,వాంతి చేసుకుంటాడు/చేసుకుంటుంది,vomiting,వాంతి చేసుకుంటూ,vomited,వాంతి చేసుకున్నాడు,vomited,వాంతి చేసుకోబడి
+wake,మేలుకొను,wakes,మేల్కొంటాడు/మేల్కొంటుంది,waking,మేల్కొంటూ,woke,మేల్కొన్నాడు,woken,మేల్కొని
+walk,నడచు,walks,నడుస్తాడు/నడుస్తుంది,walking,నడుస్తూ,walked,నడిచాడు,walked,నడవబడి
+wander,"తిరుగుట, సంచరించుట",wanders,తిరుగుతాడు/తిరుగుతుంది,wandering,తిరుగుతూ,wandered,తిరిగాడు,wandered,తిరిగి
+want,కావలసిన,wants,కోరుకుంటాడు/కోరుకుంటుంది,wanting,కోరుకుంటూ,wanted,కోరుకున్నాడు,wanted,కోరబడి
+warn,హెచ్చరించు,warns,హెచ్చరిస్తాడు/హెచ్చరిస్తుంది,warning,హెచ్చరిస్తూ,warned,హెచ్చరించాడు,warned,హెచ్చరించబడి
+waste,వృధా,wastes,వృధా చేస్తాడు/చేస్తుంది,wasting,వృధా చేస్తూ,wasted,వృధా చేశాడు,wasted,వృధా చేయబడి
+watch,"కాచుట, కాపాడుట, కావలివుండుట",watches,చూస్తాడు/చూస్తుంది,watching,చూస్తూ,watched,చూశాడు,watched,చూడబడి
+water,"చెమర్చుట, నీళ్ళుకట్టుట, నీళ్ళుకారుట",waters,నీళ్ళు పోస్తాడు/పోస్తుంది,watering,నీళ్ళు పోస్తూ,watered,నీళ్ళు పోశాడు,watered,నీళ్ళు పోయబడి
+wave,"అల, వీచుట",waves,ఊపుతాడు/ఊపుతుంది,waving,ఊపుతూ,waved,ఊపాడు,waved,ఊపబడి
+wax,"ఆపుట, పెరుగుట, వృద్ధియవుట",waxes,పెరుగుతుంది,waxing,పెరుగుతూ,waxed,పెరిగింది,waxed,పెరిగి
+waylay,దాగియుండి పైబడు,waylays,అడ్డగిస్తాడు/అడ్డగిస్తుంది,waylaying,అడ్డగిస్తూ,waylaid,అడ్డగించాడు,waylaid,అడ్డగించబడి
+wear,ధరించు,wears,ధరిస్తాడు/ధరిస్తుంది,wearing,ధరిస్తూ,wore,ధరించాడు,worn,ధరించబడి
+weave,నేయు,weaves,అల్లుతాడు/అల్లుతుంది,weaving,అల్లుతూ,wove,అల్లాడు,woven,అల్లబడి
+wed,పెళ్లి అవుట,weds,పెళ్లి చేసుకుంటాడు/చేసుకుంటుంది,wedding,పెళ్లి చేసుకుంటూ,wed,పెళ్లి చేసుకున్నాడు,wed,పెళ్లి చేసుకోబడి
+weep,"కన్నీరు కార్చు, ఏడువు",weeps,ఏడుస్తాడు/ఏడుస్తుంది,weeping,ఏడుస్తూ,wept,ఏడ్చాడు,wept,ఏడ్చి
+weigh,తూచుట,weighs,తూకం వేస్తాడు/వేస్తుంది,weighing,తూకం వేస్తూ,weighed,తూకం వేశాడు,weighed,తూకం వేయబడి
+welcome,సుస్వాగతము,welcomes,స్వాగతిస్తాడు/స్వాగతిస్తుంది,welcoming,స్వాగతిస్తూ,welcomed,స్వాగతించాడు,welcomed,స్వాగతించబడి
+wend,"పోవుట, వెళ్ళుట",wends,వెళ్తాడు/వెళ్తుంది,wending,వెళ్తూ,went,వెళ్ళాడు,went,వెళ్లి
+wet,తడిచిన,wets,తడుపుతాడు/తడుపుతుంది,wetting,తడుపుతూ,wet,తడిసింది,wet,తడిసి
+whip,"కొరడా , కొట్టుట",whips,కొరడాతో కొడతాడు/కొడుతుంది,whipping,కొరడాతో కొడుతూ,whipped,కొరడాతో కొట్టాడు,whipped,కొరడాతో కొట్టబడి
+whisper,గుసగుసలాడు,whispers,గుసగుసలాడుతాడు/గుసగుసలాడుతుంది,whispering,గుసగుసలాడుతూ,whispered,గుసగుసలాడాడు,whispered,గుసగుసలాడబడి
+win,గెలుపు,wins,గెలుస్తాడు/గెలుస్తుంది,winning,గెలుస్తూ,won,గెలిచాడు,won,గెలవబడి
+wish,"ఆశించు, కోరిక కలిగియుండు",wishes,కోరుకుంటాడు/కోరుకుంటుంది,wishing,కోరుకుంటూ,wished,కోరుకున్నాడు,wished,కోరుకోబడి
+withdraw,"వెనక్కి, ఉపసంహరణము",withdraws,ఉపసంహరించుకుంటాడు/ఉపసంహరించుకుంటుంది,withdrawing,ఉపసంహరించుకుంటూ,withdrew,ఉపసంహరించుకున్నాడు,withdrawn,ఉపసంహరించుకోబడి
+work,పని,works,పనిచేస్తాడు/పనిచేస్తుంది,working,పనిచేస్తూ,worked,పనిచేశాడు,worked,పనిచేయబడి
+worry,"ఆందోళన, వ్యాకులత చెందు",worries,ఆందోళన చెందుతాడు/చెందుతుంది,worrying,ఆందోళన చెందుతూ,worried,ఆందోళన చెందాడు,worried,ఆందోళన చెంది
+worship,"పూజించు, ఆరాధించు",worships,పూజిస్తాడు/పూజిస్తుంది,worshipping,పూజిస్తూ,worshipped,పూజించాడు,worshipped,పూజించబడి
+wring,"పిండుట, మెలిపెట్టుట",wrings,పిండుతాడు/పిండుతుంది,wringing,పిండుతూ,wrung,పిండాడు,wrung,పిండబడి
+write,వ్రాయు,writes,రాస్తాడు/రాస్తుంది,writing,రాస్తూ,wrote,రాశాడు,written,రాయబడి
+yawn,ఆవలించు,yawns,ఆవలిస్తాడు/ఆవలిస్తుంది,yawning,ఆవలిస్తూ,yawned,ఆవలించాడు,yawned,ఆవలించబడి
+yell,"అరచి చెప్పు, కేకలు పెట్టు",yells,గట్టిగా అరుస్తాడు/అరుస్తుంది,yelling,గట్టిగా అరుస్తూ,yelled,గట్టిగా అరిచాడు,yelled,గట్టిగా అరవబడి
+yield,"ఇచ్చు, దిగుబడి, లభించు",yields,దిగుబడి ఇస్తాడు/ఇస్తుంది,yielding,దిగుబడి ఇస్తూ,yielded,దిగుబడి ఇచ్చింది,yielded,దిగుబడి ఇవ్వబడి

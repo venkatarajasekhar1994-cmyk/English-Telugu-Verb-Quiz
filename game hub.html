@@ -1,8 +1,7 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Removed duplicate viewport tags, kept one -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Learning Game Hub</title>
     
@@ -22,70 +21,58 @@
     <script src="https://unpkg.com/lucide@0.294.0/dist/umd/lucide.js"></script>
 
     <style>
-        /* * MODIFIED: Added new fonts:
-         * DM Sans, DM Serif Display, Outfit, Lexend
-        */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700;900&family=Poppins:wght@400;600;700&family=Source+Sans+3:wght@400;700&family=DM+Sans:wght@400;700&family=DM+Serif+Display&family=Outfit:wght@700&family=Lexend:wght@400;700&display=swap');
         
         :root {
-            /* Light Mode Defaults */
-            --background-start: #f3f4f6;
-            --background-end: #e5e7eb;
-            --card-background: rgba(255, 255, 255, 0.7);
-            --text-primary: #1f2937; /* Adjusted for better light mode contrast */
+            --background-start: var(--accent-color-hex);
+            --background-end: var(--secondary-color-hex);
+            
+            --card-background: rgba(255, 255, 255, 0.5); 
+            
+            --text-primary: #1f2937; 
             --text-secondary: #4b5563;
             --shadow-light: rgba(0, 0, 0, 0.1);
             --shadow-dark: rgba(0, 0, 0, 0.3);
-            --shadow-color: var(--shadow-light); /* Default shadow */
-            --modal-bg: rgba(255, 255, 255, 0.85); /* Slightly less transparent modal */
-            --modal-border: rgba(209, 213, 219, 0.5); /* Subtle border */
+            --shadow-color: var(--shadow-light);
+            --modal-bg: rgba(255, 255, 255, 0.85); 
+            --modal-border: rgba(209, 213, 219, 0.5); 
             --button-bg: rgba(255, 255, 255, 0.1);
             --button-border: rgba(255, 255, 255, 0.2);
             --button-hover-bg: rgba(255, 255, 255, 0.2);
             
-            /* Theme Colors (Default: Indigo) - Set by JS */
             --primary-color-hex: #6366f1;
             --secondary-color-hex: #818cf8;
             --accent-color-hex: #c4b5fd;
 
-            /* * MODIFIED: Updated default fonts to Default 2 (Modern)
-             * These are now set by JS, but the values are updated
-            */
             --font-title: 'Montserrat', sans-serif;
             --font-body: 'Lexend', sans-serif;
 
-            /* Icon Glow Variables (Light Mode Defaults) */
             --icon-glow-opacity: 0.6;
             --icon-glow-blur: 8px;
             --icon-glow-color: var(--primary-color-hex);
 
-            /* NEW: Contrast Text Colors */
-            --text-contrast-light: #000000; /* Black for light mode high contrast */
-            --text-contrast-dark: #ffffff;  /* White for dark mode high contrast */
+            --text-contrast-light: #000000;
+            --text-contrast-dark: #ffffff;
         }
 
-        /* --- DARK MODE FIX ---
-         * Changed selector from ".dark" to ":root.dark"
-         * This ensures the dark mode variables correctly override the :root defaults
-         * when the .dark class is applied to the <html> (root) element.
-        */
         :root.dark {
             --background-start: #111827;
             --background-end: #1f2937;
-            --card-background: rgba(31, 41, 55, 0.6); /* Darker card */
+            
+            --card-background: rgba(31, 41, 55, 0.4); 
+            
             --text-primary: #f9fafb;
             --text-secondary: #d1d5db;
-            --shadow-color: var(--shadow-dark); /* Use dark shadow */
-            --modal-bg: rgba(17, 24, 39, 0.85); /* Darker modal */
-            --modal-border: rgba(55, 65, 81, 0.5); /* Darker border */
+            --shadow-color: var(--shadow-dark); 
+            --modal-bg: rgba(17, 24, 39, 0.85); 
+            --modal-border: rgba(55, 65, 81, 0.5);
             --button-bg: rgba(0, 0, 0, 0.2);
             --button-border: rgba(255, 255, 255, 0.1);
             --button-hover-bg: rgba(0, 0, 0, 0.3);
 
-            /* Icon Glow Variables (Dark Mode Adjustments) */
-            --icon-glow-opacity: 0.8; /* Brighter glow */
-            --icon-glow-blur: 10px;   /* Slightly larger blur */
-            --icon-glow-color: var(--secondary-color-hex); /* Use secondary color for more pop */
+            --icon-glow-opacity: 0.8; 
+            --icon-glow-blur: 10px;  
+            --icon-glow-color: var(--secondary-color-hex); 
         }
 
         .font-title { font-family: var(--font-title); }
@@ -94,67 +81,58 @@
         body {
             background: linear-gradient(135deg, var(--background-start), var(--background-end));
             color: var(--text-primary);
-            transition: background 0.5s ease, color 0.3s ease; /* Added color transition */
-            font-family: var(--font-body); /* Apply body font globally */
+            transition: background 0.5s ease, color 0.3s ease; 
+            font-family: var(--font-body); 
         }
 
-        /* --- DARK MODE FIX ---
-         * Also updated high-contrast rules to use :root.dark
-        */
         body[data-contrast="high"] { color: var(--text-contrast-light); }
-        body[data-contrast="high"] .text-secondary-color { color: #374151; } /* Darker gray for light high contrast */
+        body[data-contrast="high"] .text-secondary-color { color: #374151; } 
         :root.dark body[data-contrast="high"] { color: var(--text-contrast-dark); }
-        :root.dark body[data-contrast="high"] .text-secondary-color { color: #f3f4f6; } /* Lighter gray for dark high contrast */
-        /* Ensure buttons remain readable */
+        :root.dark body[data-contrast="high"] .text-secondary-color { color: #f3f4f6; } 
         body[data-contrast="high"] .setting-btn,
         body[data-contrast="high"] .modal-content h2,
         body[data-contrast="high"] .modal-content span { color: var(--text-contrast-light) !important; }
         :root.dark body[data-contrast="high"] .setting-btn,
         :root.dark body[data-contrast="high"] .modal-content h2,
         :root.dark body[data-contrast="high"] .modal-content span { color: var(--text-contrast-dark) !important; }
-        /* Keep accent colors for visual cues */
         body[data-contrast="high"] .accent-text,
         :root.dark body[data-contrast="high"] .accent-text { color: var(--primary-color-hex) !important; }
 
 
         .game-card {
             background: var(--card-background);
-            border: 1px solid var(--button-border); /* Consistent border */
-            backdrop-filter: blur(10px);
+            border: 1px solid var(--button-border); 
+            backdrop-filter: blur(12px); 
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: default; /* Card itself is not clickable */
+            cursor: default; 
         }
         .game-card:hover {
-            transform: translateY(-6px); /* Slightly increased hover effect */
-            box-shadow: 0 12px 35px var(--shadow-color), 0 0 25px var(--accent-color-hex); /* Adjusted shadow */
+            transform: translateY(-6px); 
+            box-shadow: 0 12px 35px var(--shadow-color), 0 0 25px var(--accent-color-hex);
         }
         
         .icon-circle {
             background: linear-gradient(135deg, var(--primary-color-hex), var(--secondary-color-hex));
-            position: relative; /* Needed for potential pseudo-elements */
+            position: relative; 
             transition: transform 0.3s ease;
         }
 
-        /* Hover effect for the icon circle */
         .game-card:hover .icon-circle {
              transform: scale(1.1);
         }
         
-        /* Neon Glow Effect for Icons */
         .lucide-icon {
             width: 48px;
             height: 48px;
-            stroke-width: 1.5; /* Slightly thinner lines */
-            color: white; /* Keep icon white for contrast */
-            /* Multiple drop shadows for neon effect */
+            stroke-width: 1.5; 
+            color: white; 
             filter: 
-                drop-shadow(0 0 var(--icon-glow-blur) hsla(from var(--icon-glow-color) h s l / var(--icon-glow-opacity))) /* Main Glow */
-                drop-shadow(0 0 calc(var(--icon-glow-blur) * 0.5) hsla(from var(--icon-glow-color) h s l / calc(var(--icon-glow-opacity) * 0.7))) /* Inner Haze */
-                drop-shadow(0 0 calc(var(--icon-glow-blur) * 1.5) hsla(from var(--icon-glow-color) h s l / calc(var(--icon-glow-opacity) * 0.3))); /* Outer Aura */
-            transition: filter 0.3s ease; /* Smooth transition for glow */
+                drop-shadow(0 0 var(--icon-glow-blur) hsla(from var(--icon-glow-color) h s l / var(--icon-glow-opacity))) 
+                drop-shadow(0 0 calc(var(--icon-glow-blur) * 0.5) hsla(from var(--icon-glow-color) h s l / calc(var(--icon-glow-opacity) * 0.7)))
+                drop-shadow(0 0 calc(var(--icon-glow-blur) * 1.5) hsla(from var(--icon-glow-color) h s l / calc(var(--icon-glow-opacity) * 0.3))); 
+            transition: filter 0.3s ease; 
         }
 
-        /* Optional: Enhance glow on card hover */
          .game-card:hover .lucide-icon {
             filter: 
                 drop-shadow(0 0 calc(var(--icon-glow-blur) * 1.5) hsla(from var(--icon-glow-color) h s l / calc(var(--icon-glow-opacity) * 1.2)))
@@ -173,37 +151,37 @@
         .setting-btn {
             background-color: var(--button-bg);
             border: 1px solid var(--button-border);
-            transition: background-color 0.2s, border-color 0.2s; /* Added border transition */
-            color: var(--text-secondary); /* Use secondary text color for buttons */
+            transition: background-color 0.2s, border-color 0.2s; 
+            
+            /* * --- Reverted to low-contrast gray as requested --- */
+            color: var(--text-secondary);
         }
         .setting-btn:hover {
              background-color: var(--button-hover-bg);
-             color: var(--text-primary); /* Use primary on hover */
+             color: var(--text-primary);
         }
-        /* Style for active setting buttons */
         .setting-btn.active {
             border-color: var(--primary-color-hex);
             background-color: rgba(from var(--primary-color-hex) r g b / 0.15);
             font-weight: 600;
-            color: var(--text-primary); /* Ensure text is primary on active */
+            color: var(--text-primary); 
         }
         
         .card-button {
-            margin-top: 1.5rem;
+            margin-top: 1rem; 
             font-weight: 600;
-            padding: 0.6rem 1.8rem; /* Adjusted padding */
+            padding: 0.6rem 1.8rem;
             border-radius: 9999px;
-            border: 1px solid transparent; /* Remove border */
+            border: 1px solid transparent;
             transition: transform 0.2s ease, filter 0.2s ease, background-color 0.3s ease;
             background-color: var(--primary-color-hex);
             color: white;
-            cursor: pointer; /* Button is clickable */
-            box-shadow: 0 4px 15px rgba(from var(--primary-color-hex) r g b / 0.3); /* Button shadow */
+            cursor: pointer; 
+            box-shadow: 0 4px 15px rgba(from var(--primary-color-hex) r g b / 0.3);
         }
         
-        /* When card is hovered, make the button grow slightly */
         .game-card:hover .card-button {
-            transform: scale(1.05) translateY(-2px); /* Add slight upward move */
+            transform: scale(1.05) translateY(-2px);
             filter: brightness(1.1);
         }
         
@@ -214,11 +192,13 @@
             border-radius: 8px;
             font-family: monospace;
             font-size: 12px;
-            color: var(--text-secondary); /* Use secondary text */
+            color: var(--text-secondary);
         }
 
-        /* Class to easily target secondary text */
-        .text-secondary-color { color: var(--text-secondary); }
+        /* * --- Reverted to low-contrast gray as requested --- */
+        .text-secondary-color { 
+            color: var(--text-secondary);
+        }
     </style>
 </head>
 <body class="font-body antialiased">
@@ -245,18 +225,13 @@
         </header>
 
         <main class="flex-grow">
-            <!-- 
-              NOTE: Grid is md:grid-cols-2 lg:grid-cols-3
-              The new 4th card will wrap to the next line on large screens,
-              which looks clean and doesn't require changing grid columns.
-            -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 
-                <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
-                    <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                <div class="game-card rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center group">
+                    <div class="icon-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
                         <i data-lucide="graduation-cap" class="lucide-icon"></i>
                     </div>
-                    <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-primary);">Spoken English Quiz</h2>
+                    <h2 class="font-title font-bold text-xl sm:text-2xl mb-2" style="color: var(--text-primary);">Spoken English Quiz</h2>
                     <p id="spoken-card-progress" class="flex-grow text-secondary-color">
                         Test your knowledge with 45 lessons covering grammar from basic to advanced concepts.
                     </p>
@@ -265,11 +240,11 @@
                     </button>
                 </div>
 
-                <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
-                    <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                <div class="game-card rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center group">
+                    <div class="icon-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
                         <i data-lucide="book-open-text" class="lucide-icon"></i> 
                     </div>
-                    <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-primary);">Vocabulary Builder</h2>
+                    <h2 class="font-title font-bold text-xl sm:text-2xl mb-2" style="color: var(--text-primary);">Vocabulary Builder</h2>
                     <p id="vocab-card-progress" class="flex-grow text-secondary-color">
                         Expand your word power with a challenging multiple-choice quiz.
                     </p>
@@ -278,11 +253,11 @@
                     </button>
                 </div>
 
-                <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
-                    <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                <div class="game-card rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center group">
+                    <div class="icon-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
                         <i data-lucide="list-checks" class="lucide-icon"></i> 
                     </div>
-                    <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-primary);">Verbs Master</h2> 
+                    <h2 class="font-title font-bold text-xl sm:text-2xl mb-2" style="color: var(--text-primary);">Verbs Master</h2> 
                     <p id="verbs-card-progress" class="flex-grow text-secondary-color">
                         Master the tricky past tense and participle forms of common English verbs.
                     </p>
@@ -291,12 +266,10 @@
                     </button>
                 </div>
 
-                <!-- NEW: Teluginglish Dictionary Card -->
-                <div class="game-card rounded-2xl p-8 flex flex-col items-center text-center group">
-                    <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                        <i data-lucide="book-heart" class="lucide-icon"></i> <!-- New icon -->
-                    </div>
-                    <h2 class="font-title font-bold text-2xl mb-2" style="color: var(--text-primary);">Teluginglish Dictionary</h2> 
+                <div class="game-card rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center group">
+                    <div class="icon-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
+                        <i data-lucide="book-heart" class="lucide-icon"></i> </div>
+                    <h2 class="font-title font-bold text-xl sm:text-2xl mb-2" style="color: var(--text-primary);">Teluginglish Dictionary</h2> 
                     <p id="dictionary-card-progress" class="flex-grow text-secondary-color">
                         Explore a crowd-sourced dictionary for Telugu-English conversational words.
                     </p>
@@ -333,7 +306,6 @@
                         <p style="color: var(--text-primary);">Spoken English: <strong id="spoken-progress">0/45</strong> lessons</p>
                         <p style="color: var(--text-primary);">Vocabulary: <strong id="vocab-progress">0</strong> quizzes completed</p>
                         <p style="color: var(--text-primary);">Verbs: <strong id="verbs-progress">0</strong> quizzes completed</p>
-                        <!-- NEW: Dictionary Progress Line -->
                         <p style="color: var(--text-primary);">Dictionary: <strong id="dictionary-progress">0</strong> words added</p>
                     </div>
                 </div>
@@ -398,11 +370,6 @@
         // Use a shared key for settings across all pages
         const GLOBAL_SETTINGS_KEY = 'globalHubSettings'; 
         
-        /* * MODIFIED: FONT_OPTIONS
-         * - Values are now clean names (e.g., 'Poppins') for consistency.
-         * - Added new fonts (Merriweather, DM Serif, Outfit, DM Sans, Lexend).
-         * - Set new default to 'Montserrat' and 'Lexend' (Default 2).
-        */
         const FONT_OPTIONS = {
             title: [
                 { value: 'Montserrat', label: 'Montserrat (Modern)' }, // Default
@@ -423,8 +390,6 @@
             ]
         };
         
-        /* * NEW: Font Combination Definitions
-        */
         const FONT_COMBINATIONS = {
             'default1': { title: 'DM Serif Display', body: 'DM Sans' }, // Elegant
             'default2': { title: 'Montserrat', body: 'Lexend' } // Modern
@@ -432,6 +397,7 @@
         
         const COLOR_THEMES = [
             { name: 'Indigo', primary: '#6366f1', secondary: '#818cf8', accent: '#c4b5fd' },
+            /* * --- FIX: This was the typo. It is now corrected. --- */
             { name: 'Teal', primary: '#14b8a6', secondary: '#2dd4bf', accent: '#5eead4' },
             { name: 'Rose', primary: '#f43f5e', secondary: '#fb7185', accent: '#fda4af' },
             { name: 'Amber', primary: '#f59e0b', secondary: '#fbbf24', accent: '#fcd34d' },
@@ -443,7 +409,7 @@
             { name: 'Cyan', primary: '#06b6d4', secondary: '#22d3ee', accent: '#67e8f9' }
         ];
         let currentSelectionType = null;
-        let textContrast = 'default'; // NEW: State for contrast
+        let textContrast = 'default'; 
 
         // --- UPDATED Local Storage Helpers ---
         function getLocalStorageSetting(key, defaultValue) {
@@ -451,7 +417,6 @@
                 const settingsString = localStorage.getItem(GLOBAL_SETTINGS_KEY);
                 if (!settingsString) return defaultValue;
                 const settings = JSON.parse(settingsString);
-                // Ensure correct default for contrast if not saved yet
                 if (key === 'contrast' && typeof settings[key] === 'undefined') {
                     return 'default';
                 }
@@ -475,7 +440,7 @@
         // --- Offline Profile & Progress Logic ---
         const PROGRESS_KEY = 'englishHubProgress'; 
         let localUserId = null;
-        let localProgress = { spoken: 0, vocab: 0, verbs: 0 }; // MODIFIED: Removed dictionary, will be loaded separately
+        let localProgress = { spoken: 0, vocab: 0, verbs: 0 }; 
 
         function getLocalUserId() {
             let id = localStorage.getItem('englishHubUserId'); 
@@ -486,15 +451,13 @@
             return id;
         }
 
-        // MODIFIED: This function now also loads dictionary progress from GLOBAL_SETTINGS_KEY
         function loadLocalProgress() {
             localUserId = getLocalUserId();
             const userIdEl = document.getElementById('user-id');
             if(userIdEl) userIdEl.textContent = localUserId;
 
-            // Load game progress
             const progressString = localStorage.getItem(PROGRESS_KEY);
-            localProgress = { spoken: 0, vocab: 0, verbs: 0 }; // Reset defaults
+            localProgress = { spoken: 0, vocab: 0, verbs: 0 }; 
             if (progressString) {
                 try { localProgress = JSON.parse(progressString); } 
                 catch (e) { console.error("Could not parse local progress:", e); }
@@ -503,7 +466,6 @@
             localProgress.vocab = localProgress.vocab || 0;
             localProgress.verbs = localProgress.verbs || 0;
             
-            // NEW: Load dictionary progress from global settings
             let dictionaryWordCount = 0;
             try {
                 const settingsString = localStorage.getItem(GLOBAL_SETTINGS_KEY);
@@ -517,17 +479,15 @@
                 console.error("Error reading dictionary progress:", e);
             }
 
-            // Update profile modal
             const spokenProgressEl = document.getElementById('spoken-progress');
             if(spokenProgressEl) spokenProgressEl.textContent = `${localProgress.spoken}/45`;
             const vocabProgressEl = document.getElementById('vocab-progress');
             if(vocabProgressEl) vocabProgressEl.textContent = `${localProgress.vocab}`;
             const verbsProgressEl = document.getElementById('verbs-progress');
             if(verbsProgressEl) verbsProgressEl.textContent = `${localProgress.verbs}`;
-            const dictionaryProgressEl = document.getElementById('dictionary-progress'); // NEW
-            if(dictionaryProgressEl) dictionaryProgressEl.textContent = `${dictionaryWordCount}`; // NEW
+            const dictionaryProgressEl = document.getElementById('dictionary-progress'); 
+            if(dictionaryProgressEl) dictionaryProgressEl.textContent = `${dictionaryWordCount}`; 
             
-            // Update game cards
             const spokenDesc = document.getElementById('spoken-card-progress');
             if (spokenDesc) spokenDesc.innerHTML = `Test your knowledge with 45 lessons...<br><strong class="accent-text" style="color: var(--primary-color-hex);">Completed: ${localProgress.spoken}/45</strong>`;
             const vocabDesc = document.getElementById('vocab-card-progress');
@@ -535,7 +495,6 @@
             const verbsDesc = document.getElementById('verbs-card-progress');
             if(verbsDesc) verbsDesc.innerHTML = `Master the tricky past tense forms...<br><strong class="accent-text" style="color: var(--primary-color-hex);">Completed: ${localProgress.verbs} quizzes</strong>`;
             
-            // NEW: Update dictionary card
             const dictionaryDesc = document.getElementById('dictionary-card-progress');
             if(dictionaryDesc) dictionaryDesc.innerHTML = `Explore a crowd-sourced dictionary...<br><strong class="accent-text" style="color: var(--primary-color-hex);">Words Added: ${dictionaryWordCount}</strong>`;
         }
@@ -553,7 +512,7 @@
         function applyTheme(isDark) {
             const root = document.documentElement;
             const toggleBtn = document.getElementById('theme-toggle-btn');
-            const currentSetting = getLocalStorageSetting('theme', 'auto'); // Get the setting
+            const currentSetting = getLocalStorageSetting('theme', 'auto'); 
 
             if (isDark) {
                 root.classList.add('dark');
@@ -561,7 +520,6 @@
                 root.classList.remove('dark');
             }
             
-            // *** BUG FIX: Changed logic to show the CURRENT theme, not the NEXT theme ***
             if (toggleBtn) {
                 if (currentSetting === 'light') {
                     toggleBtn.innerHTML = '<i data-lucide="sun" class="w-4 h-4 mr-2 inline-block"></i> Light Mode';
@@ -573,7 +531,7 @@
             }
             
             applyAccentColor(getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name));
-            applyContrast(getLocalStorageSetting('contrast', 'default')); // Re-apply contrast on theme change
+            applyContrast(getLocalStorageSetting('contrast', 'default')); 
             setTimeout(() => { if (typeof lucide !== 'undefined') lucide.createIcons(); }, 0); 
         }
 
@@ -594,7 +552,7 @@
             }
             
             setLocalStorageSetting('theme', newSetting); 
-            applyTheme(isDark); // Pass the visual state
+            applyTheme(isDark);
         }
 
         // --- Accent Color Management ---
@@ -618,7 +576,7 @@
 
         // --- NEW: Contrast Management ---
         function applyContrast(contrastValue) {
-            textContrast = contrastValue; // Update state
+            textContrast = contrastValue; 
             document.body.setAttribute('data-contrast', contrastValue);
             setLocalStorageSetting('contrast', contrastValue);
             updateContrastButtonsUI();
@@ -633,39 +591,33 @@
         }
 
         /* * MODIFIED: Font Management
-         * - apply... functions now handle fallback logic.
-         * - They save ONLY the clean font name (e.g., 'Poppins') for consistency.
-         * - getFontLabel is updated to read clean names or old "dirty" names.
         */
         function applyBodyFont(fontFamily) {
             let fontValue = fontFamily;
-            let fontName = fontFamily.split(',')[0].replace(/'/g, ''); // Clean the name from old storage values
+            let fontName = fontFamily.split(',')[0].replace(/'/g, ''); 
 
-            // Add fallback
             const fallback = (fontName === 'Merriweather') ? 'serif' : 'sans-serif';
             fontValue = `'${fontName}', ${fallback}`;
             
             document.documentElement.style.setProperty('--font-body', fontValue);
-            setLocalStorageSetting('bodyFont', fontName); // Save ONLY the name
-            updateFontCombinationUI(); // Update combo buttons
+            setLocalStorageSetting('bodyFont', fontName); 
+            updateFontCombinationUI(); 
         }
 
         function applyTitleFont(fontFamily) {
             let fontValue = fontFamily;
-            let fontName = fontFamily.split(',')[0].replace(/'/g, ''); // Clean the name from old storage values
+            let fontName = fontFamily.split(',')[0].replace(/'/g, ''); 
             
-            // Add fallback
             const fallback = (fontName === 'Lora' || fontName === 'Playfair Display' || fontName === 'Merriweather' || fontName === 'DM Serif Display') ? 'serif' : 'sans-serif';
             fontValue = `'${fontName}', ${fallback}`;
 
             document.documentElement.style.setProperty('--font-title', fontValue);
-            setLocalStorageSetting('titleFont', fontName); // Save ONLY the name
-            updateFontCombinationUI(); // Update combo buttons
+            setLocalStorageSetting('titleFont', fontName); 
+            updateFontCombinationUI(); 
         }
         
         function getFontLabel(type, value) {
             const options = FONT_OPTIONS[type];
-            // Clean the value from storage (it might be "'Poppins', sans-serif" or "Poppins")
             const fontName = value.split(',')[0].replace(/'/g, '');
             const option = options.find(opt => opt.value === fontName);
             return option ? option.label : 'Default'; 
@@ -676,13 +628,11 @@
             const storageKey = type === 'body' ? 'bodyFont' : 'titleFont';
             const defaultFont = type === 'body' ? FONT_OPTIONS.body[0].value : FONT_OPTIONS.title[0].value;
             
-            // Get the clean name from storage
             const value = getLocalStorageSetting(storageKey, defaultFont);
             const button = document.getElementById(id);
             
             if(button) {
                 button.textContent = getFontLabel(type, value);
-                // Apply the clean name to the button's style
                 const fallback = (value === 'Lora' || value === 'Playfair Display' || value === 'Merriweather' || value === 'DM Serif Display') ? 'serif' : 'sans-serif';
                 button.style.fontFamily = `'${value}', ${fallback}`; 
             }
@@ -695,11 +645,10 @@
             if (combo) {
                 applyTitleFont(combo.title);
                 applyBodyFont(combo.body);
-                // Update individual dropdowns
                 updateFontButton('title');
                 updateFontButton('body');
             }
-            updateFontCombinationUI(); // Update button active state
+            updateFontCombinationUI();
         }
 
         function updateFontCombinationUI() {
@@ -731,7 +680,6 @@
             document.getElementById('settings-modal').classList.add('hidden');
         }
         function updateSettingsUI() {
-            // Re-run the logic from loadInitialSettings to apply correct theme and button
             const savedTheme = getLocalStorageSetting('theme', 'auto');
             let isDark;
             if (savedTheme === 'auto') {
@@ -739,13 +687,13 @@
             } else {
                 isDark = (savedTheme === 'dark');
             }
-            applyTheme(isDark); // This will set the correct button text and theme
+            applyTheme(isDark); 
 
             updateFontButton('title');
             updateFontButton('body');
             updateColorButton();
             updateContrastButtonsUI();
-            updateFontCombinationUI(); // NEW: Update combo buttons
+            updateFontCombinationUI(); 
         }
 
         window.openSelectionModal = function(type) {
@@ -754,7 +702,7 @@
             const listEl = document.getElementById('selection-list');
             const titleEl = document.getElementById('selection-modal-title');
             let optionsHTML = '';
-            const activeClass = 'active'; // Use the .active class defined in CSS
+            const activeClass = 'active'; 
 
             if (type === 'color') {
                 if(titleEl) titleEl.textContent = 'Select Accent Color';
@@ -773,7 +721,6 @@
                 const currentFont = getLocalStorageSetting(storageKey, defaultFont);
                 
                 optionsHTML = options.map(opt => {
-                    // Get correct fallback for styling the button itself
                     const fallback = (opt.value === 'Lora' || opt.value === 'Playfair Display' || opt.value === 'Merriweather' || opt.value === 'DM Serif Display') ? 'serif' : 'sans-serif';
                     return `<button onclick="handleSelectionChange('${type}', '${opt.value}')" 
                                      class="w-full text-left p-3 rounded-lg setting-btn ${currentFont === opt.value ? activeClass : ''}" 
@@ -791,20 +738,18 @@
             currentSelectionType = null;
         }
         
-        // UPDATED handleSelectionChange
         window.handleSelectionChange = function(type, value) {
             if (type === 'body') {
-                applyBodyFont(value); // Value is now 'Poppins', etc.
+                applyBodyFont(value); 
                 updateFontButton(type);
             } else if (type === 'title') {
-                applyTitleFont(value); // Value is now 'Montserrat', etc.
+                applyTitleFont(value); 
                 updateFontButton(type);
             } else if (type === 'color') {
-                applyAccentColor(value); // This handles saving and UI update
-            } else if (type === 'contrast') { // NEW
-                applyContrast(value); // This handles saving and UI update
+                applyAccentColor(value); 
+            } else if (type === 'contrast') { 
+                applyContrast(value); 
             }
-            // Only close selection modal for font/color, not contrast buttons
             if (type !== 'contrast') { 
                 closeSelectionModal();
             }
@@ -812,7 +757,6 @@
         
         // --- Initialization (UPDATED) ---
         function loadInitialSettings() {
-            // UPDATED theme logic to default to 'auto'
             const savedTheme = getLocalStorageSetting('theme', 'auto'); 
             let isDark;
 
@@ -823,26 +767,23 @@
             }
             applyTheme(isDark); 
 
-            // Get the clean font name (e.g., "Poppins") from storage
             const titleFont = getLocalStorageSetting('titleFont', FONT_OPTIONS.title[0].value);
             const bodyFont = getLocalStorageSetting('bodyFont', FONT_OPTIONS.body[0].value);
             
-            applyTitleFont(titleFont); // This function now handles adding fallbacks
-            applyBodyFont(bodyFont); // This function now handles adding fallbacks
+            applyTitleFont(titleFont); 
+            applyBodyFont(bodyFont); 
             
             const colorTheme = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name);
             applyAccentColor(colorTheme); 
             
-            // NEW: Load and apply contrast setting
             const savedContrast = getLocalStorageSetting('contrast', 'default');
             applyContrast(savedContrast);
 
-            // NEW: Add listener for live OS theme changes
             const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
             mediaQuery.addEventListener('change', (e) => {
                 const currentSetting = getLocalStorageSetting('theme', 'auto');
                 if (currentSetting === 'auto') {
-                    applyTheme(e.matches); // e.matches is true for dark
+                    applyTheme(e.matches); 
                 }
             });
 
@@ -855,10 +796,7 @@
             
             loadLocalProgress();
             
-            // UPDATED pageshow listener
             window.addEventListener('pageshow', function(event) {
-                // This logic ensures that if you use the browser's back button,
-                // the theme and progress are correctly re-loaded.
                 if (event.persisted) {
                     loadLocalProgress();
                     
@@ -871,7 +809,6 @@
                     }
                     applyTheme(isDark);
                     
-                    // Re-apply color, contrast, and fonts
                     const colorTheme = getLocalStorageSetting('colorTheme', COLOR_THEMES[0].name);
                     applyAccentColor(colorTheme); 
                     const savedContrast = getLocalStorageSetting('contrast', 'default');
@@ -886,11 +823,10 @@
                 }
             });
             
-            updateFontCombinationUI(); // Call this once on load
+            updateFontCombinationUI(); 
         }
         
         window.onload = loadInitialSettings;
     </script>
 </body>
 </html>
-
