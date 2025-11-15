@@ -1,105 +1,137 @@
 // service-worker.js
 
-// వెర్షన్‌ను 51కి అప్‌డేట్ చేస్తున్నాము (మీ పాత వెర్షన్ 50)
-const CACHE_VERSION = 51;
+// Incrementing the version to 52 to trigger the update
+const CACHE_VERSION = 52;
 const STATIC_CACHE_NAME = `static-cache-v${CACHE_VERSION}`;
 const DYNAMIC_CACHE_NAME = `dynamic-cache-v${CACHE_VERSION}`;
 
-// మీ యాప్ ఆఫ్‌లైన్‌లో పనిచేయడానికి అవసరమైన అన్ని ఫైల్స్
-// మీరు అందించిన జాబితా ప్రకారం
+// This list now includes all the files you mentioned,
+// with comments explaining their purpose based on your description.
 const FILES_TO_CACHE = [
-    './', // రూట్ డైరెక్టరీ (index.html కోసం)
-    'index.html',
-    'game hub.html',
+    // --- Core App Shell ---
+    './', // This caches the root, which serves index.html
+    'index.html', // The entry point (redirects to hub)
+    'game hub.html', // The main hub page
+    'manifest.json', // The PWA manifest
+
+    // --- Page 1: Spoken English ---
     'spoken english.html',
+    'data.csv', // Dependency for spoken english
+    'data2.csv', // Dependency for spoken english
+    'diagram_data.js', // Dependency for spoken english
+
+    // --- Page 2: English Vocabulary Game ---
     'English vocabulary game.html',
+    'Vocabulary.csv', // Dependency for English vocabulary game
+
+    // --- Page 3: Verbs Game ---
     'Verbs game.html',
+    'Verbs.csv', // Dependency for Verbs game
+
+    // --- Page 4: Teluginglish Dictionary ---
     'Teluginglish dictionary.html',
-    'manifest.json',
-    'diagram_data.js',
-    'data.csv',
-    'data2.csv',
-    'Vocabulary.csv',
-    'english2telugu.csv',
-    'Verbs.csv'
+    'english2telugu.csv', // Dependency for Teluginglish dictionary
+    
+    // --- Page 5: Correction Pad ---
+    'correction pad.html' // No specific data dependency mentioned
 ];
 
-// 1. Install Event: యాప్ షెల్ మరియు డేటాను కాష్ చేయండి
+// 1. Install Event: Cache all the core app shell files
 self.addEventListener('install', (event) => {
     console.log(`[Service Worker] Installing version ${CACHE_VERSION}...`);
     event.waitUntil(
         caches.open(STATIC_CACHE_NAME).then((cache) => {
             console.log('[Service Worker] Pre-caching App Shell and Data');
-            // బ్రౌజర్ యొక్క HTTP కాష్‌ను దాటవేయడానికి { cache: 'reload' } వాడండి
+            // Use { cache: 'reload' } to bypass the browser's HTTP cache.
+            // This ensures we get the latest files from the server.
             const cachePromises = FILES_TO_CACHE.map((url) => {
-                return cache.add(new Request(url, { cache: 'reload' })).catch(err => {
-                    console.warn(`[Service Worker] Failed to cache: ${url}`, err);
-                });
+                return fetch(url, { cache: 'reload' })
+                    .then(response => {
+                        if (!response.ok) {
+                            // If a file fails to fetch, log it but don't break the entire install
+                            console.error(`[Service Worker] Failed to cache ${url}: ${response.status} ${response.statusText}`);
+                            // If it's a critical file, you might want to throw an error
+                            // throw new Error(`Failed to cache ${url}`);
+                        }
+                        return cache.put(url, response);
+                    })
+                    .catch(err => {
+                        console.error(`[Service Worker] Cache error for ${url}:`, err);
+                    });
             });
+            
             return Promise.all(cachePromises);
+        }).then(() => {
+            console.log('[Service Worker] All files cached successfully.');
+            // Force the waiting service worker to become the active service worker
+            return self.skipWaiting();
         })
     );
-    self.skipWaiting(); // కొత్త సర్వీస్ వర్కర్‌ను వెంటనే యాక్టివేట్ చేయండి
 });
 
-// 2. Activate Event: పాత కాష్‌లను తొలగించండి
+// 2. Activate Event: Clean up old caches
 self.addEventListener('activate', (event) => {
     console.log(`[Service Worker] Activating version ${CACHE_VERSION}...`);
     event.waitUntil(
         caches.keys().then((keyList) => {
-            return Promise.all(
-                keyList.map((key) => {
-                    if (key !== STATIC_CACHE_NAME && key !== DYNAMIC_CACHE_NAME) {
-                        console.log('[Service Worker] Removing old cache:', key);
-                        return caches.delete(key);
-                    }
-                })
-            );
+            return Promise.all(keyList.map((key) => {
+                // Delete old caches that are not the current static or dynamic cache
+                if (key !== STATIC_CACHE_NAME && key !== DYNAMIC_CACHE_NAME) {
+                    console.log('[Service Worker] Removing old cache:', key);
+                    return caches.delete(key);
+                }
+            }));
+        }).then(() => {
+            // Tell the active service worker to take control of the page immediately
+            return self.clients.claim();
         })
     );
-    return self.clients.claim();
 });
 
-// 3. Fetch Event: కాష్ నుండి సర్వ్ చేయండి, లేకపోతే నెట్‌వర్క్‌కు వెళ్లండి
+// 3. Fetch Event: Serve from cache first, then network (Cache-First strategy)
 self.addEventListener('fetch', (event) => {
-    // కేవలం http/https రిక్వెస్ట్‌లను మాత్రమే హ్యాండిల్ చేయండి
-    if (event.request.url.indexOf('http') !== 0) {
+    // Don't intercept requests for non-HTTP/HTTPS protocols
+    if (!(event.request.url.startsWith('http'))) {
         return;
     }
 
+    // For all other requests, use Cache-First
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
+            // 1. Found in Cache - Return it
             if (cachedResponse) {
-                // 1. కాష్‌లో దొరికింది - కాష్ నుండి ఇవ్వండి (Cache-First)
+                // console.log(`[Service Worker] Serving from Cache: ${event.request.url}`);
                 return cachedResponse;
             }
 
-            // 2. కాష్‌లో లేదు - నెట్‌వర్క్ నుండి తెచ్చుకోవడానికి ప్రయత్నించండి
+            // 2. Not in Cache - Fetch from Network
+            // console.log(`[Service Worker] Fetching from Network: ${event.request.url}`);
             return fetch(event.request).then((networkResponse) => {
-                // 3. నెట్‌వర్క్ నుండి విజయవంతంగా వచ్చింది - డైనమిక్‌గా కాష్ చేసి, యూజర్‌కు పంపండి
+                // 3. Network successful - Clone, cache dynamically, and return
                 return caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
-                    // రెస్పాన్స్‌ను క్లోన్ చేయండి, ఎందుకంటే అది ఒక స్ట్రీమ్
+                    // Clone the response because it's a stream and can only be consumed once
                     cache.put(event.request.url, networkResponse.clone());
+                    // console.log(`[Service Worker] Dynamically Cached: ${event.request.url}`);
                     return networkResponse;
                 });
             }).catch((error) => {
-                // 4. నెట్‌వర్క్ విఫలమైంది - ఫాల్‌బ్యాక్ పేజీని ఇవ్వండి
+                // 4. Network failed - Handle offline
                 console.warn(`[Service Worker] Fetch failed. URL: ${event.request.url}`, error);
                 
-                // ఫెయిల్ అయిన రిక్వెస్ట్ ఒక HTML పేజీ (navigation) అయితే, index.htmlను చూపించండి
+                // If the failed request is an HTML page (navigation), return the main index.html as a fallback.
                 if (event.request.mode === 'navigate') {
-                    console.log('[Service Worker] Returning fallback HTML page.');
+                    console.log('[Service Worker] Returning fallback HTML page (index.html).');
                     return caches.match('index.html'); 
                 }
                 
-                // ఇతర ఫైల్స్ (data, images) ఫెయిల్ అయితే ఎర్రర్ ఇవ్వండి
-                return new Response(JSON.stringify({ error: 'Offline and resource not cached' }), {
+                // For other failed requests (e.g., data, images), return a generic error response
+                // This prevents the page from hanging indefinitely
+                return new Response(JSON.stringify({ error: 'Offline and resource not in cache.' }), {
                     headers: { 'Content-Type': 'application/json' },
-                    status: 503
+                    status: 503 // Service Unavailable
                 });
             });
         })
     );
 });
-
 

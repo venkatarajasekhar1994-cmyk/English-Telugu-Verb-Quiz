@@ -1,0 +1,1413 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correction Pad (All-in-One)</title>
+    
+    <link rel="manifest" href="manifest.json">
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').catch(e => console.error('SW Init Error:', e));
+            });
+        }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    
+    <style>
+        /* --- FONTS --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Roboto:wght@400;700&family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;700;900&family=Poppins:wght@400;600;700&family=Source+Sans+3:wght@400;700&family=DM+Sans:wght@400;700&family=DM+Serif+Display&family=Lexend:wght@400;700&display=swap');
+        
+        :root {
+            --title-font: 'Montserrat', sans-serif;
+            --body-font: 'Lexend', sans-serif;
+            --accent-color-rgb: 79, 70, 229; --accent-color-hex: #4f46e5;
+            --bg-grad-color1: #a5b4fc; --bg-grad-color2: #818cf8; --bg-grad-color3: #6366f1; --bg-grad-color4: #4f46e5;
+            --glass-bg: rgba(255, 255, 255, 0.1); --glass-border: rgba(255, 255, 255, 0.2);
+            --modal-bg: rgba(255, 255, 255, 0.05);
+            
+            --text-main: #f3f4f6;
+            --text-subtle: #9ca3af;
+            --text-label: #d1d5db; 
+            
+            --button-bg: rgba(0, 0, 0, 0.1);
+            --button-hover-bg: rgba(0, 0, 0, 0.05); 
+            --button-active-bg: rgba(0, 0, 0, 0.2); 
+
+            --color-success: #22c55e;
+            --color-warning: #eab308;
+            --color-error: #ef4444;
+        }
+        .dark:root {
+            --bg-grad-color1: #312e81; --bg-grad-color2: #4338ca; --bg-grad-color3: #4f46e5; --bg-grad-color4: #6366f1;
+            --glass-bg: rgba(31, 41, 55, 0.4); --glass-border: rgba(255, 255, 255, 0.1);
+            --modal-bg: rgba(17, 24, 39, 0.6);
+            
+            --text-main: #f9fafb;
+            --text-subtle: #9ca3af;
+            --text-label: #d1d5db;
+
+            --button-bg: rgba(0, 0, 0, 0.3);
+            --button-hover-bg: rgba(0, 0, 0, 0.2); 
+            --button-active-bg: rgba(0, 0, 0, 0.4); 
+        }
+        body { color: var(--text-main); font-family: var(--body-font); background: linear-gradient(-45deg, var(--bg-grad-color1), var(--bg-grad-color2), var(--bg-grad-color3), var(--bg-grad-color4)); background-size: 400% 400%; animation: gradientBG 15s ease infinite; transition: all 0.5s ease; min-height: 100vh; }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        body.read-mode { background: #f5f5f5 !important; animation: none !important; color: #333 !important; }
+        .dark body.read-mode { background: #050505 !important; color: #e0e0e0 !important; }
+        .read-mode #app { max-width: 900px !important; }
+        .read-mode .input-container {
+            background-color: #ffffff !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+            border: 1px solid #e5e7eb !important;
+            backdrop-filter: none !important;
+            border-radius: 8px !important;
+        }
+        .dark .read-mode .input-container { background-color: #0a0a0a !important; border-color: #202020 !important; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5) !important; }
+        .read-mode #grammar-input {
+             background-color: transparent !important; border: none !important;
+             background-image: linear-gradient(transparent 95%, #e5e7eb 95%) !important;
+             background-size: 100% 2.5rem; line-height: 2.5rem !important; padding-top: 0.5rem !important;
+             font-family: 'Lora', serif !important; font-size: 1.15rem !important; color: #2d3748 !important;
+        }
+        .dark .read-mode #grammar-input { background-image: linear-gradient(transparent 95%, #202020 95%) !important; color: #e2e8f0 !important; }
+        .read-mode #mic-button { display: flex !important; color: #a0aec0 !important; background: transparent !important; }
+        .dark .read-mode #mic-button { color: #6b7280 !important; }
+        .read-mode #mic-button:hover, .read-mode #mic-button.mic-active { color: var(--accent-color-hex) !important; background: rgba(0,0,0,0.05) !important; }
+        .dark .read-mode #mic-button:hover, .dark .read-mode #mic-button.mic-active { background: rgba(255,255,255,0.05) !important; }
+        .read-mode #check-api-btn { background-color: #4a5568 !important; color: #e2e8f0 !important; }
+        .dark .read-mode #check-api-btn { background-color: #2d3748 !important; color: #e2e8f0 !important; }
+        
+        .read-mode #practice-answer-input {
+             background-color: transparent !important;
+             border: none !important;
+             background-image: linear-gradient(transparent 95%, #e5e7eb 95%) !important;
+             background-size: 100% 2.5rem;
+             line-height: 2.5rem !important;
+             padding: 0.5rem 0.5rem 0.5rem 1rem !important; 
+             font-family: 'Lora', serif !important;
+             font-size: 1.15rem !important;
+             color: #2d3748 !important;
+             min-height: 120px !important; 
+             resize: none !important;
+             box-shadow: none !important;
+        }
+        .dark .read-mode #practice-answer-input {
+            background-image: linear-gradient(transparent 95%, #202020 95%) !important;
+            color: #e2e8f0 !important;
+        }
+
+        #exit-read-mode-btn { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 50; background-color: rgba(0,0,0,0.7); color: white; padding: 12px; border-radius: 50%; backdrop-filter: blur(5px); transition: all 0.3s ease; font-weight: bold; font-size: 24px; width: 48px; height: 48px; align-items: center; justify-content: center; }
+        .read-mode #exit-read-mode-btn { display: flex !important; }
+        .dark .read-mode #exit-read-mode-btn { background-color: rgba(255,255,255,0.15) !important; }
+        #exit-read-mode-btn:hover { transform: scale(1.1); }
+
+        .glass-effect { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); transition: all 0.3s ease; }
+        .modal-glass { background: var(--modal-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); }
+        
+        .button-bg-color { background-color: var(--button-bg); transition: background-color 0.2s ease; } 
+        .button-bg-color:hover { background-color: var(--button-hover-bg); }
+        .button-bg-color:active { background-color: var(--button-active-bg); }
+        
+        .accent-bg {
+            background-color: rgb(var(--accent-color-rgb));
+            transition: all 0.2s ease;
+        }
+        .accent-bg:hover {
+            filter: brightness(1.15);
+        }
+        .accent-bg:active {
+            filter: brightness(0.9);
+            transform: scale(0.98);
+        }
+        .accent-bg:disabled {
+            background-color: var(--button-bg);
+            filter: saturate(0);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .selection-button { 
+            background-color: rgba(0, 0, 0, 0.2); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: all 0.2s; 
+            color: var(--text-subtle); 
+        } 
+        .selection-button.active { 
+            border-color: rgb(var(--accent-color-rgb)); 
+            background-color: rgb(var(--accent-color-rgb)); 
+            font-weight: 600; 
+            color: var(--text-main) !important; 
+        }
+        
+        .fade-in { animation: fadeIn 0.5s ease-in-out; } @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .spinner { border: 4px solid rgba(255, 255, 255, 0.3); border-left-color: #fff; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; margin: 0 auto; } @keyframes spin { to { transform: rotate(360deg); } }
+        .speak-button { @apply p-2 rounded-full hover:bg-white/20 transition-colors text-gray-300 hover:text-white flex-shrink-0; font-size: 24px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+        .copy-button { @apply p-2 rounded-full hover:bg-white/20 transition-colors text-gray-300 hover:text-white flex-shrink-0; font-size: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+        .mic-active { animation: pulse-red 1.5s infinite; color: #ef4444 !important; }
+        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+        
+        input::placeholder, textarea::placeholder { color: var(--text-subtle); opacity: 0.7; }
+        .read-mode input::placeholder, .read-mode textarea::placeholder { color: #a0aec0 !important; opacity: 0.8; }
+        .dark .read-mode input::placeholder, .dark .read-mode textarea::placeholder { color: #6b7280 !important; opacity: 0.6; }
+        
+        #practice-mode-container {
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .practice-box {
+            @apply p-4 rounded-lg border border-white/10 min-h-[60px] flex items-center;
+            background-color: var(--button-bg);
+        }
+        
+        #practice-answer-input {
+            @apply practice-box text-white w-full resize-none placeholder-gray-500;
+            min-height: 80px;
+            background-color: var(--button-bg);
+        }
+        
+        @keyframes pop-in {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .pop-in-staggered {
+            animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        }
+        @keyframes pulse-text {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        #api-loading p {
+            animation: pulse-text 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        #main-tool-wrapper, #practice-mode-container {
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            overflow: hidden;
+            max-height: 2000px; 
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .layout-hidden {
+            max-height: 0px !important;
+            opacity: 0 !important;
+            transform: translateY(-10px) !important;
+        }
+        
+        #check-api-btn, #get-new-question-btn, #practice-mic-btn, #check-practice-answer-btn {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #check-api-btn:not(:disabled):hover, 
+        #get-new-question-btn:not(:disabled):hover, 
+        #check-practice-answer-btn:not(:disabled):hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);
+        }
+        #practice-mic-btn:not(:disabled):hover {
+            transform: scale(1.1);
+        }
+
+        .modal-glass {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(0.9);
+            opacity: 0;
+        }
+        #settings-modal:not(.hidden) .modal-glass,
+        #selection-modal:not(.hidden) .modal-glass {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body class="transition-colors duration-500">
+
+    <button id="exit-read-mode-btn" onclick="toggleReadMode()" aria-label="Exit Read Mode" title="Exit Read Mode">
+        X
+    </button>
+
+    <div id="app" class="max-w-4xl mx-auto p-4 md:p-6 transition-all duration-500">
+        
+        <header class="flex items-center justify-between mb-6 transition-opacity duration-500">
+            <div class="flex items-center overflow-hidden mr-2">
+                 <a href="game hub.html" class="mr-3 p-2 rounded-full text-gray-200 hover:text-white transition-colors glass-effect md:hidden flex-shrink-0 w-10 h-10 flex items-center justify-center font-bold text-xl" aria-label="Back to Hub">
+                    &lt;
+                </a>
+                <h1 id="app-title" class="text-2xl md:text-4xl font-bold shadow-sm truncate font-title">Correction Pad</h1>
+            </div>
+            <div class="flex items-center space-x-1 md:space-x-2 flex-shrink-0">
+                <button id="read-mode-toggle" class="flex items-center space-x-2 px-3 py-2 rounded-full text-gray-100 bg-white/10 hover:bg-white/20 transition-all border border-white/10 hover:border-white/30" title="Toggle Read Mode">
+                    <span class="text-lg">📖</span>
+                    <span class="hidden sm:inline text-sm font-semibold">Read</span>
+                </button>
+                 <a href="game hub.html" class="hidden md:flex text-gray-200 hover:text-white transition-colors p-2 rounded-full glass-effect w-10 h-10 items-center justify-center text-2xl" aria-label="Go to Hub">
+                    🏠
+                </a>
+                <button id="settings-button" class="p-2 rounded-full text-gray-200 hover:text-white transition-colors glass-effect w-10 h-10 flex items-center justify-center text-2xl" aria-label="Settings">
+                    ⚙️
+                </button>
+                <button id="theme-toggle" class="p-2 rounded-full text-gray-200 hover:text-white transition-colors glass-effect w-10 h-10 flex items-center justify-center text-2xl" aria-label="Theme">
+                    <span id="theme-icon-light" class="hidden">☀️</span>
+                    <span id="theme-icon-dark" class="hidden">🌙</span>
+                    <span id="theme-icon-system" class="hidden">💻</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="fade-in space-y-6 transition-all duration-500">
+            
+            <div class="input-container p-6 rounded-2xl glass-effect shadow-xl flex flex-col transition-all duration-500">
+                 
+                 <div id="mode-selector" class="grid grid-cols-3 gap-2 mb-4">
+                    <button id="mode-grammar-en" class="py-2 px-2 rounded-lg text-xs selection-button active">
+                        EN Grammar
+                    </button>
+                    <button id="mode-trans-te-en" class="py-2 px-2 rounded-lg text-xs selection-button">
+                        Te ➔ En
+                    </button>
+                    <button id="mode-practice-en" class="py-2 px-2 rounded-lg text-xs selection-button">
+                        Practice (EN)
+                    </button>
+                    <button id="mode-grammar-hi" class="py-2 px-2 rounded-lg text-xs selection-button">
+                        HI Grammar
+                    </button>
+                    <button id="mode-trans-te-hi" class="py-2 px-2 rounded-lg text-xs selection-button">
+                        Te ➔ Hi
+                    </button>
+                    <button id="mode-practice-hi" class="py-2 px-2 rounded-lg text-xs selection-button">
+                        Practice (HI)
+                    </button>
+                </div>
+                 
+                 <div id="main-tool-wrapper">
+                     <div class="relative flex-grow h-full">
+                         <textarea id="grammar-input" maxlength="1000" class="w-full p-6 pr-14 rounded-xl bg-black/20 border-2 border-white/10 focus:border-indigo-400/50 focus:ring-0 placeholder-gray-400 resize-y transition-all text-xl leading-relaxed min-h-[60vh]" style="color: var(--text-main);" placeholder="Start writing here..."></textarea>
+                         <button id="mic-button" class="absolute right-4 bottom-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all flex items-center justify-center z-10 text-3xl" aria-label="Start speech recognition" title="Speak Now" style="width: 56px; height: 56px;">
+                             🎤
+                         </button>
+                     </div>
+                     <button id="check-api-btn" class="w-full mt-4 accent-bg text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center text-lg">
+                         <span id="check-api-btn-text">Check</span>
+                         <span class="ml-2 text-2xl">↑</span>
+                     </button>
+                 </div>
+                 
+                 <div id="practice-mode-container" class="layout-hidden space-y-4">
+                    <h3 class="text-lg font-bold text-center" style="color: var(--text-main);">స్పీకింగ్ ప్రాక్టీస్</h3>
+                    
+                    <div class="flex space-x-2">
+                        <button id="practice-type-word" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button active">Practice Word (పదం)</button>
+                        <button id="practice-type-sentence" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button">Practice Sentence (వాక్యం)</button>
+                    </div>
+
+                    <button id="get-new-question-btn" class="w-full accent-bg text-white font-bold py-3 px-5 rounded-xl shadow-lg transition-all flex items-center justify-center text-base">
+                        <span id="new-question-btn-text">New Word (కొత్త పదం)</span>
+                    </button>
+                    
+                    <div>
+                        <label class="text-xs font-medium text-[var(--text-label)]" id="practice-question-label">Translate this Word (ఈ పదాన్ని అనువదించండి):</label>
+                        <div id="practice-question-box" class="practice-box text-lg font-semibold">
+                            Press "New Word" to start...
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="text-xs font-medium text-[var(--text-label)]">Your Answer (మీ సమాధానం):</label>
+                        <textarea id="practice-answer-input" class="placeholder-gray-500" placeholder="Type or speak your answer..."></textarea>
+                    </div>
+                    
+                    <div class="flex items-center justify-center space-x-4">
+                        <button id="practice-mic-btn" aria-label="Speak your answer" title="Speak Answer" class="p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all flex items-center justify-center z-10 text-3xl w-16 h-16" disabled>
+                            🎤
+                        </button>
+                        <button id="check-practice-answer-btn" class="flex-1 accent-bg text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all text-base" disabled>
+                            Check Typed Answer
+                        </button>
+                    </div>
+
+                    <div>
+                        <label class="text-xs font-medium text-[var(--text-label)]">Feedback (ఫీడ్‌బ్యాక్):</label>
+                        <div id="practice-feedback-box" class="practice-box">
+                            ...
+                        </div>
+                    </div>
+                 </div>
+                 
+            </div>
+
+            <!-- API లోడింగ్ (రెండింటికీ ఒకటి) -->
+            <div id="api-loading" class="hidden text-center py-8 fade-in">
+                 <div class="spinner"></div>
+                 <p class="opacity-80 animate-pulse font-medium" style="color: var(--text-main);">Analyzing...</p>
+             </div>
+
+            <!-- మెయిన్ టూల్ ఫలితాలు -->
+            <div id="main-api-results" class="hidden space-y-4 fade-in">
+                <div id="grammar-status" class="p-4 rounded-xl flex items-center justify-center font-bold text-xl shadow-md transition-all font-title hidden"></div>
+                
+                <div id="correction-card" class="p-5 rounded-2xl glass-effect border-l-4 hidden shadow-lg" style="border-left-color: var(--color-success);">
+                    <h3 id="correction-title" class="text-xs font-bold text-[var(--text-label)] uppercase tracking-wider mb-2 font-title">Corrected Text</h3>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                        <p id="corrected-text" class="text-xl md:text-2xl font-bold leading-relaxed font-title whitespace-pre-wrap"></p>
+                        <div class="flex space-x-2 flex-shrink-0 self-end md:self-auto">
+                             <button id="copy-corrected" class="copy-button" aria-label="Copy to clipboard" title="Copy">
+                                Copy
+                            </button>
+                             <button id="speak-corrected" class="speak-button" aria-label="Speak corrected text" title="Listen">
+                                🔊
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="explanations-wrapper" class="grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
+                    <div class="p-5 rounded-2xl button-bg-color shadow-md border border-white/5">
+                        <div class="flex justify-between items-center mb-3 pb-2 border-b border-white/10">
+                            <h3 class="font-bold flex items-center font-title" style="color: var(--text-main);"><span class="mr-2 font-bold text-sm bg-gray-600 px-2 py-1 rounded">EN</span> English Explanation</h3>
+                             <button id="speak-exp-en" class="speak-button" aria-label="Speak English explanation">
+                                🔊
+                            </button>
+                        </div>
+                        <p id="exp-en" class="text-[var(--text-label)] text-base leading-relaxed"></p>
+                    </div>
+                    <div class="p-5 rounded-2xl button-bg-color shadow-md border border-white/5">
+                         <div class="flex justify-between items-center mb-3 pb-2 border-b border-white/10">
+                            <h3 class="font-bold flex items-center font-title" style="color: var(--text-main);"><span class="mr-2 font-bold text-sm bg-gray-600 px-2 py-1 rounded">TE</span> వివరణ (Telugu)</h3>
+                             <button id="speak-exp-te" class="speak-button" aria-label="Speak Telugu explanation">
+                                🔊
+                            </button>
+                        </div>
+                        <p id="exp-te" class="text-[var(--text-label)] text-base leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- సెట్టింగ్‌ల మోడల్ -->
+    <div id="settings-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
+        <div class="rounded-2xl shadow-xl p-6 w-full max-w-md modal-glass fade-in flex flex-col max-h-[90vh]">
+             <div class="flex justify-between items-center mb-6 flex-shrink-0">
+                <h3 class="text-xl font-bold font-title" style="color: var(--text-main);">Settings</h3>
+                <button id="close-settings-modal" class="text-gray-300 hover:text-white text-2xl font-bold">&times;</button>
+            </div>
+            <!-- *** API కీ సెక్షన్ ఇక్కడ జోడించబడింది *** -->
+            <div class="space-y-4 overflow-y-auto no-scrollbar">
+                <div>
+                    <label for="api-key-input" class="font-semibold text-[var(--text-label)] block mb-1">Your Gemini API Key</label>
+                    <p class="text-xs text-[var(--text-subtle)] mb-2">Save your free key here. It's stored only on your device.</p>
+                    <div class="flex space-x-2">
+                        <input type="password" id="api-key-input" class="flex-1 p-2 rounded-lg bg-black/20 border-2 border-white/10 text-[var(--text-main)] placeholder-gray-500" placeholder="Paste your API key...">
+                        <button id="save-api-key-btn" class="accent-bg text-white font-bold py-2 px-4 rounded-lg">Save</button>
+                    </div>
+                </div>
+                <hr style="border-color: var(--glass-border);">
+                <!-- *** పాత సెట్టింగ్స్ ఇక్కడ నుండి మొదలవుతాయి *** -->
+                <button id="color-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white flex justify-between items-center"><div> <span class="text-xs text-gray-400">Accent Color</span><br> <span id="current-accent-color" class="font-semibold"></span> </div> <span id="color-preview" class="w-5 h-5 rounded-full border border-white/20"></span></button>
+                <div><span class="text-xs text-gray-400 block mb-1">Theme</span><div class="flex space-x-2"> <button id="theme-light" onclick="handleSelectionChange('theme', 'light')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white">Light</button><button id="theme-dark" onclick="handleSelectionChange('theme', 'dark')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white">Dark</button><button id="theme-system" onclick="handleSelectionChange('theme', 'system')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white">System</button></div></div>
+                <div><span class="text-xs text-gray-400 block mb-1">Text Contrast</span><div class="flex space-x-2"><button id="contrast-default" onclick="handleSelectionChange('contrast', 'default')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white">Default</button><button id="contrast-high" onclick="handleSelectionChange('contrast', 'high')" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white">High Contrast</button></div></div>
+                <div><span class="text-xs text-gray-400 block mb-1">Font Combination</span><div id="font-combo-btns" class="grid grid-cols-2 gap-2"><button onclick="applyFontCombination('default1')" data-combo="default1" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white text-center"><strong>Default 1</strong><br><span class="text-xs text-gray-400">Elegant Serif</span></button><button onclick="applyFontCombination('default2')" data-combo="default2" class="flex-1 py-2 px-3 rounded-lg text-sm selection-button text-white text-center"><strong>Default 2</strong><br><span class="text-xs text-gray-400">Modern Sans</span></button></div></div>
+                <button id="body-font-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white"><span class="text-xs text-gray-400">Body Font</span><br> <span id="current-body-font" class="font-semibold"></span></button>
+                <button id="title-font-button" class="w-full p-3 rounded-lg text-left button-bg-color hover:button-hover-bg text-white"><span class="text-xs text-gray-400">Title Font</span><br> <span id="current-title-font" class="font-semibold"></span></button>
+                <div><span class="text-xs text-gray-400 block mb-1">Feedback</span><div class="space-y-2"><label class="flex items-center space-x-3 cursor-pointer p-2 rounded-lg button-bg-color hover:button-hover-bg text-white"><input type="checkbox" id="toggle-audio" onclick="handleSelectionChange('toggleAudio')" class="form-checkbox h-5 w-5 rounded accent-bg border-gray-500 bg-transparent focus:ring-0 text-accent-color-hex"><span>Disable Sound Effects</span></label><label class="flex items-center space-x-3 cursor-pointer p-2 rounded-lg button-bg-color hover:button-hover-bg text-white"><input type="checkbox" id="toggle-haptics" onclick="handleSelectionChange('toggleHaptics')" class="form-checkbox h-5 w-5 rounded accent-bg border-gray-500 bg-transparent focus:ring-0 text-accent-color-hex"><span>Disable Vibration</span></label></div></div>
+            </div>
+        </div>
+    </div>
+    <div id="selection-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50"><div class="rounded-2xl shadow-xl p-6 w-full max-w-sm max-h-[80vh] flex flex-col modal-glass fade-in"><div class="flex justify-between items-center mb-4"><h3 id="modal-title" class="text-xl font-bold font-title" style="color: var(--text-main);">Select Option</h3><button id="close-selection-modal" class="text-gray-300 hover:text-white text-2xl font-bold" aria-label="Close modal">&times;</button></div><div id="modal-options" class="space-y-2 overflow-y-auto no-scrollbar"></div></div></div>
+
+    <script>
+        // --- DOM ELEMENTS ---
+        let settingsModal, themeToggle, themeIconLight, themeIconDark, themeIconSystem, readModeToggle;
+        let bodyFontBtn, titleFontBtn, colorBtn, currentBodyFont, currentTitleFont, currentAccentColor, colorPreview;
+        let contrastDefaultBtn, contrastHighBtn, toggleAudioCheckbox, toggleHapticsCheckbox;
+        let themeLightBtn, themeDarkBtn, themeSystemBtn;
+        let selectionModal, modalTitle, modalOptions;
+        
+        // మెయిన్ టూల్ DOM
+        let mainToolWrapper, grammarInput, micButton, checkApiBtn, checkApiBtnText;
+        let mainApiResults, grammarStatus, correctionCard, correctedTextEl, speakCorrectedBtn, copyCorrectedBtn;
+        let expEnEl, expTeEl, speakExpEnBtn, speakExpTeBtn;
+        let correctionTitle, explanationsWrapper;
+        
+        // మోడ్ బటన్లు
+        let modeGrammarEnBtn, modeGrammarHiBtn, modeTransTeEnBtn, modeTransTeHiBtn, modePracticeEnBtn, modePracticeHiBtn;
+        
+        // ప్రాక్టీస్ మోడ్ DOM
+        let practiceModeContainer, getNewQuestionBtn, newQuestionBtnText, practiceQuestionBox, practiceQuestionLabel;
+        let practiceMicBtn, practiceAnswerInput, checkPracticeAnswerBtn, practiceFeedbackBox;
+        let practiceTypeWordBtn, practiceTypeSentenceBtn;
+        
+        // షేర్డ్ DOM
+        let apiLoading;
+        
+        // *** API కీ కోసం కొత్త వేరియబుల్ ***
+        const API_KEY_STORAGE_KEY = 'user_gemini_api_key';
+
+        // --- STATE ---
+        let disableSound = false, disableVibration = false, isReadMode = false, textContrast = 'default';
+        let recognitionMain, isMicListeningMain = false;
+        let recognitionPractice, isMicListeningPractice = false;
+        let systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        let currentMode = 'mode-grammar-en';
+        let currentMicLangMain = 'en-US';
+        
+        // ప్రాక్టీస్ మోడ్ స్టేట్
+        let currentPracticeLang = 'en'; // Target language (en or hi)
+        let currentPracticeType = 'word';
+        let currentPracticeItemTE = ''; // Always stores the Telugu/source question
+        let previousPracticeItems = []; // History array
+        
+        let isApiBusy = false;
+        let synth; // సౌండ్ కోసం
+
+        // గ్లోబల్ సెట్టింగ్స్ కీ మరియు 10 కలర్లు
+        const SETTINGS_KEY = 'globalHubSettings'; // ఇది game hub.html నుండి షేర్ చేయబడింది
+        const FONT_OPTIONS = { body: [{ label: 'Lexend', value: 'Lexend' }, { label: 'DM Sans', value: 'DM Sans' }, { label: 'Poppins', value: 'Poppins' }, { label: 'Inter', value: 'Inter' }, { label: 'Roboto', value: 'Roboto' }, { label: 'Source Sans 3', value: 'Source Sans 3' }, { label: 'Merriweather', value: 'Merriweather' }], title: [{ label: 'Montserrat', value: 'Montserrat' }, { label: 'DM Serif Display', value: 'DM Serif Display' }, { label: 'Outfit', value: 'Outfit' }, { label: 'Lora', value: 'Lora' }, { label: 'Playfair Display', value: 'Playfair Display' }, { label: 'Merriweather', value: 'Merriweather' }] };
+        const COLOR_THEMES = [ 
+            { name: 'Indigo', value: '79, 70, 229', hex: '#4f46e5', gradient: { light: ['#a5b4fc', '#818cf8', '#6366f1', '#4f46e5'], dark: ['#312e81', '#4338ca', '#4f46e5', '#6366f1'] } }, 
+            { name: 'Teal', value: '20, 184, 166', hex: '#14b8a6', gradient: { light: ['#99f6e4', '#5eead4', '#2dd4bf', '#14b8a6'], dark: ['#0f766e', '#0d9488', '#14b8a6', '#2dd4bf'] } }, 
+            { name: 'Rose', value: '225, 29, 72', hex: '#e11d48', gradient: { light: ['#fecdd3', '#fda4af', '#fb7185', '#f43f5e'], dark: ['#881337', '#be123c', '#f43f5e', '#fb7185'] } }, 
+            { name: 'Amber', value: '217, 119, 6', hex: '#d97706', gradient: { light: ['#fde68a', '#fcd34d', '#fbbf24', '#f59e0b'], dark: ['#78350f', '#b45309', '#f59e0b', '#fbbf24'] } },
+            { name: 'Sky', value: '2, 132, 199', hex: '#0284c7', gradient: { light: ['#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9'], dark: ['#0c4a6e', '#0369a1', '#0ea5e9', '#38bdf8'] } },
+            { name: 'Cyan', value: '6, 182, 212', hex: '#06b6d4', gradient: { light: ['#a5f3fc', '#67e8f9', '#22d3ee', '#06b6d4'], dark: ['#155e75', '#0e7490', '#06b6d4', '#22d3ee'] } },
+            { name: 'Pink', value: '219, 39, 119', hex: '#db2777', gradient: { light: ['#fbcfe8', '#f9a8d4', '#f472b6', '#ec4899'], dark: ['#831843', '#9d174d', '#db2777', '#ec4899'] } },
+            { name: 'Orange', value: '234, 88, 12', hex: '#ea580c', gradient: { light: ['#fed7aa', '#fdba74', '#fdba74', '#f97316'], dark: ['#7c2d12', '#9a3412', '#ea580c', '#f97316'] } },
+            { name: 'Purple', value: '147, 51, 234', hex: '#9333ea', gradient: { light: ['#e9d5ff', '#d8b4fe', '#c084fc', '#a855f7'], dark: ['#581c87', '#6b21a8', '#9333ea', '#a855f7'] } },
+            { name: 'Emerald', value: '5, 150, 105', hex: '#059669', gradient: { light: ['#a7f3d0', '#6ee7b7', '#34d399', '#10b981'], dark: ['#064e3b', '#065f46', '#059669', '#10b981'] } }
+        ];
+        const FONT_COMBINATIONS = { 'default1': { title: 'DM Serif Display', body: 'DM Sans' }, 'default2': { title: 'Montserrat', body: 'Lexend' } };
+
+        // --- UTILITY FUNCTIONS ---
+        function getLocalStorageSetting(k, d) { try { const s = JSON.parse(localStorage.getItem(SETTINGS_KEY)); return s && s[k] !== undefined ? s[k] : d; } catch { return d; } }
+        function setLocalStorageSetting(k, v) { try { const s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}'); s[k] = v; localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); } catch {} }
+        
+        // *** API కీని లోకల్ స్టోరేజ్ నుండి చదివే ఫంక్షన్ ***
+        function getApiKey() {
+            const savedKey = localStorage.getItem(API_KEY_STORAGE_KEY);
+            if (savedKey && savedKey.length > 10) {
+                return savedKey;
+            }
+            return null; // కీ లభించలేదు
+        }
+
+        function speak(text, lang = 'en-US') {
+            if (window.speechSynthesis && text) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = lang;
+                window.speechSynthesis.speak(u);
+            }
+        }
+        
+        function playSound(note, success = true) {
+            if (disableSound) return;
+            try {
+                if (!synth) {
+                    synth = new Tone.Synth().toDestination();
+                }
+                if (Tone.context.state !== 'running') {
+                    Tone.start();
+                }
+                const freq = success ? (note || 'C4') : (note || 'C3');
+                synth.triggerAttackRelease(freq, "8n");
+            } catch (e) {
+                console.error("Tone.js error:", e);
+            }
+        }
+
+        function playHaptic(success) { 
+            if (!disableVibration && navigator.vibrate) {
+                navigator.vibrate(success ? 50 : [50, 50, 50]); 
+            }
+        }
+
+        // --- READ MODE ---
+        function toggleReadMode() {
+            isReadMode = !isReadMode;
+            document.body.classList.toggle('read-mode', isReadMode);
+            playSound('E4');
+            playHaptic(true);
+        }
+        
+        // --- setMode (మాస్టర్ కంట్రోలర్) ఫంక్షన్ ---
+        function setMode(mode) {
+            currentMode = mode;
+            
+            const allButtons = [modeGrammarEnBtn, modeGrammarHiBtn, modeTransTeEnBtn, modeTransTeHiBtn, modePracticeEnBtn, modePracticeHiBtn];
+            allButtons.forEach(btn => btn.classList.remove('active'));
+            
+            let placeholderText = "Start writing here...";
+            let buttonText = "Check";
+            
+            if (mode.startsWith('mode-practice')) {
+                mainToolWrapper.classList.add('layout-hidden');
+                practiceModeContainer.classList.remove('layout-hidden');
+                mainApiResults.classList.add('hidden');
+                
+                if (mode === 'mode-practice-en') {
+                    modePracticeEnBtn.classList.add('active');
+                    currentPracticeLang = 'en'; 
+                } else {
+                    modePracticeHiBtn.classList.add('active');
+                    currentPracticeLang = 'hi'; 
+                }
+                setPracticeType(currentPracticeType); 
+
+            } else {
+                mainToolWrapper.classList.remove('layout-hidden');
+                practiceModeContainer.classList.add('layout-hidden');
+                
+                if (mode === 'mode-grammar-en') {
+                    modeGrammarEnBtn.classList.add('active');
+                    currentMicLangMain = 'en-US';
+                    placeholderText = "Write English here for grammar check...";
+                    buttonText = "Check";
+                } else if (mode === 'mode-grammar-hi') {
+                    modeGrammarHiBtn.classList.add('active');
+                    currentMicLangMain = 'hi-IN';
+                    placeholderText = "व्याकरण जांच के लिए यहां हिंदी लिखें...";
+                    buttonText = "Check";
+                } else if (mode === 'mode-trans-te-en') {
+                    modeTransTeEnBtn.classList.add('active');
+                    currentMicLangMain = 'te-IN';
+                    placeholderText = "అనువాదం కోసం ఇక్కడ తెలుగులో రాయండి...";
+                    buttonText = "Translate";
+                } else if (mode === 'mode-trans-te-hi') {
+                    modeTransTeHiBtn.classList.add('active');
+                    currentMicLangMain = 'te-IN';
+                    placeholderText = "అనువాదం కోసం ఇక్కడ తెలుగులో రాయండి...";
+                    buttonText = "Translate";
+                }
+            }
+            
+            grammarInput.placeholder = placeholderText;
+            checkApiBtnText.textContent = buttonText;
+            if (recognitionMain) {
+                recognitionMain.lang = currentMicLangMain;
+            }
+            playSound('C4');
+            playHaptic(true);
+        }
+
+        // --- SPEECH RECOGNITION (MAIN TOOL) ---
+        function setupSpeechRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (SpeechRecognition) {
+                recognitionMain = new SpeechRecognition();
+                recognitionMain.continuous = false; 
+                recognitionMain.interimResults = true; 
+                recognitionMain.lang = currentMicLangMain;
+                
+                recognitionMain.onstart = () => { isMicListeningMain = true; micButton.classList.add('mic-active'); grammarInput.placeholder = "Listening..."; };
+                recognitionMain.onend = () => { isMicListeningMain = false; micButton.classList.remove('mic-active'); setMode(currentMode); };
+                recognitionMain.onresult = (e) => {
+                    let finalTranscript = '';
+                    for (let i = e.resultIndex; i < e.results.length; ++i) { if (e.results[i].isFinal) { finalTranscript += e.results[i][0].transcript; } }
+                    grammarInput.value = finalTranscript;
+                };
+                recognitionMain.onerror = (e) => { console.error("Mic Error:", e.error); isMicListeningMain = false; micButton.classList.remove('mic-active'); };
+            } else { 
+                micButton.style.display = 'none';
+            }
+        }
+        
+        function toggleMic() { 
+            if (!recognitionMain) return; 
+            if (isMicListeningMain) { 
+                recognitionMain.stop(); 
+                playSound('C3', false); 
+                playHaptic(false); 
+            }
+            else { 
+                try { 
+                    recognitionMain.lang = currentMicLangMain; 
+                    recognitionMain.start(); 
+                    playSound('C4', true); 
+                    playHaptic(true); 
+                } catch (e) { 
+                    console.error("Mic start error:", e); 
+                } 
+            }
+        }
+
+        // --- CLIPBOARD ---
+        function copyToClipboard(text, btnElement) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed"; textArea.style.top = "0"; textArea.style.left = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                playSound('G4', true);
+                playHaptic(true);
+                const originalHTML = btnElement.innerHTML;
+                btnElement.innerHTML = `Copied!`; 
+                btnElement.style.color = 'var(--color-success)';
+                setTimeout(() => { btnElement.innerHTML = originalHTML; btnElement.style.color = ''; }, 2000);
+            } catch (err) { 
+                console.error('Copy failed:', err); 
+                playSound('C3', false);
+                playHaptic(false); 
+            }
+            document.body.removeChild(textArea);
+        }
+        
+        // --- API కీ ఎర్రర్ చూపించే ఫంక్షన్ ---
+        function showApiKeyError(mode) {
+            const errorMsg = "❌ No API Key found. Please add your key in Settings ⚙️.";
+            if (mode === 'main') {
+                mainApiResults.classList.remove('hidden');
+                grammarStatus.classList.remove('hidden');
+                grammarStatus.textContent = errorMsg;
+                grammarStatus.style.backgroundColor = 'var(--color-error)';
+                grammarStatus.style.color = 'var(--text-main)';
+                correctionCard.classList.add('hidden');
+                explanationsWrapper.classList.add('hidden');
+            } else if (mode === 'practice-question') {
+                practiceQuestionBox.textContent = "API Key Error. Check Settings.";
+            } else if (mode === 'practice-answer') {
+                practiceFeedbackBox.innerHTML = `<p class="font-semibold" style="color: var(--color-error);">${errorMsg}</p>`;
+            }
+        }
+
+        // --- GEMINI API: (MAIN TOOL - Grammar/Translate) ---
+        async function checkApi() {
+            const text = grammarInput.value.trim();
+            if (!text) { grammarInput.focus(); return; }
+            
+            // *** API కీ చెక్ ***
+            const apiKey = getApiKey();
+            if (!apiKey) {
+                showApiKeyError('main');
+                isApiBusy = false; 
+                checkApiBtn.disabled = false;
+                return;
+            }
+
+            if (isApiBusy) { console.log("API is busy."); return; }
+            isApiBusy = true; 
+            checkApiBtn.disabled = true;
+            const originalBtnText = checkApiBtnText.textContent;
+            checkApiBtnText.textContent = "Analyzing...";
+            apiLoading.classList.remove('hidden');
+            mainApiResults.classList.add('hidden');
+
+            grammarStatus.classList.add('hidden');
+            correctionCard.classList.add('hidden');
+            explanationsWrapper.classList.add('hidden');
+            document.querySelectorAll('.pop-in-staggered').forEach(el => {
+                el.classList.remove('pop-in-staggered');
+            });
+
+            playSound('C4', true);
+            playHaptic(true);
+            
+            // *** API కీ ఇక్కడ వాడబడింది ***
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            let systemPrompt = "";
+            let responseSchema;
+            let temperature = 0.2; 
+
+            if (currentMode === 'mode-grammar-en' || currentMode === 'mode-grammar-hi') {
+                const languageName = (currentMode === 'mode-grammar-hi') ? 'Hindi' : 'English';
+                systemPrompt = `You are a meticulous ${languageName} grammar coach. Analyze the text for **ALL** errors (Tense, Articles, Prepositions, Spelling, Punctuation, Formation).
+                    Example: If the input is "I go to school yesterday", you must correct it to "I went to school yesterday", identifying the tense error.
+                    Rules for JSON:
+                    1.  If perfect: 'status': 'correct', 'issueCount': 0, 'correctedText': original, 'explanationEN': "Looks great! No errors found.", 'explanationTE': "చాలా బాగుంది! ఎలాంటి తప్పులు లేవు.".
+                    2.  If errors: 'status': 'incorrect', 'issueCount': total number of individual corrections, 'correctedText': the fully corrected version, 'explanationEN': A concise English explanation of **all** changes made, 'explanationTE': A simple Telugu translation of the explanation.`;
+                responseSchema = { type: "OBJECT", properties: { status: { type: "STRING" }, issueCount: { type: "NUMBER" }, correctedText: { type: "STRING" }, explanationEN: { type: "STRING" }, explanationTE: { type: "STRING" } }, required: ["status", "issueCount", "correctedText", "explanationEN", "explanationTE"] };
+            
+            } else {
+                const targetLanguage = (currentMode === 'mode-trans-te-en') ? 'English' : 'Hindi';
+                systemPrompt = `You are an expert Telugu to ${targetLanguage} translator. Translate the text accurately. Respond ONLY with a JSON object.`;
+                responseSchema = { type: "OBJECT", properties: { translation: { type: "STRING" } }, required: ["translation"] };
+                temperature = 0.2;
+            }
+
+            const payload = { contents: [{ parts: [{ text: text }] }], systemInstruction: { parts: [{ text: systemPrompt }] }, generationConfig: { responseMimeType: "application/json", responseSchema: responseSchema, temperature: temperature } };
+
+            try {
+                let response;
+                let delay = 1000;
+                for (let i = 0; i < 5; i++) { 
+                    response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (response.status === 429 || response.status >= 500) { await new Promise(resolve => setTimeout(resolve, delay)); delay *= 2; continue; }
+                    if (!response.ok) { const errorData = await response.json(); throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`); }
+                    break; 
+                }
+                if (!response || !response.ok) { throw new Error(`API call failed after retries. Status: ${response?.status}`); }
+                
+                const resultData = await response.json();
+                const candidate = resultData.candidates?.[0];
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    const parsedJson = JSON.parse(candidate.content.parts[0].text);
+                    displayMainResults(parsedJson);
+                    playSound('G4', true);
+                    playHaptic(true);
+                } else { throw new Error("Invalid response structure from API."); }
+            } catch (e) {
+                console.error("Error in checkApi:", e);
+                playSound('C3', false);
+                playHaptic(false);
+                mainApiResults.classList.remove('hidden');
+                grammarStatus.classList.remove('hidden');
+                grammarStatus.textContent = "❌ Error: " + e.message;
+                grammarStatus.style.backgroundColor = 'var(--color-error)';
+                grammarStatus.style.color = 'var(--text-main)';
+                correctionCard.classList.add('hidden');
+                explanationsWrapper.classList.add('hidden');
+            } finally {
+                checkApiBtn.disabled = false;
+                checkApiBtnText.textContent = originalBtnText;
+                apiLoading.classList.add('hidden');
+                setTimeout(() => { isApiBusy = false; }, 3000); 
+            }
+        }
+
+        function displayMainResults(result) {
+            mainApiResults.classList.remove('hidden');
+            grammarStatus.className = "p-4 rounded-xl flex items-center justify-center font-bold text-xl shadow-md transition-all font-title";
+            grammarStatus.style.color = 'var(--text-main)';
+
+            if (result.translation) {
+                grammarStatus.classList.add('hidden');
+                explanationsWrapper.classList.add('hidden');
+                
+                setTimeout(() => {
+                    correctionCard.classList.remove('hidden');
+                    correctionCard.classList.add('pop-in-staggered');
+                }, 0);
+
+                let targetLang, speakLang;
+                if (currentMode === 'mode-trans-te-en') { targetLang = 'English Translation'; speakLang = 'en-US'; }
+                else { targetLang = 'Hindi Translation'; speakLang = 'hi-IN'; }
+                
+                correctionTitle.textContent = targetLang;
+                correctedTextEl.textContent = result.translation;
+                copyCorrectedBtn.onclick = () => copyToClipboard(result.translation, copyCorrectedBtn);
+                speakCorrectedBtn.onclick = () => speak(result.translation, speakLang);
+
+            } else if (result.status) {
+                
+                setTimeout(() => {
+                    grammarStatus.classList.remove('hidden');
+                    grammarStatus.classList.add('pop-in-staggered');
+                }, 0);
+                
+                correctionTitle.textContent = "Corrected Text";
+                
+                if (result.status === "correct") {
+                    grammarStatus.textContent = "✅ No issues found!";
+                    grammarStatus.style.backgroundColor = 'var(--color-success)';
+                    correctionCard.classList.add('hidden');
+                } else {
+                    grammarStatus.textContent = `⚠️ Found ${result.issueCount} ${result.issueCount === 1 ? 'issue' : 'issues'}`;
+                    grammarStatus.style.backgroundColor = 'var(--color-warning)';
+                    
+                    setTimeout(() => {
+                        correctionCard.classList.remove('hidden');
+                        correctionCard.classList.add('pop-in-staggered');
+                    }, 100);
+
+                    correctedTextEl.textContent = result.correctedText;
+                    let speakLang = (currentMode === 'mode-grammar-hi') ? 'hi-IN' : 'en-US';
+                    copyCorrectedBtn.onclick = () => copyToClipboard(result.correctedText, copyCorrectedBtn);
+                    speakCorrectedBtn.onclick = () => speak(result.correctedText, speakLang);
+                }
+
+                expEnEl.textContent = result.explanationEN;
+                expTeEl.textContent = result.explanationTE;
+
+                setTimeout(() => {
+                    explanationsWrapper.classList.remove('hidden');
+                    explanationsWrapper.classList.add('pop-in-staggered');
+                }, result.status === "correct" ? 100 : 200);
+                
+                speakExpEnBtn.onclick = () => speak(result.explanationEN, 'en-US');
+                speakExpTeBtn.onclick = () => speak(result.explanationTE, 'te-IN');
+            }
+        }
+
+        // --- ప్రాక్టీస్ మోడ్ ఫంక్షన్లు (Word/Sentence/History) ---
+        
+        function setPracticeType(type) {
+            currentPracticeType = type;
+            previousPracticeItems = []; 
+            
+            if (type === 'word') {
+                practiceTypeWordBtn.classList.add('active');
+                practiceTypeSentenceBtn.classList.remove('active');
+                newQuestionBtnText.textContent = "New Word (కొత్త పదం)";
+                practiceQuestionLabel.textContent = "Translate this Word (ఈ పదాన్ని అనువదించండి):";
+            } else {
+                practiceTypeWordBtn.classList.remove('active');
+                practiceTypeSentenceBtn.classList.add('active');
+                newQuestionBtnText.textContent = "New Sentence (కొత్త వాక్యం)";
+                practiceQuestionLabel.textContent = "Translate this Sentence (ఈ వాక్యాన్ని అనువదించండి):";
+            }
+            playSound('E4');
+            getPracticeItem();
+        }
+
+        async function getPracticeItem() {
+            // *** API కీ చెక్ ***
+            const apiKey = getApiKey();
+            if (!apiKey) {
+                showApiKeyError('practice-question');
+                return;
+            }
+            
+            if (isApiBusy) { console.log("API is busy."); return; }
+
+            isApiBusy = true;
+            getNewQuestionBtn.disabled = true;
+            practiceMicBtn.disabled = true;
+            checkPracticeAnswerBtn.disabled = true;
+            practiceQuestionBox.innerHTML = '<div class="spinner"></div>';
+            practiceAnswerInput.value = "";
+            practiceFeedbackBox.textContent = "...";
+            playHaptic(true);
+            playSound('C4');
+
+            // *** API కీ ఇక్కడ వాడబడింది ***
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            const sourceLanguage = 'Telugu';
+            const jsonProp = 'itemTE';
+            const itemType = currentPracticeType;
+
+            const promptText = (itemType === 'word') ? `simple ${sourceLanguage} word (common noun, verb, or adjective)` : `simple 6-8 word ${sourceLanguage} sentence`;
+            const history = (previousPracticeItems.length > 0) ? `Avoid these: [${previousPracticeItems.map(item => `"${item}"`).join(', ')}]` : "";
+            
+            const systemPrompt = `Give me one ${promptText} for a beginner to practice translating. ${history} Respond ONLY with a JSON object.`;
+            const responseSchema = { type: "OBJECT", properties: { [jsonProp]: { "type": "STRING" } }, required: [jsonProp] };
+
+            const payload = { 
+                contents: [{ parts: [{ text: "New item" }] }], 
+                systemInstruction: { parts: [{ text: systemPrompt }] }, 
+                generationConfig: { 
+                    responseMimeType: "application/json", 
+                    responseSchema: responseSchema, 
+                    temperature: 1.0 
+                } 
+            };
+
+            try {
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                if (!response.ok) throw new Error("Failed to fetch item.");
+                
+                const resultData = await response.json();
+                const candidate = resultData.candidates?.[0];
+                const parsedJson = JSON.parse(candidate.content.parts[0].text);
+                
+                const newItem = parsedJson.itemTE; 
+                currentPracticeItemTE = newItem; 
+                
+                practiceQuestionBox.textContent = currentPracticeItemTE;
+                practiceMicBtn.disabled = false;
+                checkPracticeAnswerBtn.disabled = false;
+                
+                previousPracticeItems.push(newItem);
+                if (previousPracticeItems.length > 20) { 
+                    previousPracticeItems.shift();
+                }
+                
+            } catch (e) {
+                console.error("Error getting practice item:", e);
+                practiceQuestionBox.textContent = "Error loading. Try again.";
+                playSound('C3', false);
+            } finally {
+                isApiBusy = false;
+                getNewQuestionBtn.disabled = false;
+            }
+        }
+        
+        function setupPracticeSpeechRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (SpeechRecognition) {
+                recognitionPractice = new SpeechRecognition();
+                recognitionPractice.continuous = false; 
+                recognitionPractice.interimResults = false;
+                
+                recognitionPractice.onstart = () => { isMicListeningPractice = true; practiceMicBtn.classList.add('mic-active'); practiceAnswerInput.placeholder = "Listening..."; };
+                recognitionPractice.onend = () => { isMicListeningPractice = false; practiceMicBtn.classList.remove('mic-active'); practiceAnswerInput.placeholder = "Type or speak your answer...";};
+                
+                recognitionPractice.onresult = (e) => {
+                    const spokenText = e.results[0][0].transcript;
+                    practiceAnswerInput.value = spokenText;
+                    checkPracticeAnswer(spokenText); 
+                };
+                recognitionPractice.onerror = (e) => { console.error("Practice Mic Error:", e.error); isMicListeningPractice = false; practiceMicBtn.classList.remove('mic-active'); practiceAnswerInput.placeholder = "Mic error."; };
+            } else {
+                practiceMicBtn.style.display = 'none';
+            }
+        }
+        
+        function togglePracticeMic() {
+            if (!recognitionPractice) return;
+            if (isMicListeningPractice) {
+                recognitionPractice.stop();
+                playSound('C3', false);
+            } else {
+                try {
+                    recognitionPractice.lang = (currentPracticeLang === 'hi') ? 'hi-IN' : 'en-US';
+                    recognitionPractice.start();
+                    playSound('C4');
+                } catch (e) {
+                    console.error("Practice mic start error:", e);
+                }
+            }
+        }
+
+        function checkPracticeAnswerFromButton() {
+            const typedText = practiceAnswerInput.value.trim();
+            if (typedText) {
+                checkPracticeAnswer(typedText);
+            } else {
+                practiceAnswerInput.focus();
+            }
+        }
+        
+        async function checkPracticeAnswer(textToAnalyse) {
+            // *** API కీ చెక్ ***
+            const apiKey = getApiKey();
+            if (!apiKey) {
+                showApiKeyError('practice-answer');
+                return;
+            }
+
+            if (isApiBusy) { console.log("API is busy."); return; }
+            if (!currentPracticeItemTE) { console.log("No practice item set."); return; } 
+            if (!textToAnalyse) { console.log("No answer to check."); return; }
+
+            isApiBusy = true;
+            practiceMicBtn.disabled = true;
+            checkPracticeAnswerBtn.disabled = true;
+            practiceFeedbackBox.innerHTML = '<div class="spinner"></div>';
+            playSound('C4', true);
+            playHaptic(true);
+
+            // *** API కీ ఇక్కడ వాడబడింది ***
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            const targetLanguage = (currentPracticeLang === 'hi') ? 'Hindi' : 'English';
+            const sourceLanguage = 'Telugu'; 
+            const itemType = currentPracticeType;
+            const userQuery = `Original ${sourceLanguage} ${itemType}: "${currentPracticeItemTE}"\nUser's ${targetLanguage} Translation: "${textToAnalyse}"`;
+
+            let feedbackLanguagePrompt = "";
+            let feedbackLangScript = "";
+            let feedbackJSONKey = "";
+            
+            if (targetLanguage === 'Hindi') {
+                feedbackLanguagePrompt = `Provide feedback in simple Hindi, using **only Devanagari script (Unicode)**. **Do not use Romanized text (e.g., 'Shabaash').**`;
+                feedbackLangScript = `* If correct: Say "शाबाश!"
+                    * If incorrect: Explain *why* in simple Hindi (e.g., "आपने 'Gud' लिखा, सही शब्द 'Good' है...")`;
+                feedbackJSONKey = "feedbackHI";
+            } else { 
+                feedbackLanguagePrompt = `Provide feedback in simple Telugu, using **only Telugu script (Unicode)**. **Do not use Romanized text (e.g., 'Shabash').**`;
+                feedbackLangScript = `* If correct: Say "శభాష్!"
+                    * If incorrect: Explain *why* in simple Telugu (e.g., "మీరు 'Gud' రాశారు, కానీ సరైన పదం 'Good'...")`;
+                feedbackJSONKey = "feedbackTE";
+            }
+
+            const systemPrompt = `You are a very strict language tutor and spelling checker. The user is translating a ${sourceLanguage} ${itemType}.
+                Original ${sourceLanguage}: "${currentPracticeItemTE}"
+                User's ${targetLanguage} Translation: "${textToAnalyse}"
+                
+                **Strict Rules:**
+                1.  Check for **exact spelling** and grammatical correctness.
+                2.  "Gud" is **NOT** correct for "Good". "Runing" is **NOT** correct for "Running".
+                3.  The translation must be 100% perfect to be "correct".
+                
+                ${feedbackLanguagePrompt}
+
+                Respond in JSON.
+                1.  'isCorrect' (boolean): **True ONLY if the translation is 100% perfect (including spelling).**
+                2.  'correctTranslation' (string): The most common and correctly spelled ${targetLanguage} translation.
+                3.  '${feedbackJSONKey}' (string): Your feedback based on the rules.
+                    ${feedbackLangScript}`;
+            
+            let feedbackProp = (targetLanguage === 'Hindi') ? "feedbackHI" : "feedbackTE";
+            
+            const responseSchema = {
+                type: "OBJECT",
+                properties: {
+                    isCorrect: { type: "BOOLEAN" },
+                    correctTranslation: { type: "STRING" },
+                    [feedbackProp]: { type: "STRING" } 
+                },
+                required: ["isCorrect", "correctTranslation", feedbackProp]
+            };
+            
+            const payload = { contents: [{ parts: [{ text: userQuery }] }], systemInstruction: { parts: [{ text: systemPrompt }] }, generationConfig: { responseMimeType: "application/json", responseSchema: responseSchema, temperature: 0.4 } };
+
+            try {
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                if (!response.ok) throw new Error("Failed to check answer.");
+                
+                const resultData = await response.json();
+                const candidate = resultData.candidates?.[0];
+                const result = JSON.parse(candidate.content.parts[0].text);
+                
+                let feedbackText = result.feedbackTE || result.feedbackHI; 
+                let feedbackHTML = `<p class="font-semibold" style="color: ${result.isCorrect ? 'var(--color-success)' : 'var(--color-warning)'}">${feedbackText}</p>`;
+                
+                if (!result.isCorrect) {
+                    feedbackHTML += `<p class="text-xs text-[var(--text-subtle)] mt-2">Correct: ${result.correctTranslation}</p>`;
+                    playSound('E3', false);
+                } else {
+                    playSound('G4', true);
+                }
+                practiceFeedbackBox.innerHTML = feedbackHTML;
+                
+            } catch (e) {
+                console.error("Error checking answer:", e);
+                practiceFeedbackBox.textContent = "Error checking answer. Try again.";
+                playSound('C3', false);
+            } finally {
+                isApiBusy = false;
+                practiceMicBtn.disabled = false;
+                checkPracticeAnswerBtn.disabled = false;
+                setTimeout(() => { isApiBusy = false; }, 3000); 
+            }
+        }
+        
+        // --- INITIALIZATION ---
+        window.onload = () => {
+            // సెట్టింగ్‌ల DOM
+            settingsModal = document.getElementById('settings-modal'); 
+            themeToggle = document.getElementById('theme-toggle'); 
+            themeIconLight = document.getElementById('theme-icon-light'); 
+            themeIconDark = document.getElementById('theme-icon-dark'); 
+            themeIconSystem = document.getElementById('theme-icon-system'); 
+            readModeToggle = document.getElementById('read-mode-toggle');
+            bodyFontBtn = document.getElementById('body-font-button'); 
+            titleFontBtn = document.getElementById('title-font-button'); 
+            colorBtn = document.getElementById('color-button'); 
+            currentBodyFont = document.getElementById('current-body-font'); 
+            currentTitleFont = document.getElementById('current-title-font'); 
+            currentAccentColor = document.getElementById('current-accent-color'); 
+            colorPreview = document.getElementById('color-preview');
+            toggleAudioCheckbox = document.getElementById('toggle-audio'); 
+            toggleHapticsCheckbox = document.getElementById('toggle-haptics'); 
+            themeLightBtn = document.getElementById('theme-light'); 
+            themeDarkBtn = document.getElementById('theme-dark'); 
+            themeSystemBtn = document.getElementById('theme-system');
+            contrastDefaultBtn = document.getElementById('contrast-default'); 
+            contrastHighBtn = document.getElementById('contrast-high');
+            selectionModal = document.getElementById('selection-modal'); 
+            modalTitle = document.getElementById('modal-title'); 
+            modalOptions = document.getElementById('modal-options');
+            
+            // మెయిన్ టూల్ DOM
+            mainToolWrapper = document.getElementById('main-tool-wrapper');
+            grammarInput = document.getElementById('grammar-input'); 
+            micButton = document.getElementById('mic-button'); 
+            checkApiBtn = document.getElementById('check-api-btn'); 
+            checkApiBtnText = document.getElementById('check-api-btn-text');
+            mainApiResults = document.getElementById('main-api-results');
+            grammarStatus = document.getElementById('grammar-status'); 
+            correctionCard = document.getElementById('correction-card'); 
+            correctedTextEl = document.getElementById('corrected-text'); 
+            speakCorrectedBtn = document.getElementById('speak-corrected'); 
+            copyCorrectedBtn = document.getElementById('copy-corrected');
+            expEnEl = document.getElementById('exp-en'); 
+            expTeEl = document.getElementById('exp-te'); 
+            speakExpEnBtn = document.getElementById('speak-exp-en'); 
+            speakExpTeBtn = document.getElementById('speak-exp-te');
+            correctionTitle = document.getElementById('correction-title');
+            explanationsWrapper = document.getElementById('explanations-wrapper');
+            
+            // ప్రాక్టీస్ మోడ్ DOM
+            practiceModeContainer = document.getElementById('practice-mode-container');
+            getNewQuestionBtn = document.getElementById('get-new-question-btn');
+            newQuestionBtnText = document.getElementById('new-question-btn-text');
+            practiceQuestionBox = document.getElementById('practice-question-box');
+            practiceQuestionLabel = document.getElementById('practice-question-label');
+            practiceMicBtn = document.getElementById('practice-mic-btn');
+            practiceAnswerInput = document.getElementById('practice-answer-input');
+            checkPracticeAnswerBtn = document.getElementById('check-practice-answer-btn');
+            practiceFeedbackBox = document.getElementById('practice-feedback-box');
+            practiceTypeWordBtn = document.getElementById('practice-type-word');
+            practiceTypeSentenceBtn = document.getElementById('practice-type-sentence');
+            
+            // మోడ్ బటన్లు
+            modeGrammarEnBtn = document.getElementById('mode-grammar-en');
+            modeGrammarHiBtn = document.getElementById('mode-grammar-hi');
+            modeTransTeEnBtn = document.getElementById('mode-trans-te-en');
+            modeTransTeHiBtn = document.getElementById('mode-trans-te-hi');
+            modePracticeEnBtn = document.getElementById('mode-practice-en');
+            modePracticeHiBtn = document.getElementById('mode-practice-hi');
+            
+            // షేర్డ్ DOM
+            apiLoading = document.getElementById('api-loading');
+            
+            // సెట్టింగ్‌ల లిజనర్లు
+            document.getElementById('settings-button').addEventListener('click', () => { 
+                settingsModal.classList.remove('hidden'); 
+                // *** API కీని ఇన్‌పుట్‌లో లోడ్ చేయండి ***
+                const savedKey = localStorage.getItem(API_KEY_STORAGE_KEY) || "";
+                document.getElementById('api-key-input').value = savedKey;
+                playSound('E4'); 
+            });
+            document.getElementById('close-settings-modal').addEventListener('click', () => { 
+                const modalGlass = settingsModal.querySelector('.modal-glass');
+                modalGlass.style.transform = 'scale(0.9)';
+                modalGlass.style.opacity = '0';
+                setTimeout(() => {
+                    settingsModal.classList.add('hidden');
+                    modalGlass.style.transform = '';
+                    modalGlass.style.opacity = '';
+                }, 300);
+                playSound('C4'); 
+            });
+            
+            // *** API కీ సేవ్ బటన్ లిజనర్ ***
+            document.getElementById('save-api-key-btn').addEventListener('click', () => {
+                const keyInput = document.getElementById('api-key-input');
+                localStorage.setItem(API_KEY_STORAGE_KEY, keyInput.value);
+                playSound('G4', true);
+                playHaptic(true);
+                // ఫీడ్‌బ్యాక్
+                keyInput.style.borderColor = 'var(--color-success)';
+                document.getElementById('save-api-key-btn').textContent = "Saved!";
+                setTimeout(() => { 
+                    keyInput.style.borderColor = ''; 
+                    document.getElementById('save-api-key-btn').textContent = "Save";
+                }, 2000);
+            });
+            
+            document.getElementById('close-selection-modal').addEventListener('click', () => { 
+                const modalGlass = selectionModal.querySelector('.modal-glass');
+                modalGlass.style.transform = 'scale(0.9)';
+                modalGlass.style.opacity = '0';
+                setTimeout(() => {
+                    selectionModal.classList.add('hidden');
+                    modalGlass.style.transform = '';
+                    modalGlass.style.opacity = '';
+                }, 300);
+                playSound('C4'); 
+            });
+            themeToggle.addEventListener('click', cycleTheme); 
+            readModeToggle.addEventListener('click', toggleReadMode);
+            bodyFontBtn.addEventListener('click', () => { openSelectionModal('bodyFont'); playSound('E4'); }); 
+            titleFontBtn.addEventListener('click', () => { openSelectionModal('titleFont'); playSound('E4'); }); 
+            colorBtn.addEventListener('click', () => { openSelectionModal('color'); playSound('E4'); });
+            
+            // మెయిన్ టూల్ లిజనర్లు
+            micButton.addEventListener('click', toggleMic); 
+            checkApiBtn.addEventListener('click', checkApi);
+            grammarInput.addEventListener('keydown', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); checkApi(); } });
+            
+            // మోడ్ లిజనర్లు
+            modeGrammarEnBtn.addEventListener('click', () => setMode('mode-grammar-en'));
+            modeGrammarHiBtn.addEventListener('click', () => setMode('mode-grammar-hi'));
+            modeTransTeEnBtn.addEventListener('click', () => setMode('mode-trans-te-en'));
+            modeTransTeHiBtn.addEventListener('click', () => setMode('mode-trans-te-hi'));
+            modePracticeEnBtn.addEventListener('click', () => setMode('mode-practice-en'));
+            modePracticeHiBtn.addEventListener('click', () => setMode('mode-practice-hi'));
+            
+            // ప్రాక్టీస్ మోడ్ లిజనర్లు
+            practiceTypeWordBtn.addEventListener('click', () => setPracticeType('word'));
+            practiceTypeSentenceBtn.addEventListener('click', () => setPracticeType('sentence'));
+            getNewQuestionBtn.addEventListener('click', getPracticeItem);
+            practiceMicBtn.addEventListener('click', togglePracticeMic);
+            checkPracticeAnswerBtn.addEventListener('click', checkPracticeAnswerFromButton);
+            
+            systemPrefersDark.addEventListener('change', (e) => { if (getLocalStorageSetting('theme', 'system') === 'system') applyTheme('system'); });
+
+            // సెటప్
+            setupSpeechRecognition();
+            setupPracticeSpeechRecognition();
+            loadInitialSettings();
+            setMode('mode-grammar-en');
+        };
+
+        // --- సెట్టింగ్‌ల ఫంక్షన్లు ---
+        function loadInitialSettings() { 
+            applyTheme(getLocalStorageSetting('theme', 'system')); 
+            applyContrast(getLocalStorageSetting('contrast', 'default')); 
+            
+            const lastCombo = getLocalStorageSetting('lastFontCombo', 'default2');
+            if (lastCombo) {
+                applyFontCombination(lastCombo);
+            } else {
+                applyFont('--body-font', getLocalStorageSetting('bodyFont', 'Lexend'));
+                applyFont('--title-font', getLocalStorageSetting('titleFont', 'Montserrat'));
+            }
+            applyAccentColor(getLocalStorageSetting('colorTheme', 'Indigo')); 
+            
+            disableSound = getLocalStorageSetting('disableSound', false); 
+            disableVibration = getLocalStorageSetting('disableVibration', false); 
+            
+            updateSettingsUI(); 
+        }
+        
+        function applyTheme(t) { 
+            document.documentElement.classList.toggle('dark', t === 'dark' || (t === 'system' && systemPrefersDark.matches)); 
+            if (themeIconLight) { 
+                [themeIconLight, themeIconDark, themeIconSystem].forEach(i => i.style.display = 'none'); 
+                if (t === 'light') themeIconLight.style.display = 'inline'; 
+                else if (t === 'dark') themeIconDark.style.display = 'inline'; 
+                else themeIconSystem.style.display = 'inline'; 
+            } 
+            setLocalStorageSetting('theme', t); 
+            updateSettingsUI(); 
+            applyAccentColor(getLocalStorageSetting('colorTheme', 'Indigo')); 
+        }
+        
+        function cycleTheme() { 
+            const t = getLocalStorageSetting('theme', 'system'); 
+            const nextTheme = t === 'light' ? 'dark' : t === 'dark' ? 'system' : 'light';
+            applyTheme(nextTheme); 
+            playSound('E4');
+            playHaptic(true);
+        }
+        
+        function applyAccentColor(n) { 
+            const t = COLOR_THEMES.find(x => x.name === n) || COLOR_THEMES[0]; 
+            const isDark = document.documentElement.classList.contains('dark'); 
+            const g = t.gradient[isDark ? 'dark' : 'light']; 
+            document.documentElement.style.setProperty('--accent-color-rgb', t.value); 
+            document.documentElement.style.setProperty('--accent-color-hex', t.hex); 
+            for(let i=0;i<4;i++) document.documentElement.style.setProperty(`--bg-grad-color${i+1}`, g[i]); 
+            setLocalStorageSetting('colorTheme', n); 
+            updateSettingsUI(); 
+        }
+        
+        function applyContrast(c) { 
+            textContrast = c; 
+            document.body.setAttribute('data-contrast', c); 
+            setLocalStorageSetting('contrast', c); 
+            updateSettingsUI(); 
+        }
+        
+        function applyFont(type, v) {
+            document.documentElement.style.setProperty(type, v);
+            setLocalStorageSetting(type === '--body-font' ? 'bodyFont' : 'titleFont', v);
+            setLocalStorageSetting('lastFontCombo', null); 
+            updateSettingsUI();
+        }
+        
+        window.applyFontCombination = function(c) { 
+            const combo = FONT_COMBINATIONS[c] || FONT_COMBINATIONS['default2']; 
+            document.documentElement.style.setProperty('--title-font', combo.title); 
+            document.documentElement.style.setProperty('--body-font', combo.body); 
+            setLocalStorageSetting('bodyFont', combo.body); 
+            setLocalStorageSetting('titleFont', combo.title); 
+            setLocalStorageSetting('lastFontCombo', c); 
+            updateSettingsUI(); 
+        }
+        
+        window.handleSelectionChange = function(t, v) { 
+            if(t==='theme') {
+                applyTheme(v); 
+                playSound('C4');
+            }
+            else if(t==='contrast') {
+                applyContrast(v);
+                playSound('C4');
+            }
+            else if(t==='color') {
+                applyAccentColor(v);
+                playSound('C4');
+            }
+            else if(t==='toggleAudio') {
+                disableSound = !disableSound;
+                setLocalStorageSetting('disableSound', disableSound);
+                if (!disableSound) { playSound('C4'); }
+            } 
+            else if(t==='toggleHaptics') {
+                disableVibration = !disableVibration;
+                setLocalStorageSetting('disableVibration', disableVibration);
+                playHaptic(true); 
+            }
+            else if (t === 'bodyFont') {
+                applyFont('--body-font', v);
+                playSound('C4');
+            } 
+            else if (t === 'titleFont') {
+                applyFont('--title-font', v);
+                playSound('C4');
+            } 
+            
+            if(!t.startsWith('toggle')) {
+                const modalGlass = selectionModal.querySelector('.modal-glass');
+                modalGlass.style.transform = 'scale(0.9)';
+                modalGlass.style.opacity = '0';
+                setTimeout(() => {
+                    selectionModal.classList.add('hidden');
+                    modalGlass.style.transform = '';
+                    modalGlass.style.opacity = '';
+                }, 300);
+            }
+            updateSettingsUI(); 
+        }
+        
+        function updateSettingsUI() {
+            if (!currentBodyFont) return;
+            currentBodyFont.textContent = getLocalStorageSetting('bodyFont', 'Lexend'); 
+            currentTitleFont.textContent = getLocalStorageSetting('titleFont', 'Montserrat');
+            const tn = getLocalStorageSetting('colorTheme', 'Indigo'); 
+            currentAccentColor.textContent = tn; 
+            colorPreview.style.backgroundColor = (COLOR_THEMES.find(t => t.name === tn) || COLOR_THEMES[0]).hex;
+            
+            toggleAudioCheckbox.checked = disableSound; 
+            toggleHapticsCheckbox.checked = disableVibration; 
+            
+            const ct = getLocalStorageSetting('theme', 'system'); 
+            themeLightBtn.classList.toggle('active', ct==='light'); 
+            themeDarkBtn.classList.toggle('active', ct==='dark'); 
+            themeSystemBtn.classList.toggle('active', ct==='system');
+            
+            contrastDefaultBtn.classList.toggle('active', textContrast === 'default'); 
+            contrastHighBtn.classList.toggle('active', textContrast === 'high');
+            
+            const lc = getLocalStorageSetting('lastFontCombo', null);
+            document.querySelectorAll('#font-combo-btns button').forEach(b => b.classList.toggle('active', b.dataset.combo === lc));
+        }
+        
+        window.openSelectionModal = function(type) {
+            settingsModal.classList.add('hidden'); 
+            selectionModal.classList.remove('hidden'); 
+            let h = ''; 
+            const btn = 'w-full text-left p-3 rounded-lg selection-button text-white';
+            
+            if(type.endsWith('Font')) { 
+                modalTitle.textContent = `Select ${type.replace('Font','')}`; 
+                const opts = FONT_OPTIONS[type.replace('Font','').toLowerCase()];
+                const curr = getLocalStorageSetting(type.replace('Font','').toLowerCase() + 'Font'); 
+                h = opts.map(o => 
+                    `<button onclick="handleSelectionChange('${type.replace('Font','').toLowerCase() + 'Font'}', '${o.value}')" class="${btn} ${curr === o.value ? 'active' : ''}">
+                        ${o.label}
+                    </button>`
+                ).join(''); 
+            }
+            else if(type==='color') { 
+                modalTitle.textContent = 'Accent Color'; 
+                const curr = getLocalStorageSetting('colorTheme'); 
+                h = COLOR_THEMES.map(t => 
+                    `<button onclick="handleSelectionChange('color','${t.name}')" class="${btn} ${curr === t.name ? 'active' : ''} flex justify-between items-center">
+                        <span>${t.name}</span>
+                        <span class="w-6 h-6 rounded-full border border-white/20" style="background-color:${t.hex}"></span>
+                    </button>`
+                ).join(''); 
+            }
+            modalOptions.innerHTML = h;
+        }
+    </script>
+</body>
+</html>
+

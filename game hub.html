@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -277,6 +277,23 @@
                         Open Dictionary
                     </button>
                 </div>
+                
+                <!-- *** ఇక్కడ కొత్త కార్డ్ జోడించబడింది *** -->
+                <div class="game-card rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center group">
+                    <div class="icon-circle w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
+                        <!-- 'check-check' ఐకాన్ వాడబడింది -->
+                        <i data-lucide="check-check" class="lucide-icon"></i>
+                    </div>
+                    <h2 class="font-title font-bold text-xl sm:text-2xl mb-2" style="color: var(--text-primary);">Correction Pad</h2> 
+                    <p id="correction-card-progress" class="flex-grow text-secondary-color">
+                        Improve grammar, spelling, and translation skills with AI feedback and practice.
+                    </p>
+                    <!-- 'car4.html'కి లింక్ చేయబడింది -->
+                    <button onclick="window.location.href='car4.html'" class="card-button">
+                        Start Correcting
+                    </button>
+                </div>
+                <!-- *** కొత్త కార్డ్ ముగిసింది *** -->
 
             </div>
         </main>
@@ -497,6 +514,10 @@
             
             const dictionaryDesc = document.getElementById('dictionary-card-progress');
             if(dictionaryDesc) dictionaryDesc.innerHTML = `Explore a crowd-sourced dictionary...<br><strong class="accent-text" style="color: var(--primary-color-hex);">Words Added: ${dictionaryWordCount}</strong>`;
+            
+            // Correction Pad కోసం కొత్త ప్రోగ్రెస్ (ప్రస్తుతానికి 0 చూపిస్తుంది)
+            const correctionDesc = document.getElementById('correction-card-progress');
+            if(correctionDesc) correctionDesc.innerHTML = `Improve grammar, spelling, and translation...<br><strong class="accent-text" style="color: var(--primary-color-hex);">Corrections: 0</strong>`;
         }
 
         window.openProfile = function() {
@@ -830,3 +851,4 @@
     </script>
 </body>
 </html>
+
